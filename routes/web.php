@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MyArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,13 +71,13 @@ Route::get('/register', function () {
 // Route::any('/register', [AuthController::class, 'register']) ->name('register')->middleware('withauth');
 
 // //frontend author
-// Route::prefix('author')
-//     ->name('author.')
-//     ->controller(AuthorController::class)
-//     ->group(function () {
-//         Route::get('/', 'myarticle')->name('myarticle')->middleware('withauth');
+Route::prefix('myarticle')
+    ->name('myarticle.')
+    ->controller(MyArticleController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
 
-//     });
+    });
 
 //frontend profile
 Route::prefix('profile')

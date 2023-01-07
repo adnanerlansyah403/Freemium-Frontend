@@ -7,7 +7,7 @@
 <section class="py-[100px]">
     <h1 class="font-iceberg text-lg text-center text-primary mb-16">ME</h1>
 
-    {{-- <div class="container mx-auto mb-9">
+    <div class="container mx-auto mb-9">
 
         <nav class="col col-12" style="margin-inline: 0;">
             <ul class="flex items-center gap-7">
@@ -26,7 +26,7 @@
             </ul>
         </nav>
 
-    </div> --}}
+    </div>
 
     <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0">
 

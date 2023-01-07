@@ -1,5 +1,5 @@
 <header class="shadow-lg">
-<div class="container mx-auto flex items-center justify-between">
+<div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>
         <a href="#" class="flex items-center">
@@ -15,7 +15,7 @@
         <a href="" class="px-4 py-2 hover:bg-primary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a> --}}
 
         <div class="flex items-center gap-6">
-            <button class="flex items-center gap-2 text-gray-primary text-md hover:text-opacity-90 transition duration-200 ease-in-out">
+            <button class="hidden lg:flex items-center gap-2 text-gray-primary text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
                 <i data-feather="edit"></i>
                 <span>Write</span>
             </button>
