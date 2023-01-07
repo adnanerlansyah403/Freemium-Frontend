@@ -9,6 +9,7 @@ module.exports = {
     container: {
     },
     screens: {
+      'xs': '480px',
       'sm': '576px',
       'md': '768px',
       'lg': '992px',
@@ -30,6 +31,7 @@ module.exports = {
       md: '24px',
       lg: '32px',
       xl: '48px',
+      '2xl': '72px',
     },
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],

@@ -10,7 +10,7 @@
     <div class="container mx-auto mb-9">
 
         <nav class="col col-12" style="margin-inline: 0;">
-            <ul class="flex items-center gap-7">
+            <ul class="flex items-center justify-center lg:justify-start gap-7">
                 <li class="pb-2 border-b border-primary cursor-pointer">
                     <a href="" class="text-base font-iceberg">
                         <span class="span">My</span> 
@@ -30,40 +30,40 @@
 
     <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0">
 
-        <div class="col col-12 order-2 lg:order-1 lg:col-8">
+        <div class="col col-12 order-2 lg:order-1 lg:col-8" style="margin-left: 0px;">
             <form action="">
 
-                <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center px-6 py-3 rounded-primary">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Full Name
                     </span>
-                    <input type="text" class="py-3" placeholder="Your full name...">
+                    <input type="text" class="py-3" placeholder="Your full name..." title="Full Name">
                 </div>
 
-                <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center px-6 py-3 rounded-primary">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Username
                     </span>
-                    <input type="text" class="py-3" placeholder="Your username...">
+                    <input type="text" class="py-3" placeholder="Your username..." title="Username">
                 </div>
 
-                <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center px-6 py-3 rounded-primary">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Email">
                         Email
                     </span>
                     <input type="email" class="py-3" placeholder="Your email...">
                 </div>
                 
-                <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center px-6 py-3 rounded-primary">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Password">
                         Password
                     </span>
                     <input type="text" class="py-3" placeholder="Your password...">
                 </div>
                 
                 <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="cursor-pointer bg-primary text-white text-center px-6 py-3 rounded-primary">
-                        Upload File
+                    <span class="cursor-pointer bg-primary text-white text-center px-4 lg:px-6 py-3 rounded-primary" title="Upload Photo Profile">
+                        Upload
                     </span>
                     <input type="file" class="py-3" placeholder="Your password...">
                 </div>
@@ -83,11 +83,11 @@
                     </li>
                 </ul>
 
-                <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center px-6 py-3 rounded-primary">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Link Social Media
                     </span>
-                    <input type="url" class="py-3" placeholder="Your link social...">
+                    <input type="url" class="py-3" placeholder="Your link social..." title="Link Social Media">
                 </div>
 
                 <div class="flex items-center justify-center mt-10">

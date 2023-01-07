@@ -1,4 +1,4 @@
-<footer class="py-10">
+<footer class="py-8">
 <div class="container mx-auto flex flex-col items-center">
 
     <h1 class="text-[18px] lg:text-md text-center"><span class="span font-iceberg">@Freemium</span> 2022. All Right Copyright Reserved</h1>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MyArticleController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,12 +89,13 @@ Route::prefix('profile')
 
     });
 
-// //frontend subscription
-// Route::prefix('transaction')
-//     ->name('transaction.')
-//     ->controller(TransactionController::class)
-//     ->group(function () {
-//         Route::get('/create', 'create')->name('create')->middleware('withauth');
-//         Route::get('/detail/{id}', 'detail')->name('detail')->middleware('withauth');
+//frontend subscription
+Route::prefix('transaction')
+    ->name('transaction.')
+    ->controller(TransactionController::class)
+    ->group(function () {
+        Route::get('/', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/details', 'show')->name('show');
 
-//     });
+    });
