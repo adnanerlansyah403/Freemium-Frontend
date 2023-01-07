@@ -6,7 +6,12 @@
 
         <title>@yield("title", "Freemium App")</title>
 
+        {{-- Custome CSS Link --}}
+
+        <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+
         <!-- Vite Link CSS -->
+
         @vite('resources/css/app.css')
 
         <!-- Ionicons -->

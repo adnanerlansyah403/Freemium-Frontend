@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,14 +78,14 @@ Route::get('/register', function () {
 
 //     });
 
-// //frontend profile
-// Route::prefix('profile')
-//     ->name('profile.')
-//     ->controller(ProfileController::class)
-//     ->group(function () {
-//         Route::get('/', 'myprofile')->name('myprofile')->middleware('withauth');
+//frontend profile
+Route::prefix('profile')
+    ->name('profile.')
+    ->controller(ProfileController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
 
-//     });
+    });
 
 // //frontend subscription
 // Route::prefix('transaction')
