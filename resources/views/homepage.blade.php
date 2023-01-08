@@ -70,9 +70,9 @@
 
         {{-- TinyMCE Tools --}}
         
-        <script>
+        <script type="text/javascript">
             tinymce.init({
-            selector: '#content',
+            selector: 'textarea',
             plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
             });
         </script>

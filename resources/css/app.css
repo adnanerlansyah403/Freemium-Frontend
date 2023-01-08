@@ -66,6 +66,10 @@
         width: 10%;
     }
 
+    .col-2 {
+        width: 20%;
+    }
+
     .col-3 {
         width: 25%;
     }

@@ -22,7 +22,7 @@
 
     <div class="container mx-auto flex items-center">
 
-        <form action="" class="col col-12">
+        <form action="" class="col col-12" x-data="article">
 
             <div class="flex flex-wrap lg:flex-nowrap">
                 <div class="mb-5 col-12 lg:col-6">
@@ -91,8 +91,8 @@
             </div>
 
             <div class="flex items-center justify-between mt-16 mb-10">
-                <button type="button" class="flex items-center gap-2">
-                    <i data-feather="plus-circle" class="w-12 h-12 text-primary"></i> 
+                <button type="button" class="flex items-center gap-2" @click="createSubArticle($refs)">
+                    <i data-feather="plus-circle" class="w-10 h-10 text-primary"></i> 
                     <span class="text-base">Add a sub article</span>
                 </button>
                 <button type="submit" class="px-4 py-2 bg-primary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
@@ -101,8 +101,9 @@
             </div>
 
             <div class="w-full my-1">
-                <ul class="flex flex-col">
-                    <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
+                <ul class="flex flex-col" id="listsubarticle" x-ref="listsubarticle">
+                    
+                    {{-- <li class="bg-white my-2 shadow-lg accordion" x-data="accordion(1)">
                         <h2
                         class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                         >
@@ -193,16 +194,53 @@
                             </div>
 
                         </div>
-                    </li>
+                    </li> --}}
 
-                    <li class="bg-white my-2 shadow-lg" x-data="accordion(2)">
+                </ul>
+            </div>
+            
+        </form>
+
+    </div>
+
+</section>
+
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('accordion', {
+            tab: 0
+        });
+      
+        Alpine.data('accordion', (idx) => ({
+            init() {
+            this.idx = idx;
+            },
+            idx: -1,
+            handleClick() {
+            this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
+            },
+            handleRotate() {
+            return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';
+            },
+            handleToggle() {
+            return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
+            }
+        }));
+
+        Alpine.data('article', () => ({
+            index: 1,
+            createSubArticle(refs) {
+                refs.listsubarticle.innerHTML += `
+                    <li class="bg-white my-2 shadow-lg accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
                         <h2
                         class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                         >
-                        <span>Sub Artikel 2</span>
+                        <span>Sub Artikel ${this.index}</span>
                         <div class="flex items-center gap-2">
-                            <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60 shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
+                            <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60 shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" @click="deleteSubArticle(${this.index})">
                                 <i data-feather="trash-2" class="text-xs"></i> 
+                                <img src="{{ asset('assets/images/icons/trash-2.svg') }}" />
                             </span>
                             <svg
                             :class="handleRotate()"
@@ -241,83 +279,61 @@
                                 <label for="text" class="text-md">Thumbnail</label>
                                 <input type="file" name="thumbnail" placeholder="Your thumbnail..."
                                     hidden 
-                                    x-ref="file"
+                                    x-ref="file${this.index}"
                                     @change="
                                         if ($refs.file) {
-                                            $refs.iconimage.style.display = 'none';
+                                            $refs.iconimage${this.index}.style.display = 'none';
                                             var reader = new FileReader();
-                                            reader.readAsDataURL($refs.file.files[0]);
+                                            reader.readAsDataURL($refs.file${this.index}.files[0]);
                                             reader.onload = function (e) {
-                                                $refs.image.src = e.target.result;
-                                                $refs.image.alt = $refs.file.name;
-                                                $refs.filename.classList.add('active');
-                                                $refs.filename.innerText = $refs.file.files[0].name;
+                                                $refs.image${this.index}.src = e.target.result;
+                                                $refs.image${this.index}.alt = $refs.file${this.index}.name;
+                                                $refs.filename${this.index}.classList.add('active');
+                                                $refs.filename${this.index}.innerText = $refs.file${this.index}.files[0].name;
                                             }
                                         }
                                     ">
                                 <span
                                     class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4 overflow-y-hidden"
                                     @click="
-                                        $refs.file.click();
-                                        console.log($refs.file)
+                                        $refs.file${this.index}.click();
                                     "
                                 >
                                     <img src="" 
-                                    x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
-                                    <i 
-                                        data-feather="image" 
+                                    x-ref="image${this.index}" class="absolute w-full h-full object-cover rounded-lg" alt="">
+                                    <img 
+                                        src="{{ asset('assets/images/icons/image.svg') }}"
                                         class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
-                                        x-ref="iconimage"
-                                    >
-                                    </i>
+                                        x-ref="iconimage${this.index}"
+                                    />
                                     <p 
                                         class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
-                                        x-ref="filename"
+                                        x-ref="filename${this.index}"
                                     >
                                     </p>
                                 </span>
                             </div>
                 
-                            <div class="mb-5 col-12">
+                            <div class="mb-5 col-12" id="content${this.index}">
                                 <label for="text" class="text-md">Content</label><br>
-                                <textarea id="content" placeholder="Your content..."
-                                class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
-                                </textarea>
                             </div>
 
                         </div>
                     </li>
-                </ul>
-            </div>
-            
-        </form>
+                `;
+                document.getElementById(`content${this.index}`).insertAdjacentHTML('beforeend', `
+                                <textarea id="content" placeholder="Your content..."
+                                class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
+                                </textarea>`)
+                this.index++
+            },
+            deleteSubArticle(id)
+            {
+                let parentElement = document.getElementById('listsubarticle');
+                parentElement.querySelector(`#accordion${id}`).remove();
+            }
+        }))
 
-    </div>
-
-</section>
-
-
-  <script>
-    document.addEventListener('alpine:init', () => {
-      Alpine.store('accordion', {
-        tab: 0
-      });
-      
-      Alpine.data('accordion', (idx) => ({
-        init() {
-          this.idx = idx;
-        },
-        idx: -1,
-        handleClick() {
-          this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
-        },
-        handleRotate() {
-          return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';
-        },
-        handleToggle() {
-          return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
-        }
-      }));
     })
   </script>
 

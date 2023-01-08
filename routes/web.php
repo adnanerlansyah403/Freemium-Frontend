@@ -59,7 +59,7 @@ Route::prefix('article')
     ->controller(ArticleController::class)
     ->group(function () {
         Route::get('/', 'list')->name('list');
-        Route::post('/edit', 'edit')->name('edit');
+        Route::get('/edit', 'edit')->name('edit');
         Route::get('/create', 'create')->name('create');
         Route::post('/add', 'add')->name('add');
         Route::get('/detail/{id}', 'show')->name('show');

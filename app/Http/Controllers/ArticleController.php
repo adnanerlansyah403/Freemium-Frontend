@@ -17,4 +17,9 @@ class ArticleController extends Controller
         return view("pages.frontend.article.create");
     }
 
+    public function edit()
+    {
+        return view("pages.frontend.article.edit");
+    }
+
 }
