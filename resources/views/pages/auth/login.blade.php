@@ -4,7 +4,7 @@
 
 @section("content")
 
-<section class="p-[100px]">
+<section class="py-[100px]">
     <div class="container mx-auto flex items-start">
 
         <form action="" class="col col-12 lg:col-6">
@@ -37,7 +37,7 @@
 
         </form>
 
-        <div class="border border-gray-third rounded-primary col col-6 sm:hidden h-[485px] lg:flex items-center justify-center">
+        <div class="border border-gray-third rounded-primary col col-12 lg:col-6 hidden h-[485px] lg:flex items-center justify-center">
             <figure>
                 <img src="{{ asset('assets/images/securelogin.svg') }}" class="w-full h-auto" alt="">
             </figure>
