@@ -23,6 +23,23 @@
 
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+        {{-- TinyMCE Scripts --}}
+
+        <script src="https://cdn.tiny.cloud/1/u2nxm9ys2v0iwr5re916e7g6e8yjcnyzb81g34b18pmx0kk2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+        {{-- Custom Style --}}
+                
+        <style>
+            .tox-statusbar__branding {
+                display: none;
+            }
+
+            .tox-tinymce {
+                height: 500px !important;
+            }
+        
+        </style>
+
     </head>
     <body class="antialiased" x-data="">
     
@@ -49,6 +66,15 @@
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script>
         feather.replace()
+        </script>
+
+        {{-- TinyMCE Tools --}}
+        
+        <script>
+            tinymce.init({
+            selector: '#content',
+            plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
+            });
         </script>
 
     </body>

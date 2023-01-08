@@ -26,6 +26,7 @@ module.exports = {
       'slate-secondary': '#3F3D56'
     },
     fontSize: {
+      xs: '12px',
       sm: '14px',
       base: '18px',
       md: '24px',
