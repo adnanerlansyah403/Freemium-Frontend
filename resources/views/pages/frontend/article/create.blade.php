@@ -16,6 +16,11 @@
         transition: .2s ease-in-out;
     }
 
+    .removefile.active {
+        right: 12px;
+        transition: .2s ease-in-out;
+    }
+
 </style>
 
 <section class="py-[100px]">
@@ -57,6 +62,7 @@
                                 $refs.image.alt = $refs.file.name;
                                 $refs.filename.classList.add('active');
                                 $refs.filename.innerText = $refs.file.files[0].name;
+                                $refs.removefile.classList.add('active')
                             }
                         }
                     ">
@@ -64,7 +70,6 @@
                     class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4 overflow-y-hidden"
                     @click="
                         $refs.file.click();
-                        console.log($refs.file)
                     "
                 >
                     <img src="" 
@@ -75,6 +80,9 @@
                         x-ref="iconimage"
                     >
                     </i>
+                    <span class="removefile absolute w-max top-3 -right-full p-2 bg-primary text-white text-center font-semibold rounded-lg hover:text-opacity-80 transition duration-200 ease-in-out" x-ref="removefile"
+                    @click="">
+                    </span>
                     <p 
                         class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                         x-ref="filename"
@@ -231,7 +239,10 @@
         Alpine.data('article', () => ({
             index: 1,
             createSubArticle(refs) {
-                refs.listsubarticle.innerHTML += `
+                // const accordionsubarticle = document.querySelector('.accordion');
+                // let cloneAccordion = accordionsubarticle.cloneNode(true);
+                // refs.listsubarticle.appendChild(cloneAccordion);
+                refs.listsubarticle.insertAdjacentHTML('beforeend' ,`
                     <li class="bg-white my-2 shadow-lg accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
                         <h2
                         class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
@@ -314,18 +325,18 @@
                                 </span>
                             </div>
                 
-                            <div class="mb-5 col-12" id="content${this.index}">
+                            <div class="mb-5 col-12" id="content${this.index}" class="content${this.index}">
                                 <label for="text" class="text-md">Content</label><br>
                             </div>
 
                         </div>
                     </li>
-                `;
-                document.getElementById(`content${this.index}`).insertAdjacentHTML('beforeend', `
-                                <textarea id="content" placeholder="Your content..."
-                                class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
-                                </textarea>`)
-                this.index++
+                `);
+                let textareaTinyMce = document.getElementById('content');
+                let cloneTextarea = textareaTinyMce.cloneNode(true);
+                // console.log(document.querySelector(`#accordion${this.index} #content${this.index}`));
+                document.querySelector(`#accordion${this.index} #content${this.index}`).appendChild(cloneTextarea)
+                this.index++;
             },
             deleteSubArticle(id)
             {
@@ -336,5 +347,6 @@
 
     })
   </script>
+  
 
 @endsection
