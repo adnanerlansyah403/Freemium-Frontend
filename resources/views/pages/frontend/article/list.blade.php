@@ -50,6 +50,7 @@
 
         {{-- kanan --}}
         <div class="lg:col-9 mt-5 lg:mt-0 bg-white lg:ml-[30px] md:mt-20">
+            <div class="lg:w-full w-[320px] md:w-full bg-primary rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 lg:h-[50px] md:h-[50px] mt-5 lg:mt-0 h-[70px] font-normal text-sm px-[27px] py-[13px]">You have to <span class="font-bold text-primary leading-[27px]">Subscribe</span>  to Get Unlimited Access</div>
             <div class="flex lg:justify-between md:justify-between mx-auto gap-5 flex-col-reverse md:w-full md:flex-row lg:flex-row items-center w-[320px] lg:w-full">
                 <div class="flex gap-[47px]">
                     <h2 class="font-bold text-primary text-[18px]"> <a href="#">All</a></h2>
