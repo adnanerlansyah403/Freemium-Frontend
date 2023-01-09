@@ -9,9 +9,9 @@
 4. isi file .env dan sesuaikan dengan database yang ingin di gunakan
 5. php artisan migrate
 6. config .env 
--DB_CONNECTION=pgsql 
--DB_HOST=127.0.0.1 
--DB_PORT=5432 
--DB_DATABASE=nama_database 
--DB_USERNAME=postgres 
--DB_PASSWORD=password
+    -DB_CONNECTION=pgsql 
+    -DB_HOST=127.0.0.1 
+    -DB_PORT=5432 
+    -DB_DATABASE=nama_database 
+    -DB_USERNAME=postgres 
+    -DB_PASSWORD=password
