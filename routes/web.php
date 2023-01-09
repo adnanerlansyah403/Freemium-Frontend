@@ -29,6 +29,10 @@ Route::get('/register', function () {
     return view('pages.auth.register');
 })->name('register');
 
+Route::get('/logout', function () {
+
+})->name('logout');
+
 // //backend user
 // Route::prefix('user')
 //     ->name('user.')

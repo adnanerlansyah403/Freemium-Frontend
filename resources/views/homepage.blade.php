@@ -19,6 +19,10 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+        {{-- Quill Theme --}}
+        
+        <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+
         {{-- AlpineJS Link --}}
 
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -38,6 +42,8 @@
 
     </head>
     <body class="antialiased" x-data="">
+
+        {{-- <x-alert /> --}}
     
 
         <!-- HEADER -->
@@ -64,6 +70,10 @@
         feather.replace()
         </script>
 
+        {{-- Ckeditor5 Scripts --}}
+
+        <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+
         {{-- TinyMCE Scripts --}}
 
         <script src="https://cdn.tiny.cloud/1/u2nxm9ys2v0iwr5re916e7g6e8yjcnyzb81g34b18pmx0kk2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -76,7 +86,7 @@
             function addTinyMCE(){
                 // Initialize
                 tinymce.init({
-                    selector: 'textarea',
+                    selector: '#content',
                     plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
                 });
             }
