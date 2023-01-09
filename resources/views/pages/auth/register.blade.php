@@ -35,7 +35,7 @@
 
             <div class="flex items-center justify-center">
                 Already have an account? &nbsp;
-                <a href=""><span class="span font-semibold"> Sign In Now</span></a>
+                <a href="{{ route('login') }}"><span class="span font-semibold"> Sign In Now</span></a>
             </div>
 
         </form>

@@ -51,6 +51,29 @@
         font-size: 10pt;
     }
 
+    input[type="radio"] {
+        /* remove standard background appearance */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /* create custom radiobutton appearance */
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        padding: 3px;
+        /* background-color only for content */
+        background-clip: content-box;
+        border: 2px solid #bbbbbb;
+        background-color: #e7e6e7;
+        border-radius: 50%;
+    }
+
+    /* appearance for checked radiobutton */
+    input[type="radio"]:checked {
+        background-color: #7C000B;
+    }
+
+
 
 }
 
@@ -96,6 +119,40 @@
         @apply text-primary;
     }
 
+    .span-danger {
+        @apply text-[#dc2626];
+    }
+
 }
 
-@layer components {}
+@layer components {
+
+    /* ALERTS */
+
+    .alert {
+        @apply fixed flex justify-between top-10 right-6 p-4 max-w-sm rounded-lg
+    }
+
+    .alert-success {
+        @apply bg-[#dcfce7] text-[#15803d];
+    }
+
+    .alert-danger {
+        @apply bg-[#fee2e2] text-[#b91c1c];
+    }
+
+    .alert-warning {
+        @apply bg-[#fef9c3] text-[#a16207];
+    }
+
+    .alert-info {
+        @apply bg-[#dbeafe] text-[#1d4ed8];
+    }
+
+    /* INPUTS */
+
+    .input-danger {
+        @apply bg-[#fef2f2] border border-[#ef4444] text-[#7f1d1d] placeholder-[#b91c1c] ring-[#ef4444];
+    }
+
+}

@@ -80,9 +80,9 @@
                         x-ref="iconimage"
                     >
                     </i>
-                    <span class="removefile absolute w-max top-3 -right-full p-2 bg-primary text-white text-center font-semibold rounded-lg hover:text-opacity-80 transition duration-200 ease-in-out" x-ref="removefile"
+                    {{-- <span class="removefile absolute w-max top-3 -right-full p-2 bg-primary text-white text-center font-semibold rounded-lg hover:text-opacity-80 transition duration-200 ease-in-out" x-ref="removefile"
                     @click="">
-                    </span>
+                    </span> --}}
                     <p 
                         class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                         x-ref="filename"
@@ -239,18 +239,15 @@
         Alpine.data('article', () => ({
             index: 1,
             createSubArticle(refs) {
-                // const accordionsubarticle = document.querySelector('.accordion');
-                // let cloneAccordion = accordionsubarticle.cloneNode(true);
-                // refs.listsubarticle.appendChild(cloneAccordion);
+
                 refs.listsubarticle.insertAdjacentHTML('beforeend' ,`
-                    <li class="bg-white my-2 shadow-lg accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
+                    <li class="bg-white rounded-lg my-2 shadow-lg accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
                         <h2
                         class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                         >
                         <span>Sub Artikel ${this.index}</span>
                         <div class="flex items-center gap-2">
                             <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60 shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" @click="deleteSubArticle(${this.index})">
-                                <i data-feather="trash-2" class="text-xs"></i> 
                                 <img src="{{ asset('assets/images/icons/trash-2.svg') }}" />
                             </span>
                             <svg
@@ -327,16 +324,36 @@
                 
                             <div class="mb-5 col-12" id="content${this.index}" class="content${this.index}">
                                 <label for="text" class="text-md">Content</label><br>
+                                <textarea id="editor${this.index}" placeholder="Your content..."
+                                class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
+                                </textarea>
+                            </div>
+
+                            <div class="mb-5 col-12">
+                                <span class="text-base font-semibold">Choose Your Plan</span>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <label for="free" class="flex items-center gap-1">
+                                        <input type="radio" name="status" id="free">
+                                        <span class="text-base">Free</span>
+                                    </label>
+                                    <label for="paid" class="flex items-center gap-1">
+                                        <input type="radio" name="status" id="paid">
+                                        <span class="text-base">Member-Only</span>
+                                    </label>
+                                </div>
+                                <p class="mt-4">*Get Royalty for Author</p>
                             </div>
 
                         </div>
                     </li>
                 `);
-                let textareaTinyMce = document.getElementById('content');
-                let cloneTextarea = textareaTinyMce.cloneNode(true);
-                // console.log(document.querySelector(`#accordion${this.index} #content${this.index}`));
-                document.querySelector(`#accordion${this.index} #content${this.index}`).appendChild(cloneTextarea)
+                
+                ClassicEditor
+                .create( document.querySelector( `#editor${this.index}` ) )
+                
                 this.index++;
+            
+
             },
             deleteSubArticle(id)
             {
