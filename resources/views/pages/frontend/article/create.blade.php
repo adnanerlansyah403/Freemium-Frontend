@@ -21,6 +21,10 @@
         transition: .2s ease-in-out;
     }
 
+    .ck-content {
+        height: 500px;
+    }
+
 </style>
 
 <section class="py-[100px]">
@@ -263,7 +267,7 @@
                         <div
                         x-ref="tab"
                         :style="handleToggle()"
-                        class="px-4 overflow-hidden max-h-0 duration-500 transition-all"
+                        class="px-4 overflow-y-scroll overflow-x-hidden max-h-0 duration-500 transition-all"
                         >
                             <div class="flex flex-wrap lg:flex-nowrap">
                                 <div class="mb-5 col-12 lg:col-6">
@@ -330,10 +334,10 @@
                             </div>
 
                             <div class="mb-5 col-12">
-                                <span class="text-base font-semibold">Choose Your Plan</span>
+                                <span class="text-md">Choose Your Plan</span>
                                 <div class="flex items-center gap-2 mt-2">
                                     <label for="free" class="flex items-center gap-1">
-                                        <input type="radio" name="status" id="free">
+                                        <input type="radio" name="status" id="free" checked>
                                         <span class="text-base">Free</span>
                                     </label>
                                     <label for="paid" class="flex items-center gap-1">
@@ -350,6 +354,12 @@
                 
                 ClassicEditor
                 .create( document.querySelector( `#editor${this.index}` ) )
+                .then( editor => {
+                    editor.config.toolbar = [{ name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }]
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
                 
                 this.index++;
             

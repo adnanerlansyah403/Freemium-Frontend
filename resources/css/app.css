@@ -130,7 +130,7 @@
     /* ALERTS */
 
     .alert {
-        @apply fixed flex justify-between top-10 right-6 p-4 max-w-sm rounded-lg
+        @apply fixed flex justify-between top-10 right-6 p-4 max-w-sm rounded-lg z-50
     }
 
     .alert-success {
