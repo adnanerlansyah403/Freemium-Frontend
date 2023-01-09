@@ -17,7 +17,7 @@
                         Profile 
                     </a>
                 </li>
-                <li class="pb-2 border-b border-black cursor-pointer">
+                <li class="pb-2 cursor-pointer">
                     <a href="" class="text-base font-iceberg">
                         <span class="span">My</span> 
                         Articles 
@@ -37,35 +37,35 @@
                     <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Full Name
                     </span>
-                    <input type="text" class="py-3" placeholder="Your full name..." title="Full Name">
+                    <input type="text" class="py-3 lg:w-4/5" placeholder="Your full name..." title="Full Name">
                 </div>
 
                 <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                     <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Username
                     </span>
-                    <input type="text" class="py-3" placeholder="Your username..." title="Username">
+                    <input type="text" class="py-3 w-full lg:w-4/5" placeholder="Your username..." title="Username">
                 </div>
 
                 <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                     <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Email">
                         Email
                     </span>
-                    <input type="email" class="py-3" placeholder="Your email...">
+                    <input type="email" class="py-3 w-full lg:w-4/5" placeholder="Your email...">
                 </div>
                 
                 <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                     <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Password">
                         Password
                     </span>
-                    <input type="text" class="py-3" placeholder="Your password...">
+                    <input type="password" class="py-3 w-full lg:w-4/5" placeholder="Your password...">
                 </div>
                 
                 <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                     <span class="cursor-pointer bg-primary text-white text-center px-4 lg:px-6 py-3 rounded-primary" title="Upload Photo Profile">
                         Upload
                     </span>
-                    <input type="file" class="py-3" placeholder="Your password...">
+                    <input type="file" class="py-3 w-full lg:w-4/5" placeholder="Your password...">
                 </div>
                 
                 <ul class="flex items-center justify-center gap-4 my-12">
@@ -87,7 +87,7 @@
                     <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Link Social Media
                     </span>
-                    <input type="url" class="py-3" placeholder="Your link social..." title="Link Social Media">
+                    <input type="url" class="py-3 w-full lg:w-[70%]" placeholder="Your link social..." title="Link Social Media">
                 </div>
 
                 <div class="flex items-center justify-center mt-10">
