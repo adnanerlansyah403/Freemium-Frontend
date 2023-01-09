@@ -96,6 +96,24 @@
         @apply text-primary;
     }
 
+    #filter{
+        font-family: 'Poppins';
+        font-style: normal;
+    }
+
+    #filter h1{
+        font-size: 14px;
+        line-height: 21px;
+        /* identical to box height */
+
+    }
+
+    #filter h2{
+        font-size: 18px;
+        line-height: 27px;
+    }
+
+
 }
 
 @layer components {}

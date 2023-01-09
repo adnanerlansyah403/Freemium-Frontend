@@ -10,3 +10,6 @@
 5. isi file .env supaya ngikutin database kamu
 6. php artisan migrate
 7. config env DB_CONNECTION=pgsql DB_HOST=127.0.0.1 DB_PORT=5432 DB_DATABASE=nama_database_maneh DB_USERNAME=postgres DB_PASSWORD=password_maneh
+
+8. npm install -D tailwindcss postcss autoprefixer
+9. npx tailwindcss init -p
