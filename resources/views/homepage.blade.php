@@ -39,6 +39,8 @@
             }
         
         </style>
+        
+        @livewireStyles
 
     </head>
     <body class="antialiased" x-data="">
@@ -91,6 +93,8 @@
                 });
             }
         </script>
+
+        @livewireScripts
 
     </body>
 </html>
