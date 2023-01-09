@@ -109,6 +109,10 @@
         width: calc(100% * 2 / 3);
     }
 
+    .col-9{
+        width: calc(100% * (9/12));
+    }
+
     .col-12 {
         width: 100%;
     }
@@ -118,24 +122,6 @@
     .span {
         @apply text-primary;
     }
-
-    #filter{
-        font-family: 'Poppins';
-        font-style: normal;
-    }
-
-    #filter h1{
-        font-size: 14px;
-        line-height: 21px;
-        /* identical to box height */
-
-    }
-
-    #filter h2{
-        font-size: 18px;
-        line-height: 27px;
-    }
-
 
     .span-danger {
         @apply text-[#dc2626];
