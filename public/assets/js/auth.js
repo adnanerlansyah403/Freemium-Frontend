@@ -8,7 +8,7 @@ document.addEventListener('alpine:init', () => {
     email: '',
     password: '',
     subscribe_status: false,
-    alertLogin: false,
+    showFlash: false,
     data_user: [],
 
     checkSubscribe() {

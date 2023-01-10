@@ -46,7 +46,7 @@
     </head>
     <body class="antialiased" x-data="">
 
-        {{-- <x-alert /> --}}
+        <x-alert />
     
 
         <!-- HEADER -->

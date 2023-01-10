@@ -136,4 +136,37 @@
 
 }
 
-@layer components {}
+@layer components {
+
+
+    /* ALERTS */
+
+    .alert {
+        @apply fixed flex justify-between top-10 right-6 p-4 max-w-sm rounded-lg
+    }
+
+    .alert-success {
+        @apply bg-[#dcfce7] text-[#15803d];
+    }
+
+    .alert-danger {
+        @apply bg-[#fee2e2] text-[#b91c1c];
+    }
+
+    .alert-warning {
+        @apply bg-[#fef9c3] text-[#a16207];
+    }
+
+    .alert-info {
+        @apply bg-[#dbeafe] text-[#1d4ed8];
+    }
+
+    /* INPUTS */
+
+    .input-danger {
+        @apply bg-[#fef2f2] border border-[#ef4444] text-[#7f1d1d] placeholder-[#b91c1c] ring-[#ef4444];
+    }
+
+
+
+}
