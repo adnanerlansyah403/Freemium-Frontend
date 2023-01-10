@@ -49,11 +49,11 @@
             </div>
 
             <div class="flex content-center flex-wrap gap-3 mt-12">
-                <span class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Coding</span>
-                <span class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">National</span>
-                <span class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Sport</span>
-                <span class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Healthy</span>
-                <span class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Healthy</span>
+                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Coding</a>
+                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">National</a>
+                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Sport</a>
+                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Healthy</a>
+                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Healthy</a>
             </div>
 
         </div>
