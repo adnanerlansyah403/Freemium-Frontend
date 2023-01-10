@@ -9,13 +9,13 @@
 
     <div class="flex container mx-auto justify-center mt-[88px] mb-[226px] flex-col lg:flex-row">
         {{-- kiri --}}
-        <div class="lg:col-3 lg:w-[270px] mx-auto w-[320px] h-[340px] px-8 py-8 bg-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-            <div class="h-[44px] w-[229px] py-2.5 px-3 rounded-[10px] border-solid border border-primary ">
-                <div class="flex gap-[83px]">
-                    <h1 class="text-[#8B8585] font-normal text-sm">Search Here...</h1>
+        <div class="w-full lg:col-3 lg:w-[270px] mx-auto h-max px-4 py-8 bg-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+            <form class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary ">
+                <div class="flex justify-between">
+                    <input class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm" placeholder="Search Here..." />
                     <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                 </div>
-            </div>
+            </form>
 
             <div class="flex flex-col justify-center gap-[9px] mt-[28px]">
                 <div class="text-black font-extrabold">
@@ -37,10 +37,11 @@
             </div>
 
             <div class="mt-[33px] flex flex-wrap gap-[11px]">
-                <div class="h-[25px] w-[101px] font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px]"> <a class="text-xs leading-[18px] px-[15px] py-[5px]" href="#">Category 1</a></div>
-                <div class="h-[25px] w-[101px] font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px]"> <a class="text-xs leading-[18px] px-[15px] py-[5px]" href="#">Category 1</a> </div>
-                <div class="h-[25px] w-[101px] font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px]"> <a class="text-xs leading-[18px] px-[15px] py-[5px]" href="#">Category 1</a> </div>
-                <div class="h-[25px] w-[101px] font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px]"> <a class="text-xs leading-[18px] px-[15px] py-[5px]" href="#">Category 1</a> </div>
+                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
+                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
+                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
+                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
+                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
 
             </div>
 

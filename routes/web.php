@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\User\Article;
+use App\Http\Livewire\User\Profile;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
@@ -77,22 +79,26 @@ Route::prefix('article')
 // Route::any('/register', [AuthController::class, 'register']) ->name('register')->middleware('withauth');
 
 // //frontend author
-Route::prefix('myarticle')
-    ->name('myarticle.')
-    ->controller(MyArticleController::class)
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
+// Route::prefix('myarticle')
+//     ->name('myarticle.')
+//     ->controller(MyArticleController::class)
+//     ->group(function () {
+//         Route::get('/', 'index')->name('index');
 
-    });
+//     });
+
+Route::get("/myprofile", Profile::class)->name('profile.index');
+
+Route::get("/myarticle", Article::class)->name('article.index');
 
 //frontend profile
-Route::prefix('profile')
-    ->name('profile.')
-    ->controller(ProfileController::class)
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
+// Route::prefix('profile')
+//     ->name('profile.')
+//     ->controller(ProfileController::class)
+//     ->group(function () {
+//         Route::get('/', 'index')->name('index');
 
-    });
+//     });
 
 //frontend subscription
 Route::prefix('transaction')

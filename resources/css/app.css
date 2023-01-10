@@ -22,8 +22,15 @@
         height: auto;
     }
 
+    input {
+        outline: none;
+        background: none;
+        border: none;
+    }
+
     input:is(:hover, :focus-visible) {
         outline: none;
+        background: none;
         border: none;
     }
 
@@ -109,7 +116,7 @@
         width: calc(100% * 2 / 3);
     }
 
-    .col-9{
+    .col-9 {
         width: calc(100% * (9/12));
     }
 
