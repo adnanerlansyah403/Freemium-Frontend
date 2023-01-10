@@ -112,26 +112,5 @@
         </div>
 
     </div>
-    
-    <script>
-        async function getData() {
-          try {
-            const response = await fetch('https://localhost:8001/api/article', {
-                    method: 'GET',
-                    headers: new Headers({
-                        'Access-Control-Allow-Origin': '*'
-                    }),
-                });
-
-            const data = await response.json();
-            this.data = data;
-            console.log(data);
-          } catch (e) {
-            this.error = e.message;
-            console.log(e.message);
-          }
-        }
-        getData();
-      </script>
 
 </section>

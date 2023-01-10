@@ -20,7 +20,7 @@ use App\Http\Controllers\TransactionController;
 */
 
 Route::get('/', function () {
-    return view('homepage');
+    return view("pages.frontend.article.list");
 })->name('homepage');
 
 Route::get('/login', function () {
@@ -87,7 +87,7 @@ Route::prefix('article')
 
 //     });
 
-Route::get("/myprofile", Profile::class)->name('profile.index');
+Route::get("/profile", Profile::class)->name('profile.index');
 
 Route::get("/myarticle", Article::class)->name('article.index');
 

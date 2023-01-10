@@ -58,10 +58,10 @@
                     <h2 class="font-bold text-[18px]"><a href="#">Free</a></h2>
                     <h2 class="font-bold text-[18px]"><a href="#">Paid</a></h2>
                 </div>
-                <button class="bg-primary h-[50px] w-[270px] px-5 py-3 mb-3 rounded-[10px] flex items-center gap-5 mt-10 lg:mt-auto md:mt-auto">
+                <a href="{{ route('transaction.create') }}" class="bg-primary px-4 py-3 mb-3 rounded-[10px] flex items-center gap-2 mt-10 lg:mt-auto md:mt-auto">
                     <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
                     <h2 class="font-bold text-white">Get Unlimited Access</h2>
-                </button>
+                </a>
             </div>
 
             {{-- list article --}}
