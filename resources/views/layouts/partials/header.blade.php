@@ -36,10 +36,10 @@
                         <figure>
                             <img x-bind:src="imgUrl+data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
                         </figure>
-                        <span class="font-inter" x-text="data_user.name">Adnan Erlansyah</span>
+                        <span class="font-inter" x-text="data_user.name == null ? 'User' : data_user.name"></span>
                     </button>
                     <ul 
-                        class="absolute top-[140%] rounded-primary bg-primary text-white w-full shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)]"
+                        class="absolute top-[140%] rounded-primary w-[200px] bg-primary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)]"
                         x-show="dropdownmenu"
                         x-transition
                     >
@@ -63,6 +63,11 @@
                         </li>
                     </ul>
                 </div>
+                <!-- Feather Icons Scripts -->
+                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                <script>
+                    feather.replace()
+                </script>
             </div>
         </template>
 

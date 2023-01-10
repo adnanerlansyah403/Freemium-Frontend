@@ -2,7 +2,7 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('user', () => ({
     isLogedIn: false,
-    baseUrl: "http://127.0.0.1:8002/",
+    baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
     imgUrl: "http://127.0.0.1:8001/",
     subscribe_status: false,

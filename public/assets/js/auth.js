@@ -2,12 +2,13 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('auth', () => ({
     isLogedIn: false,
-    baseUrl: "http://127.0.0.1:8002/",
+    baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
     name: '',
     email: '',
     password: '',
     subscribe_status: false,
+    alertLogin: false,
     data_user: [],
 
     checkSubscribe() {
@@ -16,7 +17,6 @@ document.addEventListener('alpine:init', () => {
 
     checkSession() {
       const token = localStorage.getItem('token')
-      console.log(token);
       this.isLogedIn = token ? true : false
 
       // if (this.isLogedIn) {

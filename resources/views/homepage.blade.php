@@ -70,7 +70,7 @@
         <!-- Feather Icons Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script>
-        feather.replace()
+            feather.replace()
         </script>
 
         {{-- Ckeditor5 Scripts --}}
