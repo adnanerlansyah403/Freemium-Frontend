@@ -41,8 +41,8 @@
                                 <i data-feather="calendar" class="w-4 h-4"></i>
 
                             </span>
-                            <span class="flex items-center gap-1">
-                                <i data-feather="eye" class="w-4 h-4"></i>
+                            <i data-feather="eye" class="w-4 h-4"></i>
+                            <span class="flex items-center gap-1" x-text="item.total_views_sum ? item.total_views_sum : '0'">
                                 1000
                             </span>
                         </p>
