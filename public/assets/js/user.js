@@ -127,8 +127,8 @@ document.addEventListener('alpine:init', () => {
           }
         })
           .then(async (response) => {
+            // console.log(response.json())
             this.listMyArticle = await response.json()
-            console.log(this.listMyArticle)
             this.isLoading = false
 
           })

@@ -50,6 +50,7 @@
                 </div>
                 <div class="flex items-center justify-between mt-6 mb-4">
                     <span class="text-md font-bold" x-text="item.title"></span>
+                    {{-- <b x-text="console.log(item)"></b> --}}
                     <i class="bg-primary px-4 py-2 rounded-primary text-white font-bold" x-text="item.type"></i>
                 </div>
                 <p class="text-sm text-gray-secondary" x-text="item.description">
@@ -73,7 +74,12 @@
                 feather.replace()
             </script>
         </div>
-
+        </template>
+        
+        {{-- <i x-text="console.log(listMyArticle.data.length || listMyArticle.data == undefined)"></i> --}}
+        
+        <template x-if="listMyArticle.data.length == 0">
+            <h1 class="text-center text-md"><span class="span">Oops</span>, You don't have an article</h1>
         </template>
 
     </div>
