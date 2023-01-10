@@ -13,6 +13,7 @@ document.addEventListener('alpine:init', () => {
     showFlash: false,
     isLoading: false,
     listMyArticle: [],
+    idArticle: 0,
 
     flash() {
       if (localStorage.getItem('showFlash')) {
@@ -41,6 +42,10 @@ document.addEventListener('alpine:init', () => {
         // Fetch API Check Token
         return window.location.replace(this.baseUrl + 'login')
       }
+    },
+
+    checkMyArticle() {
+
     },
 
     fetchMe() {
@@ -133,6 +138,11 @@ document.addEventListener('alpine:init', () => {
 
           })
 
+    },
+
+    setIdArticle(id) {
+      console.log(id)
+      this.idArticle = id
     },
 
     deleteArticle(id) {

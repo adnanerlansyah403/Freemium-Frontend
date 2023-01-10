@@ -20,7 +20,8 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </head>
-<body>
+<body x-data="user">
+    <div x-init="checkAlreadyAuth"></div>
 
     <section class="py-[60px]">
         <div class="container mx-auto flex flex-col">

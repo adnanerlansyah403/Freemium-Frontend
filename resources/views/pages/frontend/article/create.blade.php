@@ -4,7 +4,8 @@
 
 @section("content")
 
-<section class="py-[100px]">
+<section class="py-[100px]" x-data="user">
+    <div x-init="checkAlreadyAuth"></div>
 
     <style>
 

@@ -44,8 +44,8 @@
     
 </head>
 <body 
-    x-data=""
->
+x-data="user">
+    <div x-init="checkAlreadyAuth"></div>
 
     <section class="py-[60px]">
         <div class="container mx-auto flex flex-col">
