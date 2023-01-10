@@ -7,8 +7,17 @@ document.addEventListener('alpine:init', () => {
     imgUrl: "http://127.0.0.1:8001/",
     subscribe_status: false,
     data_user: [],
-    listMyArticle:[],
+    showFlash: false,
 
+    flash() {
+      if (localStorage.getItem('showFlash')) {
+        this.showFlash = true;
+        setTimeout(function () {
+          localStorage.removeItem("showFlash")
+          this.showFlash = false;
+        }, 3000);
+      }
+    },
 
     checkSession() {
       const token = localStorage.getItem('token')
@@ -40,38 +49,5 @@ document.addEventListener('alpine:init', () => {
       localStorage.clear()
       window.location.replace(this.baseUrl + 'login')
     },
-
-    fetchListMyArticle(){
-        const token = localStorage.getItem('token')
-
-        this.isLoading = true,
-        fetch(`${this.apiUrl}myArticle`,{
-            method: "GET",
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': localStorage.getItem('token')
-            }})
-        .then(async (response) => {
-            this.listMyArticle = await response.json()
-            console.log(this.listMyArticle)
-            this.isLoading = false
-
-        })
-
-    },
-
-    deleteArticle(id){
-        const token = localStorage.getItem('token')
-        fetch(this.apiUrl + 'article/'+id+'/delete',{
-            method: "POST",
-            headers: {
-                'Authorization': token
-            }})
-        .then( (response) => {
-            console.log(response)
-            window.location.replace(this.baseUrl+'myarticle')
-        });
-    }
-
   }))
 })

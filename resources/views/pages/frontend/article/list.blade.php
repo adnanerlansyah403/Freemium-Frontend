@@ -4,8 +4,15 @@
 
 @section("content")
 
-<section class="lg:px-[12px] px-8">
-    <div class="flex container mx-auto justify-center mt-[88px] mb-[226px] flex-col lg:flex-row">
+<section class="lg:px-[12px] px-8 pt-[88px]">
+    {{-- alert --}}
+    <div x-data="user" class="container mx-auto">
+        <div x-init="flash()"></div>
+        <div x-show="showFlash">
+            <x-alert />
+        </div>
+    </div>
+    <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row">
         {{-- kiri --}}
         <div class="w-full lg:col-3 lg:w-[270px] mx-auto h-max px-4 py-8 bg-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
             <form class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary ">

@@ -62,6 +62,7 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('name', fullName)
             localStorage.setItem('role', role)
             localStorage.setItem('subscribe_status', subscribe_status)
+            localStorage.setItem('showFlash', true)
             this.data_user = user.data
             if (role == 2) {
               return window.location.replace(this.baseUrl + 'article')
