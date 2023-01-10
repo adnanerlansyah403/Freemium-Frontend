@@ -13,14 +13,14 @@
             <ul class="flex justify-center lg:justify-start items-center gap-7">
                 <li class="pb-2 border-b border-primary cursor-pointer">
                     <a href="{{ route("profile.index") }}" class="text-base font-iceberg">
-                        <span class="span">My</span> 
-                        Profile 
+                        <span class="span">My</span>
+                        Profile
                     </a>
                 </li>
                 <li class="pb-2 border-b border-black cursor-pointer">
                     <a href="{{ route("myarticle.index") }}" class="text-base font-iceberg">
-                        <span class="span">My</span> 
-                        Articles 
+                        <span class="span">My</span>
+                        Articles
                     </a>
                 </li>
             </ul>

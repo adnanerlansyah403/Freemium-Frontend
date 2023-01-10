@@ -15,12 +15,12 @@
         @vite('resources/css/app.css')
 
         <!-- Ionicons -->
-        
+
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
         {{-- Quill Theme --}}
-        
+
         <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
 
         {{-- AlpineJS Link --}}
@@ -29,7 +29,7 @@
         <script src="./assets/js/auth.js"></script>
         <script src="./assets/js/user.js"></script>
         {{-- Custom Style --}}
-                
+
         <style>
             .tox-statusbar__branding {
                 display: none;
@@ -38,16 +38,16 @@
             .tox-tinymce {
                 height: 500px !important;
             }
-        
+
         </style>
-        
+
         @livewireStyles
 
     </head>
     <body class="antialiased" x-data="">
 
         <x-alert />
-    
+
 
         <!-- HEADER -->
 
@@ -64,7 +64,7 @@
         </main>
 
         <!-- FOOTER -->
-        
+
         @include("layouts.partials.footer")
 
         <!-- Feather Icons Scripts -->
@@ -80,9 +80,9 @@
         {{-- TinyMCE Scripts --}}
 
         <script src="https://cdn.tiny.cloud/1/u2nxm9ys2v0iwr5re916e7g6e8yjcnyzb81g34b18pmx0kk2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-        
+
         {{-- TinyMCE Tools --}}
-        
+
         <script type="text/javascript">
             addTinyMCE();
 
