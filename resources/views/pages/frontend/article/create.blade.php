@@ -4,7 +4,7 @@
 
 @section("content")
 
-<section class="py-[100px]" x-data="auth">
+<section class="py-[100px]">
 
     <style>
 
