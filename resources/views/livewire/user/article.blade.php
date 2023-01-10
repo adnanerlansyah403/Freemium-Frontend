@@ -25,30 +25,6 @@
 
     </div>
 
-    <div x-data="user" text-black>
-        <button @click="fetchListMyArticle()">Fetch Data</button>
-        <template x-if="isLoading">
-            <p>sedang memuat....</p>
-        </template>
-        <template x-if="!isLoading">
-            <template x-if="listMyArticle.length !=0">
-                <ul>
-                    <template x-for="(item, index) in listMyArticle.data">
-                        <li x-text="`${index + 1 } . ${item.title}`"></li>
-                    </template>
-                </ul>
-            </template>
-         </template>
-
-        <button x-on:click="open = !open">Toggle</button>
-        <p x-text="open? 'buka': 'tutup'"></p>
-
-
-        <template x-if="listMyArticle.length == 0">
-            <p>Data pengguna kosong</p>
-        </template>
-    </div>
-
     <div class="container mx-auto mt-10 w-full" x-data="user">
         <div x-init="fetchListMyArticle()"></div>
         <template x-for="(item, index) in listMyArticle.data">
