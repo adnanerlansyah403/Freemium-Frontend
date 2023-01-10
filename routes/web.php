@@ -5,6 +5,7 @@ use App\Http\Livewire\User\Profile;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Article\CreateArticle;
 use App\Http\Controllers\MyArticleController;
 use App\Http\Controllers\TransactionController;
 
@@ -72,6 +73,8 @@ Route::prefix('article')
         Route::post('/delete/{id}', 'delete')->name('delete');
         Route::post('/update/{id}', 'update')->name('update');
     });
+
+// Route::get("/article/create", CreateArticle::class)->name('article.create');
 
 // //frontend authentication
 // Route::any('/login', [AuthController::class, 'login'])->name('login')->middleware('noauth');

@@ -21,6 +21,10 @@ document.addEventListener('alpine:init', () => {
       this.isLogedIn = token ? true : false
 
       // if (this.isLogedIn) {
+      //   return window.location.href = this.baseUrl + "article";
+      // }
+
+      // if (this.isLogedIn) {
       //   // Fetch API Check Token
 
       //   if (token) {
@@ -32,6 +36,16 @@ document.addEventListener('alpine:init', () => {
       //     }
       //   }
       // }
+    },
+
+    checkAlreadyAuth() {
+      const token = localStorage.getItem('token')
+      this.isLogedIn = token ? true : false
+
+      if (this.isLogedIn) {
+        return window.location.href = this.baseUrl;
+      }
+
     },
 
     fetchLogin() {
@@ -80,6 +94,7 @@ document.addEventListener('alpine:init', () => {
         email: this.email,
         password: this.password
       }
+      console.log(params)
       fetch(this.apiUrl + 'register', {
         method: "POST",
         headers: {

@@ -33,9 +33,11 @@
                         class="flex items-center gap-3 px-4 py-2 bg-primary text-white hover:text-opacity-90 rounded-primary"
                         @click="dropdownmenu = !dropdownmenu"
                     >
-                        <figure>
-                            <img x-bind:src="imgUrl+data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
-                        </figure>
+                        <template x-if="imgUrl+data_user.photo != null || imgUrl+data_user.photo != ''">
+                            <figure>
+                                <img x-bind:src="imgUrl+data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
+                            </figure>
+                        </template>
                         <span class="font-inter" x-text="data_user.name == null ? 'User' : data_user.name"></span>
                     </button>
                     <ul 

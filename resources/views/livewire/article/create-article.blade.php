@@ -1,10 +1,8 @@
-@extends("homepage")
-
 @section("title", "Create Article - Freemium App")
 
 @section("content")
 
-<section class="py-[100px]" x-data="auth">
+<section class="py-[100px]">
 
     <style>
 

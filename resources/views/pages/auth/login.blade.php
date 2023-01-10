@@ -4,10 +4,11 @@
 
 @section("content")
 
-<section class="py-[100px]">
+<section class="py-[100px]" x-data="auth">
+    <div x-init="checkAlreadyAuth()"></div>
     <div class="container mx-auto flex items-start">
 
-        <div class="col col-12 lg:col-6" x-data="auth">
+        <div class="col col-12 lg:col-6">
 
             <div class="mb-5">
                 <label for="email" class="text-md">Email</label>
