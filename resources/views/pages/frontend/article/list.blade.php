@@ -5,8 +5,6 @@
 @section("content")
 
 <section class="lg:px-[12px] px-8">
-
-
     <div class="flex container mx-auto justify-center mt-[88px] mb-[226px] flex-col lg:flex-row">
         {{-- kiri --}}
         <div class="w-full lg:col-3 lg:w-[270px] mx-auto h-max px-4 py-8 bg-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
@@ -50,18 +48,31 @@
         </div>
 
         {{-- kanan --}}
-        <div class="lg:col-9 mt-5 lg:mt-0 bg-white lg:ml-[30px] md:mt-20">
-            <div class="lg:w-full w-[320px] md:w-full bg-primary rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 lg:h-[50px] md:h-[50px] mt-5 lg:mt-0 h-[70px] font-normal text-sm px-[27px] py-[13px]">You have to <span class="font-bold text-primary leading-[27px]">Subscribe</span>  to Get Unlimited Access</div>
+        <div class="lg:col-9 mt-5 lg:mt-0 bg-white lg:ml-[30px] md:mt-20" x-data="user">
+            <div x-init="fetchMe()"></div>
+            <template x-if="!data_user.subscribe_status">
+                <div>
+                    <div class="lg:w-full w-[320px] md:w-full bg-primary rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 lg:h-[50px] md:h-[50px] mt-5 lg:mt-0 h-[70px] font-normal text-sm px-[27px] py-[13px]">
+                        You have to 
+                        <span class="font-bold text-primary leading-[27px]">
+                            Subscribe</span>  to Get Unlimited Access
+                    </div>
+                </div>
+            </template>
             <div class="flex lg:justify-between md:justify-between mx-auto gap-5 flex-col-reverse md:w-full md:flex-row lg:flex-row items-center w-[320px] lg:w-full">
                 <div class="flex gap-[47px]">
                     <h2 class="font-bold text-primary text-[18px]"> <a href="#">All</a></h2>
                     <h2 class="font-bold text-[18px]"><a href="#">Free</a></h2>
                     <h2 class="font-bold text-[18px]"><a href="#">Paid</a></h2>
                 </div>
-                <a href="{{ route('transaction.create') }}" class="bg-primary px-4 py-3 mb-3 rounded-[10px] flex items-center gap-2 mt-10 lg:mt-auto md:mt-auto">
-                    <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
-                    <h2 class="font-bold text-white">Get Unlimited Access</h2>
-                </a>
+                <template  x-if="!data_user.subscribe_status">
+                    <div>
+                        <a href="{{ route('transaction.create') }}" class="bg-primary px-4 py-3 mb-3 rounded-[10px] flex items-center gap-2 mt-10 lg:mt-auto md:mt-auto">
+                            <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
+                            <h2 class="font-bold text-white">Get Unlimited Access</h2>
+                        </a>
+                    </div>
+                </template>
             </div>
 
             {{-- list article --}}

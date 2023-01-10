@@ -26,7 +26,8 @@
         {{-- AlpineJS Link --}}
 
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+        <script src="./assets/js/auth.js"></script>
+        <script src="./assets/js/user.js"></script>
         {{-- Custom Style --}}
                 
         <style>
