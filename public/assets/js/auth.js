@@ -9,6 +9,7 @@ document.addEventListener('alpine:init', () => {
     password: '',
     subscribe_status: false,
     showFlash: false,
+    status_err: [],
     data_user: [],
 
     checkSubscribe() {
@@ -47,21 +48,27 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           user = await response.json()
-          console.log(user)
-          token = `Bearer ${user.data.auth.token}`;
-          fullName = user.data.user.name;
-          role = user.data.user.role;
-          subscribe_status = user.data.user.subscribe_status;
-          localStorage.setItem('token', token)
-          localStorage.setItem('name', fullName)
-          localStorage.setItem('role', role)
-          localStorage.setItem('subscribe_status', subscribe_status)
-          this.data_user = user.data
-          if (role == 2) {
-            return window.location.replace(this.baseUrl + 'article')
+          if (!user.status) {
+            this.showFlash = true;
+            this.status_err = user.message;
           }
-          if (role == 1) {
-            return window.location.replace(this.baseUrl + 'admin')
+
+          if (user.status) {
+            token = `Bearer ${user.data.auth.token}`;
+            fullName = user.data.user.name;
+            role = user.data.user.role;
+            subscribe_status = user.data.user.subscribe_status;
+            localStorage.setItem('token', token)
+            localStorage.setItem('name', fullName)
+            localStorage.setItem('role', role)
+            localStorage.setItem('subscribe_status', subscribe_status)
+            this.data_user = user.data
+            if (role == 2) {
+              return window.location.replace(this.baseUrl + 'article')
+            }
+            if (role == 1) {
+              return window.location.replace(this.baseUrl + 'admin')
+            }
           }
         });
     },
@@ -81,7 +88,10 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           user = await response.json();
-          if (user) {
+          if (!user.status) {
+            this.showFlash = true;
+            this.status_err = user.message;
+          } else {
             window.location.replace(this.baseUrl + 'login')
           }
         });

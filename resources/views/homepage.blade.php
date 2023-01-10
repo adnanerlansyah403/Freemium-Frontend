@@ -44,9 +44,8 @@
         @livewireStyles
 
     </head>
-    <body class="antialiased" x-data="">
-
-        <x-alert />
+    <body class="antialiased">
+        {{-- <x-alert /> --}}
     
 
         <!-- HEADER -->
