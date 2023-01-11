@@ -140,7 +140,7 @@
                     <button @click.prevent="paySubscription()" type="submit" class="px-4 py-2 rounded-pill text-white bg-primary hover:text-opacity-80 transition duration-200 ease-in-out">
                         Pay Now
                     </button>
-                    <h1 x-text="plan"></h1>
+
                 </div>
 
 
