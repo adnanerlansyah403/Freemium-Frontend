@@ -46,6 +46,10 @@ document.addEventListener('alpine:init', () => {
             }
         },
 
+        setTiny(id, text) {
+            tinymce.get(id).setContent(text);
+        },
+
         fetchMe() {
             fetch(this.apiUrl + 'me', {
                     method: "GET",
@@ -178,7 +182,27 @@ document.addEventListener('alpine:init', () => {
                 })
                 .then(async (response) => {
                     // console.log(response.json())
-                    Article = await response.json()
+                    this.Article = await response.json()
+                    this.isLoading = false
+
+                })
+
+        },
+
+        fetchEditArticle(id) {
+            const token = localStorage.getItem('token')
+
+            this.isLoading = true,
+                fetch(`${this.apiUrl}article/${id}/edit`, {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token')
+                    }
+                })
+                .then(async (response) => {
+                    // console.log(response.json())
+                    this.Article = await response.json()
                     this.isLoading = false
 
                 })

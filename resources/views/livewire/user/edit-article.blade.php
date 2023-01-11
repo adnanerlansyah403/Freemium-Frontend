@@ -1,57 +1,56 @@
 @section("title", "Edit Article - Freemium App")
 
-<style>
-    .filename.active {
-        bottom: 0;
-        transition: .2s ease-in-out;
-    }
-
-    .filenamesubarticle.active {
-        bottom: 0;
-        transition: .2s ease-in-out;
-    }
-
-    .filesize.active {
-        right: 12px;
-        transition: .2s ease-in-out;
-    }
-
-    .has-scrollbar::-webkit-scrollbar {
-        background-color: transparent !important;
-        width: 6px !important;
-    }
-
-    .has-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #7C000B;
-        border-radius: 50px;
-        width: 6px !important;
-    }
-
-    .has-scrollbar::-webkit-scrollbar-button {
-        width: calc(25% - 40px);
-    }
-
-    .has-scrollbar::-moz-scrollbar {
-        background-color: #7C000B !important;
-        height: 6px !important;
-    }
-
-    .has-scrollbar::-moz-scrollbar-track {
-        outline: 2px solid #8B8585;
-        border-radius: 50px;
-    }
-
-    .has-scrollbar::-moz-scrollbar-button {
-        width: calc(25% - 40px);
-    }
-</style>
-
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
+    <style>
+        .filename.active {
+            bottom: 0;
+            transition: .2s ease-in-out;
+        }
+
+        .filenamesubarticle.active {
+            bottom: 0;
+            transition: .2s ease-in-out;
+        }
+
+        .filesize.active {
+            right: 12px;
+            transition: .2s ease-in-out;
+        }
+
+        .has-scrollbar::-webkit-scrollbar {
+            background-color: transparent !important;
+            width: 6px !important;
+        }
+
+        .has-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #7C000B;
+            border-radius: 50px;
+            width: 6px !important;
+        }
+
+        .has-scrollbar::-webkit-scrollbar-button {
+            width: calc(25% - 40px);
+        }
+
+        .has-scrollbar::-moz-scrollbar {
+            background-color: #7C000B !important;
+            height: 6px !important;
+        }
+
+        .has-scrollbar::-moz-scrollbar-track {
+            outline: 2px solid #8B8585;
+            border-radius: 50px;
+        }
+
+        .has-scrollbar::-moz-scrollbar-button {
+            width: calc(25% - 40px);
+        }
+    </style>
     <div x-init="
         if(isLogedIn == true) {
+            fetchEditArticle(window.location.href.split('/').pop())
             return document.querySelector('section').style.display = 'block';
         }
-        console.log(Article.data);
     ">
 
         <div class="container mx-auto flex items-center">
@@ -61,18 +60,18 @@
                 <div class="flex flex-wrap lg:flex-nowrap">
                     <div class="mb-5 col-12 lg:col-6">
                         <label for="text" class="text-md">Title</label>
-                        <input type="text" placeholder="Your text..."
+                        <input x-model="Article.data.title" type="text" placeholder="Your text..."
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
 
                     <div class="mb-5 col-12 lg:col lg:col-6">
                         <label for="text" class="text-md">Category</label>
-                        <select name="category_id" id=""
+                        <select x-model="Article.data.tags[0].category_id" name="category_id" id=""
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                             <option value="">--Choosen Category--</option>
-                            <option value="">HTML</option>
-                            <option value="">CSS</option>
-                            <option value="">Javascript</option>
+                            <template x-for="(c, index) in Article.category">
+                                <option x-bind:value="c.id" x-text="c.name">test</option>
+                            </template>
                         </select>
                     </div>
                 </div>
@@ -97,7 +96,7 @@
                         @click="
                             $refs.file.click();
                         ">
-                        <img src="" x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
+                        <img x-bind:src="'http://localhost:8001/' + Article.data.thumbnail" src="" x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage">
                         </i>
@@ -107,10 +106,12 @@
                     </span>
                 </div>
 
-                <div class="mb-5 col-12">
+                <div x-init="setTiny('content', Article.data.description);" class="mb-5 col-12">
                     <label for="text" class="text-md">Content</label><br>
-                    <textarea id="content" placeholder="Your content..."
+                    <textarea 
+                    x-text="Article.data.description" id="content" placeholder="Your content..."
                         class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
+                        <div x-text="Article.data.description"></div>
                     </textarea>
                 </div>
 
@@ -125,7 +126,9 @@
 
         </div>
 
-        <div class="container mx-auto mt-4">
+        <div class="container mx-auto mt-4" x-data="{
+            editSub: 0,
+        }">
 
 
             <form class="w-full my-1 px-5 lg:px-0">
@@ -166,50 +169,63 @@
                         <div x-ref="tab" :style="handleToggle()"
                             class="px-4 overflow-hidden max-h-0 duration-500 transition-all">
                             <div class="py-10 px-1 flex max-h-[500px] overflow-y-scroll flex-wrap gap-4 has-scrollbar">
-                                <template>
+                                <template x-for="(s, index) in Article.data.subarticles">
                                     <span type="button"
                                         class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
-                                        <b>Sub-Article 1</b>
+                                        <b x-text="s.title">Sub-Article 1</b>
                                         <div class="flex items-center gap-1">
-                                            <a href="#"
-                                                class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                            <button type="button" @click="editSub = index;" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                                 title="Edit Article">
                                                 <i data-feather="edit" class="text-sm">
                                                 </i>
-                                            </a>
-                                            <a href="#"
-                                                class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                            </button>
+                                            <button type="button" href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                                 title="Delete Sub Article">
                                                 <i data-feather="trash-2" class="text-sm">
                                                 </i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </span>
                                 </template>
+                                <span type="button"
+                                    class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
+                                    <b>Sub-Article 1</b>
+                                    <div class="flex items-center gap-1">
+                                        <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                            title="Edit Article">
+                                            <i data-feather="edit" class="text-sm">
+                                            </i>
+                                        </a>
+                                        <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                            title="Delete Sub Article">
+                                            <i data-feather="trash-2" class="text-sm">
+                                            </i>
+                                        </a>
+                                    </div>
+                                </span>
                             </div>
 
                         </div>
                     </li>
 
                 </ul>
-
                 <div class="flex flex-wrap lg:flex-nowrap">
                     <div class="mb-5 col-12 lg:col-6">
                         <label for="text" class="text-md">Title</label>
-                        <input type="text" placeholder="Your text..."
+                        <input x-model="Article.data.subarticles[editSub].title" type="text" placeholder="Your text..."
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
 
-                    <div class="mb-5 col-12 lg:col lg:col-6">
+                    {{-- <div class="mb-5 col-12 lg:col lg:col-6">
                         <label for="text" class="text-md">Category</label>
-                        <select name="category_id" id=""
+                        <select x-model="Article.data.tags[0].category_id" name="category_id" id=""
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                             <option value="">--Choosen Category--</option>
-                            <option value="">HTML</option>
-                            <option value="">CSS</option>
-                            <option value="">Javascript</option>
+                            <template x-for="(c, index) in Article.category">
+                                <option x-bind:value="c.id" x-text="c.name">test</option>
+                            </template>
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="mb-5">
@@ -221,8 +237,8 @@
                                 var reader = new FileReader();
                                 reader.readAsDataURL($refs.filesubarticle.files[0]);
                                 reader.onload = function (e) {
-                                    $refs.image.src = e.target.result;
-                                    $refs.image.alt = $refs.filesubarticle.name;
+                                    $refs.subimage.src = e.target.result;
+                                    $refs.subimage.alt = $refs.filesubarticle.name;
                                     $refs.filenamesubarticle.classList.add('active');
                                     $refs.filenamesubarticle.innerText = $refs.filesubarticle.files[0].name;
                                 }
@@ -233,7 +249,7 @@
                         @click="
                             $refs.filesubarticle.click();
                         ">
-                        <img src="" x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
+                        <img x-bind:src="'http://localhost:8001/' + Article.data.subarticles[editSub].thumbnail" src="" x-ref="subimage" class="absolute w-full h-full object-cover rounded-lg" alt="">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimagesubarticle">
                         </i>
@@ -245,7 +261,7 @@
 
                 <div class="mb-5 col-12">
                     <label for="text" class="text-md">Content</label><br>
-                    <textarea id="content" placeholder="Your content..."
+                    <textarea x-text="Article.data.subarticles[editSub].title" id="sub_content" placeholder="Your content..."
                         class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                     </textarea>
                 </div>
@@ -263,29 +279,28 @@
 
     </div>
 
+    <script>
+        document.addEventListener('alpine:init', () => {
+        Alpine.store('accordion', {
+        tab: 0
+        });
+        
+        Alpine.data('accordion', (idx) => ({
+        init() {
+            this.idx = idx;
+        },
+        idx: -1,
+        handleClick() {
+            this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
+        },
+        handleRotate() {
+            return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';
+        },
+        handleToggle() {
+            return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
+        }
+        }));
+    })
+    </script>
 </section>
 
-
-<script>
-    document.addEventListener('alpine:init', () => {
-    Alpine.store('accordion', {
-    tab: 0
-    });
-    
-    Alpine.data('accordion', (idx) => ({
-    init() {
-        this.idx = idx;
-    },
-    idx: -1,
-    handleClick() {
-        this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
-    },
-    handleRotate() {
-        return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';
-    },
-    handleToggle() {
-        return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
-    }
-    }));
-})
-</script>
