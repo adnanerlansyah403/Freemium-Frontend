@@ -4,11 +4,16 @@
 
 @section("content")
 
-<section class="py-[100px]"  x-data="auth">
-    <div x-init="checkAlreadyAuth()"></div>
-    <div class="container mx-auto flex items-start">
+<section class="py-[100px]" x-data="auth" x-init="checkAlreadyAuth()" style="display: none;"
+>
 
-        <div class="col col-12 lg:col-6" x-data="auth">
+    <div class="container mx-auto flex items-start" x-init="
+        if(!isLogedIn) {
+            return document.querySelector('section').style.display = 'block';
+        }
+    ">
+
+        <div class="col col-12 lg:col-6">
 
             <div class="mb-5">
                 <label for="name" class="text-md">Name</label>
@@ -66,6 +71,7 @@
         </div>
 
     </div>
+
 </section>
 
 @endsection

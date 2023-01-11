@@ -12,8 +12,9 @@ document.addEventListener('alpine:init', () => {
         data_user: [],
         showFlash: false,
         isLoading: false,
-        listMyArticle: [],
         Article: [],
+        listMyArticle: [],
+        myTransactions: [],
         message: '',
 
         flash() {
