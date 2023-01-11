@@ -15,6 +15,8 @@ document.addEventListener('alpine:init', () => {
         listMyArticle: [],
         Article: [],
         message: '',
+        plan: '',
+        plan_id: '',
 
         flash() {
             if (localStorage.getItem('showFlash')) {
@@ -202,6 +204,30 @@ document.addEventListener('alpine:init', () => {
                     console.log(response)
                     window.location.replace(this.baseUrl + 'myarticle')
                 });
-        }
+        },
+        paySubscription() {
+            const data = new FormData()
+            data.append('plan', this.plan)
+            plan_id = this.plan
+            console.log(this.plan)
+            const token = localStorage.getItem('token')
+            fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
+              method: "POST",
+              headers: {
+                'Authorization': token
+              }
+            })
+
+            .then((response) => {
+                if (response.ok){
+                    alert('Payment Successfully!')
+                    window.location.replace(this.baseUrl + 'transaction/details')
+                }else{
+                    alert ('Pembayaran Gagal')
+                }
+              });
+
+          }
+
     }))
 })
