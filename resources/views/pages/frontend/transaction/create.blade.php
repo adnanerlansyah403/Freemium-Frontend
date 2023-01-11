@@ -49,14 +49,16 @@
 
 </head>
 <body x-data="user" x-init="checkSession()"
->
-    <section class="py-[60px]" style="display: none;"
+style="display: none;">
+<div x-init="fetchMyTransactions()"></div>
+    <section class="py-[60px]"
         x-init="
-            if(isLogedIn == true) {
-                return document.querySelector('section').style.display = 'block';
+            if(isLogedIn == true && myTransactions != null) {
+                return document.body.style.display = 'block';
             }
         "
     >
+
         <div class="container mx-auto flex flex-col">
 
             <a href="#" class="flex items-center justify-center">
@@ -64,15 +66,15 @@
                 <p class="text-xl font-iceberg">reemium</p>
             </a>
 
-            <h1 class="text-lg lg:text-xl text-center">
-                GET UNLIMITED ACCESS TO <br>
+            <h1 class="text-md md:text-lg lg:text-xl text-center">
+                GET UNLIMITED ACCESS TO <br> 
                 EVERYTHING IN FREEMIUM
             </h1>
 
             <div class="mt-14 mb-10 flex flex-col items-center text-center">
-                <h3 class="text-md text-gray-secondary">Plans at less 100$/Year</h3>
+                <h3 class="text-[20px] md:text-md text-gray-secondary">Plans at less 100$/Year</h3>
                 <ul class="mt-4">
-                    <li class="flex items-center gap-2">
+                    <li class="flex items-center gap-2 text-sm">
                         <i data-feather="check-circle" class="text-primary"></i>
                         <span>Unlimited Content both free and paid</span>
                     </li>
@@ -124,8 +126,8 @@
                     </div>
 
                 </div>
-
-                <div class="lg:w-[630px] lg:mx-auto">
+                
+                <div class="px-2 lg:px-0 lg:w-[630px] lg:mx-auto">
                     <span class="text-md font-semibold">Pay With : </span>
 
                     <div class="flex items-center gap-5 mt-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
@@ -146,6 +148,8 @@
 
 
         </div>
+
+     
     </section>
 
 
