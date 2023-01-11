@@ -1,140 +1,126 @@
 
 @section("title", "Me - Freemium App")
 
-<section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
-    <div
-    x-init="
-        if(isLogedIn == true) {
-            return document.querySelector('section').style.display = 'block';
-        }
-    ">
+<section class="py-[100px]" x-data="user">
+    <div x-init="checkSession()"></div>
+    <h1 class="font-iceberg text-lg text-center text-primary mb-16">ME</h1>
 
-        <h1 class="font-iceberg text-lg text-center text-primary mb-16">ME</h1>
-    
-        <div class="container mx-auto mb-9">
-    
-            <nav class="col col-12" style="margin-inline: 0;">
-                <ul class="flex items-center justify-center lg:justify-start gap-7">
-                    <li class="pb-2 border-b border-primary cursor-pointer">
-                        <a href="{{ route('profile.index') }}" class="text-base font-iceberg">
-                            <span class="span">My</span> 
-                            Profile 
-                        </a>
-                    </li>
-                    <li class="pb-2 cursor-pointer">
-                        <a href="{{ route('article.index') }}" class="text-base font-iceberg">
-                            <span class="span">My</span> 
-                            Articles 
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-    
-        </div>
-    
-        <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0" x-data="user">
+    <div class="container mx-auto mb-9">
+
+        <nav class="col col-12" style="margin-inline: 0;">
+            <ul class="flex items-center justify-center lg:justify-start gap-7">
+                <li class="pb-2 border-b border-primary cursor-pointer">
+                    <a href="{{ route('profile.index') }}" class="text-base font-iceberg">
+                        <span class="span">My</span> 
+                        Profile 
+                    </a>
+                </li>
+                <li class="pb-2 cursor-pointer">
+                    <a href="{{ route('article.index') }}" class="text-base font-iceberg">
+                        <span class="span">My</span> 
+                        Articles 
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0" x-data="user">
+        
+        <div x-init="fetchMe()"></div>        
+
+        <div class="col col-12 order-2 lg:order-1 lg:col-8" style="margin-left: 0px;">
+
+            {{-- <div x-text="console.log(data_user.name)"></div> --}}
+
+            <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                    Full Name
+                </span>
+                <input type="text" class="py-3 lg:w-4/5" placeholder="Your full name..." title="Full Name" x-model="name">
+            </div>
+
+            <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                    Username
+                </span>
+                <input type="text" class="py-3 w-full lg:w-4/5" placeholder="Your username..." x-bind:value="data_user.username" x-model="username" title="Username">
+            </div>
+
+            <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Email">
+                    Email
+                </span>
+                <input type="email" class="py-3 w-full lg:w-4/5" x-bind:value="data_user.email" x-model="email" placeholder="Your email...">
+            </div>
             
-            <div x-init="fetchMe()"></div>        
-    
-            <div class="col col-12 order-2 lg:order-1 lg:col-8" style="margin-left: 0px;">
-    
-                {{-- <div x-text="console.log(data_user.name)"></div> --}}
-    
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
-                        Full Name
-                    </span>
-                    <input type="text" class="py-3 lg:w-4/5" placeholder="Your full name..." title="Full Name" x-model="name">
-                </div>
-    
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
-                        Username
-                    </span>
-                    <input type="text" class="py-3 w-full lg:w-4/5" placeholder="Your username..." x-bind:value="data_user.username" x-model="username" title="Username">
-                </div>
-    
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Email">
-                        Email
-                    </span>
-                    <input type="email" class="py-3 w-full lg:w-4/5" x-bind:value="data_user.email" x-model="email" placeholder="Your email...">
-                </div>
-                
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Password">
-                        Password
-                    </span>
-                    <input type="password" class="py-3 w-full lg:w-4/5" placeholder="Your password..." x-model="password">
-                </div>
-                
-                <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="cursor-pointer bg-primary text-white text-center px-4 lg:px-6 py-3 rounded-primary" title="Upload Photo Profile"
-                    @click="$refs.photo.click()">
-                        Upload
-                    </span>
-                    <input type="file" class="py-3 w-full lg:w-4/5" id="photo" x-ref="photo" x-model="photo" placeholder="Your password...">
-                </div>
-                
-                <ul class="flex items-center justify-center gap-4 my-12">
-                    <li class="w-max cursor-pointer p-3 rounded-full bg-[#4267B2] text-white hover:bg-primary transition duration-200 ease-in-out"
-                    @click="
-                        linkInputFacebook = true;
-                        linkInputLinkedin = false;
-                        linkInputInstagram = false;
-                        linkInputTwitter = false;
-                    ">
-                        <i data-feather="facebook"></i>
-                    </li>
-                    <li class="w-max cursor-pointer p-3 rounded-full bg-[#0077B5] text-white hover:bg-primary transition duration-200 ease-in-out"
-                    @click="
-                    linkInputFacebook = false;
-                    linkInputLinkedin = true;
-                    linkInputInstagram = false;
-                    linkInputTwitter = false;
-                    ">
-                        <i data-feather="linkedin"></i>
-                    </li>
-                    <li class="w-max cursor-pointer p-3 rounded-full bg-[#C13584] text-white hover:bg-primary transition duration-200 ease-in-out"
-                    @click="
-                    linkInputFacebook = false;
-                    linkInputLinkedin = false;
-                    linkInputInstagram = true;
-                    linkInputTwitter = false;
-                    ">
-                        <i data-feather="instagram"></i>
-                    </li>
-                    <li class="w-max cursor-pointer p-3 rounded-full bg-[#1DA1F2] text-white hover:bg-primary transition duration-200 ease-in-out"
-                    @click="
-                    linkInputFacebook = false;
+            <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Password">
+                    Password
+                </span>
+                <input type="password" class="py-3 w-full lg:w-4/5" placeholder="Your password..." x-model="password">
+            </div>
+            
+            <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                <span class="cursor-pointer bg-primary text-white text-center px-4 lg:px-6 py-3 rounded-primary" title="Upload Photo Profile"
+                @click="$refs.photo.click()">
+                    Upload
+                </span>
+                <input type="file" class="py-3 w-full lg:w-4/5" id="photo" x-ref="photo" x-model="photo" placeholder="Your password...">
+            </div>
+            
+            <ul class="flex items-center justify-center gap-4 my-12">
+                <li class="w-max cursor-pointer p-3 rounded-full bg-[#4267B2] text-white hover:bg-primary transition duration-200 ease-in-out"
+                @click="
+                    linkInputFacebook = true;
                     linkInputLinkedin = false;
                     linkInputInstagram = false;
-                    linkInputTwitter = true;
-                    ">
-                        <i data-feather="twitter"></i>
-                    </li>
-                </ul>
-    
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
-                        Link Social 
-                        <i x-show="linkInputFacebook">Facebook</i> 
-                        <i x-show="linkInputLinkedin">Linkedin</i> 
-                        <i x-show="linkInputInstagram">Instagram</i> 
-                        <i x-show="linkInputTwitter">Twitter</i>
-                    </span>
-                    <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link facebook..." title="Link Facebook" x-bind:value="data_user.link_facebook" x-model="link_facebook" x-show="linkInputFacebook">
-                    <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link linkedin..." title="Link Linkedin" x-bind:value="data_user.link_linkedin" x-model="link_linkedin" x-show="linkInputLinkedin">
-                    <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link instagram..." title="Link Instagram" x-bind:value="data_user.link_instagram" x-model="link_instagram" x-show="linkInputInstagram">
-                    <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link twitter..." title="Link Twitter" x-bind:value="data_user.link_twitter" x-model="link_twitter" x-show="linkInputTwitter">
-                </div>
-    
-                <div class="flex items-center justify-center mt-10">
-                    <button @click="updateMe()" class="py-2 px-4 rounded-primary outline outline-1 outline-primary text-primary hover:bg-primary hover:text-white hover:outline-none transition duration-200 ease-in-out">
-                        Save
-                    </button>
-                </div>
-    
+                    linkInputTwitter = false;
+                ">
+                    <i data-feather="facebook"></i>
+                </li>
+                <li class="w-max cursor-pointer p-3 rounded-full bg-[#0077B5] text-white hover:bg-primary transition duration-200 ease-in-out"
+                @click="
+                linkInputFacebook = false;
+                linkInputLinkedin = true;
+                linkInputInstagram = false;
+                linkInputTwitter = false;
+                ">
+                    <i data-feather="linkedin"></i>
+                </li>
+                <li class="w-max cursor-pointer p-3 rounded-full bg-[#C13584] text-white hover:bg-primary transition duration-200 ease-in-out"
+                @click="
+                linkInputFacebook = false;
+                linkInputLinkedin = false;
+                linkInputInstagram = true;
+                linkInputTwitter = false;
+                ">
+                    <i data-feather="instagram"></i>
+                </li>
+                <li class="w-max cursor-pointer p-3 rounded-full bg-[#1DA1F2] text-white hover:bg-primary transition duration-200 ease-in-out"
+                @click="
+                linkInputFacebook = false;
+                linkInputLinkedin = false;
+                linkInputInstagram = false;
+                linkInputTwitter = true;
+                ">
+                    <i data-feather="twitter"></i>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                <span class="bg-primary text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                    Link Social 
+                    <i x-show="linkInputFacebook">Facebook</i> 
+                    <i x-show="linkInputLinkedin">Linkedin</i> 
+                    <i x-show="linkInputInstagram">Instagram</i> 
+                    <i x-show="linkInputTwitter">Twitter</i>
+                </span>
+                <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link facebook..." title="Link Facebook" x-bind:value="data_user.link_facebook" x-model="link_facebook" x-show="linkInputFacebook">
+                <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link linkedin..." title="Link Linkedin" x-bind:value="data_user.link_linkedin" x-model="link_linkedin" x-show="linkInputLinkedin">
+                <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link instagram..." title="Link Instagram" x-bind:value="data_user.link_instagram" x-model="link_instagram" x-show="linkInputInstagram">
+                <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link twitter..." title="Link Twitter" x-bind:value="data_user.link_twitter" x-model="link_twitter" x-show="linkInputTwitter">
             </div>
 
             <div x-data="user" class="container mx-auto">
@@ -170,9 +156,7 @@
                     </template>
                 </p>
             </div>
-    
         </div>
-
 
     </div>
 
