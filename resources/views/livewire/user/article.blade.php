@@ -35,29 +35,30 @@
             <div x-init="fetchListMyArticle()"></div>
             <template x-for="(item, index) in listMyArticle.data">
                 <div class="flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between gap-6 mb-10">
-                    <div class="col col-8" style="margin: 0 !important;">
+                    <div class="col col-9 md:col-8" style="margin: 0 !important;">
                         <div class="flex items-center gap-3">
                             <figure>
                                 <img x-bind:src="imgUrl+item.author.photo" class="w-10 h-10 bg-gray-primary rounded-full" alt="">
                             </figure>
-                            <div>
+                            <div x-data="helpers">
                                 <span class="font-bold text-base" x-text="item.author.username"></span>
                                 <p class="flex flex-wrap lg:flex-nowrap items-center gap-2 text-sm mt-2">
-                                    <span class="flex items-center gap-1" x-text="new Date(item.created_at).toDateString()">{{ \Carbon\Carbon::parse()->translatedFormat('d F Y H:i:s') }}
+                                    <span class="flex items-center gap-1" 
+                                    x-text="convertDate(item.created_at)">
+                                        {{-- {{ \Carbon\Carbon::parse()->translatedFormat('H:i:s') }} --}}
                                         <i data-feather="calendar" class="w-4 h-4"></i>
 
                                     </span>
                                     <i data-feather="eye" class="w-4 h-4"></i>
-                                    <span class="flex items-center gap-1" x-text="item.total_views_sum ? item.total_views_sum : '0'">
+                                    <span class="flex items-center gap-1 -ml-1" x-text="item.total_views_sum ? item.total_views_sum : '0'">
                                         1000
                                     </span>
                                 </p>
                             </div>
                         </div>
                         <div class="flex items-center justify-between mt-6 mb-4">
-                            <span class="text-md font-bold" x-text="item.title"></span>
-                            {{-- <b x-text="console.log(item)"></b> --}}
-                            <i class="bg-primary px-4 py-2 rounded-primary text-white font-bold" x-text="item.type"></i>
+                            <span class="text-base md:text-md font-bold" x-text="item.title"></span>
+                            <i class="bg-primary px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
                         </div>
                         <p class="text-sm text-gray-secondary" x-text="item.description">
 

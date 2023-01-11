@@ -72,7 +72,7 @@
         </div>
 
         <div class="flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between gap-6 mb-10">
-            <div class="col col-8" style="margin: 0 !important;">
+            <div class="col col-12 md:col-8" style="margin: 0 !important;">
                 <div class="flex items-center gap-3">
                     <figure>
                         <img src="" class="w-10 h-10 bg-gray-primary rounded-full" alt="">
