@@ -26,10 +26,14 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </head>
-<body x-data="user">
-    <div x-init="checkSession()"></div>
-
-    <section class="py-[60px]">
+<body x-data="user" x-init="checkSession()"
+>
+    <section class="py-[60px]" style="display: none;"
+        x-init="
+            if(isLogedIn == true) {
+                return document.querySelector('section').style.display = 'block';
+            }
+        ">
         <div class="container mx-auto flex flex-col">
 
             <a href="#" class="flex items-center justify-center">
