@@ -30,7 +30,7 @@
 
         <div x-init="fetchMe()"></div>
 
-        <div class="col col-12 order-2 lg:order-1 lg:col-8" style="margin-left: 0px;">
+        <div class="col col-12 order-2 lg:order-1 lg:col-8">
 
             {{-- <div x-text="console.log(data_user.name)"></div> --}}
 
