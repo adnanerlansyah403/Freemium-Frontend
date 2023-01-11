@@ -92,6 +92,10 @@
                     selector: '#content',
                     plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
                 });
+                tinymce.init({
+                    selector: '#sub_content',
+                    plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
+                });
             }
         </script>
 

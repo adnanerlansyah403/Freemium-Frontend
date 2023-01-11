@@ -87,7 +87,7 @@ style="display: none;">
                             }
                         ">
                     <span
-                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4 overflow-y-hidden"
+                        class="relative cursor-pointer flex items-center justify-center h-[200px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4 overflow-y-hidden"
                         @click="
                             $refs.file.click();
                         "

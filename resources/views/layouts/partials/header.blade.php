@@ -31,7 +31,7 @@
                 >
                     <button 
                         type="button" 
-                        class="flex items-center gap-3 px-4 py-2 bg-primary text-white hover:text-opacity-90 rounded-primary"
+                        class="flex items-center gap-1 px-4 py-2 bg-primary text-white hover:text-opacity-90 rounded-primary"
                         @click="dropdownmenu = !dropdownmenu"
                     >
                         <template x-if="imgUrl+data_user.photo != null || imgUrl+data_user.photo != ''">
@@ -39,6 +39,7 @@
                                 <img x-bind:src="imgUrl+data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
                             </figure>
                         </template>
+                        <span x-text="console.log(data_user)"></span>
                         <span class="font-inter" x-text="data_user.name == null ? 'User' : data_user.name"></span>
                     </button>
                     <ul 
