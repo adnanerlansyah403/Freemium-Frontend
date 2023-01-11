@@ -55,7 +55,7 @@
 <section class="py-[100px]" x-data="user">
     <div x-init="checkAlreadyAuth"></div>
     <div x-init="checkMyArticle"></div>
-    {{-- <div x-text="console.log(idArticle)"></div> --}}
+    <div x-text="fetchMyArticle()"></div>
     <div class="container mx-auto flex items-center">
 
         <form action="" class="col col-12">

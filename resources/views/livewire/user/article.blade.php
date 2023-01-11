@@ -61,7 +61,7 @@
                     <img x-bind:src="imgUrl+item.thumbnail" class="w-[150px] h-[150px] bg-gray-primary rounded-lg" alt="">
                 </figure>
                 <div class="col col-3 lg:col-1 flex flex-row md:flex-col items-center lg:items-start gap-4">
-                    <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="setIdArticle(item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary hover:bg-primary hover:text-white hover:outline-none transition duration-200 ease-in-out">
+                    <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="console.log(idArticle = item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary hover:bg-primary hover:text-white hover:outline-none transition duration-200 ease-in-out">
                         <i data-feather="edit"></i>
                     </a>
                     <button href="#" x-on:click="deleteArticle(item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary hover:bg-primary hover:text-white hover:outline-none transition duration-200 ease-in-out">

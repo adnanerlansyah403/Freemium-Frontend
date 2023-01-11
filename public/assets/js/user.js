@@ -13,7 +13,6 @@ document.addEventListener('alpine:init', () => {
     showFlash: false,
     isLoading: false,
     listMyArticle: [],
-    idArticle: 0,
 
     flash() {
       if (localStorage.getItem('showFlash')) {
@@ -42,10 +41,6 @@ document.addEventListener('alpine:init', () => {
         // Fetch API Check Token
         return window.location.replace(this.baseUrl + 'login')
       }
-    },
-
-    checkMyArticle() {
-
     },
 
     fetchMe() {
@@ -118,6 +113,26 @@ document.addEventListener('alpine:init', () => {
     logout() {
       localStorage.clear()
       window.location.replace(this.baseUrl + 'login')
+    },
+
+    fetchMyArticle() {
+      let url = window.location.href;
+      let id = url.substring(url.lastIndexOf('/') + 1);
+
+      fetch(`${this.apiUrl}article/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(async (response) => {
+          let myArticle = await response.json();
+          console.log(myArticle)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
     },
 
     fetchListMyArticle() {

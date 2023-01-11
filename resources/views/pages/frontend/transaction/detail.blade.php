@@ -10,6 +10,12 @@
 
     <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
 
+    {{-- AlpineJS Link --}}
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="{{ asset('assets/js/auth.js') }}"></script>
+    <script src="{{ asset('assets/js/user.js') }}"></script>
+    
     <!-- Vite Link CSS -->
 
     @vite('resources/css/app.css')
@@ -21,7 +27,7 @@
 
 </head>
 <body x-data="user">
-    <div x-init="checkAlreadyAuth"></div>
+    <div x-init="checkSession()"></div>
 
     <section class="py-[60px]">
         <div class="container mx-auto flex flex-col">
