@@ -139,7 +139,6 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           let myArticle = await response.json();
-          console.log(myArticle)
         })
         .catch(error => {
           console.log(error)
@@ -184,6 +183,7 @@ document.addEventListener('alpine:init', () => {
           .then(async (response) => {
             // console.log(response.json())
             this.Article = await response.json()
+            console.log(this.Article)
             this.isLoading = false
 
           })
@@ -204,6 +204,9 @@ document.addEventListener('alpine:init', () => {
           .then(async (response) => {
             // console.log(response.json())
             this.Article = await response.json()
+            if (this.Article.status == false) {
+              return window.location.replace(`${this.baseUrl}myarticle`);
+            }
             this.isLoading = false
 
           })
@@ -227,7 +230,88 @@ document.addEventListener('alpine:init', () => {
           console.log(response)
           window.location.replace(this.baseUrl + 'myarticle')
         });
+    },
+
+
+    // MY TRANSACTONS
+
+    fetchMyTransactions() {
+
+      fetch(`${this.apiUrl}payment/getMyPayment`, {
+        method: "GET",
+        headers: {
+          'Authorization': localStorage.getItem('token'),
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.myTransactions = data.data;
+
+          let url = window.location.href;
+          let lastPath = url.substring(url.lastIndexOf('/'));
+          // console.log(this.myTransactions[0].total_price);
+
+          if (this.myTransactions != null && this.myTransactions.status == 1 && lastPath == "/details") {
+            window.location.replace(this.baseUrl + "profile");
+          }
+          // console.log('details')
+
+          if (this.myTransactions == null && lastPath == '/details') {
+            window.location.replace(`${this.baseUrl}transaction`)
+          } else if (this.myTransactions != null && lastPath == '/transaction') {
+            window.location.replace(`${this.baseUrl}transaction/details`)
+          }
+          return;
+        })
+    },
+
+    updateMyTransaction() {
+      let attachment = document.getElementById('attachment').files[0];
+      let formData = new FormData();
+
+
+      if (attachment != undefined) {
+        formData.append('attachment', attachment);
+        console.log('test')
+        fetch(`${this.apiUrl}payment/checkout`, {
+          method: "POST",
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          },
+          body: formData
+        })
+          .then(async (response) => {
+            const { data } = await response.json();
+            if (data) {
+              return window.location.replace(`${this.baseUrl}profile`)
+            }
+          })
+          .catch(error => {
+            console.log(error.message);
+          })
+
+        return;
+      }
+
+      fetch(`${this.apiUrl}payment/checkout`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+            return window.location.replace(`${this.baseUrl}profile`)
+          }
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+
     }
+
   }))
 
   Alpine.data('helpers', () => ({

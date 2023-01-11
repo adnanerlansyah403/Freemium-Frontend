@@ -148,10 +148,10 @@
                 {{-- <span class="mb-4 font-semibold text-primary">AUTHOR</span> --}}
                 <p class="flex items-center gap-2">
                     <span class=" font-bold">Status : </span>
-                    <template x-if="subscribe_status">
+                    <template x-if="data_user.subscribe_status">
                         <span class="bg-primary rounded-primary py-1 px-3 text-white">Member - Lifetime</span>
                     </template>
-                    <template x-if="!subscribe_status">
+                    <template x-if="!data_user.subscribe_status">
                         <span class="bg-primary rounded-primary py-1 px-3 text-white">Not a Member</span>
                     </template>
                 </p>

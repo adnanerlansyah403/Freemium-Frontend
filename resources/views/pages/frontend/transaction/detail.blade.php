@@ -51,7 +51,7 @@ style="display: none;">
 
             <div class="mb-8 text-center">
                 <span class="text-base md:text-md text-gray-secondary">Payment Code ( Transaction No. )</span>
-                <p class="font-bold text-[20px] mt-2" x-text="myTransactions.virtual_account_number">
+                <p class="font-bold text-[20px] mt-2" x-text="myTransactions[0].virtual_account_number">
                     
                 </p>
             </div>
@@ -61,9 +61,9 @@ style="display: none;">
                 <div class="flex items-center justify-between flex-wrap mb-10">
                     <span class="text-slate-secondary text-base">Amount</span>
                     <div>
-                        $<span x-text="myTransactions.total_price">
+                        $<span x-text="myTransactions[0].total_price">
                             
-                        </span>/<span x-text="myTransactions.plan[0].name" class="span"></span>
+                        </span>/<span x-text="myTransactions[0].plan[0].name" class="span"></span>
                     </div>
                 </div>
 

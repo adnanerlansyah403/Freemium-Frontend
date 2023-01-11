@@ -181,12 +181,12 @@
                                 <span type="button" class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
                                     <b>Sub-Article 1</b>
                                     <div class="flex items-center gap-1">
-                                        <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
+                                        <button type="button" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
                                             <i 
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
-                                        <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
+                                        <a class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
                                             <i 
                                                 data-feather="trash-2" class="text-sm">
                                             </i>

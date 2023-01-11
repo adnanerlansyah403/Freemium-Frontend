@@ -1,5 +1,23 @@
 @section("title", "Edit Article - Freemium App")
 
+<div x-data="user" class="py-[100px]" x-show="isLoading">
+    <div class="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
+        <div class="animate-pulse flex space-x-4">
+          <div class="rounded-full bg-slate-700 h-10 w-10"></div>
+          <div class="flex-1 space-y-6 py-1">
+            <div class="h-2 bg-slate-700 rounded"></div>
+            <div class="space-y-3">
+              <div class="grid grid-cols-3 gap-4">
+                <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+                <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+              </div>
+              <div class="h-2 bg-slate-700 rounded"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
     <style>
         .filename.active {
@@ -46,10 +64,13 @@
             width: calc(25% - 40px);
         }
     </style>
+
     <div x-init="
         if(isLogedIn == true) {
             fetchEditArticle(window.location.href.split('/').pop())
-            return document.querySelector('section').style.display = 'block';
+            setTimeout(() => {
+                return document.querySelector('section').style.display = 'block';
+            }, 1000);
         }
     ">
 
@@ -133,23 +154,6 @@
 
             <form class="w-full my-1 px-5 lg:px-0">
 
-                {{-- <ul class="flex items-center pb-8 gap-4 mb-10 overflow-scroll snap-mandatory has-scrollbar">
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                </ul> --}}
-
                 <ul class="flex flex-col mb-10">
 
                     <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
@@ -191,12 +195,12 @@
                                     class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
                                     <b>Sub-Article 1</b>
                                     <div class="flex items-center gap-1">
-                                        <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                        <button type="button" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                             title="Edit Article">
                                             <i data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
-                                        <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                        <a class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                             title="Delete Sub Article">
                                             <i data-feather="trash-2" class="text-sm">
                                             </i>
