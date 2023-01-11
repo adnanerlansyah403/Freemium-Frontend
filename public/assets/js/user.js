@@ -13,10 +13,12 @@ document.addEventListener('alpine:init', () => {
     showFlash: false,
     isLoading: false,
     listMyArticle: [],
+    message: '',
 
     flash() {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
+        this.message = localStorage.getItem('message');
         setTimeout(function () {
           localStorage.removeItem("showFlash")
           this.showFlash = false;
@@ -36,7 +38,6 @@ document.addEventListener('alpine:init', () => {
     checkSession() {
       const token = localStorage.getItem('token')
       this.isLogedIn = token ? true : false
-
       if (!this.isLogedIn) {
         // Fetch API Check Token
         return window.location.replace(this.baseUrl + 'login')
@@ -97,6 +98,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           user = await response.json();
+          // add message
           this.data_user = user.data != null ? user.data : ''
           this.name = user.data.name != null ? user.data.name : ''
           this.username = user.data.username != null ? user.data.username : ''
@@ -107,6 +109,10 @@ document.addEventListener('alpine:init', () => {
           this.link_linkedin = user.data.link_linkedin != null ? user.data.link_linkedin : ''
           this.link_instagram = user.data.link_instagram != null ? user.data.link_instagram : ''
           this.link_twitter = user.data.link_twitter != null ? user.data.link_twitter : ''
+
+          localStorage.setItem('message', user.message);
+          localStorage.setItem('showFlash', true);
+          window.location.reload();
         })
     },
 
@@ -147,9 +153,12 @@ document.addEventListener('alpine:init', () => {
           }
         })
           .then(async (response) => {
-            // console.log(response.json())
-            this.listMyArticle = await response.json()
-            this.isLoading = false
+            data = await response.json();
+            if (data.message === 'Unauthorized') {
+              window.location.replace(this.baseUrl + 'login')
+            }
+            this.listMyArticle = data;
+            this.isLoading = false;
 
           })
 
@@ -169,7 +178,6 @@ document.addEventListener('alpine:init', () => {
         }
       })
         .then((response) => {
-          console.log(response)
           window.location.replace(this.baseUrl + 'myarticle')
         });
     }

@@ -136,25 +136,39 @@
                 </div>
     
             </div>
-            
-            <div class="col col-12 lg:col-4 md:order-2 h-max py-5 px-4 rounded-primary bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
-                <figure>
-                    <img x-bind:src="imgUrl+data_user.photo" class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
-                </figure>
-                <span class="text-md font-semibold" x-text="data_user.name">User</span>
-                <p x-text="data_user.email">user@gmail.com</p>
-                <div class="mt-12 flex flex-col items-center justify-center">
-                    {{-- <span class="mb-4 font-semibold text-primary">AUTHOR</span> --}}
-                    <p class="flex items-center gap-2">
-                        <span class=" font-bold">Status : </span>
-                        <template x-if="subscribe_status">
-                            <span class="bg-primary rounded-primary py-1 px-3 text-white">Member - Lifetime</span>
-                        </template>
-                        <template x-if="!subscribe_status">
-                            <span class="bg-primary rounded-primary py-1 px-3 text-white">Not a Member</span>
-                        </template>
-                    </p>
+
+            <div x-data="user" class="container mx-auto">
+                <div x-init="flash()"></div>
+                <div x-show="showFlash">
+                    <x-alert />
                 </div>
+            </div>
+
+            <div class="flex items-center justify-center mt-10">
+                <button @click="updateMe()" class="py-2 px-4 rounded-primary outline outline-1 outline-primary text-primary hover:bg-primary hover:text-white hover:outline-none transition duration-200 ease-in-out">
+                    Save
+                </button>
+            </div>
+
+        </div>
+        
+        <div class="col col-12 lg:col-4 md:order-2 h-max py-5 px-4 rounded-primary bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
+            <figure>
+                <img x-bind:src="imgUrl+data_user.photo" class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
+            </figure>
+            <span class="text-md font-semibold" x-text="data_user.name">User</span>
+            <p x-text="data_user.email">user@gmail.com</p>
+            <div class="mt-12 flex flex-col items-center justify-center">
+                {{-- <span class="mb-4 font-semibold text-primary">AUTHOR</span> --}}
+                <p class="flex items-center gap-2">
+                    <span class=" font-bold">Status : </span>
+                    <template x-if="subscribe_status">
+                        <span class="bg-primary rounded-primary py-1 px-3 text-white">Member - Lifetime</span>
+                    </template>
+                    <template x-if="!subscribe_status">
+                        <span class="bg-primary rounded-primary py-1 px-3 text-white">Not a Member</span>
+                    </template>
+                </p>
             </div>
     
         </div>
