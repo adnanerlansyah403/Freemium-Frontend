@@ -4,9 +4,14 @@
 
 @section("content")
 
-<section class="py-[100px]" x-data="auth">
-    <div x-init="checkAlreadyAuth()"></div>
-    <div class="container mx-auto flex items-start">
+<section class="py-[100px]" x-data="auth" x-init="checkAlreadyAuth()" style="display: none;"
+>
+
+    <div class="container mx-auto flex items-start" x-init="
+        if(!isLogedIn) {
+            return document.querySelector('section').style.display = 'block';
+        }
+    ">
 
         <div class="col col-12 lg:col-6">
 
@@ -57,6 +62,7 @@
         </div>
 
     </div>
+    
 </section>
 
 @endsection

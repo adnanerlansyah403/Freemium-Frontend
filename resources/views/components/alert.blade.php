@@ -31,6 +31,7 @@
 <div class="hidden" x-data="{ showFlash: true, message:message }" :class="{'block' : showFlash, 'hidden' : !showFlash}" x-init="setTimeout(() => showFlash = false, 3000)">
     <div class="text-center lg:w-full w-[320px] md:w-full bg-[#04A96D] rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 lg:h-[50px] md:h-[50px] mt-5 lg:mt-0 h-[70px] font-normal text-sm px-[27px] py-[13px]">
         <span class="font-bold text-[#04A96D] leading-[27px]" x-text="message">
-            Success</span> 
+            Success
+        </span> 
     </div>
 </div>

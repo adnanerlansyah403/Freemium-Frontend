@@ -1,4 +1,4 @@
-<header class="shadow-lg">
+<header class="shadow-lg py-2">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>
@@ -21,6 +21,7 @@
         <template x-if="isLogedIn">
             <div class="flex items-center gap-6" x-data="user">
                 <div x-init="fetchMe()"></div>
+                <div x-init="fetchMyTransactions()"></div>
                 <a href="{{ route('article.create') }}" class="hidden lg:flex items-center gap-2 text-gray-primary text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
                     <i data-feather="edit"></i>
                     <span>Write</span>
@@ -41,7 +42,7 @@
                         <span class="font-inter" x-text="data_user.name == null ? 'User' : data_user.name"></span>
                     </button>
                     <ul 
-                        class="absolute top-[140%] rounded-primary w-[200px] bg-primary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)]"
+                        class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-primary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)]"
                         x-show="dropdownmenu"
                         x-transition
                     >
@@ -57,6 +58,19 @@
                                 <span>My Articles</span>
                             </a>
                         </li>
+                        <template x-if="myTransactions != null">
+                            <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
+                                <a href="{{ route('transaction.show') }}" class="flex items-center gap-2">
+                                    <i data-feather="credit-card"></i>
+                                    <span>My Transaction</span>
+                                </a>
+                                <!-- Feather Icons Scripts -->
+                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </li>
+                        </template>
                         <li class="px-[18px] py-2 rounded-b-primary hover:bg-white hover:text-black transition duration-200 ease-out">
                             <button @click="logout()" class="flex items-center gap-2">
                                 <i data-feather="log-out"></i>

@@ -6,7 +6,7 @@
 
 <section class="lg:px-[12px] px-8 pt-[88px]">
     {{-- alert --}}
-    <div x-data="user" class="container mx-auto">
+    <div x-data="user" class="container mx-auto w-full">
         <div x-init="flash()"></div>
         <div x-show="showFlash">
             <x-alert />
