@@ -134,7 +134,6 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           let myArticle = await response.json();
-          console.log(myArticle)
         })
         .catch(error => {
           console.log(error)
@@ -198,15 +197,14 @@ document.addEventListener('alpine:init', () => {
         }
       })
         .then((response) => {
-          console.log(response)
           window.location.replace(this.baseUrl + 'myarticle')
         });
     },
+
     paySubscription() {
       const data = new FormData()
       data.append('plan', this.plan)
       plan_id = this.plan
-      console.log(this.plan)
       const token = localStorage.getItem('token')
       fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
         method: "POST",
@@ -226,11 +224,6 @@ document.addEventListener('alpine:init', () => {
 
     },
 
-    setIdArticle(id) {
-      console.log(id)
-      this.idArticle = id
-    },
-
     deleteArticle(id) {
       const token = localStorage.getItem('token')
       fetch(this.apiUrl + 'article/' + id + '/delete', {
@@ -240,7 +233,6 @@ document.addEventListener('alpine:init', () => {
         }
       })
         .then((response) => {
-          console.log(response)
           window.location.replace(this.baseUrl + 'myarticle')
         });
     },
@@ -258,40 +250,70 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.myTransactions = data.data;
-          console.log(this.myTransactions)
 
           let url = window.location.href;
           let lastPath = url.substring(url.lastIndexOf('/'));
+
+          if (this.myTransactions != null && this.myTransactions.status == 1 && lastPath == "/details") {
+            window.location.replace(this.baseUrl + "profile");
+          }
+          // console.log('details')
 
           if (this.myTransactions == null && lastPath == '/details') {
             window.location.replace(`${this.baseUrl}transaction`)
           } else if (this.myTransactions != null && lastPath == '/transaction') {
             window.location.replace(`${this.baseUrl}transaction/details`)
           }
-          // if (this.myTransactions != null) {
-          // }
           return;
         })
     },
 
-    // checkUserAlreadyTransaction() {
-    //   if (this.myTransactions.length != 0) {
-    //     // console.log(this.myTransactions)
-    //     return window.location.replace(`${this.baseUrl}transaction/details`);
-    //   }
-    //   // if (this.myTransactions != null && this.myTransactions.length > 1) {
-    //   // }
-    // },
+    updateMyTransaction() {
+      let attachment = document.getElementById('attachment').files[0];
+      let formData = new FormData();
 
-    // checkUserDontHaveTransaction() {
-    //   // this.fetchMyTransactions()
-    //   console.log(this.myTransactions)
-    //   if (this.myTransactions.length == 0) {
-    //     // return window.location.replace(`${this.baseUrl}transaction`)
-    //   }
-    //   // if (this.myTransactions.length == 0 || this.myTransactions == null) {
-    //   // }
-    // },
+
+      if (attachment != undefined) {
+        formData.append('attachment', attachment);
+        console.log('test')
+        fetch(`${this.apiUrl}payment/checkout`, {
+          method: "POST",
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          },
+          body: formData
+        })
+          .then(async (response) => {
+            const { data } = await response.json();
+            if (data) {
+              return window.location.replace(`${this.baseUrl}profile`)
+            }
+          })
+          .catch(error => {
+            console.log(error.message);
+          })
+
+        return;
+      }
+
+      fetch(`${this.apiUrl}payment/checkout`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data);
+          if (data) {
+            return window.location.replace(`${this.baseUrl}profile`)
+          }
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+
+    }
 
   }))
 })

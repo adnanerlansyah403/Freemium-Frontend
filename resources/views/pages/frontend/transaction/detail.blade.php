@@ -57,7 +57,8 @@ style="display: none;">
             </div>
 
             <div class="max-w-[630px] mx-auto pt-3 pb-4 px-4 border border-primary rounded-primary">
-                <div class="flex items-center justify-between mb-10">
+
+                <div class="flex items-center justify-between flex-wrap mb-10">
                     <span class="text-slate-secondary text-base">Amount</span>
                     <div>
                         $<span x-text="myTransactions.total_price">
@@ -66,11 +67,9 @@ style="display: none;">
                     </div>
                 </div>
 
-
-
                 <div class="mb-5">
                     <label for="text" class="text-[20px]">Screenshoot Transaction</label>
-                    <input type="file" name="screenshoot" placeholder="Your screenshoot..."
+                    <input type="file" name="attachment" id="attachment" placeholder="Your screenshoot..."
                         hidden 
                         x-ref="file"
                         @change="
@@ -113,11 +112,11 @@ style="display: none;">
                 </div>
 
                 <div class="flex items-center justify-center gap-2">
-                    <a href="#" class="bg-primary px-4 py-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
+                    <button type="submit" @click="updateMyTransaction()" class="bg-primary px-4 py-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
                         Confirm Payment
-                    </a>
+                    </button>
 
-                    <a href="#" class="bg-primary px-4 py-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
+                    <a href="{{ route('homepage') }}" class="bg-primary px-4 py-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
                         Go Back to Home
                     </a>
                 </div>
