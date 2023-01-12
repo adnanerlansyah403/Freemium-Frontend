@@ -1,5 +1,14 @@
 
-@section("title", "Me - Freemium App")
+{{-- @section("title", "Me - Freemium App") --}}
+
+{{-- Title Section --}}
+<div x-data="user" x-init="checkSession()">
+    <template x-if="isLogedIn">
+        <script>
+            document.title = 'Me Article - Freemium App';
+        </script>
+    </template>
+</div>
 
 <section class="py-[100px]" x-data="user">
     <div x-init="checkSession()"></div>

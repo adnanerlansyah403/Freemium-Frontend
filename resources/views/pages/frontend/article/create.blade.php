@@ -1,13 +1,23 @@
 @extends("homepage")
 
-@section("title", "Create Article - Freemium App")
+{{-- @section("title", "Create Article - Freemium App") --}}
+
+<div x-data="user" x-init="checkSession()">
+    <template x-if="isLogedIn">
+        <script>
+            document.title = 'Create Article - Freemium App';
+        </script>
+    </template>
+</div>
 
 @section("content")
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
     <div
     x-init="
         if(isLogedIn == true) {
-            return document.querySelector('section').style.display = 'block';
+            setTimeout(function() {
+                return document.querySelector('section').style.display = 'block';
+            }, 1000)
         }
     ">
 

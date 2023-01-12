@@ -2,6 +2,15 @@
 
 @section("title", "Register - Freemium App")
 
+{{-- Title Section --}}
+{{-- <div x-data="user" x-init="checkSession()">
+    <template x-if="!isLogedIn">
+        <script>
+            document.title = 'Register - Freemium App';
+        </script>
+    </template>
+</div> --}}
+
 @section("content")
 
 <section class="py-[100px]" x-data="auth" x-init="checkAlreadyAuth()" style="display: none;"
@@ -9,7 +18,9 @@
 
     <div class="container mx-auto flex items-start" x-init="
         if(!isLogedIn) {
-            return document.querySelector('section').style.display = 'block';
+            setTimeout(function() {
+                return document.querySelector('section').style.display = 'block';
+            }, 1000)
         }
     ">
 

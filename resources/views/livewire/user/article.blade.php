@@ -1,10 +1,21 @@
-@section("title", "Me - Freemium App")
+{{-- @section("title", "Me - Freemium App") --}}
+
+{{-- Title Section --}}
+<div x-data="user" x-init="checkSession()">
+    <template x-if="isLogedIn">
+        <script>
+            document.title = 'Me - Freemium App';
+        </script>
+    </template>
+</div>
 
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
     <div
     x-init="
         if(isLogedIn == true) {
-            return document.querySelector('section').style.display = 'block';
+            setTimeout(function() {
+                return document.querySelector('section').style.display = 'block';
+            }, 1000)
         }
     ">
 

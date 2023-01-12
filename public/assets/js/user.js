@@ -183,7 +183,6 @@ document.addEventListener('alpine:init', () => {
           .then(async (response) => {
             // console.log(response.json())
             this.Article = await response.json()
-            console.log(this.Article)
             this.isLoading = false
 
           })
@@ -213,11 +212,6 @@ document.addEventListener('alpine:init', () => {
 
     },
 
-    setIdArticle(id) {
-      console.log(id)
-      this.idArticle = id
-    },
-
     deleteArticle(id) {
       const token = localStorage.getItem('token')
       fetch(this.apiUrl + 'article/' + id + '/delete', {
@@ -227,7 +221,6 @@ document.addEventListener('alpine:init', () => {
         }
       })
         .then((response) => {
-          console.log(response)
           window.location.replace(this.baseUrl + 'myarticle')
         });
     },
@@ -249,12 +242,13 @@ document.addEventListener('alpine:init', () => {
 
           let url = window.location.href;
           let lastPath = url.substring(url.lastIndexOf('/'));
-          // console.log(this.myTransactions[0].total_price);
 
-          if (this.myTransactions != null && this.myTransactions.status == 1 && lastPath == "/details") {
-            window.location.replace(this.baseUrl + "profile");
+
+          if (this.myTransactions != null && this.myTransactions[0].status == 1) {
+            if (this.myTransactions[0].status == 1 && lastPath == '/details') {
+              window.location.replace(this.baseUrl + "profile");
+            }
           }
-          // console.log('details')
 
           if (this.myTransactions == null && lastPath == '/details') {
             window.location.replace(`${this.baseUrl}transaction`)
@@ -272,7 +266,6 @@ document.addEventListener('alpine:init', () => {
 
       if (attachment != undefined) {
         formData.append('attachment', attachment);
-        console.log('test')
         fetch(`${this.apiUrl}payment/checkout`, {
           method: "POST",
           headers: {

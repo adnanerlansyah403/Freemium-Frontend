@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield("title", "Plans - Freemium App")</title>
+    <title>@yield("title", "Freemium App")</title>
 
     {{-- Custome CSS Link --}}
 
@@ -50,11 +50,22 @@
 </head>
 <body x-data="user" x-init="checkSession()"
 style="display: none;">
+
+{{-- Title Section --}}
+<template x-if="isLogedIn && data_user.subscribe_status == 0">
+    <script>
+        document.title = 'Plans - Freemium App';
+    </script>
+</template>
+
+
 <div x-init="fetchMyTransactions()"></div>
     <section class="py-[60px]"
         x-init="
             if(isLogedIn == true && myTransactions != null) {
-                return document.body.style.display = 'block';
+                setTimeout(function() {
+                    return document.body.style.display = 'block';
+                }, 1000)
             }
         "
     >

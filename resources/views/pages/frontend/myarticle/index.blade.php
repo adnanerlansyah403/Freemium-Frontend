@@ -1,6 +1,15 @@
 @extends("homepage")
 
-@section("title", "Me - Freemium App")
+{{-- @section("title", "Me - Freemium App") --}}
+
+{{-- Title Section --}}
+<div x-data="user" x-init="checkSession()">
+    <template x-if="isLogedIn">
+        <script>
+            document.title = 'Me - Freemium App';
+        </script>
+    </template>
+</div>
 
 @section("content")
 
