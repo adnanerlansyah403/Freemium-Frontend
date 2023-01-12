@@ -13,8 +13,8 @@
 
         <template x-if="!isLogedIn">
             <div>
-                <a href="{{ route('login') }}" class="text-xs sm:text-base px-4 py-2 hover:bg-primary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
-                <a href="{{ route('register') }}" class="text-xs sm:text-base px-4 py-2 hover:bg-primary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
+                <a href="{{ route('login') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
+                <a href="{{ route('register') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
             </div>
         </template>
 

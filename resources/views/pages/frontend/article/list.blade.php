@@ -363,7 +363,7 @@
                             <div class="border mt-5"></div>
                             
                             <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                                <div class="flex flex-col col-8">
+                                <div class="flex flex-col col-12 md:col-8">
                                     <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
                                         <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
                 
@@ -387,7 +387,8 @@
                                     </div>
                 
                                     <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                        <a x-bind:href="baseUrl + `article/detail/${item.id}` " class="font-bold text-[24px] leading-9" x-text="item.title">JUDUL ARTIKEL</a>
+                                        <a x-bind:href="baseUrl + `article/detail/${item.id}`"
+                                        class="font-bold text-[24px] leading-9" x-text="item.title">JUDUL ARTIKEL</a>
                                         <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
                                             PAID
                                         </button>
