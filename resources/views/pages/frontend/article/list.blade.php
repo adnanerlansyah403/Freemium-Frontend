@@ -33,12 +33,16 @@
         
         {{-- kiri --}}
         <div class="w-full lg:col-3 lg:w-[270px] mx-auto h-max px-4 py-8 bg-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-            <form class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary ">
+            <div class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary ">
                 <div class="flex justify-between">
-                    <input class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm" placeholder="Search Here..." />
+                    <input 
+                        x-model="keywordArticle"
+                        x-on:change="searchArticle(keywordArticle)" 
+                        class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm" 
+                        placeholder="Search Here..." />
                     <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                 </div>
-            </form>
+            </div>
 
             <div class="flex flex-col justify-center gap-[9px] mt-[28px]">
                 <div class="text-black font-extrabold">
@@ -354,6 +358,12 @@
                     </div>
                                     
                 </div> --}}
+
+                <template x-if="isLoadingArticle">
+                    <span class="my-10">
+                        Loading...
+                    </span>
+                </template>
                 
                 <template x-for="(item, index) in listArticle">
                     
@@ -419,9 +429,11 @@
                 
             </div>
                     
-            <div class="flex items-center justify-center mt-20">
-                <a href="#" id="loadMore" class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</a>
-            </div>            
+            <template x-if="listArticle.length > 2">
+                <div class="flex items-center justify-center mt-20">
+                    <a href="#" id="loadMore" class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</a>
+                </div>            
+            </template>
 
 
         </div>

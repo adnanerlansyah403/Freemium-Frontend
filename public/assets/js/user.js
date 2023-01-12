@@ -294,6 +294,7 @@ document.addEventListener('alpine:init', () => {
 
       if (attachment != undefined) {
         formData.append('attachment', attachment);
+
         fetch(`${this.apiUrl}payment/checkout`, {
           method: "POST",
           headers: {
@@ -331,6 +332,7 @@ document.addEventListener('alpine:init', () => {
           console.log(error.message);
         })
 
+      return;
     },
 
   }))
@@ -341,6 +343,10 @@ document.addEventListener('alpine:init', () => {
     imgUrl: "http://127.0.0.1:8001/",
     listArticle: [],
     detailArticle: null,
+    isLoadingArticle: false,
+
+    // INPUTS ARTICLE
+    keywordArticle: '',
 
     getArticle() {
       fetch(`${this.apiUrl}article`, {
@@ -368,6 +374,21 @@ document.addEventListener('alpine:init', () => {
         .catch(error => {
           console.log(error.message);
         })
+    },
+
+    searchArticle(keyword) {
+
+      this.isLoadingArticle = true;
+
+      fetch(`${this.apiUrl}article?search=${keyword}`, {
+        method: 'GET',
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+          this.isLoadingArticle = false;
+        })
+
     }
 
   }))
