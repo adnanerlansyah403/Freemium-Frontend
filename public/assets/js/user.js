@@ -13,7 +13,14 @@ document.addEventListener('alpine:init', () => {
     data_user: [],
     showFlash: false,
     isLoading: false,
-    Article: [],
+    DetailArticle: {
+      tags: [],
+      subarticles: []
+    },
+    EditArticle: {
+      tags: [],
+      subarticles: []
+    },
     listMyArticle: [],
     myTransactions: [],
     message: '',
@@ -183,7 +190,7 @@ document.addEventListener('alpine:init', () => {
         })
           .then(async (response) => {
             // console.log(response.json())
-            this.Article = await response.json()
+            this.DetailArticle = await response.json()
             this.isLoading = false
 
           })
@@ -203,13 +210,46 @@ document.addEventListener('alpine:init', () => {
         })
           .then(async (response) => {
             // console.log(response.json())
-            this.Article = await response.json()
-            if (this.Article.status == false) {
+            this.EditArticle = await response.json()
+            if (this.EditArticle.status == false) {
               return window.location.replace(`${this.baseUrl}myarticle`);
             }
             this.isLoading = false
 
           })
+
+    },
+
+    updateSub(number) {
+      let editSub = this.EditArticle.data.subarticles[number];
+      editSub.description = tinymce.get('sub_content').getContent();
+      
+      if(typeof editSub.thumbnail !== 'string' && editSub.thumbnail[0]){
+        editSub.thumbnail = editSub.thumbnail[0];
+      }
+
+      let formData = new FormData();
+
+      formData.append('article_id',  editSub.article_id);
+      formData.append('title',  editSub.title);
+      formData.append('type',  editSub.type);
+      formData.append('description',  editSub.description);
+      formData.append('thumbnail',  editSub.thumbnail);
+      
+      fetch(this.apiUrl + `sub-article/${editSub.id}/update`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+        body: formData
+      })
+        .then(async response => {
+          sub = await response.json();
+
+          localStorage.setItem('message', sub.message);
+          localStorage.setItem('showFlash', true);
+          this.flash()
+        })
 
     },
 
