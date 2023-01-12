@@ -40,6 +40,9 @@
 
     </style>
 
+    {{-- SweetAlert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     {{-- AlpineJS Link --}}
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -78,7 +81,7 @@ style="display: none;">
             </a>
 
             <h1 class="text-md md:text-lg lg:text-xl text-center">
-                GET UNLIMITED ACCESS TO <br> 
+                GET UNLIMITED ACCESS TO <br>
                 EVERYTHING IN FREEMIUM
             </h1>
 
@@ -137,7 +140,7 @@ style="display: none;">
                     </div>
 
                 </div>
-                
+
                 <div class="px-2 lg:px-0 lg:w-[630px] lg:mx-auto">
                     <span class="text-md font-semibold">Pay With : </span>
 
@@ -160,7 +163,7 @@ style="display: none;">
 
         </div>
 
-     
+
     </section>
 
 

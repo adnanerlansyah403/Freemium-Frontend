@@ -243,12 +243,23 @@ document.addEventListener('alpine:init', () => {
       })
 
         .then((response) => {
-          if (response.ok) {
-            alert('Payment Successfully!')
-            window.location.replace(this.baseUrl + 'transaction/details')
-          } else {
-            alert('Pembayaran Gagal')
-          }
+            if (response.ok){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Transaction Process',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                window.location.replace(this.baseUrl + 'transaction/details')
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Choose Plan First!',
+                    confirmButtonColor: 'primary',
+
+                  })
+            }
         });
 
     },
@@ -305,6 +316,13 @@ document.addEventListener('alpine:init', () => {
           .then(async (response) => {
             const { data } = await response.json();
             if (data) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Payment Successfully!',
+                    showConfirmButton: false,
+                    timer: 3000
+                    })
               return window.location.replace(`${this.baseUrl}profile`)
             }
           })
@@ -325,6 +343,13 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           console.log(data);
           if (data) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Payment Successfully!',
+                showConfirmButton: false,
+                timer: 3000
+                })
             return window.location.replace(`${this.baseUrl}profile`)
           }
         })
