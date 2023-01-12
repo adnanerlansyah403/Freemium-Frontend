@@ -225,6 +225,33 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
+    //pay subscription
+    plan: '',
+    plan_id: '',
+    paySubscription() {
+        const data = new FormData()
+        data.append('plan', this.plan)
+        plan_id = this.plan
+        console.log(this.plan)
+        const token = localStorage.getItem('token')
+        fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
+          method: "POST",
+          headers: {
+            'Authorization': token
+          }
+        })
+
+        .then((response) => {
+            if (response.ok){
+                alert('Payment Successfully!')
+                window.location.replace(this.baseUrl + 'transaction/details')
+            }else{
+                alert ('Pembayaran Gagal')
+            }
+          });
+
+      },
+
 
     // MY TRANSACTONS
 
