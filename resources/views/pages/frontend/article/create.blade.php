@@ -46,29 +46,30 @@
         
         <div class="container mx-auto flex items-center">
 
-            <form action="" class="col col-12" x-data="article">
+            <div class="col col-12" x-data="article">
 
                 <div class="flex flex-wrap lg:flex-nowrap">
                     <div class="mb-5 col-12 lg:col-6">
                         <label for="text" class="text-md">Title</label>
-                        <input type="text" placeholder="Your text..."
+                        <input id="title"  type="text" placeholder="Your text..."
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
         
-                    <div class="mb-5 col-12 lg:col lg:col-6">
+                    <div class="mb-5 col-12 lg:col lg:col-6" x-data="user">
+                        <div x-init="fetchCategory()"></div>
                         <label for="text" class="text-md">Category</label>
-                        <select name="category_id" id="" class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
+                        <select name="category_id" id="" class="categories px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4" >
                             <option value="">--Choosen Category--</option>
-                            <option value="">HTML</option>
-                            <option value="">CSS</option>
-                            <option value="">Javascript</option>
+                            <template x-for="category in categories.data">
+                                <option x-bind:value="category.id" x-text="category.name">HTML</option>
+                            </template>
                         </select>
                     </div>
                 </div>
 
                 <div class="mb-5">
                     <label for="text" class="text-md">Thumbnail</label>
-                    <input type="file" name="thumbnail" placeholder="Your thumbnail..."
+                    <input id="thumbnail" type="file" name="thumbnail" placeholder="Your thumbnail..."
                         hidden 
                         x-ref="file"
                         @change="
@@ -122,7 +123,7 @@
                         <i data-feather="plus-circle" class="w-10 h-10 text-primary"></i> 
                         <span class="text-base">Add a sub article</span>
                     </button>
-                    <button type="submit" class="px-4 py-2 bg-primary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                    <button @click="createArticle()" class="px-4 py-2 bg-primary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
                     </button>
                 </div>
@@ -226,7 +227,7 @@
                     </ul>
                 </div>
                 
-            </form>
+            </div>
 
         </div>
         
@@ -254,6 +255,7 @@
         
             Alpine.data('article', () => ({
                 index: 1,
+                apiUrl: "http://127.0.0.1:8001/api/",
                 createSubArticle(refs) {
         
                     refs.listsubarticle.insertAdjacentHTML('beforeend' ,`
@@ -282,26 +284,17 @@
                             class="px-4 overflow-y-scroll overflow-x-hidden max-h-0 duration-500 transition-all"
                             >
                                 <div class="flex flex-wrap lg:flex-nowrap">
-                                    <div class="mb-5 col-12 lg:col-6">
+                                    <div class="mb-5 col-12 lg:col-12">
                                         <label for="text" class="text-md">Title</label>
                                         <input type="text" placeholder="Your text..."
-                                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
+                                            class="title_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                                     </div>
                         
-                                    <div class="mb-5 col-12 lg:col lg:col-6">
-                                        <label for="text" class="text-md">Category</label>
-                                        <select name="category_id" id="" class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
-                                            <option value="">--Choosen Category--</option>
-                                            <option value="">HTML</option>
-                                            <option value="">CSS</option>
-                                            <option value="">Javascript</option>
-                                        </select>
-                                    </div>
                                 </div>
                     
                                 <div class="mb-5">
                                     <label for="text" class="text-md">Thumbnail</label>
-                                    <input type="file" name="thumbnail" placeholder="Your thumbnail..."
+                                    <input class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
                                         hidden 
                                         x-ref="file${this.index}"
                                         @change="
@@ -341,7 +334,7 @@
                                 <div class="mb-5 col-12" id="content${this.index}" class="content${this.index}">
                                     <label for="text" class="text-md">Content</label><br>
                                     <textarea id="editor${this.index}" placeholder="Your content..."
-                                    class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
+                                    class="description_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                                     </textarea>
                                 </div>
         
@@ -349,11 +342,11 @@
                                     <span class="text-md">Choose Your Plan</span>
                                     <div class="flex items-center gap-2 mt-2">
                                         <label for="free" class="flex items-center gap-1">
-                                            <input type="radio" name="status" id="free" checked>
+                                            <input class="type" type="radio" name="status${this.index}" value="free" id="free" checked>
                                             <span class="text-base">Free</span>
                                         </label>
                                         <label for="paid" class="flex items-center gap-1">
-                                            <input type="radio" name="status" id="paid">
+                                            <input class="type" type="radio" name="status${this.index}" value="paid" id="paid">
                                             <span class="text-base">Member-Only</span>
                                         </label>
                                     </div>
@@ -363,7 +356,7 @@
                             </div>
                         </li>
                     `);
-                    
+
                     ClassicEditor
                     .create( document.querySelector( `#editor${this.index}` ) )
                     .then( editor => {

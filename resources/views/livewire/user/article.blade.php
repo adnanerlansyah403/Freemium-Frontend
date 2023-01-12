@@ -20,6 +20,12 @@
     ">
 
         <h1 class="font-iceberg text-lg text-center text-primary mb-16">ME</h1>
+        <div x-data="user" class="container mx-auto">
+            <div x-init="flash()"></div>
+            <div x-show="showFlash">
+                <x-alert />
+            </div>
+        </div>
 
         <div class="container mx-auto mb-9">
 
@@ -71,7 +77,7 @@
                             <span class="text-base md:text-md font-bold" x-text="item.title"></span>
                             <i class="bg-primary px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
                         </div>
-                        <p class="text-sm text-gray-secondary" x-text="item.description">
+                        <p class="text-sm text-gray-secondary" x-text="item.substring+'...'">
 
                         </p>
                     </div>

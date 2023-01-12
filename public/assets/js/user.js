@@ -24,6 +24,7 @@ document.addEventListener('alpine:init', () => {
     listMyArticle: [],
     myTransactions: [],
     message: '',
+    categories: [],
 
     flash() {
       if (localStorage.getItem('showFlash')) {
@@ -223,19 +224,19 @@ document.addEventListener('alpine:init', () => {
     updateSub(number) {
       let editSub = this.EditArticle.data.subarticles[number];
       editSub.description = tinymce.get('sub_content').getContent();
-      
-      if(typeof editSub.thumbnail !== 'string' && editSub.thumbnail[0]){
+
+      if (typeof editSub.thumbnail !== 'string' && editSub.thumbnail[0]) {
         editSub.thumbnail = editSub.thumbnail[0];
       }
 
       let formData = new FormData();
 
-      formData.append('article_id',  editSub.article_id);
-      formData.append('title',  editSub.title);
-      formData.append('type',  editSub.type);
-      formData.append('description',  editSub.description);
-      formData.append('thumbnail',  editSub.thumbnail);
-      
+      formData.append('article_id', editSub.article_id);
+      formData.append('title', editSub.title);
+      formData.append('type', editSub.type);
+      formData.append('description', editSub.description);
+      formData.append('thumbnail', editSub.thumbnail);
+
       fetch(this.apiUrl + `sub-article/${editSub.id}/update`, {
         method: "POST",
         headers: {
@@ -283,23 +284,23 @@ document.addEventListener('alpine:init', () => {
       })
 
         .then((response) => {
-            if (response.ok){
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Transaction Process',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                window.location.replace(this.baseUrl + 'transaction/details')
-            }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Choose Plan First!',
-                    confirmButtonColor: 'primary',
+          if (response.ok) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Transaction Process',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            window.location.replace(this.baseUrl + 'transaction/details')
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Choose Plan First!',
+              confirmButtonColor: 'primary',
 
-                  })
-            }
+            })
+          }
         });
 
     },
@@ -356,13 +357,13 @@ document.addEventListener('alpine:init', () => {
           .then(async (response) => {
             const { data } = await response.json();
             if (data) {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Payment Successfully!',
-                    showConfirmButton: false,
-                    timer: 3000
-                    })
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Payment Successfully!',
+                showConfirmButton: false,
+                timer: 3000
+              })
               return window.location.replace(`${this.baseUrl}profile`)
             }
           })
@@ -384,12 +385,12 @@ document.addEventListener('alpine:init', () => {
           console.log(data);
           if (data) {
             Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Payment Successfully!',
-                showConfirmButton: false,
-                timer: 3000
-                })
+              position: 'top-end',
+              icon: 'success',
+              title: 'Payment Successfully!',
+              showConfirmButton: false,
+              timer: 3000
+            })
             return window.location.replace(`${this.baseUrl}profile`)
           }
         })
@@ -454,6 +455,56 @@ document.addEventListener('alpine:init', () => {
           this.isLoadingArticle = false;
         })
 
+    },
+
+    async fetchCategory() {
+      category = await fetch(`${this.apiUrl}category`);
+      this.categories = await category.json();
+    },
+
+    async createArticle() {
+      let title = document.getElementById('title');
+      let description = document.getElementById('content');
+      let thumbnail = document.getElementById('thumbnail').files[0];
+      let category = document.getElementsByClassName('categories');
+      let type = document.getElementsByClassName('type');
+      let title_sub = document.getElementsByClassName('title_sub');
+      let thumbnail_sub = document.getElementsByClassName('thumbnail_sub');
+      let description_sub = document.getElementsByClassName('ck-content');
+      let formData = new FormData();
+      formData.append('title', title.value);
+      formData.append('description', description.value);
+      formData.append('thumbnail', thumbnail);
+      for (var i = 0, length = type.length; i < length; i++) {
+        if (type[i].checked) {
+          formData.append('type_sub[]', type[i].value);
+        }
+      }
+      for (let i = 0; i < category.length; i++) {
+        formData.append('category_id[]', category[i].value);
+      }
+      for (let i = 0; i < title_sub.length; i++) {
+        formData.append('title_sub[]', title_sub[i].value);
+        formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
+        formData.append('description_sub[]', description_sub[i].innerHTML);
+      }
+      article = await fetch(`${this.apiUrl}article`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+        body: formData
+      })
+
+      data = await article.json();
+
+      if (data.status) {
+        localStorage.setItem('message', 'article successfully created!');
+        localStorage.setItem('showFlash', true);
+        return window.location.replace(`${this.baseUrl}myarticle`)
+      }
+
+      // console.log(data);
     }
 
   }))
@@ -473,5 +524,4 @@ document.addEventListener('alpine:init', () => {
     }
 
   }))
-
 })
