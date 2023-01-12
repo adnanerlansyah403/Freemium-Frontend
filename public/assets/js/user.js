@@ -84,7 +84,6 @@ document.addEventListener('alpine:init', () => {
     },
 
     updateMe() {
-      // console.log(document.getElementById('photo').files[0]);
 
       let photoProfile = document.getElementById('photo').files[0];
 
@@ -190,7 +189,6 @@ document.addEventListener('alpine:init', () => {
           }
         })
           .then(async (response) => {
-            // console.log(response.json())
             this.DetailArticle = await response.json()
             this.isLoading = false
 
@@ -210,7 +208,6 @@ document.addEventListener('alpine:init', () => {
           }
         })
           .then(async (response) => {
-            // console.log(response.json())
             this.EditArticle = await response.json()
             if (this.EditArticle.status == false) {
               return window.location.replace(`${this.baseUrl}myarticle`);
@@ -274,7 +271,6 @@ document.addEventListener('alpine:init', () => {
       const data = new FormData()
       data.append('plan', this.plan)
       plan_id = this.plan
-      console.log(this.plan)
       const token = localStorage.getItem('token')
       fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
         method: "POST",
@@ -284,6 +280,7 @@ document.addEventListener('alpine:init', () => {
       })
 
         .then((response) => {
+          console.log(response.ok)
           if (response.ok) {
             Swal.fire({
               position: 'top-end',
@@ -382,7 +379,6 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          console.log(data);
           if (data) {
             Swal.fire({
               position: 'top-end',
@@ -444,7 +440,6 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.detailArticle = data.data;
-          // console.log(this.detailArticle);
         })
         .catch(error => {
           console.log(error.message);
@@ -530,8 +525,6 @@ document.addEventListener('alpine:init', () => {
 
     fetchArticleByCategory(categoryId) {
 
-      // console.log(categoryId);
-
       this.isLoadingArticle = true;
 
       fetch(`${this.apiUrl}article?category=${categoryId}`, {
@@ -568,7 +561,6 @@ document.addEventListener('alpine:init', () => {
         }
       }
 
-      console.log(categories)
       this.keywordArticle = '';
       this.getArticle();
     }

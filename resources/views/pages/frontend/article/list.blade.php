@@ -462,7 +462,7 @@
             
             <span x-text="console.log(itemArticle > listArticle.length)"></span>
             <span x-text="console.log(listArticle.length < itemArticle)"></span>
-            <template x-if="itemArticle > listArticle.length && keywordArticle == ''">
+            <template x-if="itemArticle > listArticle.length && keywordArticle == '' && listArticle.length > 1">
                 <div class="flex items-center justify-center">
                     <div id="resetButton" class="flex items-center justify-center mt-20" style="display: none;"
                         x-init="
