@@ -55,7 +55,7 @@
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
         
-                    <div class="mb-5 col-12 lg:col lg:col-6" x-data="user">
+                    <div class="mb-5 col-12 lg:col lg:col-6" x-data="articles">
                         <div x-init="fetchCategory()"></div>
                         <label for="text" class="text-md">Category</label>
                         <select name="category_id" id="" class="categories px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4" >
@@ -118,7 +118,7 @@
                     </textarea>
                 </div>
 
-                <div class="flex items-center justify-between mt-16 mb-10">
+                <div class="flex items-center justify-between mt-16 mb-10" x-data="articles">
                     <button type="button" class="flex items-center gap-2" @click="createSubArticle($refs)">
                         <i data-feather="plus-circle" class="w-10 h-10 text-primary"></i> 
                         <span class="text-base">Add a sub article</span>
