@@ -88,16 +88,16 @@
                 <div class="flex flex-wrap lg:flex-nowrap">
                     <div class="mb-5 col-12 lg:col-6">
                         <label for="text" class="text-md">Title</label>
-                        <input x-model="Article.data.title" type="text" placeholder="Your text..."
+                        <input x-model="EditArticle.data.title" type="text" placeholder="Your text..."
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
 
                     <div class="mb-5 col-12 lg:col lg:col-6">
                         <label for="text" class="text-md">Category</label>
-                        <select x-model="Article.data.tags[0].category_id" name="category_id" id=""
+                        <select x-model="EditArticle.data.tags[0].category_id" name="category_id" id=""
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                             <option value="">--Choosen Category--</option>
-                            <template x-for="(c, index) in Article.category">
+                            <template x-for="(c, index) in EditArticle.category">
                                 <option x-bind:value="c.id" x-text="c.name">test</option>
                             </template>
                         </select>
@@ -124,7 +124,7 @@
                         @click="
                             $refs.file.click();
                         ">
-                        <img x-bind:src="'http://localhost:8001/' + Article.data.thumbnail" src="" x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
+                        <img x-bind:src="'http://localhost:8001/' + EditArticle.data.thumbnail" src="" x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage">
                         </i>
@@ -134,13 +134,14 @@
                     </span>
                 </div>
 
-                <div x-init="setTiny('content', Article.data.description);" class="mb-5 col-12">
+                <div class="mb-5 col-12">
                     <label for="text" class="text-md">Content</label><br>
                     <textarea 
-                    x-text="Article.data.description" id="content" placeholder="Your content..."
+                    x-text="EditArticle.data.description" id="content" placeholder="Your content..."
                         class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
-                        <div x-text="Article.data.description"></div>
+                        <div x-text="EditArticle.data.description"></div>
                     </textarea>
+                    <span x-init="setTiny('content', EditArticle.data.description);"></span>
                 </div>
 
                 <div class="flex items-center justify-center my-10">
@@ -180,18 +181,18 @@
                         <div x-ref="tab" :style="handleToggle()"
                             class="px-4 overflow-hidden max-h-0 duration-500 transition-all">
                             <div class="py-10 px-1 flex max-h-[500px] overflow-y-scroll flex-wrap gap-4 has-scrollbar">
-                                <template x-for="(s, index) in Article.data.subarticles">
+                                <template x-for="(s, index) in EditArticle.data.subarticles">
                                     <span type="button"
                                         class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
-                                        <b x-text="s.title">Sub-Article 1</b>
+                                        <b x-text="s.title">Sub-EditArticle 1</b>
                                         <div class="flex items-center gap-1">
                                             <button type="button" @click="editSub = index;" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
-                                                title="Edit Article">
+                                                title="Edit EditArticle">
                                                 <i data-feather="edit" class="text-sm">
                                                 </i>
                                             </button>
                                             <button type="button" href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
-                                                title="Delete Sub Article">
+                                                title="Delete Sub EditArticle">
                                                 <i data-feather="trash-2" class="text-sm">
                                                 </i>
                                             </button>
@@ -200,7 +201,7 @@
                                 </template>
                                 <span type="button"
                                     class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
-                                    <b>Sub-Article 1</b>
+                                    <b>Sub-EditArticle 1</b>
                                     <div class="flex items-center gap-1">
                                         <button type="button" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                             title="Edit Article">
@@ -223,16 +224,16 @@
                 <div class="flex flex-wrap lg:flex-nowrap">
                     <div class="mb-5 col-12 lg:col-6">
                         <label for="text" class="text-md">Title</label>
-                        <input x-model="Article.data.subarticles[editSub].title" type="text" placeholder="Your text..."
+                        <input x-model="EditArticle.data.subarticles[editSub].title" type="text" placeholder="Your text..."
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
 
                     {{-- <div class="mb-5 col-12 lg:col lg:col-6">
                         <label for="text" class="text-md">Category</label>
-                        <select x-model="Article.data.tags[0].category_id" name="category_id" id=""
+                        <select x-model="EditArticle.data.tags[0].category_id" name="category_id" id=""
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                             <option value="">--Choosen Category--</option>
-                            <template x-for="(c, index) in Article.category">
+                            <template x-for="(c, index) in EditArticle.category">
                                 <option x-bind:value="c.id" x-text="c.name">test</option>
                             </template>
                         </select>
@@ -260,7 +261,7 @@
                         @click="
                             $refs.filesubarticle.click();
                         ">
-                        <img x-bind:src="'http://localhost:8001/' + Article.data.subarticles[editSub].thumbnail" src="" x-ref="subimage" class="absolute w-full h-full object-cover rounded-lg" alt="">
+                        <img x-bind:src="'http://localhost:8001/' + EditArticle.data.subarticles[editSub].thumbnail" src="" x-ref="subimage" class="absolute w-full h-full object-cover rounded-lg" alt="">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimagesubarticle">
                         </i>
@@ -269,10 +270,10 @@
                         </p>
                     </span>
                 </div>
-
+                
                 <div class="mb-5 col-12">
                     <label for="text" class="text-md">Content</label><br>
-                    <textarea x-text="Article.data.subarticles[editSub].title" id="sub_content" placeholder="Your content..."
+                    <textarea x-text="EditArticle.data.subarticles[editSub].title" id="sub_content" placeholder="Your content..."
                         class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                     </textarea>
                 </div>
