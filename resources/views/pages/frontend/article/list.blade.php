@@ -369,18 +369,12 @@
                     </div>
                                     
                 </div> --}}
-
-                <template x-if="isLoadingArticle">
-                    <span class="my-10">
-                        Loading...
-                    </span>
-                </template>
                 
                 {{-- <div class="content"></div> --}}
 
 
 
-                <template x-for="(item, index) in listArticle.slice(0, itemArticle)">
+                <template x-for="(item, index) in listArticle.length > 1 ? listArticle.slice(0, itemArticle) : listArticle">
                 
                     <div class="content" x-data="helpers">
                         
@@ -434,6 +428,18 @@
         
                 </template>
 
+                <template x-if="listArticle == null || listArticle.length == 0">
+                    <p id="articleNotFound" class="text-md mt-10" style="display: none;"
+                        x-init="
+                            setTimeout(() => {
+                                document.getElementById('articleNotFound').style.display = 'block';
+                            }, 550)
+                        "
+                    >
+                        <span class="span">Oops</span>, We can't find your article
+                    </p>
+                </template>
+
             </div>
 
                 
@@ -456,13 +462,13 @@
             
             <span x-text="console.log(itemArticle > listArticle.length)"></span>
             <span x-text="console.log(listArticle.length < itemArticle)"></span>
-            <template x-if="itemArticle > listArticle.length">
+            <template x-if="itemArticle > listArticle.length && keywordArticle == ''">
                 <div class="flex items-center justify-center">
                     <div id="resetButton" class="flex items-center justify-center mt-20" style="display: none;"
                         x-init="
                             setTimeout(() => {
                                 document.getElementById('resetButton').style.display = 'block';
-                            }, 500)
+                            }, 300)
                         "
                     >
                         

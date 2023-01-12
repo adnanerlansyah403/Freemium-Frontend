@@ -423,7 +423,6 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.listArticle = data.data;
-          console.log(this.listArticle);
         })
 
     },
@@ -433,8 +432,7 @@ document.addEventListener('alpine:init', () => {
       setTimeout(() => {
         this.isLoadingArticle = false;
         this.itemArticle += 3;
-        console.log(this.itemArticle)
-      }, 1000)
+      }, 600)
     },
 
     getDetailArticle(id) {
