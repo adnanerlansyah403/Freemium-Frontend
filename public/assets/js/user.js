@@ -1,4 +1,5 @@
 document.addEventListener('alpine:init', () => {
+
   Alpine.data('user', () => ({
     isLogedIn: false,
     baseUrl: "http://127.0.0.1:8000/",
@@ -62,15 +63,15 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           user = await response.json();
           this.data_user = user.data
-          this.name = user.data.name != null ? user.data.name : ''
-          this.username = user.data.username != null ? user.data.username : ''
-          this.email = user.data.email != null ? user.data.email : ''
-          this.password = user.data.password != null ? user.data.password : ''
-          this.photo = user.data.photo != null ? user.data.photo : ''
-          this.link_facebook = user.data.link_facebook != null ? user.data.link_facebook : ''
-          this.link_linkedin = user.data.link_linkedin != null ? user.data.link_linkedin : ''
-          this.link_instagram = user.data.link_instagram != null ? user.data.link_instagram : ''
-          this.link_twitter = user.data.link_twitter != null ? user.data.link_twitter : ''
+          this.name = user.data.name == null ? '' : user.data.name
+          this.username = user.data.username == null ? '' : user.data.username
+          this.email = user.data.email == null ? '' : user.data.email
+          this.password = user.data.password == null ? '' : user.data.password
+          this.photo = user.data.photo == null ? '' : user.data.photo
+          this.link_facebook = user.data.link_facebook == null ? '' : user.data.link_facebook
+          this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
+          this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
+          this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
         });
     },
 
@@ -328,6 +329,26 @@ document.addEventListener('alpine:init', () => {
         })
         .catch(error => {
           console.log(error.message);
+        })
+
+    },
+
+  }))
+
+  Alpine.data('articles', () => ({
+    baseUrl: "http://127.0.0.1:8000/",
+    apiUrl: "http://127.0.0.1:8001/api/",
+    imgUrl: "http://127.0.0.1:8001/",
+    listArticle: [],
+
+    getArticle() {
+      fetch(`${this.apiUrl}article`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+          console.log(this.listArticle);
         })
 
     }

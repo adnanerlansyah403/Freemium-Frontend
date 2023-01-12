@@ -39,7 +39,6 @@
                                 <img x-bind:src="imgUrl+data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
                             </figure>
                         </template>
-                        <span x-text="console.log(data_user)"></span>
                         <span class="font-inter" x-text="data_user.name == null ? 'User' : data_user.name"></span>
                     </button>
                     <ul 
