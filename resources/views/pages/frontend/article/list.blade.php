@@ -19,7 +19,7 @@
     
 </style>
 
-<section class="lg:px-[12px] px-8 pt-[88px]">
+<section class="lg:px-[12px] px-8 pt-[88px]" x-data="user">
 
     {{-- alert --}}
     <div x-data="user" class="container mx-auto w-full">
@@ -29,7 +29,8 @@
         </div>
     </div>
 
-    <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row">
+    <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row" x-data="articles">
+        
         {{-- kiri --}}
         <div class="w-full lg:col-3 lg:w-[270px] mx-auto h-max px-4 py-8 bg-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
             <form class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary ">
@@ -72,8 +73,9 @@
         </div>
 
         {{-- kanan --}}
-        <div class="lg:col-9 mt-5 lg:mt-0 bg-white lg:ml-[30px] md:mt-20" x-data="user">
+        <div class="lg:col-9 mt-5 lg:mt-0 bg-white lg:ml-[30px] md:mt-20">
             <div x-init="fetchMe()"></div>
+            <div x-init="getArticle()"></div>
 
             <template x-if="!data_user.subscribe_status">
                 <div>
@@ -101,337 +103,328 @@
                 </template>
             </div>
 
-            <div x-data="articles">
+            {{-- wrapper content --}}
 
-                <div x-init="getArticle()"></div>
-                {{-- wrapper content --}}
-    
-                <div class="flex flex-wrap items-center justify-center">
+            <div class="flex flex-wrap items-center justify-center">
 
+                
+                {{-- <div class="content">
+                    <div class="border mt-5"></div>
                     
-                    {{-- <div class="content">
-                        <div class="border mt-5"></div>
-                        
-                        <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                            <div class="h-50 w-50 flex flex-col ">
-                                <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                    <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-            
-                                    </div>
-                                    <div>
-                                        <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                        <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                            <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                            <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                        </div>
+                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
+                        <div class="h-50 w-50 flex flex-col ">
+                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
+                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
+        
+                                </div>
+                                <div>
+                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
+                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
+                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
+                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
                                     </div>
                                 </div>
-            
-                                <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-            
-                                </div>
-            
-                                <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                    <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                    <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                        PAID
-                                    </button>
-                                </div>
-                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                    short desc short desc short desc short desc
-                                </p>
-            
                             </div>
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-            
+        
+                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
+        
                             </div>
+        
+                            <div class="flex lg:gap-5 justify-between items-center mt-5">
+                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
+                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
+                                    PAID
+                                </button>
+                            </div>
+                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
+                                short desc short desc short desc short desc
+                            </p>
+        
                         </div>
-                                        
+                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
+        
+                        </div>
                     </div>
-                    <div class="content">
-                        <div class="border mt-5"></div>
-                        
-                        <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                            <div class="h-50 w-50 flex flex-col ">
-                                <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                    <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-            
-                                    </div>
-                                    <div>
-                                        <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                        <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                            <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                            <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                                <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-            
-                                </div>
-            
-                                <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                    <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                    <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                        PAID
-                                    </button>
-                                </div>
-                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                    short desc short desc short desc short desc
-                                </p>
-            
-                            </div>
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-            
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="content">
-                        <div class="border mt-5"></div>
-                        
-                        <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                            <div class="h-50 w-50 flex flex-col ">
-                                <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                    <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-            
-                                    </div>
-                                    <div>
-                                        <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                        <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                            <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                            <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                                <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-            
-                                </div>
-            
-                                <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                    <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                    <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                        PAID
-                                    </button>
-                                </div>
-                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                    short desc short desc short desc short desc
-                                </p>
-            
-                            </div>
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-            
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="content">
-                        <div class="border mt-5"></div>
-                        
-                        <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                            <div class="h-50 w-50 flex flex-col ">
-                                <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                    <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-            
-                                    </div>
-                                    <div>
-                                        <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                        <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                            <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                            <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                                <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-            
-                                </div>
-            
-                                <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                    <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                    <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                        PAID
-                                    </button>
-                                </div>
-                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                    short desc short desc short desc short desc
-                                </p>
-            
-                            </div>
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-            
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="content">
-                        <div class="border mt-5"></div>
-                        
-                        <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                            <div class="h-50 w-50 flex flex-col ">
-                                <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                    <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-            
-                                    </div>
-                                    <div>
-                                        <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                        <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                            <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                            <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                                <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-            
-                                </div>
-            
-                                <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                    <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                    <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                        PAID
-                                    </button>
-                                </div>
-                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                    short desc short desc short desc short desc
-                                </p>
-            
-                            </div>
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-            
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="content">
-                        <div class="border mt-5"></div>
-                        
-                        <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                            <div class="h-50 w-50 flex flex-col ">
-                                <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                    <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-            
-                                    </div>
-                                    <div>
-                                        <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                        <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                            <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                            <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                                <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-            
-                                </div>
-            
-                                <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                    <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                    <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                        PAID
-                                    </button>
-                                </div>
-                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                    short desc short desc short desc short desc
-                                </p>
-            
-                            </div>
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-            
-                            </div>
-                        </div>
-                                        
-                    </div> --}}
-                    
-                    <template x-for="(item, index) in listArticle">
-                        
-                        <div class="content" x-data="helpers">
-                            <span x-text="console.log(item)"></span>
-                            <div class="border mt-5"></div>
-                            
-                            <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                                <div class="flex flex-col col-12 md:col-8">
-                                    <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                        <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-                
-                                        </div>
-                                        <div>
-                                            <h1 class="text-[18px] font-bold mb-2 leading-[27px]" x-text="item.author.username">Nama Author</h1>
-                                            <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                                <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
-                                                <p class="text-[14px] leading-[21px]">
-                                                    <span x-text="item.total_views_sum > 0 ? item.total_views_sum : 'No'">
-                                                        1000 
-                                                    </span> 
-                                                    Views
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                
-                                    <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-                
-                                    </div>
-                
-                                    <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                        <a x-bind:href="baseUrl + `article/detail/${item.id}`"
-                                        class="font-bold text-[24px] leading-9" x-text="item.title">JUDUL ARTIKEL</a>
-                                        <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
-                                            PAID
-                                        </button>
-                                    </div>
-                                    <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full" x-text="item.description">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                        eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                        short desc short desc short desc short desc
-                                    </p>
-                
-                                </div>
-                                <div class="bg-[#D9D9D9] rounded-lg max-w-[180px] w-[180px] h-[180px] my-auto mx-5 hidden md:block lg:block col-4">
-                                    <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
-                                </div>
-                            </div>
-
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-                            <script>
-                                $(document).ready(function(){
-                                    $(".content").slice(0, 2).show();
-                                })
-                            </script>
-                                            
-                        </div>
-           
-                    </template>
-                    
+                                    
                 </div>
-                        
-                <div class="flex items-center justify-center mt-20">
-                    <a href="#" id="loadMore" class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</a>
+                <div class="content">
+                    <div class="border mt-5"></div>
+                    
+                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
+                        <div class="h-50 w-50 flex flex-col ">
+                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
+                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
+        
+                                </div>
+                                <div>
+                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
+                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
+                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
+                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
+        
+                            </div>
+        
+                            <div class="flex lg:gap-5 justify-between items-center mt-5">
+                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
+                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
+                                    PAID
+                                </button>
+                            </div>
+                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
+                                short desc short desc short desc short desc
+                            </p>
+        
+                        </div>
+                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
+        
+                        </div>
+                    </div>
+                                    
                 </div>
+                <div class="content">
+                    <div class="border mt-5"></div>
+                    
+                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
+                        <div class="h-50 w-50 flex flex-col ">
+                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
+                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
+        
+                                </div>
+                                <div>
+                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
+                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
+                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
+                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
+        
+                            </div>
+        
+                            <div class="flex lg:gap-5 justify-between items-center mt-5">
+                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
+                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
+                                    PAID
+                                </button>
+                            </div>
+                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
+                                short desc short desc short desc short desc
+                            </p>
+        
+                        </div>
+                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
+        
+                        </div>
+                    </div>
+                                    
+                </div>
+                <div class="content">
+                    <div class="border mt-5"></div>
+                    
+                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
+                        <div class="h-50 w-50 flex flex-col ">
+                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
+                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
+        
+                                </div>
+                                <div>
+                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
+                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
+                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
+                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
+        
+                            </div>
+        
+                            <div class="flex lg:gap-5 justify-between items-center mt-5">
+                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
+                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
+                                    PAID
+                                </button>
+                            </div>
+                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
+                                short desc short desc short desc short desc
+                            </p>
+        
+                        </div>
+                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
+        
+                        </div>
+                    </div>
+                                    
+                </div>
+                <div class="content">
+                    <div class="border mt-5"></div>
+                    
+                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
+                        <div class="h-50 w-50 flex flex-col ">
+                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
+                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
+        
+                                </div>
+                                <div>
+                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
+                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
+                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
+                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
+        
+                            </div>
+        
+                            <div class="flex lg:gap-5 justify-between items-center mt-5">
+                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
+                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
+                                    PAID
+                                </button>
+                            </div>
+                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
+                                short desc short desc short desc short desc
+                            </p>
+        
+                        </div>
+                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
+        
+                        </div>
+                    </div>
+                                    
+                </div>
+                <div class="content">
+                    <div class="border mt-5"></div>
+                    
+                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
+                        <div class="h-50 w-50 flex flex-col ">
+                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
+                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
+        
+                                </div>
+                                <div>
+                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
+                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
+                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
+                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
+        
+                            </div>
+        
+                            <div class="flex lg:gap-5 justify-between items-center mt-5">
+                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
+                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
+                                    PAID
+                                </button>
+                            </div>
+                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
+                                short desc short desc short desc short desc
+                            </p>
+        
+                        </div>
+                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
+        
+                        </div>
+                    </div>
+                                    
+                </div> --}}
+                
+                <template x-for="(item, index) in listArticle">
+                    
+                    <div class="content" x-data="helpers">
+                        <span x-text="console.log(item)"></span>
+                        <div class="border mt-5"></div>
+                        
+                        <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
+                            <div class="flex flex-col col-12 md:col-8">
+                                <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
+                                    <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
+            
+                                    </div>
+                                    <div>
+                                        <h1 class="text-[18px] font-bold mb-2 leading-[27px]" x-text="item.author.username">Nama Author</h1>
+                                        <div class="flex lg:gap-5 gap-3 flex-wrap">
+                                            <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
+                                            <p class="text-[14px] leading-[21px]">
+                                                <span x-text="item.total_views_sum > 0 ? item.total_views_sum : 'No'">
+                                                    1000 
+                                                </span> 
+                                                Views
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
+            
+                                </div>
+            
+                                <div class="flex lg:gap-5 justify-between items-center mt-5">
+                                    <a x-bind:href="baseUrl + `article/detail/${item.id}`"
+                                    class="font-bold text-[24px] leading-9" x-text="item.title">JUDUL ARTIKEL</a>
+                                    <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
+                                        PAID
+                                    </button>
+                                </div>
+                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full" x-text="item.description">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
+                                    short desc short desc short desc short desc
+                                </p>
+            
+                            </div>
+                            <div class="bg-[#D9D9D9] rounded-lg max-w-[180px] w-[180px] h-[180px] my-auto mx-5 hidden md:block lg:block col-4">
+                                <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
+                            </div>
+                        </div>
+
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+                        <script>
+                            $(document).ready(function(){
+                                $(".content").slice(0, 2).show();
+                            })
+                        </script>
+                                        
+                    </div>
+        
+                </template>
                 
             </div>
-            
+                    
+            <div class="flex items-center justify-center mt-20">
+                <a href="#" id="loadMore" class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</a>
+            </div>            
 
 
         </div>
-
-
-
 
     </div>
 
