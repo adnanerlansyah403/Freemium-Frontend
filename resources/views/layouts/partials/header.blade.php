@@ -31,7 +31,7 @@
                 >
                     <button 
                         type="button" 
-                        class="flex items-center gap-1 px-4 py-2 bg-primary text-white hover:text-opacity-90 rounded-primary"
+                        class="flex items-center gap-2 px-4 py-2 bg-primary text-white hover:text-opacity-90 rounded-primary"
                         @click="dropdownmenu = !dropdownmenu"
                     >
                         <template x-if="imgUrl+data_user.photo != null || imgUrl+data_user.photo != ''">

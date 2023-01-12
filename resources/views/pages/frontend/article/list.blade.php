@@ -93,7 +93,12 @@
             <div x-init="getArticle()"></div>
 
             <template x-if="!data_user.subscribe_status">
-                <div>
+                <div id="alertSubscribe" style="display: none"
+                x-init="
+                    setTimeout(() => {
+                        document.getElementById('alertSubscribe').style.display = 'block';
+                    }, 600)
+                ">
                     <div class="lg:w-full w-[320px] md:w-full bg-primary rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 lg:h-[50px] md:h-[50px] mt-5 lg:mt-0 h-[70px] font-normal text-sm px-[27px] py-[13px]">
                         You have to 
                         <span class="font-bold text-primary leading-[27px]">
@@ -110,9 +115,16 @@
                 </div>
                 <template  x-if="!data_user.subscribe_status">
                     <div>
-                        <a href="{{ route('transaction.create') }}" class="bg-primary px-4 py-3 mb-3 rounded-[10px] flex items-center gap-2 mt-10 lg:mt-auto md:mt-auto">
+                        <a id="buttonTransactionCreate" style="display: none;" href="{{ route('transaction.create') }}" class="bg-primary px-4 py-3 mb-3 rounded-[10px] flex items-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                        x-init="
+                            setTimeout(() => {
+                                document.getElementById('buttonTransactionCreate').style.display = 'flex';
+                            }, 600)
+                        "
+                        >
                             <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
-                            <h2 class="font-bold text-white">Get Unlimited Access</h2>
+                            <h2 class="font-bold text-white"
+                            >Get Unlimited Access</h2>
                         </a>
                     </div>
                 </template>
@@ -428,7 +440,7 @@
         
                 </template>
 
-                <template x-if="listArticle == null || listArticle.length == 0">
+                <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle != ''">
                     <p id="articleNotFound" class="text-md mt-10" style="display: none;"
                         x-init="
                             setTimeout(() => {
@@ -437,6 +449,19 @@
                         "
                     >
                         <span class="span">Oops</span>, We can't find your article
+                    </p>
+                </template>
+
+                <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle == ''">
+                    <p id="articleNotFound" class="text-md mt-10" style="display: none;"
+                        x-init="
+                            setTimeout(() => {
+                                document.getElementById('articleNotFound').style.display = 'block';
+                            }, 550)
+                        "
+                    >
+                        <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
+                        <span class="span">We</span> still don't have any articles 
                     </p>
                 </template>
 

@@ -271,17 +271,16 @@ document.addEventListener('alpine:init', () => {
       const data = new FormData()
       data.append('plan', this.plan)
       plan_id = this.plan
-      const token = localStorage.getItem('token')
       fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
         method: "POST",
         headers: {
-          'Authorization': token
+          'Authorization': localStorage.getItem('token'),
         }
       })
 
         .then((response) => {
-          console.log(response.ok)
           if (response.ok) {
+            console.log(response)
             Swal.fire({
               position: 'top-end',
               icon: 'success',
