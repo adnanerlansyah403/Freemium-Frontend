@@ -6,10 +6,18 @@
 
 <style>
 
+
+.category.active {
+    background-color: #7C000B;
+    color: white;
+    border: none;
+}
+
 .content {
   width: 100%;
-  display: none;
+  /* display: none; */
 }
+
 .noContent {
   color: #000 !important;
   background-color: transparent !important;
@@ -63,13 +71,16 @@
 
             </div>
 
-            <div class="mt-[33px] flex flex-wrap gap-[11px]">
-                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
-                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
-                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
-                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
-                <a class="font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#">Category 1</a>
-
+            <div class="mt-[33px] flex flex-wrap gap-[11px]" x-init="getCategories()">
+                <template x-for="(item, index) in categoriesArticle">
+                    <a x-bind:id=`category${item.id}` class="category font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#" x-text="item.name" @click="
+                    fetchArticleByCategory(item.id);
+                    {{-- console.log(document.getElementById(`category${item.id}`).style.background = "#7C000B"); --}}
+                    ">Category 1</a>
+                </template>
+                <button type="button" @click="resetFilters()" class="w-full py-2 bg-primary mt-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
+                    Reset Filter
+                </button>
             </div>
 
 
@@ -365,9 +376,14 @@
                     </span>
                 </template>
                 
-                <template x-for="(item, index) in listArticle">
-                    
+                {{-- <div class="content"></div> --}}
+
+
+
+                <template x-for="(item, index) in listArticle.slice(0, itemArticle)">
+                
                     <div class="content" x-data="helpers">
+                        
                         <span x-text="console.log(item)"></span>
                         <div class="border mt-5"></div>
                         
@@ -413,49 +429,76 @@
                                 <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
                             </div>
                         </div>
-
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-                        <script>
-                            $(document).ready(function(){
-                                $(".content").slice(0, 2).show();
-                            })
-                        </script>
-                                        
+                        
                     </div>
         
                 </template>
-                
+
             </div>
-                    
-            <template x-if="listArticle.length > 2">
+
+                
+            <template x-if="listArticle.length > 1 && listArticle.length > itemArticle">
                 <div class="flex items-center justify-center mt-20">
-                    <a href="#" id="loadMore" class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</a>
+
+                    <template x-if="isLoadingArticle">
+                        <span class="span">Loading...</span>
+                    </template>
+
+                    <template x-if="!isLoadingArticle">
+                        <button @click="
+                            loadMoreArticle()
+                        " id="loadMore" class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</button>
+                    </template>
+
+                    
                 </div>            
+            </template> 
+            
+            <span x-text="console.log(itemArticle > listArticle.length)"></span>
+            <span x-text="console.log(listArticle.length < itemArticle)"></span>
+            <template x-if="itemArticle > listArticle.length">
+                <div class="flex items-center justify-center">
+                    <div id="resetButton" class="flex items-center justify-center mt-20" style="display: none;"
+                        x-init="
+                            setTimeout(() => {
+                                document.getElementById('resetButton').style.display = 'block';
+                            }, 500)
+                        "
+                    >
+                        
+                        <button 
+                        x-on:click="itemArticle = 3"
+                        class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</button>
+    
+                    </div>
+                </div>
             </template>
+                    
 
 
         </div>
 
     </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    
+</section>
+
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <script>
     $(document).ready(function(){
         $(".content").slice(0, 2).show();
+        
         $("#loadMore").on("click", function(e){
             e.preventDefault();
             $(".content:hidden").slice(0, 2).slideDown();
             if($(".content:hidden").length == 0) {
-            $("#loadMore").text("No Content").addClass("noContent");
+                $("#loadMore").text("No Content").addClass("noContent");
             }
         });
     })
-</script>
-
-</section>
+</script> --}}
 
 @endsection

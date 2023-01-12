@@ -408,8 +408,10 @@ document.addEventListener('alpine:init', () => {
     apiUrl: "http://127.0.0.1:8001/api/",
     imgUrl: "http://127.0.0.1:8001/",
     listArticle: [],
+    categoriesArticle: [],
     detailArticle: null,
     isLoadingArticle: false,
+    itemArticle: 3,
 
     // INPUTS ARTICLE
     keywordArticle: '',
@@ -424,6 +426,15 @@ document.addEventListener('alpine:init', () => {
           console.log(this.listArticle);
         })
 
+    },
+
+    loadMoreArticle() {
+      this.isLoadingArticle = true;
+      setTimeout(() => {
+        this.isLoadingArticle = false;
+        this.itemArticle += 3;
+        console.log(this.itemArticle)
+      }, 1000)
     },
 
     getDetailArticle(id) {
@@ -503,8 +514,65 @@ document.addEventListener('alpine:init', () => {
         localStorage.setItem('showFlash', true);
         return window.location.replace(`${this.baseUrl}myarticle`)
       }
+    },
 
-      // console.log(data);
+    // CATEGORIES ARTICLE
+
+    getCategories() {
+
+      fetch(`${this.apiUrl}category`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.categoriesArticle = data.data;
+        })
+
+    },
+
+    fetchArticleByCategory(categoryId) {
+
+      // console.log(categoryId);
+
+      this.isLoadingArticle = true;
+
+      fetch(`${this.apiUrl}article?category=${categoryId}`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+          this.isLoadingArticle = false;
+
+          this.getCategories();
+
+          for (let index = 0; index < this.categoriesArticle.length; index++) {
+            if (this.categoriesArticle[index].id === categoryId) {
+              document.getElementById(`category${categoryId}`).classList.add('active');
+            } else {
+              document.getElementById(`category${this.categoriesArticle[index].id}`).classList.remove('active');
+            }
+          }
+
+        })
+
+    },
+
+    // FILTERS
+
+    resetFilters() {
+
+      let categories = document.querySelectorAll('.category');
+
+      for (let index = 0; index < categories.length; index++) {
+        if (categories[index].classList.contains('active')) {
+          categories[index].classList.remove('active');
+        }
+      }
+
+      console.log(categories)
+      this.keywordArticle = '';
+      this.getArticle();
     }
 
   }))
