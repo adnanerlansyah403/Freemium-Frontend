@@ -58,7 +58,7 @@
                                 <span>My Articles</span>
                             </a>
                         </li>
-                        <template x-if="myTransactions != null && data_user.subscribe_status == false">
+                        <template x-if="myTransactions[0] != null && data_user.subscribe_status == false">
                             <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
                                 <a href="{{ route('transaction.show') }}" class="flex items-center gap-2">
                                     <i data-feather="credit-card"></i>

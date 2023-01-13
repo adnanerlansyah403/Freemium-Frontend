@@ -327,16 +327,17 @@ document.addEventListener('alpine:init', () => {
           let url = window.location.href;
           let lastPath = url.substring(url.lastIndexOf('/'));
 
+          console.log(this.myTransactions);
 
-          if (this.myTransactions != null && this.myTransactions[0].status == 1) {
+          if (this.myTransactions[0] != null) {
             if (this.myTransactions[0].status == 1 && lastPath == '/details') {
               window.location.replace(this.baseUrl + "profile");
             }
           }
 
-          if (this.myTransactions == null && lastPath == '/details') {
+          if (this.myTransactions[0] == null && lastPath == '/details') {
             window.location.replace(`${this.baseUrl}transaction`)
-          } else if (this.myTransactions != null && lastPath == '/transaction') {
+          } else if (this.myTransactions[0] != null && lastPath == '/transaction') {
             window.location.replace(`${this.baseUrl}transaction/details`)
           }
           return;
