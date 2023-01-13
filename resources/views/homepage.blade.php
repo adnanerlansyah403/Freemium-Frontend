@@ -45,7 +45,7 @@
         @livewireStyles
 
     </head>
-    <body>
+    <body class="antialiased">
         {{-- <x-alert /> --}}
 
 
@@ -73,6 +73,10 @@
             feather.replace()
         </script>
 
+        {{-- Ckeditor5 Scripts --}}
+
+        <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+
         {{-- TinyMCE Scripts --}}
 
         <script src="https://cdn.tiny.cloud/1/u2nxm9ys2v0iwr5re916e7g6e8yjcnyzb81g34b18pmx0kk2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -80,20 +84,20 @@
         {{-- TinyMCE Tools --}}
 
         <script type="text/javascript">
-            // Initialize
-            tinymce.init({
-                selector: 'textarea',
-                plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
-            });
-            // tinymce.init({
-            //     selector: '#sub_content',
-            //     plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
-            // });
+            addTinyMCE();
+
+            function addTinyMCE(){
+                // Initialize
+                tinymce.init({
+                    selector: '#content',
+                    plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
+                });
+                tinymce.init({
+                    selector: '#sub_content',
+                    plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
+                });
+            }
         </script>
-
-        {{-- Ckeditor5 Scripts --}}
-
-        <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
 
         @livewireScripts
 
