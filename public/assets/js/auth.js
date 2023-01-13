@@ -75,7 +75,7 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('token', token)
             localStorage.setItem('name', fullName)
             localStorage.setItem('role', role)
-            // localStorage.setItem('subscribe_status', subscribe_status)
+            localStorage.setItem('subscribe_status', subscribe_status)
             localStorage.setItem('showFlash', true)
             localStorage.setItem('message', user.message);
             this.data_user = user.data

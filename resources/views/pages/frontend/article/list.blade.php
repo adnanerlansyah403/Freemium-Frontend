@@ -71,15 +71,15 @@
                     <h1 class="text-sm leading-[21px] font-extrabold">Or <span class="text-primary font-bold">Filter By</span> :</h1>
                 </div>
                 <div class="flex items-center gap-[5px]">
-                    <input class="bg-primary" type="radio" id="free" name="fav_language" value="free" @click="getFreeArticle()">
+                    <input class="bg-primary" type="radio" id="free" name="type_article" value="free" @click="getFreeArticle()">
                     <label class="mt-[2px] text-sm leading-[21px]" for="free">Free</label><br>
                 </div>
                 <div class="flex items-center gap-[5px]">
-                    <input class="bg-primary" type="radio" id="paid" name="fav_language" value="paid" @click="getPaidArticle()">
+                    <input class="bg-primary" type="radio" id="paid" name="type_article" value="paid" @click="getPaidArticle()">
                     <label class="mt-[2px] text-sm leading-[21px]" for="paid">Paid</label><br>
                 </div>
                 {{-- <div class="flex items-center gap-[5px]">
-                    <input class="bg-primary" type="radio" id="html" name="fav_language" value="description">
+                    <input class="bg-primary" type="radio" id="html" name="type_article" value="description">
                     <label class="mt-[2px] text-sm leading-[21px]" for="html">Description</label><br>
                 </div> --}}
 
@@ -118,7 +118,7 @@
                         document.getElementById('alertSubscribe').style.display = 'block';
                     }, 600)
                 ">
-                    <div class="lg:w-full w-[320px] md:w-full bg-primary rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 lg:h-[50px] md:h-[50px] mt-5 lg:mt-0 h-[70px] font-normal text-sm px-[27px] py-[13px]">
+                    <div class="lg:w-full w-[320px] md:w-full bg-primary rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 mt-5 lg:mt-0 font-normal text-sm px-4 py-2">
                         You have to 
                         <span class="font-bold text-primary leading-[27px]">
                             Subscribe</span>  to Get Unlimited Access
@@ -134,7 +134,7 @@
                 </div> --}}
                 <template  x-if="!data_user.subscribe_status">
                     <div>
-                        <a id="buttonTransactionCreate" style="display: none;" href="{{ route('transaction.create') }}" class="bg-primary px-4 py-3 mb-3 rounded-[10px] flex items-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                        <a id="buttonTransactionCreate" style="display: none;" href="{{ route('transaction.create') }}" class="bg-primary px-4 py-2 text-sm mb-3 rounded-[10px] flex items-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                         x-init="
                             setTimeout(() => {
                                 document.getElementById('buttonTransactionCreate').style.display = 'flex';

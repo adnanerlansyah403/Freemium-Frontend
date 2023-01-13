@@ -136,27 +136,26 @@ document.addEventListener('alpine:init', () => {
       localStorage.clear()
       window.location.replace(this.baseUrl + 'login')
     },
-    listPlan : '',
+
+    listPlan: [],
+
     fetchListPlan() {
-        const token = localStorage.getItem('token')
-        console.log("apaansi weh")
-          fetch(`${this.apiUrl}plan`, {
-            method: "GET",
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': localStorage.getItem('token')
-            }
-          })
-            .then(async (response) => {
-              data = await response.json();
-              if (data.message === 'Unauthorized') {
-                window.location.replace(this.baseUrl + 'login')
-              }
-              this.listPlan = data;
+      fetch(`${this.apiUrl}plan`, {
+        method: "GET",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          // if (data.message === 'Unauthorized') {
+          //   window.location.replace(this.baseUrl + 'login')
+          // }
+          this.listPlan = data.data;
+          console.log(data);
+        })
 
-            })
-
-      },
+    },
 
     fetchMyArticle() {
       let url = window.location.href;
@@ -278,7 +277,8 @@ document.addEventListener('alpine:init', () => {
     paySubscription() {
       const data = new FormData()
       data.append('plan', this.plan)
-      plan_id = this.plan
+      console.log(this.plan);
+      let plan_id = this.plan
       fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
         method: "POST",
         headers: {
@@ -287,6 +287,7 @@ document.addEventListener('alpine:init', () => {
       })
 
         .then((response) => {
+          console.log(response)
           if (response.ok) {
             console.log(response)
             Swal.fire({
@@ -302,7 +303,7 @@ document.addEventListener('alpine:init', () => {
               icon: 'error',
               title: 'Choose Plan First!',
               confirmButtonColor: 'primary',
-
+              position: 'center'
             })
           }
         });
@@ -327,7 +328,7 @@ document.addEventListener('alpine:init', () => {
           let url = window.location.href;
           let lastPath = url.substring(url.lastIndexOf('/'));
 
-          console.log(this.myTransactions);
+          // console.log(this.myTransactions);
 
           if (this.myTransactions[0] != null) {
             if (this.myTransactions[0].status == 1 && lastPath == '/details') {
@@ -388,13 +389,6 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           if (data) {
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Payment Successfully!',
-              showConfirmButton: false,
-              timer: 3000
-            })
             return window.location.replace(`${this.baseUrl}profile`)
           }
         })
@@ -404,6 +398,19 @@ document.addEventListener('alpine:init', () => {
 
       return;
     },
+
+    selectedPlan(item = null) {
+
+      var elements = document.querySelectorAll(".cardplan");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove("active");
+        document.querySelectorAll(".selectplan")[i].innerText = "Select"
+      }
+
+      document.getElementById(`plan${item.id}`).click();
+      document.getElementById(`cardplan${item.id}`).classList.add('active');
+      document.getElementById(`selectedplan${item.id}`).innerText = 'Selected';
+    }
 
   }))
 
@@ -676,6 +683,12 @@ document.addEventListener('alpine:init', () => {
 
       return fullDate;
 
+    },
+
+    convertCurrencyUsd(money) {
+      console.log(money);
+      let currency = '$' + money.toFixed(2);
+      return currency;
     }
 
   }))

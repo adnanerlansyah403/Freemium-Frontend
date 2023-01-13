@@ -60,6 +60,8 @@ style="display: none;">
                 Details Transaction
             </h1>
 
+            <span x-text="console.log(myTransactions[0])"></span>
+
             <div class="mb-8 text-center">
                 <span class="text-base md:text-md text-gray-secondary">Payment Code ( Transaction No. )</span>
                 <p class="font-bold text-[20px] mt-2" x-text="myTransactions[0].virtual_account_number">
@@ -74,7 +76,7 @@ style="display: none;">
                     <div>
                         $<span x-text="myTransactions[0].total_price">
 
-                        </span>/<span x-text="myTransactions[0].plan[0].name" class="span"></span>
+                        </span>/<span x-text="myTransactions[0].plan.name" class="span"></span>
                     </div>
                 </div>
 

@@ -55,7 +55,7 @@
 style="display: none;">
 
 {{-- Title Section --}}
-<template x-if="isLogedIn && data_user.subscribe_status == 0">
+<template x-if="isLogedIn">
     <script>
         document.title = 'Plans - Freemium App';
     </script>
@@ -95,31 +95,27 @@ style="display: none;">
                 </ul>
             </div>
             <div x-init="fetchListPlan()">
-                <template x-for="(item, index) in listPlan.data">
-                    <div class="mb-14 flex flex-wrap lg:flex-nowrap items-center justify-center gap-6">
-                        <div class="w-[300px] text-center py-5 border border-primary rounded-primary transition duration-200 ease-in-out plan" x-ref="cardplan1">
-                            <span class="text-md" x-text="item.name"></span>
+                <div class="mb-14 flex flex-wrap lg:flex-nowrap items-center justify-center gap-6" x-data="helpers">
+                        <template x-for="(item, index) in listPlan">
+                            <div class="cardplan w-[300px] text-center py-5 border border-primary rounded-primary transition duration-200 ease-in-out plan" x-bind:id="`cardplan${item.id}`">
+                                <span class="text-md" x-text="item.name"></span>
 
-                            <p class="mt-12 mb-8 text-base text-slate-secondary" x-text="item.price"></p>
+                                <p class="mt-12 mb-8 text-base text-slate-secondary" x-text=" '$' + parseFloat(item.price).toFixed(2)"></p>
 
-                            <button type="button"
-                                class="px-4 py-2 bg-primary text-white hover:text-opacity-80 rounded-pill"
-                                @click="
-                                    $refs.plan1.click();
-                                    $refs.textplan2.innerText = 'Select';
-                                    $refs.cardplan2.classList.remove('active');
-                                    $refs.cardplan1.classList.add('active');
-                                    $refs.textplan1.innerText = 'Selected'
-                                "
-                            >
-                                <span x-ref="textplan1">Select</span>
-                                <input type="radio" name="plan" x-model="plan" value="1" id="plan" style="display: none;" x-ref="plan1">
-                            </button>
+                                <button type="button"
+                                    class="px-4 py-2 bg-primary text-white hover:text-opacity-80 rounded-pill"
+                                    @click="
+                                        selectedPlan(item)
+                                    "
+                                >
+                                    <span x-bind:id="`selectedplan${item.id}`" class="selectplan">Select</span>
+                                    <input type="radio" name="plan" x-model="plan" x-bind:value="item.id" x-bind:id="`plan${item.id}`" style="display: none;">
+                                </button>
 
-                        </div>
+                            </div>
 
+                        </template>
                     </div>
-                </template>
             </div>
 
                 <div class="px-2 lg:px-0 lg:w-[630px] lg:mx-auto">
