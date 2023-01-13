@@ -15,8 +15,7 @@ document.addEventListener('alpine:init', () => {
     showFlash: false,
     isLoading: false,
     DetailArticle: {
-      tags: [],
-      subarticles: []
+      data: ''
     },
     EditArticle: {
       data: ''
@@ -197,27 +196,6 @@ document.addEventListener('alpine:init', () => {
             this.listMyArticle = data;
             this.isLoading = false;
 
-          })
-
-    },
-
-    fetchDetailMyArticle(id) {
-      const token = localStorage.getItem('token')
-
-      this.isLoading = true,
-        fetch(`${this.apiUrl}article/${id}`, {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
-          }
-        })
-          .then(async (response) => {
-            this.DetailArticle = await response.json()
-            if (data.message === 'Unauthorized') {
-              window.location.replace(this.baseUrl)
-            }
-            this.isLoading = false
           })
 
     },
@@ -438,6 +416,8 @@ document.addEventListener('alpine:init', () => {
     isLoadingArticle: false,
     isLoadMore: false,
     itemArticle: 3,
+    content: false,
+    back: false,
 
     // INPUTS ARTICLE
     keywordArticle: '',
@@ -521,14 +501,31 @@ document.addEventListener('alpine:init', () => {
     },
 
     getDetailArticle(id) {
-
-
       fetch(`${this.apiUrl}article/${id}`, {
-        method: "GET"
+        method: "GET",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
       })
         .then(async (response) => {
           const data = await response.json();
           this.detailArticle = data.data;
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+    },
+
+    getSubArticle(id) {
+      fetch(`${this.apiUrl}sub-article/${id}`, {
+        method: "GET",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.content = data.data;
         })
         .catch(error => {
           console.log(error.message);
