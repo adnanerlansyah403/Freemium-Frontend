@@ -11,6 +11,7 @@ document.addEventListener('alpine:init', () => {
     linkInputInstagram: false,
     linkInputTwitter: false,
     data_user: [],
+    status_err: [],
     showFlash: false,
     isLoading: false,
     DetailArticle: {
@@ -535,16 +536,17 @@ document.addEventListener('alpine:init', () => {
 
     async createArticle() {
       let title = document.getElementById('title');
-      let description = document.getElementById('content');
+      let description = tinymce.get('content').getContent();
       let thumbnail = document.getElementById('thumbnail').files[0];
       let category = document.getElementsByClassName('categories');
       let type = document.getElementsByClassName('type');
       let title_sub = document.getElementsByClassName('title_sub');
       let thumbnail_sub = document.getElementsByClassName('thumbnail_sub');
-      let description_sub = document.getElementsByClassName('ck-content');
+      // let description_sub = document.getElementsByClassName('ck-content');
+
       let formData = new FormData();
       formData.append('title', title.value);
-      formData.append('description', description.value);
+      formData.append('description', description);
       formData.append('thumbnail', thumbnail);
       for (var i = 0, length = type.length; i < length; i++) {
         if (type[i].checked) {
@@ -557,7 +559,7 @@ document.addEventListener('alpine:init', () => {
       for (let i = 0; i < title_sub.length; i++) {
         formData.append('title_sub[]', title_sub[i].value);
         formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
-        formData.append('description_sub[]', description_sub[i].innerHTML);
+        formData.append('description_sub[]', tinymce.get(`editor${i + 1}`).getContent());
       }
       article = await fetch(`${this.apiUrl}article`, {
         method: "POST",
@@ -568,6 +570,11 @@ document.addEventListener('alpine:init', () => {
       })
 
       data = await article.json();
+      if (!data.status) {
+        this.showFlash = true;
+        this.status_err = data.message;
+        console.log(this.status_err)
+      }
 
       if (data.status) {
         localStorage.setItem('message', 'article successfully created!');
@@ -580,7 +587,8 @@ document.addEventListener('alpine:init', () => {
 
     getCategories() {
 
-      fetch(`${this.apiUrl}category`, {
+      fetch(`${this.apiUrl
+        }category`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -594,7 +602,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?category=${categoryId}`, {
+      fetch(`${this.apiUrl}article ? category = ${categoryId}`, {
         method: "GET"
       })
         .then(async (response) => {
