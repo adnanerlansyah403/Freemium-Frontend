@@ -1,4 +1,4 @@
-<header class="shadow-lg py-2">
+<header class="shadow-lg py-1">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>

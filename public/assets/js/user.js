@@ -414,12 +414,16 @@ document.addEventListener('alpine:init', () => {
     categoriesArticle: [],
     detailArticle: null,
     isLoadingArticle: false,
+    isLoadMore: false,
     itemArticle: 3,
 
     // INPUTS ARTICLE
     keywordArticle: '',
 
     getArticle() {
+
+      this.isLoadingArticle = true;
+
       fetch(`${this.apiUrl}article`, {
         method: "GET"
       })
@@ -428,13 +432,19 @@ document.addEventListener('alpine:init', () => {
           this.listArticle = data.data;
 
           // DOM
-          document.getElementById("all").classList.add('active');
-          document.getElementById("free").classList.remove('active');
-          document.getElementById("paid").classList.remove('active');
+          // document.getElementById("all").classList.add('active');
+          // document.getElementById("free").classList.remove('active');
+          // document.getElementById("paid").classList.remove('active');
+
+          this.isLoadingArticle = false;
+
         })
     },
 
     getFreeArticle() {
+
+      this.isLoadingArticle = true;
+
       fetch(`${this.apiUrl}article`, {
         method: "GET"
       })
@@ -443,15 +453,22 @@ document.addEventListener('alpine:init', () => {
           this.listArticle = data.data.filter(item => {
             return item.type == 'free';
           });
+          console.log(this.listArticle);
           // DOM
-          document.getElementById("all").classList.remove('active');
-          document.getElementById("free").classList.add('active');
-          document.getElementById("paid").classList.remove('active');
+          // document.getElementById("all").classList.remove('active');
+          // document.getElementById("free").classList.add('active');
+          // document.getElementById("paid").classList.remove('active');
+
+          this.isLoadingArticle = false;
+
         })
     },
 
 
     getPaidArticle() {
+
+      this.isLoadingArticle = true;
+
       fetch(`${this.apiUrl}article`, {
         method: "GET"
       })
@@ -460,17 +477,23 @@ document.addEventListener('alpine:init', () => {
           this.listArticle = data.data.filter(item => {
             return item.type == 'paid';
           });
+          console.log(this.listArticle);
           // DOM
-          document.getElementById("all").classList.remove('active');
-          document.getElementById("free").classList.remove('active');
-          document.getElementById("paid").classList.add('active');
+          // document.getElementById("all").classList.remove('active');
+          // document.getElementById("free").classList.remove('active');
+          // document.getElementById("paid").classList.add('active');
+
+          this.isLoadingArticle = false;
+
         })
     },
 
     loadMoreArticle() {
       this.isLoadingArticle = true;
+      this.isLoadMore = true;
       setTimeout(() => {
         this.isLoadingArticle = false;
+        this.isLoadMore = false;
         this.itemArticle += 3;
       }, 600)
     },
@@ -595,9 +618,12 @@ document.addEventListener('alpine:init', () => {
 
     // FILTERS
 
-    resetFilters() {
+    resetFilters(typeArticle = '') {
 
       let categories = document.querySelectorAll('.category');
+
+      document.getElementById('free').checked = false;
+      document.getElementById('paid').checked = false;
 
       for (let index = 0; index < categories.length; index++) {
         if (categories[index].classList.contains('active')) {
