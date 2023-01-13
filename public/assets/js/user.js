@@ -136,6 +136,27 @@ document.addEventListener('alpine:init', () => {
       localStorage.clear()
       window.location.replace(this.baseUrl + 'login')
     },
+    listPlan : '',
+    fetchListPlan() {
+        const token = localStorage.getItem('token')
+        console.log("apaansi weh")
+          fetch(`${this.apiUrl}plan`, {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': localStorage.getItem('token')
+            }
+          })
+            .then(async (response) => {
+              data = await response.json();
+              if (data.message === 'Unauthorized') {
+                window.location.replace(this.baseUrl + 'login')
+              }
+              this.listPlan = data;
+
+            })
+
+      },
 
     fetchMyArticle() {
       let url = window.location.href;

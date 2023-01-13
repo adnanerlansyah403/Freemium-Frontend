@@ -73,7 +73,7 @@ style="display: none;">
         "
     >
 
-        <div class="container mx-auto flex flex-col">
+        <div x-data="user" class="container mx-auto flex flex-col">
 
             <a href="#" class="flex items-center justify-center">
                 <span class="span text-2xl">F</span>
@@ -94,52 +94,33 @@ style="display: none;">
                     </li>
                 </ul>
             </div>
+            <div x-init="fetchListPlan()">
+                <template x-for="(item, index) in listPlan.data">
+                    <div class="mb-14 flex flex-wrap lg:flex-nowrap items-center justify-center gap-6">
+                        <div class="w-[300px] text-center py-5 border border-primary rounded-primary transition duration-200 ease-in-out plan" x-ref="cardplan1">
+                            <span class="text-md" x-text="item.name"></span>
 
+                            <p class="mt-12 mb-8 text-base text-slate-secondary" x-text="item.price"></p>
 
-                <div class="mb-14 flex flex-wrap lg:flex-nowrap items-center justify-center gap-6">
-                    <div class="w-[300px] text-center py-5 border border-primary rounded-primary transition duration-200 ease-in-out plan" x-ref="cardplan1">
-                        <span class="text-md">Yearly</span>
+                            <button type="button"
+                                class="px-4 py-2 bg-primary text-white hover:text-opacity-80 rounded-pill"
+                                @click="
+                                    $refs.plan1.click();
+                                    $refs.textplan2.innerText = 'Select';
+                                    $refs.cardplan2.classList.remove('active');
+                                    $refs.cardplan1.classList.add('active');
+                                    $refs.textplan1.innerText = 'Selected'
+                                "
+                            >
+                                <span x-ref="textplan1">Select</span>
+                                <input type="radio" name="plan" x-model="plan" value="1" id="plan" style="display: none;" x-ref="plan1">
+                            </button>
 
-                        <p class="mt-12 mb-8 text-base text-slate-secondary">100$/Year</p>
-
-                        <button type="button"
-                            class="px-4 py-2 bg-primary text-white hover:text-opacity-80 rounded-pill"
-                            @click="
-                                $refs.plan1.click();
-                                $refs.textplan2.innerText = 'Select';
-                                $refs.cardplan2.classList.remove('active');
-                                $refs.cardplan1.classList.add('active');
-                                $refs.textplan1.innerText = 'Selected'
-                            "
-                        >
-                            <span x-ref="textplan1">Select</span>
-                            <input type="radio" name="plan" x-model="plan" value="1" id="plan" style="display: none;" x-ref="plan1">
-                        </button>
-
-                    </div>
-
-                    <div class="w-[300px] text-center py-5 border border-primary rounded-primary transition duration-200 ease-in-out plan" x-ref="cardplan2">
-                        <span class="text-md">Unlimited</span>
-
-                        <p class="mt-12 mb-8 text-base text-slate-secondary">300$/Lifetime</p>
-
-                        <button type="button"
-                            class="px-4 py-2 bg-primary text-white hover:text-opacity-80 rounded-pill"
-                            @click="
-                                $refs.plan2.click();
-                                $refs.textplan1.innerText = 'Select'
-                                $refs.cardplan1.classList.remove('active');
-                                $refs.cardplan2.classList.add('active');
-                                $refs.textplan2.innerText = 'Selected'
-                            "
-                        >
-                            <span x-ref="textplan2">Select</span>
-                            <input type="radio" name="plan" x-model="plan" value="2" id="plan" x-ref="plan2" style="display: none;">
-                        </button>
+                        </div>
 
                     </div>
-
-                </div>
+                </template>
+            </div>
 
                 <div class="px-2 lg:px-0 lg:w-[630px] lg:mx-auto">
                     <span class="text-md font-semibold">Pay With : </span>
