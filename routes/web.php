@@ -73,7 +73,7 @@ Route::prefix('article')
     ->controller(ArticleController::class)
     ->group(function () {
         Route::get('/', 'list')->name('list');
-        Route::get('/create', 'create')->name('create');
+        // Route::get('/create', 'create')->name('create');
         Route::get('/detail/{id}', 'show')->name('show');
 
         Route::post('/add', 'add')->name('add');
@@ -101,6 +101,7 @@ Route::get("/profile", Profile::class)->name('profile.index');
 
 Route::get("/myarticle", Article::class)->name('article.index');
 Route::get('/article/edit/{id}', EditArticle::class)->name('article.edit');
+Route::get('/article/create', CreateArticle::class)->name('article.create');
 
 //frontend profile
 // Route::prefix('profile')
