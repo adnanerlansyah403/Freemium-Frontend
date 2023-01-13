@@ -85,6 +85,8 @@ document.addEventListener('alpine:init', () => {
 
     updateMe() {
 
+      this.isLoading = true;
+
       let photoProfile = document.getElementById('photo').files[0];
 
       if (photoProfile == undefined) {
@@ -127,6 +129,7 @@ document.addEventListener('alpine:init', () => {
           localStorage.setItem('message', user.message);
           localStorage.setItem('showFlash', true);
           window.location.reload();
+          this.isLoading = false;
         })
     },
 
@@ -252,6 +255,8 @@ document.addEventListener('alpine:init', () => {
     },
 
     deleteArticle(id) {
+      this.isLoading = true;
+
       const token = localStorage.getItem('token')
       fetch(this.apiUrl + 'article/' + id + '/delete', {
         method: "POST",
@@ -260,7 +265,9 @@ document.addEventListener('alpine:init', () => {
         }
       })
         .then((response) => {
-          window.location.replace(this.baseUrl + 'myarticle')
+          this.isLoading = false;
+          this.fetchListMyArticle();
+          // window.location.replace(this.baseUrl + 'myarticle')
         });
     },
 
