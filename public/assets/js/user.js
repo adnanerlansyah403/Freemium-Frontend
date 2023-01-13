@@ -418,8 +418,45 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.listArticle = data.data;
-        })
 
+          // DOM
+          document.getElementById("all").classList.add('active');
+          document.getElementById("free").classList.remove('active');
+          document.getElementById("paid").classList.remove('active');
+        })
+    },
+
+    getFreeArticle() {
+      fetch(`${this.apiUrl}article`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data.filter(item => {
+            return item.type == 'free';
+          });
+          // DOM
+          document.getElementById("all").classList.remove('active');
+          document.getElementById("free").classList.add('active');
+          document.getElementById("paid").classList.remove('active');
+        })
+    },
+
+
+    getPaidArticle() {
+      fetch(`${this.apiUrl}article`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data.filter(item => {
+            return item.type == 'paid';
+          });
+          // DOM
+          document.getElementById("all").classList.remove('active');
+          document.getElementById("free").classList.remove('active');
+          document.getElementById("paid").classList.add('active');
+        })
     },
 
     loadMoreArticle() {

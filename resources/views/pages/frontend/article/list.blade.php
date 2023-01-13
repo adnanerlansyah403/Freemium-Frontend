@@ -24,6 +24,20 @@
   pointer-events: none;
   outline: none !important;
 }
+
+/* nav */
+
+#all.active {
+    color: #7C000B;
+}
+
+#free.active {
+    color: #7C000B;
+}
+
+#paid.active {
+    color: #7C000B;
+}
     
 </style>
 
@@ -109,9 +123,9 @@
 
             <div class="flex lg:justify-between md:justify-between mx-auto gap-5 flex-col-reverse md:w-full md:flex-row lg:flex-row items-center w-[320px] lg:w-full">
                 <div class="flex gap-[47px]">
-                    <h2 class="font-bold text-primary text-[18px]"> <a href="#">All</a></h2>
-                    <h2 class="font-bold text-[18px]"><a href="#">Free</a></h2>
-                    <h2 class="font-bold text-[18px]"><a href="#">Paid</a></h2>
+                    <h2 id="all" class="font-bold active text-[18px]"> <a href="#" @click="getArticle()">All</a></h2>
+                    <h2 id="free" class="font-bold text-[18px]"><a href="#" @click="getFreeArticle()">Free</a></h2>
+                    <h2 id="paid" class="font-bold text-[18px]"><a href="#" @click="getPaidArticle()">Paid</a></h2>
                 </div>
                 <template  x-if="!data_user.subscribe_status">
                     <div>
@@ -381,10 +395,6 @@
                     </div>
                                     
                 </div> --}}
-                
-                {{-- <div class="content"></div> --}}
-
-
 
                 <template x-for="(item, index) in listArticle.length > 1 ? listArticle.slice(0, itemArticle) : listArticle">
                 
