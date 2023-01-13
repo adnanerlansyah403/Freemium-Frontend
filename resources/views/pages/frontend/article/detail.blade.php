@@ -53,9 +53,9 @@
                         </div>
                     </div>
                 </div>
-                <span class="h-max px-3 py-2 rounded-primary bg-primary text-white text-[14px] mr-4">
+                {{-- <span class="h-max px-3 py-2 rounded-primary bg-primary text-white text-[14px] mr-4">
                     Category
-                </span>
+                </span> --}}
             </div>
 
             <div>
@@ -65,11 +65,11 @@
             </div>
 
             <div class="flex content-center flex-wrap gap-3 mt-12">
-                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Coding</a>
-                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">National</a>
-                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Sport</a>
-                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Healthy</a>
-                <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">Healthy</a>
+                <span x-text="console.log(detailArticle)"></span>
+                <template x-for="(item, index) in detailArticle.tags">
+                    <a href="" class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" x-text="item.category.name">Coding</a>
+                </template>
+
             </div>
 
         </div>
@@ -135,9 +135,15 @@
             <div class="mt-6 px-5 py-6 bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg">
                 <h3 class="text-md mb-4 font-semibold">Content</h3>
                 <ul class="flex flex-col gap-4">
+                    {{-- <span x-text="detailArticle.subarticles.length == 0"></span> --}}
                     <template x-for="(item, index) in detailArticle.subarticles">
                         <li class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] cursor-pointer hover:bg-primary hover:text-white hover:skew-y-1 transition duration-200 ease-in-out">
                             <a href="#" class="text-base lg:text-md font-iceberg" x-text="item.title">Sub-Artikel 1</a>
+                        </li>
+                    </template>
+                    <template x-if="detailArticle.subarticles.length == 0">
+                        <li class="text-base">
+                            <span class="span">No</span> Sub Article
                         </li>
                     </template>
                 </ul>
