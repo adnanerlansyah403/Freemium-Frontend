@@ -18,8 +18,7 @@ document.addEventListener('alpine:init', () => {
       subarticles: []
     },
     EditArticle: {
-      tags: [],
-      subarticles: []
+      data: ''
     },
     listMyArticle: [],
     myTransactions: [],
@@ -193,8 +192,10 @@ document.addEventListener('alpine:init', () => {
         })
           .then(async (response) => {
             this.DetailArticle = await response.json()
+            if (data.message === 'Unauthorized') {
+              window.location.replace(this.baseUrl)
+            }
             this.isLoading = false
-
           })
 
     },

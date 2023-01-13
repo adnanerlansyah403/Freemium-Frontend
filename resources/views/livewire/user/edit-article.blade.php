@@ -232,7 +232,7 @@
                         @click="
                             $refs.filesubarticle.click();
                         ">
-                        <img x-bind:src="!EditArticle.data.subarticles[editSub].thumbnail_1 ? 'http://localhost:8001/' + EditArticle.data.subarticles[editSub].thumbnail : EditArticle.data.subarticles[editSub].thumbnail_1" class="absolute w-full h-full object-cover rounded-lg" alt="">
+                        <img x-bind:src="!EditArticle.data.subarticles[editSub].thumbnail_1 ? 'http://localhost:8001/' + EditArticle.data.subarticles[editSub].thumbnail : EditArticle.data.subarticles[editSub].thumbnail_1" class="absolute w-full h-full object-cover rounded-lg" alt="EditArticle.data.subarticles[editSub].thumbnail_1_alt">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimagesubarticle">
                         </i>

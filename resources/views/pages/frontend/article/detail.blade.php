@@ -14,7 +14,7 @@
 
 @section("content")
 
-<section class="py-[100px]">
+<section class="py-[100px]" x-data="user" x-init="checkSession()">
     <div class="container mx-auto">
 
         <figure class="mb-7">
@@ -78,7 +78,7 @@
 
             <ul class="flex items-center justify-center gap-4">
 
-                <template x-if="detailArticle.author.link_facebook != null || detailArticle.author.link_facebook != ''">
+                <template x-if="detailArticle.author.link_facebook != null && detailArticle.author.link_facebook != ''">
                     <li class="p-2 rounded-full hover:bg-primary hover:text-white transition duration-200 ease-in-out">
                         <a x-bind:href="detailArticle.author.link_facebook" class="text-md">
                             <i data-feather="facebook"></i>
@@ -91,7 +91,7 @@
                     </li>
                 </template>
                 
-                <template x-if="detailArticle.author.link_linkedin != null || detailArticle.author.link_linkedin != ''">
+                <template x-if="detailArticle.author.link_linkedin != null && detailArticle.author.link_linkedin != ''">
                     <li class="p-2 rounded-full hover:bg-primary hover:text-white transition duration-200 ease-in-out">
                         <a x-bind:href="detailArticle.author.link_linkedin" class="text-md">
                             <i data-feather="linkedin"></i>
@@ -104,7 +104,7 @@
                     </li>
                 </template>
 
-                <template x-if="detailArticle.author.link_instagram != null || detailArticle.author.link_instagram != ''">
+                <template x-if="detailArticle.author.link_instagram != null && detailArticle.author.link_instagram != ''">
                     <li class="p-2 rounded-full hover:bg-primary hover:text-white transition duration-200 ease-in-out">
                         <a x-bind:href="detailArticle.author.link_instagram" class="text-md">
                             <i data-feather="instagram"></i>
@@ -117,7 +117,7 @@
                     </li>
                 </template>
 
-                <template x-if="detailArticle.author.link_twitter != null || detailArticle.author.link_twitter != ''">
+                <template x-if="detailArticle.author.link_twitter != null && detailArticle.author.link_twitter != ''">
                     <li class="p-2 rounded-full hover:bg-primary hover:text-white transition duration-200 ease-in-out">
                         <a x-bind:href="detailArticle.author.link_twitter" class="text-md">
                             <i data-feather="twitter"></i>
