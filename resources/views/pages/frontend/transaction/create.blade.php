@@ -52,7 +52,7 @@
 
 </head>
 <body x-data="user" x-init="checkSession()"
-style="display: none;">
+style="display: none;" class="dark:bg-slate-primary dark:text-white">
 
 {{-- Title Section --}}
 <template x-if="isLogedIn">
@@ -73,10 +73,19 @@ style="display: none;">
         "
     >
 
-        <div x-data="user" class="container mx-auto flex flex-col">
+        <div x-data="user" class="relative container mx-auto flex flex-col">
+
+
+            <div class="absolute top-0 -translate-y-8 right-0 -translate-x-8" x-data="helpers">
+                <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
+                    {{-- <ion-icon id="iconMode" class="dark:text-white" name="moon-outline"></ion-icon> --}}
+                    {{-- <i id="iconMode" data-feather="moon"></i> --}}
+                    <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
+                </button>
+            </div>
 
             <a href="#" class="flex items-center justify-center">
-                <span class="span text-2xl">F</span>
+                <span class="span text-2xl dark:text-slate-third">F</span>
                 <p class="text-xl font-iceberg">reemium</p>
             </a>
 
@@ -89,7 +98,7 @@ style="display: none;">
                 <h3 class="text-[20px] md:text-md text-gray-secondary">Plans at less 100$/Year</h3>
                 <ul class="mt-4">
                     <li class="flex items-center gap-2 text-sm">
-                        <i data-feather="check-circle" class="text-primary"></i>
+                        <i data-feather="check-circle" class="text-primary dark:text-slate-third"></i>
                         <span>Unlimited Content both free and paid</span>
                     </li>
                 </ul>
@@ -97,13 +106,13 @@ style="display: none;">
             <div x-init="fetchListPlan()">
                 <div class="mb-14 flex flex-wrap lg:flex-nowrap items-center justify-center gap-6" x-data="helpers">
                         <template x-for="(item, index) in listPlan">
-                            <div class="cardplan w-[300px] text-center py-5 border border-primary rounded-primary transition duration-200 ease-in-out plan" x-bind:id="`cardplan${item.id}`">
+                            <div class="cardplan w-[300px] text-center py-5 border border-primary dark:border-gray-secondary rounded-primary transition duration-200 ease-in-out plan" x-bind:id="`cardplan${item.id}`">
                                 <span class="text-md" x-text="item.name"></span>
 
-                                <p class="mt-12 mb-8 text-base text-slate-secondary" x-text=" '$' + parseFloat(item.price).toFixed(2)"></p>
+                                <p class="mt-12 mb-8 text-base text-slate-secondary dark:text-slate-fourth" x-text=" '$' + parseFloat(item.price).toFixed(2)"></p>
 
                                 <button type="button"
-                                    class="px-4 py-2 bg-primary text-white hover:text-opacity-80 rounded-pill"
+                                    class="px-4 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-80 rounded-pill"
                                     @click="
                                         selectedPlan(item)
                                     "
@@ -118,23 +127,23 @@ style="display: none;">
                     </div>
             </div>
 
-                <div class="px-2 lg:px-0 lg:w-[630px] lg:mx-auto">
-                    <span class="text-md font-semibold">Pay With : </span>
+            <div class="px-2 lg:px-0 lg:w-[630px] lg:mx-auto">
+                <span class="text-md font-semibold">Pay With : </span>
 
-                    <div class="flex items-center gap-5 mt-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                        <span class="bg-primary text-white text-center px-4 py-2 rounded-primary">
-                            <i data-feather="credit-card"></i>
-                        </span>
-                        <span class="py-3 font-semibold">Virtual Account</span>
-                    </div>
+                <div class="flex items-center gap-5 mt-7 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary dark:bg-slate-secondary text-white text-center px-4 py-2 rounded-primary">
+                        <i data-feather="credit-card"></i>
+                    </span>
+                    <span class="py-3 font-semibold">Virtual Account</span>
                 </div>
+            </div>
 
-                <div class="flex items-center justify-center mt-10">
-                    <button @click.prevent="paySubscription()" type="submit" class="px-4 py-2 rounded-pill text-white bg-primary hover:text-opacity-80 transition duration-200 ease-in-out">
-                        Pay Now
-                    </button>
+            <div class="flex items-center justify-center mt-10">
+                <button @click.prevent="paySubscription()" type="submit" class="px-4 py-2 rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 transition duration-200 ease-in-out">
+                    Pay Now
+                </button>
 
-                </div>
+            </div>
 
 
 
@@ -149,6 +158,30 @@ style="display: none;">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>
         feather.replace()
+    </script>
+
+
+    <script type="text/javascript">
+
+
+        window.addEventListener("DOMContentLoaded", function() {
+            
+            if (localStorage.theme === 'light') {
+                document.documentElement.classList.add('light')
+                document.documentElement.classList.remove('dark')
+                localStorage.theme = 'light'
+                document.getElementById("buttonMode").setAttribute("title", "Light Mode")
+                document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/sun.svg")
+            } else if(localStorage.theme === 'dark') {
+                document.documentElement.classList.add('dark')
+                document.documentElement.classList.remove('light')
+                localStorage.theme = 'dark'
+                document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
+                document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/moon.svg")
+            }
+
+        });
+
     </script>
 
 </body>

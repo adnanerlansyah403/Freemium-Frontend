@@ -53,7 +53,7 @@
         }
     ">
 
-        <div class="container mx-auto flex items-center">
+        <div class="container mx-auto flex items-center dark:text-white">
 
             <form action="" class="col col-12">
 
@@ -61,13 +61,13 @@
                     <div class="mb-5 col-12 lg:col-6">
                         <label for="text" class="text-md">Title</label>
                         <input x-model="EditArticle.data.title" type="text" placeholder="Your text..."
-                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
+                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
                     </div>
 
                     <div class="mb-5 col-12 lg:col lg:col-6">
                         <label for="text" class="text-md">Category</label>
                         <select x-model="EditArticle.data.tags[0].category_id" name="category_id" id=""
-                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
+                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white  dark:bg-slate-secondary mt-4">
                             <option value="">--Choosen Category--</option>
                             <template x-for="(c, index) in EditArticle.category">
                                 <option x-bind:value="c.id" x-text="c.name">test</option>
@@ -92,7 +92,7 @@
                             }
                         ">
                     <span
-                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4 overflow-y-hidden"
+                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4 overflow-y-hidden"
                         @click="
                             $refs.file.click();
                         ">
@@ -117,7 +117,7 @@
 
                 <div class="flex items-center justify-center my-10">
                     <button type="submit"
-                        class="px-4 py-2 bg-primary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                        class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
                     </button>
                 </div>
@@ -131,30 +131,13 @@
         }">
 
 
-            <form class="w-full my-1 px-5 lg:px-0">
-
-                {{-- <ul class="flex items-center pb-8 gap-4 mb-10 overflow-scroll snap-mandatory has-scrollbar">
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                    <li class="min-w-[30%] py-2 px-4 snap-center rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                        Sub-Artikel 1</li>
-                </ul> --}}
+            <form class="w-full my-1 px-5 lg:px-0 dark:text-white">
 
                 <ul class="flex flex-col mb-10">
 
-                    <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
+                    <li class="bg-white dark:bg-slate-secondary dark:text-white my-2 shadow-lg rounded-lg" x-data="accordion(1)">
                         <h2 @click="handleClick()"
-                            class="flex flex-row justify-between items-center font-semibold p-3 border border-gray-secondary rounded-lg cursor-pointer">
+                            class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
                             <span>Daftar List Sub Artikel</span>
                             <div class="flex items-center gap-2">
                                 <svg :class="handleRotate()"
@@ -195,22 +178,12 @@
 
                 </ul>
                 <div class="flex flex-wrap lg:flex-nowrap">
-                    <div class="mb-5 col-12 lg:col-6">
-                        <label for="text" class="text-md">Title</label>
+                    <div class="mb-5 col-12">
+                        <label for="text" class="text-md dark:text-white">Title</label>
                         <input x-model="EditArticle.data.subarticles[editSub].title" type="text" placeholder="Your text..."
-                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
+                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
                     </div>
 
-                    {{-- <div class="mb-5 col-12 lg:col lg:col-6">
-                        <label for="text" class="text-md">Category</label>
-                        <select x-model="EditArticle.data.tags[0].category_id" name="category_id" id=""
-                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
-                            <option value="">--Choosen Category--</option>
-                            <template x-for="(c, index) in EditArticle.category">
-                                <option x-bind:value="c.id" x-text="c.name">test</option>
-                            </template>
-                        </select>
-                    </div> --}}
                 </div>
 
                 <div class="mb-5">
@@ -228,7 +201,7 @@
                             }
                         ">
                     <span
-                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4 overflow-y-hidden"
+                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4 overflow-y-hidden"
                         @click="
                             $refs.filesubarticle.click();
                         ">
@@ -272,6 +245,8 @@
                 <div x-show="showFlash">
                     <x-alert />
                 </div>
+            
+            </form>
 
         </div>
 

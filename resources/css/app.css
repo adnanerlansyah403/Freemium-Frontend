@@ -70,19 +70,19 @@
         width: 20px;
         height: 20px;
         padding: 3px;
-        margin-left: -2px;
-        margin-top: .5px;
+        margin-left: -1px;
+        margin-top: .1px;
         /* background-color only for content */
         background-clip: content-box;
         border: 2px solid #bbbbbb;
-        background-color: #e7e6e7;
+        /* background-color: #e7e6e7; */
         border-radius: 50%;
     }
 
     /* appearance for checked radiobutton */
-    input[type="radio"]:checked {
+    /* input[type="radio"]:checked {
         background-color: #7C000B;
-    }
+    } */
 
 
 
@@ -142,6 +142,49 @@
         @apply text-[#dc2626];
     }
 
+    /* DARK MODE */
+
+    /* .dark {
+        @apply bg-slate-primary;
+    }
+
+    .dark .span {
+        @apply text-slate-primary;
+    }
+
+    .dark input[type="radio"]:checked {
+        @apply bg-slate-primary;
+    } */
+
+    /* ANIMATIONS */
+
+    .bounce-4 {
+        animation-name: bounce-4;
+        animation-timing-function: ease;
+    }
+
+    @keyframes bounce-4 {
+        0% {
+            transform: scale(1, 1) translateY(0);
+        }
+
+        10% {
+            transform: scale(1.1, .9) translateY(0);
+        }
+
+        30% {
+            transform: scale(.9, 1.1) translateY(-100px);
+        }
+
+        50% {
+            transform: scale(1, 1) translateY(0);
+        }
+
+        100% {
+            transform: scale(1, 1) translateY(0);
+        }
+    }
+
 }
 
 @layer components {
@@ -175,6 +218,15 @@
         @apply bg-[#fef2f2] border border-[#ef4444] text-[#7f1d1d] placeholder-[#b91c1c] ring-[#ef4444];
     }
 
+    /* CARDS */
+
+    .plan.active {
+        @apply dark:bg-slate-secondary
+    }
+
+    .plan.active button span {
+    	@apply dark:text-slate-primary
+    }
 
 
 }

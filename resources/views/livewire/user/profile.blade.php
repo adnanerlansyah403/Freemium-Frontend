@@ -12,21 +12,21 @@
 
 <section class="py-[100px]" x-data="user">
     <div x-init="checkSession()"></div>
-    <h1 class="font-iceberg text-lg text-center text-primary mb-16">ME</h1>
+    <h1 class="font-iceberg text-lg text-center text-primary dark:text-white mb-16">ME</h1>
 
     <div class="container mx-auto mb-9">
 
         <nav class="col col-12" style="margin-inline: 0;">
-            <ul class="flex items-center justify-center lg:justify-start gap-7">
-                <li class="pb-2 border-b border-primary cursor-pointer">
+            <ul class="flex items-center justify-center lg:justify-start gap-7 dark:text-white">
+                <li class="pb-2 border-b border-primary dark:border-white cursor-pointer">
                     <a href="{{ route('profile.index') }}" class="text-base font-iceberg">
-                        <span class="span">My</span>
+                        <span class="span dark:text-slate-third">My</span>
                         Profile
                     </a>
                 </li>
                 <li class="pb-2 cursor-pointer">
                     <a href="{{ route('article.index') }}" class="text-base font-iceberg">
-                        <span class="span">My</span>
+                        <span class="span dark:text-slate-third">My</span>
                         Articles
                     </a>
                 </li>
@@ -51,40 +51,40 @@
 
                 {{-- <div x-text="console.log(data_user.name)"></div> --}}
 
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Full Name
                     </span>
-                    <input type="text" class="py-3 lg:w-4/5" placeholder="Your full name..." title="Full Name" x-model="name">
+                    <input type="text" class="py-3 lg:w-4/5 dark:text-white" placeholder="Your full name..." title="Full Name" x-model="name">
                 </div>
 
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary lg:w-[150px] text-white dark:bg-slate-secondary text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Username
                     </span>
-                    <input type="text" class="py-3 w-full lg:w-4/5" placeholder="Your username..." x-bind:value="data_user.username" x-model="username" title="Username">
+                    <input type="text" class="py-3 w-full lg:w-4/5 dark:text-white" placeholder="Your username..." x-bind:value="data_user.username" x-model="username" title="Username">
                 </div>
 
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Email">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Email">
                         Email
                     </span>
-                    <input type="email" class="py-3 w-full lg:w-4/5" x-bind:value="data_user.email" x-model="email" placeholder="Your email...">
+                    <input type="email" class="py-3 w-full lg:w-4/5 dark:text-white" x-bind:value="data_user.email" x-model="email" placeholder="Your email...">
                 </div>
 
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Password">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Password">
                         Password
                     </span>
-                    <input type="password" class="py-3 w-full lg:w-4/5" placeholder="Your password..." x-model="password">
+                    <input type="password" class="py-3 w-full lg:w-4/5 dark:text-white" placeholder="Your password..." x-model="password">
                 </div>
 
-                <div class="flex items-center gap-5 mb-7 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="cursor-pointer bg-primary lg:w-[150px] text-white text-center px-4 lg:px-6 py-3 rounded-primary" title="Upload Photo Profile"
+                <div class="flex items-center gap-5 mb-7 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="cursor-pointer bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center px-4 lg:px-6 py-3 rounded-primary" title="Upload Photo Profile"
                     @click="$refs.photo.click()">
                         Upload
                     </span>
-                    <input type="file" class="py-3 w-full lg:w-4/5" id="photo" x-ref="photo" x-model="photo" placeholder="Your password...">
+                    <input type="file" class="py-3 w-full lg:w-4/5 dark:text-white" id="photo" x-ref="photo" x-model="photo" placeholder="Your password...">
                 </div>
 
                 <ul class="flex items-center justify-center gap-4 my-12">
@@ -126,8 +126,8 @@
                     </li>
                 </ul>
 
-                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                    <span class="bg-primary lg:w-[220px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                    <span class="bg-primary dark:bg-slate-secondary lg:w-[220px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                         Link Social
                         <i x-show="linkInputFacebook">Facebook</i>
                         <i x-show="linkInputLinkedin">Linkedin</i>
@@ -135,13 +135,13 @@
                         <i x-show="linkInputTwitter">Twitter</i>
                     </span>
 
-                    <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link facebook..." title="Link Facebook" x-bind:value="data_user.link_facebook" x-model="link_facebook" x-show="linkInputFacebook">
+                    <input type="url" class="py-3 w-full lg:w-[65%] dark:text-white" placeholder="Your link facebook..." title="Link Facebook" x-bind:value="data_user.link_facebook" x-model="link_facebook" x-show="linkInputFacebook">
 
-                    <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link linkedin..." title="Link Linkedin" x-bind:value="data_user.link_linkedin" x-model="link_linkedin" x-show="linkInputLinkedin">
+                    <input type="url" class="py-3 w-full lg:w-[65%] dark:text-white" placeholder="Your link linkedin..." title="Link Linkedin" x-bind:value="data_user.link_linkedin" x-model="link_linkedin" x-show="linkInputLinkedin">
 
-                    <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link instagram..." title="Link Instagram" x-bind:value="data_user.link_instagram" x-model="link_instagram" x-show="linkInputInstagram">
+                    <input type="url" class="py-3 w-full lg:w-[65%] dark:text-white" placeholder="Your link instagram..." title="Link Instagram" x-bind:value="data_user.link_instagram" x-model="link_instagram" x-show="linkInputInstagram">
 
-                    <input type="url" class="py-3 w-full lg:w-[65%]" placeholder="Your link twitter..." title="Link Twitter" x-bind:value="data_user.link_twitter" x-model="link_twitter" x-show="linkInputTwitter">
+                    <input type="url" class="py-3 w-full lg:w-[65%] dark:text-white" placeholder="Your link twitter..." title="Link Twitter" x-bind:value="data_user.link_twitter" x-model="link_twitter" x-show="linkInputTwitter">
                 </div>
 
                 <div x-data="user" class="container mx-auto">
@@ -152,14 +152,14 @@
                 </div>
 
                 <div class="flex items-center justify-center mt-10">
-                    <button @click="updateMe()" class="py-2 px-4 rounded-primary outline outline-1 outline-primary text-primary hover:bg-primary hover:text-white hover:outline-none transition duration-200 ease-in-out">
+                    <button @click="updateMe()" class="py-2 px-4 rounded-primary outline outline-1 outline-primary dark:outline-white text-primary dark:text-white hover:bg-primary dark:hover:bg-slate-secondary hover:text-white hover:outline-none transition duration-200 ease-in-out">
                         Save
                     </button>
                 </div>
 
             </div>
 
-            <div class="col col-12 lg:col-4 md:order-2 h-max py-5 px-4 rounded-primary bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
+            <div class="col col-12 lg:col-4 md:order-2 h-max py-5 px-4 rounded-primary bg-white dark:bg-slate-secondary dark:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
                 <figure class="mb-5">
                     <img x-bind:src="imgUrl+data_user.photo" class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
                 </figure>
@@ -170,14 +170,19 @@
                     <p class="flex items-center gap-2">
                         <span class=" font-bold">Status : </span>
                         <template x-if="data_user.subscribe_status">
-                            <span class="bg-primary rounded-primary py-1 px-3 text-white">Member - Lifetime</span>
+                            <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white">Member - Lifetime</span>
                         </template>
                         <template x-if="!data_user.subscribe_status">
-                            <span class="bg-primary rounded-primary py-1 px-3 text-white">Not a Member</span>
+                            <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white">Not a Member</span>
                         </template>
                     </p>
                 </div>
             </div>
+            <!-- Feather Icons Scripts -->
+            <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+            <script>
+                feather.replace()
+            </script>
 
         </div>
 

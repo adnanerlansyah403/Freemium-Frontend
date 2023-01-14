@@ -26,18 +26,6 @@
 }
 
 /* nav */
-
-#all.active {
-    color: #7C000B;
-}
-
-#free.active {
-    color: #7C000B;
-}
-
-#paid.active {
-    color: #7C000B;
-}
     
 </style>
 
@@ -54,60 +42,70 @@
     <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row" x-data="articles">
         
         {{-- kiri --}}
-        <div class="w-full lg:col-3 lg:w-[270px] mx-auto h-max px-4 py-8 bg-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-            <div class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary">
-                <div class="flex justify-between">
-                    <input 
-                        x-model="keywordArticle"
-                        x-on:change="searchArticle(keywordArticle)" 
-                        class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm" 
-                        placeholder="Search Here..." />
-                    <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
+        <div class="lg:col-3">
+            <template  x-if="!data_user.subscribe_status">
+                <div class="w-full lg:w-[270px] mx-auto h-max">
+                    <a id="buttonTransactionCreate" style="display: none;" href="{{ route('transaction.create') }}" class="bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                    x-init="
+                        setTimeout(() => {
+                            document.getElementById('buttonTransactionCreate').style.display = 'flex';
+                        }, 600)
+                    "
+                    >
+                        <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
+                        <h2 class="font-bold text-white hover:text-opacity-80 transition duration-200 ease-in-out"
+                        >Get Unlimited Access</h2>
+                    </a>
                 </div>
+            </template>
+            <div class="w-full lg:w-[270px] mx-auto h-max px-4 py-8 bg-white dark:bg-slate-secondary dark:text-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                <div class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white">
+                    <div class="flex justify-between">
+                        <input 
+                            x-model="keywordArticle"
+                            x-on:change="searchArticle(keywordArticle)" 
+                            class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm" 
+                            placeholder="Search Here..." />
+                        <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
+                    </div>
+                </div>
+    
+                <div class="flex flex-col justify-center gap-[9px] mt-[28px]">
+                    <div class="text-black font-extrabold">
+                        <h1 class="text-sm dark:text-slate-fourth leading-[21px] font-extrabold">Or <span class="text-primary dark:text-white font-bold"> Filter By : </span></h1>
+                    </div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <div class="flex items-center gap-[5px]">
+                            <input class="checked:bg-primary dark:checked:bg-slate-third" type="radio" id="free" name="type_article" value="free" @click="getFreeArticle()">
+                            <label class="mt-[2px] text-sm leading-[21px]" for="free">Free</label><br>
+                        </div>
+                        <div class="flex items-center gap-[5px]">
+                            <input class="checked:bg-primary dark:checked:bg-slate-third" type="radio" id="paid" name="type_article" value="paid" @click="getPaidArticle()">
+                            <label class="mt-[2px] text-sm leading-[21px]" for="paid">Paid</label><br>
+                        </div>
+                    </div>
+    
+                </div>
+    
+                <div class="mt-[33px] flex flex-wrap gap-[11px]" x-init="getCategories()">
+                    <select name="category" id="category" class="py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white" x-ref="category">
+                        <option value="" @click="getArticle()">--Select a Category--</option>
+                        <template x-for="(item, index) in categoriesArticle">
+                            <option x-bind:value="item.id" x-text="item.name" x-on:click="fetchArticleByCategory(item.id)"></option>
+                        </template>
+                    </select>
+                    <button type="button" @click="resetFilters()" class="w-full py-2 bg-primary dark:bg-slate-primary dark:border-white mt-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
+                        Reset Filter
+                    </button>
+                </div>
+    
+    
+    
             </div>
-
-            <div class="flex flex-col justify-center gap-[9px] mt-[28px]">
-                <div class="text-black font-extrabold">
-                    <h1 class="text-sm leading-[21px] font-extrabold">Or <span class="text-primary font-bold">Filter By</span> :</h1>
-                </div>
-                <div class="flex items-center gap-[5px]">
-                    <input class="bg-primary" type="radio" id="free" name="type_article" value="free" @click="getFreeArticle()">
-                    <label class="mt-[2px] text-sm leading-[21px]" for="free">Free</label><br>
-                </div>
-                <div class="flex items-center gap-[5px]">
-                    <input class="bg-primary" type="radio" id="paid" name="type_article" value="paid" @click="getPaidArticle()">
-                    <label class="mt-[2px] text-sm leading-[21px]" for="paid">Paid</label><br>
-                </div>
-                {{-- <div class="flex items-center gap-[5px]">
-                    <input class="bg-primary" type="radio" id="html" name="type_article" value="description">
-                    <label class="mt-[2px] text-sm leading-[21px]" for="html">Description</label><br>
-                </div> --}}
-
-            </div>
-
-            <div class="mt-[33px] flex flex-wrap gap-[11px]" x-init="getCategories()">
-                {{-- <template x-for="(item, index) in categoriesArticle">
-                    <a x-bind:id=`category${item.id}` class="category font-bold bg-white hover:bg-primary hover:text-white text-primary border border-primary rounded-[6px] text-xs px-[12px] py-[5px]" href="#" x-text="item.name" @click="
-                    fetchArticleByCategory(item.id);
-                    ">Category 1</a>
-                </template> --}}
-                <select name="category" id="category" class="py-2.5 px-3 rounded-[10px] border-solid border border-primary w-full bg-white" x-ref="category">
-                    <option value="" @click="getArticle()">--Select a Category--</option>
-                    <template x-for="(item, index) in categoriesArticle">
-                        <option x-bind:value="item.id" x-text="item.name" x-on:click="fetchArticleByCategory(item.id)"></option>
-                    </template>
-                </select>
-                <button type="button" @click="resetFilters()" class="w-full py-2 bg-primary mt-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
-                    Reset Filter
-                </button>
-            </div>
-
-
-
         </div>
 
         {{-- kanan --}}
-        <div class="lg:col-9 mt-5 lg:mt-0 bg-white lg:ml-[30px] md:mt-20">
+        <div class="lg:col-9 mt-5 lg:mt-0 lg:ml-[30px] md:mt-20">
             <div x-init="fetchMe()"></div>
             <div x-init="getArticle()"></div>
 
@@ -118,192 +116,36 @@
                         document.getElementById('alertSubscribe').style.display = 'block';
                     }, 600)
                 ">
-                    <div class="lg:w-full w-[320px] md:w-full bg-primary rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 mt-5 lg:mt-0 font-normal text-sm px-4 py-2">
+                    <div class="lg:w-full w-[320px] md:w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 mt-5 lg:mt-0 font-normal text-sm px-4 py-2">
                         You have to 
-                        <span class="font-bold text-primary leading-[27px]">
+                        <span class="font-bold text-primary dark:text-slate-third leading-[27px]">
                             Subscribe</span>  to Get Unlimited Access
                     </div>
                 </div>
             </template>
 
-            <div class="flex lg:justify-between md:justify-between mx-auto gap-5 flex-col-reverse md:w-full md:flex-row lg:flex-row items-center w-[320px] lg:w-full">
-                {{-- <div class="flex gap-[47px]">
-                    <h2 id="all" class="font-bold active text-[18px]"> <a href="#" @click="getArticle()">All</a></h2>
-                    <h2 id="free" class="font-bold text-[18px]"><a href="#" @click="getFreeArticle()">Free</a></h2>
-                    <h2 id="paid" class="font-bold text-[18px]"><a href="#" @click="getPaidArticle()">Paid</a></h2>
-                </div> --}}
-                <template  x-if="!data_user.subscribe_status">
-                    <div>
-                        <a id="buttonTransactionCreate" style="display: none;" href="{{ route('transaction.create') }}" class="bg-primary px-4 py-2 text-sm mb-3 rounded-[10px] flex items-center gap-2 mt-10 lg:mt-auto md:mt-auto"
-                        x-init="
-                            setTimeout(() => {
-                                document.getElementById('buttonTransactionCreate').style.display = 'flex';
-                            }, 600)
-                        "
-                        >
-                            <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
-                            <h2 class="font-bold text-white"
-                            >Get Unlimited Access</h2>
-                        </a>
-                    </div>
-                </template>
-            </div>
-
             {{-- wrapper content --}}
 
-            <div class="flex flex-wrap items-center justify-center">
+            <div class="flex flex-wrap items-center justify-center" x-data="helpers">
 
-                
-                {{-- <div class="content">
-                    <div class="border mt-5"></div>
-                    
-                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                        <div class="h-50 w-50 flex flex-col ">
-                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-        
-                                </div>
-                                <div>
-                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-        
-                            </div>
-        
-                            <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                    PAID
-                                </button>
-                            </div>
-                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                short desc short desc short desc short desc
-                            </p>
-        
-                        </div>
-                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-        
-                        </div>
-                    </div>
-                                    
-                </div>
-                <div class="content">
-                    <div class="border mt-5"></div>
-                    
-                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                        <div class="h-50 w-50 flex flex-col ">
-                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-        
-                                </div>
-                                <div>
-                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-        
-                            </div>
-        
-                            <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                    PAID
-                                </button>
-                            </div>
-                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                short desc short desc short desc short desc
-                            </p>
-        
-                        </div>
-                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-        
-                        </div>
-                    </div>
-                                    
-                </div>
-                <div class="content">
-                    <div class="border mt-5"></div>
-                    
-                    <div class="flex lg:justify-between mt-[22px] flex-wrap lg:flex-nowrap md:flex-nowrap">
-                        <div class="h-50 w-50 flex flex-col ">
-                            <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-        
-                                </div>
-                                <div>
-                                    <h1 class="text-[18px] font-bold mb-2 leading-[27px]">Nama Author</h1>
-                                    <div class="flex lg:gap-5 gap-3 flex-wrap">
-                                        <p class="text-[14px] leading-[21px]">tanggal-bulan-tahun</p>
-                                        <p class="text-[14px] leading-[21px]">1000 Views</p>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-10">
-        
-                            </div>
-        
-                            <div class="flex lg:gap-5 justify-between items-center mt-5">
-                                <div class="font-bold text-[24px] leading-9">JUDUL ARTIKEL</div>
-                                <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]">
-                                    PAID
-                                </button>
-                            </div>
-                            <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                short desc short desc short desc short desc
-                            </p>
-        
-                        </div>
-                        <div class="bg-[#D9D9D9] w-[280px] h-[180px] my-auto mx-5 hidden md:block lg:block">
-        
-                        </div>
-                    </div>
-                                    
-                </div> --}}
-                
-                <template x-if="listArticle[0].type == 'free' && 
-                document.getElementById('free').classList.contains('active');">
-                    <div x-init="getFreeArticle()"></div>
-                </template>
-
-                <template x-if="listArticle[0].type == 'paid' && document.getElementById('paid').classList.contains('active')">
-                    <div x-init="getPaidArticle()"></div>
-                </template>
                 
                 <template x-if="isLoadingArticle && isLoadMore == false">
-                    <span class="span text-md">Loading...</span>
+                    <span class="span text-md dark:text-slate-third">Loading...</span>
                 </template>
+                
 
                 <template x-for="(item, index) in listArticle.length > 1 ? listArticle.slice(0, itemArticle) : listArticle">
-                
-                    <div class="content first-of-type:mt-0 mt-[22px]" x-data="helpers">
+                    <div class="content first-of-type:mt-0 mt-[22px]" >
                         
                         {{-- <div class="border mt-5 first:border-none"></div> --}}
-                        
-                        <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white rounded-primary px-3 py-2">
-                            <div class="flex flex-col col-12 md:col-8">
+                        <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary dark:text-white rounded-primary px-3 py-4">
+                            <div class="flex flex-col col-12 md:col-9">
                                 <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
                                     <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-            
+                                        
                                     </div>
                                     <div>
+                                        <span x-text="console.log(item)"></span>
                                         <h1 class="text-[18px] font-bold mb-2 leading-[27px]" x-text="item.author.username">Nama Author</h1>
                                         <div class="flex gap-3 flex-wrap">
                                             <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
@@ -323,7 +165,7 @@
                                 <div class="flex lg:gap-5 justify-between items-center mt-0 md:mt-5">
                                     <a x-bind:href="baseUrl + `article/detail/${item.id}`"
                                     class="font-bold text-[24px] leading-9" x-text="item.title">JUDUL ARTIKEL</a>
-                                    <button class="w-[100px] h-[30px] bg-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
+                                    <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
                                         PAID
                                     </button>
                                 </div>
@@ -334,7 +176,7 @@
                                 </p>
             
                             </div>
-                            <div class="bg-[#D9D9D9] rounded-lg max-w-[180px] w-[180px] h-[180px] my-auto mx-5 hidden md:block lg:block col-4">
+                            <div class="bg-[#D9D9D9] rounded-lg max-w-[150px] w-[150px] h-[150px] my-auto mx-5 hidden md:block lg:block col-4">
                                 <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
                             </div>
                         </div>
@@ -377,13 +219,13 @@
                 <div class="flex items-center justify-center mt-20">
 
                     <template x-if="isLoadMore">
-                        <span class="span">Loading...</span>
+                        <span class="span dark:text-slate-third">Loading...</span>
                     </template>
 
                     <template x-if="!isLoadingArticle">
                         <button @click="
                             loadMoreArticle()
-                        " id="loadMore" class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</button>
+                        " id="loadMore" class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</button>
                     </template>
 
                     
@@ -404,7 +246,7 @@
                         
                         <button 
                         x-on:click="itemArticle = 3"
-                        class="px-4 py-2 outline outline-1 outline-primary rounded-pill text-primary hover:bg-primary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</button>
+                        class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</button>
     
                     </div>
                 </div>

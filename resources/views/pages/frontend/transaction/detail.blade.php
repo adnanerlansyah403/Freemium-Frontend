@@ -30,10 +30,10 @@
 
 </head>
 <body x-data="user" x-init="checkSession()"
-style="display: none;">
+style="display: none;" class="dark:bg-slate-primary dark:text-white">
 
 {{-- Title Section --}}
-<template x-if="isLogedIn && data_user.subscribe_status == 0">
+<template x-if="isLogedIn">
     <script>
         document.title = 'Details Transaction - Freemium App';
     </script>
@@ -49,10 +49,18 @@ style="display: none;">
             }
         ">
 
-        <div class="container mx-auto flex flex-col">
+        <div class="relative container mx-auto flex flex-col">
+
+            <div class="absolute top-0 -translate-y-8 right-0 -translate-x-8" x-data="helpers">
+                <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
+                    {{-- <ion-icon id="iconMode" class="dark:text-white" name="moon-outline"></ion-icon> --}}
+                    {{-- <i id="iconMode" data-feather="moon"></i> --}}
+                    <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
+                </button>
+            </div>
 
             <a href="#" class="flex items-center justify-center">
-                <span class="span text-2xl">F</span>
+                <span class="span text-2xl dark:text-slate-third">F</span>
                 <p class="text-xl font-iceberg">reemium</p>
             </a>
 
@@ -69,15 +77,15 @@ style="display: none;">
                 </p>
             </div>
 
-            <div class="max-w-[630px] mx-auto pt-3 pb-4 px-4 border border-primary rounded-primary">
+            <div class="max-w-[630px] mx-auto pt-3 pb-4 px-4 border border-primary dark:border-slate-third rounded-primary">
 
-                <div class="flex items-center justify-between flex-wrap mb-10">
-                    <span class="text-slate-secondary text-base">Amount</span>
-                    <div>
-                        $<span x-text="myTransactions[0].total_price">
+                <div class="flex items-center justify-center flex-wrap">
+                    <span class="text-slate-secondary dark:text-slate-fourth text-base">Amount</span>
+                </div>
+                <div class="mt-2 mb-10 text-center">
+                    $<span x-text="myTransactions[0].total_price">
 
-                        </span>/<span x-text="myTransactions[0].plan.name" class="span"></span>
-                    </div>
+                    </span>/<span x-text="myTransactions[0].plan.name" class="span dark:text-slate-fourth"></span>
                 </div>
 
                 <div class="mb-5">
@@ -100,7 +108,7 @@ style="display: none;">
                             }
                         ">
                     <span
-                        class="relative cursor-pointer flex items-center justify-center h-[200px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4 overflow-y-hidden"
+                        class="relative cursor-pointer flex items-center justify-center h-[200px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:text-slate-secondary mt-4 overflow-y-hidden"
                         @click="
                             $refs.file.click();
                         "
@@ -125,11 +133,11 @@ style="display: none;">
                 </div>
 
                 <div class="flex items-center justify-center gap-2">
-                    <button type="submit" @click="updateMyTransaction()" class="bg-primary px-4 py-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
+                    <button type="submit" @click="updateMyTransaction()" class="bg-primary dark:bg-slate-secondary px-4 py-2 rounded-pill text-white hover:text-opacity-60 transition duration-200 ease-in-out">
                         Confirm Payment
                     </button>
 
-                    <a href="{{ route('homepage') }}" class="bg-primary px-4 py-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
+                    <a href="{{ route('homepage') }}" class="bg-primary dark:bg-slate-secondary px-4 py-2 rounded-pill text-white hover:text-opacity-60 transition duration-200 ease-in-out">
                         Go Back to Home
                     </a>
                 </div>
@@ -145,6 +153,28 @@ style="display: none;">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>
         feather.replace()
+    </script>
+    
+    <script>
+
+        window.addEventListener("DOMContentLoaded", function() {
+            
+            if (localStorage.theme === 'light') {
+                document.documentElement.classList.add('light')
+                document.documentElement.classList.remove('dark')
+                localStorage.theme = 'light'
+                document.getElementById("buttonMode").setAttribute("title", "Light Mode")
+                document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/sun.svg")
+            } else if(localStorage.theme === 'dark') {
+                document.documentElement.classList.add('dark')
+                document.documentElement.classList.remove('light')
+                localStorage.theme = 'dark'
+                document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
+                document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/moon.svg")
+            }
+
+        });
+            
     </script>
 
 </body>

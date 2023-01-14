@@ -152,7 +152,6 @@ document.addEventListener('alpine:init', () => {
           //   window.location.replace(this.baseUrl + 'login')
           // }
           this.listPlan = data.data;
-          console.log(data);
         })
 
     },
@@ -277,7 +276,6 @@ document.addEventListener('alpine:init', () => {
     paySubscription() {
       const data = new FormData()
       data.append('plan', this.plan)
-      console.log(this.plan);
       let plan_id = this.plan
       fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
         method: "POST",
@@ -287,16 +285,14 @@ document.addEventListener('alpine:init', () => {
       })
 
         .then((response) => {
-          console.log(response)
           if (response.ok) {
-            console.log(response)
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Transaction Process',
-              showConfirmButton: false,
-              timer: 1500
-            })
+            // Swal.fire({
+            //   position: 'top-end',
+            //   icon: 'success',
+            //   title: 'Transaction Process',
+            //   showConfirmButton: false,
+            //   timer: 1500
+            // })
             window.location.replace(this.baseUrl + 'transaction/details')
           } else {
             Swal.fire({
@@ -455,14 +451,12 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article`, {
+      fetch(`${this.apiUrl}article?type=free`, {
         method: "GET"
       })
         .then(async (response) => {
           const data = await response.json();
-          this.listArticle = data.data.filter(item => {
-            return item.type == 'free';
-          });
+          this.listArticle = data.data;
           console.log(this.listArticle);
           // DOM
           // document.getElementById("all").classList.remove('active');
@@ -479,14 +473,12 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article`, {
+      fetch(`${this.apiUrl}article?type=paid`, {
         method: "GET"
       })
         .then(async (response) => {
           const data = await response.json();
-          this.listArticle = data.data.filter(item => {
-            return item.type == 'paid';
-          });
+          this.listArticle = data.data
           console.log(this.listArticle);
           // DOM
           // document.getElementById("all").classList.remove('active');
@@ -628,7 +620,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article ? category = ${categoryId}`, {
+      fetch(`${this.apiUrl}article?category=${categoryId}`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -638,13 +630,13 @@ document.addEventListener('alpine:init', () => {
 
           this.getCategories();
 
-          for (let index = 0; index < this.categoriesArticle.length; index++) {
-            if (this.categoriesArticle[index].id === categoryId) {
-              document.getElementById(`category${categoryId}`).classList.add('active');
-            } else {
-              document.getElementById(`category${this.categoriesArticle[index].id}`).classList.remove('active');
-            }
-          }
+          // for (let index = 0; index < this.categoriesArticle.length; index++) {
+          //   if (this.categoriesArticle[index].id === categoryId) {
+          //     document.getElementById(`category${categoryId}`).classList.add('active');
+          //   } else {
+          //     document.getElementById(`category${this.categoriesArticle[index].id}`).classList.remove('active');
+          //   }
+          // }
 
         })
 
@@ -672,6 +664,9 @@ document.addEventListener('alpine:init', () => {
   }))
 
   Alpine.data('helpers', () => ({
+    baseUrl: "http://127.0.0.1:8000/",
+    apiUrl: "http://127.0.0.1:8001/api/",
+    imgUrl: "http://127.0.0.1:8001/",
 
     convertDate(date) {
 
@@ -686,10 +681,26 @@ document.addEventListener('alpine:init', () => {
     },
 
     convertCurrencyUsd(money) {
-      console.log(money);
       let currency = '$' + money.toFixed(2);
       return currency;
-    }
+    },
+
+    darkMode() {
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (localStorage.theme == 'dark') {
+        document.documentElement.classList.add('light')
+        document.documentElement.classList.remove('dark')
+        localStorage.theme = 'light'
+        document.getElementById("buttonMode").setAttribute("title", "Light Mode")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
+      } else {
+        document.documentElement.classList.add('dark')
+        document.documentElement.classList.remove('light')
+        localStorage.theme = 'dark'
+        document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
+      }
+    },
 
   }))
 })

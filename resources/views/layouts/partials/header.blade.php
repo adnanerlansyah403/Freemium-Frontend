@@ -1,9 +1,9 @@
-<header class="shadow-lg py-1">
+<header class="shadow-lg py-1 dark:text-white">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>
         <a href="{{ route('homepage') }}" class="flex items-center">
-            <span class="span text-lg sm:text-xl">F</span>
+            <span class="span text-lg sm:text-xl dark:text-slate-third">F</span>
             <p class="text-md font-iceberg">reemium</p>
         </a>
     </figure>
@@ -13,8 +13,8 @@
 
         <template x-if="!isLogedIn">
             <div>
-                <a href="{{ route('login') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
-                <a href="{{ route('register') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
+                <a href="{{ route('login') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
+                <a href="{{ route('register') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
             </div>
         </template>
 
@@ -31,7 +31,7 @@
                 >
                     <button 
                         type="button" 
-                        class="flex items-center gap-2 px-4 py-2 bg-primary text-white hover:text-opacity-90 rounded-primary"
+                        class="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
                         @click="dropdownmenu = !dropdownmenu"
                     >
                         <template x-if="imgUrl+data_user.photo != null || imgUrl+data_user.photo != ''">
@@ -42,7 +42,7 @@
                         <span class="font-inter" x-text="data_user.name == null ? 'User' : data_user.name"></span>
                     </button>
                     <ul 
-                        class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-primary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)]"
+                        class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-primary dark:bg-slate-secondary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)]"
                         x-show="dropdownmenu"
                         x-transition
                     >
@@ -86,6 +86,15 @@
                 </script>
             </div>
         </template>
+
+        <div x-data="helpers">
+            <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
+                {{-- <ion-icon id="iconMode" class="dark:text-white" name="moon-outline"></ion-icon> --}}
+                {{-- <i id="iconMode" data-feather="moon"></i> --}}
+                <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
+            </button>
+        </div>
+
 
     </div>
 

@@ -5,6 +5,7 @@ module.exports = {
     "./resources/**/*.js",
     "./resources/**/*.vue",
   ],
+  darkMode: "class",
   theme: {
     container: {
     },
@@ -23,7 +24,9 @@ module.exports = {
       'gray-secondary': '#8B8585',
       'gray-third': '#D9D9D9',
       'slate-primary': '#2F2E41',
-      'slate-secondary': '#3F3D56'
+      'slate-secondary': '#3F3D56',
+      'slate-third': '#64748b',
+      'slate-fourth': '#94a3b8',
     },
     fontSize: {
       xs: '12px',

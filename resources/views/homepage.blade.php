@@ -45,7 +45,7 @@
         @livewireStyles
 
     </head>
-    <body class="antialiased">
+    <body class="antialiased dark:bg-slate-primary">
         {{-- <x-alert /> --}}
 
 
@@ -97,6 +97,30 @@
                     plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
                 });
             }
+
+        </script>
+
+        <script defer>
+
+
+            window.addEventListener("DOMContentLoaded", function() {
+                
+                if (localStorage.theme === 'light') {
+                    document.documentElement.classList.add('light')
+                    document.documentElement.classList.remove('dark')
+                    localStorage.theme = 'light'
+                    document.getElementById("buttonMode").setAttribute("title", "Light Mode")
+                    document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/sun.svg")
+                } else if(localStorage.theme === 'dark') {
+                    document.documentElement.classList.add('dark')
+                    document.documentElement.classList.remove('light')
+                    localStorage.theme = 'dark'
+                    document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
+                    document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/moon.svg")
+                }
+
+            });
+            
         </script>
 
         @livewireScripts
