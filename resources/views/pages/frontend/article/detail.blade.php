@@ -65,7 +65,7 @@
                     <div class="flex content-center flex-wrap gap-3 mt-12">
                         <template x-for="(item, index) in detailArticle.tags">
                             <a href=""
-                                class="px-3 py-2 bg-white rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                class="px-3 py-2 bg-white text-black rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                 x-text="item.category.name">Coding</a>
                         </template>
 

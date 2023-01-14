@@ -278,6 +278,7 @@
                             <input type="radio" name="status" id="paid" value="paid" x-model="EditArticle.data.subarticles[editSub].type">
                             <span class="text-base">Member-Only</span>
                         </label>
+                        <span x-text="EditArticle.data.subarticles[editSub].type"></span>
                     </div>
                     <p class="mt-4">*Get Royalty for Author</p>
 
