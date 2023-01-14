@@ -14,7 +14,7 @@
 
 @section("content")
 
-<section class="py-[100px]" x-data="user">
+<section class="py-[100px] dark:text-white" x-data="user">
     <div x-data="articles" x-init="checkSession()">
         <span x-init="getDetailArticle(window.location.href.split('/').pop())"></span>
         <div class="container mx-auto">
@@ -49,9 +49,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <span class="h-max px-3 py-2 rounded-primary bg-primary text-white text-[14px] mr-4">
-                        Category
-                    </span> --}}
                 </div>
     
                 <div>
@@ -71,12 +68,12 @@
             </div>
     
             <div class="col md:mx-0 col-12 lg:col-4">
-                <p class="text-center text-md mb-4 font-semibold">Link Social Media</p>
-                <hr class="my-[5px] text-primary">
+                {{-- <p class="text-center text-md mb-4 font-semibold">Link Social Media</p>
+                <hr class="my-[5px] text-primary"> --}}
                 <ul class="flex items-center justify-center gap-4">
     
                     <template x-if="detailArticle.author.link_facebook != null && detailArticle.author.link_facebook != ''">
-                        <li class="p-2 rounded-full hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a x-bind:href="detailArticle.author.link_facebook" class="text-md" target="_blank">
                                 <i data-feather="facebook"></i>
                             </a>
@@ -89,7 +86,7 @@
                     </template>
                     
                     <template x-if="detailArticle.author.link_linkedin != null && detailArticle.author.link_linkedin != ''">
-                        <li class="p-2 rounded-full hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a x-bind:href="detailArticle.author.link_linkedin" class="text-md" target="_blank">
                                 <i data-feather="linkedin"></i>
                             </a>
@@ -102,7 +99,7 @@
                     </template>
     
                     <template x-if="detailArticle.author.link_instagram != null && detailArticle.author.link_instagram != ''">
-                        <li class="p-2 rounded-full hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a x-bind:href="detailArticle.author.link_instagram" class="text-md" target="_blank">
                                 <i data-feather="instagram"></i>
                             </a>
@@ -115,7 +112,7 @@
                     </template>
     
                     <template x-if="detailArticle.author.link_twitter != null && detailArticle.author.link_twitter != ''">
-                        <li class="p-2 rounded-full hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a x-bind:href="detailArticle.author.link_twitter" class="text-md" target="_blank">
                                 <i data-feather="twitter"></i>
                             </a>
@@ -129,13 +126,13 @@
     
                 </ul>
     
-                <div class="mt-6 px-5 py-6 bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg">
+                <div class="mt-6 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg">
                     <h3 class="text-md mb-4 font-semibold">Content</h3>
                     <ul class="flex flex-col gap-4">
                         {{-- <span x-text="detailArticle.subarticles.length == 0"></span> --}}
                         <template x-for="(item, index) in detailArticle.subarticles">
-                            <li @click="getSubArticle(item.id); back = true" :class="content.id == item.id ? 'bg-primary text-white' : ''" class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] cursor-pointer hover:bg-primary hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
-                                <a class="text-base lg:text-md font-iceberg" x-text="item.title + ' ' + item.type">Sub-Artikel 1</a>
+                            <li @click="getSubArticle(item.id); back = true" :class="content.id == item.id ? 'bg-primary text-white' : ''" class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] cursor-pointer hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
+                                <a class="text-base lg:text-md font-iceberg" x-text="item.title + ' ' + '(' + item.type.toUpperCase() + ')'">Sub-Artikel 1</a>
                                 <i x-show="item.type == 'paid'" data-feather="lock" class="hover:text-white min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]"></i>
                                 <script>
                                     feather.replace()
