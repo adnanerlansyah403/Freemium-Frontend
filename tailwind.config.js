@@ -43,6 +43,40 @@ module.exports = {
       iceberg: ['Iceberg', 'sans-serif'],
     },
     extend: {
+      animation: {
+        bounce5: 'bounce-5 1s ease-in-out linear',
+      },
+      keyframes: {
+        'bounce-5': {
+          '0%': {
+            transform: 'translateY(0)'
+          },
+
+          '10%': {
+            transform: 'translateY(0)'
+          },
+
+          '30%': {
+            transform: 'translateY(-100px)'
+          },
+
+          '50%': {
+            transform: 'translateY(0)'
+          },
+
+          '57%': {
+            transform: 'translateY(-7px)'
+          },
+
+          '64%': {
+            transform: 'translateY(0)'
+          },
+
+          '100%': {
+            transform: 'translateY(0)'
+          },
+        },
+      },
       borderRadius: {
         'circle': '50%',
         'pill': '50px',

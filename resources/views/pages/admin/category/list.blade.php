@@ -56,11 +56,11 @@
                             <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                         </div>
 
-                        <button class="group w-full flex items-center justify-center gap-2 p-2 rounded-primary border outline-1 hover:text-white outline-primary hover:outline-none hover:bg-primary transition duration-200 ease-in-out">
+                        <button class="group w-full flex items-center justify-center gap-2 p-2 rounded-primary border outline-1 outline-primary transition duration-200 ease-in-out">
                             <p>
-                                <span class="span group-hover:text-white">Sort By:</span>A/Z
+                                <span class="span group-hover:animate-bounce5">Sort By:</span>A/Z
                             </p>
-                            <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:text-white"></i>
+                            <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:-rotate-90 transition duration-200 ease-in-out"></i>
                         </button>
 
                     </div>
