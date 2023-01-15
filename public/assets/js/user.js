@@ -262,6 +262,40 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    listUser: [],
+    fetchListUser() {
+      fetch(`${this.apiUrl}user/all`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          data = await response.json();
+          this.listUser = data.data;
+        })
+    },
+
+    async deleteUser(id) {
+      user = await fetch(`${this.apiUrl}user/${id}/delete`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+
+      data = await user;
+
+      console.log(data)
+
+      if (data.status) {
+        localStorage.setItem('message', "data successfully deleted!");
+        localStorage.setItem('showFlash', true);
+        window.location.reload();
+      }
+    },
+
     fetchMyArticle() {
       let url = window.location.href;
       let id = url.substring(url.lastIndexOf('/') + 1);

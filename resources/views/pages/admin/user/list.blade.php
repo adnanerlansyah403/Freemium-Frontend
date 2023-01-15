@@ -63,15 +63,20 @@
                 </div>
 
                 <div class="w-full rounded-primary bg-white shadow-lg">
+                  <div x-data="user">
+                    <div x-init="flash()"></div>
+                    <div x-show="showFlash">
+                        <x-alert />
+                    </div>
+                  </div>
                     <div class="w-full text-center bg-primary py-2 text-white">List Users</div>
                     <div class="overflow-x-auto">
-                        <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
+                        <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse" x-data="fetchListUser()">
                             <thead>
                               <tr>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Username</th>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Email</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Role</th>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Subscribe Status</th>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Photo</th>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
@@ -79,32 +84,25 @@
                             </thead>
                     
                             <tbody>
-                              <tr class="border border-b-primary">
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold">Obi Imanuel</td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>obito
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>obito@gmail.com 
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>2
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>TRUE 
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i> 
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
-                                    <a href="" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
-                                        <i data-feather="edit" class="w-5 h-5 lg:w-8 lg:h-8"></i>
-                                    </a>
-                                    <a href="" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
-                                        <i data-feather="trash-2" class="w-5 h-5 lg:w-8 lg:h-8"></i>
-                                    </a>
-                                </td>
-                              </tr>
+                              <template x-for="data in listUser">
+                                <tr class="border border-b-primary">
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name">Obi Imanuel</td>
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.username">obito
+                                  </td>
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.email">obito@gmail.com 
+                                  </td>
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.subscribe_status">TRUE 
+                                  </td>
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                    <img x-bind:src="imgUrl+data.photo" src="" class="w-[100px]">
+                                  </td>
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
+                                      <button @click="deleteUser(data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
+                                          <i data-feather="trash-2" class="w-5 h-5 lg:w-8 lg:h-8"></i> Delete
+                                      </button>
+                                  </td>
+                                </tr>
+                              </template>
                             </tbody>
                         </table>
                     </div>
