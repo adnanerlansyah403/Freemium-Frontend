@@ -33,19 +33,33 @@
                         type="button" 
                         class="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
                         @click="dropdownmenu = !dropdownmenu"
+                        x-data="helpers"
                     >
                         <template x-if="imgUrl+data_user.photo != null || imgUrl+data_user.photo != ''">
                             <figure>
                                 <img x-bind:src="imgUrl+data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
                             </figure>
                         </template>
-                        <span class="font-inter" x-text="data_user.name == null ? 'User' : data_user.name"></span>
+                        <span class="font-inter" x-text="data_user.name == null ? 'User' : substring(data_user.name)"></span>
                     </button>
                     <ul 
                         class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-primary dark:bg-slate-secondary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)]"
                         x-show="dropdownmenu"
                         x-transition
                     >
+                        <template x-if="data_user.role == 1">
+                            <li class="px-[18px] py-2 rounded-t-primary hover:bg-white hover:text-black transition duration-200 ease-out">
+                                <a href="{{ route('admin.dashboard.index') }}" class="flex items-center gap-2">
+                                    <i data-feather="trending-up"></i>
+                                    <span>Admin</span>
+                                </a>
+                                <!-- Feather Icons Scripts -->
+                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </li>
+                        </template>
                         <li class="px-[18px] py-2 rounded-t-primary hover:bg-white hover:text-black transition duration-200 ease-out">
                             <a href="{{ route('profile.index') }}" class="flex items-center gap-2">
                                 <i data-feather="user"></i>

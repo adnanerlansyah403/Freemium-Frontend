@@ -74,8 +74,8 @@ document.addEventListener('alpine:init', () => {
             subscribe_status = user.data.user.subscribe_status;
             localStorage.setItem('token', token)
             localStorage.setItem('name', fullName)
-            localStorage.setItem('role', role)
-            localStorage.setItem('subscribe_status', subscribe_status)
+            // localStorage.setItem('role', role)
+            // localStorage.setItem('subscribe_status', subscribe_status)
             localStorage.setItem('showFlash', true)
             localStorage.setItem('message', user.message);
             this.data_user = user.data
@@ -83,7 +83,7 @@ document.addEventListener('alpine:init', () => {
               return window.location.replace(this.baseUrl + 'article')
             }
             if (role == 1) {
-              return window.location.replace(this.baseUrl + 'admin')
+              return window.location.replace(this.baseUrl + 'admin/dashboard')
             }
           }
         });

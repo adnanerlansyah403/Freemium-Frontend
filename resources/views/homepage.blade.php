@@ -23,12 +23,16 @@
 
         <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
 
+        {{-- ChartJS --}}
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         {{-- AlpineJS Link --}}
 
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <script src="{{ asset('assets/js/auth.js') }}"></script>
         <script src="{{ asset('assets/js/user.js') }}"></script>
-        
+
         {{-- Custom Style --}}
 
         <style>
@@ -99,7 +103,7 @@
             }
 
         </script>
-
+        
         <script defer>
 
 

@@ -45,20 +45,6 @@ document.addEventListener('alpine:init', () => {
     link_instagram: '',
     link_twitter: '',
 
-    checkSession() {
-      const token = localStorage.getItem('token')
-      this.isLogedIn = token ? true : false
-
-      if (!this.isLogedIn) {
-        // Fetch API Check Token
-        return window.location.replace(this.baseUrl + 'login')
-      }
-    },
-
-    setTiny(id, text) {
-      tinymce.get(id).setContent(text);
-    },
-
     fetchMe() {
       fetch(this.apiUrl + 'me', {
         method: "GET",
@@ -80,6 +66,37 @@ document.addEventListener('alpine:init', () => {
           this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
           this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
         });
+    },
+
+    checkSession() {
+      const token = localStorage.getItem('token')
+      this.isLogedIn = token ? true : false
+
+      if (!this.isLogedIn) {
+        // Fetch API Check Token
+        return window.location.replace(this.baseUrl + 'login')
+      }
+    },
+
+    checkRole() {
+      fetch(this.apiUrl + 'me', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        },
+      })
+        .then(async response => {
+          user = await response.json();
+          this.data_user = user.data
+          if (this.data_user.role != 1) {
+            return window.location.replace(this.baseUrl + 'article');
+          }
+        });
+    },
+
+    setTiny(id, text) {
+      tinymce.get(id).setContent(text);
     },
 
     updateMe() {
@@ -758,6 +775,10 @@ document.addEventListener('alpine:init', () => {
     convertCurrencyUsd(money) {
       let currency = '$' + money.toFixed(2);
       return currency;
+    },
+
+    substring(string) {
+      return string.substring(0, 5) + "..."
     },
 
     darkMode() {

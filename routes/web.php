@@ -1,20 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\User\Article;
 
 // livewire
-use App\Http\Livewire\User\Article;
 use App\Http\Livewire\User\Profile;
+use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\User\EditArticle;
-use App\Http\Livewire\Article\CreateArticle;
+use App\Http\Controllers\ArticleController;
 
 // dipakai
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Article\CreateArticle;
 
 // !dipakai
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MyArticleController;
+use App\Http\Controllers\TransactionController;
+
+// Admin
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,3 +125,26 @@ Route::prefix('transaction')
         Route::get('/details', 'show')->name('show');
 
     });
+
+
+
+
+
+// Backend Routes
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::prefix('dashboard')
+            ->name('dashboard.')
+            ->controller(DashboardController::class)
+            ->group(function () {
+            Route::get('/', 'index')->name('index');
+        });
+
+        Route::get("/categories", function () {
+            return view("pages.admin.category.list");
+        })->name('categories.index');;
+
+});

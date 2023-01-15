@@ -14,26 +14,7 @@
     <div x-init="checkSession()"></div>
     <h1 class="font-iceberg text-lg text-center text-primary dark:text-white mb-16">ME</h1>
 
-    <div class="container mx-auto mb-9">
-
-        <nav class="col col-12" style="margin-inline: 0;">
-            <ul class="flex items-center justify-center lg:justify-start gap-7 dark:text-white">
-                <li class="pb-2 border-b border-primary dark:border-white cursor-pointer">
-                    <a href="{{ route('profile.index') }}" class="text-base font-iceberg">
-                        <span class="span dark:text-slate-third">My</span>
-                        Profile
-                    </a>
-                </li>
-                <li class="pb-2 cursor-pointer">
-                    <a href="{{ route('article.index') }}" class="text-base font-iceberg">
-                        <span class="span dark:text-slate-third">My</span>
-                        Articles
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-    </div>
+    @include("layouts.partials.user.dashboard")
 
     <div x-init="fetchMe()"></div>
 
