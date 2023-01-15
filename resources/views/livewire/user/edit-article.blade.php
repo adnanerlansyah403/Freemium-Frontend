@@ -178,15 +178,15 @@
                             class="px-4 overflow-hidden max-h-0 duration-500 transition-all">
                             <div class="py-10 px-1 flex max-h-[500px] overflow-y-scroll flex-wrap gap-4 has-scrollbar">
                                 <template x-for="(s, index) in EditArticle.data.subarticles">
-                                    <span type="button"
+                                    <span type="button" x-show="s"
                                         class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
-                                        <b x-text="s.title">Sub-EditArticle 1</b>
+                                        <b x-text="s.title ? s.title + s.id : 'New Sub-Article'">Sub-EditArticle 1</b>
                                         <div class="flex items-center gap-1">
                                             <button type="button" @click="editSub = index;" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                                 title="Edit Article">
                                                 <i data-feather="edit" class="text-sm"></i>
                                             </button>
-                                            <button type="button" href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                            <button type="button" @click="confirm('Delete this sub-article?') ? deleteSub(s.id) : ''; s = null" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                                 title="Delete Sub Article">
                                                 <i data-feather="trash-2" class="text-sm"></i>
                                             </button>
@@ -196,6 +196,18 @@
                                         </div>
                                     </span>
                                 </template>
+                                    <span @click="
+                                        editSub = EditArticle.data.subarticles.length; 
+                                        EditArticle.data.subarticles[editSub] = addSub()
+                                    " type="button"
+                                        class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
+                                        <i data-feather="plus-circle" class="w-8 h-8 text-primary dark:text-slate-third"></i>
+                                        <script>
+                                            feather.replace()
+                                        </script>
+                                        <b>Create New Sub-Article</b>
+                                        <span x-text="editSub"></span>
+                                    </span>
                             </div>
 
                         </div>

@@ -58,6 +58,9 @@ Route::get('/logout', function () {
 //         Route::post('/add', 'add')->name('add');
 //     });
 
+
+// Route::get("/test", Test::class)->name('test');
+
 // //backend category
 // Route::prefix('category')
 // ->name('category.')

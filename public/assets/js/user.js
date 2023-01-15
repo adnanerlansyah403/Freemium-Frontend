@@ -279,6 +279,16 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    addSub(){
+      let id = 0;
+      let article_id = this.EditArticle.data.subarticles[0].article_id;
+      let title = '';
+      let type = '';
+      let description = '';
+      let thumbnail = '';
+      return { id, article_id, title, type, description, thumbnail };
+    },
+
     updateSub(number) {
       let editSub = this.EditArticle.data.subarticles[number];
       editSub.description = tinymce.get('sub_content').getContent();
@@ -286,7 +296,7 @@ document.addEventListener('alpine:init', () => {
       if (typeof editSub.thumbnail !== 'string' && editSub.thumbnail[0]) {
         editSub.thumbnail = editSub.thumbnail[0];
       }
-
+      console.log(editSub);
       let formData = new FormData();
 
       formData.append('article_id', editSub.article_id);
@@ -311,6 +321,7 @@ document.addEventListener('alpine:init', () => {
             console.log(this.status_err)
           }
           else{
+            editSub.id = sub.data.id;
             this.status_err[1] = null;
             localStorage.setItem('message', sub.message);
             localStorage.setItem('showFlash', true);
@@ -325,6 +336,23 @@ document.addEventListener('alpine:init', () => {
 
       const token = localStorage.getItem('token')
       fetch(this.apiUrl + 'article/' + id + '/delete', {
+        method: "POST",
+        headers: {
+          'Authorization': token
+        }
+      })
+        .then((response) => {
+          this.isLoading = false;
+          this.fetchListMyArticle();
+          // window.location.replace(this.baseUrl + 'myarticle')
+        });
+    },
+
+    deleteSub(delSub){
+      this.isLoading = true;
+
+      const token = localStorage.getItem('token')
+      fetch(this.apiUrl + 'sub-article/' + delSub + '/delete', {
         method: "POST",
         headers: {
           'Authorization': token
