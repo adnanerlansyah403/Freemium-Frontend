@@ -222,6 +222,46 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    updateArticle() {
+      let editA = this.EditArticle.data;
+      editA.description = tinymce.get('content').getContent();
+
+      if (typeof editA.thumbnail !== 'string' && editA.thumbnail[0]) {
+        editA.thumbnail = editA.thumbnail[0];
+      }
+
+      let formData = new FormData();
+
+      formData.append('category_id[]', document.getElementById('category_id').value);
+      formData.append('title', editA.title);
+      formData.append('description', editA.description);
+      formData.append('thumbnail', editA.thumbnail);
+
+      fetch(this.apiUrl + `article/${editA.id}/update`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+        body: formData
+      })
+        .then(async response => {
+          data = await response.json();
+
+          if (!data.status) {
+            this.showFlash = true;
+            this.status_err[0] = data.message;
+            console.log(this.status_err)
+          }
+          else{
+            this.status_err[0] = null;
+            localStorage.setItem('message', data.message);
+            localStorage.setItem('showFlash', true);
+            this.flash()
+          }
+        })
+
+    },
+
     updateSub(number) {
       let editSub = this.EditArticle.data.subarticles[number];
       editSub.description = tinymce.get('sub_content').getContent();
@@ -248,9 +288,17 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           sub = await response.json();
 
-          localStorage.setItem('message', sub.message);
-          localStorage.setItem('showFlash', true);
-          this.flash()
+          if (!sub.status) {
+            this.showFlash = true;
+            this.status_err[1] = sub.message;
+            console.log(this.status_err)
+          }
+          else{
+            this.status_err[1] = null;
+            localStorage.setItem('message', sub.message);
+            localStorage.setItem('showFlash', true);
+            this.flash()
+          }
         })
 
     },
@@ -424,6 +472,20 @@ document.addEventListener('alpine:init', () => {
     itemArticle: 3,
     content: false,
     back: false,
+    showFlash: false,
+    message: '',
+
+    flash() {
+      if (localStorage.getItem('showFlash')) {
+        this.showFlash = true;
+        this.message = localStorage.getItem('message');
+        setTimeout(function () {
+          localStorage.removeItem("showFlash")
+          this.showFlash = false;
+        }, 3000);
+        console.log('test');
+      }
+    },
 
     // INPUTS ARTICLE
     keywordArticle: '',
@@ -514,7 +576,7 @@ document.addEventListener('alpine:init', () => {
           this.detailArticle = data.data;
         })
         .catch(error => {
-          console.log(error.message);
+          console.log(error);
         })
     },
 
@@ -527,10 +589,21 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.content = data.data;
+          if (!data.status) {
+            this.showFlash = true;
+            localStorage.setItem('message', data.message);
+            localStorage.setItem('showFlash', true);
+            console.log(data)
+          }
+          else{
+            this.showFlash = false;
+            this.content = data.data;
+          }
+          
+          
         })
         .catch(error => {
-          console.log(error.message);
+          console.log(error);
         })
     },
 
