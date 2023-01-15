@@ -118,10 +118,10 @@
                     </textarea>
                 </div>
 
-                <div class="flex items-center justify-between mt-16 mb-10" x-data="articles">
+                <div class="group flex items-center justify-between mt-16 mb-10" x-data="articles">
                     <button type="button" class="flex items-center gap-2" @click="createSubArticle($refs)">
                         <i data-feather="plus-circle" class="w-10 h-10 text-primary"></i> 
-                        <span class="text-base">Add a sub article</span>
+                        <span class="text-base group-hover:rotate-90 transition duration-200 ease-in-out">Add a sub article</span>
                     </button>
                     <button @click="createArticle()" class="px-4 py-2 bg-primary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save

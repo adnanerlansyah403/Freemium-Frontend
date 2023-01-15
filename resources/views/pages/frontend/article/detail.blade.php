@@ -144,19 +144,25 @@
                     </ul>
 
                     <div
-                        class="mt-6 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg">
+                        class="mt-6 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
                         <h3 class="text-md mb-4 font-semibold">Content</h3>
                         <ul class="flex flex-col gap-4">
                             {{-- <span x-text="detailArticle.subarticles.length == 0"></span> --}}
                             <template x-for="(item, index) in detailArticle.subarticles">
                                 <li @click="getSubArticle(item.id); back = true; if(showFlash){flash();}"
                                     :class="{
-                                        'bg-gray-secondary text-black': item.type == 'paid',
-                                        'bg-primary text-white': content.id == item.id
+                                        'border-primary text-black': item.type == 'paid',
+                                        'bg-white border-slate-primary text-slate-primary': content.id == item.id
                                     }"
-                                    class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] cursor-pointer hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
+                                    class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
                                     <a class="text-base lg:text-md font-iceberg"
-                                        x-text="item.title + ' ' + item.type">Sub-Artikel 1</a>
+                                        x-text="substring(item.title, 8) + ' ' + '(' + item.type.toUpperCase() + ')'">Sub-Artikel 1</a>
+                                    <template x-if="content.id == item.id">
+                                        <p class="flex items-center gap-1">
+                                            <span class="w-4 h-4 rounded-full bg-slate-primary dark:bg-slate-third"></span>
+                                            <b>Active</b>
+                                        </p>
+                                    </template>
                                     <i x-show="item.type == 'paid'" data-feather="lock"
                                         class="hover:text-white min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]"></i>
                                     <script>
@@ -166,8 +172,8 @@
                             </template>
                             <template x-if="back">
                                 <li @click="content = null; back = false"
-                                    class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] cursor-pointer bg-primary text-white hover:skew-y-1 transition duration-200 ease-in-out text-center">
-                                    <button class="text-base lg:text-md font-iceberg">Back to Article</button>
+                                    class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-lg cursor-pointer bg-primary dark:bg-slate-third text-white hover:skew-y-1 transition duration-200 ease-in-out text-center">
+                                    <button class="text-base lg:text-md font-iceberg hover:text-opacity-80">Back to Article</button>
                                 </li>
                             </template>
                             <template x-if="detailArticle.subarticles.length == 0">

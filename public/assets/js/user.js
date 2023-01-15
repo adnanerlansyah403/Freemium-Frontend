@@ -269,7 +269,7 @@ document.addEventListener('alpine:init', () => {
             this.status_err[0] = data.message;
             console.log(this.status_err)
           }
-          else{
+          else {
             this.status_err[0] = null;
             localStorage.setItem('message', data.message);
             localStorage.setItem('showFlash', true);
@@ -279,7 +279,7 @@ document.addEventListener('alpine:init', () => {
 
     },
 
-    addSub(){
+    addSub() {
       let id = 0;
       let article_id = this.EditArticle.data.subarticles[0].article_id;
       let title = '';
@@ -320,7 +320,7 @@ document.addEventListener('alpine:init', () => {
             this.status_err[1] = sub.message;
             console.log(this.status_err)
           }
-          else{
+          else {
             editSub.id = sub.data.id;
             this.status_err[1] = null;
             localStorage.setItem('message', sub.message);
@@ -348,7 +348,7 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
-    deleteSub(delSub){
+    deleteSub(delSub) {
       this.isLoading = true;
 
       const token = localStorage.getItem('token')
@@ -640,12 +640,12 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('showFlash', true);
             console.log(data)
           }
-          else{
+          else {
             this.showFlash = false;
             this.content = data.data;
           }
-          
-          
+
+
         })
         .catch(error => {
           console.log(error);
@@ -805,8 +805,10 @@ document.addEventListener('alpine:init', () => {
       return currency;
     },
 
-    substring(string) {
-      return string.substring(0, 5) + "..."
+    substring(string, max = 5) {
+      if (string.length > max) {
+        return string.substring(0, max) + "..."
+      }
     },
 
     darkMode() {

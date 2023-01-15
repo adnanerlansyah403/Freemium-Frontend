@@ -109,7 +109,7 @@
                         @click="
                             $refs.file.click();
                         ">
-                        <img x-bind:src="!EditArticle.data.thumbnail_1 ? 'http://localhost:8001/' + EditArticle.data.thumbnail : EditArticle.data.thumbnail_1" class="absolute w-full h-full object-cover rounded-lg" alt="EditArticle.data.thumbnail_1_alt">
+                        <img x-bind:src="!EditArticle.data.thumbnail_1 ? 'http://localhost:8001/' + EditArticle.data.thumbnail : EditArticle.data.thumbnail_1" class="absolute w-full h-full object-cover rounded-lg" x-bind:alt="EditArticle.data.thumbnail_1_alt">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage">
                         </i>
@@ -176,38 +176,41 @@
                         </h2>
                         <div x-ref="tab" :style="handleToggle()"
                             class="px-4 overflow-hidden max-h-0 duration-500 transition-all">
-                            <div class="py-10 px-1 flex max-h-[500px] overflow-y-scroll flex-wrap gap-4 has-scrollbar">
-                                <template x-for="(s, index) in EditArticle.data.subarticles">
-                                    <span type="button" x-show="s"
-                                        class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
-                                        <b x-text="s.title ? s.title + s.id : 'New Sub-Article'">Sub-EditArticle 1</b>
-                                        <div class="flex items-center gap-1">
-                                            <button type="button" @click="editSub = index;" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
-                                                title="Edit Article">
-                                                <i data-feather="edit" class="text-sm"></i>
-                                            </button>
-                                            <button type="button" @click="confirm('Delete this sub-article?') ? deleteSub(s.id) : ''; s = null" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
-                                                title="Delete Sub Article">
-                                                <i data-feather="trash-2" class="text-sm"></i>
-                                            </button>
-                                            <script>
-                                                feather.replace()
-                                            </script>
-                                        </div>
-                                    </span>
-                                </template>
+                            <div class="px-1 h-[500px]">
+                                <div class="flex flex-wrap gap-4 max-h-[500px] pb-4 overflow-y-auto">
+                                    <template x-for="(s, index) in EditArticle.data.subarticles">
+                                        <span type="button" x-show="s"
+                                            class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
+                                            <b x-text="s.title ? s.title + s.id : 'New Sub-Article'">Sub-EditArticle 1</b>
+                                            <div class="flex items-center gap-1">
+                                                <button type="button" @click="editSub = index;" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                                    title="Edit Article">
+                                                    <i data-feather="edit" class="text-sm"></i>
+                                                </button>
+                                                <button type="button" @click="confirm('Delete this sub-article?') ? deleteSub(s.id) : ''; s = null" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                                    title="Delete Sub Article">
+                                                    <i data-feather="trash-2" class="text-sm"></i>
+                                                </button>
+                                                <script>
+                                                    feather.replace()
+                                                </script>
+                                            </div>
+                                        </span>
+                                    </template>
                                     <span @click="
                                         editSub = EditArticle.data.subarticles.length; 
                                         EditArticle.data.subarticles[editSub] = addSub()
                                     " type="button"
-                                        class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
-                                        <i data-feather="plus-circle" class="w-8 h-8 text-primary dark:text-slate-third"></i>
+                                        class="group cursor-pointer h-max flex items-center justify-center gap-2 col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third dark:hover:text-opacity-75 hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
+                                        <i data-feather="plus-circle" class="w-6 h-6 text-primary dark:text-slate-fourth group-hover:rotate-90 transition duration-200 ease-in-out"></i>
+                                        <b>Create New Sub-Article</b>
+                                        {{-- <span x-text="editSub"></span> --}}
+                                        <!-- Feather Icons Scripts -->
                                         <script>
                                             feather.replace()
                                         </script>
-                                        <b>Create New Sub-Article</b>
-                                        <span x-text="editSub"></span>
                                     </span>
+                                </div>
                             </div>
 
                         </div>
@@ -215,7 +218,7 @@
 
                 </ul>
                 <div class="flex flex-wrap lg:flex-nowrap">
-                    <div class="mb-5 col-12 lg:col-6">
+                    <div class="mb-5 col-12">
                         <label for="text" class="text-md">Title</label>
                         <input x-model="EditArticle.data.subarticles[editSub].title" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
@@ -248,7 +251,7 @@
                         @click="
                             $refs.filesubarticle.click();
                         ">
-                        <img x-bind:src="!EditArticle.data.subarticles[editSub].thumbnail_1 ? 'http://localhost:8001/' + EditArticle.data.subarticles[editSub].thumbnail : EditArticle.data.subarticles[editSub].thumbnail_1" class="absolute w-full h-full object-cover rounded-lg" alt="EditArticle.data.subarticles[editSub].thumbnail_1_alt">
+                        <img x-bind:src="!EditArticle.data.subarticles[editSub].thumbnail_1 ? 'http://localhost:8001/' + EditArticle.data.subarticles[editSub].thumbnail : EditArticle.data.subarticles[editSub].thumbnail_1" class="absolute w-full h-full object-cover rounded-lg" x-bind:alt="EditArticle.data.subarticles[editSub].thumbnail_1_alt">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimagesubarticle">
                         </i>
@@ -310,7 +313,7 @@
 
                 <div class="flex items-center justify-center my-10">
                     <button @click.prevent="updateSub(editSub)"
-                        class="px-4 py-2 bg-primary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                        class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
                     </button>
                 </div>

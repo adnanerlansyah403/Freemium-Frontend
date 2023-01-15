@@ -140,8 +140,8 @@
                 </div>
 
                 <div class="flex items-center justify-between mt-16 mb-10" x-data="articles">
-                    <button type="button" class="flex items-center gap-2" @click="createSubArticle($refs)">
-                        <i data-feather="plus-circle" class="w-10 h-10 text-primary dark:text-slate-third"></i> 
+                    <button type="button" class="group flex items-center gap-2" @click="createSubArticle($refs)">
+                        <i data-feather="plus-circle" class="w-10 h-10 text-primary dark:text-slate-third group-hover:rotate-90 transition duration-200 ease-in-out"></i> 
                         <span class="text-base">Add a sub article</span>
                     </button>
                     <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
@@ -201,7 +201,7 @@
                             >
                             <span>Sub Artikel ${this.index}</span>
                             <div class="flex items-center gap-2">
-                                <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60 shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" @click="deleteSubArticle(${this.index})">
+                                <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60" @click="deleteSubArticle(${this.index})">
                                     <img src="{{ asset('assets/images/icons/trash-2.svg') }}" />
                                 </span>
                                 <svg
@@ -223,7 +223,7 @@
                                     <div class="mb-5 col-12 lg:col-12">
                                         <label for="text" class="text-md">Title</label>
                                         <input type="text" placeholder="Your text..."
-                                            class="title_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white hover:bg-white mt-4">
+                                            class="title_sub dark:text-black px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white hover:bg-white mt-4">
                                     </div>
                         
                                 </div>
