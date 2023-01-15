@@ -38,11 +38,16 @@
                     <i class="span font-bold" data-feather="activity"></i>
                     <p>
                     <span class="span">Dashboard</span>
-                    Admin (User)
+                    Admin (Plan)
                 </p>
                 </h2>
 
                 <div class="mt-6 mb-10 flex items-center justify-between flex-wrap gap-y-4">
+
+                    <button class="flex items-center gap-1" onclick="modalHandler(true)">
+                        <i class="span" data-feather="plus-square"></i>
+                        Add Plan
+                    </button>
 
                     <div class="w-full flex items-center flex-wrap gap-2 gap-y-3">
 
@@ -63,38 +68,26 @@
                 </div>
 
                 <div class="w-full rounded-primary bg-white shadow-lg">
-                    <div class="w-full text-center bg-primary py-2 text-white">List Users</div>
+                    <div class="w-full text-center bg-primary py-2 text-white">List Plans</div>
                     <div class="overflow-x-auto">
                         <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                             <thead>
                               <tr>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Username</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Email</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Role</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Subscribe Status</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Photo</th>
+                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Price</th>
+                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Expired</th>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                               </tr>
                             </thead>
                     
                             <tbody>
                               <tr class="border border-b-primary">
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold">Obi Imanuel</td>
+                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold">Yearly</td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>obito
+                                  <i class="fas fa-circle text-orange-500 mr-2"></i>$80.00
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>obito@gmail.com 
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>2
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>TRUE 
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i> 
+                                  <i class="fas fa-circle text-orange-500 mr-2"></i>12 Month
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
                                     <a href="" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
@@ -135,7 +128,7 @@
                     <div class="w-full flex justify-start text-primary mb-3">
                         <i data-feather="bookmark" class="w-14 h-14"></i>
                     </div>
-                    <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a User</h1>
+                    <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a Plan</h1>
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
                     <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" placeholder="Name..." />
                     <label for="price" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Price</label>

@@ -148,6 +148,13 @@ Route::prefix('admin')
 
         Route::get("/categories", function () {
             return view("pages.admin.category.list");
-        })->name('categories.index');;
+        })->name('categories.index');
+
+        Route::get("/plans", function () {
+            return view("pages.admin.plan.list");
+        })->name('plans.index');
+        Route::get("/users", function () {
+            return view("pages.admin.user.list");
+        })->name('users.index');
 
 });
