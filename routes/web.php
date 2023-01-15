@@ -157,4 +157,8 @@ Route::prefix('admin')
             return view("pages.admin.user.list");
         })->name('users.index');
 
+        Route::get("/orders", function () {
+            return view("pages.admin.order.list");
+        })->name('orders.index');
+
 });

@@ -42,7 +42,7 @@
             <i data-feather="arrow-right" class="relative hidden opacity-0 -left-1 group-hover:opacity-80 group-hover:block group-hover:left-0 transition duration-200 ease-out"></i>
         </li>
         <li class="group flex items-center justify-center gap-1 py-3 cursor-pointer rounded-primary text-primary text-center border border-primary text-base hover:bg-primary hover:text-white lg:hover:translate-x-2 transition duration-200 ease-in-out">
-            <a href="">Order History</a>
+            <a href="{{ route("admin.orders.index") }}">Order History</a>
             <i data-feather="arrow-right" class="relative hidden opacity-0 -left-1 group-hover:opacity-80 group-hover:block group-hover:left-0 transition duration-200 ease-out"></i>
         </li>
     </ul>

@@ -7,7 +7,7 @@
     <div x-init="fetchMe()"></div>
     <template x-if="isLogedIn && data_user.role == 1">
         <script>
-            document.title = 'Dashboard Admin - Freemium App';
+            document.title = 'Dashboard Admin (Orders) - Freemium App';
         </script>
     </template>
 </div>
@@ -38,25 +38,20 @@
                     <i class="span font-bold" data-feather="activity"></i>
                     <p>
                     <span class="span">Dashboard</span>
-                    Admin (Plan)
+                    Admin (Orders)
                 </p>
                 </h2>
 
-                <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4 col-12">
+                <div class="mt-6 mb-10 flex items-center justify-between flex-wrap gap-y-4">
 
-                    <button class="flex col-2 items-center gap-1" onclick="modalHandler(true)">
-                        <i class="span" data-feather="plus-square"></i>
-                        Add Plan
-                    </button>
+                    <div class="w-full flex items-center flex-wrap gap-2 gap-y-3">
 
-                    <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
-
-                        <div class="p-2 w-full lg:col-4 flex items-center justify-between bg-white shadow-[0px_0px_4px_#7C000B] rounded-lg">
+                        <div class="p-2 w-full flex items-center justify-between bg-white shadow-[0px_0px_4px_#7C000B] rounded-lg">
                             <input type="text" placeholder="Search Here..." class="w-[93%]">
                             <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                         </div>
 
-                        <button class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border outline-1 outline-primary transition duration-200 ease-in-out">
+                        <button class="group w-full flex items-center justify-center gap-2 p-2 rounded-primary border outline-1 outline-primary transition duration-200 ease-in-out">
                             <p>
                                 <span class="span group-hover:animate-bounce5">Sort By:</span>A/Z
                             </p>
@@ -68,26 +63,38 @@
                 </div>
 
                 <div class="w-full rounded-primary bg-white shadow-lg">
-                    <div class="w-full text-center bg-primary py-2 text-white">List Plans</div>
+                    <div class="w-full text-center bg-primary py-2 text-white">List Users</div>
                     <div class="overflow-x-auto">
                         <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                             <thead>
                               <tr>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Price</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Expired</th>
+                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Username</th>
+                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Email</th>
+                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Role</th>
+                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Subscribe Status</th>
+                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Photo</th>
                                 <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                               </tr>
                             </thead>
                     
                             <tbody>
                               <tr class="border border-b-primary">
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold">Yearly</td>
+                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold">Obi Imanuel</td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>$80.00
+                                  <i class="fas fa-circle text-orange-500 mr-2"></i>obito
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>12 Month
+                                  <i class="fas fa-circle text-orange-500 mr-2"></i>obito@gmail.com 
+                                </td>
+                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                  <i class="fas fa-circle text-orange-500 mr-2"></i>2
+                                </td>
+                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                  <i class="fas fa-circle text-orange-500 mr-2"></i>TRUE 
+                                </td>
+                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                  <i class="fas fa-circle text-orange-500 mr-2"></i> 
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
                                     <a href="" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
@@ -128,7 +135,7 @@
                     <div class="w-full flex justify-start text-primary mb-3">
                         <i data-feather="bookmark" class="w-14 h-14"></i>
                     </div>
-                    <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a Plan</h1>
+                    <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a User</h1>
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
                     <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" placeholder="Name..." />
                     <label for="price" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Price</label>
