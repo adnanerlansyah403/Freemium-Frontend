@@ -68,6 +68,12 @@
                 </div>
 
                 <div class="w-full rounded-primary bg-white shadow-lg">
+                  <div x-data="user">
+                      <div x-init="flash()"></div>
+                      <div x-show="showFlash">
+                          <x-alert />
+                      </div>
+                  </div>
                     <div class="w-full text-center bg-primary py-2 text-white">List Plans</div>
                     <div class="overflow-x-auto">
                         <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
@@ -95,9 +101,9 @@
                                       <button @click="modalHandler(true, data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
                                           <i data-feather="edit" class="w-5 h-5 lg:w-8 lg:h-8"></i>Edit
                                       </button>
-                                      <a href="" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
+                                      <button @click="deletePlan(data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
                                           <i data-feather="trash-2" class="w-5 h-5 lg:w-8 lg:h-8"></i>Delete
-                                      </a>
+                                      </button>
                                   </td>
                                 </tr>
                               </template>
@@ -132,6 +138,7 @@
                         <i data-feather="bookmark" class="w-14 h-14"></i>
                     </div>
                     <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a Plan</h1>
+                    <input type="hidden" id="plan_id" value="0">
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
                     <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" placeholder="Name..."/>
                     <label for="price" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Price</label>
@@ -146,7 +153,7 @@
                         </svg>
                     </button>
                     <div class="flex items-center justify-start w-full">
-                        <button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-primary hover:text-opacity-80 rounded text-white px-8 py-2 text-sm">Submit</button>
+                        <button @click="actionPlan()" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-primary hover:text-opacity-80 rounded text-white px-8 py-2 text-sm">Submit</button>
                         <button class="relative overflow-hidden ml-3 bg-gray-100 border border-primary text-slate-primary hover:text-opacity-70 transition duration-150 ease-in-out px-8 py-2 text-sm before:absolute" @click="modalHandler()">Cancel</button>
                     </div>
                 </div>

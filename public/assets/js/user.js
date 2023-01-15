@@ -176,6 +176,7 @@ document.addEventListener('alpine:init', () => {
     },
     modalHandler(val, id = 0) {
       let modal = document.getElementById("modal");
+      let plan_id = document.getElementById("plan_id");
       let name = document.getElementById("name");
       let price = document.getElementById("price");
       let expired = document.getElementById("expired");
@@ -184,6 +185,7 @@ document.addEventListener('alpine:init', () => {
         name.value = '';
         price.value = '';
         expired.value = '';
+        plan_id.value = 0;
       }
 
       if (val) {
@@ -203,8 +205,61 @@ document.addEventListener('alpine:init', () => {
           name.value = data.data.name;
           price.value = data.data.price;
           expired.value = data.data.expired;
+          plan_id.value = data.data.id;
 
         })
+    },
+
+    async actionPlan() {
+      let id = document.getElementById("plan_id").value;
+      let name = document.getElementById("name");
+      let price = document.getElementById("price");
+      let expired = document.getElementById("expired");
+
+      formData = new FormData();
+
+      formData.append('name', name.value);
+      formData.append('price', price.value);
+      formData.append('expired', expired.value);
+
+      if (id == 0) {
+        path = '';
+      } else {
+        path = `/${id}/update`;
+      }
+
+      plan = await fetch(`${this.apiUrl}plan${path}`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+        body: formData
+      })
+
+      data = await plan.json();
+
+      if (data.status) {
+        localStorage.setItem('message', data.message);
+        localStorage.setItem('showFlash', true);
+        window.location.reload();
+      }
+    },
+
+    async deletePlan(id) {
+      plan = await fetch(`${this.apiUrl}plan/${id}/delete`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+
+      data = await plan.json();
+
+      if (data.status) {
+        localStorage.setItem('message', "data successfully deleted!");
+        localStorage.setItem('showFlash', true);
+        window.location.reload();
+      }
     },
 
     fetchMyArticle() {
@@ -212,7 +267,7 @@ document.addEventListener('alpine:init', () => {
       let id = url.substring(url.lastIndexOf('/') + 1);
 
       fetch(`${this.apiUrl
-        }article / ${id}`, {
+        }article/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
