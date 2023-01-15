@@ -174,12 +174,45 @@ document.addEventListener('alpine:init', () => {
         })
 
     },
+    modalHandler(val, id = 0) {
+      let modal = document.getElementById("modal");
+      let name = document.getElementById("name");
+      let price = document.getElementById("price");
+      let expired = document.getElementById("expired");
+
+      if (id === 0) {
+        name.value = '';
+        price.value = '';
+        expired.value = '';
+      }
+
+      if (val) {
+        fadeIn(modal);
+      } else {
+        fadeOut(modal);
+      }
+      fetch(`${this.apiUrl}plan/${id}`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          data = await response.json();
+          name.value = data.data.name;
+          price.value = data.data.price;
+          expired.value = data.data.expired;
+
+        })
+    },
 
     fetchMyArticle() {
       let url = window.location.href;
       let id = url.substring(url.lastIndexOf('/') + 1);
 
-      fetch(`${this.apiUrl}article/${id}`, {
+      fetch(`${this.apiUrl
+        }article / ${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -221,7 +254,7 @@ document.addEventListener('alpine:init', () => {
       const token = localStorage.getItem('token')
 
       this.isLoading = true,
-        fetch(`${this.apiUrl}article/${id}/edit`, {
+        fetch(`${this.apiUrl}article / ${id} / edit`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
@@ -254,7 +287,7 @@ document.addEventListener('alpine:init', () => {
       formData.append('description', editA.description);
       formData.append('thumbnail', editA.thumbnail);
 
-      fetch(this.apiUrl + `article/${editA.id}/update`, {
+      fetch(this.apiUrl + `article / ${editA.id} / update`, {
         method: "POST",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -305,7 +338,7 @@ document.addEventListener('alpine:init', () => {
       formData.append('description', editSub.description);
       formData.append('thumbnail', editSub.thumbnail);
 
-      fetch(this.apiUrl + `sub-article/${editSub.id}/update`, {
+      fetch(this.apiUrl + `sub - article / ${editSub.id} / update`, {
         method: "POST",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -406,7 +439,7 @@ document.addEventListener('alpine:init', () => {
 
     fetchMyTransactions() {
 
-      fetch(`${this.apiUrl}payment/getMyPayment`, {
+      fetch(`${this.apiUrl}payment / getMyPayment`, {
         method: "GET",
         headers: {
           'Authorization': localStorage.getItem('token'),
@@ -430,7 +463,7 @@ document.addEventListener('alpine:init', () => {
           if (this.myTransactions[0] == null && lastPath == '/details') {
             window.location.replace(`${this.baseUrl}transaction`)
           } else if (this.myTransactions[0] != null && lastPath == '/transaction') {
-            window.location.replace(`${this.baseUrl}transaction/details`)
+            window.location.replace(`${this.baseUrl}transaction / details`)
           }
           return;
         })
@@ -444,7 +477,7 @@ document.addEventListener('alpine:init', () => {
       if (attachment != undefined) {
         formData.append('attachment', attachment);
 
-        fetch(`${this.apiUrl}payment/checkout`, {
+        fetch(`${this.apiUrl}payment / checkout`, {
           method: "POST",
           headers: {
             'Authorization': localStorage.getItem('token')
@@ -471,7 +504,7 @@ document.addEventListener('alpine:init', () => {
         return;
       }
 
-      fetch(`${this.apiUrl}payment/checkout`, {
+      fetch(`${this.apiUrl}payment / checkout`, {
         method: "POST",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -560,7 +593,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?type=free`, {
+      fetch(`${this.apiUrl}article ? type = free`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -582,7 +615,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?type=paid`, {
+      fetch(`${this.apiUrl}article ? type = paid`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -610,7 +643,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     getDetailArticle(id) {
-      fetch(`${this.apiUrl}article/${id}`, {
+      fetch(`${this.apiUrl}article / ${id}`, {
         method: "GET",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -626,7 +659,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     getSubArticle(id) {
-      fetch(`${this.apiUrl}sub-article/${id}`, {
+      fetch(`${this.apiUrl}sub - article / ${id}`, {
         method: "GET",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -656,7 +689,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?search=${keyword}`, {
+      fetch(`${this.apiUrl}article ? search = ${keyword}`, {
         method: 'GET',
       })
         .then(async (response) => {
@@ -740,7 +773,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?category=${categoryId}`, {
+      fetch(`${this.apiUrl}article ? category = ${categoryId}`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -752,9 +785,9 @@ document.addEventListener('alpine:init', () => {
 
           // for (let index = 0; index < this.categoriesArticle.length; index++) {
           //   if (this.categoriesArticle[index].id === categoryId) {
-          //     document.getElementById(`category${categoryId}`).classList.add('active');
+          //     document.getElementById(`category${ categoryId }`).classList.add('active');
           //   } else {
-          //     document.getElementById(`category${this.categoriesArticle[index].id}`).classList.remove('active');
+          //     document.getElementById(`category${ this.categoriesArticle[index].id }`).classList.remove('active');
           //   }
           // }
 

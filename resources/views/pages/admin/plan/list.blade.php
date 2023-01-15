@@ -42,9 +42,9 @@
                 </p>
                 </h2>
 
-                <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4 col-12">
+                <div class="mt-6 mb-10 flex items-center justify-between flex-wrap gap-y-4" x-data="user">
 
-                    <button class="flex col-2 items-center gap-1" onclick="modalHandler(true)">
+                    <button class="flex items-center gap-1" @click="modalHandler(true)">
                         <i class="span" data-feather="plus-square"></i>
                         Add Plan
                     </button>
@@ -81,23 +81,26 @@
                             </thead>
                     
                             <tbody>
-                              <tr class="border border-b-primary">
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold">Yearly</td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>$80.00
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                  <i class="fas fa-circle text-orange-500 mr-2"></i>12 Month
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
-                                    <a href="" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
-                                        <i data-feather="edit" class="w-5 h-5 lg:w-8 lg:h-8"></i>
-                                    </a>
-                                    <a href="" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
-                                        <i data-feather="trash-2" class="w-5 h-5 lg:w-8 lg:h-8"></i>
-                                    </a>
-                                </td>
-                              </tr>
+                              <div x-init="fetchListPlan()"></div>
+                              <template x-for="data in listPlan.data">
+                                <tr class="border border-b-primary">
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name">Yearly</td>
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="'$'+data.price">
+                                    <i class="fas fa-circle text-orange-500 mr-2"></i>$80.00
+                                  </td>
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.expired+' month'">
+                                    <i class="fas fa-circle text-orange-500 mr-2"></i>12 Month
+                                  </td>
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2" x-data="user">
+                                      <button @click="modalHandler(true, data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
+                                          <i data-feather="edit" class="w-5 h-5 lg:w-8 lg:h-8"></i>Edit
+                                      </button>
+                                      <a href="" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
+                                          <i data-feather="trash-2" class="w-5 h-5 lg:w-8 lg:h-8"></i>Delete
+                                      </a>
+                                  </td>
+                                </tr>
+                              </template>
                             </tbody>
                         </table>
                     </div>
@@ -122,7 +125,7 @@
         </div>
 
         
-        <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)">
+        <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
             <div role="alert" class="relative top-[13%] lg:top-[11%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
                 <div class="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
                     <div class="w-full flex justify-start text-primary mb-3">
@@ -130,12 +133,12 @@
                     </div>
                     <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a Plan</h1>
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
-                    <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" placeholder="Name..." />
+                    <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" placeholder="Name..."/>
                     <label for="price" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Price</label>
                     <input id="price" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" type="number" placeholder="price..." />
                     <label for="expired" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Expired</label>
                     <input id="expired" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" type="number" placeholder="expired..." />
-                    <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" onclick="modalHandler()" aria-label="close modal" role="button">
+                    <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="modalHandler()" aria-label="close modal" role="button">
                         <svg  xmlns="http://www.w3.org/2000/svg"  class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" />
                             <line x1="18" y1="6" x2="6" y2="18" />
@@ -144,7 +147,7 @@
                     </button>
                     <div class="flex items-center justify-start w-full">
                         <button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-primary hover:text-opacity-80 rounded text-white px-8 py-2 text-sm">Submit</button>
-                        <button class="relative overflow-hidden ml-3 bg-gray-100 border border-primary text-slate-primary hover:text-opacity-70 transition duration-150 ease-in-out px-8 py-2 text-sm before:absolute" onclick="modalHandler()">Cancel</button>
+                        <button class="relative overflow-hidden ml-3 bg-gray-100 border border-primary text-slate-primary hover:text-opacity-70 transition duration-150 ease-in-out px-8 py-2 text-sm before:absolute" @click="modalHandler()">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -156,14 +159,14 @@
 </section>
 
 <script>
-    let modal = document.getElementById("modal");
-    function modalHandler(val) {
-        if (val) {
-            fadeIn(modal);
-        } else {
-            fadeOut(modal);
-        }
-    }
+    // let modal = document.getElementById("modal");
+    // function modalHandler(val) {
+    //     if (val) {
+    //         fadeIn(modal);
+    //     } else {
+    //         fadeOut(modal);
+    //     }
+    // }
     function fadeOut(el) {
         el.style.opacity = 1;
         (function fade() {
