@@ -23,6 +23,7 @@ module.exports = {
       'gray-primary': '#7A7A7A',
       'gray-secondary': '#8B8585',
       'gray-third': '#D9D9D9',
+      'gray-fourth': '#374151',
       'slate-primary': '#2F2E41',
       'slate-secondary': '#3F3D56',
       'slate-third': '#64748b',
