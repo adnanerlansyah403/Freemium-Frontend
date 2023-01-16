@@ -35,7 +35,7 @@
             <div class="w-full col-12 lg:col-9">
                 
                 <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
-                    <i class="span font-bold dark:text-white" data-feather="activity"></i>
+                    <i class="span font-bold dark:text-white" data-feather="bookmark"></i>
                     <p>
                     <span class="span dark:text-white">Dashboard</span>
                     Admin (Category)
