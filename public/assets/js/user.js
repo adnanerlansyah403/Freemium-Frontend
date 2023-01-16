@@ -209,6 +209,71 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    modalHandlerCategory(val, id = 0) {
+      let modal = document.getElementById("modal");
+      let category_id = document.getElementById("category_id");
+      let name = document.getElementById("name");
+
+      if (id === 0) {
+        name.value = '';
+        category_id.value = 0;
+      }
+
+      if (val) {
+        fadeIn(modal);
+      } else {
+        fadeOut(modal);
+      }
+      fetch(`${this.apiUrl}category/${id}`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          data = await response.json();
+          name.value = data.data.name;
+          category_id.value = data.data.id;
+        })
+    },
+
+    async actionCategory() {
+      let id = document.getElementById("category_id").value;
+      let name = document.getElementById("name");
+      let icon = document.getElementById('icon').files[0];
+
+      formData = new FormData();
+
+      formData.append('name', name.value);
+
+      if (id == 0) {
+        path = '';
+        formData.append('icon', icon);
+      } else {
+        path = `/${id}/update`;
+        if (icon) {
+          formData.append('icon', icon);
+        }
+      }
+
+      category = await fetch(`${this.apiUrl}category${path}`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+        body: formData
+      })
+
+      data = await category.json();
+
+      if (data.status) {
+        localStorage.setItem('message', data.message);
+        localStorage.setItem('showFlash', true);
+        window.location.reload();
+      }
+    },
+
     async actionPlan() {
       let id = document.getElementById("plan_id").value;
       let name = document.getElementById("name");
@@ -253,6 +318,23 @@ document.addEventListener('alpine:init', () => {
       })
 
       data = await plan.json();
+
+      if (data.status) {
+        localStorage.setItem('message', "data successfully deleted!");
+        localStorage.setItem('showFlash', true);
+        window.location.reload();
+      }
+    },
+
+    async deleteCategory(id) {
+      category = await fetch(`${this.apiUrl}category/${id}/delete`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+
+      data = await category.json();
 
       if (data.status) {
         localStorage.setItem('message', "data successfully deleted!");
@@ -953,7 +1035,7 @@ document.addEventListener('alpine:init', () => {
           }
         });
     },
-    
+
     fetchAdminData() {
 
       fetch(`${this.apiUrl}admin`, {
@@ -964,7 +1046,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          
+
           if (data.status) {
             this.data_admin = data.data;
             this.showFlash = true;
