@@ -50,11 +50,12 @@
                     </button>
 
                     <div class="w-full flex items-center flex-wrap gap-2 gap-y-3">
-
-                        <div class="p-2 w-full flex items-center justify-between bg-white shadow-[0px_0px_4px_#7C000B] rounded-lg">
-                            <input type="text" placeholder="Search Here..." class="w-[93%]">
-                            <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
-                        </div>
+                        <form action="" class="w-full">
+                            <div class="p-2 w-full flex items-center justify-between bg-white shadow-[0px_0px_4px_#7C000B] rounded-lg">
+                                <input id="search" type="text" placeholder="Search Here..." class="w-[93%]" name="search">
+                                <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
+                            </div>
+                        </form>
 
                         <button class="group w-full flex items-center justify-center gap-2 p-2 rounded-primary border outline-1 outline-primary transition duration-200 ease-in-out">
                             <p>
