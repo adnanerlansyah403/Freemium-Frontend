@@ -643,55 +643,24 @@ document.addEventListener('alpine:init', () => {
       let attachment = document.getElementById('attachment').files[0];
       let formData = new FormData();
 
+      formData.append('attachment', attachment);
 
-      if (attachment != undefined) {
-        formData.append('attachment', attachment);
-
-        fetch(`${this.apiUrl}payment/checkout`, {
-          method: "POST",
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          },
-          body: formData
-        })
-          .then(async (response) => {
-            const { data } = await response.json();
-            if (data) {
-              Swal.fire({
-                position: 'top-right',
-                icon: 'success',
-                title: 'Payment Successfully!',
-                showConfirmButton: false,
-                timer: 3000
-              })
-              window.location.replace(`${this.baseUrl}profile`);
-            }
-          })
-          .catch(error => {
-            console.log(error.message);
-          })
-
-      } else {
-
-        fetch(`${this.apiUrl}payment/checkout`, {
-          method: "POST",
-          headers: {
-            'Authorization': localStorage.getItem('token')
+      fetch(`${this.apiUrl}payment/checkout`, {
+        method: "POST",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        },
+        body: attachment ? formData.append('attachment', attachment) : ''
+      })
+        .then(async response => {
+          data = await response.json();
+          if (data.status) {
+            window.location.replace(`${this.baseUrl}profile`);
           }
         })
-          .then(async (response) => {
-            const data = await response.json();
-            if (data) {
-              window.location.href = this.baseUrl + 'profile'
-            }
-          })
-          .catch(error => {
-            console.log(error.message);
-          })
-
-      }
-
-      return;
+        .catch(error => {
+          console.log(error.message);
+        })
     },
 
     selectedPlan(item = null) {
