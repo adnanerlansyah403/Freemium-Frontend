@@ -29,11 +29,11 @@
 
         <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9">
 
-            <div class="w-full lg:col-2">
+            <div class="w-full lg:col-3">
                 @include("pages.admin.layouts.partials.sidebar")
             </div>
 
-            <div class="w-full lg:col-10">
+            <div class="w-full lg:col-9">
                 <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
                     <i class="span font-bold dark:text-white" data-feather="activity"></i>
                     <p>
@@ -62,28 +62,28 @@
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="users"></i>
                         <p class="dark:text-white">
-                            <b x-text="data_admin.total_members" class="block dark:text-white">2000</b>
+                            <b x-text="data_admin.total_members" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Members</span>
                         </p>
                     </li>
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="bookmark"></i>
-                        <p>
-                            <b x-text="data_admin.total_categories" class="block dark:text-white">2000</b>
+                        <p class="dark:text-white">
+                            <b x-text="data_admin.total_categories" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Categories</span>
                         </p>
                     </li>
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="package"></i>
-                        <p>
-                            <b x-text="data_admin.total_plans" class="block dark:text-white">2000</b>
+                        <p class="dark:text-white">
+                            <b x-text="data_admin.total_plans" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Plans</span>
                         </p>
                     </li>
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="credit-card"></i>
-                        <p>
-                            <b x-text="data_admin.total_payments" class="block dark:text-white">2000</b>
+                        <p class="dark:text-white">
+                            <b x-text="data_admin.total_payments" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Orders</span>
                         </p>
                     </li>

@@ -28,32 +28,32 @@
 
         <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9">
 
-            <div class="w-full lg:col-2">
+            <div class="w-full lg:col-3">
                 @include("pages.admin.layouts.partials.sidebar")
             </div>
 
-            <div class="w-full col-12 lg:col-10">
+            <div class="w-full col-12 lg:col-9">
                 
-                <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary rounded-primary text-[18px]">
-                    <i class="span font-bold" data-feather="activity"></i>
+                <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
+                    <i class="span font-bold dark:text-white" data-feather="activity"></i>
                     <p>
-                    <span class="span">Dashboard</span>
+                    <span class="span dark:text-white">Dashboard</span>
                     Admin (User)
                 </p>
                 </h2>
 
                 <div class="mt-6 mb-10 flex items-center justify-between flex-wrap gap-y-4">
 
-                    <div class="w-full flex items-center flex-wrap gap-2 gap-y-3">
+                    <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
 
-                        <div class="p-2 w-full flex items-center justify-between bg-white shadow-[0px_0px_4px_#7C000B] rounded-lg">
+                        <div class="p-2 w-full lg:col-4 flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
                             <input type="text" placeholder="Search Here..." class="w-[93%]">
                             <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                         </div>
 
-                        <button class="group w-full flex items-center justify-center gap-2 p-2 rounded-primary border outline-1 outline-primary transition duration-200 ease-in-out">
+                        <button class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                             <p>
-                                <span class="span group-hover:animate-bounce5">Sort By:</span>A/Z
+                                <span class="span dark:text-white">Sort By:</span>A/Z
                             </p>
                             <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:-rotate-90 transition duration-200 ease-in-out"></i>
                         </button>
@@ -69,24 +69,24 @@
                         <x-alert />
                     </div>
                   </div>
-                    <div class="w-full text-center bg-primary py-2 text-white">List Users</div>
+                    <div class="w-full text-center bg-primary py-2 text-white dark:bg-slate-secondary">List Users</div>
                     <div class="overflow-x-auto">
-                        <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse" x-data="fetchListUser()">
+                        <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse" x-init="fetchListUser()">
                             <thead>
                               <tr>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Username</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Email</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Subscribe Status</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Photo</th>
-                                <th class="px-6 align-middle border border-primary py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
+                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
+                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Username</th>
+                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Email</th>
+                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Subscribe Status</th>
+                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Photo</th>
+                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                               </tr>
                             </thead>
                     
                             <tbody>
                               <template x-for="data in listUser">
-                                <tr class="border border-b-primary">
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name">Obi Imanuel</td>
+                                <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name ? data.name : 'No Data'">Obi Imanuel</td>
                                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.username">obito
                                   </td>
                                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.email">obito@gmail.com 
@@ -98,9 +98,12 @@
                                   </td>
                                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
                                       <button @click="deleteUser(data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
-                                          <i data-feather="trash-2" class="w-5 h-5 lg:w-8 lg:h-8"></i> Delete
+                                          <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i> 
                                       </button>
                                   </td>
+                                  <script>
+                                      feather.replace()
+                                  </script>
                                 </tr>
                               </template>
                             </tbody>
@@ -110,13 +113,13 @@
 
                 <div class="mt-4">
                     <ul class="flex items-center justify-center gap-2">
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a href="" class="">1</a>
                         </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a href="" class="">2</a>
                         </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a href="" class="">3</a>
                         </li>
                     </ul>

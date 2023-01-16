@@ -49,7 +49,6 @@ document.addEventListener('alpine:init', () => {
       fetch(this.apiUrl + 'me', {
         method: "GET",
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': localStorage.getItem('token')
         },
       })
@@ -164,11 +163,11 @@ document.addEventListener('alpine:init', () => {
         }
       })
         .then(async (response) => {
-          data = await response.json();
+          const data = await response.json();
           if (data.message === 'Unauthorized') {
             window.location.replace(this.baseUrl + 'login')
           }
-          this.listPlan = data;
+          this.listPlan = data.data;
 
         })
 
@@ -583,6 +582,7 @@ document.addEventListener('alpine:init', () => {
       })
 
         .then((response) => {
+          console.log(response);
           if (response.ok) {
             // Swal.fire({
             //   position: 'top-end',
@@ -593,12 +593,12 @@ document.addEventListener('alpine:init', () => {
             // })
             window.location.replace(this.baseUrl + 'transaction/details')
           } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Choose Plan First!',
-              confirmButtonColor: 'primary',
-              position: 'center'
-            })
+            // Swal.fire({
+            //   icon: 'error',
+            //   title: 'Choose Plan First!',
+            //   confirmButtonColor: 'primary',
+            //   position: 'center'
+            // })
           }
         });
 
@@ -658,37 +658,38 @@ document.addEventListener('alpine:init', () => {
             const { data } = await response.json();
             if (data) {
               Swal.fire({
-                position: 'top-end',
+                position: 'top-right',
                 icon: 'success',
                 title: 'Payment Successfully!',
                 showConfirmButton: false,
                 timer: 3000
               })
-              return window.location.replace(`${this.baseUrl}profile`)
+              window.location.replace(`${this.baseUrl}profile`);
             }
           })
           .catch(error => {
             console.log(error.message);
           })
 
-        return;
-      }
+      } else {
 
-      fetch(`${this.apiUrl}payment/checkout`, {
-        method: "POST",
-        headers: {
-          'Authorization': localStorage.getItem('token')
-        },
-      })
-        .then(async (response) => {
-          const data = await response.json();
-          if (data) {
-            return window.location.replace(`${this.baseUrl}profile`)
+        fetch(`${this.apiUrl}payment/checkout`, {
+          method: "POST",
+          headers: {
+            'Authorization': localStorage.getItem('token')
           }
         })
-        .catch(error => {
-          console.log(error.message);
-        })
+          .then(async (response) => {
+            const data = await response.json();
+            if (data) {
+              window.location.href = this.baseUrl + 'profile'
+            }
+          })
+          .catch(error => {
+            console.log(error.message);
+          })
+
+      }
 
       return;
     },

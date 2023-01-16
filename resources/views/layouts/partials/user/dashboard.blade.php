@@ -15,7 +15,14 @@
                 </a>
             </li>
             <template x-if="data_user.role == 1">
-                <li class="pb-2 {{ $currentRoute == 'admin.dashboard.index' ? 'border-b border-primary dark:border-white' : '' }} cursor-pointer">
+                <li class="pb-2 
+                {{ $currentRoute == 'admin.dashboard.index' ||
+                Request::segment(2) == 'categories' ||
+                Request::segment(2) == 'plans' ||
+                Request::segment(2) == 'users' ||
+                Request::segment(2) == 'orders'
+                ? 'border-b border-primary dark:border-white' 
+                : '' }} cursor-pointer">
                     <a href="{{ route("admin.dashboard.index") }}" class="text-base font-iceberg">
                         <span class="span dark:text-slate-third">Admin</span>
                         Dashboard
