@@ -12,8 +12,9 @@
     </template>
 </div>
 
-<section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
-    <div x-init="checkRole()"></div>
+<section class="py-[100px]" x-data="admin" x-init="checkSession()" style="display: none;">
+    <div x-init="checkRole();"></div>
+    <div x-init="fetchAdminData();"></div>
     <div
     x-init="
         if(isLogedIn == true) {
@@ -47,42 +48,42 @@
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B]">
                         <i class="span font-bold" data-feather="users"></i>
                         <p>
-                            <b class="block">2000</b>
+                            <b x-text="data_admin.total_users" class="block">2000</b>
                             Total <span class="span">Users</span>
                         </p>
                     </li>
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B]">
                         <i class="span font-bold" data-feather="book"></i>
                         <p>
-                            <b class="block">2000</b>
+                            <b x-text="data_admin.total_articles" class="block">2000</b>
                             Total <span class="span">Articles</span>
                         </p>
                     </li>
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B]">
                         <i class="span font-bold" data-feather="users"></i>
                         <p>
-                            <b class="block">2000</b>
+                            <b x-text="data_admin.total_members" class="block">2000</b>
                             Total <span class="span">Members</span>
                         </p>
                     </li>
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B]">
                         <i class="span font-bold" data-feather="bookmark"></i>
                         <p>
-                            <b class="block">2000</b>
+                            <b x-text="data_admin.total_categories" class="block">2000</b>
                             Total <span class="span">Categories</span>
                         </p>
                     </li>
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B]">
                         <i class="span font-bold" data-feather="package"></i>
                         <p>
-                            <b class="block">2000</b>
+                            <b x-text="data_admin.total_plans" class="block">2000</b>
                             Total <span class="span">Plans</span>
                         </p>
                     </li>
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B]">
                         <i class="span font-bold" data-feather="credit-card"></i>
                         <p>
-                            <b class="block">2000</b>
+                            <b x-text="data_admin.total_payments" class="block">2000</b>
                             Total <span class="span">Orders</span>
                         </p>
                     </li>

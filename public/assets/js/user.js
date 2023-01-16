@@ -906,13 +906,15 @@ document.addEventListener('alpine:init', () => {
   }))
 
   Alpine.data('admin', () => ({
+    isLogedIn: false,
     baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
     imgUrl: "http://127.0.0.1:8001/",
-    data: [],
-    back: false,
+    data_user: [],
+    data_admin: [],
+    status_err: [],
     showFlash: false,
-    message: '',
+    isLoading: false,
 
     flash() {
       if (localStorage.getItem('showFlash')) {
@@ -925,37 +927,56 @@ document.addEventListener('alpine:init', () => {
         console.log('test');
       }
     },
+
+    checkSession() {
+      const token = localStorage.getItem('token')
+      this.isLogedIn = token ? true : false
+
+      if (!this.isLogedIn) {
+        // Fetch API Check Token
+        return window.location.replace(this.baseUrl + 'login')
+      }
+    },
+
+    checkRole() {
+      fetch(this.apiUrl + 'me', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        },
+      })
+        .then(async response => {
+          user = await response.json();
+          this.data_user = user.data
+          if (this.data_user.role != 1) {
+            return window.location.replace(this.baseUrl + 'article');
+          }
+        });
+    },
     
     fetchAdminData() {
 
-      // fetch(`${this.apiUrl}payment / getMyPayment`, {
-      //   method: "GET",
-      //   headers: {
-      //     'Authorization': localStorage.getItem('token'),
-      //   }
-      // })
-      //   .then(async (response) => {
-      //     const data = await response.json();
-      //     this.myTransactions = data.data;
-
-      //     let url = window.location.href;
-      //     let lastPath = url.substring(url.lastIndexOf('/'));
-
-      //     // console.log(this.myTransactions);
-
-      //     if (this.myTransactions[0] != null) {
-      //       if (this.myTransactions[0].status == 1 && lastPath == '/details') {
-      //         window.location.replace(this.baseUrl + "profile");
-      //       }
-      //     }
-
-      //     if (this.myTransactions[0] == null && lastPath == '/details') {
-      //       window.location.replace(`${this.baseUrl}transaction`)
-      //     } else if (this.myTransactions[0] != null && lastPath == '/transaction') {
-      //       window.location.replace(`${this.baseUrl}transaction / details`)
-      //     }
-      //     return;
-      //   })
+      fetch(`${this.apiUrl}admin`, {
+        method: "GET",
+        headers: {
+          'Authorization': localStorage.getItem('token'),
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          
+          if (data.status) {
+            this.data_admin = data.data;
+            this.showFlash = true;
+            console.log(this.data_admin);
+          }
+          else {
+            localStorage.setItem('message', data.message);
+            localStorage.setItem('showFlash', true);
+            // this.flash()
+          }
+        })
     },
   }))
 
