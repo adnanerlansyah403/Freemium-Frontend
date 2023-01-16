@@ -905,6 +905,60 @@ document.addEventListener('alpine:init', () => {
 
   }))
 
+  Alpine.data('admin', () => ({
+    baseUrl: "http://127.0.0.1:8000/",
+    apiUrl: "http://127.0.0.1:8001/api/",
+    imgUrl: "http://127.0.0.1:8001/",
+    data: [],
+    back: false,
+    showFlash: false,
+    message: '',
+
+    flash() {
+      if (localStorage.getItem('showFlash')) {
+        this.showFlash = true;
+        this.message = localStorage.getItem('message');
+        setTimeout(function () {
+          localStorage.removeItem("showFlash")
+          this.showFlash = false;
+        }, 3000);
+        console.log('test');
+      }
+    },
+    
+    fetchAdminData() {
+
+      // fetch(`${this.apiUrl}payment / getMyPayment`, {
+      //   method: "GET",
+      //   headers: {
+      //     'Authorization': localStorage.getItem('token'),
+      //   }
+      // })
+      //   .then(async (response) => {
+      //     const data = await response.json();
+      //     this.myTransactions = data.data;
+
+      //     let url = window.location.href;
+      //     let lastPath = url.substring(url.lastIndexOf('/'));
+
+      //     // console.log(this.myTransactions);
+
+      //     if (this.myTransactions[0] != null) {
+      //       if (this.myTransactions[0].status == 1 && lastPath == '/details') {
+      //         window.location.replace(this.baseUrl + "profile");
+      //       }
+      //     }
+
+      //     if (this.myTransactions[0] == null && lastPath == '/details') {
+      //       window.location.replace(`${this.baseUrl}transaction`)
+      //     } else if (this.myTransactions[0] != null && lastPath == '/transaction') {
+      //       window.location.replace(`${this.baseUrl}transaction / details`)
+      //     }
+      //     return;
+      //   })
+    },
+  }))
+
   Alpine.data('helpers', () => ({
     baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
