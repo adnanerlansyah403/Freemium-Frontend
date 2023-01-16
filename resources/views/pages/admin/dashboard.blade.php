@@ -45,42 +45,42 @@
                 {{-- List Report --}}
 
                 <ul class="mt-8 flex items-center justify-center flex-wrap gap-3 w-full">
-                    <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
+                    <li class="w-full col-12 md:col-6 lg:w-[30%] px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span dark:text-white font-bold" data-feather="users"></i>
                         <p class="dark:text-white">
                             <b x-text="data_admin.total_users" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Users</span>
                         </p>
                     </li>
-                    <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
+                    <li class="w-full col-12 md:col-6 lg:w-[30%] px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="book"></i>
                         <p class="dark:text-white">
                             <b x-text="data_admin.total_articles" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Articles</span>
                         </p>
                     </li>
-                    <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
+                    <li class="w-full col-12 md:col-6 lg:w-[30%] px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="users"></i>
                         <p class="dark:text-white">
                             <b x-text="data_admin.total_members" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Members</span>
                         </p>
                     </li>
-                    <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
+                    <li class="w-full col-12 md:col-6 lg:w-[30%] px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="bookmark"></i>
                         <p class="dark:text-white">
                             <b x-text="data_admin.total_categories" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Categories</span>
                         </p>
                     </li>
-                    <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
+                    <li class="w-full col-12 md:col-6 lg:w-[30%] px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="package"></i>
                         <p class="dark:text-white">
                             <b x-text="data_admin.total_plans" class="block dark:text-slate-fourth">2000</b>
                             Total <span class="span dark:text-white">Plans</span>
                         </p>
                     </li>
-                    <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
+                    <li class="w-full col-12 md:col-6 lg:w-[30%] px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="credit-card"></i>
                         <p class="dark:text-white">
                             <b x-text="data_admin.total_payments" class="block dark:text-slate-fourth">2000</b>

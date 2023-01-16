@@ -94,10 +94,10 @@
                                         </td>
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
                                             <button @click="modalHandlerCategory(true, category.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
-                                                <i data-feather="edit" class="w-5 h-5 lg:w-8 lg:h-8"></i>
+                                                <i data-feather="edit" class="w-5 h-5 lg:w-6 lg:h-6"></i>
                                             </button>
                                             <button @click="deleteCategory(category.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
-                                                <i data-feather="trash-2" class="w-5 h-5 lg:w-8 lg:h-8"></i>
+                                                <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i>
                                             </button>
                                         </td>
                                         <script>
@@ -131,16 +131,16 @@
         
         <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
             <div role="alert" class="relative top-[13%] lg:top-[11%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
-                <div class="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
-                    <div class="w-full flex justify-start text-primary mb-3">
+                <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
+                    <div class="w-full flex justify-start text-primary dark:text-slate-third mb-3">
                         <i data-feather="bookmark" class="w-14 h-14"></i>
                     </div>
                     <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a Category</h1>
                     <input type="hidden" id="category_id" value="0">
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
-                    <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" placeholder="Name..." />
+                    <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary dark:border-white rounded-primary" placeholder="Name..." style="border: 1px solid white" />
                     <label for="icon" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Icon</label>
-                    <input id="icon" type="file" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary rounded-primary" placeholder="Icon..." />
+                    <input id="icon" type="file" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary dark:border-white rounded-primary" placeholder="Icon..." />
                     <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="modalHandlerCategory()" aria-label="close modal" role="button">
                         <svg  xmlns="http://www.w3.org/2000/svg"  class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" />
@@ -149,8 +149,8 @@
                         </svg>
                     </button>
                     <div class="flex items-center justify-start w-full">
-                        <button @click="actionCategory()" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-primary hover:text-opacity-80 rounded text-white px-8 py-2 text-sm">Submit</button>
-                        <button class="relative overflow-hidden ml-3 bg-gray-100 border border-primary text-slate-primary hover:text-opacity-70 transition duration-150 ease-in-out px-8 py-2 text-sm before:absolute" @click="modalHandlerCategory()">Cancel</button>
+                        <button @click="actionCategory()" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-primary dark:bg-slate-third hover:text-opacity-80 rounded text-white px-8 py-2 text-sm">Submit</button>
+                        <button class="relative overflow-hidden ml-3 bg-gray-100 border border-primary dark:border-white dark:text-white text-slate-primary hover:text-opacity-70 transition duration-150 ease-in-out px-8 py-2 text-sm before:absolute" @click="modalHandlerCategory()">Cancel</button>
                     </div>
                 </div>
             </div>
