@@ -1,5 +1,5 @@
 
-# Freemium App 
+# Freemium App di branch main
 
 ![LogoImage](https://res.cloudinary.com/dnupwxh4q/image/upload/v1672972596/FreemiumApp/Logo_fffadk.png)
 
