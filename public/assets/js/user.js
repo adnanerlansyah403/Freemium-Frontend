@@ -156,7 +156,6 @@ document.addEventListener('alpine:init', () => {
     listPlan: '',
     fetchListPlan() {
       const token = localStorage.getItem('token')
-      console.log("apaansi weh")
       fetch(`${this.apiUrl}plan`, {
         method: "GET",
         headers: {
@@ -343,7 +342,7 @@ document.addEventListener('alpine:init', () => {
       const token = localStorage.getItem('token')
 
       this.isLoading = true,
-        fetch(`${this.apiUrl}article / ${id} / edit`, {
+        fetch(`${this.apiUrl}article/${id}/edit`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
@@ -376,7 +375,7 @@ document.addEventListener('alpine:init', () => {
       formData.append('description', editA.description);
       formData.append('thumbnail', editA.thumbnail);
 
-      fetch(this.apiUrl + `article / ${editA.id} / update`, {
+      fetch(this.apiUrl + `article/${editA.id}/update`, {
         method: "POST",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -427,7 +426,7 @@ document.addEventListener('alpine:init', () => {
       formData.append('description', editSub.description);
       formData.append('thumbnail', editSub.thumbnail);
 
-      fetch(this.apiUrl + `sub - article / ${editSub.id} / update`, {
+      fetch(this.apiUrl + `sub-article/${editSub.id}/update`, {
         method: "POST",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -528,7 +527,7 @@ document.addEventListener('alpine:init', () => {
 
     fetchMyTransactions() {
 
-      fetch(`${this.apiUrl}payment / getMyPayment`, {
+      fetch(`${this.apiUrl}payment/getMyPayment`, {
         method: "GET",
         headers: {
           'Authorization': localStorage.getItem('token'),
@@ -566,7 +565,7 @@ document.addEventListener('alpine:init', () => {
       if (attachment != undefined) {
         formData.append('attachment', attachment);
 
-        fetch(`${this.apiUrl}payment / checkout`, {
+        fetch(`${this.apiUrl}payment/checkout`, {
           method: "POST",
           headers: {
             'Authorization': localStorage.getItem('token')
@@ -593,7 +592,7 @@ document.addEventListener('alpine:init', () => {
         return;
       }
 
-      fetch(`${this.apiUrl}payment / checkout`, {
+      fetch(`${this.apiUrl}payment/checkout`, {
         method: "POST",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -682,7 +681,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article ? type = free`, {
+      fetch(`${this.apiUrl}article?type=free`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -704,7 +703,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article ? type = paid`, {
+      fetch(`${this.apiUrl}article?type=paid`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -732,7 +731,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     getDetailArticle(id) {
-      fetch(`${this.apiUrl}article / ${id}`, {
+      fetch(`${this.apiUrl}article/${id}`, {
         method: "GET",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -748,7 +747,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     getSubArticle(id) {
-      fetch(`${this.apiUrl}sub - article / ${id}`, {
+      fetch(`${this.apiUrl}sub-article/${id}`, {
         method: "GET",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -778,7 +777,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article ? search = ${keyword}`, {
+      fetch(`${this.apiUrl}article?search=${keyword}`, {
         method: 'GET',
       })
         .then(async (response) => {
@@ -862,7 +861,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article ? category = ${categoryId}`, {
+      fetch(`${this.apiUrl}article?category=${categoryId}`, {
         method: "GET"
       })
         .then(async (response) => {
