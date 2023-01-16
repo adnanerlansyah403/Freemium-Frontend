@@ -55,7 +55,11 @@
                     <li class="w-full col-12 md:col-6 lg:col-3 px-6 py-8 flex items-start gap-4 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white dark:bg-slate-secondary">
                         <i class="span font-bold dark:text-white" data-feather="book"></i>
                         <p class="dark:text-white">
+<<<<<<< HEAD
                             <b x-text="data_admin.total_articles" class="block dark:text-slate-fourth">2000</b>
+=======
+                            <b class="block dark:text-slate-fourth">2000</b>
+>>>>>>> 1599832 ((-) tanda '' di class)
                             Total <span class="span dark:text-white">Articles</span>
                         </p>
                     </li>
