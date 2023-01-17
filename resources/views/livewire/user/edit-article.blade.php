@@ -78,7 +78,7 @@
                         @click="
                             $refs.file.click();
                         ">
-                        <img x-bind:src="!EditArticle?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full object-cover rounded-lg" x-bind:alt="EditArticle?.thumbnail_1_alt">
+                        <img x-bind:src="!EditArticle?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full rounded-lg" x-bind:alt="EditArticle?.thumbnail_1_alt">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage">
                         </i>
@@ -147,10 +147,14 @@
                             class="px-4 overflow-hidden max-h-0 duration-500 transition-all">
                             <div class="px-1 h-[500px]">
                                 <div class="flex flex-wrap gap-4 max-h-[500px] pb-4 overflow-y-auto">
+                                    {{-- <span x-text="console.log(EditArticle.subarticles)"></span> --}}
                                     <template x-for="(s, index) in EditArticle?.subarticles">
                                         <span type="button" x-show="s"
                                             class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
-                                            <b x-text="s?.title ? s?.title + s?.id : 'New Sub-Article'">Sub-EditArticle 1</b>
+                                            <div class="flex items-center gap-1">
+                                                <b x-text="s?.title ? s?.title : 'New Sub-Article'">Sub-EditArticle 1</b>
+                                                <b x-text="s?.title ? '(' + Number(index + 1) + ')' : ''" class="text-primary dark:text-white"></b>
+                                            </div>
                                             <div class="flex items-center gap-1">
                                                 <button type="button" @click="
                                                     console.log('test');
@@ -224,7 +228,7 @@
                         @click="
                             $refs.filesubarticle.click();
                         ">
-                        <img x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full object-cover rounded-lg" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt">
+                        <img x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt">
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimagesubarticle">
                         </i>
@@ -259,14 +263,13 @@
                     <span class="text-md">Choose Your Plan</span>
                     <div class="flex items-center gap-2 mt-2">
                         <label for="free" class="flex items-center gap-1">
-                            <input type="radio" name="status" id="free" value="free" x-model="EditArticle.subarticles[editSub].type">
+                            <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-model="EditArticle.subarticles[editSub].type">
                             <span class="text-base">Free</span>
                         </label>
                         <label for="paid" class="flex items-center gap-1">
-                            <input type="radio" name="status" id="paid" value="paid" x-model="EditArticle.subarticles[editSub].type">
+                            <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-model="EditArticle.subarticles[editSub].type">
                             <span class="text-base">Member-Only</span>
                         </label>
-                        <span x-text="EditArticle?.subarticles?.[editSub]?.type"></span>
                     </div>
                     <p class="mt-4">*Get Royalty for Author</p>
 

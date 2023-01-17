@@ -228,7 +228,7 @@
                                     <div class="mb-5 col-12 lg:col-12">
                                         <label for="text" class="text-md">Title</label>
                                         <input type="text" placeholder="Your text..."
-                                            class="title_sub dark:text-black px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white hover:bg-white mt-4">
+                                            class="title_sub dark:text-white px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-primary border border-white hover:bg-white mt-4">
                                     </div>
                         
                                 </div>

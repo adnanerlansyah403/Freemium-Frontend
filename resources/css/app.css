@@ -61,11 +61,7 @@
     }
 
     input[type="radio"] {
-        /* remove standard background appearance */
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        /* create custom radiobutton appearance */
+        @apply accent-primary dark:accent-slate-fourth;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -77,9 +73,14 @@
         /* background-color only for content */
         background-clip: content-box;
         border: 2px solid #bbbbbb;
-        /* background-color: #e7e6e7; */
+        /* accent-color: #7C000B !important; */
+        /* background-color: #2F2E41; */
         border-radius: 50%;
     }
+
+    /* input[type="radio"]:checked {
+        @apply accent-slate-secondary
+    } */
 
     /* appearance for checked radiobutton */
     /* input[type="radio"]:checked {

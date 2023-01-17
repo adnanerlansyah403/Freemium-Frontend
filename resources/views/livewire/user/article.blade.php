@@ -46,7 +46,8 @@
             </template>
             
             <template x-if="!isLoading">
-                <template x-for="(item, index) in listMyArticle.data">
+                <template x-for="(item, index) in listMyArticle.data.length > 1 ? listMyArticle.data.slice(0, itemMyArticle) : listMyArticle.data">
+                    
                     <div class="group flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between mb-10 gap-6">
 
                         <div class="relative z-10 flex items-start flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white lg:mx-0 px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg overflow-hidden">
@@ -109,11 +110,50 @@
 
                 </template>
             </template>
+
+            <template x-if="listMyArticle.data.length > 1 && listMyArticle.data.length > itemMyArticle">
+                
+                <div>
+                    <template x-if="isLoadMore">
+                        <div class="flex items-center justify-center">
+                            <span class="span dark:text-slate-third">Loading...</span>
+                        </div>
+                    </template>
+                    
+                    <template x-if="!isLoadingMyArticle">
+                        <div class="flex items-center justify-center">
+                            <button @click="
+                            loadMoreMyArticle()
+                            " id="loadMore" class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</button>
+                        </div>
+                    </template>
+                </div>
             
-            {{-- <i x-text="console.log(listMyArticle.data.length || listMyArticle.data == undefined)"></i> --}}
+            </template>
             
             <template x-if="listMyArticle.data.length == 0">
                 <h1 class="text-center text-md"><span class="span dark:text-slate-third">Oops</span>, You don't have an article</h1>
+            </template>
+
+            <span x-text="console.log(itemMyArticle > listMyArticle.data.length)"></span>
+            <span x-text="console.log(listMyArticle.data.length < itemMyArticle)"></span>
+            <template x-if="itemMyArticle > listMyArticle.data.length && listMyArticle.data.length > 1">
+                <div class="flex items-center justify-center">
+                    <div id="resetButton" class="flex items-center justify-center" style="display: none;"
+                        x-init="
+                            setTimeout(() => {
+                                document.getElementById('resetButton').style.display = 'block';
+                            }, 300)
+                        "
+                    >
+                        
+                        <button 
+                        x-on:click="
+                            itemMyArticle = 3;"
+                        class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</button>
+    
+                    </div>
+                </div>
             </template>
         </div>
 

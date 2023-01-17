@@ -14,11 +14,14 @@ document.addEventListener('alpine:init', () => {
     status_err: [],
     showFlash: false,
     isLoading: false,
+    isLoadingMyArticle: false,
+    isLoadMore: false,
     DetailArticle: {
       data: ''
     },
     EditArticle: [],
     listMyArticle: [],
+    itemMyArticle: 3,
     myTransactions: [],
     message: '',
     categories: [],
@@ -441,6 +444,16 @@ document.addEventListener('alpine:init', () => {
           console.log(error)
         })
 
+    },
+
+    loadMoreMyArticle() {
+      this.isLoadingMyArticle = true;
+      this.isLoadMore = true;
+      setTimeout(() => {
+        this.isLoadingMyArticle = false;
+        this.isLoadMore = false;
+        this.itemMyArticle += 3;
+      }, 600)
     },
 
     fetchListMyArticle() {
