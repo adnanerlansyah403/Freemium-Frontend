@@ -77,6 +77,11 @@
             feather.replace()
         </script>
 
+        {{-- Ionicon Scripts --}}
+
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
         {{-- Ckeditor5 Scripts --}}
 
         <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>

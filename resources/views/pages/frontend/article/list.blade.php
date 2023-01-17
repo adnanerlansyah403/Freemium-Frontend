@@ -78,7 +78,7 @@
     
                 <div class="flex flex-col justify-center gap-[9px] mt-[28px]">
                     <div class="text-black font-extrabold">
-                        <h1 class="text-sm dark:text-slate-fourth leading-[21px] font-extrabold">Or <span class="text-primary dark:text-white font-bold"> Filter By : </span></h1>
+                        <h1 class="text-[16px] font-poppins dark:text-slate-fourth leading-[21px] font-extrabold">Or <span class="text-primary dark:text-white font-bold">Filter By : </span></h1>
                     </div>
                     <div class="flex items-center gap-2 mt-2">
                         <div class="flex items-center gap-[5px]">
