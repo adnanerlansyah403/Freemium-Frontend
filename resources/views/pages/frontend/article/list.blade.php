@@ -32,6 +32,7 @@
 <section class="lg:px-[12px] px-8 pt-[88px]" x-data="user">
 
     {{-- alert --}}
+    <span x-text="console.log(isLogedIn)"></span>
     <template x-if="isLogedIn == true">
         <div x-data="user" class="container mx-auto w-full">
             <div x-init="flash()"></div>
@@ -49,9 +50,11 @@
                 <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max" style="display: none;">
                     <a href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                     x-init="
-                        setTimeout(() => {
-                            document.getElementById('buttonTransactionCreate').style.display = 'flex';
-                        }, 1000)
+                        window.addEventListener('DOMContentLoaded', function() {
+                            setTimeout(() => {
+                                document.getElementById('buttonTransactionCreate').style.display = 'flex';
+                            }, 1000)
+                        });
                     "
                     >
                         <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
@@ -113,12 +116,14 @@
 
             <template x-if="!data_user.subscribe_status">
                 <div id="alertSubscribe" style="display: none"
-                x-init="
-                    setTimeout(() => {
-                        document.getElementById('alertSubscribe').style.display = 'block';
-                    }, 600)
-                ">
-                    <div class="lg:w-full w-[320px] md:w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 mt-5 lg:mt-0 font-normal text-sm px-4 py-2">
+                >
+                    <div x-init="
+                    window.addEventListener('DOMContentLoaded', function() {
+                        setTimeout(() => {
+                            document.getElementById('alertSubscribe').style.display = 'block';
+                        }, 1000)
+                    })
+                    " class="lg:w-full w-[320px] md:w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 mt-5 lg:mt-0 font-normal text-sm px-4 py-2">
                         You have to 
                         <span class="font-bold text-primary dark:text-slate-third leading-[27px]">
                             Subscribe</span>  to Get Unlimited Access
