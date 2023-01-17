@@ -59,7 +59,7 @@
                             <p>
                                 <span class="span dark:text-white">Sort By:</span>A/Z
                             </p>
-                            <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:-rotate-90 transition duration-200 ease-in-out"></i>
+                            <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary dark:group-hover:text-white  group-hover:-rotate-90 transition duration-200 ease-in-out"></i>
                         </button>
 
                     </div>

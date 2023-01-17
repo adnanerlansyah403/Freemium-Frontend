@@ -103,7 +103,6 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
                                     $refs.image.alt = $refs.file.name;
                                     $refs.filename.classList.add('active');
                                     $refs.filename.innerText = $refs.file.files[0].name;
-                                    $refs.removefile.classList.add('active')
                                 }
                             }
                         ">

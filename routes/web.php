@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Livewire\User\Article;
 
 // livewire
 use App\Http\Livewire\User\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\User\Article;
 use App\Http\Livewire\User\EditArticle;
 use App\Http\Controllers\ArticleController;
 

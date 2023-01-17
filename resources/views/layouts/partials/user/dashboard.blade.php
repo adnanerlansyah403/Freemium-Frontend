@@ -20,7 +20,8 @@
                 Request::segment(2) == 'categories' ||
                 Request::segment(2) == 'plans' ||
                 Request::segment(2) == 'users' ||
-                Request::segment(2) == 'orders'
+                Request::segment(2) == 'orders'||
+                Request::segment(2) == 'myarticle'
                 ? 'border-b border-primary dark:border-white' 
                 : '' }} cursor-pointer">
                     <a href="{{ route("admin.dashboard.index") }}" class="text-base font-iceberg">

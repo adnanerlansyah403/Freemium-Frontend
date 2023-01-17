@@ -51,11 +51,11 @@
                             <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                         </div>
 
-                        <button class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
+                        <button @click="sortOrder()" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                             <p>
                                 <span class="span dark:text-white">Sort By:</span>A/Z
                             </p>
-                            <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:-rotate-90 transition duration-200 ease-in-out"></i>
+                            <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:-rotate-90 dark:group-hover:text-white transition duration-200 ease-in-out"></i>
                         </button>
 
                     </div>
@@ -80,18 +80,18 @@
                                 <div x-init="fetchListOrder()"></div>
                                 <template x-for="(item, index) in listOrder">
                                     <tr class="border border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
-                                        <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap font-semibold" x-text="item.user.name ? item.user.name : 'No data'">Obi Imanuel</td>
+                                        <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap font-semibold" x-text="item.user.name ? item.user.name : 'No data'"></td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap" x-text="item.plan.name ? item.plan.name : 'No data'">
-                                        <i class="fas fa-circle text-orange-500 mr-2"></i>Lifetime
+                                        <i class="fas fa-circle text-orange-500 mr-2"></i>
                                         </td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
-                                        <i class="fas fa-circle text-orange-500 mr-2" x-text="item.virtual_account_number ? item.virtual_account_number : 'No data'"></i>62613131 
+                                        <i class="fas fa-circle text-orange-500 mr-2" x-text="item.virtual_account_number ? item.virtual_account_number : 'No data'"></i> 
                                         </td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
                                         <i class="fas fa-circle text-orange-500 mr-2" x-text="item.payment_date ? convertDate(item.payment_date) : 'No data'"></i> 
                                         </td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap flex ml-4 items-center gap-2">
-                                            <button @click="showOrder(true, item.id)" class="group" title="Edit">
+                                            <button @click="showOrder(true, item.id)" class="group" title="Details">
                                                 <i data-feather="eye" class="group-hover:text-primary dark:group-hover:text-white transition duration-200 ease-in-out w-5 h-5 lg:w-6 lg:h-6"></i>
                                             </button>
                                         </td>
@@ -145,7 +145,7 @@
                     </p>
                     <p class="mt-3">
                         <b class="span dark:text-slate-fourth">Virtual Number : </b>
-                        <span class="dark:text-white" id="vaOrder">6213161</span>
+                        <span class="dark:text-white" id="vaOrder"></span>
                     </p>
                     <p class="mt-3">
                         <b class="span dark:text-slate-fourth">Price : </b>

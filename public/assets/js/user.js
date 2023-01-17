@@ -621,10 +621,9 @@ document.addEventListener('alpine:init', () => {
           let url = window.location.href;
           let lastPath = url.substring(url.lastIndexOf('/'));
 
-          // console.log(this.myTransactions);
 
           if (this.myTransactions[0] != null) {
-            if (this.myTransactions[0].status == 1 && lastPath == '/details') {
+            if (this.myTransactions[0].status == 1 && lastPath == '/details' || lastPath == '/') {
               window.location.replace(this.baseUrl + "profile");
             }
           }
@@ -632,7 +631,7 @@ document.addEventListener('alpine:init', () => {
           if (this.myTransactions[0] == null && lastPath == '/details') {
             window.location.replace(`${this.baseUrl}transaction`)
           } else if (this.myTransactions[0] != null && lastPath == '/transaction') {
-            window.location.replace(`${this.baseUrl}transaction / details`)
+            window.location.replace(`${this.baseUrl}transaction/details`)
           }
           return;
         })
@@ -1039,6 +1038,100 @@ document.addEventListener('alpine:init', () => {
           }
         })
     },
+
+    // ORDERS
+
+    convertDate(date) {
+
+      const months = ["Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+      let tanggal = new Date(date);
+      let month = months[tanggal.getMonth()];
+
+      fullDate = month + ' ' + tanggal.getDate() + ' ,' + tanggal.getFullYear();
+
+      return fullDate;
+
+    },
+
+    fetchListOrder() {
+
+      fetch(`${this.apiUrl}payment`, {
+        method: 'GET',
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        }
+      })
+        .then(async response => {
+          const data = await response.json();
+          this.listOrder = data.data;
+          console.log(this.listOrder);
+        });
+
+    },
+
+    showOrder(val, id = 0) {
+      let modal = document.getElementById("modal");
+
+      let nameOrder = document.getElementById("nameOrder");
+      let emailOrder = document.getElementById("emailOrder");
+      let planOrder = document.getElementById("planOrder");
+      let priceOrder = document.getElementById("priceOrder");
+      let vaOrder = document.getElementById("vaOrder");
+      let paymentDateOrder = document.getElementById("paymentDateOrder");
+
+      if (id === 0) {
+        nameOrder.value = '';
+        emailOrder.value = '';
+        vaOrder.value = 0;
+        priceOrder = 0;
+        paymentDateOrder.value = '';
+      }
+
+      if (val) {
+        fadeIn(modal);
+      } else {
+        fadeOut(modal);
+      }
+      fetch(`${this.apiUrl}payment/${id}/show`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          // console.log(data.data);
+
+          nameOrder.innerText = data.data.user.name ? data.data.user.name : "User hasn't name yet";
+          emailOrder.innerText = data.data.user.email ? data.data.user.email : "User hasn't email yet";
+          planOrder.innerText = data.data.plan.name;
+          priceOrder.innerText = '$' + data.data.total_price;
+          vaOrder.innerText = data.data.virtual_account_number;
+          paymentDateOrder.innerText = this.convertDate(data.data.payment_date);
+
+        })
+    },
+
+    // FILTERING ORDERS
+
+    searchOrder(keyword) {
+      // console.log(keyword);
+
+      fetch(`${this.apiUrl}payment?search=${keyword}`, {
+        method: 'GET',
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listOrder = data.data
+          console.log(data);
+        })
+
+    },
+
   }))
 
   Alpine.data('helpers', () => ({
