@@ -94,23 +94,6 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
-    checkIsAdmin() {
-      fetch(this.apiUrl + 'me', {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
-        },
-      })
-        .then(async response => {
-          user = await response.json();
-          this.data_user = user.data
-          if (this.data_user.role == 1) {
-            return window.location.replace(this.baseUrl + 'article');
-          }
-        });
-    },
-
     setTiny(id, text) {
       tinymce.get(id).setContent(text);
     },
@@ -813,7 +796,6 @@ document.addEventListener('alpine:init', () => {
     },
 
     getDetailArticle(id) {
-      // console.log(id);
       fetch(`${this.apiUrl}article/${id}`, {
         method: "GET",
         headers: {
@@ -822,9 +804,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          console.log(data);
           this.detailArticle = data.data;
-          // console.log(this.detailArticle);
         })
         .catch(error => {
           console.log(error);
@@ -928,7 +908,17 @@ document.addEventListener('alpine:init', () => {
     },
 
     // CATEGORIES ARTICLE
-
+    sortCol: null,
+    sortAsc: false,
+    sort(col = 'name') {
+      if (this.sortCol === col) this.sortAsc = !this.sortAsc;
+      this.sortCol = col;
+      this.categoriesArticle.sort((a, b) => {
+        if (a[this.sortCol] < b[this.sortCol]) return this.sortAsc ? 1 : -1;
+        if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
+        return 0;
+      });
+    },
     getCategories() {
       const params = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
@@ -1204,16 +1194,13 @@ document.addEventListener('alpine:init', () => {
       let priceOrder = document.getElementById("priceOrder");
       let vaOrder = document.getElementById("vaOrder");
       let paymentDateOrder = document.getElementById("paymentDateOrder");
-      let imageOrder = document.getElementById("imageOrder");
 
       if (id === 0) {
         nameOrder.value = '';
         emailOrder.value = '';
-        vaOrder.value = '';
-        priceOrder.value = '';
+        vaOrder.value = 0;
+        priceOrder = 0;
         paymentDateOrder.value = '';
-        document.getElementById('imageOrderWrapper').style.display = 'none';
-        imageOrder.setAttribute('src', '');
       }
 
       if (val) {
@@ -1238,11 +1225,6 @@ document.addEventListener('alpine:init', () => {
           priceOrder.innerText = '$' + data.data.total_price;
           vaOrder.innerText = data.data.virtual_account_number;
           paymentDateOrder.innerText = this.convertDate(data.data.payment_date);
-
-          if (data.data.attachment) {
-            document.getElementById('imageOrderWrapper').style.display = 'block';
-            imageOrder.setAttribute('src', this.imgUrl + data.data.attachment);
-          }
 
         })
     },

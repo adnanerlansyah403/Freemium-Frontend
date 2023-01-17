@@ -32,8 +32,8 @@
                 @include("pages.admin.layouts.partials.sidebar")
             </div>
 
-            <div class="w-full col-12 lg:col-9">
-                
+            <div class="w-full col-12 lg:col-9" x-data="articles">
+                <div x-init="getCategories()"></div>
                 <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
                     <i class="span dark:text-white font-bold" data-feather="bookmark"></i>
                     <p>
@@ -57,7 +57,7 @@
                             </div>
                         </form>
 
-                        <button class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
+                        <button @click="sort('name')" type="button" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                             <p>
                                 <span class="span dark:text-white group-hover:animate-bounce5">Sort By:</span>A/Z
                             </p>
@@ -76,8 +76,7 @@
                         </div>
                     </div> --}}
                     <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Category</div>
-                    <div class="overflow-x-auto" x-data="articles">
-                        <div x-init="getCategories()"></div>
+                    <div class="overflow-x-auto">
                         <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                             <thead>
                               <tr>
