@@ -910,29 +910,39 @@ document.addEventListener('alpine:init', () => {
     // CATEGORIES ARTICLE
     sortCol: null,
     sortAsc: false,
+    search: '',
     sort(col = 'name') {
       if (this.sortCol === col) this.sortAsc = !this.sortAsc;
       this.sortCol = col;
-      this.categoriesArticle.sort((a, b) => {
+      this.categoriesArticle.data.sort((a, b) => {
         if (a[this.sortCol] < b[this.sortCol]) return this.sortAsc ? 1 : -1;
         if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
         return 0;
       });
     },
+    paginate(url) {
+      fetch(`${url}`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.categoriesArticle = data.data;
+        })
+    },
+    searchCategory() {
+      fetch(`${this.apiUrl
+        }category?search=${this.search}`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.categoriesArticle = data.data;
+        })
+    },
     getCategories() {
-      const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-      // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-      let search = params.search;
-      if (search) {
-        path = '?search=' + search;
-      } else {
-        path = ''
-      }
 
       fetch(`${this.apiUrl
-        }category${path}`, {
+        }category`, {
         method: "GET"
       })
         .then(async (response) => {

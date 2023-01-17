@@ -12,6 +12,13 @@
     </template>
 </div>
 
+<style>
+    .bg-active {
+        background : #7C000D;
+        color: white;
+    }
+</style>
+
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
     <div x-init="checkRole()"></div>
     <div
@@ -50,12 +57,12 @@
                     </button>
 
                     <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
-                        <form action="" class="w-full lg:col-4">
+                        <div action="" class="w-full lg:col-4">
                             <div class="p-2 w-full flex items-center justify-between bg-white dark:bg-slate-secondary dark:shadow-none dark:border dark:border-white shadow-[0px_0px_4px_#7C000B] rounded-lg">
-                                <input id="search" name="search" type="text" placeholder="Search Here..." class="w-[93%] dark:text-white">
+                                <input id="search" x-model="search" @keydown.enter="searchCategory()" type="text" placeholder="Search Here..." class="w-[93%] dark:text-white">
                                 <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                             </div>
-                        </form>
+                        </div>
 
                         <button @click="sort('name')" type="button" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                             <p>
@@ -87,7 +94,7 @@
                             </thead>
                     
                             <tbody>
-                                <template x-for="category in categoriesArticle">
+                                <template x-for="category in categoriesArticle.data">
                                     <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="category.name">Laravel</td>
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
@@ -120,15 +127,11 @@
 
                 <div class="mt-4">
                     <ul class="flex items-center justify-center gap-2">
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">1</a>
-                        </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">2</a>
-                        </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">3</a>
-                        </li>
+                        <template x-for="(category, index) in categoriesArticle.links">
+                            <li @click="paginate(category.url)" x-bind:class="category.active ? 'bg-active' : ''" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                <button x-text="index == 0 ? '<' : index == (categoriesArticle.links.length - 1) ? '>' : category.label">1</button>
+                            </li>
+                        </template>
                     </ul>
                 </div>
 
