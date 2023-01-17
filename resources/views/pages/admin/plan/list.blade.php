@@ -68,12 +68,12 @@
                 </div>
 
                 <div class="w-full rounded-primary bg-white shadow-lg">
-                  <div x-data="user">
+                  {{-- <div x-data="user">
                       <div x-init="flash()"></div>
                       <div x-show="showFlash">
                           <x-alert />
                       </div>
-                  </div>
+                  </div> --}}
                     <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Plans</div>
                     <div class="overflow-x-auto">
                         <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">

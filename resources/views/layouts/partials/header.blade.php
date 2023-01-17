@@ -8,7 +8,7 @@
         </a>
     </figure>
 
-    <div class="flex items-center gap-3 sm:gap-2" x-data="auth">
+    <div class="flex items-center gap-2" x-data="auth">
         <div x-init="checkSession()"></div>
 
         <template x-if="!isLogedIn">
