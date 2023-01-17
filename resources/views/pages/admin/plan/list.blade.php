@@ -49,7 +49,7 @@
                         Add Plan
                     </button>
 
-                    <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
+                    {{-- <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
                         <span x-text="console.log(keywordPlan)"></span>
                         <div class="p-2 w-full lg:col-4 flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
                             <input type="text" placeholder="Search Here..." class="w-[93%] dark:text-white">
@@ -63,7 +63,7 @@
                             <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary dark:group-hover:text-white group-hover:-rotate-90 transition duration-200 ease-in-out"></i>
                         </button>
 
-                    </div>
+                    </div> --}}
 
                 </div>
 
@@ -122,7 +122,7 @@
                     </div>
                 </div>
 
-                <div class="mt-4">
+                {{-- <div class="mt-4">
                     <ul class="flex items-center justify-center gap-2">
                         <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a href="" class="">1</a>
@@ -134,7 +134,7 @@
                             <a href="" class="">3</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
 
             </div>
 
