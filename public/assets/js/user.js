@@ -642,14 +642,15 @@ document.addEventListener('alpine:init', () => {
       let attachment = document.getElementById('attachment').files[0];
       let formData = new FormData();
 
-      formData.append('attachment', attachment);
+      if (attachment) formData.append('attachment', attachment);
+      if (!attachment) formData = '';
 
       fetch(`${this.apiUrl}payment/checkout`, {
         method: "POST",
         headers: {
           'Authorization': localStorage.getItem('token')
         },
-        body: attachment ? formData.append('attachment', attachment) : ''
+        body: formData
       })
         .then(async response => {
           data = await response.json();
