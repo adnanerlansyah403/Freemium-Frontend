@@ -1327,6 +1327,7 @@ document.addEventListener('alpine:init', () => {
       if (string.length > max) {
         return string.substring(0, max) + "..."
       }
+      return string;
     },
 
     darkMode() {
