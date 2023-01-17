@@ -973,8 +973,10 @@ document.addEventListener('alpine:init', () => {
     data_user: [],
     data_admin: [],
     status_err: [],
+    listOrder: [],
     showFlash: false,
     isLoading: false,
+    keyword: '',
 
     flash() {
       if (localStorage.getItem('showFlash')) {
