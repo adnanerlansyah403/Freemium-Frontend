@@ -623,7 +623,7 @@ document.addEventListener('alpine:init', () => {
 
 
           if (this.myTransactions[0] != null) {
-            if (this.myTransactions[0].status == 1 && lastPath == '/details' || lastPath == '/') {
+            if (this.myTransactions[0].status == 1 && lastPath == '/details') {
               window.location.replace(this.baseUrl + "profile");
             }
           }

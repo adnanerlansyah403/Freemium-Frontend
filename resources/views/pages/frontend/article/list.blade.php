@@ -1,6 +1,6 @@
 @extends("homepage")
 
-@section("title", "Lists - Freemium App")
+@section("title", "List - Freemium App")
 
 @section("content")
 
@@ -32,7 +32,7 @@
 <section class="lg:px-[12px] px-8 pt-[88px]" x-data="user">
 
     {{-- alert --}}
-    <template x-if="isLogedIn">
+    <template x-if="isLogedIn == true">
         <div x-data="user" class="container mx-auto w-full">
             <div x-init="flash()"></div>
             <div x-show="showFlash">
@@ -46,12 +46,12 @@
         {{-- kiri --}}
         <div class="lg:col-3">
             <template  x-if="!data_user.subscribe_status">
-                <div class="w-full lg:w-[270px] mx-auto h-max">
-                    <a id="buttonTransactionCreate" style="display: none;" href="{{ route('transaction.create') }}" class="bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max" style="display: none;">
+                    <a style="display: none;" href="{{ route('transaction.create') }}" class="bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                     x-init="
                         setTimeout(() => {
                             document.getElementById('buttonTransactionCreate').style.display = 'flex';
-                        }, 600)
+                        }, 1000)
                     "
                     >
                         <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
