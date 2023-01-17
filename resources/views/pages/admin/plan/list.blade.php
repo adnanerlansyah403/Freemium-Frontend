@@ -50,7 +50,7 @@
                     </button>
 
                     <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
-
+                        <span x-text="console.log(keywordPlan)"></span>
                         <div class="p-2 w-full lg:col-4 flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
                             <input type="text" placeholder="Search Here..." class="w-[93%] dark:text-white">
                             <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">

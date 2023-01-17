@@ -170,6 +170,7 @@ document.addEventListener('alpine:init', () => {
       window.location.replace(this.baseUrl + 'login')
     },
     listPlan: '',
+    keywordPlan: '',
     fetchListPlan() {
       const token = localStorage.getItem('token')
       fetch(`${this.apiUrl}plan`, {
@@ -222,6 +223,19 @@ document.addEventListener('alpine:init', () => {
           plan_id.value = data.data.id;
 
         })
+    },
+
+    searchPlan(keyword) {
+      // fetch(`${this.apiUrl}category`, {
+      //   method: 'GET',
+      //   headers: {
+      //     Authorization: localStorage.getItem('token'),
+      //   }
+      // })
+      //   .then(async (response) => {
+      //     const data = await response.json();
+      //     console.log(data);
+      //   })
     },
 
     modalHandlerCategory(val, id = 0) {
