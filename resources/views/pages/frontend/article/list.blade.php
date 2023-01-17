@@ -194,7 +194,7 @@
 
 
                 <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle != ''">
-                    <p id="articleNotFound" class="text-md mt-10" style="display: none;"
+                    <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
                         x-init="
                             setTimeout(() => {
                                 document.getElementById('articleNotFound').style.display = 'block';
@@ -202,7 +202,7 @@
                         "
                     >
                         <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
-                        <span class="span">Oops</span>, We can't find your article
+                        <span class="span dark:text-slate-fourth">Oops</span>, We can't find your article
                     </p>
                 </template>
 
