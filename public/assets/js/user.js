@@ -17,9 +17,7 @@ document.addEventListener('alpine:init', () => {
     DetailArticle: {
       data: ''
     },
-    EditArticle: {
-      data: ''
-    },
+    EditArticle: [],
     listMyArticle: [],
     myTransactions: [],
     message: '',
@@ -453,8 +451,11 @@ document.addEventListener('alpine:init', () => {
           }
         })
           .then(async (response) => {
-            this.EditArticle = await response.json()
-            if (this.EditArticle.status == false) {
+            data = await response.json();
+            this.EditArticle = data.data;
+            this.categories = data.category;
+
+            if (data.status == false) {
               return window.location.replace(`${this.baseUrl}myarticle`);
             }
             this.isLoading = false
@@ -464,7 +465,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     updateArticle() {
-      let editA = this.EditArticle.data;
+      let editA = this.EditArticle;
       editA.description = tinymce.get('content').getContent();
 
       if (typeof editA.thumbnail !== 'string' && editA.thumbnail[0]) {
@@ -505,7 +506,7 @@ document.addEventListener('alpine:init', () => {
 
     addSub() {
       let id = 0;
-      let article_id = this.EditArticle.data.subarticles[0].article_id;
+      let article_id = this.EditArticle.subarticles[0].article_id;
       let title = '';
       let type = '';
       let description = '';
@@ -514,7 +515,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     updateSub(number) {
-      let editSub = this.EditArticle.data.subarticles[number];
+      let editSub = this.EditArticle.subarticles[number];
       editSub.description = tinymce.get('sub_content').getContent();
 
       if (typeof editSub.thumbnail !== 'string' && editSub.thumbnail[0]) {
@@ -1295,7 +1296,7 @@ document.addEventListener('alpine:init', () => {
       return currency;
     },
 
-    substring(string, max = 5) {
+    substring(string, max = 10) {
       if (string.length > max) {
         return string.substring(0, max) + "..."
       }
