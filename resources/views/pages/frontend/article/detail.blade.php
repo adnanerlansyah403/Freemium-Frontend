@@ -154,25 +154,37 @@
                     <div
                         class="mt-6 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
                         <h3 class="text-md mb-4 font-semibold">Content</h3>
-                        <ul class="flex flex-col gap-4">
-                            {{-- <span x-text="detailArticle?.subarticles.length == 0"></span> --}}
+                        <ul class="flex flex-col gap-4" x-data="user">
+                            <div x-init="fetchMe()"></div>
                             <template x-for="(item, index) in detailArticle?.subarticles">
-                                <li @click="getSubArticle(item.id); back = true; if(showFlash){flash();}"
+                                <li @click="
+                                    getSubArticle(item.id); 
+                                    if(item.type == 'free') {back = true;} 
+                                    if(showFlash){flash();}"
                                     :class="{
                                         'border-primary text-black': item.type == 'paid',
                                         'bg-white border-slate-primary text-slate-primary': content?.id == item.id
                                     }"
                                     class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none dark:text-slate-fourth hover:text-white dark:hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
-                                    <a class="text-base lg:text-md font-iceberg"
-                                        x-text="substring(item?.title) + ' ' + '(' + item.type.toUpperCase() + ')'">Sub-Artikel 1</a>
+                                    <a class="text-base lg:text-md font-iceberg">
+                                        <span x-text="substring(item?.title)"></span>
+                                        <b x-show="data_user.subscribe_status != 1" x-text="'(' + item.type.toUpperCase() + ')'"></b>
+                                    </a>
                                     <template x-if="content?.id == item.id">
                                         <p class="flex items-center gap-1">
                                             <span class="w-4 h-4 rounded-full bg-slate-primary dark:bg-slate-third"></span>
                                             <b>Active</b>
                                         </p>
                                     </template>
-                                    <i x-show="item.type == 'paid'" data-feather="lock"
-                                        class="hover:text-white min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]"></i>
+                                    <template x-if="item.type == 'paid' && data_user.subscribe_status != 1">
+                                        <div>
+                                            <i data-feather="lock"
+                                                class="hover:text-white min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]"></i>
+                                                <script>
+                                                    feather.replace()
+                                                </script>
+                                        </div>
+                                    </template>
                                     <script>
                                         feather.replace()
                                     </script>
