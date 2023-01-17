@@ -14,9 +14,17 @@
 
 @section('content')
 
-    <section class="py-[100px] dark:text-white" x-data="user">
-        <div x-data="articles" x-init="checkSession()">
+    <section class="py-[100px] dark:text-white" x-data="user" style="display: none">
+        <div x-init="checkSession()"></div>
+        <div x-data="articles" x-init="
+        if(isLogedIn == true) {
+            setTimeout(function() {
+                return document.querySelector('section').style.display = 'block';
+            }, 600)
+        }
+        ">
             <span x-init="getDetailArticle(window.location.href.split('/').pop())"></span>
+
             <div class="container mx-auto">
                 <figure class="mb-7">
                     <img x-bind:src="content ? imgUrl + content.thumbnail : imgUrl + detailArticle.thumbnail" src=""
@@ -187,6 +195,7 @@
                 </div>
 
             </div>
+
         </div>
 
     </section>

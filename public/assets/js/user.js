@@ -782,6 +782,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     getDetailArticle(id) {
+      // console.log(id);
       fetch(`${this.apiUrl}article/${id}`, {
         method: "GET",
         headers: {
@@ -790,7 +791,9 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
+          console.log(data);
           this.detailArticle = data.data;
+          // console.log(this.detailArticle);
         })
         .catch(error => {
           console.log(error);
