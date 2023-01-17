@@ -69,12 +69,12 @@
                 </div>
 
                 <div class="w-full rounded-primary bg-white shadow-lg">
-                    <div x-data="user">
+                    {{-- <div x-data="user">
                         <div x-init="flash()"></div>
                         <div x-show="showFlash">
                             <x-alert />
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Category</div>
                     <div class="overflow-x-auto" x-data="articles">
                         <div x-init="getCategories()"></div>

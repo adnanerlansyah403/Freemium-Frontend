@@ -22,10 +22,16 @@
             <div class="flex items-center gap-6" x-data="user">
                 <div x-init="fetchMe()"></div>
                 <div x-init="fetchMyTransactions()"></div>
-                <a href="{{ route('article.create') }}" class="hidden lg:flex items-center gap-2 text-gray-primary dark:hover:text-white text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
-                    <i data-feather="edit"></i>
-                    <span>Write</span>
-                </a>
+                <template x-if="data_user.role == 2">
+                    <a href="{{ route('article.create') }}" class="hidden lg:flex items-center gap-2 text-gray-primary dark:hover:text-white text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
+                        <i data-feather="edit"></i>
+                        <span>Write</span>
+                        <!-- Feather Icons Scripts -->
+                        <script>
+                            feather.replace()
+                        </script>
+                    </a>
+                </template>
                 <div class="relative"
                     x-data="{dropdownmenu : false}"
                 >
@@ -54,7 +60,6 @@
                                     <span>Admin</span>
                                 </a>
                                 <!-- Feather Icons Scripts -->
-                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
                                 <script>
                                     feather.replace()
                                 </script>
