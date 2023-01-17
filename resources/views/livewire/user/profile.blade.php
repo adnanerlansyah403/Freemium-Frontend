@@ -41,6 +41,13 @@
     
                     {{-- <div x-text="console.log(data_user.name)"></div> --}}
     
+                    <div x-data="user" class="container mx-auto">
+                        <div x-init="flash()"></div>
+                        <div x-show="showFlash">
+                            <x-alert />
+                        </div>
+                    </div>
+    
                     <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                         <span class="bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
                             Full Name
@@ -132,13 +139,6 @@
                         <input type="url" class="py-3 w-full lg:w-[65%] dark:text-white" placeholder="Your link instagram..." title="Link Instagram" x-bind:value="data_user.link_instagram" x-model="link_instagram" x-show="linkInputInstagram">
     
                         <input type="url" class="py-3 w-full lg:w-[65%] dark:text-white" placeholder="Your link twitter..." title="Link Twitter" x-bind:value="data_user.link_twitter" x-model="link_twitter" x-show="linkInputTwitter">
-                    </div>
-    
-                    <div x-data="user" class="container mx-auto">
-                        <div x-init="flash()"></div>
-                        <div x-show="showFlash">
-                            <x-alert />
-                        </div>
                     </div>
     
                     <div class="flex items-center justify-center mt-10">
