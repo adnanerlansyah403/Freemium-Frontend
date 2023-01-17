@@ -3,8 +3,13 @@
 {{-- @section("title", "Create Article - Freemium App") --}}
 
 @section("content")
+
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
-    <template x-if="isLogedIn">
+    <div x-init="fetchMe()"></div>
+    <div x-data="admin">
+        <div x-init="checkIsAdmin()"></div>
+    </div>
+    <template x-if="isLogedIn && data_user.role == 2">
         <script>
             document.title = 'Create Article - Freemium App';
         </script>

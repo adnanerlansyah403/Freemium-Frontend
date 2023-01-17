@@ -1,55 +1,21 @@
-@section("title", "Edit Article - Freemium App")
+{{-- @section("title", "Edit Article - Freemium App") --}}
 
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
-    <style>
-        .filename.active {
-            bottom: 0;
-            transition: .2s ease-in-out;
-        }
-
-        .filenamesubarticle.active {
-            bottom: 0;
-            transition: .2s ease-in-out;
-        }
-
-        .filesize.active {
-            right: 12px;
-            transition: .2s ease-in-out;
-        }
-
-        .has-scrollbar::-webkit-scrollbar {
-            background-color: transparent !important;
-            width: 6px !important;
-        }
-
-        .has-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #7C000B;
-            border-radius: 50px;
-            width: 6px !important;
-        }
-
-        .has-scrollbar::-webkit-scrollbar-button {
-            width: calc(25% - 40px);
-        }
-
-        .has-scrollbar::-moz-scrollbar {
-            background-color: #7C000B !important;
-            height: 6px !important;
-        }
-
-        .has-scrollbar::-moz-scrollbar-track {
-            outline: 2px solid #8B8585;
-            border-radius: 50px;
-        }
-
-        .has-scrollbar::-moz-scrollbar-button {
-            width: calc(25% - 40px);
-        }
-    </style>
-    <div x-init="
+    <div x-init="fetchMe()"></div>
+    <div x-data="admin">
+        <div x-init="checkIsAdmin()"></div>
+    </div>
+    <template x-if="isLogedIn && data_user.role == 2">
+        <script>
+            document.title = 'Edit Article - Freemium App';
+        </script>
+    </template>
+    <div
+    x-init="
         if(isLogedIn == true) {
-            fetchEditArticle(window.location.href.split('/').pop())
-            return document.querySelector('section').style.display = 'block';
+            setTimeout(function() {
+                return document.querySelector('section').style.display = 'block';
+            }, 1000)
         }
     ">
 
@@ -327,7 +293,6 @@
 
     </div>
 
-    </div>
 
     <script>
         document.addEventListener('alpine:init', () => {

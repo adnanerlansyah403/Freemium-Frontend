@@ -8,12 +8,14 @@
                     Profile
                 </a>
             </li>
-            <li class="pb-2 {{ $currentRoute == 'article.index' ? 'border-b border-primary dark:border-white' : '' }} cursor-pointer">
-                <a href="{{ route("article.index") }}" class="text-base font-iceberg">
-                    <span class="span dark:text-slate-third">My</span>
-                    Articles
-                </a>
-            </li>
+            <template x-if="data_user.role == 2">
+                <li class="pb-2 {{ $currentRoute == 'article.index' ? 'border-b border-primary dark:border-white' : '' }} cursor-pointer">
+                    <a href="{{ route("article.index") }}" class="text-base font-iceberg">
+                        <span class="span dark:text-slate-third">My</span>
+                        Articles
+                    </a>
+                </li>
+            </template>
             <template x-if="data_user.role == 1">
                 <li class="pb-2 
                 {{ $currentRoute == 'admin.dashboard.index' ||

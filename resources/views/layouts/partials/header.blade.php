@@ -66,12 +66,17 @@
                                 <span>My Profile</span>
                             </a>
                         </li>
-                        <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
-                            <a href="{{ route('article.index') }}" class="flex items-center gap-2">
-                                <i data-feather="file-text"></i>
-                                <span>My Articles</span>
-                            </a>
-                        </li>
+                        <template x-if="data_user.role == 2">
+                            <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
+                                <a href="{{ route('article.index') }}" class="flex items-center gap-2">
+                                    <i data-feather="file-text"></i>
+                                    <span>My Articles</span>
+                                </a>
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </li>
+                        </template>
                         <template x-if="myTransactions[0] != null && data_user.subscribe_status == false">
                             <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
                                 <a href="{{ route('transaction.show') }}" class="flex items-center gap-2">

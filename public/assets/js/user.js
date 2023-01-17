@@ -94,6 +94,23 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
+    checkIsAdmin() {
+      fetch(this.apiUrl + 'me', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        },
+      })
+        .then(async response => {
+          user = await response.json();
+          this.data_user = user.data
+          if (this.data_user.role == 1) {
+            return window.location.replace(this.baseUrl + 'article');
+          }
+        });
+    },
+
     setTiny(id, text) {
       tinymce.get(id).setContent(text);
     },

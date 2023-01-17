@@ -9,15 +9,18 @@
     </template>
 </div>
 
-<section class="py-[100px]" x-data="user" style="display: none;">
-    <div x-init="checkSession()"></div>
-
-    <div  x-init="
-    if(isLogedIn == true) {
-        setTimeout(function() {
-            return document.querySelector('section').style.display = 'block';
-        }, 600)
-    }
+<section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
+    <div x-init="fetchMe()"></div>
+    <div x-data="admin">
+        <div x-init="checkIsAdmin()"></div>
+    </div>
+    <div
+    x-init="
+        if(isLogedIn == true) {
+            setTimeout(function() {
+                return document.querySelector('section').style.display = 'block';
+            }, 1000)
+        }
     ">
 
         <h1 class="font-iceberg text-lg text-center text-primary dark:text-white mb-16">ME</h1>
@@ -26,12 +29,12 @@
     
         <div x-init="fetchMe()"></div>
         
-        <div x-data="user" class="container mx-auto">
+        {{-- <div x-data="user" class="container mx-auto">
             <div x-init="flash()"></div>
             <div x-show="showFlash">
                 <x-alert />
             </div>
-        </div>
+        </div> --}}
     
         <div class="container mx-auto mt-10 w-full dark:text-white" x-data="user">
             <div x-init="fetchListMyArticle()"></div>
@@ -86,7 +89,6 @@
                             </button>
                         </div>
     
-                        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
                         <script>
                             feather.replace()
                         </script>

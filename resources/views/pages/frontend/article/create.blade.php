@@ -3,7 +3,7 @@
 {{-- @section("title", "Create Article - Freemium App") --}}
 
 <div x-data="user" x-init="checkSession()">
-    <template x-if="isLogedIn">
+    <template x-if="isLogedIn && data_user.role == 2">
         <script>
             document.title = 'Create Article - Freemium App';
         </script>
@@ -12,6 +12,10 @@
 
 @section("content")
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
+    <div x-data="admin">
+        <div x-init="checkIsAdmin()"></div>
+    </div>
+
     <div
     x-init="
         if(isLogedIn == true) {
