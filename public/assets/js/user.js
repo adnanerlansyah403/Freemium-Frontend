@@ -354,9 +354,36 @@ document.addEventListener('alpine:init', () => {
     },
 
     listUser: [],
+    search: '',
     paginate(url) {
       fetch(`${url}`, {
-        method: "GET"
+        method: "GET",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listUser = data.data;
+        })
+    },
+    sort(col = 'name') {
+      if (this.sortCol === col) this.sortAsc = !this.sortAsc;
+      this.sortCol = col;
+      this.listUser.data.sort((a, b) => {
+        if (a[this.sortCol] < b[this.sortCol]) return this.sortAsc ? 1 : -1;
+        if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
+        return 0;
+      });
+    },
+    searchUser() {
+      fetch(`${this.apiUrl
+        }user/all?search=${this.search}`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
       })
         .then(async (response) => {
           const data = await response.json();
