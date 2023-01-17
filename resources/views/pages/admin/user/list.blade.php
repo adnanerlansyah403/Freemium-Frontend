@@ -63,12 +63,12 @@
                 </div>
 
                 <div class="w-full rounded-primary bg-white shadow-lg">
-                  <div x-data="user">
+                  {{-- <div x-data="user">
                     <div x-init="flash()"></div>
                     <div x-show="showFlash">
                         <x-alert />
                     </div>
-                  </div>
+                  </div> --}}
                     <div class="w-full text-center bg-primary py-2 text-white dark:bg-slate-secondary">List Users</div>
                     <div class="overflow-x-auto">
                         <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse" x-init="fetchListUser()">
@@ -105,6 +105,13 @@
                                       feather.replace()
                                   </script>
                                 </tr>
+                              </template>
+                              <template x-if="listUser.length == 0">
+                                  <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
+                                      <td colspan="6">
+                                          <span class="text-base dark:text-white">Empty Data</span>
+                                      </td>
+                                  </tr>
                               </template>
                             </tbody>
                         </table>

@@ -100,6 +100,13 @@
                                         </script>
                                     </tr>
                                 </template>
+                                <template x-if="listOrder.length == 0">
+                                    <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
+                                        <td colspan="5">
+                                            <span class="text-base dark:text-white">Empty Data</span>
+                                        </td>
+                                    </tr>
+                                </template>
                             </tbody>
                         </table>
                     </div>
