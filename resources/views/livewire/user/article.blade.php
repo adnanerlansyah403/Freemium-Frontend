@@ -49,7 +49,7 @@
                 <template x-for="(item, index) in listMyArticle.data">
                     <div class="group flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between gap-6 mb-10">
 
-                        <div class="relative z-10 flex items-start flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg">
+                        <div class="relative z-10 flex items-start flex-wrap lg:flex-nowrap lg:justify-between col lg:mx-0 lg:col-10 bg-white px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg">
                             <div class="col col-9 md:col-8" style="margin: 0 !important;">
                                 <div class="flex items-center gap-3">
                                     <figure>
