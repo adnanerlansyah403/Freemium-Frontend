@@ -159,7 +159,13 @@
                         {{-- <span class="mb-4 font-semibold text-primary">AUTHOR</span> --}}
                         <p class="flex items-center gap-2">
                             <span class=" font-bold">Status : </span>
-                            <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm" x-text="data_user.subscribe_status == 1 ? 'Member - '+data_user.payments[0].plan.name : 'Not a Member'">Member - Lifetime</span>
+                            <template x-if="data_user.role == 1">
+                                {{-- <span x-text="console.log(data_user.role)"></span> --}}
+                                <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm" x-text="data_user.role == 1 ? 'Admin Member' : ''">Admin Member</span>
+                            </template>
+                            <template x-if="data_user.role == 2">
+                                <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm" x-text="data_user.subscribe_status == 1 ? 'Member - '+data_user.payments[0].plan.name : 'Not a Member'">Member - Lifetime</span>
+                            </template>
                         </p>
                     </div>
                 </div>

@@ -43,12 +43,12 @@
                         <span class="font-inter" x-text="data_user.name == null ? 'User' : substring(data_user.name)"></span>
                     </button>
                     <ul 
-                        class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-primary dark:bg-slate-secondary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)]"
+                        class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-primary dark:bg-slate-secondary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden"
                         x-show="dropdownmenu"
                         x-transition
                     >
                         <template x-if="data_user.role == 1">
-                            <li class="px-[18px] py-2 rounded-t-primary hover:bg-white hover:text-black transition duration-200 ease-out">
+                            <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
                                 <a href="{{ route('admin.dashboard.index') }}" class="flex items-center gap-2">
                                     <i data-feather="trending-up"></i>
                                     <span>Admin</span>
@@ -60,7 +60,7 @@
                                 </script>
                             </li>
                         </template>
-                        <li class="px-[18px] py-2 rounded-t-primary hover:bg-white hover:text-black transition duration-200 ease-out">
+                        <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
                             <a href="{{ route('profile.index') }}" class="flex items-center gap-2">
                                 <i data-feather="user"></i>
                                 <span>My Profile</span>
