@@ -48,29 +48,29 @@
                         </div>
                     </div>
     
-                    <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                        <span class="bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                    <div class="group flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                        <span class="group-hover:translate-x-1 bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary transition duration-200 ease-in-out">
                             Full Name
                         </span>
                         <input type="text" class="py-3 lg:w-4/5 dark:text-white" placeholder="Your full name..." title="Full Name" x-model="name">
                     </div>
     
-                    <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                        <span class="bg-primary lg:w-[150px] text-white dark:bg-slate-secondary text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                    <div class="group flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                        <span class="group-hover:translate-x-1 bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary transition duration-200 ease-in-out">
                             Username
                         </span>
                         <input type="text" class="py-3 w-full lg:w-4/5 dark:text-white" placeholder="Your username..." x-bind:value="data_user.username" x-model="username" title="Username">
                     </div>
     
-                    <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                        <span class="bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Email">
+                    <div class="group flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                        <span class="group-hover:translate-x-1 bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary transition duration-200 ease-in-out">
                             Email
                         </span>
                         <input type="email" class="py-3 w-full lg:w-4/5 dark:text-white" x-bind:value="data_user.email" x-model="email" placeholder="Your email...">
                     </div>
     
-                    <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                        <span class="bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary" title="Password">
+                    <div class="group flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                        <span class="group-hover:translate-x-1 bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary transition duration-200 ease-in-out">
                             Password
                         </span>
                         <input type="password" class="py-3 w-full lg:w-4/5 dark:text-white" placeholder="Your password..." x-model="password">
@@ -85,7 +85,7 @@
                     </div>
     
                     <ul class="flex items-center justify-center gap-4 my-12">
-                        <li class="w-max cursor-pointer p-3 rounded-full bg-[#4267B2] text-white hover:bg-primary transition duration-200 ease-in-out"
+                        <li class="w-max cursor-pointer p-3 rounded-full bg-[#4267B2] text-white hover:bg-primary dark:hover:bg-slate-secondary transition duration-200 ease-in-out"
                         @click="
                             linkInputFacebook = true;
                             linkInputLinkedin = false;
@@ -94,7 +94,7 @@
                         ">
                             <i data-feather="facebook"></i>
                         </li>
-                        <li class="w-max cursor-pointer p-3 rounded-full bg-[#0077B5] text-white hover:bg-primary transition duration-200 ease-in-out"
+                        <li class="w-max cursor-pointer p-3 rounded-full bg-[#0077B5] text-white hover:bg-primary dark:hover:bg-slate-secondary transition duration-200 ease-in-out"
                         @click="
                         linkInputFacebook = false;
                         linkInputLinkedin = true;
@@ -103,7 +103,7 @@
                         ">
                             <i data-feather="linkedin"></i>
                         </li>
-                        <li class="w-max cursor-pointer p-3 rounded-full bg-[#C13584] text-white hover:bg-primary transition duration-200 ease-in-out"
+                        <li class="w-max cursor-pointer p-3 rounded-full bg-[#C13584] text-white hover:bg-primary dark:hover:bg-slate-secondary transition duration-200 ease-in-out"
                         @click="
                         linkInputFacebook = false;
                         linkInputLinkedin = false;
@@ -112,7 +112,7 @@
                         ">
                             <i data-feather="instagram"></i>
                         </li>
-                        <li class="w-max cursor-pointer p-3 rounded-full bg-[#1DA1F2] text-white hover:bg-primary transition duration-200 ease-in-out"
+                        <li class="w-max cursor-pointer p-3 rounded-full bg-[#1DA1F2] text-white hover:bg-primary dark:hover:bg-slate-secondary transition duration-200 ease-in-out"
                         @click="
                         linkInputFacebook = false;
                         linkInputLinkedin = false;
@@ -123,8 +123,8 @@
                         </li>
                     </ul>
     
-                    <div class="flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                        <span class="bg-primary dark:bg-slate-secondary lg:w-[220px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary">
+                    <div class="group flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                        <span class="group-hover:translate-x-1 bg-primary dark:bg-slate-secondary lg:w-[220px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary transition duration-200 ease-in-out">
                             Link Social
                             <i x-show="linkInputFacebook">Facebook</i>
                             <i x-show="linkInputLinkedin">Linkedin</i>

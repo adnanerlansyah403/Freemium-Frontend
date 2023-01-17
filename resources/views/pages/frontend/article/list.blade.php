@@ -156,7 +156,7 @@
                                     </div>
                                     <div>
                                         <span x-text="console.log(item)"></span>
-                                        <h1 class="text-[18px] font-bold mb-2 leading-[27px]" x-text="item.author.username">Nama Author</h1>
+                                        <h1 class="text-[18px] font-bold font-bebasNeue leading-[27px]" x-text="item.author.username">Nama Author</h1>
                                         <div class="flex gap-3 flex-wrap">
                                             <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
                                             <p class="text-[14px] leading-[21px]">
@@ -174,12 +174,12 @@
             
                                 <div class="flex lg:gap-5 justify-between items-center mt-0 md:mt-5">
                                     <a x-bind:href="baseUrl + `article/detail/${item.id}`"
-                                    class="font-bold text-[24px] leading-9" x-text="item.title">JUDUL ARTIKEL</a>
+                                    class="font-bold text-[24px] font-neucha leading-9" x-text="item.title">JUDUL ARTIKEL</a>
                                     <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
                                         PAID
                                     </button>
                                 </div>
-                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full" x-html="item.description.length > 150 ? item.description.substring(0, 150) + '...' : item.description">
+                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full dark:text-gray-primary" x-html="item.description.length > 150 ? item.description.substring(0, 150) + '...' : item.description">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                                     eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
                                     short desc short desc short desc short desc

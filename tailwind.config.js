@@ -41,6 +41,8 @@ module.exports = {
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
       iceberg: ['Iceberg', 'sans-serif'],
+      bebasNeue: ['Bebas Neue', 'cursive'],
+      neucha: ['Neucha', 'cursive'],
     },
     extend: {
       animation: {
