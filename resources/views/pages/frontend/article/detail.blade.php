@@ -79,9 +79,9 @@
 
                     </div>
 
-                    <div x-show="showFlash">
+                    {{-- <div x-show="showFlash">
                         <x-alert />
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="col md:mx-0 col-12 lg:col-4">
@@ -162,7 +162,7 @@
                                         'border-primary text-black': item.type == 'paid',
                                         'bg-white border-slate-primary text-slate-primary': content.id == item.id
                                     }"
-                                    class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
+                                    class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none dark:text-slate-fourth hover:text-white dark:hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
                                     <a class="text-base lg:text-md font-iceberg"
                                         x-text="substring(item.title, 8) + ' ' + '(' + item.type.toUpperCase() + ')'">Sub-Artikel 1</a>
                                     <template x-if="content.id == item.id">
@@ -186,7 +186,7 @@
                             </template>
                             <template x-if="detailArticle.subarticles.length == 0">
                                 <li class="text-base">
-                                    <span class="span">No</span> Sub Article
+                                    <span class="span dark:text-slate-fourth">No</span> Sub Article
                                 </li>
                             </template>
                         </ul>
