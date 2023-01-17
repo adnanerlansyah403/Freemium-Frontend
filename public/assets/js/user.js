@@ -356,6 +356,15 @@ document.addEventListener('alpine:init', () => {
     },
 
     listUser: [],
+    paginate(url) {
+      fetch(`${url}`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listUser = data.data;
+        })
+    },
     fetchListUser() {
       fetch(`${this.apiUrl}user/all`, {
         method: "GET",
@@ -855,6 +864,10 @@ document.addEventListener('alpine:init', () => {
 
     async fetchCategory() {
       category = await fetch(`${this.apiUrl}category`);
+      this.categories = await category.json();
+    },
+    async fetchAllCategory() {
+      category = await fetch(`${this.apiUrl}allCategory`);
       this.categories = await category.json();
     },
 

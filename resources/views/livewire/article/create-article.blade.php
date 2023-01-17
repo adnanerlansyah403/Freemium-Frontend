@@ -69,7 +69,7 @@
                     </div>
         
                     <div class="mb-5 col-12 lg:col lg:col-6" x-data="articles">
-                        <div x-init="fetchCategory()"></div>
+                        <div x-init="fetchAllCategory()"></div>
                         <label for="text" class="text-md">Category</label>
                         <select name="category_id" id="" class="categories px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white  dark:bg-slate-secondary mt-4" >
                             <option>--Choosen Category--</option>

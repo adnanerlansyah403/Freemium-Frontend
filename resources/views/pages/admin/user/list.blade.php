@@ -3,6 +3,13 @@
 
 @section("content")
 
+<style>
+    .bg-active {
+        background : #7C000D;
+        color: white;
+    }
+</style>
+
 <div x-data="user" x-init="checkSession()">
     <div x-init="fetchMe()"></div>
     <template x-if="isLogedIn && data_user.role == 1">
@@ -33,7 +40,7 @@
             </div>
 
             <div class="w-full col-12 lg:col-9">
-                
+                <div x-init="fetchListUser()"></div>
                 <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
                     <i class="span font-bold dark:text-white" data-feather="users"></i>
                     <p>
@@ -71,7 +78,7 @@
                   </div> --}}
                     <div class="w-full text-center bg-primary py-2 text-white dark:bg-slate-secondary">List Users</div>
                     <div class="overflow-x-auto">
-                        <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse" x-init="fetchListUser()">
+                        <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                             <thead>
                               <tr>
                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
@@ -84,7 +91,7 @@
                             </thead>
                     
                             <tbody>
-                              <template x-for="data in listUser">
+                              <template x-for="data in listUser.data">
                                 <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
                                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name ? data.name : 'No Data'">Obi Imanuel</td>
                                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.username">obito
@@ -120,15 +127,11 @@
 
                 <div class="mt-4">
                     <ul class="flex items-center justify-center gap-2">
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">1</a>
-                        </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">2</a>
-                        </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">3</a>
-                        </li>
+                        <template x-for="(user, index) in listUser.links">
+                            <li @click="paginate(user.url)" x-bind:class="user.active ? 'bg-active' : ''" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                <button x-text="index == 0 ? '<' : index == (listUser.links.length - 1) ? '>' : user.label">1</button>
+                            </li>
+                        </template>
                     </ul>
                 </div>
 
