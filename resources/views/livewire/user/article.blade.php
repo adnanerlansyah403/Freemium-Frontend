@@ -9,32 +9,36 @@
     </template>
 </div>
 
-<section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
-    <div
-    x-init="
-        if(isLogedIn == true) {
-            setTimeout(function() {
-                return document.querySelector('section').style.display = 'block';
-            }, 1000)
-        }
+<section class="py-[100px]" x-data="user" style="display: none;">
+    <div x-init="checkSession()"></div>
+
+    <div  x-init="
+    if(isLogedIn == true) {
+        setTimeout(function() {
+            return document.querySelector('section').style.display = 'block';
+        }, 600)
+    }
     ">
 
         <h1 class="font-iceberg text-lg text-center text-primary dark:text-white mb-16">ME</h1>
+    
+        @include("layouts.partials.user.dashboard")
+    
+        <div x-init="fetchMe()"></div>
+        
         <div x-data="user" class="container mx-auto">
             <div x-init="flash()"></div>
             <div x-show="showFlash">
                 <x-alert />
             </div>
         </div>
-
-        @include("layouts.partials.user.dashboard")
-
+    
         <div class="container mx-auto mt-10 w-full dark:text-white" x-data="user">
             <div x-init="fetchListMyArticle()"></div>
-
+    
             <template x-if="isLoading == true">
                 <div class="flex items-center justify-center my-10">
-                    <span class="span text-md">Loading..</span>
+                    <span class="span dark:text-white text-md">Loading..</span>
                 </div>
             </template>
             
@@ -95,7 +99,6 @@
             <template x-if="listMyArticle.data.length == 0">
                 <h1 class="text-center text-md"><span class="span dark:text-slate-third">Oops</span>, You don't have an article</h1>
             </template>
-
         </div>
 
     </div>
