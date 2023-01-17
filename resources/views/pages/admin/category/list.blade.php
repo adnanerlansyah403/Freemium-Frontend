@@ -52,7 +52,7 @@
                     <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
                         <form action="" class="w-full lg:col-4">
                             <div class="p-2 w-full flex items-center justify-between bg-white dark:bg-slate-secondary dark:shadow-none dark:border dark:border-white shadow-[0px_0px_4px_#7C000B] rounded-lg">
-                                <input id="search" name="search" type="text" placeholder="Search Here..." class="w-[93%]">
+                                <input id="search" name="search" type="text" placeholder="Search Here..." class="w-[93%] dark:text-white">
                                 <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                             </div>
                         </form>
