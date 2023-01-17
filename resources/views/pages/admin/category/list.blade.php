@@ -114,13 +114,13 @@
 
                 <div class="mt-4">
                     <ul class="flex items-center justify-center gap-2">
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a href="" class="">1</a>
                         </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a href="" class="">2</a>
                         </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary hover:bg-primary hover:text-white transition duration-200 ease-in-out">
+                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                             <a href="" class="">3</a>
                         </li>
                     </ul>
