@@ -47,7 +47,7 @@
         <div class="lg:col-3">
             <template  x-if="!data_user.subscribe_status">
                 <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max" style="display: none;">
-                    <a style="display: none;" href="{{ route('transaction.create') }}" class="bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                    <a href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                     x-init="
                         setTimeout(() => {
                             document.getElementById('buttonTransactionCreate').style.display = 'flex';
