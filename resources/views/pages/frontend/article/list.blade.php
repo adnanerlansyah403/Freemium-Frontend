@@ -1,6 +1,6 @@
 @extends("homepage")
 
-@section("title", "List - Freemium App")
+@section("title", "Lists - Freemium App")
 
 @section("content")
 
@@ -32,12 +32,14 @@
 <section class="lg:px-[12px] px-8 pt-[88px]" x-data="user">
 
     {{-- alert --}}
-    <div x-data="user" class="container mx-auto w-full">
-        <div x-init="flash()"></div>
-        <div x-show="showFlash">
-            <x-alert />
+    <template x-if="isLogedIn">
+        <div x-data="user" class="container mx-auto w-full">
+            <div x-init="flash()"></div>
+            <div x-show="showFlash">
+                <x-alert />
+            </div>
         </div>
-    </div>
+    </template>
 
     <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row" x-data="articles">
         
