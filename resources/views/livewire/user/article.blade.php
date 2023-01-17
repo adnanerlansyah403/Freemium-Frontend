@@ -47,9 +47,9 @@
             
             <template x-if="!isLoading">
                 <template x-for="(item, index) in listMyArticle.data">
-                    <div class="flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between gap-6">
+                    <div class="group flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between gap-6 mb-10">
 
-                        <div class="flex items-start flex-wrap lg:flex-nowrap lg:justify-between lg:col-10 mb-10 bg-white px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg">
+                        <div class="relative z-10 flex items-start flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg">
                             <div class="col col-9 md:col-8" style="margin: 0 !important;">
                                 <div class="flex items-center gap-3">
                                     <figure>
@@ -88,7 +88,7 @@
                             </script>
                         </div>
 
-                        <div class="col col-2 lg:col-1 flex flex-row md:flex-col items-center lg:items-start gap-4">
+                        <div class="lg:group-hover:translate-x-0 col col-2 -translate-x-2 lg:col-1 lg:-translate-x-full lg:mx-0 z-[1] flex flex-row md:flex-col items-center lg:items-start gap-4 transition duration-200 ease-in-out">
                             <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
                                 <i data-feather="edit"></i>
                             </a>
