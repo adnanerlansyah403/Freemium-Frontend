@@ -22,7 +22,7 @@
             <div class="flex items-center gap-6" x-data="user">
                 <div x-init="fetchMe()"></div>
                 <div x-init="fetchMyTransactions()"></div>
-                <a href="{{ route('article.create') }}" class="hidden lg:flex items-center gap-2 text-gray-primary text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
+                <a href="{{ route('article.create') }}" class="hidden lg:flex items-center gap-2 text-gray-primary dark:hover:text-white text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
                     <i data-feather="edit"></i>
                     <span>Write</span>
                 </a>
