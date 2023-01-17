@@ -992,6 +992,8 @@ document.addEventListener('alpine:init', () => {
     imgUrl: "http://127.0.0.1:8001/",
     data_user: [],
     data_admin: [],
+    user_chart: [],
+    payment_chart: [],
     status_err: [],
     listOrder: [],
     showFlash: false,
@@ -1059,6 +1061,94 @@ document.addEventListener('alpine:init', () => {
             // this.flash()
           }
         })
+    },
+
+    fetchChart() {  
+      const barChart = document.getElementById('barChart');
+      const lineChart = document.getElementById('lineChart');
+      
+      let user = this.data_admin.user_chart;
+      let payment = this.data_admin.payment_chart;
+      let year = 2022;
+      let endyear = 6;
+
+      for(let i=0; i<endyear; i++){
+        if(user[i] && user[i].year == year+i){
+          this.user_chart.push(user[i].count);
+        }
+        else{
+          this.user_chart.push(0);
+        }
+
+        if(payment[i] && payment[i].year == year+i){
+          this.payment_chart.push(payment[i].count);
+        }
+        else{
+          this.payment_chart.push(0);
+        }
+      }
+      
+
+      // Chart.defaults.backgroundColor = '#7C000B';
+      // Chart.defaults.borderColor = '#fff';
+      // Chart.defaults.color = '#000';
+
+      new Chart(barChart, {
+          type: 'bar',
+          data: {
+          labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+          datasets: [
+              {
+                  label: 'Total Members',
+                  data: this.user_chart,
+                  borderWidth: 1,
+                  backgroundColor: '#7C000B',
+              },
+              {
+                  label: 'Total Orders',
+                  data: this.payment_chart,
+                  borderWidth: 1,
+                  backgroundColor: 'lightgreen',
+              },
+          ]
+          },
+          options: {
+              scales: {
+                  y: {
+                  beginAtZero: true
+                  }
+              }
+          },
+      });
+
+      new Chart(lineChart, {
+          type: 'line',
+          data: {
+          labels: ['2022', '2023', '2024', '2025', '2026', '2027'],
+          datasets: [
+              {
+                  label: 'Total Members',
+                  data: this.user_chart,
+                  borderWidth: 1,
+                  backgroundColor: '#7C000B',
+              },
+              {
+                  label: 'Total Orders',
+                  data: this.payment_chart,
+                  borderWidth: 1,
+                  backgroundColor: 'lightgreen',
+              },
+          ]
+          },
+          options: {
+              scales: {
+                  y: {
+                  beginAtZero: true
+                  }
+              }
+          },
+      });
+
     },
 
     // ORDERS

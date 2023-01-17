@@ -14,7 +14,8 @@
 
 <section class="py-[100px]" x-data="admin" x-init="checkSession()" style="display: none;">
     <div x-init="checkRole();"></div>
-    <div x-init="fetchAdminData();"></div>
+    <div x-init="fetchAdminData()"></div>
+    <div x-show="fetchChart();"></div>
     <div
     x-init="
         if(isLogedIn == true) {
@@ -109,70 +110,7 @@
     </div>
 </section>
 
-<script>
-    const barChart = document.getElementById('barChart');
-    const lineChart = document.getElementById('lineChart');
-
-    // Chart.defaults.backgroundColor = '#7C000B';
-    // Chart.defaults.borderColor = '#fff';
-    // Chart.defaults.color = '#000';
-
-    new Chart(barChart, {
-        type: 'bar',
-        data: {
-        labels: ['2022', '2023', '2024', '2025', '2026', '2027'],
-        datasets: [
-            {
-                label: 'Total Members',
-                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                borderWidth: 1,
-                backgroundColor: '#7C000B',
-            },
-            {
-                label: 'Total Orders',
-                data: [50, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                borderWidth: 1,
-                backgroundColor: 'lightgreen',
-            },
-        ]
-        },
-        options: {
-            scales: {
-                y: {
-                beginAtZero: true
-                }
-            }
-        },
-    });
-
-    new Chart(lineChart, {
-        type: 'line',
-        data: {
-        labels: ['2022', '2023', '2024', '2025', '2026', '2027'],
-        datasets: [
-            {
-                label: 'Total Members',
-                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                borderWidth: 1,
-                backgroundColor: '#7C000B',
-            },
-            {
-                label: 'Total Orders',
-                data: [50, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                borderWidth: 1,
-                backgroundColor: 'lightgreen',
-            },
-        ]
-        },
-        options: {
-            scales: {
-                y: {
-                beginAtZero: true
-                }
-            }
-        },
-    });
-</script>
+<script x-data="admin"></script>
 
 
 @endsection
