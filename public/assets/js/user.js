@@ -1080,13 +1080,16 @@ document.addEventListener('alpine:init', () => {
       let priceOrder = document.getElementById("priceOrder");
       let vaOrder = document.getElementById("vaOrder");
       let paymentDateOrder = document.getElementById("paymentDateOrder");
+      let imageOrder = document.getElementById("imageOrder");
 
       if (id === 0) {
         nameOrder.value = '';
         emailOrder.value = '';
-        vaOrder.value = 0;
-        priceOrder = 0;
+        vaOrder.value = '';
+        priceOrder.value = '';
         paymentDateOrder.value = '';
+        document.getElementById('imageOrderWrapper').style.display = 'none';
+        imageOrder.setAttribute('src', '');
       }
 
       if (val) {
@@ -1111,6 +1114,11 @@ document.addEventListener('alpine:init', () => {
           priceOrder.innerText = '$' + data.data.total_price;
           vaOrder.innerText = data.data.virtual_account_number;
           paymentDateOrder.innerText = this.convertDate(data.data.payment_date);
+
+          if (data.data.attachment) {
+            document.getElementById('imageOrderWrapper').style.display = 'block';
+            imageOrder.setAttribute('src', this.imgUrl + data.data.attachment);
+          }
 
         })
     },
