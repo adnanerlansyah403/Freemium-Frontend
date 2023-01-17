@@ -955,7 +955,7 @@ document.addEventListener('alpine:init', () => {
     getCategories() {
 
       fetch(`${this.apiUrl
-        }category`, {
+        }allCategory`, {
         method: "GET"
       })
         .then(async (response) => {
