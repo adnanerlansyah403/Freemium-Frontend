@@ -447,6 +447,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     loadMoreMyArticle() {
+      console.log(this.itemMyArticle);
       this.isLoadingMyArticle = true;
       this.isLoadMore = true;
       setTimeout(() => {

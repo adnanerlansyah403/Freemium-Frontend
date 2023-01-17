@@ -252,9 +252,8 @@
                         "
                     >
                         
-                        <button 
-                        x-on:click="itemArticle = 3"
-                        class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</button>
+                        <a :href="baseUrl"
+                        class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</a>
     
                     </div>
                 </div>

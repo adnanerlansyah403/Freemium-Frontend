@@ -50,8 +50,8 @@
                     
                     <div class="group flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between mb-10 gap-6">
 
-                        <div class="relative z-10 flex items-start flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white lg:mx-0 px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg overflow-hidden">
-                            <div class="col lg:col-8 col:12" style="margin: 0 !important;">
+                        <div class="relative z-10 flex items-center flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white lg:mx-0 px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg overflow-hidden">
+                            <div class="col lg:col-9 col:12" style="margin: 0 !important;">
                                 <div class="flex items-center gap-3">
                                     <figure>
                                         <img x-bind:src="imgUrl+item.author.photo" class="w-10 h-10 bg-gray-primary rounded-full" alt="">
@@ -147,10 +147,8 @@
                         "
                     >
                         
-                        <button 
-                        x-on:click="
-                            itemMyArticle = 3;"
-                        class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</button>
+                        <a x-bind:href="baseUrl+'myarticle'"
+                        class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</a>
     
                     </div>
                 </div>
