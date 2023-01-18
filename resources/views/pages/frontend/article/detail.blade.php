@@ -28,7 +28,7 @@
             <div class="container mx-auto">
                 <figure class="mb-7">
                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
-                        class="w-full h-[250px] bg-gray-secondary" alt="">
+                        class="w-full h-[400px] bg-gray-secondary rounded-primary" alt="">
                 </figure>
 
             </div>
