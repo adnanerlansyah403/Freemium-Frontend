@@ -12,6 +12,7 @@ document.addEventListener('alpine:init', () => {
     linkInputTwitter: false,
     data_user: [],
     status_err: [],
+    typeStatus: false,
     showFlash: false,
     isLoading: false,
     isLoadingMyArticle: false,

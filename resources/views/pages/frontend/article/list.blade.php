@@ -32,13 +32,10 @@
 <section class="lg:px-[12px] px-8 pt-[88px]" x-data="user">
 
     {{-- alert --}}
-    <span x-text="console.log(isLogedIn)"></span>
-        {{-- <div x-data="user" class="container mx-auto w-full">
-            <div x-init="flash()"></div>
-            <div x-show="showFlash">
-                <x-alert />
-            </div>
-        </div> --}}
+    <div x-init="flash()"></div>
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
 
     <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row" x-data="articles">
         
@@ -139,7 +136,7 @@
 
                 
                 <template x-if="isLoadingArticle && isLoadMore == false">
-                    <span class="span text-md dark:text-slate-third">Loading...</span>
+                    <x-loading />
                 </template>
                 
 

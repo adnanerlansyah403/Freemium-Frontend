@@ -41,7 +41,7 @@
     
             <template x-if="isLoading == true">
                 <div class="flex items-center justify-center my-10">
-                    <span class="span dark:text-white text-md">Loading...</span>
+                    <x-loading />
                 </div>
             </template>
             

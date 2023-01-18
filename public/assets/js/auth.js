@@ -10,6 +10,7 @@ document.addEventListener('alpine:init', () => {
     subscribe_status: false,
     showFlash: false,
     status_err: [],
+    typeStatus: true,
     data_user: [],
 
     checkSubscribe() {
@@ -65,6 +66,12 @@ document.addEventListener('alpine:init', () => {
           if (!user.status) {
             this.showFlash = true;
             this.status_err = user.message;
+          }
+
+          if (response.ok == true) {
+            this.typeStatus = true;
+          } else if (response.ok == false) {
+            this.typeStatus = false;
           }
 
           if (user.status) {
