@@ -36,6 +36,10 @@
         {{-- Custom Style --}}
 
         <style>
+            .tox-notifications-container {
+                display: none;
+            }
+            
             .tox-statusbar__branding {
                 display: none;
             }

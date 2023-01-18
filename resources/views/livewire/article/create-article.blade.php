@@ -101,22 +101,19 @@
                             }
                         ">
                     <span
-                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4 overflow-y-hidden"
+                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full rounded-primary bg-white border border-primary dark:bg-slate-secondary dark:border-white mt-4 overflow-y-hidden"
                         @click="
                             $refs.file.click();
                         "
                     >
                         <img src="" 
-                        x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
+                        x-ref="image" class="absolute w-full h-full rounded-lg" alt="">
                         <i 
                             data-feather="image" 
                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage"
                         >
                         </i>
-                        {{-- <span class="removefile absolute w-max top-3 -right-full p-2 bg-primary text-white text-center font-semibold rounded-lg hover:text-opacity-80 transition duration-200 ease-in-out" x-ref="removefile"
-                        @click="">
-                        </span> --}}
                         <p 
                             class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                             x-ref="filename"
@@ -200,23 +197,22 @@
                 createSubArticle(refs) {
         
                     refs.listsubarticle.insertAdjacentHTML('beforeend' ,`
-                        <li class="bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-lg accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
+                        <li class="bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
                             <h2
-                            class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
+                            class="flex flex-row justify-between items-center font-semibold px-3 py-2 cursor-pointer"
                             >
                             <span>Sub Artikel ${this.index}</span>
                             <div class="flex items-center gap-2">
                                 <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60" @click="deleteSubArticle(${this.index})">
-                                    <img src="{{ asset('assets/images/icons/trash-2.svg') }}" />
+                                    <ion-icon name="trash-outline" class="w-6 h-6 text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
                                 </span>
-                                <svg
+                                <span
                                 :class="handleRotate()"
                                 @click="handleClick()"
-                                class="h-6 w-6 transform transition-transform duration-500"
-                                viewBox="0 0 20 20"
+                                class="-mt-1 h-6 w-6 transform transiton-transform duration-200 ease-in-out"
                                 >
-                                <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
-                                </svg>
+                                    <ion-icon name="chevron-down-circle-outline" class="w-full h-full text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
+                                </span>
                             </div>
                             </h2>
                             <div
@@ -252,13 +248,13 @@
                                             }
                                         ">
                                     <span
-                                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4 overflow-y-hidden"
+                                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white border border-primary dark:bg-slate-primary dark:border-white mt-4 overflow-y-hidden"
                                         @click="
                                             $refs.file${this.index}.click();
                                         "
                                     >
                                         <img src="" 
-                                        x-ref="image${this.index}" class="absolute w-full h-full object-cover rounded-lg" alt="">
+                                        x-ref="image${this.index}" class="absolute w-full h-full rounded-lg" alt="">
                                         <img 
                                             src="{{ asset('assets/images/icons/image.svg') }}"
                                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"

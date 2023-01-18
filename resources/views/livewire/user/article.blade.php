@@ -41,7 +41,7 @@
     
             <template x-if="isLoading == true">
                 <div class="flex items-center justify-center my-10">
-                    <span class="span dark:text-white text-md">Loading..</span>
+                    <span class="span dark:text-white text-md">Loading...</span>
                 </div>
             </template>
             
@@ -57,7 +57,7 @@
                                         <img x-bind:src="imgUrl+item.author.photo" class="w-10 h-10 bg-gray-primary rounded-full" alt="">
                                     </figure>
                                     <div x-data="helpers">
-                                        <span class="font-bold text-base" x-text="substring(item.author.username, 10)"></span>
+                                        <span class="font-bold text-base font-bebasNeue" x-text="substring(item.author.username, 10)"></span>
                                         <p class="flex flex-wrap lg:flex-nowrap items-center gap-2 text-sm mt-2">
                                             <span class="flex items-center gap-1" 
                                             x-text="convertDate(item.created_at)">
@@ -73,9 +73,9 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between mt-6 mb-4">
-                                    <span class="text-base md:text-md font-bold" x-text="item.title"></span>
+                                    <span class="text-base md:text-md font-neucha font-bold" x-text="item.title"></span>
                                     <i class="bg-primary dark:bg-slate-third px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
-                                </div>start
+                                </div>
                                 <p class="text-sm text-gray-secondary" x-html="item.substring+'...'">
 
                                 </p>
@@ -97,11 +97,11 @@
                             </script>
                         </div>
 
-                        <div class="relative hidden -translate-x-[103%] group-hover:translate-x-0 z-[1] col col-2 lg:col-1 lg:flex flex-row md:flex-col items-center lg:items-start gap-4 transition duration-200 ease-in-out">
-                            <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
+                        <div class="relative hidden z-[1] col col-2 lg:col-1 lg:flex flex-row md:flex-col items-center lg:items-start gap-4">
+                            <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-0 transition delay-100 duration-200 ease-in-out">
                                 <i data-feather="edit"></i>
                             </a>
-                            <button href="#" x-on:click="deleteArticle(item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
+                            <button href="#" x-on:click="deleteArticle(item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-0 transition delay-200 duration-200 ease-in-out">
                                 <i data-feather="trash-2"></i>
                             </button>
                         </div>
