@@ -33,14 +33,14 @@
 
         @include("layouts.partials.user.dashboard")
 
-        <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9">
+        <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9" x-data="articles">
 
             <div class="w-full lg:col-2">
                 @include("pages.admin.layouts.partials.sidebar")
             </div>
 
-            <div class="w-full col-12 lg:col-9" x-data="articles">
-                <div x-init="getCategories()"></div>
+            <div class="w-full col-12 lg:col-9">
+                <div x-init="fetchPaginationCategory()"></div>
                 <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
                     <i class="span dark:text-white font-bold" data-feather="bookmark"></i>
                     <p>
@@ -49,7 +49,7 @@
                 </p>
                 </h2>
 
-                <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4" x-data="user">
+                <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4">
 
                     <button class="flex lg:col-2 items-center gap-1 dark:text-white" @click="modalHandlerCategory(true)">
                         <i class="span dark:text-slate-third" data-feather="plus-square"></i>

@@ -906,11 +906,12 @@ document.addEventListener('alpine:init', () => {
 
     async fetchCategory() {
       category = await fetch(`${this.apiUrl}category`);
-      this.categories = await category.json();
+      this.categoriesArticle = await category.json();
     },
-    async fetchAllCategory() {
-      category = await fetch(`${this.apiUrl}allCategory`);
-      this.categories = await category.json();
+    async fetchPaginationCategory() {
+      category = await fetch(`${this.apiUrl}category`);
+      data = await category.json();
+      this.categoriesArticle = data.data;
     },
 
     async createArticle() {
@@ -969,7 +970,7 @@ document.addEventListener('alpine:init', () => {
     sortCol: null,
     sortAsc: false,
     search: '',
-    sort(col = 'name') {
+    sort(col) {
       if (this.sortCol === col) this.sortAsc = !this.sortAsc;
       this.sortCol = col;
       this.categoriesArticle.data.sort((a, b) => {
