@@ -33,12 +33,12 @@
 
     {{-- alert --}}
     <span x-text="console.log(isLogedIn)"></span>
-        <div x-data="user" class="container mx-auto w-full">
+        {{-- <div x-data="user" class="container mx-auto w-full">
             <div x-init="flash()"></div>
             <div x-show="showFlash">
                 <x-alert />
             </div>
-        </div>
+        </div> --}}
 
     <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row" x-data="articles">
         <template>
