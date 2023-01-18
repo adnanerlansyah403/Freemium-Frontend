@@ -914,6 +914,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     async createArticle() {
+      this.isLoadingArticle = true;
       let title = document.getElementById('title');
       let description = tinymce.get('content').getContent();
       let thumbnail = document.getElementById('thumbnail').files[0];
@@ -956,6 +957,7 @@ document.addEventListener('alpine:init', () => {
       }
 
       if (data.status) {
+        this.isLoadingArticle = false;
         localStorage.setItem('message', 'article successfully created!');
         localStorage.setItem('showFlash', true);
         return window.location.replace(`${this.baseUrl}myarticle`)

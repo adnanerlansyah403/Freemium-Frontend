@@ -149,9 +149,7 @@
                         <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary dark:text-white rounded-primary px-3 py-4">
                             <div class="flex flex-col col-12 md:col-9">
                                 <div class="flex lg:gap-[22px] lg:px-0 gap-5 ">
-                                    <div class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]">
-                                        
-                                    </div>
+                                    <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
                                     <div>
                                         <span x-text="console.log(item)"></span>
                                         <h1 class="text-[18px] font-bold font-bebasNeue leading-[27px]" x-text="item.author.username">Nama Author</h1>

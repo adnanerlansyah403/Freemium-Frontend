@@ -146,9 +146,14 @@
                         <i data-feather="plus-circle" class="w-10 h-10 text-primary dark:text-slate-third group-hover:rotate-90 transition duration-200 ease-in-out"></i> 
                         <span class="text-base">Add a sub article</span>
                     </button>
-                    <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                        Save
-                    </button>
+                    <template x-if="isLoadingArticle">
+                        <span class="span text-md dark:text-slate-third">wait...</span>
+                    </template>
+                    <template x-if="!isLoadingArticle">
+                        <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                            Save
+                        </button>
+                    </template>
                 </div>
 
                 <template x-if="status_err.min_free">
