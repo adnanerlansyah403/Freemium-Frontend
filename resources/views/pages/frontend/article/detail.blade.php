@@ -154,12 +154,18 @@
                     <div
                         class="mt-6 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
                         <h3 class="text-md mb-4 font-semibold">Content</h3>
-                        <ul class="flex flex-col gap-4" x-data="user">
+                        <p x-ref="statusUser" class="hidden w-full p-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary">
+                            You have to 
+                            <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
+                            For Access this
+                        </p>
+                        <ul class="flex flex-col gap-4">
                             <div x-init="fetchMe()"></div>
                             <template x-for="(item, index) in detailArticle?.subarticles">
                                 <li @click="
                                     getSubArticle(item.id); 
                                     if(item.type == 'free') {back = true;} 
+                                    if(data_user.subscribe_status != 1 && item.type != 'free') { $refs.statusUser.classList.remove('hidden'); } else { $refs.statusUser.classList.add('hidden'); }
                                     if(showFlash){flash();}"
                                     :class="{
                                         'border-primary text-black': item.type == 'paid',
@@ -172,7 +178,7 @@
                                     </a>
                                     <template x-if="content?.id == item.id">
                                         <p class="flex items-center gap-1">
-                                            <span class="w-4 h-4 rounded-full bg-slate-primary dark:bg-slate-third"></span>
+                                            <span class="w-4 h-4 rounded-full bg-slate-primary dark:bg-slate-primary"></span>
                                             <b>Active</b>
                                         </p>
                                     </template>
