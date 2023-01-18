@@ -953,6 +953,7 @@ document.addEventListener('alpine:init', () => {
       if (!data.status) {
         this.showFlash = true;
         this.status_err = data.message;
+        this.isLoadingArticle = false;
         console.log(this.status_err)
       }
 
