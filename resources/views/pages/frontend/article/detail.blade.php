@@ -33,7 +33,7 @@
 
             </div>
 
-            <div class="container mx-auto flex flex-wrap lg:flex-nowrap gap-6 md:gap-0">
+            <div class="container mx-auto flex flex-wrap lg:flex-nowrap gap-6 md:gap-4">
 
                 <div class="col md:mx-0 col-12 lg:col-8">
                     <div class="flex flex-wrap gap-4 md:gap-0 justify-between">
@@ -63,8 +63,8 @@
                         </div>
                     </div>
 
-                    <div>
-                        <h2 class="text-md mt-5 mb-4" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
+                    <div class="mt-5 px-3 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                        <h2 class="text-md mb-4" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
                         </h2>
                         <p x-html="content ? content?.description : detailArticle?.description">
                         </p>
@@ -85,9 +85,7 @@
                 </div>
 
                 <div class="col md:mx-0 col-12 lg:col-4">
-                    {{-- <p class="text-center text-md mb-4 font-semibold">Link Social Media</p>
-                <hr class="my-[5px] text-primary"> --}}
-                    <ul class="flex items-center justify-center gap-4">
+                    <ul class="translate-y-2 flex items-center justify-center gap-4">
 
                         <template
                             x-if="detailArticle?.author?.link_facebook != null && detailArticle?.author?.link_facebook != ''">
@@ -152,7 +150,7 @@
                     </ul>
 
                     <div
-                        class="mt-6 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
+                        class="mt-10 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
                         <h3 class="text-md mb-4 font-semibold">Content</h3>
                         <p x-ref="statusUser" class="hidden w-full p-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary">
                             You have to 
