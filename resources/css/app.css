@@ -196,6 +196,73 @@
         }
     }
 
+    .wave {
+        animation: waveSmooth 1s infinite;
+    }
+
+    @keyframes waveSmooth {
+        0% {
+            transform: translateY(0)
+        }
+
+        50% {
+            @apply text-primary;
+            transform: translateY(-10px)
+        }
+
+        100% {
+            transform: translateY(0)
+        }
+    }
+
+    .wave:nth-child(1) {
+        animation-delay: 100ms;
+    }
+
+    .wave:nth-child(2) {
+        animation-delay: 200ms;
+    }
+
+    .wave:nth-child(3) {
+        @apply text-primary dark:text-slate-third;
+        animation-delay: 300ms;
+    }
+
+    .wave:nth-child(4) {
+        @apply text-primary dark:text-slate-third;
+        animation-delay: 400ms;
+    }
+
+    .wave:nth-child(5) {
+        @apply text-primary dark:text-slate-third;
+        animation-delay: 500ms;
+    }
+
+    .wave:nth-child(6) {
+        @apply text-primary dark:text-slate-third;
+        animation-delay: 600ms;
+    }
+
+    .wave:nth-child(7) {
+        @apply text-primary dark:text-slate-third;
+        animation-delay: 700ms;
+    }
+
+    .wave:nth-child(8) {
+        @apply text-primary dark:text-slate-third;
+        animation-delay: 800ms;
+    }
+    
+    .wave:nth-child(9) {
+        @apply text-primary dark:text-slate-third;
+        animation-delay: 900ms;
+    }
+    
+    .wave:nth-child(10) {
+        @apply text-primary dark:text-slate-third;
+        animation-delay: 1000ms;
+    }
+
 }
 
 @layer components {

@@ -48,6 +48,7 @@ module.exports = {
     extend: {
       animation: {
         bounce5: 'bounce-5 1s ease-in-out linear',
+        // waveSmooth: 'wave 1.5s infinite',
       },
       keyframes: {
         'bounce-5': {
@@ -79,6 +80,17 @@ module.exports = {
             transform: 'translateY(0)'
           },
         },
+        'wave': {
+          '0%': {
+            transform: 'translateY(0)'
+          },
+          '50%': {
+            transform: 'translateY(-30px)'
+          },
+          '100%': {
+            transform: 'translateY(0)'
+          }
+        }
       },
       borderRadius: {
         'circle': '50%',

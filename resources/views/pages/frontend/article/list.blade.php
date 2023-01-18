@@ -41,6 +41,7 @@
         </div> --}}
 
     <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row" x-data="articles">
+        
         <template>
             <span x-init="fetchArticleByCategory(1)"></span>
         </template>
