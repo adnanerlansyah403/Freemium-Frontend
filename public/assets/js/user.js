@@ -1103,7 +1103,24 @@ document.addEventListener('alpine:init', () => {
           user = await response.json();
           this.data_user = user.data
           if (this.data_user.role != 1) {
-            return window.location.replace(this.baseUrl + 'article');
+            return window.history.back()
+          }
+        });
+    },
+
+    checkIsAdmin() {
+      fetch(this.apiUrl + 'me', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        },
+      })
+        .then(async response => {
+          user = await response.json();
+          this.data_user = user.data
+          if (this.data_user.role == 1) {
+            return window.history.back()
           }
         });
     },
