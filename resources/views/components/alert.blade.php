@@ -1,4 +1,18 @@
 
+<style>
+
+    #alert {
+        right: -50%;
+        transition: .2s ease-in-out !important;
+    }
+
+    #alert.active {
+        right: 30px;
+        transition: .2s ease-in-out !important;
+    }
+
+</style>
+
 {{-- <div class="alert alert-{{ $type }} hidden" role="alert" x-data="{ showFlash: true }" :class="{'block' : showFlash, 'hidden' : !showFlash}" x-init="setTimeout(() => showFlash = false, 3000)">
     <svg class="w-8 h-8 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
     <div>
@@ -28,10 +42,21 @@
     </button>
 </div> --}}
 
-<div class="" x-data="{ showFlash: true, message:message }" :class="{'block' : showFlash, 'hidden' : !showFlash}" x-init="setTimeout(() => showFlash = false, 3000)">
+{{-- <div class="" x-data="{ showFlash: true, message:message }" :class="{'block' : showFlash, 'hidden' : !showFlash}" x-init="setTimeout(() => showFlash = false, 3000)">
     <div class="text-center lg:w-full w-[320px] md:w-full bg-[#04A96D] rounded-[10px] mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 lg:h-[50px] md:h-[50px] mt-5 lg:mt-0 h-[70px] font-normal text-sm px-[27px] py-[13px]">
         <span class="font-bold text-[#04A96D] leading-[27px]" x-text="message">
             Success
         </span> 
+    </div>
+</div> --}}
+
+
+<div id="alert" class="fixed flex gap-4 top-10 right-6 p-4 rounded-lg max-w-xs w-full alert-dark transition duration-200 ease-in-out" role="alert" x-data="{ showFlash: true }" :class="{'active' : showFlash, '' : !showFlash}" x-init="setTimeout(() => showFlash = false, 3000)">
+    <svg class="w-8 h-8 inline" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+    <div>
+        <span class="font-medium">
+            Info Alert
+        </span> <br>
+        <p>Some messages of alert</p>
     </div>
 </div>

@@ -204,7 +204,7 @@
     /* ALERTS */
 
     .alert {
-        @apply fixed flex justify-between top-10 right-6 p-4 max-w-sm rounded-lg
+        @apply fixed flex justify-between top-10 right-6 p-4 rounded-lg
     }
 
     .alert-success {
@@ -221,6 +221,10 @@
 
     .alert-info {
         @apply bg-[#dbeafe] text-[#1d4ed8];
+    }
+
+    .alert-dark {
+        @apply bg-slate-secondary text-white border border-white;
     }
 
     /* INPUTS */
