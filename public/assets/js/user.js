@@ -521,6 +521,7 @@ document.addEventListener('alpine:init', () => {
       formData.append('description', editA.description);
       formData.append('thumbnail', editA.thumbnail);
 
+      this.isLoading = true;
       fetch(this.apiUrl + `article/${editA.id}/update`, {
         method: "POST",
         headers: {
@@ -542,6 +543,7 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('showFlash', true);
             this.flash()
           }
+          this.isLoading = false;
         })
 
     },
@@ -1066,6 +1068,7 @@ document.addEventListener('alpine:init', () => {
     imgUrl: "http://127.0.0.1:8001/",
     data_user: [],
     data_admin: [],
+    years: [],
     user_chart: [],
     payment_chart: [],
     status_err: [],
@@ -1144,7 +1147,6 @@ document.addEventListener('alpine:init', () => {
           if (data.status) {
             this.data_admin = data.data;
             this.showFlash = true;
-            console.log(this.data_admin);
           }
           else {
             localStorage.setItem('message', data.message);
@@ -1160,23 +1162,28 @@ document.addEventListener('alpine:init', () => {
 
       let user = this.data_admin.user_chart;
       let payment = this.data_admin.payment_chart;
-      let year = 2022;
-      let endyear = 6;
+      this.years[0] = user[0].year
+      let endyear = new Date().getFullYear() - user[0].year;
 
       for (let i = 0; i < endyear; i++) {
-        if (user[i] && user[i].year == year + i) {
+        this.years.push(parseInt(this.years[i]) + 1);
+      }
+
+      for (let i = 0; i < endyear+1; i++) {
+        if (user[i] && user[i].year == this.years[i]) {
           this.user_chart.push(user[i].count);
         }
         else {
           this.user_chart.push(0);
         }
 
-        if (payment[i] && payment[i].year == year + i) {
+        if (payment[i] && payment[i].year == this.years[i]) {
           this.payment_chart.push(payment[i].count);
         }
         else {
           this.payment_chart.push(0);
         }
+
       }
 
 
@@ -1187,7 +1194,7 @@ document.addEventListener('alpine:init', () => {
       new Chart(barChart, {
         type: 'bar',
         data: {
-          labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+          labels: this.years,
           datasets: [
             {
               label: 'Total Members',
@@ -1215,7 +1222,7 @@ document.addEventListener('alpine:init', () => {
       new Chart(lineChart, {
         type: 'line',
         data: {
-          labels: ['2022', '2023', '2024', '2025', '2026', '2027'],
+          labels: this.years,
           datasets: [
             {
               label: 'Total Members',

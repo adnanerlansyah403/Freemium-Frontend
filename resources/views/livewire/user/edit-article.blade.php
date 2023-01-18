@@ -21,13 +21,16 @@
         }
     ">
 
-        <div class="container mx-auto flex items-center dark:text-white">
+        <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 
             <form action="" class="col col-12">
 
                 <div class="flex flex-wrap lg:flex-nowrap">
                     <div class="mb-5 col-12 lg:col-6">
-                        <label for="text" class="text-md">Title</label>
+                        <div class="flex justify-between">
+                            <label for="title" class="text-md">Title</label>
+                            <p x-show="!isLoading" x-text="'Created at : ' + convertDate(EditArticle?.created_at)"></p>
+                        </div>
                         <input x-model="EditArticle.title" type="text" placeholder="Your text..." name="title" id="title"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
                             
@@ -40,15 +43,14 @@
                     </div>
 
                     <div class="mb-5 col-12 lg:col lg:col-6">
-                        <label for="text" class="text-md">Category</label>
+                        <label for="category_id" class="text-md">Category</label>
                         <select x-model="EditArticle.tags[0].category_id" name="category_id" id="category_id"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
                             <option value="">--Choosen Category--</option>
                             <template x-for="(c, index) in categories">
-                                <option :value="c.id" :selected="c.id == EditArticle.tags[0].category_id" x-text="c.name">test</option>
+                                <option :value="c.id" :selected="c.id == EditArticle?.tags?.[0]?.category_id" x-text="c.name">test</option>
                             </template>
                         </select>
-                        <span x-show="console.log(EditArticle?.category, EditArticle.tags[0].category_id)"></span>
 
                         <template x-if="status_err?.[0]?.category_id">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -60,7 +62,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <label for="text" class="text-md">Thumbnail</label>
+                    <label for="thumbnail" class="text-md">Thumbnail</label>
                     <input x-on:change="EditArticle.thumbnail = Object.values($event.target.files)" type="file" name="thumbnail" id="thumbnail" placeholder="Your thumbnail..." hidden
                         x-ref="file" @change="
                             if ($refs.file) {
@@ -82,7 +84,7 @@
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage">
                         </i>
-                        <p x-show="EditArticle?.thumbnail_1_alt" x-text="EditArticle?.thumbnail_1_alt" class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
+                        <p x-show="EditArticle?.thumbnail_1_alt" x-text="EditArticle?.thumbnail_1_alt" class="filename absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
                     </span>
 
                     <template x-if="status_err?.[0]?.thumbnail">
@@ -94,7 +96,7 @@
                 </div>
 
                 <div class="mb-5 col-12">
-                    <label for="text" class="text-md">Content</label><br>
+                    <label for="content" class="text-md">Content</label><br>
                     <textarea 
                     x-text="EditArticle?.description" name="description" id="content" placeholder="Your content..."
                         class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
@@ -110,6 +112,7 @@
                 </div>
 
                 <div class="flex items-center justify-center my-10">
+                    <p x-show="isLoading" class="text-green-500">Loading...</p>
                     <button @click.prevent="updateArticle()"
                         class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
@@ -152,12 +155,11 @@
                                         <span type="button" x-show="s"
                                             class="group h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
                                             <div class="flex items-center gap-1">
+                                                <b x-text="Number(index + 1) + '. '" class="text-primary dark:text-white group-hover:text-white"></b>
                                                 <b x-text="s?.title ? s?.title : 'New Sub-Article'">Sub-EditArticle 1</b>
-                                                <b x-text="s?.title ? '(' + Number(index + 1) + ')' : ''" class="text-primary dark:text-white group-hover:text-white"></b>
                                             </div>
                                             <div class="flex items-center gap-1">
                                                 <button type="button" @click="
-                                                    console.log('test');
                                                     EditArticle.subarticles[editSub].description = tinymce.get('sub_content').getContent();
                                                     editSub = index;
                                                 " class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
@@ -194,9 +196,12 @@
                     </li>
 
                 </ul>
-                <div class="flex flex-wrap lg:flex-nowrap">
+                <div class="flex flex-wrap lg:flex-nowrap" x-data="helpers">
                     <div class="mb-5 col-12">
-                        <label for="text" class="text-md">Title</label>
+                        <div class="flex justify-between">
+                            <label for="sub_title" class="text-md">Title</label>
+                            <p x-show="!isLoading" x-text="'Created at : ' + convertDate(EditArticle?.subarticles?.[editSub]?.created_at)"></p>
+                        </div>
                         <input x-model="EditArticle.subarticles[editSub].title" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
                         <template x-if="status_err?.[1]?.title">
@@ -210,7 +215,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <label for="text" class="text-md">Thumbnail</label>
+                    <label for="sub_thumbnail" class="text-md">Thumbnail</label>
                     <input x-on:change="EditArticle.subarticles[editSub].thumbnail = Object.values($event.target.files)" type="file" name="thumbnail_subarticle" placeholder="Your thumbnail..." hidden name="sub_thumbnail" id="sub_thumbnail"
                         x-ref="filesubarticle" @change="
                             if ($refs.filesubarticle) {
@@ -232,7 +237,7 @@
                         <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimagesubarticle">
                         </i>
-                        <p x-show="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-text="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" class="filenamesubarticle absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
+                        <p x-show="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-text="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" class="filenamesubarticle absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
                     </span>
 
                     <template x-if="status_err?.[1]?.thumbnail">
@@ -244,7 +249,7 @@
                 </div>
                 
                 <div class="mb-5 col-12">
-                    <label for="text" class="text-md">Content</label><br>
+                    <label for="sub_content" class="text-md">Content</label><br>
                     <textarea x-text="EditArticle?.subarticles?.[editSub]?.description" name="sub_description" id="sub_content" placeholder="Your content..."
                         class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                     </textarea>
@@ -288,6 +293,7 @@
                 </div>
 
                 <div class="flex items-center justify-center my-10">
+                    <p x-show="isLoading" class="text-green-500">Loading...</p>
                     <button @click.prevent="updateSub(editSub)"
                         class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
