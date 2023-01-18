@@ -129,7 +129,7 @@
 
                 <ul class="flex flex-col mb-10">
 
-                    <li class="bg-white dark:bg-slate-secondary dark:text-white my-2 shadow-lg rounded-lg" x-data="accordion(1)">
+                    <li class="bg-white dark:bg-slate-secondary dark:text-white my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-lg" x-data="accordion(1)">
                         <h2 @click="handleClick()"
                             class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
                             <span>Daftar List Sub Artikel</span>
@@ -150,10 +150,10 @@
                                     {{-- <span x-text="console.log(EditArticle.subarticles)"></span> --}}
                                     <template x-for="(s, index) in EditArticle?.subarticles">
                                         <span type="button" x-show="s"
-                                            class="h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
+                                            class="group h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
                                             <div class="flex items-center gap-1">
                                                 <b x-text="s?.title ? s?.title : 'New Sub-Article'">Sub-EditArticle 1</b>
-                                                <b x-text="s?.title ? '(' + Number(index + 1) + ')' : ''" class="text-primary dark:text-white"></b>
+                                                <b x-text="s?.title ? '(' + Number(index + 1) + ')' : ''" class="text-primary dark:text-white group-hover:text-white"></b>
                                             </div>
                                             <div class="flex items-center gap-1">
                                                 <button type="button" @click="
@@ -179,7 +179,7 @@
                                         EditArticle.subarticles[editSub] = addSub()
                                     " type="button"
                                         class="group cursor-pointer h-max flex items-center justify-center gap-2 col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third dark:hover:text-opacity-75 hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
-                                        <i data-feather="plus-circle" class="w-6 h-6 text-primary dark:text-slate-fourth group-hover:rotate-90 transition duration-200 ease-in-out"></i>
+                                        <i data-feather="plus-circle" class="w-6 h-6 text-primary group-hover:text-white dark:text-slate-fourth group-hover:rotate-90 transition duration-200 ease-in-out"></i>
                                         <b>Create New Sub-Article</b>
                                         {{-- <span x-text="editSub"></span> --}}
                                         <!-- Feather Icons Scripts -->
