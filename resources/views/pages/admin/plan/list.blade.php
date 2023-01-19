@@ -154,11 +154,11 @@
                     <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a Plan</h1>
                     <input type="hidden" id="plan_id" value="0">
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
-                    <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary dark:border-white rounded-primary" placeholder="Name..." style="border: 1px solid white"/>
+                    <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]  dark:border-white rounded-primary" placeholder="Name..." style="border: 1px solid white"/>
                     <label for="price" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Price</label>
-                    <input id="price" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary dark:border-white rounded-primary" type="number" placeholder="price..." style="border: 1px solid white" />
+                    <input id="price" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]  dark:border-white rounded-primary" type="number" placeholder="price..." style="border: 1px solid white" />
                     <label for="expired" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Expired</label>
-                    <input id="expired" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary rounded-primary" type="number" placeholder="expired..." style="border: 1px solid white;" />
+                    <input id="expired" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]  rounded-primary" type="number" placeholder="expired..." style="border: 1px solid white;" />
                     <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="modalHandler()" aria-label="close modal" role="button">
                         <svg  xmlns="http://www.w3.org/2000/svg"  class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" />

@@ -217,7 +217,7 @@
                     <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a Category</h1>
                     <input type="hidden" id="category_id" value="0">
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
-                    <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary dark:border-white rounded-primary" placeholder="Name..." style="border: 1px solid white;" />
+                    <input id="name" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:border-white rounded-primary" placeholder="Name..." style="border: 1px solid white;" />
                     <label for="icon" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Icon</label>
                     <input id="icon" type="file" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 py-2 text-sm border border-primary dark:border-white rounded-primary" placeholder="Icon..." style="border: 1px solid white" />
                     <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="modalHandlerCategory()" aria-label="close modal" role="button">
