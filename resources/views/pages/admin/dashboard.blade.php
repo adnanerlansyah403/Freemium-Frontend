@@ -16,6 +16,12 @@
     <div x-init="checkRole();"></div>
     <div x-init="fetchAdminData()"></div>
     <div x-show="fetchChart();"></div>
+
+    <div x-init="flash()"></div>
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
+    
     <div
     x-init="
         if(isLogedIn == true) {
