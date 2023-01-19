@@ -30,7 +30,6 @@
 </style>
 
 <section class="lg:px-[12px] px-8 pt-[88px]" x-data="user">
-
     {{-- alert --}}
     <div x-init="flash()"></div>
     <div x-show="showFlash">
@@ -45,7 +44,7 @@
         
         {{-- kiri --}}
         <div class="lg:col-3">
-            <template  x-if="!data_user?.subscribe_status">
+            <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
                 <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max" style="display: none;">
                     <a href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                     x-init="
@@ -113,7 +112,7 @@
             <div x-init="fetchMe()"></div>
             <div x-init="getArticle()"></div>
 
-            <template x-if="!data_user?.subscribe_status">
+            <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
                 <div id="alertSubscribe" style="display: none"
                 >
                     <div x-init="
@@ -207,7 +206,7 @@
                 </template>
 
                 <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle == ''">
-                    <p id="articleNotFound" class="text-md mt-10" style="display: none;"
+                    <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
                         x-init="
                             setTimeout(() => {
                                 document.getElementById('articleNotFound').style.display = 'block';
@@ -215,7 +214,7 @@
                         "
                     >
                         <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
-                        <span class="span">We</span> still don't have any articles 
+                        <span class="span dark:text-slate-fourth">We</span> still don't have any articles 
                     </p>
                 </template>
 
