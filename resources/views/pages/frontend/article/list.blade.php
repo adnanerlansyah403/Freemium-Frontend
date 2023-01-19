@@ -92,10 +92,10 @@
                 </div>
     
                 <div class="mt-[33px] flex flex-wrap gap-[11px]" x-init="getCategories()">
-                    <select name="category" id="category" class="py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white" x-ref="category">
+                    <select name="category" x-on:change="fetchArticleByCategory($event.target.value)" id="category" class="py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white" x-ref="category">
                         <option value="" @click="getArticle()">--Select a Category--</option>
                         <template x-for="(item, index) in categoriesArticle">
-                            <option x-bind:value="item.id" x-text="item.name" x-on:click="fetchArticleByCategory(item.id)"></option>
+                            <option x-bind:value="item.id" x-text="item.name" ></option>
                         </template>
                     </select>
                     <button type="button" @click="resetFilters()" class="w-full py-2 bg-primary dark:bg-slate-primary dark:border-white mt-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
