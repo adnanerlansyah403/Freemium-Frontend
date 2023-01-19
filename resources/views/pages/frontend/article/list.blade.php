@@ -163,7 +163,7 @@
                                 </div>
             
                                 <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-6 md:mb-10">
-            
+                                    <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
                                 </div>
             
                                 <div class="flex lg:gap-5 justify-between items-center mt-0 md:mt-5">
