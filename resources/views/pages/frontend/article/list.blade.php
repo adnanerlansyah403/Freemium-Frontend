@@ -184,7 +184,7 @@
                                                 <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
                                                 <p class="flex items-center gap-1 text-[14px] leading-[21px]">
                                                     <i data-feather="eye" class="w-4 h-4"></i>
-                                                    <span x-text="item.total_views_sum > 0 ? item.total_views_sum : 'No'">
+                                                    <span x-text="item.total_views_sum > 0 ? item.total_views_sum : 'No Views'">
                                                         1000 
                                                     </span> 
                                                 </p>
