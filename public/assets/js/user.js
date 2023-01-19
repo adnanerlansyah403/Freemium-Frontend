@@ -59,7 +59,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           user = await response.json();
-          if(user.status){
+          if (user.status) {
             this.data_user = user.data
             this.name = user.data.name == null ? '' : user.data.name
             this.username = user.data.username == null ? '' : user.data.username
@@ -584,7 +584,7 @@ document.addEventListener('alpine:init', () => {
       if (typeof editSub.thumbnail !== 'string' && editSub.thumbnail[0]) {
         editSub.thumbnail = editSub.thumbnail[0];
       }
-      
+
       let formData = new FormData();
 
       formData.append('article_id', editSub.article_id);
@@ -786,6 +786,8 @@ document.addEventListener('alpine:init', () => {
         this.message = localStorage.getItem('message');
         setTimeout(function () {
           localStorage.removeItem("showFlash")
+          localStorage.removeItem("message")
+          localStorage.removeItem("message")
           this.showFlash = false;
         }, 3000);
       }
@@ -825,7 +827,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.listArticle = data.data;
-          
+
           // DOM
           // document.getElementById("all").classList.remove('active');
           // document.getElementById("free").classList.add('active');
@@ -847,7 +849,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.listArticle = data.data
-          
+
           // DOM
           // document.getElementById("all").classList.remove('active');
           // document.getElementById("free").classList.remove('active');

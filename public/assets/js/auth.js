@@ -21,7 +21,7 @@ document.addEventListener('alpine:init', () => {
         setTimeout(function () {
           localStorage.removeItem("showFlash")
           localStorage.removeItem("message")
-          // localStorage.removeItem("typeStatus");
+          localStorage.removeItem("typeStatus")
           this.showFlash = false;
         }, 4000);
       }
