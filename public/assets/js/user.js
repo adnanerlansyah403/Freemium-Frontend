@@ -310,7 +310,6 @@ document.addEventListener('alpine:init', () => {
         this.showFlash = true;
         this.status_err = data.message;
         this.isLoadingArticle = false;
-        console.log(this.status_err)
       }
     },
 
@@ -346,6 +345,11 @@ document.addEventListener('alpine:init', () => {
         localStorage.setItem('message', data.message);
         localStorage.setItem('showFlash', true);
         window.location.reload();
+      }
+      if (!data.status) {
+        this.showFlash = true;
+        this.status_err = data.message;
+        this.isLoadingArticle = false;
       }
     },
 
