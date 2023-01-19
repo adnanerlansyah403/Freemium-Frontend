@@ -10,8 +10,8 @@ document.addEventListener('alpine:init', () => {
     message: '',
     subscribe_status: false,
     showFlash: false,
-    status_err: [],
     typeStatus: true,
+    status_err: [],
     data_user: [],
 
     flash() {
@@ -21,6 +21,7 @@ document.addEventListener('alpine:init', () => {
         setTimeout(function () {
           localStorage.removeItem("showFlash")
           localStorage.removeItem("message")
+          // localStorage.removeItem("typeStatus");
           this.showFlash = false;
         }, 4000);
       }
@@ -83,8 +84,10 @@ document.addEventListener('alpine:init', () => {
 
           if (response.ok == true) {
             this.typeStatus = true;
+            localStorage.setItem("typeStatus", true)
           } else if (response.ok == false) {
             this.typeStatus = false;
+            localStorage.setItem("typeStatus", false)
           }
 
           if (user.status) {

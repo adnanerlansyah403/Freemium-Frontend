@@ -34,6 +34,7 @@ document.addEventListener('alpine:init', () => {
         setTimeout(function () {
           localStorage.removeItem("showFlash")
           localStorage.removeItem("message")
+          // localStorage.removeItem("typeStatus")
           this.showFlash = false;
         }, 4000);
       }
@@ -77,6 +78,15 @@ document.addEventListener('alpine:init', () => {
 
       if (!this.isLogedIn) {
         // Fetch API Check Token
+        let url = window.location.pathname;
+        let originalUrl = url.replace(/detail\/.*$/, "detail");
+
+        if (originalUrl == '/article/detail') {
+          localStorage.setItem("showFlash", true);
+          localStorage.setItem("typeStatus", false);
+          localStorage.setItem("message", "You're not allowed for this, please login first");
+        }
+
         return window.location.replace(this.baseUrl + 'login')
       }
     },
@@ -873,10 +883,6 @@ document.addEventListener('alpine:init', () => {
           this.detailArticle = data.data;
         })
         .catch(error => {
-          if (data.status == false) {
-            this.showFlash = true;
-            this.message = "You are not allowed to access this page, please login first";
-          }
           console.log(error);
         })
     },
@@ -1128,6 +1134,7 @@ document.addEventListener('alpine:init', () => {
 
       if (!this.isLogedIn) {
         // Fetch API Check Token
+
         return window.location.replace(this.baseUrl + 'login')
       }
     },
@@ -1296,19 +1303,6 @@ document.addEventListener('alpine:init', () => {
 
     },
 
-    paginateOrder(url) {
-      fetch(`${url}`, {
-        method: "GET",
-        headers: {
-          'Authorization': localStorage.getItem('token')
-        }
-      })
-        .then(async (response) => {
-          const data = await response.json();
-          this.listOrder = data.data;
-        })
-    },
-
     fetchListOrder() {
 
       fetch(`${this.apiUrl}payment`, {
@@ -1371,16 +1365,6 @@ document.addEventListener('alpine:init', () => {
 
     // FILTERING ORDERS
 
-    sortOrder(col = 'payment_date') {
-      console.log(col)
-      if (this.sortCol === col) this.sortAsc = !this.sortAsc;
-      this.sortCol = col;
-      this.listOrder.data.sort((a, b) => {
-        if (a[this.sortCol] < b[this.sortCol]) return this.sortAsc ? 1 : -1;
-        if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
-        return 0;
-      });
-    },
     searchOrder(keyword) {
       // console.log(keyword);
 
