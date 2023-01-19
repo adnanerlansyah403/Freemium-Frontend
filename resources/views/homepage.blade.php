@@ -55,7 +55,7 @@
     </head>
     <body class="antialiased dark:bg-slate-primary">
         
-        <x-loading-page />
+        {{-- <x-loading-page /> --}}
 
 
         <!-- HEADER -->
