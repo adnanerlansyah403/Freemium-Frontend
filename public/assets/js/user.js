@@ -516,10 +516,17 @@ document.addEventListener('alpine:init', () => {
             this.EditArticle = data.data;
             this.categories = data.category;
 
-            if (data.status == false) {
+            if (!data.status) {
+              localStorage.setItem('message', data.message);
+              localStorage.setItem('showFlash', true);
               return window.location.replace(`${this.baseUrl}myarticle`);
             }
-            this.isLoading = false
+            else {
+              localStorage.setItem('message', data.message);
+              localStorage.setItem('showFlash', true);
+              this.flash()
+            }
+            this.isLoading = false;
 
           })
 
@@ -1112,6 +1119,7 @@ document.addEventListener('alpine:init', () => {
     listOrder: [],
     showFlash: false,
     isLoading: false,
+    message: '',
     keyword: '',
 
     flash() {
@@ -1200,10 +1208,20 @@ document.addEventListener('alpine:init', () => {
     fetchChart() {
       const barChart = document.getElementById('barChart');
       const lineChart = document.getElementById('lineChart');
-
       let user = this.data_admin.user_chart;
       let payment = this.data_admin.payment_chart;
-      this.years[0] = user[0].year
+
+      // if(user.length == 0){
+      //   console.log(user);
+      //   user = [{year: '' + new Date().getFullYear(), count: 0}]
+      // }
+
+      // if(payment.length == 0){
+      //   console.log(payment);
+      //   payment = [{year: '' + new Date().getFullYear(), count: 0}]
+      // }
+      
+      this.years[0] = user[0].year;
       let endyear = new Date().getFullYear() - user[0].year;
 
       for (let i = 0; i < endyear; i++) {
@@ -1224,7 +1242,7 @@ document.addEventListener('alpine:init', () => {
         else {
           this.payment_chart.push(0);
         }
-
+        
       }
 
 
