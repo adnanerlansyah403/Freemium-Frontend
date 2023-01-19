@@ -40,7 +40,7 @@
             </div>
 
             <div class="w-full col-12 lg:col-9">
-                
+
                 <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
                     <i class="span font-bold dark:text-white" data-feather="credit-card"></i>
                     <p>
@@ -51,9 +51,9 @@
 
                 <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4 col-12">
 
-                    <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
+                    <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" >
 
-                        <div class="p-2 w-full lg:col-4 flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
+                        <div class="p-2 w-full flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
                             <input type="text" placeholder="Search Here..." @change="searchOrder(keyword)" x-model="keyword" class="w-[93%] dark:text-white">
                             <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                         </div>
@@ -82,7 +82,7 @@
                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                               </tr>
                             </thead>
-                    
+
                             <tbody>
                                 <template x-for="(item, index) in listOrder.data">
                                     <tr class="border border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
@@ -91,10 +91,10 @@
                                         <i class="fas fa-circle text-orange-500 mr-2"></i>
                                         </td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
-                                        <i class="fas fa-circle text-orange-500 mr-2" x-text="item.virtual_account_number ? item.virtual_account_number : 'No data'"></i> 
+                                        <i class="fas fa-circle text-orange-500 mr-2" x-text="item.virtual_account_number ? item.virtual_account_number : 'No data'"></i>
                                         </td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
-                                        <i class="fas fa-circle text-orange-500 mr-2" x-text="item.payment_date ? convertDate(item.payment_date) : 'No data'"></i> 
+                                        <i class="fas fa-circle text-orange-500 mr-2" x-text="item.payment_date ? convertDate(item.payment_date) : 'No data'"></i>
                                         </td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap flex ml-4 items-center gap-2">
                                             <button @click="showOrder(true, item.id)" class="group" title="Details">
@@ -128,11 +128,11 @@
                     </p>
                     <ul class="flex items-center justify-center gap-2">
                         <template x-if="listOrder.current_page != 1">
-    
+
                             <a @click="paginateOrder(listOrder.prev_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
 
-                                <                                
-                                
+                                <
+
                             </a>
 
                         </template>
@@ -144,17 +144,17 @@
                                     '' : listOrder.current_page != order.label,
                                 }" @click="paginateOrder(order.url); console.log(order.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
                                 {{-- <span x-text="console.log(categoriesArticle)"></span> --}}
-                                    <button  
+                                    <button
                                     x-text="order.label">
                                     </button>
                                 </li>
-                            </template>                         
+                            </template>
                         </template>
                         <template x-if="listOrder.current_page < listOrder.last_page">
                             <a @click="paginateOrder(listOrder.next_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                        
+
                                 >
-                                
+
                             </a>
                         </template>
                     </ul>
@@ -164,7 +164,7 @@
 
         </div>
 
-        
+
         <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="admin">
             <div role="alert" class="relative top-[13%] lg:top-[17%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
                 <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
@@ -210,7 +210,7 @@
                 </div>
             </div>
         </div>
-        
+
 
 
     </div>

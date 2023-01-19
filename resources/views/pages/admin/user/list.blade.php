@@ -51,16 +51,16 @@
 
                 <div class="mt-6 mb-10 flex items-center justify-between flex-wrap gap-y-4">
 
-                    <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
+                    <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" >
 
-                        <div class="p-2 w-full lg:col-4 flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
+                        <div class="p-2 w-full  flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
                             <input type="text" placeholder="Search Here..." x-model="search" @keydown.enter="searchUser()" class="w-[93%] dark:text-white">
                             <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                         </div>
 
                         <button @click="sort('name')" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                             <p>
-                                <span class="span dark:text-white">Sort By:</span>A/Z
+                                <span class="span dark:text-white">Sort By: </span>A/Z
                             </p>
                             <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary dark:group-hover:text-white  group-hover:-rotate-90 transition duration-200 ease-in-out"></i>
                         </button>
@@ -86,23 +86,23 @@
                                         <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                                     </tr>
                                     </thead>
-                            
+
                                     <tbody>
                                     <template x-for="data in listUser.data">
                                         <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name ? data.name : 'No Data'">Obi Imanuel</td>
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.username">obito
                                         </td>
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.email">obito@gmail.com 
+                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.email">obito@gmail.com
                                         </td>
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.subscribe_status ? 'Member' : 'Not Member'">TRUE 
+                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.subscribe_status ? 'Member' : 'Not Member'">TRUE
                                         </td>
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                             <img x-bind:src="imgUrl+data.photo" src="" class="w-[100px]">
                                         </td>
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
                                             <button @click="deleteUser(data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
-                                                <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i> 
+                                                <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i>
                                             </button>
                                         </td>
                                         <script>
@@ -121,7 +121,7 @@
                                 </table>
                             </div>
                         </div>
-        
+
                         <div class="mt-4 flex items-center justify-between">
                             <p class="dark:text-white">
                                 Pages
@@ -131,19 +131,19 @@
                                 </b>
                             </p>
                             <ul class="flex items-center justify-center gap-2">
-        
+
                                 <template x-if="listUser.current_page != 1">
-        
+
                                     <a @click="paginate(listUser.prev_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-        
-                                        <                                
-                                        
+
+                                        <
+
                                     </a>
-        
+
                                 </template>
-        
+
                                 <template x-for="(user, index) in listUser.links">
-                                        
+
                                         <template x-if="index != 0 && index != (listUser.links.length - 1) && listUser.last_page > 1">
                                             <li :class="
                                             {
@@ -151,20 +151,20 @@
                                                 '' : listUser.current_page != user.label,
                                             }" @click="paginate(user.url); console.log(user.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
                                             {{-- <span x-text="console.log(categoriesArticle)"></span> --}}
-                                                <button  
+                                                <button
                                                 x-text="user.label">
                                                 </button>
                                             </li>
                                         </template>
-                                        
-                                                                    
+
+
                                 </template>
-        
+
                                 <template x-if="listUser.current_page < listUser.last_page">
                                     <a @click="paginate(listUser.next_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                
+
                                         >
-                                        
+
                                     </a>
                                 </template>
                             </ul>
@@ -178,12 +178,12 @@
                         <x-loading />
                     </div>
                 </template>
-                
+
             </div>
 
         </div>
 
-        
+
         <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)">
             <div role="alert" class="relative top-[13%] lg:top-[11%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
                 <div class="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
@@ -211,7 +211,7 @@
                 </div>
             </div>
         </div>
-        
+
 
 
     </div>
