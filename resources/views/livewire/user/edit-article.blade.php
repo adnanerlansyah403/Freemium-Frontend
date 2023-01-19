@@ -21,6 +21,11 @@
         }
     ">
 
+        <template x-if="isLoading">
+            <div class="flex justify-end px-32 py-4">
+                <x-loading />
+            </div>
+        </template>
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 
             <form action="" class="col col-12">
@@ -196,11 +201,18 @@
                     </li>
 
                 </ul>
+
+                <template x-if="isLoading">
+                    <div class="flex justify-end py-4">
+                        <x-loading />
+                    </div>
+                </template>
+                
                 <div class="flex flex-wrap lg:flex-nowrap" x-data="helpers">
                     <div class="mb-5 col-12">
                         <div class="flex justify-between">
                             <label for="sub_title" class="text-md">Title</label>
-                            <p x-show="!isLoading" x-text="'Created at : ' + convertDate(EditArticle?.subarticles?.[editSub]?.created_at)"></p>
+                            <p x-show="EditArticle?.subarticles?.[editSub]?.created_at" x-text="'Created at : ' + convertDate(EditArticle?.subarticles?.[editSub]?.created_at)"></p>
                         </div>
                         <input x-model="EditArticle.subarticles[editSub].title" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">

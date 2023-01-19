@@ -59,16 +59,18 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           user = await response.json();
-          this.data_user = user.data
-          this.name = user.data.name == null ? '' : user.data.name
-          this.username = user.data.username == null ? '' : user.data.username
-          this.email = user.data.email == null ? '' : user.data.email
-          this.password = user.data.password == null ? '' : user.data.password
-          this.photo = user.data.photo == null ? '' : user.data.photo
-          this.link_facebook = user.data.link_facebook == null ? '' : user.data.link_facebook
-          this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
-          this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
-          this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
+          if(user.status){
+            this.data_user = user.data
+            this.name = user.data.name == null ? '' : user.data.name
+            this.username = user.data.username == null ? '' : user.data.username
+            this.email = user.data.email == null ? '' : user.data.email
+            this.password = user.data.password == null ? '' : user.data.password
+            this.photo = user.data.photo == null ? '' : user.data.photo
+            this.link_facebook = user.data.link_facebook == null ? '' : user.data.link_facebook
+            this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
+            this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
+            this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
+          }
         });
     },
 
@@ -438,8 +440,6 @@ document.addEventListener('alpine:init', () => {
 
       data = await user;
 
-      console.log(data)
-
       if (data.status) {
         localStorage.setItem('message', "data successfully deleted!");
         localStorage.setItem('showFlash', true);
@@ -468,7 +468,6 @@ document.addEventListener('alpine:init', () => {
     },
 
     loadMoreMyArticle() {
-      console.log(this.itemMyArticle);
       this.isLoadingMyArticle = true;
       this.isLoadMore = true;
       setTimeout(() => {
@@ -585,7 +584,7 @@ document.addEventListener('alpine:init', () => {
       if (typeof editSub.thumbnail !== 'string' && editSub.thumbnail[0]) {
         editSub.thumbnail = editSub.thumbnail[0];
       }
-      console.log(editSub);
+      
       let formData = new FormData();
 
       formData.append('article_id', editSub.article_id);
@@ -594,6 +593,7 @@ document.addEventListener('alpine:init', () => {
       formData.append('description', editSub.description);
       formData.append('thumbnail', editSub.thumbnail);
 
+      this.isLoading = true;
       fetch(this.apiUrl + `sub-article/${editSub.id}/update`, {
         method: "POST",
         headers: {
@@ -607,7 +607,6 @@ document.addEventListener('alpine:init', () => {
           if (!sub.status) {
             this.showFlash = true;
             this.status_err[1] = sub.message;
-            console.log(this.status_err)
           }
           else {
             editSub.id = sub.data.id;
@@ -616,6 +615,7 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('showFlash', true);
             this.flash()
           }
+          this.isLoading = false;
         })
 
     },
@@ -669,7 +669,6 @@ document.addEventListener('alpine:init', () => {
       })
 
         .then((response) => {
-          console.log(response);
           if (response.ok) {
             // Swal.fire({
             //   position: 'top-end',
@@ -789,7 +788,6 @@ document.addEventListener('alpine:init', () => {
           localStorage.removeItem("showFlash")
           this.showFlash = false;
         }, 3000);
-        console.log('test');
       }
     },
 
@@ -827,7 +825,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.listArticle = data.data;
-          console.log(this.listArticle);
+          
           // DOM
           // document.getElementById("all").classList.remove('active');
           // document.getElementById("free").classList.add('active');
@@ -849,7 +847,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.listArticle = data.data
-          console.log(this.listArticle);
+          
           // DOM
           // document.getElementById("all").classList.remove('active');
           // document.getElementById("free").classList.remove('active');
@@ -900,17 +898,14 @@ document.addEventListener('alpine:init', () => {
             this.showFlash = true;
             localStorage.setItem('message', data.message);
             localStorage.setItem('showFlash', true);
-            console.log(data)
           }
           else {
             this.showFlash = false;
             this.content = data.data;
           }
-
-
         })
         .catch(error => {
-          console.log(error);
+          console.log('error');
         })
     },
 
@@ -1124,7 +1119,6 @@ document.addEventListener('alpine:init', () => {
           localStorage.removeItem("showFlash")
           this.showFlash = false;
         }, 3000);
-        console.log('test');
       }
     },
 
@@ -1314,7 +1308,6 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           const data = await response.json();
           this.listOrder = data.data;
-          console.log(this.listOrder);
         });
 
     },
@@ -1351,7 +1344,6 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          // console.log(data.data);
 
           nameOrder.innerText = data.data.user.name ? data.data.user.name : "User hasn't name yet";
           emailOrder.innerText = data.data.user.email ? data.data.user.email : "User hasn't email yet";
@@ -1365,9 +1357,17 @@ document.addEventListener('alpine:init', () => {
 
     // FILTERING ORDERS
 
-    searchOrder(keyword) {
-      // console.log(keyword);
+    sortOrder(col = 'payment_date') {
+      if (this.sortCol === col) this.sortAsc = !this.sortAsc;
+      this.sortCol = col;
+      this.listOrder.data.sort((a, b) => {
+        if (a[this.sortCol] < b[this.sortCol]) return this.sortAsc ? 1 : -1;
+        if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
+        return 0;
+      });
+    },
 
+    searchOrder(keyword) {
       fetch(`${this.apiUrl}payment?search=${keyword}`, {
         method: 'GET',
         headers: {
@@ -1377,7 +1377,6 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.listOrder = data.data
-          console.log(data);
         })
 
     },

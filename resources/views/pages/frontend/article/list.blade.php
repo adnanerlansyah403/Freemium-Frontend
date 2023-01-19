@@ -45,7 +45,7 @@
         
         {{-- kiri --}}
         <div class="lg:col-3">
-            <template  x-if="!data_user.subscribe_status">
+            <template  x-if="!data_user?.subscribe_status">
                 <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max" style="display: none;">
                     <a href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                     x-init="
@@ -113,7 +113,7 @@
             <div x-init="fetchMe()"></div>
             <div x-init="getArticle()"></div>
 
-            <template x-if="!data_user.subscribe_status">
+            <template x-if="!data_user?.subscribe_status">
                 <div id="alertSubscribe" style="display: none"
                 >
                     <div x-init="
@@ -149,7 +149,6 @@
                                 <div class="flex lg:gap-[12px] lg:px-0 gap-5 ">
                                     <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
                                     <div>
-                                        <span x-text="console.log(item)"></span>
                                         <h1 class="text-[18px] font-bold font-bebasNeue leading-[27px]" x-text="item.author.username">Nama Author</h1>
                                         <div class="flex gap-3 flex-wrap">
                                             <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
@@ -240,8 +239,8 @@
                 </div>            
             </template> 
             
-            <span x-text="console.log(itemArticle > listArticle.length)"></span>
-            <span x-text="console.log(listArticle.length < itemArticle)"></span>
+            {{-- <span x-text="console.log(itemArticle > listArticle.length)"></span>
+            <span x-text="console.log(listArticle.length < itemArticle)"></span> --}}
             <template x-if="itemArticle > listArticle.length && keywordArticle == '' && listArticle.length > 1">
                 <div class="flex items-center justify-center">
                     <div id="resetButton" class="flex items-center justify-center mt-20" style="display: none;"
