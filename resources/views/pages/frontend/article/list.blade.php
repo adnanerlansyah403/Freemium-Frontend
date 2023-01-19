@@ -61,7 +61,7 @@
                     </a>
                 </div>
             </template>
-            <div class="w-full lg:w-[270px] mx-auto h-max px-4 py-8 bg-white dark:bg-slate-secondary dark:text-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+            <div class="w-full lg:w-[270px] mx-auto h-max mt-[10px] px-4 py-8 bg-white dark:bg-slate-secondary dark:text-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                 <div class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white">
                     <div class="flex justify-between">
                         <input 
@@ -133,90 +133,95 @@
 
             <div class="flex flex-wrap items-center justify-center" x-data="helpers">
 
-                
-                <template x-if="isLoadingArticle && isLoadMore == false">
-                    <x-loading />
-                </template>
+                <div class="flex flex-col flex-wrap items-center justify-center">
+
+                    <template x-if="isLoadingArticle && isLoadMore == false">
+                        <x-loading />
+                    </template>
+                    
+                    <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle != ''">
+                        <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
+                            x-init="
+                                setTimeout(() => {
+                                    document.getElementById('articleNotFound').style.display = 'block';
+                                }, 800)
+                            "
+                        >
+                            <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
+                            <span class="span dark:text-slate-fourth">Oops</span>, We can't find your article
+                        </p>
+                    </template>
+    
+                    <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle == ''">
+                        <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
+                            x-init="
+                                setTimeout(() => {
+                                    document.getElementById('articleNotFound').style.display = 'block';
+                                }, 700)
+                            "
+                        >
+                            <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
+                            <span class="span dark:text-slate-fourth">We</span> still don't have any articles 
+                        </p>
+                    </template>
+
+
+                </div>
                 
 
-                <template x-for="(item, index) in listArticle.length > 1 ? listArticle.slice(0, itemArticle) : listArticle">
-                    <div class="content first-of-type:mt-0 mt-[22px]" >
-                        
-                        {{-- <div class="border mt-5 first:border-none"></div> --}}
-                        <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary dark:text-white rounded-primary px-3 py-4">
-                            <div class="flex flex-col col-12 md:col-9">
-                                <div class="flex lg:gap-[12px] lg:px-0 gap-5 ">
-                                    <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
-                                    <div>
-                                        <h1 class="text-[18px] font-bold font-bebasNeue leading-[27px]" x-text="item.author.username">Nama Author</h1>
-                                        <div class="flex gap-3 flex-wrap">
-                                            <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
-                                            <p class="flex items-center gap-1 text-[14px] leading-[21px]">
-                                                <i data-feather="eye" class="w-4 h-4"></i>
-                                                <span x-text="item.total_views_sum > 0 ? item.total_views_sum : 'No'">
-                                                    1000 
-                                                </span> 
-                                            </p>
+                <div class="flex flex-wrap items-center justify-center -translate-y-[10px]">
+                    <template x-for="(item, index) in listArticle.length > 1 ? listArticle.slice(0, itemArticle) : listArticle">
+                        <div class="content first-of-type:mt-0 mt-[22px]" >
+                            
+                            {{-- <div class="border mt-5 first:border-none"></div> --}}
+                            <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary dark:text-white rounded-primary px-3 py-4">
+                                <div class="flex flex-col col-12 md:col-9">
+                                    <div class="flex lg:gap-[12px] lg:px-0 gap-5 ">
+                                        <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
+                                        <div>
+                                            <h1 class="text-[18px] font-bold font-bebasNeue leading-[27px]" x-text="item.author.username">Nama Author</h1>
+                                            <div class="flex gap-3 flex-wrap">
+                                                <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
+                                                <p class="flex items-center gap-1 text-[14px] leading-[21px]">
+                                                    <i data-feather="eye" class="w-4 h-4"></i>
+                                                    <span x-text="item.total_views_sum > 0 ? item.total_views_sum : 'No'">
+                                                        1000 
+                                                    </span> 
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
+                
+                                    <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-6 md:mb-10">
+                                        <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
+                                    </div>
+                
+                                    <div class="flex lg:gap-5 justify-between items-center mt-0 md:mt-5">
+                                        <a x-bind:href="baseUrl + `article/detail/${item.id}`"
+                                        class="font-bold text-[24px] font-neucha leading-9" x-text="item.title">JUDUL ARTIKEL</a>
+                                        <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
+                                            PAID
+                                        </button>
+                                    </div>
+                                    <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full dark:text-gray-primary" x-html="item.description.length > 150 ? item.description.substring(0, 150) + '...' : item.description">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
+                                        short desc short desc short desc short desc
+                                    </p>
+                
                                 </div>
-            
-                                <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-6 md:mb-10">
+                                <div class="bg-[#D9D9D9] rounded-lg max-w-[150px] w-[150px] h-[150px] my-auto mx-5 hidden md:block lg:block col-4">
                                     <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
                                 </div>
-            
-                                <div class="flex lg:gap-5 justify-between items-center mt-0 md:mt-5">
-                                    <a x-bind:href="baseUrl + `article/detail/${item.id}`"
-                                    class="font-bold text-[24px] font-neucha leading-9" x-text="item.title">JUDUL ARTIKEL</a>
-                                    <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
-                                        PAID
-                                    </button>
-                                </div>
-                                <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full dark:text-gray-primary" x-html="item.description.length > 150 ? item.description.substring(0, 150) + '...' : item.description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
-                                    short desc short desc short desc short desc
-                                </p>
-            
                             </div>
-                            <div class="bg-[#D9D9D9] rounded-lg max-w-[150px] w-[150px] h-[150px] my-auto mx-5 hidden md:block lg:block col-4">
-                                <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
-                            </div>
+                            <script>
+                                feather.replace()
+                            </script>
+                            
                         </div>
-                        <script>
-                            feather.replace()
-                        </script>
-                        
-                    </div>
-        
-                </template>
-
-
-                <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle != ''">
-                    <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
-                        x-init="
-                            setTimeout(() => {
-                                document.getElementById('articleNotFound').style.display = 'block';
-                            }, 800)
-                        "
-                    >
-                        <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
-                        <span class="span dark:text-slate-fourth">Oops</span>, We can't find your article
-                    </p>
-                </template>
-
-                <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle == ''">
-                    <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
-                        x-init="
-                            setTimeout(() => {
-                                document.getElementById('articleNotFound').style.display = 'block';
-                            }, 550)
-                        "
-                    >
-                        <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
-                        <span class="span dark:text-slate-fourth">We</span> still don't have any articles 
-                    </p>
-                </template>
+            
+                    </template>
+                </div>
 
             </div>
 
