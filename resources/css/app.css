@@ -197,7 +197,7 @@
     }
 
     .circle {
-        animation: circle 1.5s infinite;
+        animation: circle 2s infinite;
     }
 
     @keyframes circle {
@@ -216,81 +216,89 @@
 
     .open-up-left-box {
         /* transform: translateY(12px); */
-        animation: openUpLeftBox 1.5s linear infinite;
-            border-radius: 50%;
+        animation: openUpLeftBox 2s linear infinite;
     }
 
     @keyframes openUpLeftBox {
         0% {
             transform: translate(0);
+            border-radius: 0%;
         }
 
         50% {
             transform: translateX(-12px) translateY(-12px);
+            border-radius: 50%;
         }
 
         100% {
             transform: translate(0);
+            border-radius: 0%;
         }
     }
 
     .open-up-right-box {
         /* transform: translateY(12px); */
-        animation: openUpRightBox 1.5s linear infinite;
-            border-radius: 50%;
+        animation: openUpRightBox 2s linear infinite;
     }
 
     @keyframes openUpRightBox {
         0% {
             transform: translate(0);
+            border-radius: 0%;
         }
 
         50% {
             transform: translateX(12px) translateY(-12px);
+            border-radius: 50%;
         }
 
         100% {
             transform: translate(0);
+            border-radius: 0%;
         }
     }
 
     .open-bottom-left-box {
         /* transform: translateY(12px); */
-        animation: openBottomLeftBox 1.5s linear infinite;
-            border-radius: 50%;
+        animation: openBottomLeftBox 2s linear infinite;
     }
 
     @keyframes openBottomLeftBox {
         0% {
             transform: translate(0);
+            border-radius: 0%;
         }
 
         50% {
             transform: translateX(-12px) translateY(12px);
+            border-radius: 50%;
         }
 
         100% {
             transform: translate(0);
+            border-radius: 0%;
         }
     }
 
     .open-bottom-right-box {
         /* transform: translateY(12px); */
-        animation: openBottomRightBox 1.5s linear infinite;
-            border-radius: 50%;
+        animation: openBottomRightBox 2s linear infinite;
     }
 
     @keyframes openBottomRightBox {
         0% {
             transform: translate(0);
+            border-radius: 0% !important;
         }
 
         50% {
             transform: translateX(12px) translateY(12px);
+            border-radius: 50%;
         }
 
         100% {
             transform: translate(0);
+            border-radius: 0% !important;
         }
     }
 
