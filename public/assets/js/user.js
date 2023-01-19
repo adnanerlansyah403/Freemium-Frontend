@@ -306,6 +306,12 @@ document.addEventListener('alpine:init', () => {
         localStorage.setItem('showFlash', true);
         window.location.reload();
       }
+      if (!data.status) {
+        this.showFlash = true;
+        this.status_err = data.message;
+        this.isLoadingArticle = false;
+        console.log(this.status_err)
+      }
     },
 
     async actionPlan() {
