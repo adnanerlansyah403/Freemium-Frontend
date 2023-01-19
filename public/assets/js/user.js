@@ -11,9 +11,9 @@ document.addEventListener('alpine:init', () => {
     linkInputInstagram: false,
     linkInputTwitter: false,
     data_user: [],
-    status_err: [],
-    typeStatus: false,
     showFlash: false,
+    status_err: [],
+    typeStatus: true,
     isLoading: false,
     isLoadingMyArticle: false,
     isLoadMore: false,
@@ -33,15 +33,17 @@ document.addEventListener('alpine:init', () => {
         this.message = localStorage.getItem('message');
         setTimeout(function () {
           localStorage.removeItem("showFlash")
+          localStorage.removeItem("message")
           this.showFlash = false;
-        }, 3000);
+        }, 4000);
       }
     },
+
     name: '',
     username: '',
     email: '',
     password: '',
-    photo: '',
+    // photo: '',
     link_facebook: '',
     link_linkedin: '',
     link_instagram: '',
@@ -143,9 +145,10 @@ document.addEventListener('alpine:init', () => {
           this.link_instagram = user.data.link_instagram != null ? user.data.link_instagram : ''
           this.link_twitter = user.data.link_twitter != null ? user.data.link_twitter : ''
 
+          localStorage.setItem('showFlash', true)
           localStorage.setItem('message', user.message);
-          localStorage.setItem('showFlash', true);
-          window.location.reload();
+          // this.typeStatus = true;
+          window.location.replace(this.baseUrl + 'profile');
           this.isLoading = false;
         })
     },
@@ -395,6 +398,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
     fetchListUser() {
+      this.isLoading = true;
       fetch(`${this.apiUrl}user/all`, {
         method: "GET",
         headers: {
@@ -405,6 +409,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           data = await response.json();
           this.listUser = data.data;
+          this.isLoading = false;
         })
     },
 
@@ -754,6 +759,7 @@ document.addEventListener('alpine:init', () => {
     detailArticle: null,
     isLoadingArticle: false,
     isLoadMore: false,
+    isLoading: false,
     itemArticle: 3,
     content: false,
     back: false,
@@ -912,9 +918,16 @@ document.addEventListener('alpine:init', () => {
       this.categoriesArticle = await category.json();
     },
     async fetchPaginationCategory() {
-      category = await fetch(`${this.apiUrl}category`);
-      data = await category.json();
-      this.categoriesArticle = data.data;
+      this.isLoading = true;
+      // category = await fetch(`${this.apiUrl}category`);
+      // data = await category.json();
+      fetch(`${this.apiUrl}category`, {
+        method: 'GET',
+      }).then(async (response) => {
+        const data = await response.json();
+        this.categoriesArticle = data.data;
+        this.isLoading = false;
+      })
     },
 
     async createArticle() {
@@ -976,9 +989,17 @@ document.addEventListener('alpine:init', () => {
     sort(col) {
       if (this.sortCol === col) this.sortAsc = !this.sortAsc;
       this.sortCol = col;
+      let repeatIcon = document.getElementById("repeatIcon")
       this.categoriesArticle.data.sort((a, b) => {
-        if (a[this.sortCol] < b[this.sortCol]) return this.sortAsc ? 1 : -1;
-        if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
+        if (a[this.sortCol] < b[this.sortCol]) {
+          repeatIcon.classList.add("active");
+          return this.sortAsc ? 1 : -1
+        };
+        if (a[this.sortCol] > b[this.sortCol]) {
+          repeatIcon.classList.remove("active");
+          return this.sortAsc ? -1 : 1
+        };
+        repeatIcon.classList.remove("active");
         return 0;
       });
     },
@@ -992,6 +1013,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
     searchCategory() {
+      this.isLoading = true;
       fetch(`${this.apiUrl
         }category?search=${this.search}`, {
         method: "GET"
@@ -999,6 +1021,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.categoriesArticle = data.data;
+          this.isLoading = false
         })
     },
     getCategories() {

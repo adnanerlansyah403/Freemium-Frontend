@@ -195,7 +195,7 @@
                         x-init="
                             setTimeout(() => {
                                 document.getElementById('articleNotFound').style.display = 'block';
-                            }, 550)
+                            }, 800)
                         "
                     >
                         <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">

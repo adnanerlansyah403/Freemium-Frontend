@@ -33,7 +33,7 @@
                         </script>
                     </a>
                 </template>
-                <div class="relative"
+                <div class="relative z-[100]"
                     x-data="{dropdownmenu : false}"
                 >
                     <button 

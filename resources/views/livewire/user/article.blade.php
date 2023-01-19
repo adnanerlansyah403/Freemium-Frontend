@@ -29,12 +29,10 @@
     
         <div x-init="fetchMe()"></div>
         
-        {{-- <div x-data="user" class="container mx-auto">
-            <div x-init="flash()"></div>
-            <div x-show="showFlash">
-                <x-alert />
-            </div>
-        </div> --}}
+        <div x-init="flash()"></div>
+        <div x-show="showFlash">
+            <x-alert />
+        </div>
     
         <div class="container mx-auto mt-10 w-full dark:text-white" x-data="user">
             <div x-init="fetchListMyArticle()"></div>
@@ -132,7 +130,10 @@
             </template>
             
             <template x-if="listMyArticle.data.length == 0">
-                <h1 class="text-center text-md"><span class="span dark:text-slate-third">Oops</span>, You don't have an article</h1>
+                <div>
+                    <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
+                    <h1 class="text-center text-md"><span class="span dark:text-slate-third">Oops</span>, You don't have an article</h1>
+                </div>
             </template>
 
             <span x-text="console.log(itemMyArticle > listMyArticle.data.length)"></span>

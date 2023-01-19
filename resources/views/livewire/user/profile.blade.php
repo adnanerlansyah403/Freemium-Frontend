@@ -5,31 +5,35 @@
 <div x-data="user" x-init="checkSession()">
     <template x-if="isLogedIn">
         <script>
-            document.title = 'Me Article - Freemium App';
+            document.title = 'Me - Freemium App';
         </script>
     </template>
 </div>
 
-<section class="py-[100px]" x-data="user" style="display: none;">
-    <div x-init="checkSession()"></div>
-    
-    <div x-init="
-    if(isLogedIn == true) {
-        setTimeout(function() {
-            return document.querySelector('section').style.display = 'block';
-        }, 600)
-    }
-    ">
+<section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
+    <div x-init="fetchMe()"></div>
 
+    {{-- alert --}}
+    <div x-init="flash()"></div>
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
+    
+    <div
+    x-init="
+        if(isLogedIn == true) {
+            setTimeout(function() {
+                return document.querySelector('section').style.display = 'block';
+            }, 1000)
+        }
+    ">
         <h1 class="font-iceberg text-lg text-center text-primary dark:text-white mb-16">ME</h1>
     
         @include("layouts.partials.user.dashboard")
-    
-        <div x-init="fetchMe()"></div>
-    
+        
         <template x-if="isLoading == true">
             <div class="container mx-auto flex items-center justify-center flex-wrap md:flex-nowrap gap-10 lg:gap-0">
-                <span class="span my-10 text-md">Loading...</span>
+                <span class="span my-10 dark:text-white text-md">Loading...</span>
             </div>
         </template>
     
@@ -38,15 +42,6 @@
             <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0">
     
                 <div class="col col-12 order-2 md:ml-0 lg:order-1 lg:col-8">
-    
-                    {{-- <div x-text="console.log(data_user.name)"></div> --}}
-    
-                    <div x-data="user" class="container mx-auto">
-                        <div x-init="flash()"></div>
-                        <div x-show="showFlash">
-                            <x-alert />
-                        </div>
-                    </div>
     
                     <div class="group flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                         <span class="group-hover:translate-x-1 bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary transition duration-200 ease-in-out">
@@ -81,7 +76,7 @@
                         @click="$refs.photo.click()">
                             Upload
                         </span>
-                        <input type="file" class="py-3 w-full lg:w-4/5 dark:text-white" id="photo" x-ref="photo" x-model="photo" placeholder="Your password...">
+                        <input type="file" class="py-3 w-full lg:w-4/5 dark:text-white" id="photo" x-ref="photo" placeholder="Your password...">
                     </div>
     
                     <ul class="flex items-center justify-center gap-4 my-12">

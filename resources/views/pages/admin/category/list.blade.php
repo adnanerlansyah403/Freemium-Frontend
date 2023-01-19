@@ -17,10 +17,32 @@
         background : #7C000D;
         color: white;
     }
+
+    .hidden-prev {
+        display: none
+    }
+
+    .hidden-next {
+        display: none;
+    }
+
+    #repeatIcon.active {
+        color: #7C000D !important;
+        transform: rotate(90deg);
+        background-color: transparent;
+        transition: .2s ease-in-out;
+    }
+
 </style>
 
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
     <div x-init="checkRole()"></div>
+    
+    <div x-init="flash()"></div>
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
+
     <div
     x-init="
         if(isLogedIn == true) {
@@ -68,72 +90,118 @@
                             <p>
                                 <span class="span dark:text-white group-hover:animate-bounce5">Sort By:</span>A/Z
                             </p>
-                            <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:-rotate-90 dark:group-hover:text-white transition duration-200 ease-in-out"></i>
+                            <i id="repeatIcon" data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary transition duration-200 ease-in-out"></i>
                         </button>
 
                     </div>
 
                 </div>
 
-                <div class="w-full rounded-primary bg-white shadow-lg">
-                    {{-- <div x-data="user">
-                        <div x-init="flash()"></div>
-                        <div x-show="showFlash">
-                            <x-alert />
-                        </div>
-                    </div> --}}
-                    <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Category</div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
-                            <thead>
-                              <tr>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Icon</th>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
-                              </tr>
-                            </thead>
-                    
-                            <tbody>
-                                <template x-for="category in categoriesArticle.data">
-                                    <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="category.name">Laravel</td>
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                            <img x-bind:src="imgUrl+category.icon" src="" class="w-[100px]">
-                                        </td>
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
-                                            <button @click="modalHandlerCategory(true, category.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
-                                                <i data-feather="edit" class="w-5 h-5 lg:w-6 lg:h-6"></i>
-                                            </button>
-                                            <button @click="deleteCategory(category.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
-                                                <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i>
-                                            </button>
-                                        </td>
-                                        <script>
-                                            feather.replace()
-                                        </script>
-                                    </tr>
-                                </template>
-                                <template x-if="categoriesArticle.length == 0">
-                                    <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
-                                        <td colspan="3">
-                                            <span class="text-base dark:text-white">Empty Data</span>
-                                        </td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <template x-if="!isLoading">
 
-                <div class="mt-4">
-                    <ul class="flex items-center justify-center gap-2">
-                        <template x-for="(category, index) in categoriesArticle.links">
-                            <li @click="paginate(category.url)" x-bind:class="category.active ? 'bg-active' : ''" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                <button x-text="index == 0 ? '<' : index == (categoriesArticle.links.length - 1) ? '>' : category.label">1</button>
-                            </li>
-                        </template>
-                    </ul>
-                </div>
+                    <div>
+
+                        <div class="w-full rounded-primary bg-white shadow-lg">
+                            <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Category</div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
+                                    <thead>
+                                    <tr>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Icon</th>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
+                                    </tr>
+                                    </thead>
+                            
+                                    <tbody>
+                                        <template x-for="category in categoriesArticle.data">
+                                            <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
+                                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="category.name">Laravel</td>
+                                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                                                    <img x-bind:src="imgUrl+category.icon" src="" class="w-[100px]">
+                                                </td>
+                                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
+                                                    <button @click="modalHandlerCategory(true, category.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
+                                                        <i data-feather="edit" class="w-5 h-5 lg:w-6 lg:h-6"></i>
+                                                    </button>
+                                                    <button @click="deleteCategory(category.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
+                                                        <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i>
+                                                    </button>
+                                                </td>
+                                                <script>
+                                                    feather.replace()
+                                                </script>
+                                            </tr>
+                                        </template>
+                                        <template x-if="categoriesArticle.data.length == 0">
+                                            <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
+                                                <td colspan="3">
+                                                    <span class="text-base dark:text-white">Empty Data</span>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+    
+                        <div class="mt-4 flex items-center justify-between">
+                            <p class="dark:text-white">
+                                Pages
+                                <b>
+                                    <span x-text="categoriesArticle.current_page"></span> /
+                                    <span class="span dark:text-slate-third" x-text="categoriesArticle.last_page"></span>
+                                </b>
+                            </p>
+                            <ul class="flex items-center justify-center gap-2">
+        
+                                <template x-if="categoriesArticle.current_page != 1">
+        
+                                    <a @click="paginate(categoriesArticle.prev_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+        
+                                        <                                
+                                        
+                                    </a>
+        
+                                </template>
+        
+                                <template x-for="(category, index) in categoriesArticle.links">
+                                        
+                                        <template x-if="index != 0 && index != (categoriesArticle.links.length - 1) && categoriesArticle.last_page > 1">
+                                            <li :class="
+                                            {
+                                                'bg-active' : categoriesArticle.current_page == category.label,
+                                                '' : categoriesArticle.current_page != category.label,
+                                            }" @click="paginate(category.url); console.log(category.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
+                                            {{-- <span x-text="console.log(categoriesArticle)"></span> --}}
+                                                <button  
+                                                x-text="category.label">
+                                                </button>
+                                            </li>
+                                        </template>
+                                        
+                                                                    
+                                </template>
+        
+                                <template x-if="categoriesArticle.current_page < categoriesArticle.last_page">
+                                    <a @click="paginate(categoriesArticle.next_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                
+                                        >
+                                        
+                                    </a>
+                                </template>
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                </template>
+
+                <template x-if="isLoading">
+                    <div class="w-full col-12 lg:col-9 flex items-center justify-center">
+                        <x-loading />
+                    </div>
+                </template>
 
             </div>
 

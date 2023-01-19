@@ -69,72 +69,116 @@
 
                 </div>
 
-                <div class="w-full rounded-primary bg-white shadow-lg">
-                  {{-- <div x-data="user">
-                    <div x-init="flash()"></div>
-                    <div x-show="showFlash">
-                        <x-alert />
-                    </div>
-                  </div> --}}
-                    <div class="w-full text-center bg-primary py-2 text-white dark:bg-slate-secondary">List Users</div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
-                            <thead>
-                              <tr>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Username</th>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Email</th>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Subscribe Status</th>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Photo</th>
-                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
-                              </tr>
-                            </thead>
-                    
-                            <tbody>
-                              <template x-for="data in listUser.data">
-                                <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name ? data.name : 'No Data'">Obi Imanuel</td>
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.username">obito
-                                  </td>
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.email">obito@gmail.com 
-                                  </td>
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.subscribe_status">TRUE 
-                                  </td>
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <img x-bind:src="imgUrl+data.photo" src="" class="w-[100px]">
-                                  </td>
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
-                                      <button @click="deleteUser(data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
-                                          <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i> 
-                                      </button>
-                                  </td>
-                                  <script>
-                                      feather.replace()
-                                  </script>
-                                </tr>
-                              </template>
-                              <template x-if="listUser.length == 0">
-                                  <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
-                                      <td colspan="6">
-                                          <span class="text-base dark:text-white">Empty Data</span>
-                                      </td>
-                                  </tr>
-                              </template>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <template x-if="!isLoading">
 
-                <div class="mt-4">
-                    <ul class="flex items-center justify-center gap-2">
-                        <template x-for="(user, index) in listUser.links">
-                            <li @click="paginate(user.url)" x-bind:class="user.active ? 'bg-active' : ''" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                <button x-text="index == 0 ? '<' : index == (listUser.links.length - 1) ? '>' : user.label">1</button>
-                            </li>
-                        </template>
-                    </ul>
-                </div>
+                    <div>
+                        <div class="w-full rounded-primary bg-white shadow-lg">
+                            <div class="w-full text-center bg-primary py-2 text-white dark:bg-slate-secondary">List Users</div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
+                                    <thead>
+                                    <tr>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Username</th>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Email</th>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Subscribe Status</th>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Photo</th>
+                                        <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
+                                    </tr>
+                                    </thead>
+                            
+                                    <tbody>
+                                    <template x-for="data in listUser.data">
+                                        <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
+                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name ? data.name : 'No Data'">Obi Imanuel</td>
+                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.username">obito
+                                        </td>
+                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.email">obito@gmail.com 
+                                        </td>
+                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.subscribe_status ? 'Member' : 'Not Member'">TRUE 
+                                        </td>
+                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                            <img x-bind:src="imgUrl+data.photo" src="" class="w-[100px]">
+                                        </td>
+                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
+                                            <button @click="deleteUser(data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
+                                                <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i> 
+                                            </button>
+                                        </td>
+                                        <script>
+                                            feather.replace()
+                                        </script>
+                                        </tr>
+                                    </template>
+                                    <template x-if="listUser.data.length == 0">
+                                        <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
+                                            <td colspan="6">
+                                                <span class="text-base dark:text-white">Empty Data</span>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+        
+                        <div class="mt-4 flex items-center justify-between">
+                            <p class="dark:text-white">
+                                Pages
+                                <b>
+                                    <span x-text="listUser.current_page"></span> /
+                                    <span class="span dark:text-slate-third" x-text="listUser.last_page"></span>
+                                </b>
+                            </p>
+                            <ul class="flex items-center justify-center gap-2">
+        
+                                <template x-if="listUser.current_page != 1">
+        
+                                    <a @click="paginate(listUser.prev_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+        
+                                        <                                
+                                        
+                                    </a>
+        
+                                </template>
+        
+                                <template x-for="(category, index) in listUser.links">
+                                        
+                                        <template x-if="index != 0 && index != (listUser.links.length - 1) && listUser.last_page > 1">
+                                            <li :class="
+                                            {
+                                                'bg-active' : listUser.current_page == category.label,
+                                                '' : listUser.current_page != category.label,
+                                            }" @click="paginate(category.url); console.log(category.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
+                                            {{-- <span x-text="console.log(categoriesArticle)"></span> --}}
+                                                <button  
+                                                x-text="category.label">
+                                                </button>
+                                            </li>
+                                        </template>
+                                        
+                                                                    
+                                </template>
+        
+                                <template x-if="listUser.current_page < listUser.last_page">
+                                    <a @click="paginate(listUser.next_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                
+                                        >
+                                        
+                                    </a>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
 
+                </template>
+
+                <template x-if="isLoading == true">
+                    <div class="w-full col-12 lg:col-9 flex items-center justify-center">
+                        <x-loading />
+                    </div>
+                </template>
+                
             </div>
 
         </div>

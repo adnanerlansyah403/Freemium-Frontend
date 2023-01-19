@@ -7,11 +7,24 @@ document.addEventListener('alpine:init', () => {
     name: '',
     email: '',
     password: '',
+    message: '',
     subscribe_status: false,
     showFlash: false,
     status_err: [],
     typeStatus: true,
     data_user: [],
+
+    flash() {
+      if (localStorage.getItem('showFlash')) {
+        this.showFlash = true;
+        this.message = localStorage.getItem('message');
+        setTimeout(function () {
+          localStorage.removeItem("showFlash")
+          localStorage.removeItem("message")
+          this.showFlash = false;
+        }, 4000);
+      }
+    },
 
     checkSubscribe() {
       this.subscribe_status = localStorage.getItem('subscribe_status');
@@ -112,10 +125,13 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           user = await response.json();
+          console.log(user);
           if (!user.status) {
-            this.showFlash = true;
-            this.status_err = user.message;
+            localStorage.setItem('showFlash', true)
+            localStorage.setItem('message', user.message);
           } else {
+            localStorage.setItem('showFlash', true)
+            localStorage.setItem('message', user.message);
             window.location.replace(this.baseUrl + 'login')
           }
         });
