@@ -3,6 +3,13 @@
 
 @section("content")
 
+<style>
+    .bg-active {
+        background : #7C000D;
+        color: white;
+    }
+</style>
+
 <div x-data="user" x-init="checkSession()">
     <div x-init="fetchMe()"></div>
     <template x-if="isLogedIn && data_user.role == 1">
@@ -27,7 +34,7 @@
         @include("layouts.partials.user.dashboard")
 
         <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9" x-data="admin">
-
+            <div x-init="fetchListOrder()"></div>
             <div class="w-full lg:col-3">
                 @include("pages.admin.layouts.partials.sidebar")
             </div>
@@ -51,7 +58,7 @@
                             <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                         </div>
 
-                        <button @click="sortOrder()" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
+                        <button @click="sortOrder('payment_date')" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                             <p>
                                 <span class="span dark:text-white">Sort By:</span>A/Z
                             </p>
@@ -77,8 +84,7 @@
                             </thead>
                     
                             <tbody>
-                                <div x-init="fetchListOrder()"></div>
-                                <template x-for="(item, index) in listOrder">
+                                <template x-for="(item, index) in listOrder.data">
                                     <tr class="border border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap font-semibold" x-text="item.user.name ? item.user.name : 'No data'"></td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap" x-text="item.plan.name ? item.plan.name : 'No data'">
@@ -100,7 +106,7 @@
                                         </script>
                                     </tr>
                                 </template>
-                                <template x-if="listOrder.length == 0">
+                                <template x-if="listOrder.data.length == 0">
                                     <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
                                         <td colspan="5">
                                             <span class="text-base dark:text-white">Empty Data</span>
@@ -112,17 +118,45 @@
                     </div>
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-4 flex items-center justify-between">
+                    <p class="dark:text-white">
+                        Pages
+                        <b>
+                            <span x-text="listOrder.current_page"></span> /
+                            <span class="span dark:text-slate-third" x-text="listOrder.last_page"></span>
+                        </b>
+                    </p>
                     <ul class="flex items-center justify-center gap-2">
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">1</a>
-                        </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">2</a>
-                        </li>
-                        <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                            <a href="" class="">3</a>
-                        </li>
+                        <template x-if="listOrder.current_page != 1">
+    
+                            <a @click="paginateOrder(listOrder.prev_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+
+                                <                                
+                                
+                            </a>
+
+                        </template>
+                        <template x-for="(order, index) in listOrder.links">
+                            <template x-if="index != 0 && index != (listOrder.links.length - 1) && listOrder.last_page > 1">
+                                <li :class="
+                                {
+                                    'bg-active' : listOrder.current_page == order.label,
+                                    '' : listOrder.current_page != order.label,
+                                }" @click="paginateOrder(order.url); console.log(order.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
+                                {{-- <span x-text="console.log(categoriesArticle)"></span> --}}
+                                    <button  
+                                    x-text="order.label">
+                                    </button>
+                                </li>
+                            </template>                         
+                        </template>
+                        <template x-if="listOrder.current_page < listOrder.last_page">
+                            <a @click="paginateOrder(listOrder.next_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                        
+                                >
+                                
+                            </a>
+                        </template>
                     </ul>
                 </div>
 

@@ -1192,7 +1192,7 @@ document.addEventListener('alpine:init', () => {
         this.years.push(parseInt(this.years[i]) + 1);
       }
 
-      for (let i = 0; i < endyear+1; i++) {
+      for (let i = 0; i < endyear + 1; i++) {
         if (user[i] && user[i].year == this.years[i]) {
           this.user_chart.push(user[i].count);
         }
@@ -1286,6 +1286,19 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    paginateOrder(url) {
+      fetch(`${url}`, {
+        method: "GET",
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listOrder = data.data;
+        })
+    },
+
     fetchListOrder() {
 
       fetch(`${this.apiUrl}payment`, {
@@ -1348,6 +1361,16 @@ document.addEventListener('alpine:init', () => {
 
     // FILTERING ORDERS
 
+    sortOrder(col = 'payment_date') {
+      console.log(col)
+      if (this.sortCol === col) this.sortAsc = !this.sortAsc;
+      this.sortCol = col;
+      this.listOrder.data.sort((a, b) => {
+        if (a[this.sortCol] < b[this.sortCol]) return this.sortAsc ? 1 : -1;
+        if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
+        return 0;
+      });
+    },
     searchOrder(keyword) {
       // console.log(keyword);
 

@@ -142,17 +142,17 @@
         
                                 </template>
         
-                                <template x-for="(category, index) in listUser.links">
+                                <template x-for="(user, index) in listUser.links">
                                         
                                         <template x-if="index != 0 && index != (listUser.links.length - 1) && listUser.last_page > 1">
                                             <li :class="
                                             {
-                                                'bg-active' : listUser.current_page == category.label,
-                                                '' : listUser.current_page != category.label,
-                                            }" @click="paginate(category.url); console.log(category.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
+                                                'bg-active' : listUser.current_page == user.label,
+                                                '' : listUser.current_page != user.label,
+                                            }" @click="paginate(user.url); console.log(user.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
                                             {{-- <span x-text="console.log(categoriesArticle)"></span> --}}
                                                 <button  
-                                                x-text="category.label">
+                                                x-text="user.label">
                                                 </button>
                                             </li>
                                         </template>
