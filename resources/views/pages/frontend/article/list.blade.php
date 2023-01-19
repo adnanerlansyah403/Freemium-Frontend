@@ -46,7 +46,7 @@
         <div class="lg:col-3">
             <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
                 <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max" style="display: none;">
-                    <a href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm mb-3 rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                    <a href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] mb-3 lg:mb-5 flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                     x-init="
                         window.addEventListener('DOMContentLoaded', function() {
                             setTimeout(() => {
@@ -61,7 +61,7 @@
                     </a>
                 </div>
             </template>
-            <div class="w-full lg:w-[270px] mx-auto h-max mt-[10px] px-4 py-8 bg-white dark:bg-slate-secondary dark:text-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+            <div class="w-full lg:w-[270px] mx-auto h-max px-4 py-8 bg-white dark:bg-slate-secondary dark:text-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                 <div class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white">
                     <div class="flex justify-between">
                         <input 
@@ -121,7 +121,7 @@
                             document.getElementById('alertSubscribe').style.display = 'block';
                         }, 1000)
                     })
-                    " class="lg:w-full w-[320px] md:w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-2 lg:mb-[29px] md:mb-[29px] bg-opacity-20 mt-5 lg:mt-0 font-normal text-sm px-4 py-2">
+                    " class="lg:w-full w-[320px] md:w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-4 bg-opacity-20 mt-5 lg:mt-0 font-normal text-sm px-4 py-2">
                         You have to 
                         <span class="font-bold text-primary dark:text-slate-third leading-[27px]">
                             Subscribe</span>  to Get Unlimited Access
@@ -169,7 +169,7 @@
                 </div>
                 
 
-                <div class="flex flex-wrap items-center justify-center -translate-y-[10px]">
+                <div class="flex flex-wrap items-center justify-center">
                     <template x-for="(item, index) in listArticle.length > 1 ? listArticle.slice(0, itemArticle) : listArticle">
                         <div class="content first-of-type:mt-0 mt-[22px]" >
                             
