@@ -1192,7 +1192,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     fetchAdminData() {
-
+      this.isLoading = true;
       fetch(`${this.apiUrl}admin`, {
         method: "GET",
         headers: {
@@ -1202,19 +1202,20 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
 
-
-          if (!data.status) {
+          if (data.status) {
+            this.data_admin = data.data;
             this.showFlash = true;
-            this.status_err = data.message;
-          }
-
-          if (response.ok == true) {
             this.typeStatus = true;
             localStorage.setItem("typeStatus", true)
-          } else if (response.ok == false) {
+          }
+          else {
+            localStorage.setItem('message', data.message);
+            localStorage.setItem('showFlash', true);
             this.typeStatus = false;
             localStorage.setItem("typeStatus", false)
           }
+
+          this.isLoading = false;
         })
     },
 
@@ -1224,24 +1225,26 @@ document.addEventListener('alpine:init', () => {
       let user = this.data_admin.user_chart;
       let payment = this.data_admin.payment_chart;
 
-      // if(user.length == 0){
-      //   console.log(user);
+      // console.log('admin', this.data_admin);
+      // if(user == null || user.length == 0){
+      //   console.log('user', user);
       //   user = [{year: '' + new Date().getFullYear(), count: 0}]
       // }
 
-      // if(payment.length == 0){
-      //   console.log(payment);
+      // if(payment == null || payment.length == 0){
+      //   console.log('payment', payment);
       //   payment = [{year: '' + new Date().getFullYear(), count: 0}]
       // }
-
-      this.years[0] = user[0].year;
-      let endyear = new Date().getFullYear() - user[0].year;
+      
+      this.years[0] = user?.[0] ? user[0].year : new Date().getFullYear();
+      let endyear = new Date().getFullYear() - this.years[0];
 
       for (let i = 0; i < endyear; i++) {
         this.years.push(parseInt(this.years[i]) + 1);
       }
 
       for (let i = 0; i < endyear + 1; i++) {
+        // console.log('test', this.user_chart, user[i], user[i].year == this.years[i]);
         if (user[i] && user[i].year == this.years[i]) {
           this.user_chart.push(user[i].count);
         }
@@ -1258,6 +1261,9 @@ document.addEventListener('alpine:init', () => {
 
       }
 
+      // console.log(this.user_chart, this.payment_chart , user, payment);
+      // console.log(this.user_chart);
+      // console.log('year', this.years);
 
       // Chart.defaults.backgroundColor = '#7C000B';
       // Chart.defaults.borderColor = '#fff';
