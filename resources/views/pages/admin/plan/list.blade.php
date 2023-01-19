@@ -14,6 +14,10 @@
 
 <section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
     <div x-init="checkRole()"></div>
+    <div x-init="flash()"></div>
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
     <div
     x-init="
         if(isLogedIn == true) {
