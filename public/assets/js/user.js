@@ -965,9 +965,10 @@ document.addEventListener('alpine:init', () => {
         formData.append('category_id[]', category[i].value);
       }
       for (let i = 0; i < title_sub.length; i++) {
+        let data_id = title_sub[i].getAttribute("data-id");
         formData.append('title_sub[]', title_sub[i].value);
         formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
-        formData.append('description_sub[]', tinymce.get(`editor${i + 1}`).getContent());
+        formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
       }
       article = await fetch(`${this.apiUrl}article`, {
         method: "POST",
