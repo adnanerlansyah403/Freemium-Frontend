@@ -81,6 +81,11 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    checkAuth() {
+      const token = localStorage.getItem('token')
+      this.isLogedIn = token ? true : false
+    },
+
     checkRole() {
       fetch(this.apiUrl + 'me', {
         method: "GET",
@@ -864,9 +869,14 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
+
           this.detailArticle = data.data;
         })
         .catch(error => {
+          if (data.status == false) {
+            this.showFlash = true;
+            this.message = "You are not allowed to access this page, please login first";
+          }
           console.log(error);
         })
     },
