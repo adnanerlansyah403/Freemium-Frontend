@@ -100,7 +100,7 @@
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                             <img x-bind:src="imgUrl+data.photo" src="" class="w-[100px]">
                                         </td>
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2">
+                                        <td class="flex items-center justify-center w-full h-full translate-y-[15%] border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2">
                                             <button @click="deleteUser(data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Delete">
                                                 <i data-feather="trash-2" class="w-5 h-5 lg:w-6 lg:h-6"></i>
                                             </button>

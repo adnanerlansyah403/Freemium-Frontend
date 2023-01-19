@@ -96,7 +96,7 @@
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
                                         <i class="fas fa-circle text-orange-500 mr-2" x-text="item.payment_date ? convertDate(item.payment_date) : 'No data'"></i>
                                         </td>
-                                        <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap flex ml-4 items-center gap-2">
+                                        <td class="flex items-center w-full h-full translate-y-1/3 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2">
                                             <button @click="showOrder(true, item.id)" class="group" title="Details">
                                                 <i data-feather="eye" class="group-hover:text-primary dark:group-hover:text-white transition duration-200 ease-in-out w-5 h-5 lg:w-6 lg:h-6"></i>
                                             </button>

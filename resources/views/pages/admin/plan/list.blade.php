@@ -97,7 +97,7 @@
                                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.expired+' month'">
                                     <i class="fas fa-circle text-orange-500 mr-2"></i>12 Month
                                   </td>
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 flex items-center gap-2" x-data="user">
+                                  <td class="flex items-center w-full h-full border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2" x-data="user">
                                       <button @click="modalHandler(true, data.id)" class="hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
                                           <i data-feather="edit" class="w-5 h-5 lg:w-6 lg:h-6"></i>
                                       </button>
