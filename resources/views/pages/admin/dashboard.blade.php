@@ -31,6 +31,11 @@
         }"
     >
 
+    <div x-init="flash()"></div>
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
+
 
         @include("layouts.partials.user.dashboard")
 
