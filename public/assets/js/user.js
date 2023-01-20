@@ -531,17 +531,6 @@ document.addEventListener('alpine:init', () => {
             data = await response.json();
             this.EditArticle = data.data;
             this.categories = data.category;
-
-            if (!data.status) {
-              localStorage.setItem('message', data.message);
-              localStorage.setItem('showFlash', true);
-              return window.location.replace(`${this.baseUrl}myarticle`);
-            }
-            else {
-              localStorage.setItem('message', data.message);
-              localStorage.setItem('showFlash', true);
-              this.flash()
-            }
             this.isLoading = false;
 
           })
