@@ -53,7 +53,7 @@
         @livewireStyles
 
     </head>
-    <body class="antialiased bg-[#e9e9e9] dark:bg-slate-primary">
+    <body class="antialiased overflow-x-hidden bg-[#e9e9e9] dark:bg-slate-primary">
         
         {{-- <x-loading-page /> --}}
 
