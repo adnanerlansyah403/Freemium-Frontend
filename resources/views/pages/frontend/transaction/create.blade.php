@@ -63,7 +63,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
 
 
 <div x-init="fetchMyTransactions()"></div>
-    <section class="py-[60px]"
+    <section class="pt-[60px] pb-[100px]"
         x-init="
             if(isLogedIn == true && myTransactions != null) {
                 setTimeout(function() {

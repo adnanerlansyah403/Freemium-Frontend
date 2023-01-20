@@ -31,12 +31,17 @@ document.addEventListener('alpine:init', () => {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
+        window.addEventListener("beforeunload", function () {
+          localStorage.removeItem("showFlash")
+          localStorage.removeItem("message")
+          localStorage.removeItem("typeStatus")
+        })
         setTimeout(function () {
           localStorage.removeItem("showFlash")
           localStorage.removeItem("message")
           // localStorage.removeItem("typeStatus")
           this.showFlash = false;
-        }, 4000);
+        }, 2000);
       }
     },
 
@@ -1235,7 +1240,7 @@ document.addEventListener('alpine:init', () => {
       //   console.log('payment', payment);
       //   payment = [{year: '' + new Date().getFullYear(), count: 0}]
       // }
-      
+
       this.years[0] = user?.[0] ? user[0].year : new Date().getFullYear();
       let endyear = new Date().getFullYear() - this.years[0];
 

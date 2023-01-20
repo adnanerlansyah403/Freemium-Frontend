@@ -35,7 +35,7 @@
 
 </style>
 
-<section class="py-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
+<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
     <div x-init="checkRole()"></div>
     
     <div x-init="flash()"></div>

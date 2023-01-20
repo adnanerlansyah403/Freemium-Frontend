@@ -19,12 +19,17 @@ document.addEventListener('alpine:init', () => {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
+        window.addEventListener("beforeunload", function () {
+          localStorage.removeItem("showFlash")
+          localStorage.removeItem("message")
+          localStorage.removeItem("typeStatus")
+        })
         setTimeout(function () {
           localStorage.removeItem("showFlash")
           localStorage.removeItem("message")
           localStorage.removeItem("typeStatus")
           this.showFlash = false;
-        }, 4000);
+        }, 2000);
       }
     },
 

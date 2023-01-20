@@ -13,7 +13,7 @@
 
 @section("content")
 
-<section class="py-[100px]">
+<section class="pt-[60px] pb-[100px]">
     <h1 class="font-iceberg text-lg text-center text-primary mb-16">ME</h1>
 
     <div class="container mx-auto mb-9">
