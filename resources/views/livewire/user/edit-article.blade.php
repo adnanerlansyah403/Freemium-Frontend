@@ -138,6 +138,10 @@
 
             <form class="w-full my-1 px-5 lg:px-0 dark:text-white">
 
+                <p class="font-semibold text-base mb-2">
+                    *If you make three paid sub contents, then you must have to create 3 free content first.
+                </p>
+                
                 <ul class="flex flex-col mb-10">
 
                     <li class="bg-white dark:bg-slate-secondary dark:text-white my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-lg" x-data="accordion(1)">

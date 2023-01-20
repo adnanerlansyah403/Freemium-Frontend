@@ -27,15 +27,15 @@
     }
 
     input {
-        outline: none;
-        background: none;
-        border: none;
+        outline: none !important;
+        background: none !important;
+        border: none !important;
     }
 
     input:is(:hover, :focus-visible) {
-        outline: none;
-        background: none;
-        border: none;
+        outline: none !important;
+        background: none !important;
+        border: none !important;
     }
 
     input[type="file"]::-webkit-file-upload-button {
