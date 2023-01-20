@@ -1,4 +1,4 @@
-<header id="header" class="shadow-lg py-1 dark:text-white">
+<header id="header" class="shadow-lg py-1 bg-white dark:bg-slate-primary dark:text-white">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>
@@ -19,7 +19,7 @@
         </template>
 
         <template x-if="isLogedIn">
-            <div class="flex items-center gap-6" x-data="user">
+            <div class="flex items-center gap-4" x-data="user">
                 <div x-init="fetchMe()"></div>
                 <div x-init="fetchMyTransactions()"></div>
                 {{-- <span x-text="console.log(data_user)"></span> --}}
@@ -40,6 +40,7 @@
                         type="button" 
                         class="flex items-center gap-1 px-3 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
                         @click="dropdownmenu = !dropdownmenu"
+                        x-on:mouseover="dropdownmenu = true"
                         x-data="helpers"
                     >
                         <template x-if="data_user.photo != null || data_user.photo.length != 0">
@@ -57,6 +58,7 @@
                     <ul 
                         class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-primary dark:bg-slate-secondary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden"
                         x-show="dropdownmenu"
+                        x-on:mouseleave="dropdownmenu = false"
                         x-transition
                     >
                         <template x-if="data_user.role == 1">

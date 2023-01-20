@@ -48,43 +48,34 @@
                     
                     <div class="group flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between mb-10 gap-6">
 
-                        <div class="relative z-10 flex lg:items-center flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white lg:mx-0 px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg overflow-hidden">
+                        <div class="relative z-10 flex lg:items-start flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white lg:mx-0 px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] h-full lg:max-h-[200px] lg:h-[200px] dark:bg-slate-secondary rounded-lg overflow-hidden">
                             <div class="col lg:col-9 col:12" style="margin: 0 !important;">
-                                <div class="flex items-start justify-between gap-3">
-                                    <div x-data="helpers">
-                                        <span class="font-bold text-base font-bebasNeue" x-text="substring(item.author.username, 10)"></span>
-                                        <p class="flex flex-wrap lg:flex-nowrap items-center gap-2 text-sm mt-2">
-                                            <span class="flex items-center gap-1" 
-                                            x-text="convertDate(item.created_at)">
-                                                {{-- {{ \Carbon\Carbon::parse()->translatedFormat('H:i:s') }} --}}
-                                                <i data-feather="calendar" class="w-4 h-4"></i>
-
-                                            </span>
-                                            <i data-feather="eye" class="w-4 h-4"></i>
-                                            <span class="flex items-center gap-1 -ml-1" x-text="item.total_views_sum ? item.total_views_sum : '0'">
-                                                1000
-                                            </span>
-                                        </p>
+                                <div class="flex items-center gap-3">
+                                    <p class="text-sm " x-data="helpers">
+                                        <span class="flex items-center gap-1" 
+                                        x-text="convertDate(item.created_at)">
+                                            <i data-feather="calendar" class="w-4 h-4"></i>
+                                        </span>
+                                    </p>
+                                    <div class="flex items-center gap-2">
+                                        <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
+                                        <span class="flex items-center gap-1 -ml-1" x-text="item.total_views_sum ? item.total_views_sum : '0'">
+                                            1000
+                                        </span>
                                     </div>
-                                    <figure class="-translate-x-4">
-                                        <template x-if="item.author.photo != null || item.author.photo.length != 0">
-                                            <img x-bind:src="imgUrl+item.author.photo" class="w-10 h-10 bg-gray-primary rounded-full" alt="">
-                                        </template>
-                                        <template x-if="item.author.photo == null || item.author.photo.length == 0">
-                                            <img x-bind:src="imgUrl+'img/user1.png'" class="w-10 h-10 bg-gray-secondary rounded-full" alt="">
-                                        </template>
-                                    </figure>
                                 </div>
-                                <div class="flex items-center justify-between mt-6 mb-4">
-                                    <span class="text-base md:text-md font-neucha font-bold" x-text="item.title"></span>
-                                    <i class="bg-primary dark:bg-slate-third px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
+                                <div class="pb-4 pt-12 lg:py-0 lg:translate-y-5">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-base md:text-md font-neucha font-bold" x-text="item.title"></span>
+                                        <i class="bg-primary dark:bg-slate-third px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
+                                    </div>
+                                    <p class="text-sm text-gray-secondary" x-html="item.substring+'...'">
+    
+                                    </p>
                                 </div>
-                                <p class="text-sm text-gray-secondary" x-html="item.substring+'...'">
-
-                                </p>
                             </div>
-                            <figure class="col col-3 hidden lg:flex items-center justify-center" style="margin: 0 !important;">
-                                <img x-bind:src="imgUrl+item.thumbnail" class="w-[150px] h-[150px] bg-gray-primary rounded-lg" alt="">
+                            <figure class="col col-2 h-full hidden lg:flex items-center justify-end" style="margin: 0 !important;">
+                                <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full bg-gray-primary rounded-lg" alt="">
                             </figure>
                             <div class="absolute right-4 md:hidden flex flex-row md:flex-col items-center lg:items-start gap-2">
                                 <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
