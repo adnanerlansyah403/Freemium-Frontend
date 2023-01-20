@@ -121,7 +121,7 @@
                             document.getElementById('alertSubscribe').style.display = 'block';
                         }, 1000)
                     })
-                    " class="lg:w-full w-[320px] md:w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-4 bg-opacity-20 mt-5 lg:mt-0 font-normal text-sm px-4 py-2">
+                    " class="w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-4 bg-opacity-20 mt-5 lg:-translate-y-1 lg:mt-0 font-normal text-sm px-4 py-2">
                         You have to 
                         <span class="font-bold text-primary dark:text-slate-third leading-[27px]">
                             Subscribe</span>  to Get Unlimited Access

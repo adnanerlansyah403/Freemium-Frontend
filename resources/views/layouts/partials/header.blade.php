@@ -119,7 +119,7 @@
             </div>
         </template>
 
-        <div x-data="helpers" class="absolute -right-1/3 top-[18px] group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
+        <div x-data="helpers" class="absolute right-20 lg:-right-1/3 lg:top-[18px] lg:group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
             <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
                 <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
             </button>
