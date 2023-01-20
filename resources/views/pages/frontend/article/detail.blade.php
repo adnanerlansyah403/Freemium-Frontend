@@ -83,7 +83,7 @@
                             </p>
                         </div>
 
-                        <div class="flex items-center w-full" x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between mt-12' : 'justify-end mt-12'">
+                        <div class="flex items-center w-full" x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between mt-12' : 'justify-end mt-6'">
                             <div class="flex content-center flex-wrap gap-3" x-bind:class="detailArticle?.tags.length > 0 ? '' : 'hidden'">
                                 <template x-for="(item, index) in detailArticle?.tags">
                                     <a
@@ -227,16 +227,18 @@
                             }">
     
                                 <div class="flex items-center w-full gap-2 mt-5 mb-3">
-                                    <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
-                                        type = 'paid';
-                                        $refs.freeSub.classList.add('active');
-                                        $refs.paidSub.classList.remove('active');
-                                        {{-- back = true; --}}
-                                        " x-ref="freeSub">
-                                            <span>Free</span>
-                                    </button>
-                                    <template x-if="detailArticle?.type == 'paid'">
-                                        <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
+                                    <template x-if="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0">
+                                        <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
+                                            type = 'paid';
+                                            $refs.freeSub.classList.add('active');
+                                            $refs.paidSub.classList.remove('active');
+                                            {{-- back = true; --}}
+                                            " x-ref="freeSub">
+                                                <span>Free</span>
+                                        </button>
+                                    </template>
+                                    <template x-if="detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0">
+                                        <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'free').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
                                         type = 'free';
                                         $refs.paidSub.classList.add('active');
                                         $refs.freeSub.classList.remove('active');
