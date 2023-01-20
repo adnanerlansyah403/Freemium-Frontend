@@ -86,8 +86,9 @@
                             <tbody>
                                 <template x-for="(item, index) in listOrder.data">
                                     <tr class="border border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
-                                        <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap font-semibold" x-text="item.user.name ? item.user.name : 'No data'"></td>
-                                        <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap" x-text="item.plan.name ? item.plan.name : 'No data'">
+                                        {{-- not defined --}}
+                                        <td x-bind:class="item.user.name ? 'border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap font-semibold' : 'border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap font-semibold text-[#86A3B8] dark:text-[#787A91] italic' " x-text="item.user.name ? item.user.name : 'Undefined'"></td>
+                                        <td x-bind:class="item.plan.name ? 'border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap' : 'border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap text-[#86A3B8] dark:text-[#787A91] italic' " x-text="item.plan.name ? item.plan.name : 'Undefined'">
                                         <i class="fas fa-circle text-orange-500 mr-2"></i>
                                         </td>
                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">

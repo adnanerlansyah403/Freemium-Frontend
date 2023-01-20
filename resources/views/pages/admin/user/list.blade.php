@@ -90,7 +90,8 @@
                                     <tbody>
                                     <template x-for="data in listUser.data">
                                         <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="data.name ? data.name : 'No Data'">Obi Imanuel</td>
+                                        {{-- kondisi Undefined --}}
+                                        <td x-bind:class="data.name ? 'border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold' : 'border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold text-[#86A3B8] dark:text-[#787A91] italic'"  x-text="data.name ? data.name : 'Undefined'">Obi Imanuel</td>
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.username">obito
                                         </td>
                                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.email">obito@gmail.com
