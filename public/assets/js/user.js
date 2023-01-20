@@ -893,6 +893,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     getDetailArticle(id) {
+      this.isLoadingArticle = true;
       fetch(`${this.apiUrl}article/${id}`, {
         method: "GET",
         headers: {
@@ -907,6 +908,7 @@ document.addEventListener('alpine:init', () => {
         .catch(error => {
           console.log(error);
         })
+        this.isLoadingArticle = false;
     },
 
     getSubArticle(id = 1) {

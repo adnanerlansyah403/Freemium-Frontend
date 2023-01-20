@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 translate-y-1" x-data="helpers">
-                                <span class="flex items-center gap-1">
+                                <span x-show="!isLoadingArticle" class="flex items-center gap-1">
                                     <i data-feather="calendar" class="w-4 h-4"></i>
                                     <p x-text="convertDate(content ? content?.created_at : detailArticle?.created_at)">
                                     </p>
@@ -76,14 +76,8 @@
                                 <span class="flex items-center gap-1">
                                     <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
                                     <p>
-                                        <template x-if="content?.total_views || detailArticle.total_views_sum">
-                                            <span
-                                                x-text="content ? content?.total_views : detailArticle?.total_views_sum">
-                                            </span>
-                                        </template>
-                                        <template x-if="content?.total_views == '' || detailArticle.total_views_sum == ''">
-                                            <span>No Views</span>
-                                        </template>
+                                        <span x-show="!isLoadingArticle" x-text="content ? content?.total_views + ' views' : detailArticle?.total_views_sum + ' views'">
+                                        </span>
                                     </p>
                                 </span>
                             </div>
