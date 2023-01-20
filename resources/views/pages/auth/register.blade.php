@@ -22,8 +22,11 @@
 
             <div class="mb-5">
                 <label for="name" class="text-md">Name</label>
-                <input type="text" placeholder="Your name..."
-                    x-bind:class="status_err.name ? 'input-danger' : ''" class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-model="name">
+                <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4">
+                    <i data-feather="user" class="w-6 h-6 text-gray-secondary"></i>
+                    <input type="text" placeholder="Your name..."
+                    x-bind:class="status_err.name ? 'input-danger' : ''" class="" x-model="name">
+                </div>
                     <template x-if="status_err.name">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -34,8 +37,11 @@
 
             <div class="mb-5">
                 <label for="email" class="text-md">Email</label>
-                <input type="text" placeholder="Your email..."
-                    x-bind:class="status_err.email ? 'input-danger' : ''" class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-model="email">
+                <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4">
+                    <i data-feather="mail" class="w-6 h-6 text-gray-secondary"></i>
+                    <input type="text" placeholder="Your email..."
+                    x-bind:class="status_err.email ? 'input-danger' : ''" class="" x-model="email">
+                </div>
                     <template x-if="status_err.email">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -44,10 +50,20 @@
                     </template>
             </div>
 
-            <div class="mb-8">
+            <div class="mb-8" x-data="{passwordHidden: true}">
                 <label for="password" class="text-md">Password</label>
-                <input type="password" placeholder="Your password..."
-                x-bind:class="status_err.password ? 'input-danger' : ''" class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-model="password">
+                <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4">
+                    <button type="button" @click="
+                    typePassword = passwordHidden == true ? 'text' : 'password';
+                    $refs.password.setAttribute('type', typePassword)
+                    passwordHidden = !passwordHidden;
+                    ">
+                        <i x-show="passwordHidden == true" data-feather="lock" class="w-6 h-6 text-gray-secondary"></i>
+                        <i x-show="passwordHidden == false" data-feather="unlock" class="w-6 h-6 text-gray-secondary"></i>
+                    </button>
+                    <input type="password" placeholder="Your password..."
+                    x-bind:class="status_err.password ? 'input-danger' : ''" class="" x-model="password" x-ref="password">
+                </div>
                     <template x-if="status_err.password">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -69,7 +85,7 @@
 
         </div>
 
-        <div class="border border-gray-third bg-white dark:bg-slate-secondary rounded-primary hidden lg:flex col col-6 h-[485px] items-center justify-center">
+        <div class="border border-gray-third bg-white dark:bg-slate-secondary rounded-primary hidden lg:flex col col-6 h-[400px] items-center justify-center">
             <figure>
                 <img src="{{ asset('assets/images/accessaccount.svg') }}" width="375" height="300" alt="">
             </figure>
