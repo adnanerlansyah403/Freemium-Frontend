@@ -99,20 +99,19 @@
                                 </template>
                                 
                             </div>
-                            <div class="flex items-center gap-2">
-                                <button title="PREV" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-slate-primary dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-linear">
-                                    <i data-feather="arrow-left" class="w-4 h-4"></i>
-                                </button>
-                                <button title="NEXT" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-slate-primary dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-linear">
-                                    <i data-feather="arrow-right" class="w-4 h-4"></i>
-                                </button>
-                            </div>
+                            <template x-if="detailArticle?.subarticles.length > 0">
+                                <div class="flex items-center gap-2">
+                                    <button title="PREV" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-linear">
+                                        <i data-feather="arrow-left" class="w-4 h-4"></i>
+                                    </button>
+                                    <button title="NEXT" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-linear">
+                                        <i data-feather="arrow-right" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </template>
                         </div>
                     </div>
-
-                    {{-- <div x-show="showFlash">
-                        <x-alert />
-                    </div> --}}
+                    
                 </div>
 
                 <div class="col md:mx-0 col-12 lg:col-4">
