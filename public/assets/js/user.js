@@ -1212,6 +1212,7 @@ document.addEventListener('alpine:init', () => {
             this.showFlash = true;
             this.typeStatus = true;
             localStorage.setItem("typeStatus", true)
+            this.isLoading = false;
           }
           else {
             localStorage.setItem('message', data.message);
@@ -1219,8 +1220,6 @@ document.addEventListener('alpine:init', () => {
             this.typeStatus = false;
             localStorage.setItem("typeStatus", false)
           }
-
-          this.isLoading = false;
         })
     },
 
