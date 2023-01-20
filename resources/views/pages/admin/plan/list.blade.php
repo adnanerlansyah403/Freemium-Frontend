@@ -37,7 +37,7 @@
             </div>
 
             <div class="w-full col-12 lg:col-9">
-                
+
                 <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
                     <i class="span dark:text-white font-bold" data-feather="package"></i>
                     <p>
@@ -89,7 +89,7 @@
                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                               </tr>
                             </thead>
-                    
+
                             <tbody>
                               <div x-init="fetchListPlan()"></div>
                               <template x-for="data in listPlan">
@@ -98,7 +98,7 @@
                                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="'$'+data.price">
                                     <i class="fas fa-circle text-orange-500 mr-2"></i>$80.00
                                   </td>
-                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.expired+' month'">
+                                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.expired == 0? 'unlimited' : `${data.expired} month`">
                                     <i class="fas fa-circle text-orange-500 mr-2"></i>12 Month
                                   </td>
                                   <td class="flex items-center w-full h-full border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2" x-data="user">
@@ -144,7 +144,7 @@
 
         </div>
 
-        
+
         <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
             <div role="alert" class="relative top-[13%] lg:top-[11%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
                 <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
@@ -191,7 +191,7 @@
                 </div>
             </div>
         </div>
-        
+
 
 
     </div>
