@@ -904,7 +904,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
-    getSubArticle(id) {
+    getSubArticle(id = 1) {
       fetch(`${this.apiUrl}sub-article/${id}`, {
         method: "GET",
         headers: {
