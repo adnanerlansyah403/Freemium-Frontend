@@ -9,19 +9,12 @@
     </template>
 </div>
 
-<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
+<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()" >
     <div x-init="fetchMe()"></div>
     <div x-data="admin">
         <div x-init="checkIsAdmin()"></div>
     </div>
-    <div
-    x-init="
-        if(isLogedIn == true) {
-            setTimeout(function() {
-                return document.querySelector('section').style.display = 'block';
-            }, 1000)
-        }
-    ">
+    <div>
 
         <h1 class="font-iceberg text-lg text-center text-primary dark:text-white mb-16">ME</h1>
     

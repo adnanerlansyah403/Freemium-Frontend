@@ -74,7 +74,13 @@
 
         <!-- FOOTER -->
 
-        @include("layouts.partials.footer")
+        <div x-data="user">
+            <div x-data="articles">
+                <template x-if="!isLoading">
+                    @include("layouts.partials.footer")
+                </template>
+            </div>
+        </div>
 
         <!-- Feather Icons Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
