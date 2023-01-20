@@ -902,16 +902,16 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-
           this.detailArticle = data.data;
         })
         .catch(error => {
           console.log(error);
         })
-        this.isLoadingArticle = false;
+      this.isLoadingArticle = false;
     },
 
     getSubArticle(id = 1) {
+      this.isLoadingArticle = true;
       fetch(`${this.apiUrl}sub-article/${id}`, {
         method: "GET",
         headers: {
@@ -931,8 +931,9 @@ document.addEventListener('alpine:init', () => {
           }
         })
         .catch(error => {
-          console.log('error');
+          console.log(error);
         })
+        this.isLoadingArticle = false;
     },
 
     searchArticle(keyword) {

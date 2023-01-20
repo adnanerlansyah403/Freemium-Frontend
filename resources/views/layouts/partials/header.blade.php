@@ -23,7 +23,7 @@
                 <div x-init="fetchMe()"></div>
                 <div x-init="fetchMyTransactions()"></div>
                 {{-- <span x-text="console.log(data_user)"></span> --}}
-                <template x-if="data_user.role == 2">
+                <template x-if="data_user?.role == 2">
                     <a href="{{ route('article.create') }}" class="hidden lg:flex items-center gap-2 text-slate-primary dark:text-gray-third dark:hover:text-white text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
                         <i data-feather="edit"></i>
                         <span>Write</span>
@@ -43,17 +43,17 @@
                         x-on:mouseover="dropdownmenu = true"
                         x-data="helpers"
                     >
-                        <template x-if="data_user.photo != null || data_user.photo.length != 0">
+                        <template x-if="data_user?.photo != null || data_user?.photo?.length != 0">
                             <figure>
-                                <img x-bind:src="data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
+                                <img x-bind:src="imgUrl + data_user?.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
                             </figure>
                         </template>
-                        <template x-if="data_user.photo == null || data_user.photo.length == 0">
-                            {{-- <figure>
+                        {{-- <template x-if="data_user?.photo == null || data_user?.photo?.length == 0">
+                            <figure>
                                 <ion-icon class="text-[22px] translate-y-[3px]" name="person-circle-outline"></ion-icon>
-                            </figure> --}}
-                        </template>
-                        <span class="font-inter" x-text="data_user.name == null ? 'User' : substring(data_user.name)"></span>
+                            </figure>
+                        </template> --}}
+                        <span class="font-inter" x-text="data_user?.name == null ? 'User' : substring(data_user?.name)"></span>
                     </button>
                     <ul 
                         class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-primary dark:bg-slate-secondary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden"
@@ -61,7 +61,7 @@
                         x-on:mouseleave="dropdownmenu = false"
                         x-transition
                     >
-                        <template x-if="data_user.role == 1">
+                        <template x-if="data_user?.role == 1">
                             <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
                                 <a href="{{ route('admin.dashboard.index') }}" class="flex items-center gap-2">
                                     <i data-feather="trending-up"></i>
@@ -79,7 +79,7 @@
                                 <span>My Profile</span>
                             </a>
                         </li>
-                        <template x-if="data_user.role == 2">
+                        <template x-if="data_user?.role == 2">
                             <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
                                 <a href="{{ route('article.index') }}" class="flex items-center gap-2">
                                     <i data-feather="file-text"></i>
@@ -90,7 +90,7 @@
                                 </script>
                             </li>
                         </template>
-                        <template x-if="myTransactions[0] != null && data_user.subscribe_status == false">
+                        <template x-if="myTransactions[0] != null && data_user?.subscribe_status == false">
                             <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
                                 <a href="{{ route('transaction.show') }}" class="flex items-center gap-2">
                                     <i data-feather="credit-card"></i>

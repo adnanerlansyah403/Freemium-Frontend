@@ -53,14 +53,14 @@
                         <div class="flex items-start flex-wrap gap-4 md:gap-0 justify-between">
                             <div class="flex gap-3">
                                 <figure>
-                                    <template x-if="detailArticle?.author?.photo != null || detailArticle?.author?.photo.length != 0">
-                                        <img x-bind:src="imgUrl+detailArticle?.author?.photo" x-bind:src="imgUrl + detailArticle?.author?.photo" src=""
+                                    <div>
+                                        <img x-bind:src="
+                                            detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
+                                            ? imgUrl + detailArticle?.author?.photo
+                                            : imgUrl + 'img/user1.png'" 
+                                        src=""
                                         class="w-[50px] h-[50px] bg-gray-secondary rounded-full border-none" alt="">
-                                    </template>
-                                    <template x-if="detailArticle?.author?.photo == null || detailArticle?.author?.photo.length == 0">
-                                        <img x-bind:src="imgUrl + 'img/user1.png'" src=""
-                                        class="w-[50px] h-[50px] bg-gray-secondary rounded-full border-none" alt="">
-                                    </template>
+                                    </div>
                                 </figure>
                                 <div class="">
                                     <b class="text-base font-semibold" x-text="detailArticle?.author?.username">Nama Author</b>
@@ -73,10 +73,10 @@
                                     <p x-text="convertDate(content ? content?.created_at : detailArticle?.created_at)">
                                     </p>
                                 </span>
-                                <span class="flex items-center gap-1">
+                                <span x-show="!isLoadingArticle" class="flex items-center gap-1">
                                     <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
                                     <p>
-                                        <span x-show="!isLoadingArticle" x-text="content ? content?.total_views + ' views' : detailArticle?.total_views_sum + ' views'">
+                                        <span x-text="content ? content?.total_views + ' views' : detailArticle?.total_views_sum + ' views'">
                                         </span>
                                     </p>
                                 </span>
@@ -103,10 +103,46 @@
                             </div>
                             <template x-if="detailArticle?.subarticles.length > 0">
                                 <div class="flex items-center gap-2">
-                                    <button title="PREV" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
+                                    <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id" x-on:click="
+                                        if(content){
+                                            id = content.id;
+                                            id = detailArticle?.subarticles?.findIndex(x => x.id == id);
+                                            if(id != 0){
+                                                id = detailArticle?.subarticles?.[id - 1]?.id;
+                                                getSubArticle(id);
+                                            }
+                                            if(showFlash){
+                                                document.getElementById('alert').classList.remove('hidden');
+                                            }
+                                            else{
+                                                document.getElementById('alert').classList.add('hidden');
+                                            }
+                                            back = true;
+                                        }
+                                    "
+                                        title="PREV" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                         <i data-feather="arrow-left" class="w-4 h-4"></i>
                                     </button>
-                                    <button title="NEXT" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
+                                    <button x-show="content?.id != detailArticle?.subarticles?.[detailArticle?.subarticles?.length - 1]?.id" x-on:click="
+                                        if(content){
+                                            id = content.id;
+                                            id = detailArticle?.subarticles?.findIndex(x => x.id == id);
+                                            id = detailArticle?.subarticles?.[id + 1]?.id;
+                                            getSubArticle(id);
+                                        }
+                                        else{
+                                            id = detailArticle?.subarticles?.[0]?.id;
+                                            getSubArticle(id);
+                                        };
+                                        if(showFlash){
+                                            document.getElementById('alert').classList.remove('hidden');
+                                        }
+                                        else{
+                                            document.getElementById('alert').classList.add('hidden');
+                                        }
+                                        back = true;
+                                        "
+                                        title="NEXT" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                         <i data-feather="arrow-right" class="w-4 h-4"></i>
                                     </button>
                                 </div>
@@ -190,23 +226,20 @@
 
                         <template x-if="detailArticle?.subarticles.length > 0">
                             <div x-data="{
-                                freeSub: detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 ? true : false,
-                                paidSub: detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0 ? true : false,
+                                type: null,
                             }">
     
                                 <div class="flex items-center w-full gap-2 my-3">
-                                    <template x-if="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0">
-                                        <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:border-none dark:text-white dark:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
-                                        freeSub = true; paidSub = false;
+                                    <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:border-none dark:text-white dark:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
+                                        type = 'paid';
                                         $refs.freeSub.classList.add('active');
                                         $refs.paidSub.classList.remove('active');
                                         " x-ref="freeSub">
                                             <span>Free</span>
-                                        </button>
-                                    </template>
-                                    <template x-if="detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0">
+                                    </button>
+                                    <template x-if="detailArticle?.type == 'paid'">
                                         <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:border-none dark:text-white dark:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
-                                        freeSub = false; paidSub = true;
+                                        type = 'free';
                                         $refs.paidSub.classList.add('active');
                                         $refs.freeSub.classList.remove('active');
                                         " x-ref="paidSub">
@@ -215,18 +248,18 @@
                                     </template>
                                 </div>
     
-                                <p x-ref="statusUser" class="hidden w-full p-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
+                                <p x-ref="statusUser" id="alert" class="hidden w-full p-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
                                     You have to 
                                     <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
-                                    For Access this
+                                    to Access this
                                 </p>
                                 <div x-init="fetchMe()"></div>
-                                <ul class="flex flex-col gap-4" x-show="freeSub" x-transition x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
-                                    <template x-for="(item, index) in detailArticle?.subarticles.filter((item) => item.type == 'free')">
-                                        <li @click="
+                                <ul class="flex flex-col gap-4" x-transition x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
+                                    <template x-for="(item, index) in detailArticle?.subarticles">
+                                        <li x-show="item.type != type" @click="
                                             getSubArticle(item.id); 
-                                            if(item.type == 'free') {back = true;} 
-                                            if(data_user.subscribe_status != 1 && item.type != 'free') { $refs.statusUser.classList.remove('hidden'); } else { $refs.statusUser.classList.add('hidden'); }
+                                            back = true; 
+                                            if(data_user?.subscribe_status != 1 && item.type != 'free') { $refs.statusUser.classList.remove('hidden'); } else { $refs.statusUser.classList.add('hidden'); }
                                             if(showFlash){flash();}"
                                             :class="{
                                                 'border-primary text-black': item.type == 'paid',
@@ -235,7 +268,7 @@
                                             class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none dark:text-slate-fourth hover:text-white dark:hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
                                             <a class="text-base lg:text-md font-iceberg">
                                                 <span x-text="substring(item?.title)"></span>
-                                                <b x-show="data_user.subscribe_status != 1" x-text="'(' + item.type.toUpperCase() + ')'"></b>
+                                                <b x-show="data_user?.subscribe_status != 1 && item.type == 'paid'" x-text="'(' + item.type.toUpperCase() + ')'"></b>
                                             </a>
                                             <template x-if="content?.id == item.id">
                                                 <p class="flex items-center gap-1">
@@ -243,7 +276,7 @@
                                                     <b>Active</b>
                                                 </p>
                                             </template>
-                                            <template x-if="item.type == 'paid' && data_user.subscribe_status != 1">
+                                            <template x-if="item.type == 'paid' && data_user?.subscribe_status != 1">
                                                 <div>
                                                     <i data-feather="lock"
                                                         class="hover:text-white min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]"></i>
@@ -261,55 +294,6 @@
                                         <li @click="content = null; back = false"
                                             class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-lg cursor-pointer bg-primary dark:bg-slate-third text-white hover:skew-y-1 transition duration-200 ease-in-out text-center">
                                             <button class="text-base lg:text-md font-iceberg hover:text-opacity-80">Back to Article</button>
-                                        </li>
-                                    </template>
-                                </ul>
-    
-                                <ul class="flex flex-col gap-4" x-show="paidSub" x-transition x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
-                                    <template x-for="(item, index) in detailArticle?.subarticles.filter((item) => item.type == 'paid')">
-                                        <li @click="
-                                            getSubArticle(item.id); 
-                                            if(item.type == 'free') {back = true;} 
-                                            if(data_user.subscribe_status != 1 && item.type != 'free') { $refs.statusUser.classList.remove('hidden'); } else { $refs.statusUser.classList.add('hidden'); }
-                                            if(showFlash){flash();}"
-                                            :class="{
-                                                'border-primary text-black': item.type == 'paid',
-                                                'bg-white border-slate-primary text-slate-primary': content?.id == item.id
-                                            }"
-                                            class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none dark:text-slate-fourth hover:text-white dark:hover:text-white hover:skew-y-1 transition duration-200 ease-in-out flex justify-between items-center">
-                                            <a class="text-base lg:text-md font-iceberg">
-                                                <span x-text="substring(item?.title)"></span>
-                                                <b x-show="data_user.subscribe_status != 1" x-text="'(' + item.type.toUpperCase() + ')'"></b>
-                                            </a>
-                                            <template x-if="content?.id == item.id">
-                                                <p class="flex items-center gap-1">
-                                                    <span class="w-4 h-4 rounded-full bg-slate-primary dark:bg-slate-primary"></span>
-                                                    <b>Active</b>
-                                                </p>
-                                            </template>
-                                            <template x-if="item.type == 'paid' && data_user.subscribe_status != 1">
-                                                <div>
-                                                    <i data-feather="lock"
-                                                        class="hover:text-white min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]"></i>
-                                                        <script>
-                                                            feather.replace()
-                                                        </script>
-                                                </div>
-                                            </template>
-                                            <script>
-                                                feather.replace()
-                                            </script>
-                                        </li>
-                                    </template>
-                                    <template x-if="back">
-                                        <li @click="content = null; back = false"
-                                            class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-lg cursor-pointer bg-primary dark:bg-slate-third text-white hover:skew-y-1 transition duration-200 ease-in-out text-center">
-                                            <button class="text-base lg:text-md font-iceberg hover:text-opacity-80">Back to Article</button>
-                                        </li>
-                                    </template>
-                                    <template x-if="detailArticle?.subarticles.length == 0">
-                                        <li class="text-base">
-                                            <span class="span dark:text-slate-fourth">No</span> Sub Article
                                         </li>
                                     </template>
                                 </ul>
