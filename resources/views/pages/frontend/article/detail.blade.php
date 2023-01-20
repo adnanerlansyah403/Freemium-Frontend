@@ -11,15 +11,6 @@
     </template>
 </div>
 
-<style>
-
-    .active {
-        background-color: #7C000B !important;
-        color: #fff;
-    }
-
-</style>
-
 @section('content')
 
     <section class="pt-[60px] pb-[100px] dark:text-white" x-data="user" style="display: none">
@@ -47,7 +38,7 @@
 
                     <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                         
-                        <h2 class="text-md mb-4 font-bold border-b border-gray-third pb-2" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
+                        <h2 class="text-md text-[#3A3440] dark:text-white font-bold border-b border-gray-third mb-4 pb-2" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
                         </h2>
 
                         <div class="flex items-start flex-wrap gap-4 md:gap-0 justify-between">
@@ -64,7 +55,7 @@
                                 </figure>
                                 <div class="">
                                     <b class="text-base font-semibold" x-text="detailArticle?.author?.username">Nama Author</b>
-                                    <span class="block text-gray-primary" x-text="detailArticle?.author?.email"></span>
+                                    <span class="block text-gray-primary dark:text-gray-third" x-text="detailArticle?.author?.email"></span>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 translate-y-1" x-data="helpers">
@@ -157,7 +148,7 @@
                     <div
                         class="px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
 
-                        <ul class="relative left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 shadow-[0px_0px_4px_#7C000B] dark:shadow-[0px_0px_4px_#fff] w-max p-2 rounded-lg">
+                        <ul class="relative left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 dark:shadow-[0px_0px_4px_#fff] w-max p-2 rounded-lg">
 
                             <template
                                 x-if="detailArticle?.author?.link_facebook != null && detailArticle?.author?.link_facebook != ''">

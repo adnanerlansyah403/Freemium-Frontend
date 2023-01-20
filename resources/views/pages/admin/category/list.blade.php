@@ -4,7 +4,7 @@
 @section("content")
 
 <div x-data="user" x-init="checkSession()">
-    <div x-init="fetchMe()"></div>
+    {{-- <div x-init="fetchMe()"></div> --}}
     <template x-if="isLogedIn && data_user.role == 1">
         <script>
             document.title = 'Dashboard Admin - Freemium App';
@@ -35,7 +35,7 @@
 
 </style>
 
-<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()" style="display: none;">
+<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()">
     <div x-init="checkRole()"></div>
     
     <div x-init="flash()"></div>
@@ -43,14 +43,7 @@
         <x-alert />
     </div>
 
-    <div
-    x-init="
-        if(isLogedIn == true) {
-            setTimeout(function() {
-                return document.querySelector('section').style.display = 'block';
-            }, 1000)
-        }"
-    >
+    <div>
 
 
         @include("layouts.partials.user.dashboard")

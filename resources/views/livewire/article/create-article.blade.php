@@ -29,28 +29,28 @@
                 bottom: 0;
                 transition: .2s ease-in-out;
             }
-        
+
             .filesize.active {
                 right: 12px;
                 transition: .2s ease-in-out;
             }
-        
+
             .removefile.active {
                 right: 12px;
                 transition: .2s ease-in-out;
             }
-        
+
             .ck-content {
                 height: 500px;
             }
-            
+
             input[type="radio"] {
                 margin-left: 1px;
                 margin-top: 1px;
             }
-        
+
         </style>
-        
+
         <div class="container mx-auto flex items-center dark:text-white">
 
             <div class="col col-12" x-data="article">
@@ -67,7 +67,7 @@
                                 </div>
                             </template>
                     </div>
-        
+
                     <div class="mb-5 col-12 lg:col lg:col-6" x-data="articles">
                         <div x-init="getCategories()"></div>
                         <label for="text" class="text-md">Category</label>
@@ -76,7 +76,7 @@
                             <template x-for="category in categoriesArticle">
                                 <option x-bind:value="category.id" x-text="category.name">HTML</option>
                             </template>
-                            
+
                         </select>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                 <div class="mb-5">
                     <label for="text" class="text-md">Thumbnail</label>
                     <input id="thumbnail" type="file" name="thumbnail" placeholder="Your thumbnail..."
-                        hidden 
+                        hidden
                         x-ref="file"
                         @change="
                             if ($refs.file) {
@@ -106,15 +106,15 @@
                             $refs.file.click();
                         "
                     >
-                        <img src="" 
+                        <img src=""
                         x-ref="image" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                        <i 
-                            data-feather="image" 
+                        <i
+                            data-feather="image"
                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage"
                         >
                         </i>
-                        <p 
+                        <p
                             class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                             x-ref="filename"
                         >
@@ -142,18 +142,21 @@
                 </div>
 
                 <div class="flex items-center justify-between mt-16 mb-10" x-data="articles">
-                    <button type="button" class="group flex items-center gap-2" @click="createSubArticle($refs)">
-                        <i data-feather="plus-circle" class="w-10 h-10 text-primary dark:text-slate-third group-hover:rotate-90 transition duration-200 ease-in-out"></i> 
+                    <button type="button" class="group flex items-center gap-2" @click="createSubArticle($refs), $refs.hiddensave.remove(), buttonshow = true " >
+                        <i data-feather="plus-circle" class="w-10 h-10 text-primary dark:text-slate-third group-hover:rotate-90 transition duration-200 ease-in-out"></i>
                         <span class="text-base">Add a sub article</span>
                     </button>
-                    <template x-if="isLoadingArticle">
-                        <span class="span text-md dark:text-slate-third">wait...</span>
-                    </template>
-                    <template x-if="!isLoadingArticle">
-                        <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                            Save
-                        </button>
-                    </template>
+                    <div x-ref="hiddensave">
+
+                        <template x-if="isLoadingArticle">
+                            <span class="span text-md dark:text-slate-third">wait...</span>
+                        </template>
+                        <template x-if="!isLoadingArticle">
+                            <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                                Save
+                            </button>
+                        </template>
+                    </div>
                 </div>
 
                 <template x-if="status_err.min_free">
@@ -164,22 +167,39 @@
                 </template>
 
                 <div class="w-full my-1">
-                    <ul class="flex flex-col" id="listsubarticle" x-ref="listsubarticle">
-                        
+
+                    <p class="font-semibold text-base mb-2">
+                        *If you make three paid sub contents, then you must have to create 3 free content first.
+                    </p>
+
+                    <ul x-on:change="console.log('test')" class="flex flex-col" id="listsubarticle" x-ref="listsubarticle">
+
 
                     </ul>
                 </div>
-                
+
+                <div x-data="articles" x-show="buttonshow" class="flex justify-end mt-5">
+
+                    <template x-if="isLoadingArticle">
+                        <span class="span text-md dark:text-slate-third">wait...</span>
+                    </template>
+                    <template x-if="!isLoadingArticle">
+                        <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                            Save
+                        </button>
+                    </template>
+                </div>
+
             </div>
 
         </div>
-        
+
         <script>
         document.addEventListener('alpine:init', () => {
             Alpine.store('accordion', {
                 tab: 0
             });
-            
+
             Alpine.data('accordion', (idx) => ({
                 init() {
                 this.idx = idx;
@@ -195,12 +215,12 @@
                 return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
                 }
             }));
-        
+
             Alpine.data('article', () => ({
                 index: 1,
                 apiUrl: "http://127.0.0.1:8001/api/",
                 createSubArticle(refs) {
-        
+
                     refs.listsubarticle.insertAdjacentHTML('beforeend' ,`
                         <li class="bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
                             <h2
@@ -232,13 +252,13 @@
                                         <input data-id="${this.index}" type="text" placeholder="Your text..."
                                             class="title_sub dark:text-white px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-primary border border-white hover:bg-white mt-4">
                                     </div>
-                        
+
                                 </div>
-                    
+
                                 <div class="mb-5">
                                     <label for="text" class="text-md">Thumbnail</label>
                                     <input class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
-                                        hidden 
+                                        hidden
                                         x-ref="file${this.index}"
                                         @change="
                                             if ($refs.file) {
@@ -259,28 +279,28 @@
                                             $refs.file${this.index}.click();
                                         "
                                     >
-                                        <img src="" 
+                                        <img src=""
                                         x-ref="image${this.index}" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                                        <img 
+                                        <img
                                             src="{{ asset('assets/images/icons/image.svg') }}"
                                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                                             x-ref="iconimage${this.index}"
                                         />
-                                        <p 
+                                        <p
                                             class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                                             x-ref="filename${this.index}"
                                         >
                                         </p>
                                     </span>
                                 </div>
-                    
+
                                 <div class="mb-5 col-12" id="content${this.index}" class="content${this.index}">
                                     <label for="text" class="text-md">Content</label><br>
                                     <textarea id="editor${this.index}" placeholder="Your content..."
                                     class="description_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                                     </textarea>
                                 </div>
-        
+
                                 <div class="mb-5 col-12">
                                     <span class="text-md">Choose Your Plan</span>
                                     <div class="flex items-center gap-2 mt-2">
@@ -295,7 +315,7 @@
                                     </div>
                                     <p class="mt-4">*Get Royalty for Author</p>
                                 </div>
-        
+
                             </div>
                         </li>
                     `);
@@ -313,10 +333,10 @@
                         selector: `#editor${this.index}`,
                         plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
                     });
-                    
+
                     this.index++;
-                
-        
+
+
                 },
                 deleteSubArticle(id)
                 {
@@ -324,13 +344,13 @@
                     parentElement.querySelector(`#accordion${id}`).remove();
                 }
             }))
-        
+
         })
         </script>
     </div>
 
 </section>
 
-  
+
 
 @endsection

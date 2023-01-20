@@ -29,7 +29,7 @@
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 
             <form action="" class="col col-12">
-                <p class="mb-4" x-show="!isLoading">
+                <p class="flex items-center gap-2 mb-4" x-show="!isLoading">
                     <b>Created At : </b>
                     <span x-text="convertDate(EditArticle?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third"></span>
                 </p>
@@ -138,6 +138,10 @@
 
             <form class="w-full my-1 px-5 lg:px-0 dark:text-white">
 
+                <p class="font-semibold text-base mb-2">
+                    *If you make three paid sub contents, then you must have to create 3 free content first.
+                </p>
+                
                 <ul class="flex flex-col mb-10">
 
                     <li class="bg-white dark:bg-slate-secondary dark:text-white my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-lg" x-data="accordion(1)">
@@ -145,13 +149,13 @@
                             class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
                             <span>Daftar List Sub Artikel</span>
                             <div class="flex items-center gap-2">
-                                <svg :class="handleRotate()"
-                                    class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
-                                    viewBox="0 0 20 20">
-                                    <path
-                                        d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10">
-                                    </path>
-                                </svg>
+                                <span
+                                :class="handleRotate()"
+                                class="h-6 w-6 transform transiton-transform duration-200 ease-in-out"
+                                title="Open"
+                                >
+                                    <ion-icon name="chevron-down-circle-outline" class="w-full h-full text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
+                                </span>
                             </div>
                         </h2>
                         <div x-ref="tab" :style="handleToggle()"
@@ -215,7 +219,7 @@
                     <div class="mb-5 col-12">
                         <div class="flex justify-between">
                             <label for="sub_title" class="text-md">Title</label>
-                            <p>
+                            <class="flex items-center gap-2 mb-4"ex items-center gap-2">
                                 <b>Created At : </b>
                                 <span x-show="EditArticle?.subarticles?.[editSub]?.created_at" x-text="convertDate(EditArticle?.subarticles?.[editSub]?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third"></span>
                             </p>

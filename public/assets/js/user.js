@@ -1,6 +1,7 @@
 document.addEventListener('alpine:init', () => {
 
   Alpine.data('user', () => ({
+    buttonshow: false,
     isLogedIn: false,
     baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
@@ -56,6 +57,7 @@ document.addEventListener('alpine:init', () => {
     link_twitter: '',
 
     fetchMe() {
+      this.isLoading = true;
       fetch(this.apiUrl + 'me', {
         method: "GET",
         headers: {
@@ -75,6 +77,7 @@ document.addEventListener('alpine:init', () => {
             this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
             this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
             this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
+            this.isLoading = false;
           }
         });
     },
@@ -182,6 +185,7 @@ document.addEventListener('alpine:init', () => {
     listPlan: '',
     keywordPlan: '',
     fetchListPlan() {
+      this.isLoading = true;
       const token = localStorage.getItem('token')
       fetch(`${this.apiUrl}plan`, {
         method: "GET",
@@ -196,6 +200,7 @@ document.addEventListener('alpine:init', () => {
             window.location.replace(this.baseUrl + 'login')
           }
           this.listPlan = data.data;
+          this.isLoading = false;
         })
 
     },
@@ -530,17 +535,6 @@ document.addEventListener('alpine:init', () => {
             data = await response.json();
             this.EditArticle = data.data;
             this.categories = data.category;
-
-            if (!data.status) {
-              localStorage.setItem('message', data.message);
-              localStorage.setItem('showFlash', true);
-              return window.location.replace(`${this.baseUrl}myarticle`);
-            }
-            else {
-              localStorage.setItem('message', data.message);
-              localStorage.setItem('showFlash', true);
-              this.flash()
-            }
             this.isLoading = false;
 
           })
@@ -1215,6 +1209,7 @@ document.addEventListener('alpine:init', () => {
             this.showFlash = true;
             this.typeStatus = true;
             localStorage.setItem("typeStatus", true)
+            this.isLoading = false;
           }
           else {
             localStorage.setItem('message', data.message);
@@ -1222,8 +1217,6 @@ document.addEventListener('alpine:init', () => {
             this.typeStatus = false;
             localStorage.setItem("typeStatus", false)
           }
-
-          this.isLoading = false;
         })
     },
 
@@ -1350,7 +1343,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     fetchListOrder() {
-
+      this.isLoading = true;
       fetch(`${this.apiUrl}payment`, {
         method: 'GET',
         headers: {
@@ -1360,6 +1353,7 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           const data = await response.json();
           this.listOrder = data.data;
+          this.isLoading = false;
         });
 
     },
