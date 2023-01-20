@@ -921,15 +921,16 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.content = data.data;
-          // if (!data.status) {
-          //   this.showFlash = true;
-          //   localStorage.setItem('message', data.message);
-          //   localStorage.setItem('showFlash', true);
-          // }
-          // else {
-          //   this.showFlash = false;
-          // }
+          if (!data.status) {
+            // this.showFlash = true;
+            // localStorage.setItem('message', data.message);
+            // localStorage.setItem('showFlash', true);
+          }
+          else {
+            this.content = data.data;
+            // this.showFlash = false;
+          }
+          this.isLoadingArticle = false;
         })
         .catch(error => {
           console.log(error);

@@ -115,6 +115,7 @@
                                                     document.getElementById('alert').classList.add('hidden');
                                                 }
                                                 back = true;
+                                                console.log(content);
                                             }
                                         "
                                             title="PREV" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
@@ -131,11 +132,9 @@
                                                 id = detailArticle?.subarticles?.[0]?.id;
                                                 getSubArticle(id);
                                             };
-                                            if(showFlash){
+                                            if(content){
                                                 document.getElementById('alert').classList.remove('hidden');
-                                            }
-                                            else{
-                                                document.getElementById('alert').classList.add('hidden');
+                                                console.log(content);
                                             }
                                             back = true;
                                             "
