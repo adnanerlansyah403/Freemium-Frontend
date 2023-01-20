@@ -15,6 +15,7 @@ document.addEventListener('alpine:init', () => {
     data_user: [],
 
     flash() {
+      this.showFlash = false;
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');

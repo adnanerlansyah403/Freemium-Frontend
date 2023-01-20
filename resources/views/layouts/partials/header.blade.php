@@ -1,4 +1,4 @@
-<header class="shadow-lg py-1 dark:text-white">
+<header id="header" class="shadow-lg py-1 dark:text-white">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>
@@ -38,14 +38,19 @@
                 >
                     <button 
                         type="button" 
-                        class="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
+                        class="flex items-center gap-1 px-3 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
                         @click="dropdownmenu = !dropdownmenu"
                         x-data="helpers"
                     >
-                        <template x-if="imgUrl+data_user.photo != null || imgUrl+data_user.photo != ''">
+                        <template x-if="data_user.photo != null || data_user.photo.length != 0">
                             <figure>
-                                <img x-bind:src="imgUrl+data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
+                                <img x-bind:src="data_user.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
                             </figure>
+                        </template>
+                        <template x-if="data_user.photo == null || data_user.photo.length == 0">
+                            {{-- <figure>
+                                <ion-icon class="text-[22px] translate-y-[3px]" name="person-circle-outline"></ion-icon>
+                            </figure> --}}
                         </template>
                         <span class="font-inter" x-text="data_user.name == null ? 'User' : substring(data_user.name)"></span>
                     </button>
@@ -112,13 +117,11 @@
             </div>
         </template>
 
-        <div x-data="helpers">
+        {{-- <div x-data="helpers">
             <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
-                {{-- <ion-icon id="iconMode" class="dark:text-white" name="moon-outline"></ion-icon> --}}
-                {{-- <i id="iconMode" data-feather="moon"></i> --}}
                 <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
             </button>
-        </div>
+        </div> --}}
 
 
     </div>

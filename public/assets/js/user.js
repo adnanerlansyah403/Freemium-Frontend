@@ -1133,11 +1133,14 @@ document.addEventListener('alpine:init', () => {
     keyword: '',
 
     flash() {
+      this.showFlash = false;
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
         setTimeout(function () {
           localStorage.removeItem("showFlash")
+          localStorage.removeItem("message")
+          localStorage.removeItem("typeStatus")
           this.showFlash = false;
         }, 3000);
       }
@@ -1230,7 +1233,7 @@ document.addEventListener('alpine:init', () => {
       //   console.log(payment);
       //   payment = [{year: '' + new Date().getFullYear(), count: 0}]
       // }
-      
+
       this.years[0] = user[0].year;
       let endyear = new Date().getFullYear() - user[0].year;
 
@@ -1252,7 +1255,7 @@ document.addEventListener('alpine:init', () => {
         else {
           this.payment_chart.push(0);
         }
-        
+
       }
 
 

@@ -176,8 +176,7 @@
                             {{-- <div class="border mt-5 first:border-none"></div> --}}
                             <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary dark:text-white rounded-primary px-3 py-4">
                                 <div class="flex flex-col col-12 md:col-9">
-                                    <div class="flex lg:gap-[12px] lg:px-0 gap-5 ">
-                                        <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
+                                    <div class="flex items-start justify-between">
                                         <div>
                                             <h1 class="text-[18px] font-bold font-bebasNeue leading-[27px]" x-text="item.author.username">Nama Author</h1>
                                             <div class="flex gap-3 flex-wrap">
@@ -189,6 +188,14 @@
                                                     </span> 
                                                 </p>
                                             </div>
+                                        </div>
+                                        <div class="-translate-x-5">
+                                            <template x-if="item.author.photo != null || item.author.photo.length != 0">
+                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
+                                            </template>
+                                            <template x-if="item.author.photo == '' || item.author.photo == null ">
+                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+'img/user1.png'" alt="">
+                                            </template>
                                         </div>
                                     </div>
                 

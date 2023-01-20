@@ -146,7 +146,12 @@
     
                 <div class="col col-12 lg:col-4 md:order-2 h-max py-5 px-4 rounded-primary bg-white dark:bg-slate-secondary dark:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
                     <figure class="mb-5">
-                        <img x-bind:src="imgUrl+data_user.photo" class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
+                        <template x-if="data_user.photo != null || data_user.photo.length != 0">
+                            <img x-bind:src="imgUrl+data_user.photo" class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
+                        </template>
+                        <template x-if="data_user.photo == null || data_user.photo.length == 0">
+                            <img x-bind:src="imgUrl+'img/user1.png'" class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
+                        </template>
                     </figure>
                     <span class="text-md font-semibold" x-text="data_user.name">User</span>
                     <p x-text="data_user.email">user@gmail.com</p>

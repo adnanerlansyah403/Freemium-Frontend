@@ -25,58 +25,89 @@
         ">
             <span x-init="getDetailArticle(window.location.href.split('/').pop())"></span>
 
-            <div class="container mx-auto">
+            {{-- <div class="container mx-auto">
                 <figure class="mb-7">
                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
                         class="w-full h-[400px] bg-gray-secondary rounded-primary" alt="">
                 </figure>
 
-            </div>
+            </div> --}}
 
             <div class="container mx-auto flex flex-wrap lg:flex-nowrap gap-6 md:gap-4">
 
                 <div class="col md:mx-0 col-12 lg:col-8">
-                    <div class="flex flex-wrap gap-4 md:gap-0 justify-between">
-                        <div class="flex gap-3">
-                            <figure class="">
-                                <img x-bind:src="imgUrl + detailArticle?.author?.photo" src=""
-                                    class="w-[60px] h-[60px] bg-gray-secondary rounded-full border-none" alt="">
-                            </figure>
-                            <div class="">
-                                <b class="text-md" x-text="detailArticle?.author?.username">Nama Author</b>
-                                <div class="flex items-center gap-2" x-data="helpers">
-                                    <span class="flex items-center gap-1">
-                                        <i data-feather="calendar" class="w-4 h-4"></i>
-                                        <p x-text="convertDate(content ? content?.created_at : detailArticle?.created_at)">
-                                        </p>
-                                    </span>
-                                    <span class="flex items-center gap-1">
-                                        <i data-feather="eye" class="w-4 h-4"></i>
-                                        <p>
-                                            <span
-                                                x-text="content ? content?.total_views : detailArticle?.total_views_sum"></span>
-                                            View
-                                        </p>
-                                    </span>
+
+                    <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                        
+                        <h2 class="text-md mb-4 font-bold border-b border-gray-third pb-2" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
+                        </h2>
+
+                        <div class="flex items-start flex-wrap gap-4 md:gap-0 justify-between">
+                            <div class="flex gap-3">
+                                <figure>
+                                    <template x-if="detailArticle?.author?.photo != null || detailArticle?.author?.photo.length != 0">
+                                        <img x-bind:src="imgUrl+detailArticle?.author?.photo" x-bind:src="imgUrl + detailArticle?.author?.photo" src=""
+                                        class="w-[50px] h-[50px] bg-gray-secondary rounded-full border-none" alt="">
+                                    </template>
+                                    <template x-if="detailArticle?.author?.photo == null || detailArticle?.author?.photo.length == 0">
+                                        <img x-bind:src="imgUrl + 'img/user1.png'" src=""
+                                        class="w-[50px] h-[50px] bg-gray-secondary rounded-full border-none" alt="">
+                                    </template>
+                                </figure>
+                                <div class="">
+                                    <b class="text-base font-semibold" x-text="detailArticle?.author?.username">Nama Author</b>
+                                    <span class="block text-gray-primary" x-text="detailArticle?.author?.email"></span>
                                 </div>
                             </div>
+                            <div class="flex items-center gap-3 translate-y-1" x-data="helpers">
+                                <span class="flex items-center gap-1">
+                                    <i data-feather="calendar" class="w-4 h-4"></i>
+                                    <p x-text="convertDate(content ? content?.created_at : detailArticle?.created_at)">
+                                    </p>
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <i data-feather="eye" class="w-4 h-4"></i>
+                                    <p>
+                                        <template x-if="content?.total_views || detailArticle.total_views_sum">
+                                            <span
+                                                x-text="content ? content?.total_views : detailArticle?.total_views_sum">
+                                            </span>
+                                        </template>
+                                        <template x-if="content?.total_views == 0 || detailArticle.total_views_sum == 0 || content?.total_views == null || detailArticle.total_views_sum == null">
+                                            <span>No Views</span>
+                                        </template>
+                                    </p>
+                                </span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mt-5 px-3 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                        <h2 class="text-md mb-4" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
-                        </h2>
-                        <p x-html="content ? content?.description : detailArticle?.description">
-                        </p>
-                    </div>
+                        <div class="mt-4">
+                            <figure class="mt-4">
+                                <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
+                                    class="w-full h-[345px] bg-gray-secondary rounded-primary" alt="">
+                            </figure>
+                            <p class="mt-6 font-quickSand text-[#3A3440] font-semibold" x-html="content ? content?.description : detailArticle?.description">
+                            </p>
+                        </div>
 
-                    <div class="flex content-center flex-wrap gap-3 mt-12">
-                        <template x-for="(item, index) in detailArticle?.tags">
-                            <a
-                                class="px-3 py-2 bg-white text-black rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
-                                x-text="item.category.name">Coding</a>
-                        </template>
-
+                        <div class="flex items-center mt-12 w-full" x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between' : 'justify-end'">
+                            <div class="flex content-center flex-wrap gap-3" x-bind:class="detailArticle?.tags.length > 0 ? '' : 'hidden'">
+                                <template x-for="(item, index) in detailArticle?.tags">
+                                    <a
+                                        class="px-3 py-2 bg-primary text-white dark:bg-slate-secondary pointer-events-none rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                        x-text="item.category.name"></a>
+                                </template>
+                                
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button title="PREV" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-slate-primary dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-linear">
+                                    <i data-feather="arrow-left" class="w-4 h-4"></i>
+                                </button>
+                                <button title="NEXT" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-slate-primary dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-linear">
+                                    <i data-feather="arrow-right" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     {{-- <div x-show="showFlash">
@@ -85,80 +116,82 @@
                 </div>
 
                 <div class="col md:mx-0 col-12 lg:col-4">
-                    <ul class="translate-y-2 flex items-center justify-center gap-4">
-
-                        <template
-                            x-if="detailArticle?.author?.link_facebook != null && detailArticle?.author?.link_facebook != ''">
-                            <li
-                                class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                <a x-bind:href="detailArticle?.author?.link_facebook" class="text-md" target="_blank">
-                                    <i data-feather="facebook"></i>
-                                </a>
-                                <!-- Feather Icons Scripts -->
-                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-                                <script>
-                                    feather.replace()
-                                </script>
-                            </li>
-                        </template>
-
-                        <template
-                            x-if="detailArticle?.author?.link_linkedin != null && detailArticle?.author?.link_linkedin != ''">
-                            <li
-                                class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                <a x-bind:href="detailArticle?.author?.link_linkedin" class="text-md" target="_blank">
-                                    <i data-feather="linkedin"></i>
-                                </a>
-                                <!-- Feather Icons Scripts -->
-                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-                                <script>
-                                    feather.replace()
-                                </script>
-                            </li>
-                        </template>
-
-                        <template
-                            x-if="detailArticle?.author?.link_instagram != null && detailArticle?.author?.link_instagram != ''">
-                            <li
-                                class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                <a x-bind:href="detailArticle?.author?.link_instagram" class="text-md" target="_blank">
-                                    <i data-feather="instagram"></i>
-                                </a>
-                                <!-- Feather Icons Scripts -->
-                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-                                <script>
-                                    feather.replace()
-                                </script>
-                            </li>
-                        </template>
-
-                        <template
-                            x-if="detailArticle?.author?.link_twitter != null && detailArticle?.author?.link_twitter != ''">
-                            <li
-                                class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                <a x-bind:href="detailArticle?.author?.link_twitter" class="text-md" target="_blank">
-                                    <i data-feather="twitter"></i>
-                                </a>
-                                <!-- Feather Icons Scripts -->
-                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-                                <script>
-                                    feather.replace()
-                                </script>
-                            </li>
-                        </template>
-
-                    </ul>
 
                     <div
-                        class="mt-10 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
-                        <h3 class="text-md mb-4 font-semibold">Content</h3>
-                        <p x-ref="statusUser" class="hidden w-full p-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary">
+                        class="px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
+
+                        <ul class="relative left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 shadow-[0px_0px_4px_#7C000B] dark:shadow-[0px_0px_4px_#fff] w-max p-2 rounded-lg">
+
+                            <template
+                                x-if="detailArticle?.author?.link_facebook != null && detailArticle?.author?.link_facebook != ''">
+                                <li
+                                    class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                    <a x-bind:href="detailArticle?.author?.link_facebook" class="text-md" target="_blank">
+                                        <i data-feather="facebook"></i>
+                                    </a>
+                                    <!-- Feather Icons Scripts -->
+                                    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                    <script>
+                                        feather.replace()
+                                    </script>
+                                </li>
+                            </template>
+    
+                            <template
+                                x-if="detailArticle?.author?.link_linkedin != null && detailArticle?.author?.link_linkedin != ''">
+                                <li
+                                    class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                    <a x-bind:href="detailArticle?.author?.link_linkedin" class="text-md" target="_blank">
+                                        <i data-feather="linkedin"></i>
+                                    </a>
+                                    <!-- Feather Icons Scripts -->
+                                    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                    <script>
+                                        feather.replace()
+                                    </script>
+                                </li>
+                            </template>
+    
+                            <template
+                                x-if="detailArticle?.author?.link_instagram != null && detailArticle?.author?.link_instagram != ''">
+                                <li
+                                    class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                    <a x-bind:href="detailArticle?.author?.link_instagram" class="text-md" target="_blank">
+                                        <i data-feather="instagram"></i>
+                                    </a>
+                                    <!-- Feather Icons Scripts -->
+                                    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                    <script>
+                                        feather.replace()
+                                    </script>
+                                </li>
+                            </template>
+    
+                            <template
+                                x-if="detailArticle?.author?.link_twitter != null && detailArticle?.author?.link_twitter != ''">
+                                <li
+                                    class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                    <a x-bind:href="detailArticle?.author?.link_twitter" class="text-md" target="_blank">
+                                        <i data-feather="twitter"></i>
+                                    </a>
+                                    <!-- Feather Icons Scripts -->
+                                    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                    <script>
+                                        feather.replace()
+                                    </script>
+                                </li>
+                            </template>
+    
+                        </ul>
+                        
+                        <h3 class="text-md mt-6 font-semibold">Content</h3>
+                        <p x-ref="statusUser" class="hidden w-full p-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
                             You have to 
                             <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
                             For Access this
                         </p>
-                        <ul class="flex flex-col gap-4">
-                            <div x-init="fetchMe()"></div>
+                        <div x-init="fetchMe()"></div>
+                        <ul class="flex flex-col gap-4" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
                             <template x-for="(item, index) in detailArticle?.subarticles">
                                 <li @click="
                                     getSubArticle(item.id); 

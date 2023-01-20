@@ -6,8 +6,8 @@
     }
 </style>
 
-<a id="topButton" href="{{ $url }}" class="fixed -bottom-full right-14 p-3 bg-white hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] animate-bounce transition duration-200 ease-in-out">
-    <i data-feather="arrow-up"></i> 
+<a id="topButton" href="{{ $url }}" class="fixed -bottom-full right-14 p-3 bg-white hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] transition duration-200 ease-in-out">
+    <i data-feather="arrow-up" class="animate-bounce"></i> 
 </a>
 
 <script>

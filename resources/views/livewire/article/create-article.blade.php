@@ -107,7 +107,7 @@
                         "
                     >
                         <img src="" 
-                        x-ref="image" class="absolute w-full h-full rounded-lg" alt="">
+                        x-ref="image" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                         <i 
                             data-feather="image" 
                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
@@ -259,7 +259,7 @@
                                         "
                                     >
                                         <img src="" 
-                                        x-ref="image${this.index}" class="absolute w-full h-full rounded-lg" alt="">
+                                        x-ref="image${this.index}" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                                         <img 
                                             src="{{ asset('assets/images/icons/image.svg') }}"
                                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"

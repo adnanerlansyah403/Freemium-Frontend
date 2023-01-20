@@ -50,10 +50,7 @@
 
                         <div class="relative z-10 flex lg:items-center flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white lg:mx-0 px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:bg-slate-secondary rounded-lg overflow-hidden">
                             <div class="col lg:col-9 col:12" style="margin: 0 !important;">
-                                <div class="flex items-center gap-3">
-                                    <figure>
-                                        <img x-bind:src="imgUrl+item.author.photo" class="w-10 h-10 bg-gray-primary rounded-full" alt="">
-                                    </figure>
+                                <div class="flex items-start justify-between gap-3">
                                     <div x-data="helpers">
                                         <span class="font-bold text-base font-bebasNeue" x-text="substring(item.author.username, 10)"></span>
                                         <p class="flex flex-wrap lg:flex-nowrap items-center gap-2 text-sm mt-2">
@@ -69,6 +66,14 @@
                                             </span>
                                         </p>
                                     </div>
+                                    <figure class="-translate-x-4">
+                                        <template x-if="item.author.photo != null || item.author.photo.length != 0">
+                                            <img x-bind:src="imgUrl+item.author.photo" class="w-10 h-10 bg-gray-primary rounded-full" alt="">
+                                        </template>
+                                        <template x-if="item.author.photo == null || item.author.photo.length == 0">
+                                            <img x-bind:src="imgUrl+'img/user1.png'" class="w-10 h-10 bg-gray-secondary rounded-full" alt="">
+                                        </template>
+                                    </figure>
                                 </div>
                                 <div class="flex items-center justify-between mt-6 mb-4">
                                     <span class="text-base md:text-md font-neucha font-bold" x-text="item.title"></span>

@@ -14,7 +14,7 @@ class TopButton extends Component
      *
      * @return void
      */
-    public function __construct($url = '#')
+    public function __construct($url = '#header')
     {
         $this->url = $url;
     }

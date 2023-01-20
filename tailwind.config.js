@@ -43,7 +43,8 @@ module.exports = {
       iceberg: ['Iceberg', 'sans-serif'],
       bebasNeue: ['Bebas Neue', 'cursive'],
       neucha: ['Neucha', 'cursive'],
-      comic: ['Comic Neue', 'cursive']
+      comic: ['Comic Neue', 'cursive'],
+      quickSand: ['Quicksand', 'sans-serif'],
     },
     extend: {
       animation: {
