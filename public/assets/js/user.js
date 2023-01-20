@@ -1,6 +1,7 @@
 document.addEventListener('alpine:init', () => {
 
   Alpine.data('user', () => ({
+    buttonshow : false,
     isLogedIn: false,
     baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
