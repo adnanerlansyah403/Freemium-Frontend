@@ -11,6 +11,14 @@
     </template>
 </div>
 
+<style>
+
+    .active {
+        background-color: #7C000B !important;
+        color: #fff;
+    }
+
+</style>
 
 @section('content')
 
@@ -86,7 +94,7 @@
                                 <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
                                     class="w-full h-[345px] bg-gray-secondary rounded-primary" alt="">
                             </figure>
-                            <p class="mt-6 font-quickSand text-[#3A3440] font-semibold" x-html="content ? content?.description : detailArticle?.description">
+                            <p class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                             </p>
                         </div>
 
@@ -101,10 +109,10 @@
                             </div>
                             <template x-if="detailArticle?.subarticles.length > 0">
                                 <div class="flex items-center gap-2">
-                                    <button title="PREV" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-linear">
+                                    <button title="PREV" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                         <i data-feather="arrow-left" class="w-4 h-4"></i>
                                     </button>
-                                    <button title="NEXT" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-linear">
+                                    <button title="NEXT" class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                         <i data-feather="arrow-right" class="w-4 h-4"></i>
                                     </button>
                                 </div>
@@ -188,17 +196,29 @@
 
                         <template x-if="detailArticle?.subarticles.length > 0">
                             <div x-data="{
-                                freeSub: true,
-                                paidSub: false,
+                                freeSub: detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 ? true : false,
+                                paidSub: detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0 ? true : false,
                             }">
     
                                 <div class="flex items-center w-full gap-2 my-3">
-                                    <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary text-black hover:text-white dark:text-white dark:bg-slate-secondary transition duration-200 ease-in-out" @click="freeSub = true; paidSub = false; console.log(freeSub, paidSub)">
-                                        <span>Free</span>
-                                    </button>
-                                    <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary text-black hover:text-white dark:text-white dark:bg-slate-secondary transition duration-200 ease-in-out" @click="freeSub = false; paidSub = true; console.log(freeSub, paidSub)">
-                                        <span>Paid</span>
-                                    </button>
+                                    <template x-if="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0">
+                                        <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:border-none dark:text-white dark:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
+                                        freeSub = true; paidSub = false;
+                                        $refs.freeSub.classList.add('active');
+                                        $refs.paidSub.classList.remove('active');
+                                        " x-ref="freeSub">
+                                            <span>Free</span>
+                                        </button>
+                                    </template>
+                                    <template x-if="detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0">
+                                        <button type="button" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:border-none dark:text-white dark:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
+                                        freeSub = false; paidSub = true;
+                                        $refs.paidSub.classList.add('active');
+                                        $refs.freeSub.classList.remove('active');
+                                        " x-ref="paidSub">
+                                            <span>Paid</span>
+                                        </button>
+                                    </template>
                                 </div>
     
                                 <p x-ref="statusUser" class="hidden w-full p-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
