@@ -90,7 +90,7 @@
                             </p>
                         </div>
 
-                        <div class="flex items-center mt-12 w-full" x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between' : 'justify-end'">
+                        <div class="flex items-center w-full" x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between mt-12' : 'justify-end'">
                             <div class="flex content-center flex-wrap gap-3" x-bind:class="detailArticle?.tags.length > 0 ? '' : 'hidden'">
                                 <template x-for="(item, index) in detailArticle?.tags">
                                     <a
