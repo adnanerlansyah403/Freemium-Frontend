@@ -33,7 +33,6 @@ document.addEventListener('alpine:init', () => {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
         window.addEventListener("beforeunload", function () {
-          this.showFlash = true;
           localStorage.removeItem("showFlash")
           localStorage.removeItem("message")
           localStorage.removeItem("typeStatus")
