@@ -13,16 +13,10 @@
 
 @section("content")
 
-<section class="pt-[60px] pb-[100px] dark:text-white" x-data="auth" x-init="checkAlreadyAuth()" style="display: none;"
+<section class="pt-[60px] pb-[100px] dark:text-white" x-data="auth" x-init="checkAlreadyAuth()"
 >
 
-    <div class="container mx-auto flex items-start" x-init="
-        if(!isLogedIn) {
-            setTimeout(function() {
-                return document.querySelector('section').style.display = 'block';
-            }, 1000)
-        }
-    ">
+    <div class="container mx-auto flex items-start" >
 
         <div class="col col-12 lg:col-6">
 
