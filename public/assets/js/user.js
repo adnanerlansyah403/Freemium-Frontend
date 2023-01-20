@@ -33,6 +33,7 @@ document.addEventListener('alpine:init', () => {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
         window.addEventListener("beforeunload", function () {
+          this.showFlash = true;
           localStorage.removeItem("showFlash")
           localStorage.removeItem("message")
           localStorage.removeItem("typeStatus")
@@ -888,7 +889,6 @@ document.addEventListener('alpine:init', () => {
 
     getDetailArticle(id) {
       this.isLoadingArticle = true;
-      console.log(this.isLoadingArticle);
       fetch(`${this.apiUrl}article/${id}`, {
         method: "GET",
         headers: {
@@ -897,18 +897,12 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          if (data.status) {
-            this.detailArticle = data.data;
-            this.isLoadingArticle = false;
-          }
-          else{
-            console.log(data.message);
-            this.isLoadingArticle = false;
-          }
+          this.detailArticle = data.data;
         })
         .catch(error => {
           console.log(error);
         })
+      this.isLoadingArticle = false;
     },
 
     getSubArticle(id = 1) {
@@ -921,6 +915,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
+          this.content = data.data;
           // if (!data.status) {
           //   this.showFlash = true;
           //   localStorage.setItem('message', data.message);
@@ -928,7 +923,6 @@ document.addEventListener('alpine:init', () => {
           // }
           // else {
           //   this.showFlash = false;
-          //   this.content = data.data;
           // }
         })
         .catch(error => {
