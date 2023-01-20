@@ -66,14 +66,14 @@
                                     </p>
                                 </span>
                                 <span class="flex items-center gap-1">
-                                    <i data-feather="eye" class="w-4 h-4"></i>
+                                    <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
                                     <p>
                                         <template x-if="content?.total_views || detailArticle.total_views_sum">
                                             <span
                                                 x-text="content ? content?.total_views : detailArticle?.total_views_sum">
                                             </span>
                                         </template>
-                                        <template x-if="content?.total_views == 0 || detailArticle.total_views_sum == 0 || content?.total_views == null || detailArticle.total_views_sum == null">
+                                        <template x-if="content?.total_views == '' || detailArticle.total_views_sum == ''">
                                             <span>No Views</span>
                                         </template>
                                     </p>
@@ -111,7 +111,7 @@
                             </template>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="col md:mx-0 col-12 lg:col-4">
