@@ -888,6 +888,7 @@ document.addEventListener('alpine:init', () => {
 
     getDetailArticle(id) {
       this.isLoadingArticle = true;
+      console.log(this.isLoadingArticle);
       fetch(`${this.apiUrl}article/${id}`, {
         method: "GET",
         headers: {
@@ -896,12 +897,18 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.detailArticle = data.data;
+          if (data.status) {
+            this.detailArticle = data.data;
+            this.isLoadingArticle = false;
+          }
+          else{
+            console.log(data.message);
+            this.isLoadingArticle = false;
+          }
         })
         .catch(error => {
           console.log(error);
         })
-      this.isLoadingArticle = false;
     },
 
     getSubArticle(id = 1) {

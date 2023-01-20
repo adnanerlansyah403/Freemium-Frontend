@@ -67,6 +67,7 @@
                                 <span x-show="!isLoadingArticle" class="flex items-center gap-1">
                                     <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
                                     <p>
+                                        <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span>
                                         <span x-text="content ? content?.total_views + ' views' : detailArticle?.total_views_sum + ' views'">
                                         </span>
                                     </p>
@@ -79,7 +80,7 @@
                                 <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
                                     class="w-full h-[345px] bg-gray-secondary rounded-primary" alt="">
                             </figure>
-                            <p class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
+                            <p x-show="!isLoadingArticle" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                             </p>
                         </div>
 
