@@ -218,6 +218,7 @@
 
             Alpine.data('article', () => ({
                 index: 1,
+                total : 1,
                 apiUrl: "http://127.0.0.1:8001/api/",
                 createSubArticle(refs) {
 
@@ -305,11 +306,11 @@
                                     <span class="text-md">Choose Your Plan</span>
                                     <div class="flex items-center gap-2 mt-2">
                                         <label for="free" class="flex items-center gap-1">
-                                            <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="free" id="free" checked>
+                                            <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="free" id="free${this.index}" checked>
                                             <span class="text-base">Free</span>
                                         </label>
                                         <label for="paid" class="flex items-center gap-1">
-                                            <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="paid" id="paid">
+                                            <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="paid" id="paid${this.index}">
                                             <span class="text-base">Member-Only</span>
                                         </label>
                                     </div>
@@ -335,13 +336,31 @@
                     });
 
                     this.index++;
-
+                    this.total++;
+                    let title_sub = document.getElementsByClassName('title_sub');
+                    if (this.total > 4){
+                        for (let i = 0; i < this.total; i++) {
+                            let data_id = title_sub[i].getAttribute("data-id");
+                            if(i<= 2){
+                                document.getElementById(`free${data_id}`).checked = true;
+                                document.getElementById(`paid${data_id}`).disabled = true;
+                            }
+                        }
+                    }
 
                 },
                 deleteSubArticle(id)
                 {
                     let parentElement = document.getElementById('listsubarticle');
                     parentElement.querySelector(`#accordion${id}`).remove();
+                    this.total -= 1;
+                    let title_sub = document.getElementsByClassName('title_sub');
+                    if (this.total < 5){
+                        for (let i = 0; i < this.total; i++) {
+                            let data_id = title_sub[i].getAttribute("data-id");
+                            document.getElementById(`paid${data_id}`).disabled = false;
+                        }
+                    }
                 }
             }))
 
