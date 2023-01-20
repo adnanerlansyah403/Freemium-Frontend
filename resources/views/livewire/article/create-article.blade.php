@@ -164,7 +164,12 @@
                 </template>
 
                 <div class="w-full my-1">
-                    <ul class="flex flex-col" id="listsubarticle" x-ref="listsubarticle">
+                    
+                    <p class="font-semibold text-base mb-2">
+                        *If you make three paid sub contents, then you must have to create 3 free content first.
+                    </p>
+
+                    <ul x-on:change="console.log('test')" class="flex flex-col" id="listsubarticle" x-ref="listsubarticle">
                         
 
                     </ul>
