@@ -1,7 +1,7 @@
 document.addEventListener('alpine:init', () => {
 
   Alpine.data('user', () => ({
-    buttonshow : false,
+    buttonshow: false,
     isLogedIn: false,
     baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
@@ -57,6 +57,7 @@ document.addEventListener('alpine:init', () => {
     link_twitter: '',
 
     fetchMe() {
+      this.isLoading = true;
       fetch(this.apiUrl + 'me', {
         method: "GET",
         headers: {
@@ -76,6 +77,7 @@ document.addEventListener('alpine:init', () => {
             this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
             this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
             this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
+            this.isLoading = false;
           }
         });
     },
