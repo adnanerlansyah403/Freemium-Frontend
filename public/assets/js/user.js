@@ -909,7 +909,6 @@ document.addEventListener('alpine:init', () => {
         .catch(error => {
           console.log(error);
         })
-      this.isLoadingArticle = false;
     },
 
     getSubArticle(id = 1) {
@@ -935,7 +934,6 @@ document.addEventListener('alpine:init', () => {
         .catch(error => {
           console.log(error);
         })
-      this.isLoadingArticle = false;
     },
 
     searchArticle(keyword) {

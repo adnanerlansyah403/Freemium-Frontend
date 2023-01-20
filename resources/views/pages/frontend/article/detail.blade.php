@@ -16,12 +16,12 @@
     <section class="pt-[60px] pb-[100px] dark:text-white" x-data="user" style="display: none">
         <div x-init="checkSession()"></div>
         <div x-data="articles" x-init="
-        if(isLogedIn == true) {
-            setTimeout(function() {
-                return document.querySelector('section').style.display = 'block';
-            }, 600)
-        }
-        ">
+            if(isLogedIn == true) {
+                setTimeout(function() {
+                    return document.querySelector('section').style.display = 'block';
+                }, 600)
+            }
+            ">
             <span x-init="getDetailArticle(window.location.href.split('/').pop())"></span>
 
             {{-- <div class="container mx-auto">
@@ -58,13 +58,13 @@
                                     <span class="block text-gray-primary dark:text-gray-third" x-text="detailArticle?.author?.email"></span>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-3 translate-y-1" x-data="helpers">
-                                <span x-show="!isLoadingArticle" class="flex items-center gap-1">
+                            <div x-show="!isLoadingArticle" class="flex items-center gap-3 translate-y-1" x-data="helpers">
+                                <span class="flex items-center gap-1">
                                     <i data-feather="calendar" class="w-4 h-4"></i>
                                     <p x-text="convertDate(content ? content?.created_at : detailArticle?.created_at)">
                                     </p>
                                 </span>
-                                <span x-show="!isLoadingArticle" class="flex items-center gap-1">
+                                <span class="flex items-center gap-1">
                                     <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
                                     <p>
                                         <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span>
@@ -228,22 +228,22 @@
                             }">
     
                                 <div class="flex items-center w-full gap-2 mt-5 mb-3">
-                                    <template x-if="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0">
+                                    <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3">
                                         <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
-                                            type = 'paid';
-                                            $refs.freeSub.classList.add('active');
+                                            type = type == 'paid' ? '' : 'paid';
+                                            type == '' ? $refs.freeSub.classList.remove('active') : $refs.freeSub.classList.add('active');
                                             $refs.paidSub.classList.remove('active');
-                                            {{-- back = true; --}}
+                                            {{-- back = !back; --}}
                                             " x-ref="freeSub">
                                                 <span>Free</span>
                                         </button>
                                     </template>
-                                    <template x-if="detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0">
+                                    <template x-if="detailArticle?.type == 'paid' && detailArticle?.subarticles?.length != 0">
                                         <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'free').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
-                                        type = 'free';
-                                        $refs.paidSub.classList.add('active');
-                                        $refs.freeSub.classList.remove('active');
-                                        back = true;
+                                        type = type == 'free' ? '' : 'free';
+                                        type == '' ? $refs.paidSub.classList.remove('active') : $refs.paidSub.classList.add('active');
+                                        $refs.freeSub.classList.remove('active')
+                                        {{-- back = !back; --}}
                                         " x-ref="paidSub">
                                             <span>Paid</span>
                                         </button>
@@ -297,8 +297,8 @@
                                         </template>
                                         <template x-if="back">
                                             <li 
-                                                {{-- @click="content = null; back = false;" --}}
-                                                @click="window.location.reload();"
+                                                @click="content = null; back = false;"
+                                                {{-- @click="window.location.reload();" --}}
                                                 class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-lg cursor-pointer bg-primary dark:bg-slate-third text-white hover:translate-x-1 transition duration-200 ease-in-out text-center">
                                                 <button class="text-base lg:text-md font-iceberg hover:text-opacity-80">Back to Article</button>
                                             </li>
