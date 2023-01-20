@@ -94,6 +94,25 @@
 }
 
 @layer utilities {
+ 
+    /* ADD ONS */
+
+    .active {
+    	@apply bg-primary dark:bg-slate-third;
+        color: #fff;
+    }
+    
+    .has-scrollbar::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .has-scrollbar::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .has-scrollbar::-webkit-scrollbar-thumb {
+	@apply bg-primary dark:bg-slate-secondary rounded-pill;
+    }
 
     /* COLS */
     .col {
