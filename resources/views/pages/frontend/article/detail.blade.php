@@ -52,7 +52,7 @@
                                         <span class="block text-gray-primary dark:text-gray-third" x-text="detailArticle?.author?.email"></span>
                                     </div>
                                 </div>
-                                <div x-show="!isLoadingArticle" class="flex items-center gap-3 translate-y-1" x-data="helpers">
+                                <div x-show="!isLoading" class="flex items-center gap-3 translate-y-1" x-data="helpers">
                                     <span class="flex items-center gap-1">
                                         <i data-feather="calendar" class="w-4 h-4"></i>
                                         <p x-text="convertDate(content ? content?.created_at : detailArticle?.created_at)">
@@ -74,7 +74,7 @@
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
                                         class="w-full h-[345px] bg-gray-secondary rounded-primary" alt="">
                                 </figure>
-                                <p x-show="!isLoadingArticle" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
+                                <p x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </p>
                             </div>
     
@@ -94,6 +94,7 @@
                                             <b>1</b>
                                         </p> --}}
                                         <div class="flex items-center gap-2">
+                                            <span x-text="content ? detailArticle?.subarticles?.findIndex(x => x.id == content?.id) + 1 + '/' + detailArticle?.subarticles?.length : ''"></span>
                                             <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id" x-on:click="
                                                                         if(content){
                                                                             id = content.id;
@@ -228,7 +229,6 @@
                                                 type = type == 'paid' ? '' : 'paid';
                                                 type == '' ? $refs.freeSub.classList.remove('active') : $refs.freeSub.classList.add('active');
                                                 $refs.paidSub.classList.remove('active');
-                                                {{-- back = !back; --}}
                                                 " x-ref="freeSub">
                                                     <span>Free</span>
                                             </button>
@@ -238,7 +238,6 @@
                                             type = type == 'free' ? '' : 'free';
                                             type == '' ? $refs.paidSub.classList.remove('active') : $refs.paidSub.classList.add('active');
                                             $refs.freeSub.classList.remove('active')
-                                            {{-- back = !back; --}}
                                             " x-ref="paidSub">
                                                 <span>Paid</span>
                                             </button>

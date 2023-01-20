@@ -912,7 +912,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     getSubArticle(id = 1) {
-      this.isLoadingArticle = true;
+      this.isLoading = true;
       fetch(`${this.apiUrl}sub-article/${id}`, {
         method: "GET",
         headers: {
@@ -930,7 +930,7 @@ document.addEventListener('alpine:init', () => {
             this.content = data.data;
             // this.showFlash = false;
           }
-          this.isLoadingArticle = false;
+          this.isLoading = false;
         })
         .catch(error => {
           console.log(error);
