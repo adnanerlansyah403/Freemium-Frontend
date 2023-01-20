@@ -178,11 +178,11 @@
                                 <div class="flex flex-col col-12 md:col-9">
                                     <div class="flex items-start justify-between">
                                         <div>
-                                            <h1 class="text-[18px] font-bold font-bebasNeue leading-[27px]" x-text="item.author.username">Nama Author</h1>
-                                            <div class="flex gap-3 flex-wrap">
-                                                <p class="text-[14px] leading-[21px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
-                                                <p class="flex items-center gap-1 text-[14px] leading-[21px]">
-                                                    <i data-feather="eye" class="w-4 h-4"></i>
+                                            <h1 class="text-[18px] font-bold font-bebasNeue" x-text="item.author.username">Nama Author</h1>
+                                            <div class="flex gap-3 flex-wrap mt-2">
+                                                <p class="text-[14px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
+                                                <p class="flex items-center gap-1 text-[14px]">
+                                                    <i data-feather="eye" class="w-4 h-4 -translate-y-[1px]"></i>
                                                     <span x-text="item.total_views_sum > 0 ? item.total_views_sum : 'No Views'">
                                                         1000 
                                                     </span> 

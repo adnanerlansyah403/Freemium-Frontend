@@ -43,7 +43,7 @@
                         x-on:mouseover="dropdownmenu = true"
                         x-data="helpers"
                     >
-                        <template x-if="data_user?.photo != null || data_user?.photo?.length != 0">
+                        <template x-if="data_user?.photo != null">
                             <figure>
                                 <img x-bind:src="imgUrl + data_user?.photo" src="" class="w-6 h-6 bg-gray-third rounded-full" alt="">
                             </figure>

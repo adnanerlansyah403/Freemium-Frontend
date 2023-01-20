@@ -43,14 +43,14 @@
 
             <div class="mb-8" x-data="{passwordHidden: true}">
                 <label for="password" class="text-md">Password</label>
-                <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4">
+                <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out">
                     <button type="button" @click="
                     typePassword = passwordHidden == true ? 'text' : 'password';
                     $refs.password.setAttribute('type', typePassword)
                     passwordHidden = !passwordHidden;
                     ">
-                        <i x-show="passwordHidden == true" data-feather="lock" class="w-6 h-6 text-gray-secondary"></i>
-                        <i x-show="passwordHidden == false" data-feather="unlock" class="w-6 h-6 text-gray-secondary"></i>
+                        <i x-show="passwordHidden == true" data-feather="lock" class="group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
+                        <i x-show="passwordHidden == false" data-feather="unlock" class="group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
                     </button>
                     <input type="password" placeholder="Your password..."
                     x-bind:class="status_err.password ? 'input-danger' : ''" class="" x-model="password" x-ref="password">
@@ -81,7 +81,7 @@
 
         <div class="border border-gray-third bg-white dark:bg-slate-secondary rounded-primary col col-12 lg:col-6 hidden h-[400px] lg:flex items-center justify-center">
             <figure>
-                <img src="{{ asset('assets/images/securelogin.svg') }}" class="w-full h-auto" alt="">
+                <img src="{{ asset('assets/images/securelogin.svg') }}" class="w-[300px] h-[300px]" alt="">
             </figure>
         </div>
 
