@@ -183,6 +183,7 @@ document.addEventListener('alpine:init', () => {
     listPlan: '',
     keywordPlan: '',
     fetchListPlan() {
+      this.isLoading = true;
       const token = localStorage.getItem('token')
       fetch(`${this.apiUrl}plan`, {
         method: "GET",
@@ -197,6 +198,7 @@ document.addEventListener('alpine:init', () => {
             window.location.replace(this.baseUrl + 'login')
           }
           this.listPlan = data.data;
+          this.isLoading = false;
         })
 
     },
@@ -1336,7 +1338,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     fetchListOrder() {
-
+      this.isLoading = true;
       fetch(`${this.apiUrl}payment`, {
         method: 'GET',
         headers: {
@@ -1346,6 +1348,7 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           const data = await response.json();
           this.listOrder = data.data;
+          this.isLoading = false;
         });
 
     },
