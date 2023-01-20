@@ -305,7 +305,7 @@
 
                         
                         <template x-if="detailArticle?.subarticles.length == 0">
-                            <ul class="flex flex-col gap-4">
+                            <ul class="flex flex-col gap-4 mt-2">
                                 <li class="text-base">
                                     <span class="span dark:text-slate-fourth">No</span> Sub Article
                                 </li>
