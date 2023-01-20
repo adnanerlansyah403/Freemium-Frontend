@@ -897,7 +897,14 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.detailArticle = data.data;
+          if (data.status) {
+            this.detailArticle = data.data;
+            this.isLoadingArticle = false;
+          }
+          else{
+            console.log(data.message);
+            this.isLoadingArticle = false;
+          }
         })
         .catch(error => {
           console.log(error);
