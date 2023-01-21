@@ -26,4 +26,7 @@
     </ul>
 
 </div>
+<script>
+    feather.replace()
+</script>
 </footer>

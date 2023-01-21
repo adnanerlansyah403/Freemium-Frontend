@@ -897,14 +897,8 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          if (data.status) {
-            this.detailArticle = data.data;
-            this.isLoadingArticle = false;
-          }
-          else{
-            console.log(data.message);
-            this.isLoadingArticle = false;
-          }
+          this.detailArticle = data.data;
+          this.isLoadingArticle = false;
         })
         .catch(error => {
           console.log(error);
@@ -921,20 +915,20 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          if (!data.status) {
-            // this.showFlash = true;
-            // localStorage.setItem('message', data.message);
-            // localStorage.setItem('showFlash', true);
-          }
-          else {
-            this.content = data.data;
-            // this.showFlash = false;
-          }
-          this.isLoading = false;
+          this.content = data.data;
+          // if (!data.status) {
+          //   this.showFlash = true;
+          //   localStorage.setItem('message', data.message);
+          //   localStorage.setItem('showFlash', true);
+          // }
+          // else {
+          //   this.showFlash = false;
+          // }
         })
         .catch(error => {
           console.log(error);
         })
+      this.isLoadingArticle = false;
     },
 
     searchArticle(keyword) {
@@ -1440,6 +1434,19 @@ document.addEventListener('alpine:init', () => {
     baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
     imgUrl: "http://127.0.0.1:8001/",
+
+    convertExpiredPlan(time = 1) {
+      if (time >= 12) {
+        if (time == 12) {
+          return 'Yearly';
+        } else if (time >= 12 * 2) {
+          return time + " Years"
+        }
+      } else if (time <= 12 && time > 1) {
+        return time + ' Months'
+      }
+      return 'Unlimited';
+    },
 
     convertDate(date) {
 

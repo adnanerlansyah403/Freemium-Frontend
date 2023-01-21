@@ -111,7 +111,10 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
                         {{-- <span x-text="console.log(item)"></span> --}}
                         <span class="text-md" x-text="item.name"></span>
 
-                        <p class="mt-12 mb-8 text-base text-slate-secondary dark:text-slate-fourth" x-text=" '$' + parseFloat(item.price).toFixed(2)"></p>
+                        <p class="mt-12 mb-8 text-base text-slate-secondary dark:text-slate-fourth">
+                            <span x-text=" '$' + parseFloat(item.price).toFixed(2)"></span> /
+                            <b x-text="convertExpiredPlan(item.expired)"></b>
+                        </p>
 
                         <button type="button"
                             class="px-4 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-80 rounded-pill"

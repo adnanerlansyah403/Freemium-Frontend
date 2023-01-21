@@ -67,7 +67,7 @@
                         <input 
                             x-model="keywordArticle"
                             x-on:change="searchArticle(keywordArticle)" 
-                            class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] dark:text-white font-normal text-sm" 
+                            class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm" 
                             placeholder="Search Here..." />
                         <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                     </div>
