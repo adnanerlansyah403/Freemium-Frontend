@@ -1,12 +1,12 @@
-<div x-ref="modalInstruction" style="display: none;" class="fixed right-[15%] top-40" x-data="{
+<div x-ref="modalInstruction" style="display: none;" class="absolute lg:fixed right-[70px] top-[8.3%] sm:top-[11.35%]" x-data="{
     modalActive: false,
 }" x-init="
     setTimeout(function(){
         $refs.modalInstruction.style.display = 'block'
     }, 600)
 ">
-    <button x-show="modalActive == false" x-transition @click="modalActive = true;" type="button" class="group hover:shadow-[0_0_10px_4px_#7C000B] dark:hover:shadow-[0_0_10px_4px_#fff] w-10 h-10 flex items-center justify-center rounded-full bg-primary dark:bg-slate-secondary text-white  transition duration-200 ease-in-out" title="Instructions">
-        <ion-icon name="bulb-outline" title="Instructions" class="text-md transition duration-200 ease-in-out"></ion-icon>
+    <button x-show="modalActive == false" x-transition @click="modalActive = true;" type="button" class="group hover:shadow-[0_0_10px_4px_#7C000B] dark:hover:shadow-[0_0_10px_4px_#fff] p-2 flex items-center justify-center rounded-full bg-primary dark:bg-slate-secondary text-white  transition duration-200 ease-in-out" title="Instructions">
+        <ion-icon name="bulb-outline" title="Instructions" class="text-[23px] lg:text-md transition duration-200 ease-in-out"></ion-icon>
     </button>
 
     <div x-show="modalActive == true" x-transition class="fixed w-full h-full top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,50%)] grid place-items-center" style="z-index: 101;">

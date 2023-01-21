@@ -1,4 +1,4 @@
-<header id="header" class="group relative shadow-lg py-1 lg:py-2 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
+<header id="header" class="group relative shadow-lg py-2 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>
@@ -62,6 +62,7 @@
                         x-show="dropdownmenu"
                         x-on:mouseleave="dropdownmenu = false"
                         x-transition
+                        style="z-index: 1;"
                     >
                         <template x-if="data_user?.role == 1">
                             <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
@@ -121,7 +122,7 @@
             </div>
         </template>
 
-        <div x-data="helpers" class="absolute right-5 top-[120%] lg:-right-1/3 lg:top-[18px] lg:group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
+        <div x-data="helpers" class="absolute right-5 top-[125%] xl:-right-1/3 xl:top-[24px] xl:group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
             <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
                 <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
             </button>

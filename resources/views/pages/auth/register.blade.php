@@ -63,9 +63,23 @@
                     $refs.password.setAttribute('type', typePassword)
                     passwordHidden = !passwordHidden;
                     ">
-                        <i x-show="passwordHidden == true" data-feather="lock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
-                        <i x-show="passwordHidden == false" data-feather="unlock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"
-                        style="display: none;"></i>
+                        <template x-if="passwordHidden == true">
+                            <span>
+                                <i data-feather="lock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </span>
+                        </template>
+                        <template x-if="passwordHidden == false">
+                            <span>
+                                <i data-feather="unlock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"
+                                ></i>
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </span>
+                        </template>
                     </button>
                     <input type="password" placeholder="Your password..."
                     x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full" x-model="password" x-ref="password">
