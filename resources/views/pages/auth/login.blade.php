@@ -54,7 +54,7 @@
                         style="display: none;"></i>
                     </button>
                     <input type="password" placeholder="Your password..."
-                    x-bind:class="status_err.password ? 'input-danger' : ''" class="" x-model="password" x-ref="password">
+                    x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full" x-model="password" x-ref="password">
                 </div>
                     <template x-if="status_err.password">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
