@@ -35,7 +35,7 @@
                         </script>
                     </a>
                 </template>
-                <div class="relative z-[100]"
+                <div class="relative"
                     x-data="{dropdownmenu : false}"
                 >
                     <button 

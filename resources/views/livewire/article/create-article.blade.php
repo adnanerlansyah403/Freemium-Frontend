@@ -14,6 +14,7 @@
             document.title = 'Create Article - Freemium App';
         </script>
     </template>
+
     <div>
 
         <style>
@@ -40,6 +41,10 @@
             input[type="radio"] {
                 margin-left: 1px;
                 margin-top: 1px;
+            }
+
+            .tox .tox-editor-header {
+                z-index: 0;
             }
 
         </style>
@@ -358,6 +363,15 @@
         </script>
     </div>
 
+    {{-- INSTRUCTIONS --}}
+    
+    <x-modal-instruction>
+        <li class="flex items-center gap-2">
+            <b>1.</b>
+            <span>Title harus lebih dari 10 karakter</span>
+        </li>
+    </x-modal-instruction>
+    
     <template x-if="isLoading">
         <div class="flex justify-center px-32 py-4">
             <x-loading-page />
