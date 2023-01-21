@@ -567,11 +567,11 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           data = await response.json();
+          console.log(this.isLoading = false)
 
           if (!data.status) {
             this.showFlash = true;
             this.status_err[0] = data.message;
-            console.log(this.status_err)
           }
           else {
             this.status_err[0] = null;
@@ -580,6 +580,8 @@ document.addEventListener('alpine:init', () => {
             this.flash()
           }
           this.isLoading = false;
+        }).catch(error => {
+          console.log(error);
         })
 
     },

@@ -1,4 +1,4 @@
-<header id="header" class="group relative shadow-lg py-1 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
+<header id="header" class="group relative shadow-lg py-2 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>
@@ -19,14 +19,16 @@
         </template>
 
         <template x-if="isLogedIn">
-            <div class="flex items-center gap-4" x-data="user">
+            <div class="flex items-center gap-3 lg:gap-4" x-data="user">
                 <div x-init="fetchMe()"></div>
                 <div x-init="fetchMyTransactions()"></div>
                 {{-- <span x-text="console.log(data_user)"></span> --}}
                 <template x-if="data_user?.role == 2">
-                    <a href="{{ route('article.create') }}" class="hidden lg:flex items-center gap-2 text-slate-primary dark:text-gray-third dark:hover:text-white text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
-                        <i data-feather="edit"></i>
-                        <span>Write</span>
+                    <a href="{{ route('article.create') }}" class="lg:flex items-center gap-2 text-slate-primary dark:text-gray-third dark:hover:text-white text-[20px] hover:text-opacity-90 transition duration-200 ease-in-out">
+                        <b title="Write" class="-translate-y-1 lg:translate-y-0">
+                            <i data-feather="edit"></i>
+                        </b>
+                        <span class="hidden">Write</span>
                         <!-- Feather Icons Scripts -->
                         <script>
                             feather.replace()
@@ -119,7 +121,7 @@
             </div>
         </template>
 
-        <div x-data="helpers" class="absolute right-[90px] lg:-right-1/3 lg:top-[18px] lg:group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
+        <div x-data="helpers" class="absolute right-5 top-[120%] lg:-right-1/3 lg:top-[18px] lg:group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
             <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
                 <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
             </button>

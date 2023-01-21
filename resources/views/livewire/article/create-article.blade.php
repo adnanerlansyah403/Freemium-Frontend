@@ -159,7 +159,7 @@
 
                 <div class="w-full my-1">
 
-                    <p class="font-semibold text-base mb-2">
+                    <p class="font-semibold text-sm lg:text-base mb-2">
                         *If you make three paid sub contents, then you must have to create 3 free content first.
                     </p>
 
