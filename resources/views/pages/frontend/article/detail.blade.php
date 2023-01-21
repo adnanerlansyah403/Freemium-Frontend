@@ -202,14 +202,15 @@
                             
                             <h3 class="text-md mt-6 font-semibold">Content</h3>
 
+                            <div x-init="fetchMe()"></div>
 
                             <template x-if="detailArticle?.subarticles.length > 0">
                                 <div x-data="{
                                     type: null,
                                 }">
         
-                                    <div class="flex items-center w-full gap-2 mt-5 mb-3">
-                                        <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3">
+                                    <div class="flex items-center w-full gap-2 mb-3" x-bind:class="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1 ? 'mt-5' : ''">
+                                        <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
                                                 type = type == 'paid' ? '' : 'paid';
                                                 type == '' ? $refs.freeSub.classList.remove('active') : $refs.freeSub.classList.add('active');
@@ -218,7 +219,7 @@
                                                     <span>Free</span>
                                             </button>
                                         </template>
-                                        <template x-if="detailArticle?.type == 'paid' && detailArticle?.subarticles?.length != 0">
+                                        <template x-if="detailArticle?.type == 'paid' && detailArticle?.subarticles?.length != 0 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'free').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
                                             type = type == 'free' ? '' : 'free';
                                             type == '' ? $refs.paidSub.classList.remove('active') : $refs.paidSub.classList.add('active');
@@ -234,8 +235,6 @@
                                         <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
                                         to Access this
                                     </p>
-
-                                    <div x-init="fetchMe()"></div>
 
                                     <div id="wrapperSub" class="block max-h-[408px] overflow-y-auto has-scrollbar">
                                         <ul class="flex flex-col gap-4 pr-4" x-transition x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-2' : ''">
