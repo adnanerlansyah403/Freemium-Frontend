@@ -291,8 +291,8 @@
                                             </template>
                                             <template x-if="back">
                                                 <li 
-                                                    @click="content = null; back = false;"
-                                                    {{-- @click="window.location.reload();" --}}
+                                                    {{-- @click="content = null; back = false;" --}}
+                                                    @click="window.location.reload();"
                                                     class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-lg cursor-pointer bg-primary dark:bg-slate-third text-white hover:translate-x-1 transition duration-200 ease-in-out text-center">
                                                     <button class="text-base lg:text-md font-iceberg hover:text-opacity-80">Back to Article</button>
                                                 </li>
