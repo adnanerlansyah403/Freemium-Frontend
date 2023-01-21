@@ -59,7 +59,11 @@
                     passwordHidden = !passwordHidden;
                     ">
                         <i x-show="passwordHidden == true" data-feather="lock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
-                        <i x-show="passwordHidden == false" data-feather="unlock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
+                        <i x-show="passwordHidden == false" data-feather="unlock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"
+                        style="display: none;"
+                        x-init="setTimeout(function() {
+                            $refs.unlockPassword.style.display = 'block';
+                        },2000)" x-ref="unlockPassword"></i>
                     </button>
                     <input type="password" placeholder="Your password..."
                     x-bind:class="status_err.password ? 'input-danger' : ''" class="" x-model="password" x-ref="password">
