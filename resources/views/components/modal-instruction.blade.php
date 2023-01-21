@@ -1,6 +1,10 @@
-<div class="fixed right-[15%] top-40" x-data="{
+<div x-ref="modalInstruction" style="display: none;" class="fixed right-[15%] top-40" x-data="{
     modalActive: false,
-}">
+}" x-init="
+    setTimeout(function(){
+        $refs.modalInstruction.style.display = 'block'
+    }, 600)
+">
     <button x-show="modalActive == false" x-transition @click="modalActive = true;" type="button" class="group hover:shadow-[0_0_10px_4px_#7C000B] dark:hover:shadow-[0_0_10px_4px_#fff] w-10 h-10 flex items-center justify-center rounded-full bg-primary dark:bg-slate-secondary text-white  transition duration-200 ease-in-out" title="Instructions">
         <ion-icon name="bulb-outline" title="Instructions" class="text-md transition duration-200 ease-in-out"></ion-icon>
     </button>
