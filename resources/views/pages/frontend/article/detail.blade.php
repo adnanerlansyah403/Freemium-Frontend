@@ -113,12 +113,12 @@
                                                                             id = detailArticle?.subarticles?.[id + 1]?.id;
 
                                                                             getSubArticle(id);
+                                                                            back = true;
                                                                         }
                                                                         else{
                                                                             id = detailArticle?.subarticles?.[0]?.id;
                                                                             getSubArticle(id);
                                                                         };
-                                                                        back = true;
                                                                         " title="NEXT"
                                                 class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                                 <i data-feather="arrow-right" class="w-4 h-4"></i>
