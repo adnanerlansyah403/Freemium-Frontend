@@ -364,34 +364,34 @@
     {{-- INSTRUCTIONS --}}
     
     <x-modal-instruction>
-        <li class="flex gap-2">
+        <li class="flex items-start gap-2">
             <b class="text-primary">1.</b>
             <span>The title must longer than 10 character</span>
         </li>
-        <li class="flex gap-2">
+        <li class="flex items-start gap-2">
             <b class="text-primary">2.</b>
             <span>The article must have at least 1 category</span>
         </li>
-        <li class="flex gap-2">
+        <li class="flex items-start gap-2">
             <b class="text-primary">3.</b>
             <span>The article must have a thumbnail</span>
         </li>
-        <li class="flex gap-2">
+        <li class="flex items-start gap-2">
             <b class="text-primary">4.</b>
             <span>The thumbnail must be an image with size less than 1 MB</span>
         </li>
-        <li class="flex gap-2">
+        <li class="flex items-start gap-2">
             <b class="text-primary">5.</b>
             <span>The content length must be more than 100 character</span>
         </li>
-        <li class="flex gap-2">
+        <li class="flex items-start gap-2">
             <b class="text-primary">6.</b>
             <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
         </li>
     </x-modal-instruction>
     
     <template x-if="isLoading">
-        <div class="flex justify-center px-32 py-4">
+        <div class="flex items-start justify-center px-32 py-4">
             <x-loading-page />
         </div>
     </template>
