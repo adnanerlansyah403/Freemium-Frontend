@@ -16,6 +16,11 @@
 <section class="pt-[60px] pb-[100px] dark:text-white" x-data="auth" x-init="checkAlreadyAuth()"
 >
 
+<div x-show="isLoadingAuth" class="flex justify-center px-32 py-4">
+    <x-loading-page />
+</div>
+
+<template x-if="!isLoadingAuth">
     <div class="container mx-auto flex items-start" >
 
         <div class="col col-12 lg:col-6">
@@ -93,6 +98,7 @@
         </div>
 
     </div>
+</template>
 
 </section>
 

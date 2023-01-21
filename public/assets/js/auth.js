@@ -8,6 +8,7 @@ document.addEventListener('alpine:init', () => {
     email: '',
     password: '',
     message: '',
+    isLoadingAuth: false,
     subscribe_status: false,
     showFlash: false,
     typeStatus: true,
@@ -60,11 +61,15 @@ document.addEventListener('alpine:init', () => {
     },
 
     checkAlreadyAuth() {
+      this.isLoadingAuth = true;
       const token = localStorage.getItem('token')
       this.isLogedIn = token ? true : false
 
       if (this.isLogedIn) {
+        this.isLoadingAuth = false;
         return window.location.href = this.baseUrl;
+      } else {
+        this.isLoadingAuth = false;
       }
 
     },
