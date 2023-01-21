@@ -65,9 +65,9 @@
                 <template x-if="!isLoading">
 
                     <div>
-                        <div class="w-full rounded-primary bg-white shadow-lg">
+                        <div class="w-full bg-white shadow-lg">
                             <div class="w-full text-center bg-primary py-2 text-white dark:bg-slate-secondary">List Users</div>
-                            <div class="overflow-x-auto">
+                            <div class="overflow-x-auto has-scrollbar2">
                                 <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                                     <thead>
                                     <tr>
@@ -173,7 +173,7 @@
                 </template>
 
                 <template x-if="isLoading == true">
-                    <div class="w-full col-12 lg:col-9 flex items-center justify-center">
+                    <div class="w-full col-12 flex items-center justify-center mt-10">
                         <x-loading />
                     </div>
                 </template>

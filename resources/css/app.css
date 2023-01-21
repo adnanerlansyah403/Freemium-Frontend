@@ -114,6 +114,18 @@
         @apply bg-primary dark:bg-white rounded-pill;
     }
 
+    .has-scrollbar2::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .has-scrollbar2::-webkit-scrollbar-track {
+	@apply border dark:border dark:border-white;
+    }
+
+    .has-scrollbar2::-webkit-scrollbar-thumb {
+        @apply bg-primary dark:bg-slate-third;
+    }
+
     /* COLS */
     .col {
         margin: 0 18px;

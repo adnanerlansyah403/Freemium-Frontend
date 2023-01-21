@@ -803,6 +803,11 @@ document.addEventListener('alpine:init', () => {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
+        window.addEventListener("beforeunload", function () {
+          localStorage.removeItem("showFlash")
+          localStorage.removeItem("message")
+          localStorage.removeItem("typeStatus")
+        })
         setTimeout(function () {
           this.showFlash = false;
           localStorage.removeItem("showFlash")
@@ -1206,20 +1211,20 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
+          this.data_admin = data.data;
 
-          if (data.status) {
-            this.data_admin = data.data;
-            this.showFlash = true;
-            this.typeStatus = true;
-            localStorage.setItem("typeStatus", true)
-            this.isLoading = false;
-          }
-          else {
-            localStorage.setItem('message', data.message);
-            localStorage.setItem('showFlash', true);
-            this.typeStatus = false;
-            localStorage.setItem("typeStatus", false)
-          }
+          this.isLoading = false;
+          // if (data.status) {
+          //   this.showFlash = true;
+          //   this.typeStatus = true;
+          //   localStorage.setItem("typeStatus", true)
+          // }
+          // else {
+          //   localStorage.setItem('message', data.message);
+          //   localStorage.setItem('showFlash', true);
+          //   this.typeStatus = false;
+          //   localStorage.setItem("typeStatus", false)
+          // }
         })
     },
 

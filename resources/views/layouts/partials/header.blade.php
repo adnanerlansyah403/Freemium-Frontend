@@ -1,4 +1,4 @@
-<header id="header" class="group relative shadow-lg py-2 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
+<header id="header" class="group relative shadow-lg py-1 lg:py-2 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>

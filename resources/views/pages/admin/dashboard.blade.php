@@ -24,11 +24,6 @@
     
     <div>
 
-    <div x-init="flash()"></div>
-    <div x-show="showFlash">
-        <x-alert />
-    </div>
-
 
         @include("layouts.partials.user.dashboard")
 
@@ -49,7 +44,7 @@
 
                 {{-- List Report --}}
                 <template x-if="isLoading">
-                    <div class="w-full col-12 lg:col-9 flex items-center justify-center">
+                    <div class="w-full col-12 flex items-center justify-center mt-10">
                         <x-loading />
                     </div>
                 </template>
@@ -102,14 +97,21 @@
 
                 {{-- Canvas Chart --}}
 
-                <div class="w-full mt-5">
-                    <h2 class="text-base font-bold"><span class="span dark:text-white">Bar</span> Chart</h2>
-                    <canvas id="barChart" class="dark:bg-slate-secondary"></canvas>
-                </div>
-
-                <div class="w-full mt-5">
-                    <h2 class="text-base font-bold"><span class="span dark:text-white">Line</span> Chart</h2>
-                    <canvas id="lineChart" class="dark:bg-slate-secondary"></canvas>
+                <div style="display: none;"
+                x-init="
+                    setTimeout(() => {
+                        $refs.canvasWrapper.style.display = 'block';
+                    }, 500)
+                " x-ref="canvasWrapper">
+                    <div class="w-full mt-5">
+                        <h2 class="text-base font-bold"><span class="span dark:text-white">Bar</span> Chart</h2>
+                        <canvas id="barChart" class="dark:bg-slate-secondary"></canvas>
+                    </div>
+    
+                    <div class="w-full mt-5">
+                        <h2 class="text-base font-bold"><span class="span dark:text-white">Line</span> Chart</h2>
+                        <canvas id="lineChart" class="dark:bg-slate-secondary"></canvas>
+                    </div>
                 </div>
 
             </div>

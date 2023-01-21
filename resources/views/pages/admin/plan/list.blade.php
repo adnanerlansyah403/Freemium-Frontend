@@ -66,7 +66,7 @@
                 </div>
 
                 <template x-if="isLoading">
-                    <div class="w-full col-12 lg:col-9 flex items-center justify-center">
+                    <div class="w-full col-12 flex items-center justify-center mt-10">
                         <x-loading />
                     </div>
                 </template>
