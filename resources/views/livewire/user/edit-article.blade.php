@@ -43,7 +43,7 @@
                         <template x-if="status_err?.[0]?.title">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                <span class="span-danger" x-text="status_err?.[0]?.title[0]">Validasi Error</span>
+                                <span class="span-danger" x-text="status_err?.[0]?.title[0]">Validation Error</span>
                             </div>
                         </template>
                     </div>
@@ -61,7 +61,7 @@
                         <template x-if="status_err?.[0]?.category_id">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                <span class="span-danger" x-text="status_err?.[0]?.category_id[0]">Validasi Error</span>
+                                <span class="span-danger" x-text="status_err?.[0]?.category_id[0]">Validation Error</span>
                             </div>
                         </template>
 
@@ -103,7 +103,7 @@
                     <template x-if="status_err?.[0]?.thumbnail">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[0]?.thumbnail[0]">Validasi Error</span>
+                            <span class="span-danger" x-text="status_err?.[0]?.thumbnail[0]">Validation Error</span>
                         </div>
                     </template>
                 </div>
@@ -119,7 +119,7 @@
                     <template x-if="status_err?.[0]?.description">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[0]?.description[0]">Validasi Error</span>
+                            <span class="span-danger" x-text="status_err?.[0]?.description[0]">Validation Error</span>
                     
                     </template>
                 </div>
@@ -150,7 +150,7 @@
                     <li class="bg-white dark:bg-slate-secondary dark:text-white my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-lg" x-data="accordion(1)">
                         <h2 @click="handleClick()"
                             class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
-                            <span>Daftar List Sub Artikel</span>
+                            <span>Sub Article List</span>
                             <div class="flex items-center gap-2">
                                 <span
                                 :class="handleRotate()"
@@ -236,7 +236,7 @@
                         <template x-if="status_err?.[1]?.title">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                <span class="span-danger" x-text="status_err?.[1]?.title[0]">Validasi Error</span>
+                                <span class="span-danger" x-text="status_err?.[1]?.title[0]">Validation Error</span>
                             </div>
                         </template>
                     </div>
@@ -272,7 +272,7 @@
                     <template x-if="status_err?.[1]?.thumbnail">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[1]?.thumbnail[0]">Validasi Error</span>
+                            <span class="span-danger" x-text="status_err?.[1]?.thumbnail[0]">Validation Error</span>
                         </div>
                     </template>
                 </div>
@@ -288,7 +288,7 @@
                     <template x-if="status_err?.[1]?.description">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[1]?.description[0]">Validasi Error</span>
+                            <span class="span-danger" x-text="status_err?.[1]?.description[0]">Validation Error</span>
                         </div>
                     </template>
                 </div>
@@ -310,13 +310,13 @@
                     <template x-if="status_err?.[1]?.type">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[1]?.type[0]">Validasi Error</span>
+                            <span class="span-danger" x-text="status_err?.[1]?.type[0]">Validation Error</span>
                         </div>
                     </template>
                     <template x-if="status_err?.[1]?.min_free">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[1]?.min_free[0]">Validasi Error</span>
+                            <span class="span-danger" x-text="status_err?.[1]?.min_free[0]">Validation Error</span>
                         </div>
                     </template>
                 </div>
@@ -334,6 +334,35 @@
         </div>
 
     </div>
+
+    {{-- INSTRUCTIONS --}}
+    
+    <x-modal-instruction>
+        <li class="flex gap-2">
+            <b class="text-primary">1.</b>
+            <span>The title must longer than 10 character</span>
+        </li>
+        <li class="flex gap-2">
+            <b class="text-primary">2.</b>
+            <span>The article must have at least 1 category</span>
+        </li>
+        <li class="flex gap-2">
+            <b class="text-primary">3.</b>
+            <span>The article must have a thumbnail</span>
+        </li>
+        <li class="flex gap-2">
+            <b class="text-primary">4.</b>
+            <span>The thumbnail must be an image with size less than 1 MB</span>
+        </li>
+        <li class="flex gap-2">
+            <b class="text-primary">5.</b>
+            <span>The content length must be more than 100 character</span>
+        </li>
+        <li class="flex gap-2">
+            <b class="text-primary">6.</b>
+            <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
+        </li>
+    </x-modal-instruction>
 
 
     <script>

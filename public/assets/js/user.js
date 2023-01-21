@@ -928,17 +928,24 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.detailArticle = data.data;
+          if (data.status) {
+            this.detailArticle = data.data;
+          }
+          else{
+            console.log(data.message);
+          }
           this.isLoadingArticle = false;
+          this.isLoading = false;
         })
         .catch(error => {
           console.log(error);
+          this.isLoadingArticle = false;
         })
     },
 
-    getSubArticle(id = 1) {
+    async getSubArticle(id = 1) {
       this.isLoading = true;
-      fetch(`${this.apiUrl}sub-article/${id}`, {
+      await fetch(`${this.apiUrl}sub-article/${id}`, {
         method: "GET",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -946,20 +953,21 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.content = data.data;
-          // if (!data.status) {
-          //   this.showFlash = true;
-          //   localStorage.setItem('message', data.message);
-          //   localStorage.setItem('showFlash', true);
-          // }
-          // else {
-          //   this.showFlash = false;
-          // }
+          if (!data.status) {
+            this.content.status = false;
+            // localStorage.setItem('message', data.message);
+            // localStorage.setItem('showFlash', true);
+          }
+          else {
+            this.content = data.data;
+            this.content.status = true;
+          }
+          this.isLoading = false;
         })
         .catch(error => {
           console.log(error);
+          this.isLoading = false;
         })
-      this.isLoadingArticle = false;
     },
 
     searchArticle(keyword) {

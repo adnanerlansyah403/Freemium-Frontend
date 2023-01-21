@@ -89,12 +89,8 @@
                                 </div>
                                 <template x-if="detailArticle?.subarticles.length > 0">
                                     <div class="flex items-center gap-4">
-                                        {{-- <p class="text-base">
-                                            <span>1 / </span>
-                                            <b>1</b>
-                                        </p> --}}
                                         <div class="flex items-center gap-2">
-                                            <span x-text="content ? detailArticle?.subarticles?.findIndex(x => x.id == content?.id) + 1 + '/' + detailArticle?.subarticles?.length : ''"></span>
+                                            <span x-text="content ? detailArticle?.subarticles?.findIndex(x => x.id == content?.id) + 1 + ' of ' + detailArticle?.subarticles?.length + ' sub-article': ''"></span>
                                             <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id" x-on:click="
                                                                         if(content){
                                                                             id = content.id;
@@ -102,12 +98,6 @@
                                                                             if(id != 0){
                                                                                 id = detailArticle?.subarticles?.[id - 1]?.id;
                                                                                 getSubArticle(id);
-                                                                            }
-                                                                            if(showFlash){
-                                                                                document.getElementById('alert').classList.remove('hidden');
-                                                                            }
-                                                                            else{
-                                                                                document.getElementById('alert').classList.add('hidden');
                                                                             }
                                                                             back = true;
                                                                         }
@@ -121,18 +111,13 @@
                                                                             id = content.id;
                                                                             id = detailArticle?.subarticles?.findIndex(x => x.id == id);
                                                                             id = detailArticle?.subarticles?.[id + 1]?.id;
+
                                                                             getSubArticle(id);
                                                                         }
                                                                         else{
                                                                             id = detailArticle?.subarticles?.[0]?.id;
                                                                             getSubArticle(id);
                                                                         };
-                                                                        if(showFlash){
-                                                                            document.getElementById('alert').classList.remove('hidden');
-                                                                        }
-                                                                        else{
-                                                                            document.getElementById('alert').classList.add('hidden');
-                                                                        }
                                                                         back = true;
                                                                         " title="NEXT"
                                                 class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
@@ -244,7 +229,7 @@
                                         </template>
                                     </div>
         
-                                    <p x-ref="statusUser" id="alert" class="hidden w-full p-3 mt-5 mb-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
+                                    <p x-ref="statusUser" x-show="content && !content.status" id="alert" class="w-full p-3 mt-5 mb-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
                                         You have to 
                                         <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
                                         to Access this
@@ -257,8 +242,7 @@
                                             <template x-for="(item, index) in detailArticle?.subarticles">
                                                 <li x-show="item.type != type" @click="
                                                     getSubArticle(item.id); 
-                                                    if(item.type == 'free') {back = true;} 
-                                                    if(data_user?.subscribe_status != 1 && item.type != 'free') { $refs.statusUser.classList.remove('hidden'); } else { $refs.statusUser.classList.add('hidden'); }
+                                                    back = true;
                                                     if(showFlash){flash();}"
                                                     :class="{
                                                         'border-primary text-black': item.type == 'paid',
@@ -311,6 +295,7 @@
                                     </li>
                                 </ul>
                             </template>
+
 
                         </div>
 
