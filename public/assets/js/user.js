@@ -108,6 +108,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     checkRole() {
+      this.isLoading = true;
       fetch(this.apiUrl + 'me', {
         method: "GET",
         headers: {
@@ -120,6 +121,29 @@ document.addEventListener('alpine:init', () => {
           this.data_user = user.data
           if (this.data_user.role != 1) {
             return window.location.replace(this.baseUrl + 'article');
+          }
+          if (this.data_user.role == 1) {
+            this.isLoading = false;
+          }
+        });
+    },
+    checkRoleUser() {
+      this.isLoading = true;
+      fetch(this.apiUrl + 'me', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        },
+      })
+        .then(async response => {
+          user = await response.json();
+          this.data_user = user.data
+          if (this.data_user.role != 2) {
+            return window.history.back()
+          }
+          if (this.data_user.role == 2) {
+            this.isLoading = false;
           }
         });
     },

@@ -6,9 +6,7 @@
 
 <section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()" >
     <div x-init="fetchMe()"></div>
-    <div x-data="admin">
-        <div x-init="checkIsAdmin()"></div>
-    </div>
+    <div x-init="checkRoleUser()"></div>
     <template x-if="isLogedIn && data_user.role == 2">
         <script>
             document.title = 'Create Article - Freemium App';
@@ -50,79 +48,79 @@
         </style>
         <div class="container mx-auto flex items-center dark:text-white" x-data="article">
             <div class="col col-12">
-
-                <div class="flex flex-wrap lg:flex-nowrap">
-                    <div class="mb-5 col-12 lg:col-6">
-                        <label for="text" class="text-md">Title</label>
-                        <input id="title"  type="text" placeholder="Your text..."
-                            class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
-                            <template x-if="status_err.title">
-                                <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                    <span class="span-danger" x-text="status_err.title[0]">Validasi Error</span>
-                                </div>
-                            </template>
-                    </div>
-
-                    <div class="mb-5 col-12 lg:col lg:col-6" x-data="articles">
-                        <div x-init="getCategories()"></div>
-                        <label for="text" class="text-md">Category</label>
-                        <select name="category_id" id="" class="categories px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white  dark:bg-slate-secondary mt-4" >
-                            <option>--Choosen Category--</option>
-                            <template x-for="category in categoriesArticle">
-                                <option x-bind:value="category.id" x-text="category.name">HTML</option>
-                            </template>
-
-                        </select>
-                    </div>
-                </div>
-
-                <div class="mb-5">
-                    <label for="text" class="text-md">Thumbnail</label>
-                    <input id="thumbnail" type="file" name="thumbnail" placeholder="Your thumbnail..."
-                        hidden
-                        x-ref="file"
-                        @change="
-                            if ($refs.file) {
-                                $refs.iconimage.style.display = 'none';
-                                var reader = new FileReader();
-                                reader.readAsDataURL($refs.file.files[0]);
-                                reader.onload = function (e) {
-                                    $refs.image.src = e.target.result;
-                                    $refs.image.alt = $refs.file.name;
-                                    $refs.filename.classList.add('active');
-                                    $refs.filename.innerText = $refs.file.files[0].name;
-                                    $refs.removefile.classList.add('active')
-                                }
-                            }
-                        ">
-                    <span
-                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full rounded-primary bg-white border border-primary dark:bg-slate-secondary dark:border-white mt-4 overflow-y-hidden"
-                        @click="
-                            $refs.file.click();
-                        "
-                    >
-                        <img src=""
-                        x-ref="image" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                        <i
-                            data-feather="image"
-                            class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
-                            x-ref="iconimage"
-                        >
-                        </i>
-                        <p
-                            class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
-                            x-ref="filename"
-                        >
-                        </p>
-                    </span>
-                    <template x-if="status_err.thumbnail">
-                        <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err.thumbnail[0]">Validasi Error</span>
+                <template x-if="!isLoading">
+                    <div class="flex flex-wrap lg:flex-nowrap">
+                        <div class="mb-5 col-12 lg:col-6">
+                            <label for="text" class="text-md">Title</label>
+                            <input id="title"  type="text" placeholder="Your text..."
+                                class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
+                                <template x-if="status_err.title">
+                                    <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                        <span class="span-danger" x-text="status_err.title[0]">Validasi Error</span>
+                                    </div>
+                                </template>
                         </div>
-                    </template>
-                </div>
+    
+                        <div class="mb-5 col-12 lg:col lg:col-6" x-data="articles">
+                            <div x-init="getCategories()"></div>
+                            <label for="text" class="text-md">Category</label>
+                            <select name="category_id" id="" class="categories px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white  dark:bg-slate-secondary mt-4" >
+                                <option>--Choosen Category--</option>
+                                <template x-for="category in categoriesArticle">
+                                    <option x-bind:value="category.id" x-text="category.name">HTML</option>
+                                </template>
+    
+                            </select>
+                        </div>
+                    </div>
+                </template>
+                    <div class="mb-5">
+                        <label for="text" class="text-md">Thumbnail</label>
+                        <input id="thumbnail" type="file" name="thumbnail" placeholder="Your thumbnail..."
+                            hidden
+                            x-ref="file"
+                            @change="
+                                if ($refs.file) {
+                                    $refs.iconimage.style.display = 'none';
+                                    var reader = new FileReader();
+                                    reader.readAsDataURL($refs.file.files[0]);
+                                    reader.onload = function (e) {
+                                        $refs.image.src = e.target.result;
+                                        $refs.image.alt = $refs.file.name;
+                                        $refs.filename.classList.add('active');
+                                        $refs.filename.innerText = $refs.file.files[0].name;
+                                        $refs.removefile.classList.add('active')
+                                    }
+                                }
+                            ">
+                        <span
+                            class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full rounded-primary bg-white border border-primary dark:bg-slate-secondary dark:border-white mt-4 overflow-y-hidden"
+                            @click="
+                                $refs.file.click();
+                            "
+                        >
+                            <img src=""
+                            x-ref="image" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                            <i
+                                data-feather="image"
+                                class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
+                                x-ref="iconimage"
+                            >
+                            </i>
+                            <p
+                                class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
+                                x-ref="filename"
+                            >
+                            </p>
+                        </span>
+                        <template x-if="status_err.thumbnail">
+                            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                <span class="span-danger" x-text="status_err.thumbnail[0]">Validasi Error</span>
+                            </div>
+                        </template>
+                    </div>
 
                 <div class="mb-5 col-12">
                     <label for="text" class="text-md">Content</label><br>

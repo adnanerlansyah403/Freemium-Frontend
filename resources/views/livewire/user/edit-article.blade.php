@@ -2,9 +2,7 @@
 
 <section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()">
     <div x-init="fetchMe()"></div>
-    <div x-data="admin">
-        <div x-init="checkIsAdmin()"></div>
-    </div>
+    <div x-init="checkRoleUser()"></div>
     <template x-if="isLogedIn && data_user.role == 2">
         <script>
             document.title = 'Edit Article - Freemium App';

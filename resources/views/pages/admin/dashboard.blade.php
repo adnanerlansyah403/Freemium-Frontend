@@ -21,29 +21,35 @@
     <div x-show="showFlash">
         <x-alert />
     </div>
-    
+    <template x-if="isLoading">
+        <div class="w-full col-12 flex items-center justify-center mt-10">
+            <x-loading-page />
+        </div>
+    </template>
     <div>
 
 
         @include("layouts.partials.user.dashboard")
 
         <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9">
-
-            <div class="w-full lg:col-3">
-                @include("pages.admin.layouts.partials.sidebar")
-            </div>
+            <template x-if="!isLoading">
+                <div class="w-full lg:col-3">
+                    @include("pages.admin.layouts.partials.sidebar")
+                </div>
+            </template>
 
             <div class="w-full lg:col-9">
-                <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
-                    <i class="span font-bold dark:text-white" data-feather="activity"></i>
-                    <p>
-                        <span class="span dark:text-white">Dashboard</span>
-                        Admin
-                    </p>
-                </h2>
+                <template x-if="isLoading">
+                    <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
+                        <i class="span font-bold dark:text-white" data-feather="activity"></i>
+                        <p>
+                            <span class="span dark:text-white">Dashboard</span>
+                            Admin
+                        </p>
+                    </h2>
 
                 {{-- List Report --}}
-                <template x-if="isLoading">
+                
                     <div class="w-full col-12 flex items-center justify-center mt-10">
                         <x-loading />
                     </div>
@@ -120,6 +126,7 @@
 
 
     </div>
+
 </section>
 
 <script x-data="admin"></script>
