@@ -26,7 +26,7 @@
                 {{ $slot }}
             </ul>
             <div class="flex items-center justify-center" @click="modalActive = false;">
-                <button class="px-4 py-2 my-2 border border-primary dark:border-white hover:text-opacity-50 transition duration-20 
+                <button class="px-4 py-2 my-2 border border-primary dark:border-white hover:text-opacity-50 dark:hover:bg-slate-third dark:hover:text-white transition duration-20 
                 ease-in-out">
                     Close
                 </button>
