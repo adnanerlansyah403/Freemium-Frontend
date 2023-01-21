@@ -28,7 +28,7 @@
                         <b title="Write" class="-translate-y-1 lg:translate-y-0">
                             <i data-feather="edit"></i>
                         </b>
-                        <span class="hidden">Write</span>
+                        <span class="hidden lg:block">Write</span>
                         <!-- Feather Icons Scripts -->
                         <script>
                             feather.replace()
