@@ -234,14 +234,18 @@
                     <div class="mb-5 col-12">
                         <div class="flex justify-between">
                             <label for="sub_title" class="text-md">Title</label>
-                            <p class="flex items-center gap-2 mb-4">
-                                <b>Created At : </b>
-                                <span x-show="EditArticle?.subarticles?.[editSub]?.created_at" x-text="convertDate(EditArticle?.subarticles?.[editSub]?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
-                                setTimeout(function() {
-                                    $refs.dateSubArticle.style.display = 'block';
-                                }, 500)
-                            " x-ref="dateSubArticle"></span>
-                            </p>
+
+                            <template x-if="EditArticle?.subarticles?.[editSub]?.created_at != undefined || EditArticle?.subarticles?.[editSub]?.created_at != null">
+                                <p class="flex items-center gap-2 mb-4">
+                                    <b>Created At : </b>
+                                    <span x-show="EditArticle?.subarticles?.[editSub]?.created_at" x-text="convertDate(EditArticle?.subarticles?.[editSub]?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
+                                    setTimeout(function() {
+                                        $refs.dateSubArticle.style.display = 'block';
+                                    }, 500)
+                                " x-ref="dateSubArticle"></span>
+                                </p>
+                            </template>
+
                         </div>
                         <input x-model="EditArticle.subarticles[editSub].title" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
