@@ -14,6 +14,12 @@
 @section("content")
 
 <section class="pt-[140px] pb-[100px]">
+    <div x-data="user">
+        <div x-init="flash()"></div>
+        <div x-show="showFlash">
+            <x-alert />
+        </div>
+    </div>
     <h1 class="font-iceberg text-lg text-center text-primary mb-16">ME</h1>
 
     <div class="container mx-auto mb-9">

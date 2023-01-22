@@ -153,9 +153,6 @@ document.addEventListener('alpine:init', () => {
     },
 
     updateMe() {
-
-      this.isLoading = true;
-
       let photoProfile = document.getElementById('photo').files[0];
 
       if (photoProfile == undefined) {
@@ -199,7 +196,6 @@ document.addEventListener('alpine:init', () => {
           localStorage.setItem('message', user.message);
           // this.typeStatus = true;
           window.location.replace(this.baseUrl + 'profile');
-          this.isLoading = false;
         })
     },
 
@@ -784,6 +780,8 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           data = await response.json();
           if (data.status) {
+            localStorage.setItem('showFlash', true)
+            localStorage.setItem('message', data.message);
             window.location.replace(`${this.baseUrl}profile`);
           }
         })
@@ -932,7 +930,7 @@ document.addEventListener('alpine:init', () => {
           if (data.status) {
             this.detailArticle = data.data;
           }
-          else{
+          else {
             console.log(data.message);
           }
           this.isLoadingArticle = false;
