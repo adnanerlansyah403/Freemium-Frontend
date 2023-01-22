@@ -28,7 +28,6 @@
         }, 600)
     "style="display: none;" x-ref="wrapperEditArticle">
 
-        <div x-init="flash()"></div>
         <div x-show="showFlash">
             <x-alert />
         </div>
@@ -138,8 +137,11 @@
                 </div>
 
                 <div class="flex items-center justify-center my-10">
-                    <p x-show="isLoading" class="text-green-500">Loading...</p>
-                    <button @click.prevent="updateArticle()"
+                    <button @click.prevent="
+                        test = await updateArticle();
+                        showFlash = true;
+                        test ? flash() : '';
+                    "
                         class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
                     </button>
@@ -335,7 +337,6 @@
                 </div>
 
                 <div class="flex items-center justify-center my-10">
-                    <p x-show="isLoading" class="text-green-500">Loading...</p>
                     <button @click.prevent="updateSub(editSub)"
                         class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
