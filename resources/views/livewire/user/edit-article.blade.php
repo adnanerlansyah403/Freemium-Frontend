@@ -29,6 +29,15 @@
                 <x-loading-page />
             </div>
         </template>
+
+        <template x-if="showFlash">
+
+            <x-alert />
+        </template>
+
+        <div x-show="showFlash">
+        </div>
+
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 
             <form action="" class="col col-12">
@@ -195,7 +204,7 @@
                                                     <i data-feather="trash-2" class="text-sm"></i>
                                                 </button>
                                                 <script>
-                                                    feather.replace()
+                                                    feather?.replace()
                                                 </script>
                                             </div>
                                         </span>
@@ -210,7 +219,7 @@
                                         {{-- <span x-text="editSub"></span> --}}
                                         <!-- Feather Icons Scripts -->
                                         <script>
-                                            feather.replace()
+                                            feather?.replace()
                                         </script>
                                     </span>
                                 </div>

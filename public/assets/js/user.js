@@ -29,6 +29,7 @@ document.addEventListener('alpine:init', () => {
     categories: [],
 
     flash() {
+      console.log(localStorage.getItem("message"));
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
@@ -43,6 +44,7 @@ document.addEventListener('alpine:init', () => {
           localStorage.removeItem("message")
           // localStorage.removeItem("typeStatus")
           this.showFlash = false;
+          console.log(this.showFlash);
         }, 2000);
       }
     },
@@ -589,14 +591,14 @@ document.addEventListener('alpine:init', () => {
           data = await response.json();
 
           if (!data.status) {
-            this.showFlash = true;
             this.status_err[0] = data.message;
           }
           else {
             this.status_err[0] = null;
             localStorage.setItem('message', data.message);
             localStorage.setItem('showFlash', true);
-            this.flash()
+            this.showFlash = true;
+            this.flash();
           }
           this.isLoading = false;
         }).catch(error => {
@@ -648,11 +650,11 @@ document.addEventListener('alpine:init', () => {
             this.status_err[1] = sub.message;
           }
           else {
+            this.showFlash = false;
             editSub.id = sub.data.id;
             this.status_err[1] = null;
             localStorage.setItem('message', sub.message);
             localStorage.setItem('showFlash', true);
-            this.flash()
           }
           this.isLoading = false;
         })
