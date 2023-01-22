@@ -32,7 +32,7 @@
     
                         <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                             
-                            <h2 class="text-md text-[#3A3440] dark:text-white font-bold border-b border-gray-third dark:border-gray-secondary mb-4 pb-2" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
+                            <h2 class="text-md text-[#3A3440] dark:text-white font-bold border-b border-gray-third dark:border-gray-secondary mb-5 pb-2" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
                             </h2>
     
                             <div class="flex items-start flex-wrap gap-4 md:gap-0 justify-between">
@@ -82,7 +82,7 @@
                                 x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between mt-12' : 'justify-end mt-6'">
                                 <div class="flex content-center flex-wrap gap-3" x-bind:class="detailArticle?.tags.length > 0 ? '' : 'hidden'">
                                     <template x-for="(item, index) in detailArticle?.tags">
-                                        <a class="px-3 py-2 bg-primary text-white dark:bg-slate-secondary pointer-events-none rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                        <a class="px-3 py-2 bg-primary text-white dark:bg-slate-third pointer-events-none rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                             x-text="item.category.name"></a>
                                     </template>
                             
