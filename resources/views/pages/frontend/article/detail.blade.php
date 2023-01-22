@@ -91,35 +91,29 @@
                                     <div class="flex items-center gap-4">
                                         <div class="flex items-center gap-2">
                                             <span x-text="content ? detailArticle?.subarticles?.findIndex(x => x.id == content?.id) + 1 + ' of ' + detailArticle?.subarticles?.length + ' sub-article': ''"></span>
-                                            <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id" x-on:click="
-                                                                        if(content){
-                                                                            id = content.id;
-                                                                            id = detailArticle?.subarticles?.findIndex(x => x.id == id);
-                                                                            if(id != 0){
-                                                                                id = detailArticle?.subarticles?.[id - 1]?.id;
-                                                                                getSubArticle(id);
-                                                                            }
-                                                                            back = true;
-                                                                        }
-                                                                    " title="PREV"
+                                            <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id" 
+                                                x-on:click="
+                                                    id = content.id;
+                                                    id = detailArticle?.subarticles?.findIndex(x => x.id == id);
+                                                    if(id != 0){
+                                                        id = detailArticle?.subarticles?.[id - 1]?.id;
+                                                        getSubArticle(id);
+                                                    }
+                                                    back = true;
+                                                                        
+                                                " title="PREV"
                                                 class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                                 <i data-feather="arrow-left" class="w-4 h-4"></i>
                                             </button>
-                                            <button x-show="content?.id != detailArticle?.subarticles?.[detailArticle?.subarticles?.length - 1]?.id"
+                                            <button x-show="content && content?.id != detailArticle?.subarticles?.[detailArticle?.subarticles?.length - 1]?.id"
                                                 x-on:click="
-                                                                        if(content){
-                                                                            id = content.id;
-                                                                            id = detailArticle?.subarticles?.findIndex(x => x.id == id);
-                                                                            id = detailArticle?.subarticles?.[id + 1]?.id;
+                                                    id = content.id;
+                                                    id = detailArticle?.subarticles?.findIndex(x => x.id == id);
+                                                    id = detailArticle?.subarticles?.[id + 1]?.id;
 
-                                                                            getSubArticle(id);
-                                                                            back = true;
-                                                                        }
-                                                                        else{
-                                                                            id = detailArticle?.subarticles?.[0]?.id;
-                                                                            getSubArticle(id);
-                                                                        };
-                                                                        " title="NEXT"
+                                                    getSubArticle(id);
+                                                    back = true;
+                                                " title="NEXT"
                                                 class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                                 <i data-feather="arrow-right" class="w-4 h-4"></i>
                                             </button>
