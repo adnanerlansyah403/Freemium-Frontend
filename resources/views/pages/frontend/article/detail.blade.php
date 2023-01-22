@@ -32,7 +32,7 @@
     
                         <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                             
-                            <h2 class="text-md text-[#3A3440] dark:text-white font-bold border-b border-gray-third dark:border-gray-secondary mb-5 pb-2" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
+                            <h2 class="text-md text-[#3A3440] dark:text-white font-bold border border-gray-third rounded-primary dark:border-gray-secondary mb-5 p-2" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
                             </h2>
     
                             <div class="flex items-start flex-wrap gap-4 md:gap-0 justify-between">
