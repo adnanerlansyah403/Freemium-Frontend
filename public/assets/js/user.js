@@ -39,12 +39,10 @@ document.addEventListener('alpine:init', () => {
           // localStorage.removeItem("message")
           localStorage.removeItem("typeStatus")
         })
-        console.log(this.showFlash);
         setTimeout(function () {
           localStorage.removeItem("showFlash")
           localStorage.removeItem("message")
           // localStorage.removeItem("typeStatus")
-          this.message = null;
           this.showFlash = false;
           console.log(this.showFlash);
         }, 2000);
@@ -536,7 +534,7 @@ document.addEventListener('alpine:init', () => {
           .then(async (response) => {
             data = await response.json();
             if (data.message === 'Unauthorized') {
-              window.location.replace(this.baseUrl + 'login')
+      window.location.replace(this.baseUrl + 'login')
             }
             this.listMyArticle = data;
             this.isLoading = false;
@@ -601,7 +599,7 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('showFlash', true);
             // this.showFlash = true;
             // this.flash();
-            // window.location.reload();
+            window.location.reload();
           }
           this.isLoading = false;
         }).catch(error => {
@@ -755,7 +753,7 @@ document.addEventListener('alpine:init', () => {
 
           if (this.myTransactions[0] != null) {
             if (this.myTransactions[0].status == 1 && lastPath == '/details') {
-              window.location.replace(this.baseUrl + "profile");
+      window.location.replace(this.baseUrl + "profile");
             }
           }
 
@@ -1248,49 +1246,50 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.data_admin = data.data;
-
-          this.isLoading = false;
-          // if (data.status) {
-          //   this.showFlash = true;
-          //   this.typeStatus = true;
-          //   localStorage.setItem("typeStatus", true)
-          // }
+          
+          if (data.status) {
+            this.data_admin = data.data;
+            this.fetchChart();
+            // this.showFlash = true;
+            // this.typeStatus = true;
+            // localStorage.setItem("typeStatus", true)
+          }
           // else {
           //   localStorage.setItem('message', data.message);
           //   localStorage.setItem('showFlash', true);
           //   this.typeStatus = false;
           //   localStorage.setItem("typeStatus", false)
           // }
+          this.isLoading = false;
         })
     },
 
     fetchChart() {
       const barChart = document.getElementById('barChart');
       const lineChart = document.getElementById('lineChart');
+
       let user = this.data_admin.user_chart;
       let payment = this.data_admin.payment_chart;
 
-      // console.log('admin', this.data_admin);
-      // if(user == null || user.length == 0){
-      //   console.log('user', user);
-      //   user = [{year: '' + new Date().getFullYear(), count: 0}]
-      // }
+      if(user == null || user.length == 0){
+        user = [{year: '' + new Date().getFullYear(), count: 0}]
+      }
 
-      // if(payment == null || payment.length == 0){
-      //   console.log('payment', payment);
-      //   payment = [{year: '' + new Date().getFullYear(), count: 0}]
-      // }
+      if(payment == null || payment.length == 0){
+        payment = [{year: '' + new Date().getFullYear(), count: 0}]
+      }
 
-      this.years[0] = user?.[0] ? user[0].year : new Date().getFullYear();
+      this.years[0] = user[0] ? user[0].year : new Date().getFullYear();
       let endyear = new Date().getFullYear() - this.years[0];
 
       for (let i = 0; i < endyear; i++) {
         this.years.push(parseInt(this.years[i]) + 1);
       }
 
+      this.user_chart = [];
+      this.payment_chart = [];
       for (let i = 0; i < endyear + 1; i++) {
-        // console.log('test', this.user_chart, user[i], user[i].year == this.years[i]);
+
         if (user[i] && user[i].year == this.years[i]) {
           this.user_chart.push(user[i].count);
         }
@@ -1304,7 +1303,7 @@ document.addEventListener('alpine:init', () => {
         else {
           this.payment_chart.push(0);
         }
-
+        
       }
 
       // console.log(this.user_chart, this.payment_chart , user, payment);
@@ -1342,7 +1341,7 @@ document.addEventListener('alpine:init', () => {
           }
         },
       });
-
+        
       new Chart(lineChart, {
         type: 'line',
         data: {
@@ -1370,7 +1369,6 @@ document.addEventListener('alpine:init', () => {
           }
         },
       });
-
     },
 
     // ORDERS

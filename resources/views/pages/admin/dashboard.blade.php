@@ -15,7 +15,6 @@
 <section class="pt-[140px] pb-[100px]" x-data="admin" x-init="checkSession()" >
     <div x-init="checkRole();"></div>
     <div x-init="fetchAdminData()"></div>
-    <div x-show="fetchChart();"></div>
 
     <div x-init="flash()"></div>
     <div x-show="showFlash">
@@ -125,7 +124,6 @@
 
 </section>
 
-<script x-data="admin"></script>
 
 
 @endsection
