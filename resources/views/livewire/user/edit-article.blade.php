@@ -1,6 +1,6 @@
 {{-- @section("title", "Edit Article - Freemium App") --}}
 
-<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()">
+<section class="pt-[140px] pb-[100px]" x-data="user" x-init="checkSession()">
     <div x-init="fetchMe()"></div>
     <div x-init="checkRoleUser()"></div>
 

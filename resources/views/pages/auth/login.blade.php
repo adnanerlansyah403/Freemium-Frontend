@@ -14,7 +14,7 @@
 
 @section("content")
 
-<section class="pt-[60px] pb-[100px] dark:text-white" x-data="auth">
+<section class="pt-[140px] pb-[100px] dark:text-white" x-data="auth">
     <div x-init="checkAlreadyAuth()"></div>
     {{-- alert --}}
     <div x-init="flash()"></div>

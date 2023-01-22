@@ -19,7 +19,7 @@
     </template>
 </div>
 
-<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()">
+<section class="pt-[140px] pb-[100px]" x-data="user" x-init="checkSession()">
     <div x-init="checkRole()"></div>
     <template x-if="!isLoading">
         <div>

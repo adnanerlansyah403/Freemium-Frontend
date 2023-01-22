@@ -13,7 +13,7 @@
 
 @section("content")
 
-<section class="pt-[60px] pb-[100px] dark:text-white" x-data="auth" x-init="checkAlreadyAuth()"
+<section class="pt-[140px] pb-[100px] dark:text-white" x-data="auth" x-init="checkAlreadyAuth()"
 >
 
 <div x-show="isLoadingAuth" class="flex justify-center px-32 py-4">

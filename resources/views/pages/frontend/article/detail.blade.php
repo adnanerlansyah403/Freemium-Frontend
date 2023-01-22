@@ -13,7 +13,7 @@
 
 @section('content')
 
-    <section class="pt-[60px] pb-[100px] dark:text-white" x-data="user" >
+    <section class="pt-[140px] pb-[100px] dark:text-white" x-data="user" >
         <div x-init="checkSession()"></div>
         <div x-data="articles">
             <span x-init="getDetailArticle(window.location.href.split('/').pop())"></span>

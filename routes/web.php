@@ -31,7 +31,7 @@ use App\Http\Controllers\Admin\DashboardController;
 */
 
 Route::get('/', function () {
-    return view("pages.frontend.article.list");
+    return view("landing");
 })->name('homepage');
 
 Route::get('/login', function () {

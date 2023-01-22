@@ -4,7 +4,7 @@
 
 @section("content")
 
-<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()" >
+<section class="pt-[140px] pb-[100px]" x-data="user" x-init="checkSession()" >
     <div x-init="fetchMe()"></div>
     <div x-init="checkRoleUser()"></div>
     <template x-if="isLogedIn && data_user.role == 2">

@@ -29,7 +29,7 @@
     
 </style>
 
-<section class="lg:px-[12px] px-8 pt-[88px]" x-data="user">
+<section class="lg:px-[12px] px-8 pt-[140px]" x-data="user">
     {{-- alert --}}
     <div x-init="flash()"></div>
     <div x-show="showFlash">
@@ -190,11 +190,12 @@
                                             </div>
                                         </div>
                                         <div class="-translate-x-5">
-                                            <template x-if="item.author.photo != null || item.author.photo.length != 0">
-                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
-                                            </template>
-                                            <template x-if="item.author.photo == '' || item.author.photo == null ">
+                                            {{-- <span x-text="item.author.photo == 'null'"></span> --}}
+                                            <template x-if="item.author.photo == null">
                                                 <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+'img/user1.png'" alt="">
+                                            </template>
+                                            <template x-if="item.author.photo != null">
+                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
                                             </template>
                                         </div>
                                     </div>

@@ -1,4 +1,4 @@
-<header id="header" class="group relative shadow-lg py-2 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
+<header id="header" class="group fixed w-full z-[101] shadow-lg py-1 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
 <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
     
     <figure>
@@ -8,13 +8,94 @@
         </a>
     </figure>
 
+    @if($currentRoute == 'homepage')
+        <ul class="hidden lg:flex items-center gap-10">
+            <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <a href="#header">
+                    <span class="span">H</span>ome
+                </a>
+            </li>
+            <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <a href="{{ route('article.list') }}">
+                    <span class="span">A</span>rticle
+                </a>
+            </li>
+            <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <a href="#about">
+                    <span class="span">A</span>bout
+                </a>
+            </li>
+            <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <a href="#faq">
+                    <span class="span">F</span>aq
+                </a>
+            </li>
+            <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <a href="#contact">
+                    <span class="span">C</span>ontact
+                </a>
+            </li>
+        </ul>
+    @endif
+
     <div class="flex items-center gap-2" x-data="auth">
         <div x-init="checkSession()"></div>
 
         <template x-if="!isLogedIn">
-            <div>
+            <div class="relative flex items-center gap-2" x-data="{
+                menuBar: false
+            }">
                 <a href="{{ route('login') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
                 <a href="{{ route('register') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
+                <button class="block lg:hidden translate-y-[3px] hover:text-opacity-80 transition duration-200 ease-in-out"
+                @click="menuBar = !menuBar"
+                x-on:mouseover="menuBar = true"
+                >
+                    <ion-icon name="menu-outline" class="text-md"></ion-icon>
+                </button>
+                <ul 
+                    class="absolute top-[140%] right-0 rounded-primary w-[200px] bg-white dark:bg-slate-secondary text-black shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden z-[100]"
+                x-show="menuBar"
+                x-on:mouseleave="menuBar = false"
+                x-transition
+                >
+                    <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
+                        <a href="#header" class="flex items-center gap-2">
+                            <span>Home</span>
+                        </a>
+                        <!-- Feather Icons Scripts -->
+                        <script>
+                            feather.replace()
+                        </script>
+                    </li>
+                    <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
+                        <a href="{{ route("article.create") }}" class="flex items-center gap-2">
+                            <span>Article</span>
+                        </a>
+                        <!-- Feather Icons Scripts -->
+                        <script>
+                            feather.replace()
+                        </script>
+                    </li>
+                    <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
+                        <a href="#faq" class="flex items-center gap-2">
+                            <span>Faq</span>
+                        </a>
+                        <!-- Feather Icons Scripts -->
+                        <script>
+                            feather.replace()
+                        </script>
+                    </li>
+                    <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
+                        <a href="#contact" class="flex items-center gap-2">
+                            <span>Contact</span>
+                        </a>
+                        <!-- Feather Icons Scripts -->
+                        <script>
+                            feather.replace()
+                        </script>
+                    </li>
+                </ul>
             </div>
         </template>
 
@@ -77,6 +158,16 @@
                             </li>
                         </template>
                         <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
+                            <a href="{{ route('admin.dashboard.index') }}" class="flex items-center gap-2">
+                                <ion-icon name="documents-outline" class="text-[25px]"></ion-icon>
+                                <span>Articles</span>
+                            </a>
+                            <!-- Feather Icons Scripts -->
+                            <script>
+                                feather.replace()
+                            </script>
+                        </li>
+                        <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
                             <a href="{{ route('profile.index') }}" class="flex items-center gap-2">
                                 <i data-feather="user"></i>
                                 <span>My Profile</span>
@@ -122,7 +213,7 @@
             </div>
         </template>
 
-        <div x-data="helpers" class="absolute right-5 top-[125%] xl:-right-1/3 xl:top-[24px] xl:group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
+        <div x-data="helpers" class="absolute right-5 top-[125%] xl:-right-1/3 xl:top-[23px] xl:group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
             <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
                 <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
             </button>

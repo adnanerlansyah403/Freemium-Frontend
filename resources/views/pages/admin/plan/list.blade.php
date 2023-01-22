@@ -12,7 +12,7 @@
     </template>
 </div>
 
-<section class="pt-[60px] pb-[100px]" x-data="user" x-init="checkSession()">
+<section class="pt-[140px] pb-[100px]" x-data="user" x-init="checkSession()">
     <div x-init="checkRole()"></div>
     <div x-init="flash()"></div>
     <div x-init="fetchListPlan()"></div>

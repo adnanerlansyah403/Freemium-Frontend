@@ -45,6 +45,7 @@ module.exports = {
       neucha: ['Neucha', 'cursive'],
       comic: ['Comic Neue', 'cursive'],
       quickSand: ['Quicksand', 'sans-serif'],
+      merrieweather: ['Merriweather', 'serif'],
     },
     extend: {
       animation: {
