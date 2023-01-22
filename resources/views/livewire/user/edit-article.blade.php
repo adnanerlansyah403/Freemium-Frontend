@@ -30,12 +30,9 @@
             </div>
         </template>
 
-        <template x-if="showFlash">
-
-            <x-alert />
-        </template>
-
+        <div x-init="flash()"></div>
         <div x-show="showFlash">
+            <x-alert />
         </div>
 
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
