@@ -58,11 +58,11 @@
                                         <p x-text="convertDate(content ? content?.created_at : detailArticle?.created_at)">
                                         </p>
                                     </span>
-                                    <span class="flex items-center gap-1">
+                                    <span class="flex items-center gap-1 translate-y-[1px]">
                                         <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
                                         <p>
                                             <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span>
-                                            <span x-text="content ? content?.total_views + ' views' : detailArticle?.total_views_sum + ' views'">
+                                            <span x-text="content ? content?.total_views : detailArticle?.total_views_sum">
                                             </span>
                                         </p>
                                     </span>
@@ -128,7 +128,7 @@
                     <div class="col md:mx-0 col-12 lg:col-4 -order-1 lg:order-2">
     
                         <div
-                            class="lg:sticky lg:top-4 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
+                            class="lg:sticky lg:top-28 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
 
                             <ul class="relative left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 dark:shadow-[0px_0px_4px_#fff] w-max p-2 rounded-lg">
 
@@ -241,7 +241,7 @@
                                                         'border-primary text-black': item.type == 'paid',
                                                         'bg-white border-slate-primary text-slate-primary': content?.id == item.id
                                                     }"
-                                                    class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none dark:text-slate-fourth hover:text-white dark:hover:text-white hover:translate-x-1 transition duration-200 ease-in-out flex justify-between items-center">
+                                                    class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none dark:text-slate-fourth hover:text-white dark:hover:text-white hover:translate-x-2 transition duration-200 ease-in-out flex justify-between items-center">
                                                     <a class="text-base lg:text-md font-iceberg">
                                                         <span x-text="substring(item?.title)"></span>
                                                         {{-- <b x-show="data_user?.subscribe_status != 1 && item.type == 'paid'" x-text="'(' + item.type.toUpperCase() + ')'"></b> --}}
