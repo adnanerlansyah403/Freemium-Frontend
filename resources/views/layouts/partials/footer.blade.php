@@ -2,7 +2,7 @@
 <div class="container mx-auto flex flex-col items-center">
 
     <h1 class="text-[18px] lg:text-md text-center">
-        <span class="span dark:text-slate-third font-iceberg">@Freemium</span> 
+        <span class="span dark:text-slate-third font-iceberg text-[26px]">@Freemium</span> 
         2022. All Right Copyright Reserved</h1>
 
     <p class="my-6 font-iceberg text-[18px] lg:text-md text-center">Need a Help? Email: freemium.app@gmail.com</p>

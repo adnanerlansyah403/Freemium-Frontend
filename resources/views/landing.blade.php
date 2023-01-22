@@ -109,25 +109,22 @@
                         </div>
                     </div>
 
-                    <div class="container px-3 mx-auto mt-6 flex items-start gap-10">
+                    <div class="container px-3 mx-auto mt-16 flex items-start gap-10">
 
                         <figure class="hidden lg:block col-12 lg:col-6 h-full">
                             <img src="{{ asset("assets/images/aboutfreemium.svg") }}" class="w-full h-full object-cover" alt="">
                         </figure>
 
                         <div class="relative col-12 lg:col-6 h-full">
-                            <h1 class="font-comic text-[32px] text-center lg:text-left font-bold">
+                            <h1 class="font-comic leading-[.5rem] text-[28px] text-center lg:text-left font-bold">
                                 <span class="span">What's</span>
                                 We Build?
                             </h1>
-                            <p class="mt-6">
-                                <svg style="width:40px;height:40px" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M11 18V10H9.12L11.12 6H5.38L3 10.76V18M9 16H5V11.24L6.62 8H7.88L5.88 12H9M21 18V10H19.12L21.12 6H15.38L13 10.76V18M19 16H15V11.24L16.62 8H17.88L15.88 12H19Z" />
-                                </svg>
-                                <span class="block translate-x-1 font-poppins italic text-center">We provide services for content creators who have imaginative  thoughts and brilliant content / ideas that can be poured and shared with the general public so that they can benefit. at the same time granting access rights to several sub-articles created by content creators, so that they can get results from the content ideas they create.</span>
-                                <svg style="width:40px;height:40px; float: right" class="-translate-y-5" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M13 6V14H14.88L12.88 18H18.62L21 13.24V6M15 8H19V12.76L17.38 16H16.12L18.12 12H15M3 6V14H4.88L2.88 18H8.62L11 13.24V6M5 8H9V12.76L7.38 16H6.12L8.12 12H5Z" />
-                                </svg>
+                            <p class="block mt-10">
+                                <span class="block translate-x-1 font-poppins text-left">We provide services for content creators who have imaginative  thoughts and brilliant content / ideas that can be poured and shared with the general public so that they can benefit.</span>
+                            </p>
+                            <p class="block mt-4 text-left">
+                              <span>At the same time granting access rights to several sub-articles created by content creators, so that they can get results from the content ideas they create.</span>
                             </p>
                         </div>
 
@@ -146,7 +143,7 @@
                         </div>
                     </div>
                     
-                    <div class="container mx-auto">
+                    <div class="container px-3 mx-auto mt-16">
                         <ul class="flex flex-col">
                             <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
                               <h2
@@ -352,7 +349,7 @@
 
                     <div class="container px-3 mx-auto my-10">
                         <div class="col-12 flex flex-col items-center justify-center">
-                            <p class="flex items-center justify-center gap-2 text-[32px] font-neucha">
+                            <p class="flex items-center justify-center gap-2 text-[32px] lg:-translate-x-5 font-neucha">
                                 <ion-icon name="call-outline" class="text-lg span m-0 -translate-y-1"></ion-icon>
                                 <b class="tracking-widest"><span class="span">C</span>ontact Us</b>
                             </p>
