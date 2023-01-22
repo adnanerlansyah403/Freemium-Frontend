@@ -218,7 +218,7 @@
                                 :style="handleToggle()"
                               >
                                 <p class="p-3 text-gray-900">
-                                  Go to <a href="{{ route('transaction.create') }}">freemium.com/article</a> and click Get Unlimited Access.
+                                  Go to <a href="{{ route('article.list') }}" class="span font-medium">freemium.com/article</a> and click Get Unlimited Access.
                                   Choose your membership plan.
                                   Choose the payment method. You can transfer with Virtual Account.
                                   Upload your proof of payment or click Confirm Payment to become a member with Virtual Account.
