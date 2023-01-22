@@ -17,18 +17,16 @@
             document.title = 'Edit Article - Freemium App';
         </script>
     </template>
+    
     <div
     x-init="
         if(isLogedIn == true) {
             fetchEditArticle(window.location.href.split('/').pop())
         }
-    ">
-
-        <template x-if="isLoading">
-            <div class="flex justify-center px-32 py-4">
-                <x-loading-page />
-            </div>
-        </template>
+        setTimeout(function() {
+            $refs.wrapperEditArticle.style.display = 'block';
+        }, 600)
+    "style="display: none;" x-ref="wrapperEditArticle">
 
         <div x-init="flash()"></div>
         <div x-show="showFlash">
@@ -237,7 +235,7 @@
                     <div class="mb-5 col-12">
                         <div class="flex justify-between">
                             <label for="sub_title" class="text-md">Title</label>
-                            <class="flex items-center gap-2 mb-4"ex items-center gap-2">
+                            <p class="flex items-center gap-2 mb-4">
                                 <b>Created At : </b>
                                 <span x-show="EditArticle?.subarticles?.[editSub]?.created_at" x-text="convertDate(EditArticle?.subarticles?.[editSub]?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
                                 setTimeout(function() {
@@ -348,36 +346,44 @@
 
         </div>
 
+        {{-- INSTRUCTIONS --}}
+        
+        <x-modal-instruction>
+            <li class="flex items-start gap-2">
+                <b class="text-primary">1.</b>
+                <span>The title must longer than 10 character</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <b class="text-primary">2.</b>
+                <span>The article must have at least 1 category</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <b class="text-primary">3.</b>
+                <span>The article must have a thumbnail</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <b class="text-primary">4.</b>
+                <span>The thumbnail must be an image with size less than 1 MB</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <b class="text-primary">5.</b>
+                <span>The content length must be more than 100 character</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <b class="text-primary">6.</b>
+                <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
+            </li>
+        </x-modal-instruction>
+
     </div>
 
-    {{-- INSTRUCTIONS --}}
-    
-    <x-modal-instruction>
-        <li class="flex items-start gap-2">
-            <b class="text-primary">1.</b>
-            <span>The title must longer than 10 character</span>
-        </li>
-        <li class="flex items-start gap-2">
-            <b class="text-primary">2.</b>
-            <span>The article must have at least 1 category</span>
-        </li>
-        <li class="flex items-start gap-2">
-            <b class="text-primary">3.</b>
-            <span>The article must have a thumbnail</span>
-        </li>
-        <li class="flex items-start gap-2">
-            <b class="text-primary">4.</b>
-            <span>The thumbnail must be an image with size less than 1 MB</span>
-        </li>
-        <li class="flex items-start gap-2">
-            <b class="text-primary">5.</b>
-            <span>The content length must be more than 100 character</span>
-        </li>
-        <li class="flex items-start gap-2">
-            <b class="text-primary">6.</b>
-            <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
-        </li>
-    </x-modal-instruction>
+
+
+    <template x-if="isLoading">
+        <div class="flex justify-center px-32 py-4">
+            <x-loading-page />
+        </div>
+    </template>
 
 
     <script>
