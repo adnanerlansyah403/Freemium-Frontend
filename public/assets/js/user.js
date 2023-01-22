@@ -14,6 +14,7 @@ document.addEventListener('alpine:init', () => {
     data_user: [],
     showFlash: false,
     status_err: [],
+    category_err: [],
     typeStatus: true,
     isLoading: false,
     isLoadingMyArticle: false,
@@ -534,7 +535,7 @@ document.addEventListener('alpine:init', () => {
           .then(async (response) => {
             data = await response.json();
             if (data.message === 'Unauthorized') {
-      window.location.replace(this.baseUrl + 'login')
+              window.location.replace(this.baseUrl + 'login')
             }
             this.listMyArticle = data;
             this.isLoading = false;
@@ -753,7 +754,7 @@ document.addEventListener('alpine:init', () => {
 
           if (this.myTransactions[0] != null) {
             if (this.myTransactions[0].status == 1 && lastPath == '/details') {
-      window.location.replace(this.baseUrl + "profile");
+              window.location.replace(this.baseUrl + "profile");
             }
           }
 
@@ -1026,6 +1027,11 @@ document.addEventListener('alpine:init', () => {
         }
       }
       for (let i = 0; i < category.length; i++) {
+        if (category[i].value == '') {
+          this.category_err = { category: ['category cannot be empty!'] }
+        } else {
+          this.category_err = null;
+        }
         formData.append('category_id[]', category[i].value);
       }
       for (let i = 0; i < title_sub.length; i++) {
@@ -1047,13 +1053,15 @@ document.addEventListener('alpine:init', () => {
         this.showFlash = true;
         this.status_err = data.message;
         this.isLoadingArticle = false;
-        console.log(this.status_err)
       }
 
       if (data.status) {
         this.isLoadingArticle = false;
         localStorage.setItem('message', 'article successfully created!');
         localStorage.setItem('showFlash', true);
+      }
+      if (!this.category_err) {
+        this.isLoadingArticle = false;
         return window.location.replace(`${this.baseUrl}myarticle`)
       }
     },
@@ -1246,7 +1254,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          
+
           if (data.status) {
             this.data_admin = data.data;
             this.fetchChart();
@@ -1271,12 +1279,12 @@ document.addEventListener('alpine:init', () => {
       let user = this.data_admin.user_chart;
       let payment = this.data_admin.payment_chart;
 
-      if(user == null || user.length == 0){
-        user = [{year: '' + new Date().getFullYear(), count: 0}]
+      if (user == null || user.length == 0) {
+        user = [{ year: '' + new Date().getFullYear(), count: 0 }]
       }
 
-      if(payment == null || payment.length == 0){
-        payment = [{year: '' + new Date().getFullYear(), count: 0}]
+      if (payment == null || payment.length == 0) {
+        payment = [{ year: '' + new Date().getFullYear(), count: 0 }]
       }
 
       this.years[0] = user[0] ? user[0].year : new Date().getFullYear();
@@ -1303,7 +1311,7 @@ document.addEventListener('alpine:init', () => {
         else {
           this.payment_chart.push(0);
         }
-        
+
       }
 
       // console.log(this.user_chart, this.payment_chart , user, payment);
@@ -1341,7 +1349,7 @@ document.addEventListener('alpine:init', () => {
           }
         },
       });
-        
+
       new Chart(lineChart, {
         type: 'line',
         data: {
