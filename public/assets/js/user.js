@@ -819,6 +819,7 @@ document.addEventListener('alpine:init', () => {
     isLoading: false,
     itemArticle: 3,
     content: false,
+    fetchStatus: true,
     back: false,
     showFlash: false,
     message: '',
@@ -954,13 +955,14 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           if (!data.status) {
-            this.content.status = false;
+            this.fetchStatus = false;
+            console.log('test', this.fetchStatus);
             // localStorage.setItem('message', data.message);
             // localStorage.setItem('showFlash', true);
           }
           else {
             this.content = data.data;
-            this.content.status = true;
+            this.fetchStatus = true;
           }
           this.isLoading = false;
         })
