@@ -112,7 +112,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
                             $refs.file.click();
                         "
                     >
-                        <img src=""
+                        <img src="{{ asset('assets/images/icons/sun.svg') }}"
                         x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
                         <i
                             data-feather="image"
@@ -153,11 +153,11 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
     <script>
         feather.replace()
     </script>
-    
+
     <script>
 
         window.addEventListener("DOMContentLoaded", function() {
-            
+
             if (localStorage.theme === 'light') {
                 document.documentElement.classList.add('light')
                 document.documentElement.classList.remove('dark')
@@ -173,7 +173,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
             }
 
         });
-            
+
     </script>
 
 </body>
