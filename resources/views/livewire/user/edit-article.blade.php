@@ -28,10 +28,10 @@
         }, 600)
     "style="display: none;" x-ref="wrapperEditArticle">
 
-        <div x-init="flash()"></div>
-        <div x-show="showFlash">
-            <x-alert />
-        </div>
+    {{-- <div x-init="flash()"></div> --}}
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
 
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 

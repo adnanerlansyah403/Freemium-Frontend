@@ -35,16 +35,13 @@ document.addEventListener('alpine:init', () => {
         this.message = localStorage.getItem('message');
         window.addEventListener("beforeunload", function () {
           this.showFlash = true;
-          // localStorage.removeItem("showFlash")
-          // localStorage.removeItem("message")
           localStorage.removeItem("typeStatus")
-        })
-        setTimeout(function () {
-          localStorage.removeItem("showFlash")
-          localStorage.removeItem("message")
-          // localStorage.removeItem("typeStatus")
+        });
+        setTimeout(() => {
           this.showFlash = false;
-        }, 2000);
+          localStorage.removeItem("showFlash");
+          localStorage.removeItem("message");
+        }, 4000);
       }
     },
 
@@ -594,11 +591,15 @@ document.addEventListener('alpine:init', () => {
           }
           else {
             this.status_err[0] = null;
-            localStorage.setItem('message', data.message);
-            localStorage.setItem('showFlash', true);
-            // this.showFlash = true;
+            this.showFlash = true;
+            this.message = data.message;
+            console.log(this.showFlash)
+            console.log(this.message)
+            setTimeout(() => {
+              this.showFlash = false;
+            }, 4000);
             // this.flash();
-            window.location.reload();
+            // window.location.reload();
           }
           this.isLoading = false;
         }).catch(error => {
