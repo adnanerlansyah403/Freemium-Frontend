@@ -610,7 +610,7 @@ document.addEventListener('alpine:init', () => {
 
     addSub() {
       let id = 0;
-      let article_id = this.EditArticle.subarticles[0].article_id;
+      let article_id = this.EditArticle.id;
       let title = '';
       let type = '';
       let description = '';

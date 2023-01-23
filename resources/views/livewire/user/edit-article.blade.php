@@ -247,7 +247,7 @@
                             </template>
 
                         </div>
-                        <input x-model="EditArticle.subarticles[editSub].title" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
+                        <input x-bind:value="EditArticle?.subarticles?.[editSub]?.title" x-on:change="EditArticle.subarticles[editSub].title = $event.target.value" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
                         <template x-if="status_err?.[1]?.title">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -313,11 +313,11 @@
                     <span class="text-md">Choose Your Plan</span>
                     <div class="flex items-center gap-2 mt-2">
                         <label for="free" class="flex items-center gap-1">
-                            <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-model="EditArticle.subarticles[editSub].type">
+                            <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'free'" x-on:change="EditArticle.subarticles[editSub].type = $event.target.value">
                             <span class="text-base">Free</span>
                         </label>
                         <label for="paid" class="flex items-center gap-1">
-                            <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-model="EditArticle.subarticles[editSub].type">
+                            <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'paid'" x-on:change="EditArticle.subarticles[editSub].type = $event.target.value">
                             <span class="text-base">Member-Only</span>
                         </label>
                     </div>
