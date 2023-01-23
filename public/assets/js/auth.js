@@ -16,21 +16,18 @@ document.addEventListener('alpine:init', () => {
     data_user: [],
 
     flash() {
-      this.showFlash = false;
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
         window.addEventListener("beforeunload", function () {
-          localStorage.removeItem("showFlash")
-          localStorage.removeItem("message")
+          this.showFlash = true;
           localStorage.removeItem("typeStatus")
-        })
-        setTimeout(function () {
-          localStorage.removeItem("showFlash")
-          localStorage.removeItem("message")
-          localStorage.removeItem("typeStatus")
+        });
+        setTimeout(() => {
           this.showFlash = false;
-        }, 2000);
+          localStorage.removeItem("showFlash");
+          localStorage.removeItem("message");
+        }, 4000);
       }
     },
 

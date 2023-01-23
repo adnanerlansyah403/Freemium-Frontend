@@ -4,13 +4,13 @@
     #alert {
         opacity: 0;
         top: -5%;
-        transition: .2s ease-in-out !important;
+        transition: .2s ease-in-out;
     }
 
     #alert.active {
         opacity: 1;
         top: 10%;
-        transition: .2s ease-in-out !important;
+        transition: .2s ease-in-out;
     }
 
 </style>
@@ -53,7 +53,7 @@
 </div> --}}
 
 
-<div id="alert" class="fixed flex gap-4 top-20 left-1/2 -translate-x-1/2 p-4 rounded-lg max-w-[350px] dark:alert-dark w-full transition duration-200 ease-in-out z-50" role="alert" x-data="{ showFlash: true }" :class="{
+<div id="alert" class="fixed flex gap-4 left-1/2 -translate-x-1/2 p-4 rounded-lg max-w-[350px] dark:alert-dark w-full transition duration-200 ease-in-out z-[101]" role="alert" x-data="{ showFlash: true }" :class="{
     'active' : showFlash, 
     '' : !showFlash || showFlash == false,
     'alert-success' : localStorage.getItem('typeStatus') == 'true',
