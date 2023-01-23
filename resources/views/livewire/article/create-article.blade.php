@@ -224,7 +224,38 @@
             </li>
         </x-modal-instruction>
 
+        <div id="btn-back-to-top" class="absolute lg:fixed right-[70px] bottom-[8.3%] sm:bottom-[11.35%] text-center">
+            <button type="button"
+                class="group hover:shadow-[0_0_10px_4px_#7C000B] dark:hover:shadow-[0_0_10px_4px_#fff] p-2 flex items-center justify-center rounded-full bg-primary dark:bg-slate-secondary text-white  transition duration-200 ease-in-out"
+                title="Instructions">
+                <ion-icon name="arrow-up-outline"" title="Instructions"
+                    class="text-[23px] lg:text-md transition duration-200 ease-in-out"></ion-icon>
+            </button>
+        </div>
+
         <script>
+            // Get the button
+            let mybutton = document.getElementById('btn-back-to-top');
+            
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () {
+            scrollFunction();
+            };
+            
+            function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = 'block';
+            } else {
+            mybutton.style.display = 'none';
+            }
+            }
+            // When the user clicks on the button, scroll to the top of the document
+            mybutton.addEventListener('click', backToTop);
+            
+            function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            }
         document.addEventListener('alpine:init', () => {
             Alpine.store('accordion', {
                 tab: 0
