@@ -41,9 +41,6 @@
         <div class="flex items-center gap-2" x-data="auth">
             <div x-init="checkSession()" style="display: none;"></div>
 
-            @if($currentRoute == 'homepage')
-
-
                 <div class="relative flex items-center gap-2 order-1 lg:-order-1" x-data="{
                     menuBar: false
                 }">
