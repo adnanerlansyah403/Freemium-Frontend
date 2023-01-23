@@ -398,21 +398,9 @@
 
 
             window.addEventListener("DOMContentLoaded", function() {
-                
-                if (localStorage.theme === 'light') {
-                    document.documentElement.classList.add('light')
-                    document.documentElement.classList.remove('dark')
-                    localStorage.theme = 'light'
-                    document.getElementById("buttonMode").setAttribute("title", "Light Mode")
-                    document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/sun.svg")
-                } else if(localStorage.theme === 'dark') {
-                    document.documentElement.classList.add('dark')
-                    document.documentElement.classList.remove('light')
-                    localStorage.theme = 'dark'
-                    document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
-                    document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/moon.svg")
-                }
-
+                document.documentElement.classList.add('light')
+                document.documentElement.classList.remove('dark')
+                localStorage.theme = 'light'
             });
             
         </script>
