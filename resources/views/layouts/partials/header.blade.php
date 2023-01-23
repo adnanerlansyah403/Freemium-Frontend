@@ -1,13 +1,13 @@
 <header id="header" class="group fixed w-full z-[101] shadow-lg py-2 lg:py-1 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
     <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
-    
+
         <figure>
             <a href="{{ route('homepage') }}" class="flex items-center">
                 <span class="span text-lg sm:text-xl dark:text-slate-third">F</span>
                 <p class="text-md font-iceberg">reemium</p>
             </a>
         </figure>
-    
+
         @if($currentRoute == 'homepage')
             <ul class="hidden lg:flex items-center gap-10">
                 <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
@@ -37,12 +37,12 @@
                 </li>
             </ul>
         @endif
-    
+
         <div class="flex items-center gap-2" x-data="auth">
             <div x-init="checkSession()" style="display: none;"></div>
-    
+
             @if($currentRoute == 'homepage')
-    
+
                 <div class="relative flex items-center gap-2 order-1 lg:-order-1" x-data="{
                     menuBar: false
                 }">
@@ -62,7 +62,7 @@
                         class="absolute top-[200%] right-0 rounded-primary w-[200px] bg-white dark:bg-slate-secondary text-black shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden z-[100]"
                         x-show="menuBar"
                         x-on:mouseleave="
-                        menuBar = false; 
+                        menuBar = false;
                         $refs.dropdownmenu.style.display='none'
                         "
                         x-transition
@@ -106,9 +106,9 @@
                         </li>
                     </ul>
                 </div>
-    
+
             @endif
-    
+
             <template x-if="isLogedIn">
                 <div class="flex items-center gap-3 lg:gap-4 -order-1 lg:order-1" x-data="user">
                     <div x-init="fetchMe()"></div>
@@ -131,8 +131,8 @@
                     <div class="relative"
                         x-data="{dropdownmenu : false}"
                     >
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             class="flex items-center gap-1 px-3 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
                             @click="dropdownmenu = !dropdownmenu"
                             x-on:mouseover="dropdownmenu = true; $refs.menuBar.style.display = 'none'"
@@ -150,11 +150,11 @@
                             </template> --}}
                             <span class="font-inter" x-text="data_user?.name == null ? 'User' : substring(data_user?.name)"></span>
                         </button>
-                        <ul 
+                        <ul
                             class="absolute top-[170%] right-0 rounded-primary w-[200px] bg-primary dark:bg-slate-secondary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden"
                             x-show="dropdownmenu"
                             x-on:mouseleave="
-                            dropdownmenu = false; 
+                            dropdownmenu = false;
                             $refs.menuBar.style.display='none'"
                             x-transition
                             style="z-index: 1;"
@@ -229,17 +229,16 @@
                     </script>
                 </div>
             </template>
-            
-            <div x-data="helpers" class="absolute right-5 top-[125%] xl:-right-1/3 xl:top-[23px] xl:group-hover:right-5 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
-                
-                <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
+
+            <div x-data="helpers" class="absolute right-5 top-[125%] xl:-right-1/3 xl:top-[23px] xl:group-hover:right-3 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
+
+                <button id="buttonMode" @click="darkMode()" class="p-1 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
                     <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
                 </button>
             </div>
-    
-    
+
+
         </div>
-    
+
     </div>
     </header>
-    
