@@ -1,31 +1,42 @@
 
 <style>
+    #topButton {
+        bottom: -56px;
+        opacity: 0;
+        transition: .2s ease-in-out;
+    }
+    
     #topButton.active {
+        opacity: 1;
         bottom: 56px;
-        transition: .6s ease-in-out;
+        transition: .2s ease-in-out;
     }
 </style>
 
-<button id="btn-back-to-top" type="button"
-    class="fixed bottom-[56px] right-14 p-3 dark:bg-slate-secondary bg-primary text-white hover:text-white dark:hover:text-opacity-80 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] transition duration-200 ease-in-out"
+<button id="topButton" type="button"
+    class="fixed right-14 p-3 dark:bg-slate-secondary bg-primary text-white hover:text-white dark:hover:text-opacity-80 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)]"
     title="Instructions">
     <i data-feather="arrow-up" class="animate-bounce bottom-[3px]"></i>
 </button>
 
 <script>
     // Get the button
-    let mybutton = document.getElementById('btn-back-to-top');
+    let mybutton = document.getElementById('topButton');
     
+    window.onload = function() {
+        scrollFunction();
+    }
+
     // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function () {
-    scrollFunction();
+        scrollFunction();
     };
     
     function scrollFunction() {
     if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-    mybutton.style.display = 'block';
+    mybutton.classList.add('active');
     } else {
-    mybutton.style.display = 'none';
+    mybutton.classList.remove('active');
     }
     }
     // When the user clicks on the button, scroll to the top of the document

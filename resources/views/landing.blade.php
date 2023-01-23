@@ -53,7 +53,7 @@
         @livewireStyles
 
     </head>
-    <body class="antialiased overflow-x-hidden bg-white dark:bg-slate-primary">
+    <body class="antialiased overflow-x-hidden has-scrollbar bg-white dark:bg-slate-primary">
 
         {{-- <x-loading-page /> --}}
 
