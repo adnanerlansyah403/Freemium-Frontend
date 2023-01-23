@@ -593,13 +593,9 @@ document.addEventListener('alpine:init', () => {
             this.status_err[0] = null;
             this.showFlash = true;
             this.message = data.message;
-            console.log(this.showFlash)
-            console.log(this.message)
             setTimeout(() => {
               this.showFlash = false;
             }, 4000);
-            // this.flash();
-            // window.location.reload();
           }
           this.isLoading = false;
         }).catch(error => {
@@ -647,16 +643,16 @@ document.addEventListener('alpine:init', () => {
           sub = await response.json();
 
           if (!sub.status) {
-            this.showFlash = true;
             this.status_err[1] = sub.message;
           }
           else {
             editSub.id = sub.data.id;
             this.status_err[1] = null;
-            localStorage.setItem('showFlash', true);
-            // this.showFlash = true;
-            // this.flash();
-            window.location.reload();
+            this.message = sub.message;
+            this.showFlash = true;
+            setTimeout(() => {
+              this.showFlash = false;
+            }, 4000);
           }
           this.isLoading = false;
         })
