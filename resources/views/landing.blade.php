@@ -67,10 +67,10 @@
         <main>
             <article>
 
-                <section class="pt-[180px] pb-[90px] dark:text-slate-fourth">
+                <section class="pt-[180px] pb-[90px] dark:text-slate-third">
                     <div class="container px-3 mx-auto flex items-start flex-wrap lg:flex-nowrap gap-10">
 
-                        <figure class="hidden col-12 lg:block lg:col-6">
+                        <figure class="hidden col-12 lg:block lg:col-6 dark:bg-white">
                             <img src="{{ asset("assets/images/contentcreatefreemium.svg") }}" class="w-full h-full object-cover" alt="">
                         </figure>
 
@@ -114,26 +114,26 @@
                     </div>
                 </section>
 
-                <section class="py-[90px] dark:text-slate-fourth" id="about" >
+                <section class="py-[90px] dark:text-slate-third id="about" >
 
                     <div class="container mx-auto my-10">
                         <div class="col-12">
                             <p class="flex items-center justify-center gap-2 text-[32px] font-neucha">
-                                <ion-icon name="document-text-outline" class="text-lg span m-0 -translate-y-1"></ion-icon>
-                                <b class="tracking-widest"><span class="span">A</span>bout Us</b>
+                                <ion-icon name="document-text-outline" class="text-lg span m-0 -translate-y-1 dark:text-slate-third"></ion-icon>
+                                <b class="tracking-widest dark:text-white"><span class="span dark:text-slate-third">A</span>bout Us</b>
                             </p>
                         </div>
                     </div>
 
                     <div class="container px-3 mx-auto mt-16 flex items-start gap-10">
 
-                        <figure class="hidden lg:block col-12 lg:col-6 h-full">
+                        <figure class="hidden lg:block col-12 lg:col-6 h-full dark:bg-white">
                             <img src="{{ asset("assets/images/aboutfreemium.svg") }}" class="w-full h-full object-cover" alt="">
                         </figure>
 
                         <div class="relative col-12 lg:col-6 h-full">
-                            <h1 class="font-comic leading-[.5rem] text-[28px] text-center lg:text-left font-bold">
-                                <span class="span">What's</span>
+                            <h1 class="font-comic leading-[.5rem] dark:text-white text-[28px] text-center lg:text-left font-bold">
+                                <span class="span dark:text-slate-third">What's</span>
                                 We Build?
                             </h1>
                             <p class="block mt-10">
@@ -152,21 +152,21 @@
                     <div class="container px-3 mx-auto my-10">
                         <div class="col-12 flex flex-col items-center justify-center">
                             <p class="flex items-center justify-center gap-2 text-[32px] font-neucha">
-                                <ion-icon name="help-outline" class="text-lg span m-0 -translate-y-1"></ion-icon>
-                                <b class="tracking-widest"><span class="span">F</span>aq</b>
+                                <ion-icon name="help-outline" class="text-lg span m-0 -translate-y-1 dark:text-slate-third"></ion-icon>
+                                <b class="tracking-widest dark:text-white"><span class="span dark:text-slate-third">F</span>aq</b>
                             </p>
-                            <h2 class="text-gray-secondary mt-2 text-base">Any Question? </h2>
+                            <h2 class="text-gray-secondary dark:text-slate-third mt-2 text-base">Any Question? </h2>
                         </div>
                     </div>
 
-                    <div class="container px-3 mx-auto mt-16">
+                    <div class="container px-3 mx-auto mt-16 ">
                         <ul class="flex flex-col">
-                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(1)">
+                            <li class="bg-white dark:bg-white my-2 shadow-lg" x-data="accordion(1)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                               >
-                                <span>What is <span class="span">Freemium</span> ?</span>
+                                <span>What is <span class="span dark:text-slate-secondary">Freemium</span> ?</span>
                                 <svg
                                   :class="handleRotate()"
                                   class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
@@ -181,16 +181,16 @@
                                 class="border-l-2 border-primary overflow-hidden max-h-0 duration-500 transition-all"
                               >
                                 <p class="p-3 text-gray-900">
-                                    <span class="span"> Freemium </span> is a social publishing platform that is open to all and home to a diverse array of stories, ideas, and perspectives.
+                                    <span class="span dark:text-slate-secondary"> Freemium </span> is a social publishing platform that is open to all and home to a diverse array of stories, ideas, and perspectives.
                                 </p>
                               </div>
                             </li>
-                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(2)">
+                            <li class="bg-white dark:bg-white my-2 shadow-lg" x-data="accordion(2)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                               >
-                                <span>What are the charges for <span class="span">Freemium</span> ?</span>
+                                <span>What are the charges for <span class="span dark:text-slate-secondary">Freemium</span> ?</span>
                                 <svg
                                   :class="handleRotate()"
                                   class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
@@ -205,27 +205,27 @@
                                 :style="handleToggle()"
                               >
                                 <p class="p-3 text-gray-900">
-                                  You must <a href="{{ route("transaction.create") }}"><span class="span"> subscribe </span></a> first to enjoy unlimited content.
+                                  You must <a href="{{ route("transaction.create") }}"><span class="span dark:text-slate-secondary"> subscribe </span></a> first to enjoy unlimited content.
 
-                                  <span class="span"> Freemium </span> is a subscription-based social publishing platform service with 2 price plans:
+                                  <span class="span dark:text-slate-secondary"> Freemium </span> is a subscription-based social publishing platform service with 2 price plans:
                                   <br>
                                   <div class="ml-3 ">
                                       <div class="flex items-center">
-                                        <div class="bg-primary h-3 w-3 rounded-full mr-3"></div> Annual $1000000.00/yearly
+                                        <div class="bg-primary h-3 w-3 dark:bg-slate-secondary rounded-full mr-3"></div> Annual $1000000.00/yearly
                                       </div>
                                       <div class="flex items-center">
-                                        <div class="bg-primary h-3 w-3 rounded-full mr-3"></div>Unlimited $10000000.00/lifetime
+                                        <div class="bg-primary h-3 w-3 dark:bg-slate-secondary rounded-full mr-3"></div>Unlimited $10000000.00/lifetime
                                       </div>
                                   </div>
                                 </p>
                               </div>
                             </li>
-                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(3)">
+                            <li class="bg-white dark:bg-white my-2 shadow-lg" x-data="accordion(3)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                               >
-                                <span>Start your <span class="span">Membership</span> ?</span>
+                                <span>Start your <span class="span dark:text-slate-secondary">Membership</span> ?</span>
                                 <svg
                                   :class="handleRotate()"
                                   class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
@@ -240,14 +240,14 @@
                                 :style="handleToggle()"
                               >
                                 <p class="p-3 text-gray-900">
-                                  Go to <a href="{{ route('article.list') }}" class="span font-medium">freemium.com/article</a> and click Get Unlimited Access.
+                                  Go to <a href="{{ route('article.list') }}" class="span font-medium dark:text-slate-secondary">freemium.com/article</a> and click Get Unlimited Access.
                                   Choose your membership plan.
                                   Choose the payment method. You can transfer with Virtual Account.
                                   Upload your proof of payment or click Confirm Payment to become a member with Virtual Account.
                                 </p>
                               </div>
                             </li>
-                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(4)">
+                            <li class="bg-white dark:bg-white my-2 shadow-lg" x-data="accordion(4)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
@@ -267,11 +267,11 @@
                                 :style="handleToggle()"
                               >
                                 <p class="p-3 text-gray-900">
-                                  Every story begins by writing it down. As a publishing platform, <span class="span"> Freemium </span> allows you to share your stories and ideas with the world. When you write an article, it can be divided into several small sub-subs and define your own article type.
+                                  Every story begins by writing it down. As a publishing platform, <span class="span dark:text-slate-secondary"> Freemium </span> allows you to share your stories and ideas with the world. When you write an article, it can be divided into several small sub-subs and define your own article type.
                                 </p>
                               </div>
                             </li>
-                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(5)">
+                            <li class="bg-white dark:bg-white my-2 shadow-lg" x-data="accordion(5)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
@@ -291,7 +291,7 @@
                                 :style="handleToggle()"
                               >
                                 <p class="p-3 text-gray-900">
-                                  The <span class="span"> Freemium </span> homepage is the place to go to quickly see the latest from your favorite writers and publications on the topics that matter to you most.
+                                  The <span class="span dark:text-slate-secondary"> Freemium </span> homepage is the place to go to quickly see the latest from your favorite writers and publications on the topics that matter to you most.
                                 </p>
                               </div>
                             </li>
@@ -356,10 +356,10 @@
                     <div class="container px-3 mx-auto my-10">
                         <div class="col-12 flex flex-col items-center justify-center">
                             <p class="flex items-center justify-center gap-2 text-[32px] lg:-translate-x-5 font-neucha">
-                                <ion-icon name="call-outline" class="text-lg span m-0 -translate-y-1"></ion-icon>
-                                <b class="tracking-widest"><span class="span">C</span>ontact Us</b>
+                                <ion-icon name="call-outline" class="text-lg span m-0 -translate-y-1 dark:text-slate-third"></ion-icon>
+                                <b class="tracking-widest dark:text-white"><span class="span dark:text-slate-third">C</span>ontact Us</b>
                             </p>
-                            <h2 class="text-gray-secondary mt-2 mb-4 text-base">Let us know what's your problem by : </h2>
+                            <h2 class="text-gray-secondary mt-2 mb-4 text-base dark:text-slate-third">Let us know what's your problem by : </h2>
                             <a href="mailto:freemium@example.com" class="my-6 flex items-center justify-center gap-2 px-6 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <i data-feather="mail"></i>
                                 Email Us
