@@ -167,7 +167,7 @@ document.addEventListener('alpine:init', () => {
       if (this.password.length != 0) {
         formData.append('password', this.password);
       }
-      formData.append('photo', photoProfile);
+      if (photoProfile) formData.append('photo', photoProfile);
       formData.append('link_facebook', this.link_facebook ? this.link_facebook : '');
       formData.append('link_linkedin', this.link_linkedin ? this.link_linkedin : '');
       formData.append('link_instagram', this.link_instagram ? this.link_instagram : '');
