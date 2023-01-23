@@ -43,6 +43,7 @@
 
             @if($currentRoute == 'homepage')
 
+
                 <div class="relative flex items-center gap-2 order-1 lg:-order-1" x-data="{
                     menuBar: false
                 }">
@@ -52,62 +53,64 @@
                             <a href="{{ route('register') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
                         </div>
                     </template>
-                    <button class="block lg:hidden translate-y-[3px] hover:text-opacity-80 transition duration-200 ease-in-out"
-                    @click="menuBar = !menuBar"
-                    x-on:mouseover="menuBar = true; $refs.dropdownmenu.style.display = 'none'"
-                    >
-                        <ion-icon name="menu-outline" class="text-md"></ion-icon>
-                    </button>
-                    <ul
-                        class="absolute top-[200%] right-0 rounded-primary w-[200px] bg-white dark:bg-slate-secondary text-black shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden z-[100]"
-                        x-show="menuBar"
-                        x-on:mouseleave="
-                        menuBar = false;
-                        $refs.dropdownmenu.style.display='none'
-                        "
-                        x-transition
-                        style="display: none;"
-                        x-ref="menuBar">
-                        <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
-                            <a href="#header" class="flex items-center gap-2">
-                                <span>Home</span>
-                            </a>
-                            <!-- Feather Icons Scripts -->
-                            <script>
-                                feather.replace()
-                            </script>
-                        </li>
-                        <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
-                            <a href="{{ route("article.list") }}" class="flex items-center gap-2">
-                                <span>Articles</span>
-                            </a>
-                            <!-- Feather Icons Scripts -->
-                            <script>
-                                feather.replace()
-                            </script>
-                        </li>
-                        <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
-                            <a href="#faq" class="flex items-center gap-2">
-                                <span>Faq</span>
-                            </a>
-                            <!-- Feather Icons Scripts -->
-                            <script>
-                                feather.replace()
-                            </script>
-                        </li>
-                        <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
-                            <a href="#contact" class="flex items-center gap-2">
-                                <span>Contact</span>
-                            </a>
-                            <!-- Feather Icons Scripts -->
-                            <script>
-                                feather.replace()
-                            </script>
-                        </li>
-                    </ul>
+
+                    @if($currentRoute == 'homepage')
+                        <button class="block lg:hidden translate-y-[3px] hover:text-opacity-80 transition duration-200 ease-in-out"
+                        @click="menuBar = !menuBar"
+                        x-on:mouseover="menuBar = true; $refs.dropdownmenu.style.display = 'none'"
+                        >
+                            <ion-icon name="menu-outline" class="text-md"></ion-icon>
+                        </button>
+                        <ul
+                            class="absolute top-[200%] right-0 rounded-primary w-[200px] bg-white dark:bg-slate-secondary text-black shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden z-[100]"
+                            x-show="menuBar"
+                            x-on:mouseleave="
+                            menuBar = false;
+                            $refs.dropdownmenu.style.display='none'
+                            "
+                            x-transition
+                            style="display: none;"
+                            x-ref="menuBar">
+                            <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
+                                <a href="#header" class="flex items-center gap-2">
+                                    <span>Home</span>
+                                </a>
+                                <!-- Feather Icons Scripts -->
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </li>
+                            <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
+                                <a href="{{ route("article.list") }}" class="flex items-center gap-2">
+                                    <span>Articles</span>
+                                </a>
+                                <!-- Feather Icons Scripts -->
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </li>
+                            <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
+                                <a href="#faq" class="flex items-center gap-2">
+                                    <span>Faq</span>
+                                </a>
+                                <!-- Feather Icons Scripts -->
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </li>
+                            <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
+                                <a href="#contact" class="flex items-center gap-2">
+                                    <span>Contact</span>
+                                </a>
+                                <!-- Feather Icons Scripts -->
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </li>
+                        </ul>
+                        @endif
                 </div>
 
-            @endif
 
             <template x-if="isLogedIn">
                 <div class="flex items-center gap-3 lg:gap-4 -order-1 lg:order-1" x-data="user">
