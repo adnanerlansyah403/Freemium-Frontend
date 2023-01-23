@@ -41,7 +41,7 @@ document.addEventListener('alpine:init', () => {
           this.showFlash = false;
           localStorage.removeItem("showFlash");
           localStorage.removeItem("message");
-        }, 4000);
+        }, 3500);
       }
     },
 
@@ -741,7 +741,10 @@ document.addEventListener('alpine:init', () => {
               showConfirmButton: false,
               timer: 3000
             })
-            window.location.replace(this.baseUrl + 'transaction/details')
+            setTimeout(function () {
+              const baseUrl = "http://127.0.0.1:8000/";
+              window.location.replace(baseUrl + 'transaction/details')
+            }, 3500)
           } else {
             Swal.fire({
               icon: 'error',
@@ -808,16 +811,19 @@ document.addEventListener('alpine:init', () => {
           data = await response.json();
           if (data.status) {
             Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Transaction Success',
-                background: '#7C030B',
-                showConfirmButton: false,
-                timer: 3000
-              })
-            localStorage.setItem('showFlash', true,5000)
+              position: 'top-end',
+              icon: 'success',
+              title: 'Transaction Success',
+              background: '#7C030B',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            localStorage.setItem('showFlash', true, 5000)
             localStorage.setItem('message', data.message);
-            window.location.replace(`${this.baseUrl}profile`);
+            setTimeout(function () {
+              const baseUrl = "http://127.0.0.1:8000/";
+              window.location.replace(`${baseUrl}profile`);
+            }, 3500)
           }
         })
         .catch(error => {
