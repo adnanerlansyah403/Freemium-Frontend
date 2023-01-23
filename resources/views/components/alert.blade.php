@@ -53,16 +53,17 @@
 </div> --}}
 
 
-<div id="alert" class="fixed z-50 flex gap-4 top-[10%] left-1/2 -translate-x-1/2 p-4 rounded-lg max-w-[350px] dark:alert-dark w-full transition duration-200 ease-in-out" role="alert" x-data="{ showFlash: true }" :class="{
+<div id="alert" class="fixed flex gap-4 top-20 right-6 p-4 rounded-lg max-w-[350px] dark:alert-dark w-full transition duration-200 ease-in-out z-50" role="alert" x-data="{ showFlash: true }" :class="{
     'active' : showFlash, 
     '' : !showFlash || showFlash == false,
     'alert-success' : localStorage.getItem('typeStatus') == 'true',
     'alert-danger' : localStorage.getItem('typeStatus') == 'false'
     }" 
-    x-init="setTimeout(() => {
+    {{-- x-init="setTimeout(() => {
         showFlash = false;
         document.getElementById('alert').classList.remove('active');
-    }, 4000);">
+    }, 4000);" --}}
+    >
     <svg class="w-8 h-8 inline" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
     <div>
         <span class="font-medium">

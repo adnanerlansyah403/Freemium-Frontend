@@ -32,7 +32,10 @@
 <section class="lg:px-[12px] px-8 pt-[140px]" x-data="user">
     {{-- alert --}}
     <div x-init="flash()"></div>
-    <div x-show="showFlash">
+    <div x-show="showFlash" x-init="setTimeout(() => {
+        showFlash = false
+        }, 4000);
+    ">
         <x-alert />
     </div>
 
