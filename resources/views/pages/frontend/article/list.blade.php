@@ -207,7 +207,14 @@
                                     <div class="flex lg:gap-5 justify-between items-center mt-0 md:mt-5">
                                         <a x-bind:href="baseUrl + `article/detail/${item.id}`"
                                         class="font-bold text-[24px] font-neucha leading-9" x-text="item.title.length > 150 ? item.title.substring(0, 150) + '...' : item.title">JUDUL ARTIKEL</a>
-                                        <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)">
+                                        <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"
+                                        x-on:click="
+                                            if(item.type == 'free') {
+                                                getFreeArticle()
+                                            } else {
+                                                getPaidArticle()
+                                            }
+                                        ">
                                             PAID
                                         </button>
                                     </div>
