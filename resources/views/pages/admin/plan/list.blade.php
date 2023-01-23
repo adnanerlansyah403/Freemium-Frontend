@@ -16,7 +16,10 @@
     <div x-init="checkRole()"></div>
     <div x-init="flash()"></div>
     <div x-init="fetchListPlan()"></div>
-    <div x-show="showFlash">
+    <div x-show="showFlash" x-init="setTimeout(() => {
+        showFlash = false
+        }, 4000);
+    ">
         <x-alert />
     </div>
     <template x-if="!isLoading">

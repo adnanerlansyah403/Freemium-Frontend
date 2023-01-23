@@ -21,6 +21,13 @@
 
 <section class="pt-[140px] pb-[100px]" x-data="user" x-init="checkSession()">
     <div x-init="checkRole()"></div>
+    <div x-init="flash()"></div>
+    <div x-show="showFlash" x-init="setTimeout(() => {
+        showFlash = false
+        }, 4000);
+    ">
+        <x-alert />
+    </div>
     <template x-if="!isLoading">
         <div>
     
