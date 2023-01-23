@@ -79,7 +79,7 @@
                                 <span class="span dark:text-white">INNOVATION</span>
                                 WITH YOURSELF
                             </h1> --}}
-                            <h1 class="text-[64px] leading-[5.5rem] font-bebasNeue -mt-5">
+                            <h1 class="text-[64px] leading-[6rem] font-bebasNeue -mt-5">
                                 SHARE your
                                 <span class="span dark:text-white">ideas</span>,
                                 <div class="-mt-5">
