@@ -35,7 +35,7 @@
 
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 
-            <form action="" class="col col-12">
+            <form action="" class="col lg:mx-0 col-12">
                 <p class="flex items-center gap-2 mb-4" x-show="!isLoading">
                     <b>Created At : </b>
                     <span x-text="convertDate(EditArticle?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
@@ -148,7 +148,7 @@
 
         </div>
 
-        <div class="container mx-auto mt-4" x-data="{editSub: 0,}">
+        <div class="relative container mx-auto mt-4" x-data="{editSub: 0,}">
 
 
             <form class="w-full my-1 px-5 lg:px-0 dark:text-white">
