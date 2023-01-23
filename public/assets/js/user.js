@@ -756,8 +756,6 @@ document.addEventListener('alpine:init', () => {
 
           if (this.myTransactions[0] == null && lastPath == '/details') {
             window.location.replace(`${this.baseUrl}transaction`)
-          } else if (this.myTransactions[0] != null && lastPath == '/transaction') {
-            window.location.replace(`${this.baseUrl}transaction/details`)
           }
           return;
         })
