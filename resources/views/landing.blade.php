@@ -67,7 +67,7 @@
         <main>
             <article>
 
-                <section class="pt-[180px] pb-[90px]">
+                <section class="pt-[180px] pb-[90px] dark:text-slate-fourth">
                     <div class="container px-3 mx-auto flex items-start flex-wrap lg:flex-nowrap gap-10">
 
                         <figure class="hidden col-12 lg:block lg:col-6">
@@ -114,7 +114,7 @@
                     </div>
                 </section>
 
-                <section class="py-[90px]" id="about">
+                <section class="py-[90px] dark:text-slate-fourth" id="about" >
 
                     <div class="container mx-auto my-10">
                         <div class="col-12">
@@ -161,7 +161,7 @@
 
                     <div class="container px-3 mx-auto mt-16">
                         <ul class="flex flex-col">
-                            <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
+                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(1)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
@@ -185,7 +185,7 @@
                                 </p>
                               </div>
                             </li>
-                            <li class="bg-white my-2 shadow-lg" x-data="accordion(2)">
+                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(2)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
@@ -220,7 +220,7 @@
                                 </p>
                               </div>
                             </li>
-                            <li class="bg-white my-2 shadow-lg" x-data="accordion(3)">
+                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(3)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
@@ -247,7 +247,7 @@
                                 </p>
                               </div>
                             </li>
-                            <li class="bg-white my-2 shadow-lg" x-data="accordion(4)">
+                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(4)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
@@ -271,7 +271,7 @@
                                 </p>
                               </div>
                             </li>
-                            <li class="bg-white my-2 shadow-lg" x-data="accordion(5)">
+                            <li class="bg-white dark:bg-slate-fourth my-2 shadow-lg" x-data="accordion(5)">
                               <h2
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
