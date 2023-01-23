@@ -1073,7 +1073,7 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < title_sub.length; i++) {
         let data_id = title_sub[i].getAttribute("data-id");
-        formData.append('title_sub[]', `${title_sub[i].value}`);
+        formData.append('title_sub[]', title_sub[i].value);
         formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
         formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
       }
@@ -1096,10 +1096,10 @@ document.addEventListener('alpine:init', () => {
         this.isLoadingArticle = false;
         localStorage.setItem('message', 'article successfully created!');
         localStorage.setItem('showFlash', true);
-      }
-      if (!this.category_err) {
-        this.isLoadingArticle = false;
-        return window.location.replace(`${this.baseUrl}myarticle`)
+        if (!this.category_err) {
+          this.isLoadingArticle = false;
+          return window.location.replace(`${this.baseUrl}myarticle`)
+        }
       }
     },
 
