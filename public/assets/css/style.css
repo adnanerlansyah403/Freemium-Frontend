@@ -2,3 +2,13 @@ input[type="file"]::-webkit-file-upload-button {
     visibility: hidden !important;
     display: none !important;
 }
+
+.swal2-title{
+    color: white !important;
+}
+
+.swal2-confirm{
+    background-color: #7C030B !important;
+    border-color: #FFF;
+}
+

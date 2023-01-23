@@ -709,21 +709,26 @@ document.addEventListener('alpine:init', () => {
 
         .then((response) => {
           if (response.ok) {
-            // Swal.fire({
-            //   position: 'top-end',
-            //   icon: 'success',
-            //   title: 'Transaction Process',
-            //   showConfirmButton: false,
-            //   timer: 1500
-            // })
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Transaction Process',
+              background: '#7C030B',
+              showConfirmButton: false,
+              timer: 3000
+            })
             window.location.replace(this.baseUrl + 'transaction/details')
           } else {
-            // Swal.fire({
-            //   icon: 'error',
-            //   title: 'Choose Plan First!',
-            //   confirmButtonColor: 'primary',
-            //   position: 'center'
-            // })
+            Swal.fire({
+              icon: 'error',
+              title: 'Choose Plan First!',
+              titleColor: '#FFFF',
+              iconColor: '#FFFF',
+              color: '#FFFF',
+              background: '#7C030B',
+              position: 'center',
+            })
+
           }
         });
 
@@ -778,7 +783,15 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           data = await response.json();
           if (data.status) {
-            localStorage.setItem('showFlash', true)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Transaction Success',
+                background: '#7C030B',
+                showConfirmButton: false,
+                timer: 3000
+              })
+            localStorage.setItem('showFlash', true,5000)
             localStorage.setItem('message', data.message);
             window.location.replace(`${this.baseUrl}profile`);
           }
