@@ -516,11 +516,35 @@ document.addEventListener('alpine:init', () => {
       }, 600)
     },
 
+    keywordMyArticle: '',
     fetchListMyArticle() {
       const token = localStorage.getItem('token')
 
       this.isLoading = true,
         fetch(`${this.apiUrl}myArticle`, {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+          }
+        })
+          .then(async (response) => {
+            data = await response.json();
+            if (data.message === 'Unauthorized') {
+              window.location.replace(this.baseUrl + 'login')
+            }
+            this.listMyArticle = data;
+            this.isLoading = false;
+
+          })
+
+    },
+
+    searchMyArticle(keyword) {
+      const token = localStorage.getItem('token')
+
+      this.isLoading = true,
+        fetch(`${this.apiUrl}myArticle?search=${keyword}`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',

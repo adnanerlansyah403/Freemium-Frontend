@@ -203,11 +203,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="bg-[#D9D9D9] w-[280px] h-[180px] mx-auto block md:hidden lg:hidden mt-10 mb-6 md:mb-10">
+                                    <div class="bg-[#D9D9D9] w-full h-[200px] lg:w-[280px] lg:h-[180px] mx-auto block md:hidden lg:hidden mt-6 lg:mt-10 mb-6 md:mb-10">
                                         <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
                                     </div>
 
-                                    <div class="flex lg:gap-5 justify-between items-center mt-0 md:mt-5">
+                                    <div class="flex flex-col lg:flex-row gap-y-2 lg:gap-5 justify-between items-start mt-0 md:mt-5">
                                         <a x-bind:href="baseUrl + `article/detail/${item.id}`"
                                         class="font-bold text-[24px] font-neucha leading-9" x-text="item.title.length > 150 ? item.title.substring(0, 150) + '...' : item.title">JUDUL ARTIKEL</a>
                                         <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"
