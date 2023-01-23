@@ -652,11 +652,12 @@ document.addEventListener('alpine:init', () => {
             this.status_err[1] = sub.message;
           }
           else {
-            this.showFlash = false;
             editSub.id = sub.data.id;
             this.status_err[1] = null;
-            localStorage.setItem('message', sub.message);
             localStorage.setItem('showFlash', true);
+            // this.showFlash = true;
+            // this.flash();
+            window.location.reload();
           }
           this.isLoading = false;
         })
@@ -1313,10 +1314,6 @@ document.addEventListener('alpine:init', () => {
         }
 
       }
-
-      // console.log(this.user_chart, this.payment_chart , user, payment);
-      // console.log(this.user_chart);
-      // console.log('year', this.years);
 
       // Chart.defaults.backgroundColor = '#7C000B';
       // Chart.defaults.borderColor = '#fff';
