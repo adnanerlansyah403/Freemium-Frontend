@@ -45,7 +45,7 @@
             }
 
             .tox-tinymce {
-                height: 500px !important;
+                /* height: 500px !important; */
             }
 
         </style>

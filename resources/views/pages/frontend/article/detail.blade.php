@@ -303,7 +303,7 @@
             </template>
         </div>
 
-        <div class="lg:hidden">
+        <div class="">
             <x-top-button />
         </div>
 
