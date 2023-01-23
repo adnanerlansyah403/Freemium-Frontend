@@ -31,23 +31,23 @@
                 bottom: 0;
                 transition: .2s ease-in-out;
             }
-        
+
             .filesize.active {
                 right: 12px;
                 transition: .2s ease-in-out;
             }
-        
+
             .removefile.active {
                 right: 12px;
                 transition: .2s ease-in-out;
             }
-        
+
             .ck-content {
                 height: 500px;
             }
-        
+
         </style>
-        
+
         <div class="container mx-auto flex items-center">
 
             <div class="col col-12" x-data="article">
@@ -58,12 +58,12 @@
                         <input id="title"  type="text" placeholder="Your text..."
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
-        
+
                     <div class="mb-5 col-12 lg:col lg:col-6" x-data="articles">
                         <div x-init="fetchCategory()"></div>
                         <label for="text" class="text-md">Category</label>
                         <select name="category_id" id="" class="categories px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4" >
-                            <option value="">--Choosen Category--</option>
+                            <option value=""> Choosen category... </option>
                             <template x-for="category in categories.data">
                                 <option x-bind:value="category.id" x-text="category.name">HTML</option>
                             </template>
@@ -74,7 +74,7 @@
                 <div class="mb-5">
                     <label for="text" class="text-md">Thumbnail</label>
                     <input id="thumbnail" type="file" name="thumbnail" placeholder="Your thumbnail..."
-                        hidden 
+                        hidden
                         x-ref="file"
                         @change="
                             if ($refs.file) {
@@ -96,10 +96,10 @@
                             $refs.file.click();
                         "
                     >
-                        <img src="" 
+                        <img src=""
                         x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
-                        <i 
-                            data-feather="image" 
+                        <i
+                            data-feather="image"
                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage"
                         >
@@ -107,7 +107,7 @@
                         {{-- <span class="removefile absolute w-max top-3 -right-full p-2 bg-primary text-white text-center font-semibold rounded-lg hover:text-opacity-80 transition duration-200 ease-in-out" x-ref="removefile"
                         @click="">
                         </span> --}}
-                        <p 
+                        <p
                             class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                             x-ref="filename"
                         >
@@ -124,7 +124,7 @@
 
                 <div class="group flex items-center justify-between mt-16 mb-10" x-data="articles">
                     <button type="button" class="flex items-center gap-2" @click="createSubArticle($refs)">
-                        <i data-feather="plus-circle" class="w-10 h-10 text-primary"></i> 
+                        <i data-feather="plus-circle" class="w-10 h-10 text-primary"></i>
                         <span class="text-base group-hover:rotate-90 transition duration-200 ease-in-out">Add a sub article</span>
                     </button>
                     <button @click="createArticle()" class="px-4 py-2 bg-primary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
@@ -134,7 +134,7 @@
 
                 <div class="w-full my-1">
                     <ul class="flex flex-col" id="listsubarticle" x-ref="listsubarticle">
-                        
+
                         {{-- <li class="bg-white my-2 shadow-lg accordion" x-data="accordion(1)">
                             <h2
                             class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
@@ -142,7 +142,7 @@
                             <span>Sub Artikel 1</span>
                             <div class="flex items-center gap-2">
                                 <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60 shadow-[0px_0px_4px_rgba(0,0,0,0.3)]">
-                                    <i data-feather="trash-2" class="text-xs"></i> 
+                                    <i data-feather="trash-2" class="text-xs"></i>
                                 </span>
                                 <svg
                                 :class="handleRotate()"
@@ -165,22 +165,22 @@
                                         <input type="text" placeholder="Your text..."
                                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                                     </div>
-                        
+
                                     <div class="mb-5 col-12 lg:col lg:col-6">
                                         <label for="text" class="text-md">Category</label>
                                         <select name="category_id" id="" class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
-                                            <option value="">--Choosen Category--</option>
+                                            <option value=""> Choosen category... </option>
                                             <option value="">HTML</option>
                                             <option value="">CSS</option>
                                             <option value="">Javascript</option>
                                         </select>
                                     </div>
                                 </div>
-                    
+
                                 <div class="mb-5">
                                     <label for="text" class="text-md">Thumbnail</label>
                                     <input type="file" name="thumbnail" placeholder="Your thumbnail..."
-                                        hidden 
+                                        hidden
                                         x-ref="file"
                                         @change="
                                             if ($refs.file) {
@@ -202,22 +202,22 @@
                                             console.log($refs.file)
                                         "
                                     >
-                                        <img src="" 
+                                        <img src=""
                                         x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
-                                        <i 
-                                            data-feather="image" 
+                                        <i
+                                            data-feather="image"
                                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                                             x-ref="iconimage"
                                         >
                                         </i>
-                                        <p 
+                                        <p
                                             class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                                             x-ref="filename"
                                         >
                                         </p>
                                     </span>
                                 </div>
-                    
+
                                 <div class="mb-5 col-12">
                                     <label for="text" class="text-md">Content</label><br>
                                     <textarea id="content" placeholder="Your content..."
@@ -230,17 +230,17 @@
 
                     </ul>
                 </div>
-                
+
             </div>
 
         </div>
-        
+
         <script>
         document.addEventListener('alpine:init', () => {
             Alpine.store('accordion', {
                 tab: 0
             });
-            
+
             Alpine.data('accordion', (idx) => ({
                 init() {
                 this.idx = idx;
@@ -256,12 +256,12 @@
                 return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
                 }
             }));
-        
+
             Alpine.data('article', () => ({
                 index: 1,
                 apiUrl: "http://127.0.0.1:8001/api/",
                 createSubArticle(refs) {
-        
+
                     refs.listsubarticle.insertAdjacentHTML('beforeend' ,`
                         <li class="bg-white rounded-lg my-2 shadow-lg accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
                             <h2
@@ -293,13 +293,13 @@
                                         <input type="text" placeholder="Your text..."
                                             class="title_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                                     </div>
-                        
+
                                 </div>
-                    
+
                                 <div class="mb-5">
                                     <label for="text" class="text-md">Thumbnail</label>
                                     <input class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
-                                        hidden 
+                                        hidden
                                         x-ref="file${this.index}"
                                         @change="
                                             if ($refs.file) {
@@ -320,28 +320,28 @@
                                             $refs.file${this.index}.click();
                                         "
                                     >
-                                        <img src="" 
+                                        <img src=""
                                         x-ref="image${this.index}" class="absolute w-full h-full object-cover rounded-lg" alt="">
-                                        <img 
+                                        <img
                                             src="{{ asset('assets/images/icons/image.svg') }}"
                                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                                             x-ref="iconimage${this.index}"
                                         />
-                                        <p 
+                                        <p
                                             class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                                             x-ref="filename${this.index}"
                                         >
                                         </p>
                                     </span>
                                 </div>
-                    
+
                                 <div class="mb-5 col-12" id="content${this.index}" class="content${this.index}">
                                     <label for="text" class="text-md">Content</label><br>
                                     <textarea id="editor${this.index}" placeholder="Your content..."
                                     class="description_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                                     </textarea>
                                 </div>
-        
+
                                 <div class="mb-5 col-12">
                                     <span class="text-md">Choose Your Plan</span>
                                     <div class="flex items-center gap-2 mt-2">
@@ -356,7 +356,7 @@
                                     </div>
                                     <p class="mt-4">*Get Royalty for Author</p>
                                 </div>
-        
+
                             </div>
                         </li>
                     `);
@@ -369,10 +369,10 @@
                     .catch( error => {
                         console.error( error );
                     } );
-                    
+
                     this.index++;
-                
-        
+
+
                 },
                 deleteSubArticle(id)
                 {
@@ -380,7 +380,7 @@
                     parentElement.querySelector(`#accordion${id}`).remove();
                 }
             }))
-        
+
         })
         </script>
 
@@ -388,6 +388,6 @@
 
 </section>
 
-  
+
 
 @endsection

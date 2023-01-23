@@ -30,7 +30,7 @@
         transition: .2s ease-in-out;
     }
 
-    .has-scrollbar::-webkit-scrollbar { 
+    .has-scrollbar::-webkit-scrollbar {
         background-color: transparent !important;
         width: 6px !important;
     }
@@ -45,9 +45,9 @@
         width: calc(25% - 40px);
     }
 
-    .has-scrollbar::-moz-scrollbar { 
+    .has-scrollbar::-moz-scrollbar {
         background-color: #7C000B !important;
-        height: 6px !important; 
+        height: 6px !important;
     }
 
     .has-scrollbar::-moz-scrollbar-track {
@@ -81,11 +81,11 @@
                         <input type="text" placeholder="Your text..."
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
-        
+
                     <div class="mb-5 col-12 lg:col lg:col-6">
                         <label for="text" class="text-md">Category</label>
                         <select name="category_id" id="" class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
-                            <option value="">--Choosen Category--</option>
+                            <option value=""> Choosen category... </option>
                             <option value="">HTML</option>
                             <option value="">CSS</option>
                             <option value="">Javascript</option>
@@ -96,7 +96,7 @@
                 <div class="mb-5">
                     <label for="text" class="text-md">Thumbnail</label>
                     <input type="file" name="thumbnail" placeholder="Your thumbnail..."
-                        hidden 
+                        hidden
                         x-ref="file"
                         @change="
                             if ($refs.file) {
@@ -117,15 +117,15 @@
                             $refs.file.click();
                         "
                     >
-                        <img src="" 
+                        <img src=""
                         x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
-                        <i 
-                            data-feather="image" 
+                        <i
+                            data-feather="image"
                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimage"
                         >
                         </i>
-                        <p 
+                        <p
                             class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                             x-ref="filename"
                         >
@@ -145,7 +145,7 @@
                         Save
                     </button>
                 </div>
-                
+
             </form>
 
         </div>
@@ -166,7 +166,7 @@
                 </ul> --}}
 
                 <ul class="flex flex-col mb-10">
-                        
+
                     <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
                         <h2
                         @click="handleClick()"
@@ -193,12 +193,12 @@
                                     <b>Sub-Article 1</b>
                                     <div class="flex items-center gap-1">
                                         <button type="button" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -208,12 +208,12 @@
                                     <b>Sub-Article 2</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -223,12 +223,12 @@
                                     <b>Sub-Article 2</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -238,12 +238,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -253,12 +253,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -268,12 +268,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -283,12 +283,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -298,12 +298,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -313,12 +313,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -328,12 +328,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -343,12 +343,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -358,12 +358,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -373,12 +373,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -388,12 +388,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -403,12 +403,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -418,12 +418,12 @@
                                     <b>Sub-Article 3</b>
                                     <div class="flex items-center gap-1">
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Edit Article">
-                                            <i 
+                                            <i
                                                 data-feather="edit" class="text-sm">
                                             </i>
                                         </a>
                                         <a href="#" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]" title="Delete Sub Article">
-                                            <i 
+                                            <i
                                                 data-feather="trash-2" class="text-sm">
                                             </i>
                                         </a>
@@ -442,11 +442,11 @@
                         <input type="text" placeholder="Your text..."
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
                     </div>
-        
+
                     <div class="mb-5 col-12 lg:col lg:col-6">
                         <label for="text" class="text-md">Category</label>
                         <select name="category_id" id="" class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white mt-4">
-                            <option value="">--Choosen Category--</option>
+                            <option value=""> Choosen category... </option>
                             <option value="">HTML</option>
                             <option value="">CSS</option>
                             <option value="">Javascript</option>
@@ -457,7 +457,7 @@
                 <div class="mb-5">
                     <label for="text" class="text-md">Thumbnail</label>
                     <input type="file" name="thumbnail_subarticle" placeholder="Your thumbnail..."
-                        hidden 
+                        hidden
                         x-ref="filesubarticle"
                         @change="
                             if ($refs.filesubarticle) {
@@ -478,15 +478,15 @@
                             $refs.filesubarticle.click();
                         "
                     >
-                        <img src="" 
+                        <img src=""
                         x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="">
-                        <i 
-                            data-feather="image" 
+                        <i
+                            data-feather="image"
                             class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                             x-ref="iconimagesubarticle"
                         >
                         </i>
-                        <p 
+                        <p
                             class="filenamesubarticle absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                             x-ref="filenamesubarticle"
                         >
@@ -521,7 +521,7 @@ document.addEventListener('alpine:init', () => {
     Alpine.store('accordion', {
     tab: 0
     });
-    
+
     Alpine.data('accordion', (idx) => ({
     init() {
         this.idx = idx;

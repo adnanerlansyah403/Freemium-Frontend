@@ -17,7 +17,7 @@
             document.title = 'Edit Article - Freemium App';
         </script>
     </template>
-    
+
     <div
     x-init="
         if(isLogedIn == true) {
@@ -52,7 +52,7 @@
                         </div>
                         <input x-model="EditArticle.title" type="text" placeholder="Your text..." name="title" id="title"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
-                            
+
                         <template x-if="status_err?.[0]?.title">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -65,7 +65,7 @@
                         <label for="category_id" class="text-md">Category</label>
                         <select x-bind:model="EditArticle && EditArticle.tags ? EditArticle.tags[0].category_id : ''" name="category_id" id="category_id"
                             class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
-                            <option value="">--Choosen Category--</option>
+                            <option value=""> Choosen category... </option>
                             <template x-for="(c, index) in categories">
                                 <option :value="c.id" :selected="c.id == EditArticle?.tags?.[0]?.category_id" x-text="c.name">test</option>
                             </template>
@@ -123,7 +123,7 @@
 
                 <div class="mb-5 col-12">
                     <label for="content" class="text-md">Content</label><br>
-                    <textarea 
+                    <textarea
                     x-text="EditArticle?.description" name="description" id="content" placeholder="Your content..."
                         class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                     </textarea>
@@ -133,7 +133,7 @@
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                             <span class="span-danger" x-text="status_err?.[0]?.description[0]">Validation Error</span>
-                    
+
                     </template>
                 </div>
 
@@ -156,7 +156,7 @@
                 <p class="font-semibold text-sm lg:text-base mb-2">
                     *If you make three paid sub contents, then you must have to create 3 free content first.
                 </p>
-                
+
                 <ul class="flex flex-col mb-10">
 
                     <li class="bg-white dark:bg-slate-secondary dark:text-white my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-lg" x-data="accordion(1)">
@@ -204,7 +204,7 @@
                                         </span>
                                     </template>
                                     <span @click="
-                                        editSub = EditArticle?.subarticles?.length; 
+                                        editSub = EditArticle?.subarticles?.length;
                                         EditArticle.subarticles[editSub] = addSub()
                                     " type="button"
                                         class="group cursor-pointer h-max flex items-center justify-center gap-2 col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third dark:hover:text-opacity-75 hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
@@ -229,7 +229,7 @@
                         <x-loading />
                     </div>
                 </template>
-                
+
                 <div class="flex flex-wrap lg:flex-nowrap" x-data="helpers">
                     <div class="mb-5 col-12">
                         <div class="flex justify-between">
@@ -292,7 +292,7 @@
                         </div>
                     </template>
                 </div>
-                
+
                 <div class="mb-5 col-12">
                     <label for="sub_content" class="text-md">Content</label><br>
                     <textarea x-text="EditArticle?.subarticles?.[editSub]?.description" name="sub_description" id="sub_content" placeholder="Your content..."
@@ -300,7 +300,7 @@
                     </textarea>
                     <template x-if="setTiny?.('sub_content', EditArticle?.subarticles?.[editSub]?.description);"></template>
 
-                    
+
                     <template x-if="status_err?.[1]?.description">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -308,7 +308,7 @@
                         </div>
                     </template>
                 </div>
-    
+
                 <div class="mb-5 col-12">
                     <span class="text-md">Choose Your Plan</span>
                     <div class="flex items-center gap-2 mt-2">
@@ -343,13 +343,13 @@
                         Save
                     </button>
                 </div>
-            
+
             </form>
 
         </div>
 
         {{-- INSTRUCTIONS --}}
-        
+
         <x-modal-instruction>
             <li class="flex items-start gap-2">
                 <b class="text-primary">1.</b>
@@ -393,7 +393,7 @@
         Alpine.store('accordion', {
         tab: 0
         });
-        
+
         Alpine.data('accordion', (idx) => ({
         init() {
             this.idx = idx;
