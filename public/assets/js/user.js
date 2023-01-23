@@ -30,7 +30,6 @@ document.addEventListener('alpine:init', () => {
     categories: [],
 
     flash() {
-      console.log(localStorage.getItem("message"));
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
@@ -45,7 +44,6 @@ document.addEventListener('alpine:init', () => {
           localStorage.removeItem("message")
           // localStorage.removeItem("typeStatus")
           this.showFlash = false;
-          console.log(this.showFlash);
         }, 2000);
       }
     },
@@ -1513,10 +1511,27 @@ document.addEventListener('alpine:init', () => {
     },
 
     substring(string, max = 10) {
+      const text = string.textContent
       if (string.length > max) {
         return string.substring(0, max) + "..."
       }
+      console.log(string);
       return string;
+    },
+
+    checkString(string) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(string, 'text/html');
+      const hasHTMLTag = doc.body.childNodes.length > 0;
+      console.log(hasHTMLTag, string);
+    },
+
+    parseToOriginalString(string, max = 10) {
+      const stringWithoutHTML = string.replace(/<[^>]+>/g, '');
+      if (stringWithoutHTML.length > max) {
+        return stringWithoutHTML.substring(0, 150) + '...';
+      }
+      return stringWithoutHTML
     },
 
     darkMode() {

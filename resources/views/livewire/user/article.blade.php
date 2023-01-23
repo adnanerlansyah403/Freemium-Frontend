@@ -61,7 +61,7 @@
                                             <span class="text-base md:text-md font-neucha font-bold" x-text="item.title"></span>
                                             <i class="bg-primary dark:bg-slate-third px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
                                         </div>
-                                        <p class="text-sm text-gray-secondary" x-html="item.substring+'...'">
+                                        <p class="text-sm text-gray-secondary mt-8 w-full" x-html="item.substring+'...'">
         
                                         </p>
                                     </div>

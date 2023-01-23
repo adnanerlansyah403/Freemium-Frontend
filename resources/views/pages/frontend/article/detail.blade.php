@@ -128,7 +128,7 @@
                     <div class="col md:mx-0 col-12 lg:col-4 -order-1 lg:order-2">
     
                         <div
-                            class="lg:sticky lg:top-28 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
+                            class="lg:sticky lg:top-24 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
 
                             <ul class="relative left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 dark:shadow-[0px_0px_4px_#fff] w-max p-2 rounded-lg">
 

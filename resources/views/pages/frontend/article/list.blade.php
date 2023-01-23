@@ -211,7 +211,8 @@
                                             PAID
                                         </button>
                                     </div>
-                                    <p class="font-normal text-sm mt-3 md:w-[400px] lg:w-full dark:text-gray-primary" x-html="item.description.length > 150 ? item.description.substring(0, 150) + '...' : item.description">
+                                    {{-- <span x-text="parseToOriginalString(item.description)"></span> --}}
+                                    <p class="font-normal text-sm mt-4 md:w-[400px] lg:w-full dark:text-gray-primary" x-text="parseToOriginalString(item.description)">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                                         eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
                                         short desc short desc short desc short desc
