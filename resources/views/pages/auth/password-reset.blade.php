@@ -35,16 +35,16 @@
 
                     <div class="mb-8 text-center">
                         <h1 class="text-[32px]">
-                            <span class="span font-medium">Reset</span>
+                            <span class="span dark:text-slate-fourth font-medium">Reset</span>
                             Password
                         </h1>
-                        <p class="mt-2 mb-4 text-[14px] text-gray-primary">Please enter your email address below to reset your password, and we'll send you a reset password link 🚀</p>
+                        <p class="mt-2 mb-4 text-[14px] text-gray-primary dark:text-white">Please enter your email address below to reset your password, and we'll send you a reset password link 🚀</p>
                     </div>
                 
                     <div class="w-full">
                         <label for="email" class="text-md">Email</label>
-                        <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4">
-                            <i data-feather="mail" class="w-6 h-6 text-gray-secondary"></i>
+                        <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary dark:shadow-none dark:border dark:border-white rounded-primary mt-4">
+                            <i data-feather="mail" class="w-6 h-6 text-gray-secondary dark:text-white"></i>
                             <input type="text" placeholder="Your email..."
                                 x-bind:class="status_err.email ? 'input-danger' : ''" class="w-full" x-model="email">
                         </div>
@@ -57,7 +57,7 @@
         
                         <div class="flex items-center justify-center">
                             <button type="submit"
-                                class="mt-5 px-4 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white text-center hover:text-opacity-90 transition duration-200 ease-in-out" @click="passwordReset()">
+                                class="mt-5 px-4 py-2 rounded-pill bg-primary dark:bg-slate-third text-white dark:text-opacity-80 text-center hover:text-opacity-90 transition duration-200 ease-in-out" @click="passwordReset()">
                                 Send
                             </button>
                         </div>

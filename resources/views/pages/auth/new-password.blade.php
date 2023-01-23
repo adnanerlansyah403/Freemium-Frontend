@@ -1,6 +1,6 @@
 @extends("homepage")
 
-@section("title", "Register - Freemium App")
+@section("title", "New Password - Freemium App")
 
 {{-- Title Section --}}
 {{-- <div x-data="user" x-init="checkSession()">
@@ -27,15 +27,15 @@
 
             <div class="mb-8 text-center">
                 <h1 class="text-[32px]">
-                    <span class="span font-medium">Make a</span>
+                    <span class="span dark:text-slate-fourth font-medium">Make a</span>
                     New Password
                 </h1>
-                <p class="mt-2 mb-4 text-[14px] text-gray-primary">Please enter your new password, and the password will be changed </p>
+                <p class="mt-2 mb-4 text-[14px] text-gray-primary dark:text-white">Please enter your new password, and the password will be changed </p>
             </div>
         
             <div class="w-full" x-data="{passwordHidden: true}">
                 <label for="password" class="text-md">New Password</label>
-                <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out">
+                <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary dark:text-white dark:shadow-none dark:border dark:border-white rounded-primary mt-4 transition duration-200 ease-in-out">
                     <button type="button" @click="
                     typePassword = passwordHidden == true ? 'text' : 'password';
                     $refs.password.setAttribute('type', typePassword)
@@ -70,7 +70,7 @@
                 </template>
                 <div class="flex items-center justify-center mt-6">
                     <button type="submit"
-                        class="px-4 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white text-center hover:text-opacity-90 transition duration-200 ease-in-out" @click="newPassword({{Request::segment(2)}})">
+                        class="px-4 py-2 rounded-pill bg-primary dark:bg-slate-third text-white dark:hover:text-opacity-80 text-center hover:text-opacity-90 transition duration-200 ease-in-out" @click="newPassword({{Request::segment(2)}})">
                         Confirm
                     </button>
                 </div>
