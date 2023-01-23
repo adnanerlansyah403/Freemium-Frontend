@@ -150,7 +150,7 @@
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                               >
-                                <span>What is Freemium?</span>
+                                <span>What is <span class="span">Freemium</span> ?</span>
                                 <svg
                                   :class="handleRotate()"
                                   class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
@@ -174,7 +174,7 @@
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                               >
-                                <span>What are the charges for Freemium?</span>
+                                <span>What are the charges for <span class="span">Freemium</span> ?</span>
                                 <svg
                                   :class="handleRotate()"
                                   class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
@@ -203,7 +203,7 @@
                                 @click="handleClick()"
                                 class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
                               >
-                                <span>Start your membership?</span>
+                                <span>Start your <span class="span">Membership</span> ?</span>
                                 <svg
                                   :class="handleRotate()"
                                   class="fill-current text-purple-700 h-6 w-6 transform transition-transform duration-500"
