@@ -27,8 +27,8 @@
 
             <div class="mb-8 text-center">
                 <h1 class="text-[32px]">
-                    <span class="span font-medium">New</span>
-                    Password
+                    <span class="span font-medium">Make a</span>
+                    New Password
                 </h1>
                 <p class="mt-2 mb-4 text-[14px] text-gray-primary">Please enter your new password, and the password will be changed </p>
             </div>
