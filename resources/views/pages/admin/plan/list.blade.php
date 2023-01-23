@@ -101,7 +101,7 @@
                                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="'$'+data.price">
                                             <i class="fas fa-circle text-orange-500 mr-2"></i>$80.00
                                           </td>
-                                          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.expired == 0? 'unlimited' : `${data.expired} month`">
+                                          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" x-text="data.expired == 0? 'Unlimited' : `${data.expired} month`">
                                             <i class="fas fa-circle text-orange-500 mr-2"></i>12 Month
                                           </td>
                                           <td class="flex items-center w-full h-full border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2" x-data="user">
