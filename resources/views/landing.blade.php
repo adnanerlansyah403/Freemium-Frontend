@@ -39,7 +39,7 @@
             .tox-notifications-container {
                 display: none;
             }
-            
+
             .tox-statusbar__branding {
                 display: none;
             }
@@ -54,7 +54,7 @@
 
     </head>
     <body class="antialiased overflow-x-hidden bg-white dark:bg-slate-primary">
-        
+
         {{-- <x-loading-page /> --}}
 
 
@@ -66,7 +66,7 @@
 
         <main>
             <article>
-                
+
                 <section class="pt-[180px] pb-[90px]">
                     <div class="container px-3 mx-auto flex items-start flex-wrap lg:flex-nowrap gap-10">
 
@@ -75,17 +75,31 @@
                         </figure>
 
                         <div class="relative col-12 lg:col-6 h-full">
-                            <h1 class="text-[64px] font-bebasNeue -mt-5">
+                            {{-- <h1 class="text-[64px] font-bebasNeue -mt-5">
                                 <span class="span dark:text-white">INNOVATION</span>
                                 WITH YOURSELF
+                            </h1> --}}
+                            <h1 class="text-[64px] font-bebasNeue -mt-5">
+                                SHARE your
+                                <span class="span dark:text-white">ideas</span>,
+                                <span class="span dark:text-white">insights</span> and
+                                <span class="span dark:text-white">experiences</span>
                             </h1>
-                            <p class="font-poppins -translate-y-3">
+                            {{-- <p class="font-poppins -translate-y-3">
                                 <span class="font-semibold span dark:text-white">Make it real</span>
                                 About what's your think
+                            </p> --}}
+                            <p class="font-poppins -translate-y-3 mt-3">
+                                <span class="font-semibold span dark:text-white">Bring your ideas to life and </span>
+                                share your thoughts with the world.
                             </p>
+                            {{-- <p class="font-merrieweather mt-4">
+                                If you have a story to tell, knowledge to share, or a perspective to offer
+                                — welcome home. Sign up for free so your writing can thrive in a network supported by millions of readers —
+                            </p> --}}
                             <p class="font-merrieweather mt-4">
-                                If you have a story to tell, knowledge to share, or a perspective to offer 
-                                — welcome home. Sign up for free so your writing can thrive in a network supported by millions of readers — 
+                                If you have a story to tell, knowledge to share, or a perspective to offer
+                                — welcome home, Sign up for free now and start sharing your story today —
                             </p>
                             <a href="{{ route("article.create") }}" class="translate-y-10 py-2 px-4 flex items-center gap-2 w-max rounded-pill bg-primary dark:bg-slate-secondary text-white hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>
@@ -142,7 +156,7 @@
                             <h2 class="text-gray-secondary mt-2 text-base">Any Question? </h2>
                         </div>
                     </div>
-                    
+
                     <div class="container px-3 mx-auto mt-16">
                         <ul class="flex flex-col">
                             <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
@@ -165,7 +179,7 @@
                                 class="border-l-2 border-primary overflow-hidden max-h-0 duration-500 transition-all"
                               >
                                 <p class="p-3 text-gray-900">
-                                  Freemium is a social publishing platform that is open to all and home to a diverse array of stories, ideas, and perspectives.
+                                    <span class="span"> Freemium </span> is a social publishing platform that is open to all and home to a diverse array of stories, ideas, and perspectives.
                                 </p>
                               </div>
                             </li>
@@ -189,12 +203,18 @@
                                 :style="handleToggle()"
                               >
                                 <p class="p-3 text-gray-900">
-                                  You must subscribe first to enjoy unlimited content
+                                  You must <a href="{{ route("transaction.create") }}"><span class="span"> subscribe </span></a> first to enjoy unlimited content.
 
-                                  Freemium is a subscription-based social publishing platform service with 2 price plans:
-
-                                  Annual $1000000.00/yearly.
-                                  Unlimited $10000000.00/lifetime.
+                                  <span class="span"> Freemium </span> is a subscription-based social publishing platform service with 2 price plans:
+                                  <br>
+                                  <div class="ml-3 ">
+                                      <div class="flex items-center">
+                                        <div class="bg-primary h-3 w-3 rounded-full mr-3"></div> Annual $1000000.00/yearly
+                                      </div>
+                                      <div class="flex items-center">
+                                        <div class="bg-primary h-3 w-3 rounded-full mr-3"></div>Unlimited $10000000.00/lifetime
+                                      </div>
+                                  </div>
                                 </p>
                               </div>
                             </li>
@@ -245,7 +265,7 @@
                                 :style="handleToggle()"
                               >
                                 <p class="p-3 text-gray-900">
-                                  Every story begins by writing it down. As a publishing platform, Freemium allows you to share your stories and ideas with the world.. When you write an article, it can be divided into several small sub-subs and define your own article type.
+                                  Every story begins by writing it down. As a publishing platform, <span class="span"> Freemium </span> allows you to share your stories and ideas with the world. When you write an article, it can be divided into several small sub-subs and define your own article type.
                                 </p>
                               </div>
                             </li>
@@ -269,7 +289,7 @@
                                 :style="handleToggle()"
                               >
                                 <p class="p-3 text-gray-900">
-                                  The Freemium homepage is the place to go to quickly see the latest from your favorite writers and publications on the topics that matter to you most.
+                                  The <span class="span"> Freemium </span> homepage is the place to go to quickly see the latest from your favorite writers and publications on the topics that matter to you most.
                                 </p>
                               </div>
                             </li>
@@ -278,7 +298,7 @@
                 </section>
 
                 {{-- <section class="py-[90px]">
-                    
+
                     <div class="container px-3 mx-auto my-10">
                         <div class="col-12 flex flex-col items-center justify-center">
                             <p class="flex items-center justify-center gap-2 text-[32px] font-neucha">
@@ -300,7 +320,7 @@
                         <div class="group hover:bg-primary hover:text-white hover:-translate-y-2 col-12 md:col-6 lg:col-4 px-3 py-4 rounded-lg text-center shadow-[0px_0px_4px_rgba(0,0,0,0.25)] transition duration-200 ease-in-out">
                             <span class="span font-bold text-md font-poppins group-hover:text-white">Annual Subscription</span>
                             <p class="mt-6 mb-10">
-                                <span class="span font-semibold group-hover:text-white">100$</span> / 
+                                <span class="span font-semibold group-hover:text-white">100$</span> /
                                 Yearly
                             </p>
                             <button type="button"
@@ -310,11 +330,11 @@
                                 <input type="radio" style="display: none;">
                             </button>
                         </div>
-                        
+
                         <div class="group hover:bg-primary hover:text-white hover:-translate-y-2 col-12 md:col-6 lg:col-4 px-3 py-4 rounded-lg text-center shadow-[0px_0px_4px_rgba(0,0,0,0.25)] transition duration-200 ease-in-out">
                             <span class="span font-bold text-md font-poppins group-hover:text-white">Lifetime Subscription</span>
                             <p class="mt-6 mb-10">
-                                <span class="span font-semibold group-hover:text-white">100$</span> / 
+                                <span class="span font-semibold group-hover:text-white">100$</span> /
                                 Yearly
                             </p>
                             <button type="button"
@@ -358,13 +378,13 @@
         <!-- FOOTER -->
 
         @include("layouts.partials.footer")
-        
+
         <script>
             document.addEventListener('alpine:init', () => {
             Alpine.store('accordion', {
                 tab: 0
             });
-            
+
             Alpine.data('accordion', (idx) => ({
                 init() {
                 this.idx = idx;
@@ -393,7 +413,7 @@
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        
+
         <script defer>
 
 
@@ -402,7 +422,7 @@
                 document.documentElement.classList.remove('dark')
                 localStorage.theme = 'light'
             });
-            
+
         </script>
 
         @livewireScripts

@@ -27,14 +27,14 @@
             </div> --}}
             <template x-if="!isLoadingArticle">
                 <div class="container mx-auto flex flex-wrap lg:flex-nowrap gap-6 md:gap-4">
-    
+
                     <div class="col md:mx-0 col-12 lg:col-8 order-1 lg:order-1">
-    
+
                         <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
-                            
+
                             <h2 class="text-md text-[#3A3440] dark:text-white font-bold border border-gray-third rounded-primary dark:border-gray-secondary mb-5 p-2" x-text="content ? content?.title : detailArticle?.title">Judul Artikel
                             </h2>
-    
+
                             <div class="flex items-start flex-wrap gap-4 md:gap-0 justify-between">
                                 <div class="flex gap-3">
                                     <figure>
@@ -42,7 +42,7 @@
                                             <img x-bind:src="
                                                 detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
                                                 ? imgUrl + detailArticle?.author?.photo
-                                                : imgUrl + 'img/user1.png'" 
+                                                : imgUrl + 'img/user1.png'"
                                             src=""
                                             class="w-[50px] h-[50px] bg-gray-secondary rounded-full border-none" alt="">
                                         </div>
@@ -68,16 +68,16 @@
                                     </span>
                                 </div>
                             </div>
-    
+
                             <div class="mt-4">
                                 <figure class="mt-4">
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
-                                        class="w-full h-[345px] bg-gray-secondary rounded-primary" alt="">
+                                        class="w-full h-[500px] bg-gray-secondary rounded-primary" alt="">
                                 </figure>
                                 <p x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </p>
                             </div>
-    
+
                             <div class="flex items-center w-full"
                                 x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between mt-12' : 'justify-end mt-6'">
                                 <div class="flex content-center flex-wrap gap-3" x-bind:class="detailArticle?.tags.length > 0 ? '' : 'hidden'">
@@ -85,13 +85,13 @@
                                         <a class="px-3 py-2 bg-primary text-white dark:bg-slate-third pointer-events-none rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                             x-text="item.category.name"></a>
                                     </template>
-                            
+
                                 </div>
                                 <template x-if="detailArticle?.subarticles.length > 0">
                                     <div class="flex items-center gap-4">
                                         <div class="flex items-center gap-2">
                                             <span x-text="content ? detailArticle?.subarticles?.findIndex(x => x.id == content?.id) + 1 + ' of ' + detailArticle?.subarticles?.length + ' sub-article': ''"></span>
-                                            <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id" 
+                                            <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id"
                                                 x-on:click="
                                                     id = content.id;
                                                     id = detailArticle?.subarticles?.findIndex(x => x.id == id);
@@ -100,7 +100,7 @@
                                                         getSubArticle(id);
                                                     }
                                                     back = true;
-                                                                        
+
                                                 " title="PREV"
                                                 class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                                 <i data-feather="arrow-left" class="w-4 h-4"></i>
@@ -122,11 +122,11 @@
                                 </template>
                             </div>
                         </div>
-    
+
                     </div>
-    
+
                     <div class="col md:mx-0 col-12 lg:col-4 -order-1 lg:order-2">
-    
+
                         <div
                             class="lg:sticky lg:top-24 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
 
@@ -146,7 +146,7 @@
                                         </script>
                                     </li>
                                 </template>
-        
+
                                 <template
                                     x-if="detailArticle?.author?.link_linkedin != null && detailArticle?.author?.link_linkedin != ''">
                                     <li
@@ -161,7 +161,7 @@
                                         </script>
                                     </li>
                                 </template>
-        
+
                                 <template
                                     x-if="detailArticle?.author?.link_instagram != null && detailArticle?.author?.link_instagram != ''">
                                     <li
@@ -176,7 +176,7 @@
                                         </script>
                                     </li>
                                 </template>
-        
+
                                 <template
                                     x-if="detailArticle?.author?.link_twitter != null && detailArticle?.author?.link_twitter != ''">
                                     <li
@@ -191,9 +191,9 @@
                                         </script>
                                     </li>
                                 </template>
-        
+
                             </ul>
-                            
+
                             <h3 class="text-md mt-6 font-semibold">Content</h3>
 
                             <div x-init="fetchMe()"></div>
@@ -202,7 +202,7 @@
                                 <div x-data="{
                                     type: null,
                                 }">
-        
+
                                     <div class="flex items-center w-full gap-2 mb-3" x-bind:class="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1 ? 'mt-5' : ''">
                                         <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
@@ -223,9 +223,9 @@
                                             </button>
                                         </template>
                                     </div>
-                                    
+
                                     <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mt-5 mb-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
-                                        You have to 
+                                        You have to
                                         <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
                                         to Access this
                                     </p>
@@ -234,7 +234,7 @@
                                         <ul class="flex flex-col gap-4 pr-4" x-transition x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-2' : ''">
                                             <template x-for="(item, index) in detailArticle?.subarticles">
                                                 <li x-show="item.type != type" @click="
-                                                    getSubArticle(item.id); 
+                                                    getSubArticle(item.id);
                                                     back = true;
                                                     if(showFlash){flash();}"
                                                     :class="{
@@ -267,7 +267,7 @@
                                                 </li>
                                             </template>
                                             <template x-if="back">
-                                                <li 
+                                                <li
                                                     {{-- @click="content = null; back = false;" --}}
                                                     @click="window.location.reload();"
                                                     class="p-3 rounded-primary shadow-[0px_0px_4px_#7C000B] dark:shadow-lg cursor-pointer bg-primary dark:bg-slate-third text-white hover:translate-x-1 transition duration-200 ease-in-out text-center">
@@ -276,11 +276,11 @@
                                             </template>
                                         </ul>
                                     </div>
-                                
+
                                 </div>
                             </template>
 
-                            
+
                             <template x-if="detailArticle?.subarticles.length == 0">
                                 <ul class="flex flex-col gap-4 mt-2">
                                     <li class="text-base">
@@ -293,7 +293,7 @@
                         </div>
 
                     </div>
-    
+
                 </div>
             </template>
             <template x-if="isLoadingArticle">
