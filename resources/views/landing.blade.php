@@ -79,17 +79,19 @@
                                 <span class="span dark:text-white">INNOVATION</span>
                                 WITH YOURSELF
                             </h1> --}}
-                            <h1 class="text-[64px] font-bebasNeue -mt-5">
+                            <h1 class="text-[64px] leading-[5.5rem] font-bebasNeue -mt-5">
                                 SHARE your
                                 <span class="span dark:text-white">ideas</span>,
-                                <span class="span dark:text-white">insights</span> and
-                                <span class="span dark:text-white">experiences</span>
+                                <div class="-mt-5">
+                                  <span class="span dark:text-white">insights</span> and
+                                  <span class="span dark:text-white">experiences</span>
+                                </div>
                             </h1>
                             {{-- <p class="font-poppins -translate-y-3">
                                 <span class="font-semibold span dark:text-white">Make it real</span>
                                 About what's your think
                             </p> --}}
-                            <p class="font-poppins -translate-y-3 mt-3">
+                            <p class="font-poppins -translate-y-3 mt-8">
                                 <span class="font-semibold span dark:text-white">Bring your ideas to life and </span>
                                 share your thoughts with the world.
                             </p>
