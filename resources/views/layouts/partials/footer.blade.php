@@ -1,4 +1,4 @@
-<footer class="py-8 dark:text-white">
+<footer class="pt-8 pb-6 dark:text-white">
 <div class="container mx-auto flex flex-col items-center">
 
     <h1 class="text-[18px] lg:text-md text-center">
