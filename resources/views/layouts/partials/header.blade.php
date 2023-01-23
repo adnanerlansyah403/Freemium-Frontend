@@ -159,7 +159,7 @@
                         </template>
                         @if($currentRoute != 'homepage')
                             <li class="px-[18px] py-2 hover:bg-white hover:text-black transition duration-200 ease-out">
-                                <a href="{{ route('admin.dashboard.index') }}" class="flex items-center gap-2">
+                                <a href="{{ route('article.list') }}" class="flex items-center gap-2">
                                     <ion-icon name="documents-outline" class="text-[25px]"></ion-icon>
                                     <span>Articles</span>
                                 </a>
