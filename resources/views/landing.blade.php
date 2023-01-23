@@ -53,10 +53,15 @@
         @livewireStyles
 
     </head>
-    <body class="antialiased overflow-x-hidden has-scrollbar bg-white dark:bg-slate-primary">
+    <body class="antialiased overflow-x-hidden has-scrollbar bg-white dark:bg-slate-primary" x-data="user">
 
-        {{-- <x-loading-page /> --}}
-
+        <div x-init="flash()"></div>
+        <div x-show="showFlash" x-init="setTimeout(() => {
+          showFlash = false
+          }, 4000);
+      ">
+            <x-alert />
+        </div>
 
         <!-- HEADER -->
 
