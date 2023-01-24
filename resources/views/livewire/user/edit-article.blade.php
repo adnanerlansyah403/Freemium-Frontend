@@ -25,7 +25,7 @@
         }
         setTimeout(function() {
             $refs.wrapperEditArticle.style.display = 'block';
-        }, 600)
+        }, 400)
     "style="display: none;" x-ref="wrapperEditArticle">
 
     <div x-init="flash()"></div>
@@ -51,7 +51,7 @@
                             <label for="title" class="text-md">Title</label>
                         </div>
                         <input x-model="EditArticle.title" type="text" placeholder="Your text..." name="title" id="title"
-                            class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
+                            class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary dark:border dark:border-white mt-4">
 
                         <template x-if="status_err?.[0]?.title">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -64,7 +64,7 @@
                     <div class="mb-5 col-12 lg:col lg:col-6">
                         <label for="category_id" class="text-md">Category</label>
                         <select x-bind:model="EditArticle && EditArticle.tags ? EditArticle.tags[0].category_id : ''" name="category_id" id="category_id"
-                            class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
+                            class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary dark:border dark:border-white mt-4">
                             <option value=""> Choosen category... </option>
                             <template x-for="(c, index) in categories">
                                 <option :value="c.id" :selected="c.id == EditArticle?.tags?.[0]?.category_id" x-text="c.name">test</option>
@@ -102,7 +102,7 @@
                             }
                         ">
                     <span
-                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4 overflow-y-hidden"
+                        class="relative cursor-pointer flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary dark:border dark:border-white mt-4 overflow-y-hidden"
                         @click="
                             $refs.file.click();
                         ">

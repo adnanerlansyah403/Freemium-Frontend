@@ -54,7 +54,7 @@
                     @if($currentRoute == 'homepage')
                         <button class="block lg:hidden translate-y-[3px] hover:text-opacity-80 transition duration-200 ease-in-out"
                         @click="menuBar = !menuBar"
-                        x-on:mouseover="menuBar = true; $refs.dropdownmenu.style.display = 'none'"
+                        x-on:mouseover="menuBar = true;"
                         >
                             <ion-icon name="menu-outline" class="text-md"></ion-icon>
                         </button>
@@ -63,7 +63,6 @@
                             x-show="menuBar"
                             x-on:mouseleave="
                             menuBar = false;
-                            $refs.dropdownmenu.style.display='none'
                             "
                             x-transition
                             style="display: none;"
@@ -135,7 +134,7 @@
                             type="button"
                             class="flex items-center gap-1 px-3 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
                             @click="dropdownmenu = !dropdownmenu"
-                            x-on:mouseover="dropdownmenu = true; $refs.menuBar.style.display = 'none'"
+                            x-on:mouseover="dropdownmenu = true;"
                             x-data="helpers"
                         >
                             <template x-if="data_user?.photo != null">
@@ -155,7 +154,7 @@
                             x-show="dropdownmenu"
                             x-on:mouseleave="
                             dropdownmenu = false;
-                            $refs.menuBar.style.display='none'"
+                            "
                             x-transition
                             style="z-index: 1;"
                             x-ref="dropdownmenu"
@@ -232,7 +231,7 @@
 
             <div x-data="helpers" class="absolute right-5 top-[125%] xl:-right-1/3 xl:top-[23px] xl:group-hover:right-3 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
 
-                <button id="buttonMode" @click="darkMode()" class="p-1 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
+                <button id="buttonMode" @click="darkMode()" class="p-[6px] text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
                     <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
                 </button>
             </div>

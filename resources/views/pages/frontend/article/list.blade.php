@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="mt-[33px] flex flex-wrap gap-[11px]" x-init="getCategories()">
-                    <select name="category" x-on:change="fetchArticleByCategory($event.target.value)" id="category" class="text-xs py-2.5 px-auto rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white" x-ref="category">
+                    <select name="category" x-on:change="fetchArticleByCategory($event.target.value)" id="category" class="text-sm py-2 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white" x-ref="category">
                         <option value="" @click="getArticle()">  Select a category... </option>
                         <template x-for="(item, index) in categoriesArticle">
                             <option x-bind:value="item.id" x-text="item.name" ></option>
@@ -134,7 +134,7 @@
 
             {{-- wrapper content --}}
 
-            <div class="flex flex-wrap items-center justify-center" x-data="helpers">
+            <div class="flex flex-wrap items-center justify-center w-full" x-data="helpers">
 
                 <div class="flex flex-col flex-wrap items-center justify-center">
 
@@ -172,7 +172,7 @@
                 </div>
 
 
-                <div class="flex flex-wrap items-center justify-center">
+                <div class="flex flex-wrap items-center justify-center w-full">
                     <template x-for="(item, index) in listArticle.length > 1 ? listArticle.slice(0, itemArticle) : listArticle">
                         <div class="content first-of-type:mt-0 mt-[22px]" >
 
@@ -193,12 +193,12 @@
                                             </div>
                                         </div>
                                         <div class="-translate-x-5">
-                                            {{-- <span x-text="item.author.photo == 'null'"></span> --}}
-                                            <template x-if="item.author.photo == null">
-                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+'img/user1.png'" alt="">
-                                            </template>
+                                            {{-- <span x-text="console.log(data_user.photo != undefined)"></span> --}}
                                             <template x-if="item.author.photo != null">
                                                 <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
+                                            </template>
+                                            <template x-if="item.author.photo == null">
+                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+'img/user1.png'" alt="">
                                             </template>
                                         </div>
                                     </div>
@@ -229,9 +229,16 @@
                                     </p>
 
                                 </div>
-                                <div class="bg-[#D9D9D9] rounded-lg max-w-[150px] w-[150px] h-[150px] my-auto mx-5 hidden md:block lg:block col-4">
-                                    <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
-                                </div>
+                                {{-- <span x-text="console.log(item.thumbnail)"></span> --}}
+                                <template x-if="item.thumbnail != ''">
+                                    <div class="bg-[#D9D9D9] rounded-lg max-w-[150px] w-[150px] h-[150px] my-auto mx-5 hidden md:block lg:block col-4">
+                                        <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill rounded-lg" alt="">
+                                    </div>
+                                </template>
+                                <template x-if="item.thumbnail == ''">
+                                    <div class="bg-slate-secondary dark:bg-white rounded-lg max-w-[150px] w-[150px] h-[150px] my-auto mx-5 hidden md:block lg:block col-4">
+                                    </div>
+                                </template>
                             </div>
                             <script>
                                 feather.replace()

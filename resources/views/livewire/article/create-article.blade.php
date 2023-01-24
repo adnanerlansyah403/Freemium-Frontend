@@ -16,7 +16,7 @@
     <div style="display: none;" x-ref="wrapperCreateArticle"
     x-init="setTimeout(function() {
         $refs.wrapperCreateArticle.style.display = 'block';
-    }, 600)">
+    }, 400)">
 
         <style>
 
@@ -201,6 +201,35 @@
             <ul>
                 <li class="mb-4">
                     <b class="text-primary dark:text-white border border-primary dark:border-white py-1 px-2">Validation</b>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">1.</b>
+                    <span>The title must longer than 10 character</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">2.</b>
+                    <span>The article must have at least 1 category</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">3.</b>
+                    <span>The article must have a thumbnail</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">4.</b>
+                    <span>The thumbnail must be an image with size less than 1 MB</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">5.</b>
+                    <span>The content length must be more than 100 character</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">6.</b>
+                    <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
+                </li>
+            </ul>
+            <ul class="mt-4">
+                <li class="mb-4">
+                    <b class="text-primary dark:text-white border border-primary dark:border-white py-1 px-2">Write a Content</b>
                 </li>
                 <li class="flex items-start gap-2">
                     <b class="text-primary dark:text-white">1.</b>

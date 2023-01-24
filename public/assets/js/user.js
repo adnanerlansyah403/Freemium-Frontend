@@ -513,6 +513,7 @@ document.addEventListener('alpine:init', () => {
         this.isLoadingMyArticle = false;
         this.isLoadMore = false;
         this.itemMyArticle += 3;
+        this.fetchListMyArticle();
       }, 600)
     },
 
@@ -533,7 +534,7 @@ document.addEventListener('alpine:init', () => {
             if (data.message === 'Unauthorized') {
               window.location.replace(this.baseUrl + 'login')
             }
-            this.listMyArticle = data;
+            this.listMyArticle = data.data;
             this.isLoading = false;
 
           })
@@ -543,23 +544,22 @@ document.addEventListener('alpine:init', () => {
     searchMyArticle(keyword) {
       const token = localStorage.getItem('token')
 
-      this.isLoading = true,
-        fetch(`${this.apiUrl}myArticle?search=${keyword}`, {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+      // this.isLoading = true,
+      fetch(`${this.apiUrl}myArticle?search=${keyword}`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          data = await response.json();
+          if (data.message === 'Unauthorized') {
+            window.location.replace(this.baseUrl + 'login')
           }
-        })
-          .then(async (response) => {
-            data = await response.json();
-            if (data.message === 'Unauthorized') {
-              window.location.replace(this.baseUrl + 'login')
-            }
-            this.listMyArticle = data;
-            this.isLoading = false;
+          this.listMyArticle = data.data;
 
-          })
+        })
 
     },
 
@@ -1553,7 +1553,6 @@ document.addEventListener('alpine:init', () => {
       if (string.length > max) {
         return string.substring(0, max) + "..."
       }
-      console.log(string);
       return string;
     },
 
