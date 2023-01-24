@@ -35,7 +35,9 @@
 
         {{-- Highlight Code CSS --}}
         
-        {{-- <link rel="stylesheet" href="{{ asset("assets/css/highlight/styles/atom-one-dark.min.css") }}"> --}}
+        {{-- <link rel="stylesheet" href="{{ asset("assets/libs/highlight/styles/atom-one-dark.min.css") }}"> --}}
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script> --}}
 
         {{-- Prism Code CSS --}}
         
@@ -130,7 +132,7 @@
                     force_br_newlines : true,
                     force_p_newlines : false,
                     forced_root_block : false,
-                    cleanup : true
+                    cleanup : true,
                 });
                 tinymce.init({
                     selector: '#sub_content',
@@ -171,7 +173,7 @@
 
         @livewireScripts
 
-        <script src="{{ asset("assets/js/prism.js") }}"></script>
+        {{-- <script src="{{ asset("assets/libs/highlight/highlight.min.js") }}"></script> --}}
 
     </body>
 </html>
