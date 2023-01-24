@@ -131,7 +131,11 @@
                     </div>
 
                 <div class="mb-5 col-12">
-                    <label for="text" class="text-md">Content</label><br>
+                    <div class="flex justify-between items-center">
+                        <label for="text" class="text-md">Content</label><br>
+                        <p><strong>Shift + Enter</strong> to Pressing enter once</p>
+                    </div>
+
                     <textarea id="content" placeholder="Your content..."
                     class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white dark:bg-slate-secondary">
                     </textarea>
