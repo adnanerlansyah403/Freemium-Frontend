@@ -922,7 +922,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?type=free`, {
+      fetch(`${this.apiUrl}article?type=free&search=${this.keywordArticle}`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -944,7 +944,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?type=paid`, {
+      fetch(`${this.apiUrl}article?type=paid&search=${this.keywordArticle}`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -1213,7 +1213,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?category=${categoryId}`, {
+      fetch(`${this.apiUrl}article?category=${categoryId}&search=${this.keywordArticle}`, {
         method: "GET"
       })
         .then(async (response) => {
