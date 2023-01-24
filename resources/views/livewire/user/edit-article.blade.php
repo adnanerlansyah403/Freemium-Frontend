@@ -28,7 +28,7 @@
         }, 600)
     "style="display: none;" x-ref="wrapperEditArticle">
 
-    {{-- <div x-init="flash()"></div> --}}
+    <div x-init="flash()"></div>
     <div x-show="showFlash">
         <x-alert />
     </div>
