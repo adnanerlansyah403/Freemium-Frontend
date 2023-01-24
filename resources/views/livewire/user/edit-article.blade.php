@@ -151,7 +151,7 @@
         <div class="relative container mx-auto mt-4" x-data="{editSub: 0,}">
 
 
-            <form class="w-full my-1 px-5 lg:px-0 dark:text-white">
+            <div class="w-full my-1 px-5 lg:px-0 dark:text-white">
 
                 <p class="font-semibold text-sm lg:text-base mb-2">
                     *If you make three paid sub contents, then you must have to create 3 free content first.
@@ -230,121 +230,123 @@
                     </div>
                 </template>
 
-                <div class="flex flex-wrap lg:flex-nowrap" x-data="helpers">
-                    <div class="mb-5 col-12">
-                        <div class="flex justify-between">
-                            <label for="sub_title" class="text-md">Title</label>
-
-                            <template x-if="EditArticle?.subarticles?.[editSub]?.created_at != undefined || EditArticle?.subarticles?.[editSub]?.created_at != null">
-                                <p class="flex items-center gap-2 mb-4">
-                                    <b>Created At : </b>
-                                    <span x-show="EditArticle?.subarticles?.[editSub]?.created_at" x-text="convertDate(EditArticle?.subarticles?.[editSub]?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
-                                    setTimeout(function() {
-                                        $refs.dateSubArticle.style.display = 'block';
-                                    }, 500)
-                                " x-ref="dateSubArticle"></span>
-                                </p>
+                <div x-show="EditArticle?.subarticles?.length">
+                    <div class="flex flex-wrap lg:flex-nowrap" x-data="helpers">
+                        <div class="mb-5 col-12">
+                            <div class="flex justify-between">
+                                <label for="sub_title" class="text-md">Title</label>
+    
+                                <template x-if="EditArticle?.subarticles?.[editSub]?.created_at">
+                                    <p class="flex items-center gap-2 mb-4">
+                                        <b>Created At : </b>
+                                        <span x-show="EditArticle?.subarticles?.[editSub]?.created_at" x-text="convertDate(EditArticle?.subarticles?.[editSub]?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
+                                        setTimeout(function() {
+                                            $refs.dateSubArticle.style.display = 'block';
+                                        }, 500)
+                                    " x-ref="dateSubArticle"></span>
+                                    </p>
+                                </template>
+    
+                            </div>
+                            <input x-bind:value="EditArticle?.subarticles?.[editSub]?.title" x-on:change="EditArticle.subarticles[editSub].title = $event.target.value" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
+                                class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
+                            <template x-if="status_err?.[1]?.title">
+                                <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                    <span class="span-danger" x-text="status_err?.[1]?.title[0]">Validation Error</span>
+                                </div>
                             </template>
-
                         </div>
-                        <input x-bind:value="EditArticle?.subarticles?.[editSub]?.title" x-on:change="EditArticle.subarticles[editSub].title = $event.target.value" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
-                            class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
-                        <template x-if="status_err?.[1]?.title">
+    
+                    </div>
+    
+                    <div class="mb-5">
+                        <label for="sub_thumbnail" class="text-md">Thumbnail</label>
+                        <input x-on:change="EditArticle.subarticles[editSub].thumbnail = Object.values($event.target.files)" type="file" name="thumbnail_subarticle" placeholder="Your thumbnail..." hidden name="sub_thumbnail" id="sub_thumbnail"
+                            x-ref="filesubarticle" @change="
+                                if ($refs.filesubarticle) {
+                                    $refs.iconimagesubarticle.style.display = 'none';
+                                    var reader = new FileReader();
+                                    reader.readAsDataURL($refs.filesubarticle.files[0]);
+                                    reader.onload = function (e) {
+                                        EditArticle.subarticles[editSub].thumbnail_1 = e.target.result;
+                                        EditArticle.subarticles[editSub].thumbnail_1_alt = $refs.filesubarticle.files[0].name;
+                                    }
+                                }
+                            ">
+                        <span
+                            class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4 overflow-y-hidden"
+                            @click="
+                                $refs.filesubarticle.click();
+                            ">
+                            <img x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                            <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
+                                x-ref="iconimagesubarticle">
+                            </i>
+                            <p x-show="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-text="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" class="filenamesubarticle absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
+                        </span>
+    
+                        <template x-if="status_err?.[1]?.thumbnail">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                <span class="span-danger" x-text="status_err?.[1]?.title[0]">Validation Error</span>
+                                <span class="span-danger" x-text="status_err?.[1]?.thumbnail[0]">Validation Error</span>
                             </div>
                         </template>
                     </div>
-
-                </div>
-
-                <div class="mb-5">
-                    <label for="sub_thumbnail" class="text-md">Thumbnail</label>
-                    <input x-on:change="EditArticle.subarticles[editSub].thumbnail = Object.values($event.target.files)" type="file" name="thumbnail_subarticle" placeholder="Your thumbnail..." hidden name="sub_thumbnail" id="sub_thumbnail"
-                        x-ref="filesubarticle" @change="
-                            if ($refs.filesubarticle) {
-                                $refs.iconimagesubarticle.style.display = 'none';
-                                var reader = new FileReader();
-                                reader.readAsDataURL($refs.filesubarticle.files[0]);
-                                reader.onload = function (e) {
-                                    EditArticle.subarticles[editSub].thumbnail_1 = e.target.result;
-                                    EditArticle.subarticles[editSub].thumbnail_1_alt = $refs.filesubarticle.files[0].name;
-                                }
-                            }
-                        ">
-                    <span
-                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4 overflow-y-hidden"
-                        @click="
-                            $refs.filesubarticle.click();
-                        ">
-                        <img x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                        <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
-                            x-ref="iconimagesubarticle">
-                        </i>
-                        <p x-show="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-text="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" class="filenamesubarticle absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
-                    </span>
-
-                    <template x-if="status_err?.[1]?.thumbnail">
-                        <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[1]?.thumbnail[0]">Validation Error</span>
-                        </div>
-                    </template>
-                </div>
-
-                <div class="mb-5 col-12">
-                    <label for="sub_content" class="text-md">Content</label><br>
-                    <textarea x-text="EditArticle?.subarticles?.[editSub]?.description" name="sub_description" id="sub_content" placeholder="Your content..."
-                        class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
-                    </textarea>
-                    <template x-if="setTiny?.('sub_content', EditArticle?.subarticles?.[editSub]?.description);"></template>
-
-
-                    <template x-if="status_err?.[1]?.description">
-                        <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[1]?.description[0]">Validation Error</span>
-                        </div>
-                    </template>
-                </div>
-
-                <div class="mb-5 col-12">
-                    <span class="text-md">Choose Your Plan</span>
-                    <div class="flex items-center gap-2 mt-2">
-                        <label for="free" class="flex items-center gap-1">
-                            <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'free'" x-on:change="EditArticle.subarticles[editSub].type = $event.target.value">
-                            <span class="text-base">Free</span>
-                        </label>
-                        <label for="paid" class="flex items-center gap-1">
-                            <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'paid'" x-on:change="EditArticle.subarticles[editSub].type = $event.target.value">
-                            <span class="text-base">Member-Only</span>
-                        </label>
+    
+                    <div class="mb-5 col-12">
+                        <label for="sub_content" class="text-md">Content</label><br>
+                        <textarea x-text="EditArticle?.subarticles?.[editSub]?.description" name="sub_description" id="sub_content" placeholder="Your content..."
+                            class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
+                        </textarea>
+                        <template x-if="setTiny?.('sub_content', EditArticle?.subarticles?.[editSub]?.description);"></template>
+    
+    
+                        <template x-if="status_err?.[1]?.description">
+                            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                <span class="span-danger" x-text="status_err?.[1]?.description[0]">Validation Error</span>
+                            </div>
+                        </template>
                     </div>
-                    <p class="mt-4">*Get Royalty for Author</p>
-
-                    <template x-if="status_err?.[1]?.type">
-                        <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[1]?.type[0]">Validation Error</span>
+    
+                    <div class="mb-5 col-12">
+                        <span class="text-md">Choose Your Plan</span>
+                        <div class="flex items-center gap-2 mt-2">
+                            <label for="free" class="flex items-center gap-1">
+                                <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'free'" x-on:change="EditArticle.subarticles[editSub].type = $event.target.value">
+                                <span class="text-base">Free</span>
+                            </label>
+                            <label for="paid" class="flex items-center gap-1">
+                                <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'paid'" x-on:change="EditArticle.subarticles[editSub].type = $event.target.value">
+                                <span class="text-base">Member-Only</span>
+                            </label>
                         </div>
-                    </template>
-                    <template x-if="status_err?.[1]?.min_free">
-                        <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                            <span class="span-danger" x-text="status_err?.[1]?.min_free[0]">Validation Error</span>
-                        </div>
-                    </template>
+                        <p class="mt-4">*Get Royalty for Author</p>
+    
+                        <template x-if="status_err?.[1]?.type">
+                            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                <span class="span-danger" x-text="status_err?.[1]?.type[0]">Validation Error</span>
+                            </div>
+                        </template>
+                        <template x-if="status_err?.[1]?.min_free">
+                            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                <span class="span-danger" x-text="status_err?.[1]?.min_free[0]">Validation Error</span>
+                            </div>
+                        </template>
+                    </div>
+    
+                    <div class="flex items-center justify-center my-10">
+                        <button @click.prevent="updateSub(editSub)"
+                            class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                            Save
+                        </button>
+                    </div>
                 </div>
 
-                <div class="flex items-center justify-center my-10">
-                    <button @click.prevent="updateSub(editSub)"
-                        class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                        Save
-                    </button>
-                </div>
-
-            </form>
+            </div>
 
         </div>
 
