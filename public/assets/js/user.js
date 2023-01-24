@@ -619,16 +619,19 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           data = await response.json();
 
-          if (!data.status) {
+          if (data.status) {
             this.status_err[0] = data.message;
+            this.showFlash = true;
+            this.message = data.message;
           }
           else {
             this.status_err[0] = null;
-            this.showFlash = true;
-            this.message = data.message;
-            localStorage.setItem('showFlash', true);
-            localStorage.setItem('message', data.message);
           }
+
+          setTimeout(() => {
+            this.showFlash = false;
+          }, 4000);
+
           this.isLoading = false;
         }).catch(error => {
           console.log(error);
@@ -674,18 +677,20 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           sub = await response.json();
 
-          if (!sub.status) {
-            this.status_err[1] = sub.message;
-          }
-          else {
+          if (sub.status) {
             editSub.id = sub.data.id;
             this.status_err[1] = null;
             this.message = sub.message;
             this.showFlash = true;
-            setTimeout(() => {
-              this.showFlash = false;
-            }, 4000);
           }
+          else {
+            this.status_err[1] = sub.message;
+
+          }
+          setTimeout(() => {
+            this.showFlash = false;
+          }, 4000);
+
           this.isLoading = false;
         })
 
