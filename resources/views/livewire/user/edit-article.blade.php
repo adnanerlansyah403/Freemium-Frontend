@@ -122,7 +122,10 @@
                 </div>
 
                 <div class="mb-5 col-12">
-                    <label for="content" class="text-md">Content</label><br>
+                    <div class="flex justify-between items-center mb-5">
+                        <label for="content" class="text-md">Content</label><br>
+                        <p><strong>Shift + Enter</strong> to Pressing enter once</p>
+                    </div>
                     <textarea
                     x-text="EditArticle?.description" name="description" id="content" placeholder="Your content..."
                         class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
@@ -295,7 +298,10 @@
                     </div>
     
                     <div class="mb-5 col-12">
-                        <label for="sub_content" class="text-md">Content</label><br>
+                        <div class="flex justify-between items-center mb-5">
+                            <label for="sub_content" class="text-md">Content</label><br>
+                            <p><strong>Shift + Enter</strong> to Pressing enter once</p>
+                        </div>
                         <textarea x-text="EditArticle?.subarticles?.[editSub]?.description" name="sub_description" id="sub_content" placeholder="Your content..."
                             class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                         </textarea>
