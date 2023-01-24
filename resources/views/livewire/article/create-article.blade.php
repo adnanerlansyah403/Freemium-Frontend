@@ -36,7 +36,7 @@
             }
 
             .ck-content {
-                height: 500px;
+                /* height: 500px; */
             }
 
             input[type="radio"] {
@@ -56,19 +56,19 @@
                         <div class="mb-5 col-12 lg:col-6">
                             <label for="text" class="text-md">Title</label>
                             <input id="title"  type="text" placeholder="Your text..."
-                                class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
-                                <template x-if="status_err.title">
-                                    <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                        <span class="span-danger" x-text="status_err.title[0]">Validasi Error</span>
-                                    </div>
-                                </template>
+                                class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none border dark:border-white rounded-primary bg-white dark:bg-slate-secondary mt-4">
+                            <template x-if="status_err.title">
+                                <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                    <span class="span-danger" x-text="status_err.title[0]">Validasi Error</span>
+                                </div>
+                            </template>
                         </div>
 
                         <div class="mb-5 col-12 lg:col lg:col-6" x-data="articles">
                             <div x-init="getCategories()"></div>
                             <label for="text" class="text-md">Category</label>
-                            <select name="category_id" id="" class="categories px-auto py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white  dark:bg-slate-secondary mt-4" >
+                            <select name="category_id" id="" class="categories px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white  dark:bg-slate-secondary mt-4" >
                                 <option value=""> Choosen category... </option>
                                 <template x-for="category in categoriesArticle">
                                     <option x-bind:value="category.id" x-text="category.name">HTML</option>
@@ -133,7 +133,7 @@
                 <div class="mb-5 col-12">
                     <label for="text" class="text-md">Content</label><br>
                     <textarea id="content" placeholder="Your content..."
-                    class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary">
+                    class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white dark:bg-slate-secondary">
                     </textarea>
                     <template x-if="status_err.description">
                         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -198,30 +198,35 @@
         {{-- INSTRUCTIONS --}}
 
         <x-modal-instruction>
-            <li class="flex items-start gap-2">
-                <b class="text-primary">1.</b>
-                <span>The title must longer than 10 character</span>
-            </li>
-            <li class="flex items-start gap-2">
-                <b class="text-primary">2.</b>
-                <span>The article must have at least 1 category</span>
-            </li>
-            <li class="flex items-start gap-2">
-                <b class="text-primary">3.</b>
-                <span>The article must have a thumbnail</span>
-            </li>
-            <li class="flex items-start gap-2">
-                <b class="text-primary">4.</b>
-                <span>The thumbnail must be an image with size less than 1 MB</span>
-            </li>
-            <li class="flex items-start gap-2">
-                <b class="text-primary">5.</b>
-                <span>The content length must be more than 100 character</span>
-            </li>
-            <li class="flex items-start gap-2">
-                <b class="text-primary">6.</b>
-                <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
-            </li>
+            <ul>
+                <li class="mb-4">
+                    <b class="text-primary dark:text-white border border-primary dark:border-white py-1 px-2">Validation</b>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">1.</b>
+                    <span>The title must longer than 10 character</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">2.</b>
+                    <span>The article must have at least 1 category</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">3.</b>
+                    <span>The article must have a thumbnail</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">4.</b>
+                    <span>The thumbnail must be an image with size less than 1 MB</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">5.</b>
+                    <span>The content length must be more than 100 character</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">6.</b>
+                    <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
+                </li>
+            </ul>
         </x-modal-instruction>
 
         <x-top-button />
@@ -283,7 +288,7 @@
                                     <div class="mb-5 col-12 lg:col-12">
                                         <label for="text" class="text-md">Title</label>
                                         <input data-id="${this.index}" type="text" placeholder="Your text..."
-                                            class="title_sub dark:text-white px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-primary border border-white hover:bg-white mt-4">
+                                            class="title_sub dark:text-white px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border-white rounded-primary bg-white dark:bg-slate-primary border border-white hover:bg-white mt-4">
                                     </div>
 
                                 </div>
@@ -307,7 +312,7 @@
                                             }
                                         ">
                                     <span
-                                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white border border-primary dark:bg-slate-primary dark:border-white mt-4 overflow-y-hidden"
+                                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white border border-primary dark:bg-slate-primary dark:border-white mt-4 overflow-y-hidden"
                                         @click="
                                             $refs.file${this.index}.click();
                                         "
@@ -330,7 +335,7 @@
                                 <div class="mb-5 col-12" id="content${this.index}" class="content${this.index}">
                                     <label for="text" class="text-md">Content</label><br>
                                     <textarea id="editor${this.index}" placeholder="Your content..."
-                                    class="description_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
+                                    class="description_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white">
                                     </textarea>
                                 </div>
 

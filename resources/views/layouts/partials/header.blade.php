@@ -10,29 +10,29 @@
 
         @if($currentRoute == 'homepage')
             <ul class="hidden lg:flex items-center gap-10">
-                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary dark:before:bg-slate-third before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
                     <a href="#header">
-                        <span class="span">H</span>ome
+                        <span class="span dark:text-slate-third">H</span>ome
                     </a>
                 </li>
-                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary dark:before:bg-slate-third before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
                     <a href="{{ route('article.list') }}">
-                        <span class="span">A</span>rticle
+                        <span class="span dark:text-slate-third">A</span>rticle
                     </a>
                 </li>
-                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary dark:before:bg-slate-third before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
                     <a href="#about">
-                        <span class="span">A</span>bout
+                        <span class="span dark:text-slate-third">A</span>bout
                     </a>
                 </li>
-                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary dark:before:bg-slate-third before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
                     <a href="#faq">
-                        <span class="span">F</span>aq
+                        <span class="span dark:text-slate-third">F</span>aq
                     </a>
                 </li>
-                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
+                <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary dark:before:bg-slate-third before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
                     <a href="#contact">
-                        <span class="span">C</span>ontact
+                        <span class="span dark:text-slate-third">C</span>ontact
                     </a>
                 </li>
             </ul>
@@ -46,8 +46,8 @@
                 }">
                     <template x-if="!isLogedIn">
                         <div>
-                            <a href="{{ route('login') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
-                            <a href="{{ route('register') }}" class="text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
+                            <a href="{{ route('login') }}" class=" {{ $currentRoute == 'login' ? 'bg-primary text-white dark:bg-slate-third' : '' }} text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
+                            <a href="{{ route('register') }}" class=" {{ $currentRoute == 'register' ? 'bg-primary dark:bg-slate-third text-white' : '' }} text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
                         </div>
                     </template>
 

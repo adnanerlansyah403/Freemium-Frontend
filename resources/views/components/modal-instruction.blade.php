@@ -15,20 +15,11 @@
                 <span>
                     <ion-icon name="alert-circle-outline" class="text-lg"></ion-icon>
                 </span>
-                <b class="-translate-y-[2px]">Requirements for Creating Articles</b>
+                <b class="-translate-y-[2px]">Requirements for Creating Article</b>
             </p>
-            <ul class="my-4">
-                {{-- <li>
-                    1. Title Harus lebih dari 10 angka
-                </li>
-                <li>
-                    2. Title Harus lebih dari 10 angka
-                </li>
-                <li>
-                    3. Title Harus lebih dari 10 angka
-                </li> --}}
+            <div class="flex items-start gap-2 flex-wrap my-4">
                 {{ $slot }}
-            </ul>
+            </div>
             <div class="flex items-center justify-center" @click="modalActive = false;">
                 <button class="px-4 py-2 my-2 border border-primary dark:border-white hover:text-opacity-50 dark:hover:bg-slate-third dark:hover:text-white transition duration-20 
                 ease-in-out">

@@ -41,7 +41,7 @@ document.addEventListener('alpine:init', () => {
           this.showFlash = false;
           localStorage.removeItem("showFlash");
           localStorage.removeItem("message");
-        }, 4000);
+        }, 3500);
       }
     },
 
@@ -516,11 +516,35 @@ document.addEventListener('alpine:init', () => {
       }, 600)
     },
 
+    keywordMyArticle: '',
     fetchListMyArticle() {
       const token = localStorage.getItem('token')
 
       this.isLoading = true,
         fetch(`${this.apiUrl}myArticle`, {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+          }
+        })
+          .then(async (response) => {
+            data = await response.json();
+            if (data.message === 'Unauthorized') {
+              window.location.replace(this.baseUrl + 'login')
+            }
+            this.listMyArticle = data;
+            this.isLoading = false;
+
+          })
+
+    },
+
+    searchMyArticle(keyword) {
+      const token = localStorage.getItem('token')
+
+      this.isLoading = true,
+        fetch(`${this.apiUrl}myArticle?search=${keyword}`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
@@ -709,21 +733,29 @@ document.addEventListener('alpine:init', () => {
 
         .then((response) => {
           if (response.ok) {
-            // Swal.fire({
-            //   position: 'top-end',
-            //   icon: 'success',
-            //   title: 'Transaction Process',
-            //   showConfirmButton: false,
-            //   timer: 1500
-            // })
-            window.location.replace(this.baseUrl + 'transaction/details')
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Transaction Process',
+              background: '#7C030B',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            setTimeout(function () {
+              const baseUrl = "http://127.0.0.1:8000/";
+              window.location.replace(baseUrl + 'transaction/details')
+            }, 3500)
           } else {
-            // Swal.fire({
-            //   icon: 'error',
-            //   title: 'Choose Plan First!',
-            //   confirmButtonColor: 'primary',
-            //   position: 'center'
-            // })
+            Swal.fire({
+              icon: 'error',
+              title: 'Choose Plan First!',
+              titleColor: '#FFFF',
+              iconColor: '#FFFF',
+              color: '#FFFF',
+              background: '#7C030B',
+              position: 'center',
+            })
+
           }
         });
 
@@ -778,9 +810,20 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           data = await response.json();
           if (data.status) {
-            localStorage.setItem('showFlash', true)
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Transaction Success',
+              background: '#7C030B',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            localStorage.setItem('showFlash', true, 5000)
             localStorage.setItem('message', data.message);
-            window.location.replace(`${this.baseUrl}profile`);
+            setTimeout(function () {
+              const baseUrl = "http://127.0.0.1:8000/";
+              window.location.replace(`${baseUrl}profile`);
+            }, 3500)
           }
         })
         .catch(error => {
@@ -1053,10 +1096,10 @@ document.addEventListener('alpine:init', () => {
         this.isLoadingArticle = false;
         localStorage.setItem('message', 'article successfully created!');
         localStorage.setItem('showFlash', true);
-      }
-      if (!this.category_err) {
-        this.isLoadingArticle = false;
-        return window.location.replace(`${this.baseUrl}myarticle`)
+        if (!this.category_err) {
+          this.isLoadingArticle = false;
+          return window.location.replace(`${this.baseUrl}myarticle`)
+        }
       }
     },
 

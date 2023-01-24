@@ -34,6 +34,14 @@ Route::get('/', function () {
     return view("landing");
 })->name('homepage');
 
+Route::get('/passwordReset', function () {
+    return view('pages.auth.password-reset');
+})->name('password-reset');
+
+Route::get('/newPassword/{token}', function () {
+    return view('pages.auth.new-password');
+})->name('new-password');
+
 Route::get('/login', function () {
     return view('pages.auth.login');
 })->name('login');

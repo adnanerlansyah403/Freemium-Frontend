@@ -62,7 +62,18 @@ document.addEventListener('alpine:init', () => {
       const token = localStorage.getItem('token')
       this.isLogedIn = token ? true : false
 
+      let url = window.location.href;
+      let lastPath = url.substring(url.lastIndexOf('/'));
+
+
       if (this.isLogedIn) {
+        if (lastPath == '/passwordReset') {
+          this.isLoadingAuth = false;
+          localStorage.setItem('showFlash', true)
+          localStorage.setItem('message', 'Oops, you must have to logged out first');
+          this.flash();
+          return window.history.back();
+        }
         this.isLoadingAuth = false;
         return window.location.href = this.baseUrl;
       } else {
@@ -121,6 +132,68 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
+    passwordReset() {
+      this.isLoadingAuth = true;
+      let params = {
+        email: this.email
+      }
+      fetch(this.apiUrl + 'passwordReset', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params)
+      })
+        .then(async response => {
+          user = await response.json();
+          console.log(user);
+          if (!user.status) {
+            // localStorage.setItem('showFlash', false)
+            // localStorage.setItem('message', user.message);
+            // this.showFlash = true;
+            // this.message = user.message;
+            this.status_err = [user.message];
+            this.isLoadingAuth = false;
+            // this.flash();
+          } else {
+            this.isLoadingAuth = false;
+            localStorage.setItem('showFlash', true)
+            localStorage.setItem('message', user.message);
+            this.flash();
+            window.location.replace(this.baseUrl + 'passwordReset');
+          }
+        });
+    },
+
+    newPassword(token) {
+      this.isLoadingAuth = true;
+      let params = {
+        password: this.password
+      }
+      fetch(`${this.apiUrl}passwordReset/${token}`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params)
+      })
+        .then(async response => {
+          user = await response.json();
+          console.log(user);
+          if (!user.status) {
+            this.isLoadingAuth = false;
+            localStorage.setItem('showFlash', true)
+            localStorage.setItem('message', user.message);
+            this.flash();
+          } else {
+            this.isLoadingAuth = false;
+            localStorage.setItem('showFlash', true)
+            localStorage.setItem('message', user.message);
+            this.flash();
+            window.location.replace(this.baseUrl + 'login')
+          }
+        });
+    },
     register() {
       let params = {
         name: this.name,

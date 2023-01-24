@@ -13,6 +13,45 @@
 
 @section('content')
 
+    <style>
+        code,p,strong,em {
+            display: inline;
+        }
+        blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
+            margin: unset;
+        }
+        #description h1 {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        #description h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        #description h3 {
+            font-size: 1.17em;
+            font-weight: bold;
+        }
+
+        #description h4 {
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        #description h5 {
+            font-size: 0.83em;
+            font-weight: bold;
+        }
+
+        #description h6 {
+            font-size: 0.67em;
+            font-weight: bold;
+        }
+
+    </style>
+
     <section class="pt-[140px] pb-[100px] dark:text-white" x-data="user" >
         <div x-init="checkSession()"></div>
         <div x-data="articles">
@@ -28,7 +67,7 @@
             <template x-if="!isLoadingArticle">
                 <div class="container mx-auto flex flex-wrap lg:flex-nowrap gap-6 md:gap-4">
 
-                    <div class="col md:mx-0 col-12 lg:col-8 order-1 lg:order-1">
+                    <div class="relative col md:mx-0 col-12 lg:col-8 order-1 lg:order-1">
 
                         <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
 
@@ -59,11 +98,19 @@
                                         </p>
                                     </span>
                                     <span class="flex items-center gap-1 translate-y-[1px]">
-                                        <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
+                                        <template x-if="detailArticle.total_views_sum > 0">
+                                            <span>
+                                                <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
+                                                <script>
+                                                    feather.replace()
+                                                </script>
+                                            </span>
+                                        </template>
                                         <p>
                                             <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span>
                                             <span x-text="content ? content?.total_views : detailArticle?.total_views_sum">
                                             </span>
+                                            Views
                                         </p>
                                     </span>
                                 </div>
@@ -74,8 +121,8 @@
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
                                         class="w-full h-[500px] bg-gray-secondary rounded-primary" alt="">
                                 </figure>
-                                <p x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
-                                </p>
+                                <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
+                                </div>
                             </div>
 
                             <div class="flex items-center w-full"
@@ -130,9 +177,9 @@
                         <div
                             class="lg:sticky lg:top-24 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
 
-                            <ul class="relative left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 dark:shadow-[0px_0px_4px_#fff] w-max p-2 rounded-lg">
+                            <ul class="relative left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 w-max p-2 rounded-lg">
 
-                                <li x-show="detailArticle?.author?.link_facebook && detailArticle?.author?.link_facebook != ''"
+                                <li x-show="detailArticle?.author?.link_facebook != null && detailArticle?.author?.link_facebook != ''"
                                     class="p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
                                     <a x-bind:href="detailArticle?.author?.link_facebook" class="text-md" target="_blank">
                                         <i data-feather="facebook"></i>
@@ -291,7 +338,7 @@
             </template>
         </div>
 
-        <div class="lg:hidden">
+        <div class="">
             <x-top-button />
         </div>
 
