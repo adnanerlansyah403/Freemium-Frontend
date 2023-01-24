@@ -876,6 +876,19 @@ document.addEventListener('alpine:init', () => {
     showFlash: false,
     message: '',
 
+    // INPUTS ARTICLE
+    filtersKey: [],
+
+    // CATEGORIES ARTICLE
+    sortCol: null,
+    sortAsc: false,
+    search: '',
+
+    // CREATE ARTICLE
+    sub_article_err: '',
+    status_sub_err: false,
+
+
     flash() {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
@@ -894,9 +907,6 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
-    // INPUTS ARTICLE
-    keywordArticle: '',
-
     getArticle() {
 
       this.isLoadingArticle = true;
@@ -912,49 +922,6 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("all").classList.add('active');
           // document.getElementById("free").classList.remove('active');
           // document.getElementById("paid").classList.remove('active');
-
-          this.isLoadingArticle = false;
-
-        })
-    },
-
-    getFreeArticle() {
-
-      this.isLoadingArticle = true;
-
-      fetch(`${this.apiUrl}article?type=free`, {
-        method: "GET"
-      })
-        .then(async (response) => {
-          const data = await response.json();
-          this.listArticle = data.data;
-
-          // DOM
-          // document.getElementById("all").classList.remove('active');
-          // document.getElementById("free").classList.add('active');
-          // document.getElementById("paid").classList.remove('active');
-
-          this.isLoadingArticle = false;
-
-        })
-    },
-
-
-    getPaidArticle() {
-
-      this.isLoadingArticle = true;
-
-      fetch(`${this.apiUrl}article?type=paid`, {
-        method: "GET"
-      })
-        .then(async (response) => {
-          const data = await response.json();
-          this.listArticle = data.data
-
-          // DOM
-          // document.getElementById("all").classList.remove('active');
-          // document.getElementById("free").classList.remove('active');
-          // document.getElementById("paid").classList.add('active');
 
           this.isLoadingArticle = false;
 
@@ -996,9 +963,9 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
-    async getSubArticle(id = 1) {
+    getSubArticle(id = 1) {
       this.isLoading = true;
-      await fetch(`${this.apiUrl}sub-article/${id}`, {
+      fetch(`${this.apiUrl}sub-article/${id}`, {
         method: "GET",
         headers: {
           'Authorization': localStorage.getItem('token')
@@ -1024,25 +991,11 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
-    searchArticle(keyword) {
-
-      this.isLoadingArticle = true;
-
-      fetch(`${this.apiUrl}article?search=${keyword}`, {
-        method: 'GET',
-      })
-        .then(async (response) => {
-          const data = await response.json();
-          this.listArticle = data.data;
-          this.isLoadingArticle = false;
-        })
-
-    },
-
     async fetchCategory() {
       category = await fetch(`${this.apiUrl}category`);
       this.categoriesArticle = await category.json();
     },
+
     async fetchPaginationCategory() {
       this.isLoading = true;
       // category = await fetch(`${this.apiUrl}category`);
@@ -1055,8 +1008,7 @@ document.addEventListener('alpine:init', () => {
         this.isLoading = false;
       })
     },
-    sub_article_err: '',
-    status_sub_err: false,
+
     async createArticle() {
       this.sub_article_err = '';
       this.isLoadingArticle = true;
@@ -1088,41 +1040,114 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < title_sub.length; i++) {
         let data_id = title_sub[i].getAttribute("data-id");
+        let accordion = document.getElementById(`accordionTitle${i + 1}`);
+        let errorSubArticle = document.getElementById(`errorSubArticle${i + 1}`);
         if (title_sub[i].value != '') {
           this.status_sub_err = false;
+          accordion.style.border = 'none';
+          console.log(errorSubArticle.removeChild(errorSubArticle.querySelectorAll("li")[i + 1]));
           formData.append('title_sub[]', title_sub[i].value);
         } else {
           this.status_sub_err = true;
-          this.sub_article_err += `
-            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                <span class="span-danger">title sub article ${i + 1} required</span>
-            </div>
-          `;
+          accordion.style.border = '1px solid #b91c1c';
+          accordion.style.borderRadius = '10px';
+          accordion.addEventListener("mouseover", function () {
+            errorSubArticle.style.transform = "scale(1)";
+            errorSubArticle.style.opacity = "1"
+            errorSubArticle.style.transition = ".2s ease-in-out";
+          });
+          accordion.addEventListener("mouseleave", function () {
+            errorSubArticle.style.transform = "scale(0)";
+            errorSubArticle.style.opacity = "0"
+            errorSubArticle.style.transition = '.2s ease-in-out';
+          });
+          if (errorSubArticle.children.length < 4) {
+            errorSubArticle.innerHTML += `
+              <li id="errorTitle${i + 1}" class="font-medium text-[16px]">
+                  <p class="text-primary">
+                      Title sub article ${i + 1} required
+                  </p>
+              </li>
+            `;
+          }
+          // this.sub_article_err += `
+          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          //       <span class="span-danger">title sub article ${i + 1} required</span>
+          //   </div>
+          // `;
         }
         if (thumbnail_sub[i].files[0]) {
           this.status_sub_err = false;
+          accordion.style.border = 'none';
+          console.log(errorSubArticle.querySelectorAll("li")[i + 1]);
           formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
         } else {
           this.status_sub_err = true;
-          this.sub_article_err += `
-          <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-              <span class="span-danger">thumbnail sub article ${i + 1} required</span>
-          </div>
-        `;
+          // accordion.style.backgroundColor = '#fee2e2';
+          accordion.style.border = '1px solid #b91c1c';
+          accordion.style.borderRadius = '10px';
+          accordion.addEventListener("mouseover", function () {
+            errorSubArticle.style.transform = "scale(1)";
+            errorSubArticle.style.opacity = "1"
+            errorSubArticle.style.transition = ".2s ease-in-out";
+          });
+          accordion.addEventListener("mouseleave", function () {
+            errorSubArticle.style.transform = "scale(0)";
+            errorSubArticle.style.opacity = "0"
+            errorSubArticle.style.transition = '.2s ease-in-out';
+          });
+          if (errorSubArticle.children.length < 4) {
+            errorSubArticle.innerHTML += `
+              <li id="errorThumbnail${i + 1}" class="font-medium text-[16px]">
+                  <p class="text-primary">
+                      Thumbnail sub article ${i + 1} required
+                  </p>
+              </li>
+            `;
+          }
+          // this.sub_article_err += `
+          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          //       <span class="span-danger">thumbnail sub article ${i + 1} required</span>
+          //   </div>
+          // `;
         }
         if (tinymce.get(`editor${data_id}`).getContent() != '') {
           this.status_sub_err = false;
+          accordion.style.border = 'none';
+          // console.log(errorSubArticle.querySelectorAll("li")[i + 1]);
+
           formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
         } else {
           this.status_sub_err = true;
-          this.sub_article_err += `
-          <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-              <span class="span-danger">description sub article ${i + 1} required</span>
-          </div>
-        `;
+          accordion.style.border = '1px solid #b91c1c';
+          accordion.style.borderRadius = '10px';
+          accordion.addEventListener("mouseover", function () {
+            errorSubArticle.style.transform = "scale(1)";
+            errorSubArticle.style.opacity = "1"
+            errorSubArticle.style.transition = ".2s ease-in-out";
+          });
+          accordion.addEventListener("mouseleave", function () {
+            errorSubArticle.style.transform = "scale(0)";
+            errorSubArticle.style.opacity = "0"
+            errorSubArticle.style.transition = '.2s ease-in-out';
+          });
+          if (errorSubArticle.children.length < 4) {
+            errorSubArticle.innerHTML += `
+              <li id="errorDescription${i + 1}" class="font-medium text-[16px]">
+                  <p class="text-primary">
+                      Description sub article ${i + 1} required
+                  </p>
+              </li>
+            `;
+          }
+          // this.sub_article_err += `
+          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          //       <span class="span-danger">description sub article ${i + 1} required</span>
+          //   </div>
+          // `;
         }
 
         this.sub_article_err += `<br>`;
@@ -1154,10 +1179,6 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
-    // CATEGORIES ARTICLE
-    sortCol: null,
-    sortAsc: false,
-    search: '',
     sort(col) {
       if (this.sortCol === col) this.sortAsc = !this.sortAsc;
       this.sortCol = col;
@@ -1175,6 +1196,7 @@ document.addEventListener('alpine:init', () => {
         return 0;
       });
     },
+
     paginate(url) {
       fetch(`${url}`, {
         method: "GET"
@@ -1184,6 +1206,7 @@ document.addEventListener('alpine:init', () => {
           this.categoriesArticle = data.data;
         })
     },
+
     searchCategory() {
       this.isLoading = true;
       fetch(`${this.apiUrl
@@ -1196,6 +1219,7 @@ document.addEventListener('alpine:init', () => {
           this.isLoading = false
         })
     },
+
     getCategories() {
 
       fetch(`${this.apiUrl
@@ -1207,6 +1231,95 @@ document.addEventListener('alpine:init', () => {
           this.categoriesArticle = data.data;
         })
 
+    },
+
+
+    // FILTERS
+
+    filterArticle() {
+      query = '';
+
+      if(this.filtersKey[0]){
+        query += 'search=' + this.filtersKey[0] + '&';
+      }
+      if(this.filtersKey[1]){
+        query += 'type=' + this.filtersKey[1] + '&';
+      }
+      if(this.filtersKey[2]){
+        query += 'category=' + this.filtersKey[2] + '&';
+      }
+      if(this.filtersKey[3]){
+        query += 'author=' + this.filtersKey[3] + '&';
+      }
+      
+      this.isLoadingArticle = true;
+
+      fetch(`${this.apiUrl}article?${query}`, {
+        method: 'GET',
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+          this.isLoadingArticle = false;
+        })
+
+    },
+
+    searchArticle(keyword) {
+
+      this.isLoadingArticle = true;
+
+      fetch(`${this.apiUrl}article?search=${keyword}`, {
+        method: 'GET',
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+          this.isLoadingArticle = false;
+        })
+
+    },
+
+    getFreeArticle() {
+
+      this.isLoadingArticle = true;
+
+      fetch(`${this.apiUrl}article?type=free`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+
+          // DOM
+          // document.getElementById("all").classList.remove('active');
+          // document.getElementById("free").classList.add('active');
+          // document.getElementById("paid").classList.remove('active');
+
+          this.isLoadingArticle = false;
+
+        })
+    },
+
+    getPaidArticle() {
+
+      this.isLoadingArticle = true;
+
+      fetch(`${this.apiUrl}article?type=paid`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data
+
+          // DOM
+          // document.getElementById("all").classList.remove('active');
+          // document.getElementById("free").classList.remove('active');
+          // document.getElementById("paid").classList.add('active');
+
+          this.isLoadingArticle = false;
+
+        })
     },
 
     fetchArticleByCategory(categoryId) {
@@ -1234,23 +1347,14 @@ document.addEventListener('alpine:init', () => {
         })
 
     },
-
-    // FILTERS
-
+    
     resetFilters(typeArticle = '') {
-
-      let categories = document.querySelectorAll('.category');
-
+      document.getElementById('search').value = null;
+      document.getElementById('category').value = '';
       document.getElementById('free').checked = false;
       document.getElementById('paid').checked = false;
 
-      for (let index = 0; index < categories.length; index++) {
-        if (categories[index].classList.contains('active')) {
-          categories[index].classList.remove('active');
-        }
-      }
-
-      this.keywordArticle = '';
+      this.filtersKey = [];
       this.getArticle();
     }
 

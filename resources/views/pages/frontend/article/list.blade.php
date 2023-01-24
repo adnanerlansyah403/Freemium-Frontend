@@ -67,9 +67,8 @@
             <div class="w-full lg:w-[270px] mx-auto h-max px-4 py-8 bg-white dark:bg-slate-secondary dark:text-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                 <div class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white">
                     <div class="flex justify-between">
-                        <input
-                            x-model="keywordArticle"
-                            x-on:change="searchArticle(keywordArticle)"
+                        <input id="search"
+                            x-on:change="filtersKey[0] = $event.target.value; filterArticle()"
                             class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm"
                             placeholder="Search Here..." />
                         <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
@@ -82,11 +81,11 @@
                     </div>
                     <div class="flex items-center gap-2 mt-2">
                         <div class="flex items-center gap-[5px]">
-                            <input class="checked:bg-primary dark:checked:bg-slate-third" type="radio" id="free" name="type_article" value="free" @click="getFreeArticle()">
+                            <input class="checked:bg-primary dark:checked:bg-slate-third" type="radio" id="free" name="type_article" value="free" @click="filtersKey[1] = $event.target.value; filterArticle()">
                             <label class="mt-[2px] text-sm leading-[21px]" for="free">Free</label><br>
                         </div>
                         <div class="flex items-center gap-[5px]">
-                            <input class="checked:bg-primary dark:checked:bg-slate-third" type="radio" id="paid" name="type_article" value="paid" @click="getPaidArticle()">
+                            <input class="checked:bg-primary dark:checked:bg-slate-third" type="radio" id="paid" name="type_article" value="paid" @click="filtersKey[1] = $event.target.value; filterArticle()">
                             <label class="mt-[2px] text-sm leading-[21px]" for="paid">Paid</label><br>
                         </div>
                     </div>
@@ -94,8 +93,8 @@
                 </div>
 
                 <div class="mt-[33px] flex flex-wrap gap-[11px]" x-init="getCategories()">
-                    <select name="category" x-on:change="fetchArticleByCategory($event.target.value)" id="category" class="text-sm py-2 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white" x-ref="category">
-                        <option value="" @click="getArticle()">  Select a category... </option>
+                    <select name="category" x-on:change="filtersKey[2] = $event.target.value; filterArticle()" id="category" class="text-sm py-2 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white" x-ref="category">
+                        <option value="" @click="getCategories()">  Select a category... </option>
                         <template x-for="(item, index) in categoriesArticle">
                             <option x-bind:value="item.id" x-text="item.name" ></option>
                         </template>
@@ -142,7 +141,7 @@
                         <x-loading />
                     </template>
 
-                    <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle != ''">
+                    <template x-if="listArticle == null || listArticle.length == 0">
                         <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
                             x-init="
                                 setTimeout(() => {
@@ -155,7 +154,7 @@
                         </p>
                     </template>
 
-                    <template x-if="listArticle == null || listArticle.length == 0 && keywordArticle == ''">
+                    <template x-if="listArticle == null || listArticle.length == 0">
                         <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
                             x-init="
                                 setTimeout(() => {
@@ -271,7 +270,7 @@
 
             {{-- <span x-text="console.log(itemArticle > listArticle.length)"></span>
             <span x-text="console.log(listArticle.length < itemArticle)"></span> --}}
-            <template x-if="itemArticle > listArticle.length && keywordArticle == '' && listArticle.length > 1">
+            <template x-if="itemArticle > listArticle.length && listArticle.length > 1">
                 <div class="flex items-center justify-center">
                     <div id="resetButton" class="flex items-center justify-center mt-20" style="display: none;"
                         x-init="
