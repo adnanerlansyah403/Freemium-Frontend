@@ -66,8 +66,8 @@
                             $refs.dropdownmenu.style.display='none'
                             "
                             x-transition
-                            style="display: none;"
-                            x-ref="menuBar">
+                            x-ref="menuBar"
+                            style="display: none;">
                             <li class="px-[18px] py-2 hover:bg-primary hover:text-white transition duration-200 ease-out">
                                 <a href="#header" class="flex items-center gap-2">
                                     <span>Home</span>
