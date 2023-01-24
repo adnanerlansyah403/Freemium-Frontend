@@ -33,6 +33,14 @@
         <script src="{{ asset('assets/js/auth.js') }}"></script>
         <script src="{{ asset('assets/js/user.js') }}"></script>
 
+        {{-- Highlight Code CSS --}}
+        
+        {{-- <link rel="stylesheet" href="{{ asset("assets/css/highlight/styles/atom-one-dark.min.css") }}"> --}}
+
+        {{-- Prism Code CSS --}}
+        
+        <link rel="stylesheet" href="{{ asset("assets/css/prism/prism.css") }}">
+
         {{-- Custom Style --}}
 
         <style>
@@ -47,6 +55,13 @@
             .tox-tinymce {
                 /* height: 500px !important; */
             }
+            
+            /* pre {
+            margin: 0;
+            padding: 16px;
+            background-color: #2e2f30;
+            border-radius: 3px;
+            } */
 
         </style>
 
@@ -111,10 +126,20 @@
                 tinymce.init({
                     selector: '#content',
                     plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
+                    height: '842px',
+                    force_br_newlines : true,
+                    force_p_newlines : false,
+                    forced_root_block : false,
+                    cleanup : true
                 });
                 tinymce.init({
                     selector: '#sub_content',
                     plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
+                    height: '842px',
+                    force_br_newlines : true,
+                    force_p_newlines : false,
+                    forced_root_block : false,
+                    cleanup : true
                 });
             }
 
@@ -143,7 +168,10 @@
             
         </script>
 
+
         @livewireScripts
+
+        <script src="{{ asset("assets/js/prism.js") }}"></script>
 
     </body>
 </html>

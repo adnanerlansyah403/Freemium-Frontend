@@ -36,7 +36,7 @@
                 </template>
                 
                 <template x-if="!isLoading">
-                    <div>
+                    <div x-data="helpers">
                         <div class="flex items-center lg:gap-6 mb-10">
                             <div class="h-[44px] col col-10 lg:mx-0 w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white">
                                 <div class="flex justify-between">
@@ -76,10 +76,10 @@
                                         </div>
                                         <div class="pb-4 pt-12 lg:py-0 lg:translate-y-5">
                                             <div class="flex items-center justify-between mb-4">
-                                                <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="text-base md:text-md font-neucha font-bold" x-text="item.title"></a>
+                                                <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="text-base md:text-md font-neucha font-bold" x-text="substring(item.title, 70)"></a>
                                                 <i class="bg-primary dark:bg-slate-third px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
                                             </div>
-                                            <p class="text-sm text-gray-secondary mt-8 w-full" x-html="item.substring+'...'">
+                                            <p class="text-sm text-gray-secondary mt-8 w-full" x-html="substring(item.substring, 150)+'...'">
             
                                             </p>
                                         </div>
