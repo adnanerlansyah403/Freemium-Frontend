@@ -131,7 +131,7 @@
                     </div>
 
                 <div class="mb-5 col-12">
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mb-5">
                         <label for="text" class="text-md">Content</label><br>
                         <p><strong>Shift + Enter</strong> to Pressing enter once</p>
                     </div>
