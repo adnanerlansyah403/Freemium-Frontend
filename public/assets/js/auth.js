@@ -5,6 +5,7 @@ document.addEventListener('alpine:init', () => {
     baseUrl: "http://127.0.0.1:8000/",
     apiUrl: "http://127.0.0.1:8001/api/",
     name: '',
+    username: '',
     email: '',
     password: '',
     message: '',
@@ -197,10 +198,10 @@ document.addEventListener('alpine:init', () => {
     register() {
       let params = {
         name: this.name,
+        username: this.username,
         email: this.email,
         password: this.password
       }
-      console.log(params)
       fetch(this.apiUrl + 'register', {
         method: "POST",
         headers: {
@@ -210,8 +211,8 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           user = await response.json();
-          console.log(user);
           if (!user.status) {
+            this.status_err = user.message;
             localStorage.setItem('showFlash', true)
             localStorage.setItem('message', user.message);
           } else {
