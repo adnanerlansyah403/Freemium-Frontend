@@ -1347,11 +1347,14 @@ document.addEventListener('alpine:init', () => {
                         >
                             <img src=""
                             x-ref="image${this.index}" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                            <img
-                                src="${this.baseUrl}assets/images/icons/image.svg"
+                            <img src=""
+                            x-ref="image" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                            <i
+                                data-feather="image"
                                 class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
-                                x-ref="iconimage${this.index}"
-                            />
+                                x-ref="iconimage"
+                            >
+                            </i>
                             <p
                                 class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                                 x-ref="filename${this.index}"
@@ -1400,6 +1403,11 @@ document.addEventListener('alpine:init', () => {
       tinymce.init({
         selector: `#editor${this.index}`,
         plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
+        height: '600px',
+        force_br_newlines: true,
+        force_p_newlines: false,
+        forced_root_block: false,
+        cleanup: true,
       });
 
       this.index++;
