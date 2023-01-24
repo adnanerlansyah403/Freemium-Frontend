@@ -1093,109 +1093,55 @@ document.addEventListener('alpine:init', () => {
         if (title_sub[i].value != '') {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          console.log(errorSubArticle.removeChild(errorSubArticle.querySelectorAll("li")[i + 1]));
           formData.append('title_sub[]', title_sub[i].value);
         } else {
+          titleSub = document.getElementById(`err_title${data_id}`);
+          titleSub.innerHTML = '';
+          titleSub.innerHTML += `
+            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="span-danger">title sub article ${i + 1} required</span>
+            </div>
+        `;
           this.status_sub_err = true;
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
-          accordion.addEventListener("mouseover", function () {
-            errorSubArticle.style.transform = "scale(1)";
-            errorSubArticle.style.opacity = "1"
-            errorSubArticle.style.transition = ".2s ease-in-out";
-          });
-          accordion.addEventListener("mouseleave", function () {
-            errorSubArticle.style.transform = "scale(0)";
-            errorSubArticle.style.opacity = "0"
-            errorSubArticle.style.transition = '.2s ease-in-out';
-          });
-          if (errorSubArticle.children.length < 4) {
-            errorSubArticle.innerHTML += `
-              <li id="errorTitle${i + 1}" class="font-medium text-[16px]">
-                  <p class="text-primary">
-                      Title sub article ${i + 1} required
-                  </p>
-              </li>
-            `;
-          }
-          // this.sub_article_err += `
-          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-          //       <span class="span-danger">title sub article ${i + 1} required</span>
-          //   </div>
-          // `;
         }
         if (thumbnail_sub[i].files[0]) {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          console.log(errorSubArticle.querySelectorAll("li")[i + 1]);
           formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
         } else {
+
+          thumbnailSub = document.getElementById(`err_thumbnail${data_id}`);
+          thumbnailSub.innerHTML = '';
+          thumbnailSub.innerHTML += `
+            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="span-danger">Thumbnail sub article ${i + 1} required</span>
+            </div>
+        `;
+
           this.status_sub_err = true;
-          // accordion.style.backgroundColor = '#fee2e2';
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
-          accordion.addEventListener("mouseover", function () {
-            errorSubArticle.style.transform = "scale(1)";
-            errorSubArticle.style.opacity = "1"
-            errorSubArticle.style.transition = ".2s ease-in-out";
-          });
-          accordion.addEventListener("mouseleave", function () {
-            errorSubArticle.style.transform = "scale(0)";
-            errorSubArticle.style.opacity = "0"
-            errorSubArticle.style.transition = '.2s ease-in-out';
-          });
-          if (errorSubArticle.children.length < 4) {
-            errorSubArticle.innerHTML += `
-              <li id="errorThumbnail${i + 1}" class="font-medium text-[16px]">
-                  <p class="text-primary">
-                      Thumbnail sub article ${i + 1} required
-                  </p>
-              </li>
-            `;
-          }
-          // this.sub_article_err += `
-          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-          //       <span class="span-danger">thumbnail sub article ${i + 1} required</span>
-          //   </div>
-          // `;
         }
         if (tinymce.get(`editor${data_id}`).getContent() != '') {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          // console.log(errorSubArticle.querySelectorAll("li")[i + 1]);
-
           formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
         } else {
+          description_sub = document.getElementById(`err_description${data_id}`);
+          description_sub.innerHTML = '';
+          description_sub.innerHTML += `
+            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="span-danger">Description sub article ${i + 1} required</span>
+            </div>
+        `;
           this.status_sub_err = true;
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
-          accordion.addEventListener("mouseover", function () {
-            errorSubArticle.style.transform = "scale(1)";
-            errorSubArticle.style.opacity = "1"
-            errorSubArticle.style.transition = ".2s ease-in-out";
-          });
-          accordion.addEventListener("mouseleave", function () {
-            errorSubArticle.style.transform = "scale(0)";
-            errorSubArticle.style.opacity = "0"
-            errorSubArticle.style.transition = '.2s ease-in-out';
-          });
-          if (errorSubArticle.children.length < 4) {
-            errorSubArticle.innerHTML += `
-              <li id="errorDescription${i + 1}" class="font-medium text-[16px]">
-                  <p class="text-primary">
-                      Description sub article ${i + 1} required
-                  </p>
-              </li>
-            `;
-          }
-          // this.sub_article_err += `
-          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-          //       <span class="span-danger">description sub article ${i + 1} required</span>
-          //   </div>
-          // `;
         }
 
         this.sub_article_err += `<br>`;
@@ -1213,7 +1159,7 @@ document.addEventListener('alpine:init', () => {
         this.showFlash = true;
         this.status_err = data.message;
         this.isLoadingArticle = false;
-        console.log(this.sub_article_err)
+        // console.log(this.sub_article_err)
       }
 
       if (data.status) {
@@ -1330,7 +1276,6 @@ document.addEventListener('alpine:init', () => {
     index: 1,
     total: 1,
     createSubArticle(refs) {
-
       refs.listsubarticle.insertAdjacentHTML('beforeend', `
             <li class="relative bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion` + this.index}" x-data="accordion(${this.index})">
 
@@ -1372,8 +1317,8 @@ document.addEventListener('alpine:init', () => {
                             <label for="text" class="text-md">Title</label>
                             <input data-id="${this.index}" type="text" placeholder="Your text..."
                                 class="title_sub dark:text-white px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border-white rounded-primary bg-white dark:bg-slate-primary border border-white hover:bg-white mt-4">
+                                <div id="err_title${this.index}"></div>
                         </div>
-
                     </div>
 
                     <div class="mb-5">
@@ -1413,6 +1358,7 @@ document.addEventListener('alpine:init', () => {
                             >
                             </p>
                         </span>
+                        <div id="err_thumbnail${this.index}"></div>
                     </div>
 
                     <div class="mb-5 col-12" id="content${this.index}" class="content${this.index}">
@@ -1420,6 +1366,7 @@ document.addEventListener('alpine:init', () => {
                         <textarea id="editor${this.index}" placeholder="Your content..."
                         class="description_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white">
                         </textarea>
+                        <div id="err_description${this.index}"></div>
                     </div>
 
                     <div class="mb-5 col-12">

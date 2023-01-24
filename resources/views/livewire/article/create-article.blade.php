@@ -186,9 +186,9 @@
                 </div>
 
                 <div x-data="articles">
-                        <div x-show="status_sub_err">
+                        {{-- <div x-show="status_sub_err">
                             <div x-html="sub_article_err"></div>
-                        </div>
+                        </div> --}}
                         <div x-show="buttonshow" class="flex justify-end mt-5">
 
                             <template x-if="isLoadingArticle">
