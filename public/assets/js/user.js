@@ -1042,8 +1042,10 @@ document.addEventListener('alpine:init', () => {
         this.isLoading = false;
       })
     },
-
+    sub_article_err: '',
+    status_sub_err: false,
     async createArticle() {
+      this.sub_article_err = '';
       this.isLoadingArticle = true;
       let title = document.getElementById('title');
       let description = tinymce.get('content').getContent();
@@ -1073,9 +1075,44 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < title_sub.length; i++) {
         let data_id = title_sub[i].getAttribute("data-id");
-        formData.append('title_sub[]', title_sub[i].value);
-        formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
-        formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
+        if (title_sub[i].value != '') {
+          this.status_sub_err = false;
+          formData.append('title_sub[]', title_sub[i].value);
+        } else {
+          this.status_sub_err = true;
+          this.sub_article_err += `
+            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="span-danger">title sub article ${i + 1} required</span>
+            </div>
+          `;
+        }
+        if (thumbnail_sub[i].files[0]) {
+          this.status_sub_err = false;
+          formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
+        } else {
+          this.status_sub_err = true;
+          this.sub_article_err += `
+          <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+              <span class="span-danger">thumbnail sub article ${i + 1} required</span>
+          </div>
+        `;
+        }
+        if (tinymce.get(`editor${data_id}`).getContent() != '') {
+          this.status_sub_err = false;
+          formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
+        } else {
+          this.status_sub_err = true;
+          this.sub_article_err += `
+          <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+              <span class="span-danger">description sub article ${i + 1} required</span>
+          </div>
+        `;
+        }
+
+        this.sub_article_err += `<br>`;
       }
       article = await fetch(`${this.apiUrl}article`, {
         method: "POST",
@@ -1090,13 +1127,14 @@ document.addEventListener('alpine:init', () => {
         this.showFlash = true;
         this.status_err = data.message;
         this.isLoadingArticle = false;
+        console.log(this.sub_article_err)
       }
 
       if (data.status) {
         this.isLoadingArticle = false;
         localStorage.setItem('message', 'article successfully created!');
         localStorage.setItem('showFlash', true);
-        if (!this.category_err) {
+        if (!this.category_err && !this.status_sub_err) {
           this.isLoadingArticle = false;
           return window.location.replace(`${this.baseUrl}myarticle`)
         }

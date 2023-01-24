@@ -184,16 +184,21 @@
                     </ul>
                 </div>
 
-                <div x-data="articles" x-show="buttonshow" class="flex justify-end mt-5">
+                <div x-data="articles">
+                        <div x-show="status_sub_err">
+                            <div x-html="sub_article_err"></div>
+                        </div>
+                        <div x-show="buttonshow" class="flex justify-end mt-5">
 
-                    <template x-if="isLoadingArticle">
-                        <span class="span text-md dark:text-slate-third">wait...</span>
-                    </template>
-                    <template x-if="!isLoadingArticle">
-                        <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                            Save
-                        </button>
-                    </template>
+                            <template x-if="isLoadingArticle">
+                                <span class="span text-md dark:text-slate-third">wait...</span>
+                            </template>
+                            <template x-if="!isLoadingArticle">
+                                <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                                    Save
+                                </button>
+                            </template>
+                        </div>
                 </div>
 
             </div>
