@@ -1045,109 +1045,55 @@ document.addEventListener('alpine:init', () => {
         if (title_sub[i].value != '') {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          console.log(errorSubArticle.removeChild(errorSubArticle.querySelectorAll("li")[i + 1]));
           formData.append('title_sub[]', title_sub[i].value);
         } else {
+          titleSub = document.getElementById(`err_title${data_id}`);
+          titleSub.innerHTML = '';
+          titleSub.innerHTML += `
+            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="span-danger">title sub article ${i + 1} required</span>
+            </div>
+        `;
           this.status_sub_err = true;
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
-          accordion.addEventListener("mouseover", function () {
-            errorSubArticle.style.transform = "scale(1)";
-            errorSubArticle.style.opacity = "1"
-            errorSubArticle.style.transition = ".2s ease-in-out";
-          });
-          accordion.addEventListener("mouseleave", function () {
-            errorSubArticle.style.transform = "scale(0)";
-            errorSubArticle.style.opacity = "0"
-            errorSubArticle.style.transition = '.2s ease-in-out';
-          });
-          if (errorSubArticle.children.length < 4) {
-            errorSubArticle.innerHTML += `
-              <li id="errorTitle${i + 1}" class="font-medium text-[16px]">
-                  <p class="text-primary">
-                      Title sub article ${i + 1} required
-                  </p>
-              </li>
-            `;
-          }
-          // this.sub_article_err += `
-          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-          //       <span class="span-danger">title sub article ${i + 1} required</span>
-          //   </div>
-          // `;
         }
         if (thumbnail_sub[i].files[0]) {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          console.log(errorSubArticle.querySelectorAll("li")[i + 1]);
           formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
         } else {
+
+          thumbnailSub = document.getElementById(`err_thumbnail${data_id}`);
+          thumbnailSub.innerHTML = '';
+          thumbnailSub.innerHTML += `
+            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="span-danger">Thumbnail sub article ${i + 1} required</span>
+            </div>
+        `;
+
           this.status_sub_err = true;
-          // accordion.style.backgroundColor = '#fee2e2';
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
-          accordion.addEventListener("mouseover", function () {
-            errorSubArticle.style.transform = "scale(1)";
-            errorSubArticle.style.opacity = "1"
-            errorSubArticle.style.transition = ".2s ease-in-out";
-          });
-          accordion.addEventListener("mouseleave", function () {
-            errorSubArticle.style.transform = "scale(0)";
-            errorSubArticle.style.opacity = "0"
-            errorSubArticle.style.transition = '.2s ease-in-out';
-          });
-          if (errorSubArticle.children.length < 4) {
-            errorSubArticle.innerHTML += `
-              <li id="errorThumbnail${i + 1}" class="font-medium text-[16px]">
-                  <p class="text-primary">
-                      Thumbnail sub article ${i + 1} required
-                  </p>
-              </li>
-            `;
-          }
-          // this.sub_article_err += `
-          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-          //       <span class="span-danger">thumbnail sub article ${i + 1} required</span>
-          //   </div>
-          // `;
         }
         if (tinymce.get(`editor${data_id}`).getContent() != '') {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          // console.log(errorSubArticle.querySelectorAll("li")[i + 1]);
-
           formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
         } else {
+          description_sub = document.getElementById(`err_description${data_id}`);
+          description_sub.innerHTML = '';
+          description_sub.innerHTML += `
+            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="span-danger">Description sub article ${i + 1} required</span>
+            </div>
+        `;
           this.status_sub_err = true;
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
-          accordion.addEventListener("mouseover", function () {
-            errorSubArticle.style.transform = "scale(1)";
-            errorSubArticle.style.opacity = "1"
-            errorSubArticle.style.transition = ".2s ease-in-out";
-          });
-          accordion.addEventListener("mouseleave", function () {
-            errorSubArticle.style.transform = "scale(0)";
-            errorSubArticle.style.opacity = "0"
-            errorSubArticle.style.transition = '.2s ease-in-out';
-          });
-          if (errorSubArticle.children.length < 4) {
-            errorSubArticle.innerHTML += `
-              <li id="errorDescription${i + 1}" class="font-medium text-[16px]">
-                  <p class="text-primary">
-                      Description sub article ${i + 1} required
-                  </p>
-              </li>
-            `;
-          }
-          // this.sub_article_err += `
-          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-          //       <span class="span-danger">description sub article ${i + 1} required</span>
-          //   </div>
-          // `;
         }
 
         this.sub_article_err += `<br>`;
@@ -1165,7 +1111,7 @@ document.addEventListener('alpine:init', () => {
         this.showFlash = true;
         this.status_err = data.message;
         this.isLoadingArticle = false;
-        console.log(this.sub_article_err)
+        // console.log(this.sub_article_err)
       }
 
       if (data.status) {
@@ -1326,7 +1272,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?category=${categoryId}`, {
+      fetch(`${this.apiUrl}article?category=${categoryId}&search=${this.keywordArticle}`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -1356,6 +1302,182 @@ document.addEventListener('alpine:init', () => {
 
       this.filtersKey = [];
       this.getArticle();
+    },
+
+    index: 1,
+    total: 1,
+    createSubArticle(refs) {
+      refs.listsubarticle.insertAdjacentHTML('beforeend', `
+            <li class="relative bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion` + this.index}" x-data="accordion(${this.index})">
+
+                <ul id="errorSubArticle${this.index}" class="absolute top-full border border-primary dark:border-none bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:text-slate-primary rounded-primary max-w-[400] py-2 px-4" style="transform: scale(0); opacity: 0; z-index: 50">
+                    <li class="font-medium text-base mb-4">
+                        <p>
+                            <span class="span">E</span>rrors
+                        </p>
+                    </li>
+                </ul>
+                
+                <h2
+                id="${`accordionTitle${this.index}`}"
+                class="flex flex-row justify-between items-center font-semibold px-3 py-2 cursor-pointer"
+                >
+                    <span>Sub Artikel ${this.index}</span>
+                    <div class="translate-y-1 flex items-center">
+                        <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60" @click="deleteSubArticle(${this.index})">
+                            <ion-icon name="trash-outline" class="w-6 h-6 text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
+                        </span>
+                        <span
+                        :class="handleRotate()"
+                        @click="handleClick()"
+                        class="-mt-[6px] h-6 w-6 transform transiton-transform duration-200 ease-in-out"
+                        title="Open"
+                        >
+                            <ion-icon name="chevron-down-circle-outline" class="w-full h-full text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
+                        </span>
+                    </div>
+                </h2>
+                
+                <div
+                x-ref="tab"
+                :style="handleToggle()"
+                class="px-4 overflow-y-scroll has-scrollbar overflow-x-hidden max-h-0 duration-500 transition-all"
+                >
+                    <div class="mt-4 flex flex-wrap lg:flex-nowrap">
+                        <div class="mb-5 col-12 lg:col-12">
+                            <label for="text" class="text-md">Title</label>
+                            <input data-id="${this.index}" type="text" placeholder="Your text..."
+                                class="title_sub dark:text-white px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border-white rounded-primary bg-white dark:bg-slate-primary border border-white hover:bg-white mt-4">
+                                <div id="err_title${this.index}"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="text" class="text-md">Thumbnail</label>
+                        <input class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
+                            hidden
+                            id="file${this.index}">
+                        <span
+                            class="relative cursor-pointer flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white border border-primary dark:bg-slate-primary mt-4 overflow-y-hidden"
+                            id="buttonClickImage${this.index}"
+                        >
+                            <img src=""
+                            id="image${this.index}" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                            <i
+                                data-feather="image"
+                                class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
+                                id="iconimage${this.index}"
+                            >
+                            </i>
+                            <p
+                                class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-b-lg transition duration-200 ease-in-out"
+                                id="filename${this.index}"
+                            >
+                            </p>
+                        </span>
+                        <div id="err_thumbnail${this.index}"></div>
+                    </div>
+
+                    <div class="mb-5 col-12" id="content${this.index}" class="content${this.index}">
+                        <label for="text" class="text-md">Content</label><br>
+                        <textarea id="editor${this.index}" placeholder="Your content..."
+                        class="description_sub px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white">
+                        </textarea>
+                        <div id="err_description${this.index}"></div>
+                    </div>
+
+                    <div class="mb-5 col-12">
+                        <span class="text-md">Choose Your Plan</span>
+                        <div class="flex items-center gap-2 mt-2">
+                            <label for="free" class="flex items-center gap-1">
+                                <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="free" id="free${this.index}" checked>
+                                <span class="text-base">Free</span>
+                            </label>
+                            <label for="paid" class="flex items-center gap-1">
+                                <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="paid" id="paid${this.index}">
+                                <span class="text-base">Member-Only</span>
+                            </label>
+                        </div>
+                        <p class="mt-4">*Get Royalty for Author</p>
+                    </div>
+
+                </div>
+            </li>
+        `);
+
+      feather.replace()
+
+      let file = document.getElementById(`file${this.index}`);
+      let filename = document.getElementById(`filename${this.index}`);
+      let image = document.getElementById(`image${this.index}`);
+      let iconimage = document.getElementById(`iconimage${this.index}`);
+      let buttonClickImage = document.getElementById(`buttonClickImage${this.index}`);
+
+      buttonClickImage.addEventListener("click", function () {
+        file.click();
+      })
+
+      document.getElementById(`file${this.index}`).addEventListener("change", () => {
+        if (file) {
+
+          iconimage.style.display = 'none';
+          var reader = new FileReader();
+          reader.readAsDataURL(file.files[0]);
+          reader.addEventListener("load", (e) => {
+            image.setAttribute("src", e.target.result);
+            image.setAttribute("alt", e.target.result);
+            filename.classList.add('active');
+            filename.innerText = file.files[0].name;
+          })
+
+          // $refs.iconimage${this.index}.style.display = 'none';
+          // var reader = new FileReader();
+          // reader.readAsDataURL($refs.file${this.index}.files[0]);
+          // reader.onload = function (e) {
+          //     $refs.image${this.index}.src = e.target.result;
+          //     $refs.image${this.index}.alt = $refs.file${this.index}.name;
+          //     $refs.filename${this.index}.classList.add('active');
+          //     $refs.filename${this.index}.innerText = $refs.file${this.index}.files[0].name;
+          // }
+        }
+      })
+
+      tinymce.init({
+        selector: `#editor${this.index}`,
+        plugins: 'anchor autolink code codesample formatselect charmap preview fullscreen emoticons image link lists media searchreplace table wordcount',
+        height: '600px',
+        force_br_newlines: true,
+        force_p_newlines: false,
+        forced_root_block: false,
+        cleanup: true,
+      });
+
+      let title_sub = document.getElementsByClassName('title_sub');
+      if (this.total > 4) {
+        for (let i = 0; i < this.total; i++) {
+          let data_id = title_sub[i].getAttribute("data-id");
+          if (i <= 2) {
+            document.getElementById(`free${data_id}`).checked = true;
+            document.getElementById(`paid${data_id}`).disabled = true;
+          }
+        }
+      }
+      this.index++;
+      this.total++;
+
+    },
+
+    deleteSubArticle(id) {
+      let parentElement = document.getElementById('listsubarticle');
+      parentElement.querySelector(`#accordion${id}`).remove();
+      this.total -= 1;
+      let title_sub = document.getElementsByClassName('title_sub');
+      if (this.total < 5) {
+        for (let i = 0; i < this.total; i++) {
+          let data_id = title_sub[i].getAttribute("data-id");
+          document.getElementById(`paid${data_id}`).disabled = false;
+        }
+      }
     }
 
   }))
