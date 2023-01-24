@@ -238,7 +238,7 @@
                         <div class="mb-5 col-12">
                             <div class="flex justify-between">
                                 <label for="sub_title" class="text-md">Title</label>
-    
+
                                 <template x-if="EditArticle?.subarticles?.[editSub]?.created_at">
                                     <p class="flex items-center gap-2 mb-4">
                                         <b>Created At : </b>
@@ -249,7 +249,7 @@
                                     " x-ref="dateSubArticle"></span>
                                     </p>
                                 </template>
-    
+
                             </div>
                             <input x-bind:value="EditArticle?.subarticles?.[editSub]?.title" x-on:change="EditArticle.subarticles[editSub].title = $event.target.value" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
                                 class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
@@ -260,9 +260,9 @@
                                 </div>
                             </template>
                         </div>
-    
+
                     </div>
-    
+
                     <div class="mb-5">
                         <label for="sub_thumbnail" class="text-md">Thumbnail</label>
                         <input x-on:change="EditArticle.subarticles[editSub].thumbnail = Object.values($event.target.files)" type="file" name="thumbnail_subarticle" placeholder="Your thumbnail..." hidden name="sub_thumbnail" id="sub_thumbnail"
@@ -288,7 +288,7 @@
                             </i>
                             <p x-show="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-text="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" class="filenamesubarticle absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
                         </span>
-    
+
                         <template x-if="status_err?.[1]?.thumbnail">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -296,7 +296,7 @@
                             </div>
                         </template>
                     </div>
-    
+
                     <div class="mb-5 col-12">
                         <div class="flex justify-between items-center mb-5">
                             <label for="sub_content" class="text-md">Content</label><br>
@@ -306,8 +306,8 @@
                             class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white">
                         </textarea>
                         <template x-if="setTiny?.('sub_content', EditArticle?.subarticles?.[editSub]?.description);"></template>
-    
-    
+
+
                         <template x-if="status_err?.[1]?.description">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -315,7 +315,7 @@
                             </div>
                         </template>
                     </div>
-    
+
                     <div class="mb-5 col-12">
                         <span class="text-md">Choose Your Plan</span>
                         <div class="flex items-center gap-2 mt-2">
@@ -329,7 +329,7 @@
                             </label>
                         </div>
                         <p class="mt-4">*Get Royalty for Author</p>
-    
+
                         <template x-if="status_err?.[1]?.type">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -343,7 +343,7 @@
                             </div>
                         </template>
                     </div>
-    
+
                     <div class="flex items-center justify-center my-10">
                         <button @click.prevent="updateSub(editSub)"
                             class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
@@ -416,6 +416,11 @@
                     <b class="text-primary dark:text-white">6.</b>
                     <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
                 </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">7.</b>
+                    <span>All media in the content article should be sourced online</span>
+                </li>
+
             </ul>
         </x-modal-instruction>
 

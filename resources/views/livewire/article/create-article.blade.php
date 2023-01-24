@@ -259,6 +259,10 @@
                     <b class="text-primary dark:text-white">6.</b>
                     <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
                 </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">7.</b>
+                    <span>All media in the content article should be sourced online</span>
+                </li>
             </ul>
         </x-modal-instruction>
 
