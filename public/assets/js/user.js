@@ -1395,7 +1395,7 @@ document.addEventListener('alpine:init', () => {
                                 }
                             ">
                         <span
-                            class="relative cursor-pointer flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white border border-primary dark:bg-slate-primary dark:border-white mt-4 overflow-y-hidden"
+                            class="relative cursor-pointer flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white border border-primary dark:bg-slate-primary mt-4 overflow-y-hidden"
                             @click="
                                 $refs.file${this.index}.click();
                             "
@@ -1403,7 +1403,7 @@ document.addEventListener('alpine:init', () => {
                             <img src=""
                             x-ref="image${this.index}" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                             <img
-                                src="{{ asset('assets/images/icons/image.svg') }}"
+                                src="${this.baseUrl}assets/images/icons/image.svg"
                                 class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
                                 x-ref="iconimage${this.index}"
                             />
