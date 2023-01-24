@@ -1083,41 +1083,114 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < title_sub.length; i++) {
         let data_id = title_sub[i].getAttribute("data-id");
+        let accordion = document.getElementById(`accordionTitle${i + 1}`);
+        let errorSubArticle = document.getElementById(`errorSubArticle${i + 1}`);
         if (title_sub[i].value != '') {
           this.status_sub_err = false;
+          accordion.style.border = 'none';
+          console.log(errorSubArticle.removeChild(errorSubArticle.querySelectorAll("li")[i + 1]));
           formData.append('title_sub[]', title_sub[i].value);
         } else {
           this.status_sub_err = true;
-          this.sub_article_err += `
-            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                <span class="span-danger">title sub article ${i + 1} required</span>
-            </div>
-          `;
+          accordion.style.border = '1px solid #b91c1c';
+          accordion.style.borderRadius = '10px';
+          accordion.addEventListener("mouseover", function () {
+            errorSubArticle.style.transform = "scale(1)";
+            errorSubArticle.style.opacity = "1"
+            errorSubArticle.style.transition = ".2s ease-in-out";
+          });
+          accordion.addEventListener("mouseleave", function () {
+            errorSubArticle.style.transform = "scale(0)";
+            errorSubArticle.style.opacity = "0"
+            errorSubArticle.style.transition = '.2s ease-in-out';
+          });
+          if (errorSubArticle.children.length < 4) {
+            errorSubArticle.innerHTML += `
+              <li id="errorTitle${i + 1}" class="font-medium text-[16px]">
+                  <p class="text-primary">
+                      Title sub article ${i + 1} required
+                  </p>
+              </li>
+            `;
+          }
+          // this.sub_article_err += `
+          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          //       <span class="span-danger">title sub article ${i + 1} required</span>
+          //   </div>
+          // `;
         }
         if (thumbnail_sub[i].files[0]) {
           this.status_sub_err = false;
+          accordion.style.border = 'none';
+          console.log(errorSubArticle.querySelectorAll("li")[i + 1]);
           formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
         } else {
           this.status_sub_err = true;
-          this.sub_article_err += `
-          <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-              <span class="span-danger">thumbnail sub article ${i + 1} required</span>
-          </div>
-        `;
+          // accordion.style.backgroundColor = '#fee2e2';
+          accordion.style.border = '1px solid #b91c1c';
+          accordion.style.borderRadius = '10px';
+          accordion.addEventListener("mouseover", function () {
+            errorSubArticle.style.transform = "scale(1)";
+            errorSubArticle.style.opacity = "1"
+            errorSubArticle.style.transition = ".2s ease-in-out";
+          });
+          accordion.addEventListener("mouseleave", function () {
+            errorSubArticle.style.transform = "scale(0)";
+            errorSubArticle.style.opacity = "0"
+            errorSubArticle.style.transition = '.2s ease-in-out';
+          });
+          if (errorSubArticle.children.length < 4) {
+            errorSubArticle.innerHTML += `
+              <li id="errorThumbnail${i + 1}" class="font-medium text-[16px]">
+                  <p class="text-primary">
+                      Thumbnail sub article ${i + 1} required
+                  </p>
+              </li>
+            `;
+          }
+          // this.sub_article_err += `
+          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          //       <span class="span-danger">thumbnail sub article ${i + 1} required</span>
+          //   </div>
+          // `;
         }
         if (tinymce.get(`editor${data_id}`).getContent() != '') {
           this.status_sub_err = false;
+          accordion.style.border = 'none';
+          // console.log(errorSubArticle.querySelectorAll("li")[i + 1]);
+
           formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
         } else {
           this.status_sub_err = true;
-          this.sub_article_err += `
-          <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-              <span class="span-danger">description sub article ${i + 1} required</span>
-          </div>
-        `;
+          accordion.style.border = '1px solid #b91c1c';
+          accordion.style.borderRadius = '10px';
+          accordion.addEventListener("mouseover", function () {
+            errorSubArticle.style.transform = "scale(1)";
+            errorSubArticle.style.opacity = "1"
+            errorSubArticle.style.transition = ".2s ease-in-out";
+          });
+          accordion.addEventListener("mouseleave", function () {
+            errorSubArticle.style.transform = "scale(0)";
+            errorSubArticle.style.opacity = "0"
+            errorSubArticle.style.transition = '.2s ease-in-out';
+          });
+          if (errorSubArticle.children.length < 4) {
+            errorSubArticle.innerHTML += `
+              <li id="errorDescription${i + 1}" class="font-medium text-[16px]">
+                  <p class="text-primary">
+                      Description sub article ${i + 1} required
+                  </p>
+              </li>
+            `;
+          }
+          // this.sub_article_err += `
+          //   <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+          //       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          //       <span class="span-danger">description sub article ${i + 1} required</span>
+          //   </div>
+          // `;
         }
 
         this.sub_article_err += `<br>`;

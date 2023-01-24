@@ -302,31 +302,42 @@
                 createSubArticle(refs) {
 
                     refs.listsubarticle.insertAdjacentHTML('beforeend' ,`
-                        <li class="bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
+                        <li class="relative bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion`+ this.index}" x-data="accordion(${this.index})">
+
+                            <ul id="errorSubArticle${this.index}" class="absolute top-full border border-primary dark:border-none bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:text-slate-primary rounded-primary max-w-[400] py-2 px-4" style="transform: scale(0); opacity: 0; z-index: 50">
+                                <li class="font-medium text-base mb-4">
+                                    <p>
+                                        <span class="span">E</span>rrors
+                                    </p>
+                                </li>
+                            </ul>
+                            
                             <h2
+                            id="${`accordionTitle${this.index}`}"
                             class="flex flex-row justify-between items-center font-semibold px-3 py-2 cursor-pointer"
                             >
-                            <span>Sub Artikel ${this.index}</span>
-                            <div class="translate-y-1 flex items-center">
-                                <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60" @click="deleteSubArticle(${this.index})">
-                                    <ion-icon name="trash-outline" class="w-6 h-6 text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
-                                </span>
-                                <span
-                                :class="handleRotate()"
-                                @click="handleClick()"
-                                class="-mt-[6px] h-6 w-6 transform transiton-transform duration-200 ease-in-out"
-                                title="Open"
-                                >
-                                    <ion-icon name="chevron-down-circle-outline" class="w-full h-full text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
-                                </span>
-                            </div>
+                                <span>Sub Artikel ${this.index}</span>
+                                <div class="translate-y-1 flex items-center">
+                                    <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60" @click="deleteSubArticle(${this.index})">
+                                        <ion-icon name="trash-outline" class="w-6 h-6 text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
+                                    </span>
+                                    <span
+                                    :class="handleRotate()"
+                                    @click="handleClick()"
+                                    class="-mt-[6px] h-6 w-6 transform transiton-transform duration-200 ease-in-out"
+                                    title="Open"
+                                    >
+                                        <ion-icon name="chevron-down-circle-outline" class="w-full h-full text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
+                                    </span>
+                                </div>
                             </h2>
+                            
                             <div
                             x-ref="tab"
                             :style="handleToggle()"
                             class="px-4 overflow-y-scroll has-scrollbar overflow-x-hidden max-h-0 duration-500 transition-all"
                             >
-                                <div class="flex flex-wrap lg:flex-nowrap">
+                                <div class="mt-4 flex flex-wrap lg:flex-nowrap">
                                     <div class="mb-5 col-12 lg:col-12">
                                         <label for="text" class="text-md">Title</label>
                                         <input data-id="${this.index}" type="text" placeholder="Your text..."
