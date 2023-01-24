@@ -4,6 +4,11 @@
     <div x-init="fetchMe()"></div>
     <div x-init="checkRoleUser()"></div>
 
+    <div x-init="flash()"></div>
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
+
     <style>
 
         .tox .tox-editor-header {
@@ -27,11 +32,6 @@
             $refs.wrapperEditArticle.style.display = 'block';
         }, 400)
     "style="display: none;" x-ref="wrapperEditArticle">
-
-    <div x-init="flash()"></div>
-    <div x-show="showFlash">
-        <x-alert />
-    </div>
 
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 
