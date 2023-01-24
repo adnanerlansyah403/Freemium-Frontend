@@ -103,7 +103,7 @@
                                 }
                             ">
                         <span
-                            class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full rounded-primary bg-white border border-primary dark:bg-slate-secondary dark:border-white mt-4 overflow-y-hidden"
+                            class="relative cursor-pointer flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] px-2 py-4 w-full rounded-primary bg-white border border-primary dark:bg-slate-secondary dark:border-white mt-4 overflow-y-hidden"
                             @click="
                                 $refs.file.click();
                             "
@@ -131,7 +131,11 @@
                     </div>
 
                 <div class="mb-5 col-12">
-                    <label for="text" class="text-md">Content</label><br>
+                    <div class="flex justify-between items-center mb-5">
+                        <label for="text" class="text-md">Content</label><br>
+                        <p><strong>Shift + Enter</strong> to Pressing enter once</p>
+                    </div>
+
                     <textarea id="content" placeholder="Your content..."
                     class="px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white dark:bg-slate-secondary">
                     </textarea>
@@ -180,16 +184,21 @@
                     </ul>
                 </div>
 
-                <div x-data="articles" x-show="buttonshow" class="flex justify-end mt-5">
+                <div x-data="articles">
+                        <div x-show="status_sub_err">
+                            <div x-html="sub_article_err"></div>
+                        </div>
+                        <div x-show="buttonshow" class="flex justify-end mt-5">
 
-                    <template x-if="isLoadingArticle">
-                        <span class="span text-md dark:text-slate-third">wait...</span>
-                    </template>
-                    <template x-if="!isLoadingArticle">
-                        <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                            Save
-                        </button>
-                    </template>
+                            <template x-if="isLoadingArticle">
+                                <span class="span text-md dark:text-slate-third">wait...</span>
+                            </template>
+                            <template x-if="!isLoadingArticle">
+                                <button @click="createArticle()" class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                                    Save
+                                </button>
+                            </template>
+                        </div>
                 </div>
 
             </div>
@@ -254,6 +263,10 @@
                 <li class="flex items-start gap-2">
                     <b class="text-primary dark:text-white">6.</b>
                     <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <b class="text-primary dark:text-white">7.</b>
+                    <span>All media in the content article should be sourced online</span>
                 </li>
             </ul>
         </x-modal-instruction>
@@ -341,7 +354,7 @@
                                             }
                                         ">
                                     <span
-                                        class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white border border-primary dark:bg-slate-primary dark:border-white mt-4 overflow-y-hidden"
+                                        class="relative cursor-pointer flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white border border-primary dark:bg-slate-primary dark:border-white mt-4 overflow-y-hidden"
                                         @click="
                                             $refs.file${this.index}.click();
                                         "
