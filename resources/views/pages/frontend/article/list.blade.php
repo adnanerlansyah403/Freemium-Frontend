@@ -177,7 +177,7 @@
                         <div class="content first-of-type:mt-0 mt-[22px]" >
 
                             {{-- <div class="border mt-5 first:border-none"></div> --}}
-                            <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary dark:text-white rounded-primary px-3 py-4">
+                            <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary max-h-[250px] dark:text-white rounded-primary px-3 py-4">
                                 <div class="flex flex-col col-12 md:col-9">
                                     <div class="flex items-start justify-between">
                                         <div>
@@ -192,7 +192,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="-translate-x-5">
+                                        <div class="-translate-x-[24px]">
                                             {{-- <span x-text="console.log(data_user.photo != undefined)"></span> --}}
                                             <template x-if="item.author.photo != null">
                                                 <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
@@ -222,11 +222,15 @@
                                         </button>
                                     </div>
                                     {{-- <span x-text="parseToOriginalString(item.description)"></span> --}}
-                                    <p class="font-normal text-sm mt-4 md:w-[400px] lg:w-full dark:text-gray-primary" x-text="parseToOriginalString(item.description)">
+                                    <p class="font-normal text-sm mt-4 md:w-[400px] lg:w-full dark:text-gray-primary" x-text="parseToOriginalString(item.description, 150)">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                                         eiusmod tempor incididunt ut labore et dolore magna aliqua. short desc
                                         short desc short desc short desc short desc
                                     </p>
+
+                                    <template x-for="(c, index) in item.tags">
+                                        <span x-text="c.category.name" @click="fetchArticleByCategory(c.category.id)" class="mt-4 cursor-pointer py-1 px-3 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)] dark:shadow-[0px_0px_4px_#fff] text-sm text-[rgba(41,41,41,1)] font-medium dark:bg-slate-secondary dark:text-white w-max"></span>
+                                    </template>
 
                                 </div>
                                 {{-- <span x-text="console.log(item.thumbnail)"></span> --}}
@@ -269,9 +273,9 @@
                 </div>
             </template>
 
-            {{-- <span x-text="console.log(itemArticle > listArticle.length)"></span>
-            <span x-text="console.log(listArticle.length < itemArticle)"></span> --}}
-            <template x-if="itemArticle > listArticle.length && keywordArticle == '' && listArticle.length > 1">
+            <span x-text="console.log(itemArticle > listArticle.length)"></span>
+            <span x-text="console.log(listArticle.length < itemArticle)"></span>
+            <template x-if="itemArticle > listArticle.length && keywordArticle == '' && listArticle.length > 3">
                 <div class="flex items-center justify-center">
                     <div id="resetButton" class="flex items-center justify-center mt-20" style="display: none;"
                         x-init="
@@ -281,7 +285,7 @@
                         "
                     >
 
-                        <a :href="baseUrl"
+                        <a :href="baseUrl+'article'"
                         class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Reset</a>
 
                     </div>
