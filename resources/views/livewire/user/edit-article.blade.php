@@ -382,10 +382,6 @@
                 </li>
                 <li class="flex items-start gap-2">
                     <b class="text-primary dark:text-white">5.</b>
-                    <span>The content length must be more than 100 character</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <b class="text-primary dark:text-white">6.</b>
                     <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
                 </li>
             </ul>
@@ -395,31 +391,15 @@
                 </li>
                 <li class="flex items-start gap-2">
                     <b class="text-primary dark:text-white">1.</b>
-                    <span>The title must longer than 10 character</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <b class="text-primary dark:text-white">2.</b>
-                    <span>The article must have at least 1 category</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <b class="text-primary dark:text-white">3.</b>
-                    <span>The article must have a thumbnail</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <b class="text-primary dark:text-white">4.</b>
-                    <span>The thumbnail must be an image with size less than 1 MB</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <b class="text-primary dark:text-white">5.</b>
                     <span>The content length must be more than 100 character</span>
                 </li>
                 <li class="flex items-start gap-2">
-                    <b class="text-primary dark:text-white">6.</b>
-                    <span>If there are more than 3 sub-articles. At least 3 of them must be free</span>
+                    <b class="text-primary dark:text-white">2.</b>
+                    <span>All media in the content article should be sourced online</span>
                 </li>
                 <li class="flex items-start gap-2">
-                    <b class="text-primary dark:text-white">7.</b>
-                    <span>All media in the content article should be sourced online</span>
+                    <b class="text-primary dark:text-white">3.</b>
+                    <span>Shift + Enter to Pressing enter once</span>
                 </li>
 
             </ul>
