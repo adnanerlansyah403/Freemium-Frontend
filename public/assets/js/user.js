@@ -576,9 +576,17 @@ document.addEventListener('alpine:init', () => {
         })
           .then(async (response) => {
             data = await response.json();
-            this.EditArticle = data.data;
-            this.categories = data.category;
+
+            if (data.status == false) {
+              localStorage.setItem('showFlash', true);
+              localStorage.setItem('message', data.message);
+              window.history.back();
+            } else {
+              this.EditArticle = data.data;
+              this.categories = data.category;
+            }
             this.isLoading = false;
+
 
           })
 

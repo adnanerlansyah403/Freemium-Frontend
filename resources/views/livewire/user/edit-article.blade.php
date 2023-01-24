@@ -3,11 +3,18 @@
 <section class="pt-[140px] pb-[100px]" x-data="user" x-init="checkSession()">
     <div x-init="fetchMe()"></div>
     <div x-init="checkRoleUser()"></div>
-
     <div x-init="flash()"></div>
     <div x-show="showFlash">
         <x-alert />
     </div>
+    <div x-init="
+    fetchEditArticle(window.location.href.split('/').pop())"></div>
+
+    <template x-if="isLogedIn && data_user.role == 2 && data_user.id == EditArticle?.user_id">
+        <script>
+            document.title = 'Edit Article - Freemium App';
+        </script>
+    </template>
 
     <style>
 
@@ -17,16 +24,9 @@
 
     </style>
 
-    <template x-if="isLogedIn && data_user.role == 2">
-        <script>
-            document.title = 'Edit Article - Freemium App';
-        </script>
-    </template>
-
     <div
     x-init="
-        if(isLogedIn == true) {
-            fetchEditArticle(window.location.href.split('/').pop())
+        if(isLogedIn == true && data_user.role == 2 && data_user.id == EditArticle?.user_id) {
         }
         setTimeout(function() {
             $refs.wrapperEditArticle.style.display = 'block';
@@ -41,7 +41,7 @@
                     <span x-text="convertDate(EditArticle?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
                         setTimeout(function() {
                             $refs.dateArticle.style.display = 'block';
-                        }, 500)
+                        }, 400)
                     " x-ref="dateArticle"></span>
                 </p>
 
@@ -140,7 +140,7 @@
                     </template>
                 </div>
 
-                <div class="flex items-center justify-center my-10">
+                <div class="flex items-center justify-center mt-6 mb-10">
                     <button @click.prevent="updateArticle()"
                         class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
@@ -278,7 +278,7 @@
                                 }
                             ">
                         <span
-                            class="relative cursor-pointer flex items-center justify-center h-[200px] lg:h-[500px] px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4 overflow-y-hidden"
+                            class="relative cursor-pointer flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4 overflow-y-hidden"
                             @click="
                                 $refs.filesubarticle.click();
                             ">
