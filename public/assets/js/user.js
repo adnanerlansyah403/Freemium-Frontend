@@ -32,16 +32,17 @@ document.addEventListener('alpine:init', () => {
     flash() {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
-        this.message = localStorage.getItem('message');
-        window.addEventListener("beforeunload", function () {
-          this.showFlash = true;
-          localStorage.removeItem("typeStatus")
-        });
+        this.message = this.message;
+        // window.addEventListener("beforeunload", function () {
+        //   this.showFlash = true;
+        //   localStorage.removeItem("typeStatus")
+        // });
         setTimeout(() => {
           this.showFlash = false;
-          localStorage.removeItem("showFlash");
-          localStorage.removeItem("message");
-        }, 3500);
+          this.message = '';
+          // localStorage.removeItem("showFlash");
+          // localStorage.removeItem("message");
+        }, 5000);
       }
     },
 
@@ -617,9 +618,8 @@ document.addEventListener('alpine:init', () => {
             this.status_err[0] = null;
             this.showFlash = true;
             this.message = data.message;
-            setTimeout(() => {
-              this.showFlash = false;
-            }, 4000);
+            localStorage.setItem('showFlash', true);
+            localStorage.setItem('message', data.message);
           }
           this.isLoading = false;
         }).catch(error => {

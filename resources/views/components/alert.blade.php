@@ -17,8 +17,8 @@
 
 
 <div id="alert" class="fixed flex gap-4 left-1/2 -translate-x-1/2 p-4 rounded-lg max-w-[400px] dark:alert-dark w-full z-[101]" x-data="{ showFlash: true }" :class="{
-    'active' : localStorage.getItem('showFlash') == 'true' || showFlash == 'true', 
-    '' : localStorage.getItem('showFlash') == 'false' || showFlash == 'false',
+    'active' : showFlash == true, 
+    '' : showFlash == false,
     'alert-success' : localStorage.getItem('typeStatus') == 'true',
     'alert-danger' : localStorage.getItem('typeStatus') == 'false'
     }" 
@@ -32,6 +32,6 @@
         <span class="font-medium">
             Information
         </span> <br>
-        <p x-text="message">Some messages of alert</p>
+        <p x-text="localStorage.getItem('message')">Some messages of alert</p>
     </div>
 </div>

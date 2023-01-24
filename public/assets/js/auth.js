@@ -20,15 +20,15 @@ document.addEventListener('alpine:init', () => {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
         this.message = localStorage.getItem('message');
-        window.addEventListener("beforeunload", function () {
-          this.showFlash = true;
-          localStorage.removeItem("typeStatus")
-        });
+        // window.addEventListener("beforeunload", function () {
+        //   this.showFlash = true;
+        //   localStorage.removeItem("typeStatus")
+        // });
         setTimeout(() => {
           this.showFlash = false;
           localStorage.removeItem("showFlash");
           localStorage.removeItem("message");
-        }, 3500);
+        }, 5000);
       }
     },
 
@@ -121,6 +121,8 @@ document.addEventListener('alpine:init', () => {
             // localStorage.setItem('subscribe_status', subscribe_status)
             localStorage.setItem('showFlash', true)
             localStorage.setItem('message', user.message);
+            this.showFlash = true;
+            this.message = user.message;
             this.data_user = user.data
             if (role == 2) {
               return window.location.replace(this.baseUrl + 'article')
@@ -179,7 +181,6 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           user = await response.json();
-          console.log(user);
           if (!user.status) {
             this.isLoadingAuth = false;
             localStorage.setItem('showFlash', true)
