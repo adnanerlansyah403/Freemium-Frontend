@@ -1325,39 +1325,22 @@ document.addEventListener('alpine:init', () => {
                         <label for="text" class="text-md">Thumbnail</label>
                         <input class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
                             hidden
-                            x-ref="file${this.index}"
-                            @change="
-                                if ($refs.file) {
-                                    $refs.iconimage${this.index}.style.display = 'none';
-                                    var reader = new FileReader();
-                                    reader.readAsDataURL($refs.file${this.index}.files[0]);
-                                    reader.onload = function (e) {
-                                        $refs.image${this.index}.src = e.target.result;
-                                        $refs.image${this.index}.alt = $refs.file${this.index}.name;
-                                        $refs.filename${this.index}.classList.add('active');
-                                        $refs.filename${this.index}.innerText = $refs.file${this.index}.files[0].name;
-                                    }
-                                }
-                            ">
+                            id="file${this.index}">
                         <span
                             class="relative cursor-pointer flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] px-2 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white border border-primary dark:bg-slate-primary mt-4 overflow-y-hidden"
-                            @click="
-                                $refs.file${this.index}.click();
-                            "
+                            id="buttonClickImage${this.index}"
                         >
                             <img src=""
-                            x-ref="image${this.index}" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                            <img src=""
-                            x-ref="image" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                            id="image${this.index}" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                             <i
                                 data-feather="image"
                                 class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
-                                x-ref="iconimage"
+                                id="iconimage${this.index}"
                             >
                             </i>
                             <p
-                                class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
-                                x-ref="filename${this.index}"
+                                class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-b-lg transition duration-200 ease-in-out"
+                                id="filename${this.index}"
                             >
                             </p>
                         </span>
@@ -1391,14 +1374,42 @@ document.addEventListener('alpine:init', () => {
             </li>
         `);
 
-      // ClassicEditor
-      // .create( document.querySelector( `#editor${this.index}` ) )
-      // .then( editor => {
-      //     editor.config.toolbar = [{ name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }]
-      // } )
-      // .catch( error => {
-      //     console.error( error );
-      // } );
+      feather.replace()
+
+      let file = document.getElementById(`file${this.index}`);
+      let filename = document.getElementById(`filename${this.index}`);
+      let image = document.getElementById(`image${this.index}`);
+      let iconimage = document.getElementById(`iconimage${this.index}`);
+      let buttonClickImage = document.getElementById(`buttonClickImage${this.index}`);
+
+      buttonClickImage.addEventListener("click", function () {
+        file.click();
+      })
+
+      document.getElementById(`file${this.index}`).addEventListener("change", () => {
+        if (file) {
+
+          iconimage.style.display = 'none';
+          var reader = new FileReader();
+          reader.readAsDataURL(file.files[0]);
+          reader.addEventListener("load", (e) => {
+            image.setAttribute("src", e.target.result);
+            image.setAttribute("alt", e.target.result);
+            filename.classList.add('active');
+            filename.innerText = file.files[0].name;
+          })
+
+          // $refs.iconimage${this.index}.style.display = 'none';
+          // var reader = new FileReader();
+          // reader.readAsDataURL($refs.file${this.index}.files[0]);
+          // reader.onload = function (e) {
+          //     $refs.image${this.index}.src = e.target.result;
+          //     $refs.image${this.index}.alt = $refs.file${this.index}.name;
+          //     $refs.filename${this.index}.classList.add('active');
+          //     $refs.filename${this.index}.innerText = $refs.file${this.index}.files[0].name;
+          // }
+        }
+      })
 
       tinymce.init({
         selector: `#editor${this.index}`,
@@ -1410,8 +1421,6 @@ document.addEventListener('alpine:init', () => {
         cleanup: true,
       });
 
-      this.index++;
-      this.total++;
       let title_sub = document.getElementsByClassName('title_sub');
       if (this.total > 4) {
         for (let i = 0; i < this.total; i++) {
@@ -1422,6 +1431,8 @@ document.addEventListener('alpine:init', () => {
           }
         }
       }
+      this.index++;
+      this.total++;
 
     },
 
