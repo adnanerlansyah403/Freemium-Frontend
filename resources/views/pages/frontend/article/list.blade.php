@@ -68,6 +68,7 @@
                 <div class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white">
                     <div class="flex justify-between">
                         <input id="search"
+                            x-ref="search"
                             x-on:change="filtersKey[0] = $event.target.value; filterArticle()"
                             class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm"
                             placeholder="Search Here..." />
@@ -110,7 +111,7 @@
         </div>
 
         {{-- kanan --}}
-        <div class="lg:col-9 mt-5 lg:mt-0 lg:ml-[30px] md:mt-20">
+        <div class="lg:col-9 mt-5 lg:mt-0 lg:ml-[30px] md:mt-160" x-bind:class="isLoadingArticle ? 'grid place-items-center' : ''">
             <div x-init="fetchMe()"></div>
             <div x-init="getArticle()"></div>
 
@@ -137,41 +138,34 @@
 
                 <div class="flex flex-col flex-wrap items-center justify-center">
 
-                    <template x-if="isLoadingArticle && isLoadMore == false">
+                    <template x-if="isLoadingArticle && isLoadMore == false && listArticle.length != 0">
                         <x-loading />
                     </template>
 
-                    <template x-if="listArticle == null || listArticle.length == 0">
-                        <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
+                    <template x-if="listArticle.length == 0">
+                        <div x-ref="articleNotFound" class="text-md mt-10 dark:text-white"
                             x-init="
-                                setTimeout(() => {
-                                    document.getElementById('articleNotFound').style.display = 'block';
-                                }, 800)
+                                setTimeout(function() {
+                                    $refs.articleNotFound.style.display = 'block';
+                                }, 600)
                             "
+                            style="display: none;"
                         >
-                            <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
-                            <span class="span dark:text-slate-fourth">Oops</span>, We can't find your article
-                        </p>
+                            <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-6" alt="">
+                            <p>
+                                <span class="span dark:text-slate-fourth" x-text="$refs.search.value != '' ? 'Oops' : 'Sorry'"></span>
+                                <span x-text="$refs.search.value != '' ? ', We can not find your article' : ', We still have not an article'"></span>
+                            </p>
+                            <div class="flex items-center justify-center mt-6">
+                                <a href="{{ route("article.create") }}" class="py-2 px-4 border border-primary dark:border-white rounded-pill text-sm font-medium text-center hover:bg-primary hover:text-white dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                    Create One
+                                </a>
+                            </div>
+                        </div>
                     </template>
-
-                    <template x-if="listArticle == null || listArticle.length == 0">
-                        <p id="articleNotFound" class="text-md mt-10 dark:text-white" style="display: none;"
-                            x-init="
-                                setTimeout(() => {
-                                    document.getElementById('articleNotFound').style.display = 'block';
-                                }, 700)
-                            "
-                        >
-                            <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
-                            <span class="span dark:text-slate-fourth">We</span> still don't have any articles
-                        </p>
-                    </template>
-
-
                 </div>
 
-
-                <div class="flex flex-wrap items-center justify-center w-full">
+                <div class="flex flex-wrap items-center justify-center w-full" x-bind:class="isLoadingArticle && !isLoadMore ? 'hidden' : ''">
                     <template x-for="(item, index) in listArticle.length > 1 ? listArticle.slice(0, itemArticle) : listArticle">
                         <div class="content first-of-type:mt-0 mt-[22px]" >
 
@@ -256,7 +250,7 @@
 
 
             <template x-if="listArticle.length > 1 && listArticle.length > itemArticle">
-                <div class="flex items-center justify-center mt-20">
+                <div class="flex items-center justify-center mt-16">
 
                     <template x-if="isLoadMore">
                         <span class="span dark:text-slate-third">Loading...</span>
@@ -272,11 +266,11 @@
                 </div>
             </template>
 
-            {{-- <span x-text="console.log(itemArticle > listArticle.length)"></span>
-            <span x-text="console.log(listArticle.length < itemArticle)"></span> --}}
+            <span x-text="console.log(itemArticle > listArticle.length)"></span>
+            <span x-text="console.log(listArticle.length < itemArticle)"></span>
             <template x-if="itemArticle > listArticle.length && listArticle.length > 3">
                 <div class="flex items-center justify-center">
-                    <div id="resetButton" class="flex items-center justify-center mt-20" style="display: none;"
+                    <div id="resetButton" class="flex items-center justify-center mt-16" style="display: none;"
                         x-init="
                             setTimeout(() => {
                                 document.getElementById('resetButton').style.display = 'block';

@@ -111,12 +111,17 @@
                     >
                         <img src=""
                         x-ref="image" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                        <i
+                        <div class="text-center"
+                        x-ref="iconimage">
+                            <i
                             data-feather="image"
-                            class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
-                            x-ref="iconimage"
-                        >
-                        </i>
+                            class="w-[100px] h-[100px] lg:h-[100px] mx-auto text-primary dark:text-white"
+                            >
+                            </i>
+                            <span class="block mt-4">
+                                <b class="span dark:text-white">Click here</b> to input an image
+                            </span>
+                        </div>
                         <p
                             class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out"
                             x-ref="filename"

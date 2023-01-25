@@ -5,7 +5,7 @@
         $refs.modalInstruction.style.display = 'block'
     }, 600)
 ">
-    <button x-show="modalActive == false" x-transition @click="modalActive = true;" type="button" class="drop-shadow-2xl group shadow-[0_0_10px_4px_#7C000B] hover:bg-primary mt-6 md:mt-[25px] lg:h-16 lg:w-16 h-10 md:w-10 dark:hover:shadow-[0_0_10px_4px_#fff] p-2 flex items-center justify-center rounded-full hover:text-[#FFEA20] bg-primary dark:bg-slate-secondary text-white  transition duration-200 ease-in-out" title="Instructions">
+    <button x-show="modalActive == false" x-transition @click="modalActive = true;" type="button" class="drop-shadow-2xl group hover:shadow-[0_0_10px_4px_#7C000B] dark:shadow-none hover:bg-primary mt-6 md:mt-[25px] lg:h-16 lg:w-16 h-10 md:w-10 dark:hover:shadow-[0_0_10px_4px_#fff] p-2 flex items-center justify-center rounded-full hover:text-[#FFEA20] bg-primary dark:bg-slate-secondary text-white  transition duration-200 ease-in-out" title="Instructions">
         <ion-icon name="bulb-outline" title="Instructions" class="text-[23px]  lg:h-16 lg:w-16 h-10 md:w-10 lg:text-md transition duration-200 ease-in-out"></ion-icon>
     </button>
 

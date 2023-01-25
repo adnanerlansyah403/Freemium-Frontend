@@ -108,9 +108,17 @@
                             $refs.file.click();
                         ">
                         <img x-bind:src="!EditArticle?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full rounded-lg" x-bind:alt="EditArticle?.thumbnail_1_alt"  onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                        <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
-                            x-ref="iconimage">
-                        </i>
+                        <div class="text-center"
+                        x-ref="iconimage">
+                            <i
+                            data-feather="image"
+                            class="w-[100px] h-[100px] lg:h-[100px] mx-auto text-primary dark:text-white"
+                            >
+                            </i>
+                            <span class="block mt-4">
+                                <b class="span dark:text-white">Click here</b> to input an image
+                            </span>
+                        </div>
                         <p x-show="EditArticle?.thumbnail_1_alt" x-text="EditArticle?.thumbnail_1_alt" class="filename absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
                     </span>
 
@@ -288,9 +296,17 @@
                                 $refs.filesubarticle.click();
                             ">
                             <img x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
-                            <i data-feather="image" class="w-[100px] h-[100px] lg:h-[100px] text-gray-secondary"
-                                x-ref="iconimagesubarticle">
-                            </i>
+                            <div class="text-center"
+                            x-ref="iconimagesubarticle">
+                                <i
+                                data-feather="image"
+                                class="w-[100px] h-[100px] lg:h-[100px] mx-auto text-primary dark:text-white"
+                                >
+                                </i>
+                                <span class="block mt-4">
+                                    <b class="span dark:text-white">Click here</b> to input an image
+                                </span>
+                            </div>
                             <p x-show="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-text="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" class="filenamesubarticle absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
                         </span>
 
