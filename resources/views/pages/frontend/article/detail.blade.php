@@ -277,13 +277,7 @@
                                             </button>
                                         </template>
                                     </div>
-
-                                    <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mt-5 mb-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary" x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-4' : ''">
-                                        You have to
-                                        <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
-                                        to Access this
-                                    </p>
-
+                                    
                                     <div id="wrapperSub" class="block max-h-[408px] overflow-y-auto has-scrollbar">
                                         <ul class="flex flex-col gap-4 pr-4" x-transition x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-2' : ''">
                                             <template x-for="(item, index) in detailArticle?.subarticles">
@@ -320,6 +314,13 @@
                                                     </script>
                                                 </li>
                                             </template>
+
+                                            <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mb-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary">
+                                                You have to
+                                                <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
+                                                to Access this
+                                            </p>
+        
                                             <template x-if="back">
                                                 <li
                                                     {{-- @click="content = null; back = false;" --}}
