@@ -497,8 +497,7 @@ document.addEventListener('alpine:init', () => {
       let url = window.location.href;
       let id = url.substring(url.lastIndexOf('/') + 1);
 
-      fetch(`${this.apiUrl
-        }article/${id}`, {
+      fetch(`${this.apiUrl}article/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -632,10 +631,13 @@ document.addEventListener('alpine:init', () => {
           }
           else {
             this.status_err[0] = null;
+            this.message = 'Update sub-article failed';
+            this.showFlash = true;
           }
 
           setTimeout(() => {
             this.showFlash = false;
+            this.message = '';
           }, 4000);
 
           this.isLoading = false;
@@ -691,10 +693,12 @@ document.addEventListener('alpine:init', () => {
           }
           else {
             this.status_err[1] = sub.message;
-
+            this.message = 'Update sub-article failed';
+            this.showFlash = true;
           }
           setTimeout(() => {
             this.showFlash = false;
+            this.message = '';
           }, 4000);
 
           this.isLoading = false;
@@ -712,11 +716,31 @@ document.addEventListener('alpine:init', () => {
           'Authorization': token
         }
       })
-        .then((response) => {
+        .then(async response => {
+          data = await response.json();
+
+          if (data.status) {
+            this.showFlash = true;
+            this.message = data.message;
+            console.log('test', data);
+            this.fetchListMyArticle();
+          }
+          else {
+            console.log('test1', data);
+            this.showFlash = true;
+            this.message = data.message;
+          }
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
+
           this.isLoading = false;
-          this.fetchListMyArticle();
-          // window.location.replace(this.baseUrl + 'myarticle')
-        });
+        }).catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        })
     },
 
     deleteSub(delSub) {
@@ -729,11 +753,29 @@ document.addEventListener('alpine:init', () => {
           'Authorization': token
         }
       })
-        .then((response) => {
+        .then(async response => {
+          data = await response.json();
+          
+          if (data.status) {
+            this.showFlash = true;
+            this.message = data.message;
+            this.fetchListMyArticle();
+          }
+          else {
+            this.showFlash = true;
+            this.message = data.message;
+          }
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
+
           this.isLoading = false;
-          this.fetchListMyArticle();
-          // window.location.replace(this.baseUrl + 'myarticle')
-        });
+        }).catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        })
     },
 
     //pay subscription

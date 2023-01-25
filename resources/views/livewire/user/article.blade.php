@@ -120,7 +120,7 @@
                                     <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-[-25%] transition delay-100 duration-200 ease-in-out">
                                         <i data-feather="edit"></i>
                                     </a>
-                                    <button href="#" x-on:click="deleteArticle(item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-[-25%] transition delay-200 duration-200 ease-in-out">
+                                    <button href="#" x-on:click="confirm('Do you want to delete this article?') ? deleteArticle(item.id) : ''" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-[-25%] transition delay-200 duration-200 ease-in-out">
                                         <i data-feather="trash-2"></i>
                                     </button>
                                 </div>
