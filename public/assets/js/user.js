@@ -885,6 +885,17 @@ document.addEventListener('alpine:init', () => {
               const baseUrl = "http://127.0.0.1:8000/";
               window.location.replace(`${baseUrl}profile`);
             }, 3500)
+          } else {
+            message = data.message.attachment[0];
+            Swal.fire({
+              icon: 'error',
+              title: message,
+              titleColor: '#FFFF',
+              iconColor: '#FFFF',
+              color: '#FFFF',
+              background: '#7C030B',
+              position: 'center',
+            })
           }
         })
         .catch(error => {
