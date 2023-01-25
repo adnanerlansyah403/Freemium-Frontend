@@ -55,8 +55,8 @@ document.addEventListener('alpine:init', () => {
     link_linkedin: '',
     link_instagram: '',
     link_twitter: '',
-    diffpayment:'',
-    paymentDateProfile:'',
+    diffpayment: '',
+    paymentDateProfile: '',
     diffPaymentByMonth: '',
 
     addMonths(date, months) {
@@ -101,9 +101,9 @@ document.addEventListener('alpine:init', () => {
     },
 
     addMonths(date, months) {
-        date.setMonth(date.getMonth() + months);
+      date.setMonth(date.getMonth() + months);
 
-        return date;
+      return date;
     },
 
 
@@ -294,7 +294,6 @@ document.addEventListener('alpine:init', () => {
       // })
       //   .then(async (response) => {
       //     const data = await response.json();
-      //     console.log(data);
       //   })
     },
 
@@ -741,11 +740,9 @@ document.addEventListener('alpine:init', () => {
           if (data.status) {
             this.showFlash = true;
             this.message = data.message;
-            console.log('test', data);
             this.fetchListMyArticle();
           }
           else {
-            console.log('test1', data);
             this.showFlash = true;
             this.message = data.message;
           }
@@ -969,7 +966,6 @@ document.addEventListener('alpine:init', () => {
     selectedPlan(item = null) {
 
       this.plan_id = item.id;
-      console.log(this.plan_id);
 
       var elements = document.querySelectorAll(".cardplan");
       for (var i = 0; i < elements.length; i++) {
@@ -1077,7 +1073,7 @@ document.addEventListener('alpine:init', () => {
             this.detailArticle = data.data;
           }
           else {
-            console.log(data.message);
+            // console.log(data.message);
           }
           this.isLoadingArticle = false;
           this.isLoading = false;
@@ -1100,7 +1096,6 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           if (!data.status) {
             this.fetchStatus = false;
-            console.log('test', this.fetchStatus);
             // localStorage.setItem('message', data.message);
             // localStorage.setItem('showFlash', true);
           }
@@ -2011,7 +2006,6 @@ document.addEventListener('alpine:init', () => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(string, 'text/html');
       const hasHTMLTag = doc.body.childNodes.length > 0;
-      console.log(hasHTMLTag, string);
     },
 
     parseToOriginalString(string, max = 10) {
