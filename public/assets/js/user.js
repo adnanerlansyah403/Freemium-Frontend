@@ -1309,7 +1309,7 @@ document.addEventListener('alpine:init', () => {
 
     },
     
-    resetFilters(typeArticle = '') {
+    resetFilters() {
       document.getElementById('search').value = null;
       document.getElementById('category').value = '';
       document.getElementById('free').checked = false;

@@ -74,31 +74,35 @@
                 <div class="mb-8" x-data="{passwordHidden: true}">
                     <label for="password" class="text-md">Password</label>
                     <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out" x-bind:class="status_err.password ? 'border border-[#b91c1c]' : ''">
-                        <button type="button" @click="
+                        <span>
+                            <i data-feather="lock" class="w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
+                            <script>
+                                feather.replace()
+                            </script>
+                        </span>
+                        <input type="password" placeholder="Your password..."
+                        x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full" x-model="password" x-ref="password">
+
+                        <button type="button" title="show password" @click="
                         typePassword = passwordHidden == true ? 'text' : 'password';
                         $refs.password.setAttribute('type', typePassword)
                         passwordHidden = !passwordHidden;
                         ">
-                            <template x-if="passwordHidden == true">
-                                <span>
-                                    <i data-feather="lock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
-                                    <script>
-                                        feather.replace()
-                                    </script>
-                                </span>
-                            </template>
-                            <template x-if="passwordHidden == false">
-                                <span>
-                                    <i data-feather="unlock" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"
-                                    ></i>
-                                    <script>
-                                        feather.replace()
-                                    </script>
-                                </span>
-                            </template>
+                            <span x-show="passwordHidden">
+                                <i data-feather="eye" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"
+                                ></i>
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </span>
+                            <span x-show="!passwordHidden">
+                                <i data-feather="eye-off" class="group-hover:text-primary dark:group-hover:text-white w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"
+                                ></i>
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </span>
                         </button>
-                        <input type="password" placeholder="Your password..."
-                        x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full" x-model="password" x-ref="password">
                     </div>
                         <template x-if="status_err.password">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">

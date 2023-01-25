@@ -213,8 +213,6 @@ document.addEventListener('alpine:init', () => {
           user = await response.json();
           if (!user.status) {
             this.status_err = user.message;
-            localStorage.setItem('showFlash', true)
-            localStorage.setItem('message', user.message);
           } else {
             localStorage.setItem('showFlash', true)
             localStorage.setItem('message', user.message);
