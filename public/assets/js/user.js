@@ -55,6 +55,10 @@ document.addEventListener('alpine:init', () => {
     link_linkedin: '',
     link_instagram: '',
     link_twitter: '',
+    diffpayment: '',
+    paymentDateProfile: '',
+    diffPaymentByMonth: '',
+    diffPaymentByDay: '',
 
     addMonths(date, months) {
       date.setMonth(date.getMonth() + months);
@@ -84,9 +88,26 @@ document.addEventListener('alpine:init', () => {
             this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
             this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
             this.isLoading = false;
+            this.diffpayment = user.data.payments[0].plan.expired
+            this.paymentDateProfile = user.data.payments[0].payment_date
+
+            const resultPaymentProfile = this.addMonths(new Date(this.paymentDateProfile), this.diffpayment)
+
+            const datenow = Date.now();
+            const diff = new Date(resultPaymentProfile - datenow)
+            this.diffPaymentByMonth = diff.getUTCMonth()
+            this.diffPaymentByDay = diff.getUTCDay()
+
           }
         });
     },
+
+    addMonths(date, months) {
+      date.setMonth(date.getMonth() + months);
+
+      return date;
+    },
+
 
     checkSession() {
       const token = localStorage.getItem('token')
@@ -275,7 +296,6 @@ document.addEventListener('alpine:init', () => {
       // })
       //   .then(async (response) => {
       //     const data = await response.json();
-      //     console.log(data);
       //   })
     },
 
@@ -722,11 +742,9 @@ document.addEventListener('alpine:init', () => {
           if (data.status) {
             this.showFlash = true;
             this.message = data.message;
-            console.log('test', data);
             this.fetchListMyArticle();
           }
           else {
-            console.log('test1', data);
             this.showFlash = true;
             this.message = data.message;
           }
@@ -822,6 +840,12 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    getTime(date) {
+      var newDate = new Date(date);
+      var hour = newDate.getHours();
+      var minutes = newDate.getMinutes();
+      return `${hour}:${minutes}`;
+    },
 
     // MY TRANSACTONS
 
@@ -839,7 +863,6 @@ document.addEventListener('alpine:init', () => {
 
           let url = window.location.href;
           let lastPath = url.substring(url.lastIndexOf('/'));
-
 
           if (this.myTransactions[0] != null) {
             if (this.myTransactions[0].status == 1 && lastPath == '/details') {
@@ -939,7 +962,7 @@ document.addEventListener('alpine:init', () => {
               planOrder.innerText = item.plan.name;
               priceOrder.innerText = '$' + item.total_price;
               vaOrder.innerText = item.virtual_account_number;
-              paymentDateOrder.innerText = this.convertDate(item.payment_date);
+              paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
           })
 
@@ -950,7 +973,6 @@ document.addEventListener('alpine:init', () => {
     selectedPlan(item = null) {
 
       this.plan_id = item.id;
-      console.log(this.plan_id);
 
       var elements = document.querySelectorAll(".cardplan");
       for (var i = 0; i < elements.length; i++) {
@@ -1058,7 +1080,7 @@ document.addEventListener('alpine:init', () => {
             this.detailArticle = data.data;
           }
           else {
-            console.log(data.message);
+            // console.log(data.message);
           }
           this.isLoadingArticle = false;
           this.isLoading = false;
@@ -1081,7 +1103,6 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           if (!data.status) {
             this.fetchStatus = false;
-            console.log('test', this.fetchStatus);
             // localStorage.setItem('message', data.message);
             // localStorage.setItem('showFlash', true);
           }
@@ -1471,7 +1492,7 @@ document.addEventListener('alpine:init', () => {
                         </p>
                     </li>
                 </ul>
-                
+
                 <h2
                 id="${`accordionTitle${this.index}`}"
                 class="flex flex-row justify-between items-center font-semibold px-3 py-2 cursor-pointer"
@@ -1492,7 +1513,7 @@ document.addEventListener('alpine:init', () => {
                         </span>
                     </div>
                 </h2>
-                
+
                 <div
                 x-ref="tab"
                 :style="handleToggle()"
@@ -1992,7 +2013,6 @@ document.addEventListener('alpine:init', () => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(string, 'text/html');
       const hasHTMLTag = doc.body.childNodes.length > 0;
-      console.log(hasHTMLTag, string);
     },
 
     parseToOriginalString(string, max = 10) {
