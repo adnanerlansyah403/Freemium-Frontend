@@ -16,6 +16,14 @@
                     </a>
                 </li>
             </template>
+            <template x-if="data_user.role == 2">
+                <li class="pb-2 {{ $currentRoute == 'transaction.history' ? 'border-b border-primary dark:border-white' : '' }} cursor-pointer">
+                    <a href="{{ route("transaction.history") }}" class="text-base font-iceberg">
+                        <span class="span dark:text-slate-third">History</span>
+                        Transaction
+                    </a>
+                </li>
+            </template>
             <template x-if="data_user.role == 1">
                 <li class="pb-2 
                 {{ $currentRoute == 'admin.dashboard.index' ||

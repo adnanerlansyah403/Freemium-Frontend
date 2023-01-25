@@ -66,7 +66,7 @@
                     <template x-if="!isLoading">
                         <div class="w-full">
                             <div class="w-full rounded-primary bg-white shadow-lg">
-                                <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Users</div>
+                                <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Orders</div>
                                 <div class="overflow-x-auto">
                                     <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                                         <thead>

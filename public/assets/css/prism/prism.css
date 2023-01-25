@@ -2,6 +2,7 @@
 https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+aspnet+c+csharp+cpp+dart+docker+go+go-module+graphql+haskell+http+java+markdown+markup-templating+mongodb+perl+php+powershell+pug+ruby+typescript */
 code[class*=language-],
 pre[class*=language-] {
+    position: relative;
     color: #f8f8f2;
     background: 0 0;
     text-shadow: 0 1px rgba(0, 0, 0, .3);
