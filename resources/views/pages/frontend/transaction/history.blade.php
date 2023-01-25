@@ -93,9 +93,15 @@
                                                             <button @click="showOrder(true, item.id)" class="group" title="Details">
                                                                 <i data-feather="eye" class="group-hover:text-primary dark:group-hover:text-white transition duration-200 ease-in-out w-5 h-5 lg:w-6 lg:h-6"></i>
                                                             </button>
-                                                            <button class="group" title="Pay Now">
-                                                                <i data-feather="credit-card" class="group-hover:text-primary dark:group-hover:text-white transition duration-200 ease-in-out w-5 h-5 lg:w-6 lg:h-6"></i>
-                                                            </button>
+                                                            {{-- <span x-text="console.log(item)" style="display: none;"></span> --}}
+                                                            <template x-if="data_user.subscribe_status == false && item.status == 0">
+                                                                <a href="{{ route('transaction.show') }}" class="group" title="Pay Now">
+                                                                    <i data-feather="credit-card" class="group-hover:text-primary dark:group-hover:text-white transition duration-200 ease-in-out w-5 h-5 lg:w-6 lg:h-6"></i>
+                                                                    <script>
+                                                                        feather.replace()
+                                                                    </script>
+                                                                </a>
+                                                            </template>
                                                         </td>
                                                         <script>
                                                             feather.replace()
@@ -171,7 +177,7 @@
                 
 
     
-            <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="admin">
+            <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
                 <div role="alert" class="relative top-[13%] lg:top-[17%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
                     <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
                         <div class="w-full flex justify-start text-primary dark:text-white mb-3">
@@ -198,7 +204,7 @@
                             <b class="span dark:text-slate-fourth">Screenshoot : </b> <br>
                             <img src="" id="imageOrder" class="mt-2 w-full h-[200px]" alt="">
                         </p>
-                        <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="showOrder(val = false)" aria-label="close modal" role="button">
+                        <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="showOrder()" aria-label="close modal" role="button">
                             <svg  xmlns="http://www.w3.org/2000/svg"  class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <line x1="18" y1="6" x2="6" y2="18" />

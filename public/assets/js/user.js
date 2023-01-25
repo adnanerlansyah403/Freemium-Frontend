@@ -755,7 +755,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           data = await response.json();
-          
+
           if (data.status) {
             this.showFlash = true;
             this.message = data.message;
@@ -910,7 +910,9 @@ document.addEventListener('alpine:init', () => {
         fadeIn(modal);
       } else {
         fadeOut(modal);
+        // return;
       }
+
       fetch(`${this.apiUrl}payment/getMyPayment`, {
         method: "GET",
         headers: {
