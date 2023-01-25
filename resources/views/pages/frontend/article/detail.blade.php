@@ -124,7 +124,7 @@
 
                             <div class="mt-4">
                                 <figure class="mt-4" x-bind:class="
-                                content?.thumbnail == '' || 
+                                content?.thumbnail == '' ||
                                 detailArticle?.thumbnail == '' ? 'hidden' : ''">
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
                                         class="w-full h-[500px] bg-gray-secondary rounded-primary" alt="">
@@ -132,7 +132,7 @@
                                 <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </div>
                                 <script>
-                            
+
                                     setTimeout(() => {
                                         let pre = document.querySelectorAll("pre");
                                         pre.forEach((element, index) => {
@@ -142,8 +142,8 @@
                                                 <div class="absolute flex items-start justify-end w-full h-full top-0 left-0 right-0 bottom-0">
                                                         <span id="copy${index}" title="Copy to clipboard" class="w-0 h-0">
                                                             <i id="iconCopy${index}" data-feather="clipboard" class="absolute top-[15px] right-4 cursor-pointer text-white hover:text-opacity-60 w-[24px] h-[24px] top-[10px] right-4 transition duration-200 ease-in-out"></i>
-                                                            
-                                                            <i id="checklistCopy${index}" data-feather="check-square" class="absolute top-[15px] right-4 cursor-pointer text-white hover:text-opacity-60 w-[24px] h-[24px] top-[10px] right-4 transition duration-200 ease-in-out" style="display: none;"></i>    
+
+                                                            <i id="checklistCopy${index}" data-feather="check-square" class="absolute top-[15px] right-4 cursor-pointer text-white hover:text-opacity-60 w-[24px] h-[24px] top-[10px] right-4 transition duration-200 ease-in-out" style="display: none;"></i>
                                                         </span>
                                                     </button>
                                                 </div>
@@ -174,8 +174,8 @@
 
                                     feather.replace()
                                     }, 600);
-                                    
-                            
+
+
                                 </script>
                             </div>
 
@@ -247,7 +247,7 @@
                                 </div>
                                 <div class="flex items-center justify-center w-full lg:w-auto mt-4 lg:mt-0">
                                     <ul class="flex items-center gap-4">
-            
+
                                         <template
                                             x-if="detailArticle?.author?.link_facebook != null && detailArticle?.author?.link_facebook != ''">
                                             <li
@@ -260,7 +260,7 @@
                                                 </script>
                                             </li>
                                         </template>
-            
+
                                         <template
                                             x-if="detailArticle?.author?.link_linkedin != null && detailArticle?.author?.link_linkedin != ''">
                                             <li
@@ -274,7 +274,7 @@
                                                 </script>
                                             </li>
                                         </template>
-            
+
                                         <template
                                             x-if="detailArticle?.author?.link_instagram != null && detailArticle?.author?.link_instagram != ''">
                                             <li
@@ -288,7 +288,7 @@
                                                 </script>
                                             </li>
                                         </template>
-            
+
                                         <template
                                             x-if="detailArticle?.author?.link_twitter != null && detailArticle?.author?.link_twitter != ''">
                                             <li
@@ -302,7 +302,7 @@
                                                 </script>
                                             </li>
                                         </template>
-            
+
                                     </ul>
                                 </div>
                             </div>
@@ -325,6 +325,15 @@
                                     type: null,
                                 }" class="mt-4">
 
+                                <div class="flex items-center justify-center">
+
+                                    <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mb-3 rounded-primary border border-primary bg-[#F0FF42] font-bold dark:border-white dark:bg-slate-primary">
+                                        You have to
+                                        <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
+                                        to Access this
+                                    </p>
+                                </div>
+
                                     <div class="flex items-center w-full gap-2 mb-3" x-bind:class="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1 ? 'mt-5' : ''">
                                         <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
@@ -345,7 +354,7 @@
                                             </button>
                                         </template>
                                     </div>
-                                    
+
                                     <div id="wrapperSub" class="block max-h-[408px] overflow-y-auto has-scrollbar">
                                         <ul class="flex flex-col gap-4 pr-4" x-transition x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-2' : ''">
                                             <template x-for="(item, index) in detailArticle?.subarticles">
@@ -383,12 +392,6 @@
                                                 </li>
                                             </template>
 
-                                            <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mb-3 rounded-primary border border-primary dark:border-white dark:bg-slate-primary">
-                                                You have to
-                                                <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
-                                                to Access this
-                                            </p>
-        
                                             <template x-if="back">
                                                 <li
                                                     {{-- @click="content = null; back = false;" --}}
