@@ -142,7 +142,7 @@
                         </figure>
                         <span class="text-md font-semibold" x-text="data_user.name">User</span>
                         <p x-text="data_user.email">user@gmail.com</p>
-                        <div class="mt-8 flex flex-col items-center justify-center">
+                        <div class="mt-8 h-max flex flex-col items-center justify-center">
                             {{-- <span class="mb-4 font-semibold text-primary">AUTHOR</span> --}}
                             <p class="flex items-center gap-2" x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-0' : ''">
                                 <span class=" font-bold">Status : </span>
@@ -179,7 +179,7 @@
                             </template>
                         </div>
                         <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
-                            <a href="{{ route('transaction.create') }}" class="group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] mb-3 lg:mb-5 flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                            <a href="{{ route('transaction.create') }}" class="-translate-y-2 group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                             >
                                 <i data-feather="check-circle" class="text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80"></i>
                                 <h2 class="font-bold transition duration-200 text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80 ease-in-out"
