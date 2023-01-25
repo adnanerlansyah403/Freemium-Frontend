@@ -1037,7 +1037,26 @@ document.addEventListener('alpine:init', () => {
       let formData = new FormData();
       formData.append('title', title.value);
       formData.append('description', description);
-      formData.append('thumbnail', thumbnail);
+
+      thumb_err = document.getElementById("err_thumb");
+      thumb_err.innerHTML = '';
+
+      if (thumbnail) {
+        file_thumbnail = thumbnail;
+        getTypeThumbnail = file_thumbnail.type;
+        typeThumbnail = getTypeThumbnail.split('/')[0];
+        if (typeThumbnail === 'image') {
+          if (thumbnail.size > 1023546) {
+            thumb_err.innerHTML += this.styleMessage(`Thumbnail not be greater than 1024 kilobytes.`);
+          } else {
+            formData.append('thumbnail', thumbnail);
+          }
+        } else {
+          thumb_err.innerHTML += this.styleMessage(`Thumbnail must be image.`);
+        }
+      } else {
+        thumb_err.innerHTML += this.styleMessage(`Thumbnail required.`);
+      }
       for (var i = 0, length = type.length; i < length; i++) {
         if (type[i].checked) {
           formData.append('type_sub[]', type[i].value);
