@@ -327,7 +327,7 @@
 
                                 <div class="flex items-center justify-center">
 
-                                    <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mb-3 rounded-primary border border-primary bg-[#F0FF42] font-bold dark:border-white dark:bg-slate-primary">
+                                    <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mb-3 rounded-primary border border-primary bg-primary bg-opacity-20 font-bold dark:border-white dark:bg-slate-primary">
                                         You have to
                                         <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
                                         to Access this
