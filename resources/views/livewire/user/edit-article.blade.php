@@ -90,7 +90,7 @@
 
                 <div class="mb-5">
                     <label for="thumbnail" class="text-md">Thumbnail</label>
-                    <input x-on:change="EditArticle.thumbnail = Object.values($event.target.files)" type="file" name="thumbnail" id="thumbnail" placeholder="Your thumbnail..." hidden
+                    <input x-on:change="EditArticle.thumbnail = Object.values($event.target.files)" type="file" accept="image/*" name="thumbnail" id="thumbnail" placeholder="Your thumbnail..." hidden
                         x-ref="file" @change="
                             if ($refs.file) {
                                 $refs.iconimage.style.display = 'none';
@@ -107,7 +107,7 @@
                         @click="
                             $refs.file.click();
                         ">
-                        <img x-bind:src="!EditArticle?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full rounded-lg" x-bind:alt="EditArticle?.thumbnail_1_alt"  onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                        <img x-bind:src="!EditArticle?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full rounded-lg object-cover" x-bind:alt="EditArticle?.thumbnail_1_alt"  onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                         <div class="text-center"
                         x-ref="iconimage">
                             <i
@@ -207,8 +207,8 @@
                                                 </button>
                                                 <button type="button" @click="
                                                     confirm('Delete this sub-article?') ? deleteSub(s?.id) : '';
-                                                    EditArticle.subarticles.splice(editSub, 1); 
-                                                    editSub--;" 
+                                                    EditArticle.subarticles.splice(editSub, 1);
+                                                    editSub--;"
                                                 class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                                     title="Delete Sub Article">
                                                     <i data-feather="trash-2" class="text-sm"></i>
@@ -278,7 +278,7 @@
 
                     <div class="mb-5">
                         <label for="sub_thumbnail" class="text-md">Thumbnail</label>
-                        <input x-on:change="EditArticle.subarticles[editSub].thumbnail = Object.values($event.target.files)" type="file" name="thumbnail_subarticle" placeholder="Your thumbnail..." hidden name="sub_thumbnail" id="sub_thumbnail"
+                        <input x-on:change="EditArticle.subarticles[editSub].thumbnail = Object.values($event.target.files)" type="file" accept="image/*" name="thumbnail_subarticle" placeholder="Your thumbnail..." hidden name="sub_thumbnail" id="sub_thumbnail"
                             x-ref="filesubarticle" @change="
                                 if ($refs.filesubarticle) {
                                     $refs.iconimagesubarticle.style.display = 'none';
@@ -295,7 +295,7 @@
                             @click="
                                 $refs.filesubarticle.click();
                             ">
-                            <img x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                            <img x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg object-cover" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1" accept="image/*">
                             <div class="text-center"
                             x-ref="iconimagesubarticle">
                                 <i

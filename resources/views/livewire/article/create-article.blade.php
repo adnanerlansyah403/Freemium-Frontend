@@ -110,7 +110,7 @@
                         "
                     >
                         <img src=""
-                        x-ref="image" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                        x-ref="image" class="absolute w-full h-full object-cover rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                         <div class="text-center"
                         x-ref="iconimage">
                             <i

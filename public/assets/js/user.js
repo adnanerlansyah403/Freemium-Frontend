@@ -1542,7 +1542,7 @@ document.addEventListener('alpine:init', () => {
                             id="buttonClickImage${this.index}"
                         >
                             <img src=""
-                            id="image${this.index}" class="absolute w-full h-full rounded-lg" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                            id="image${this.index}" class="absolute w-full h-full rounded-lg object-cover" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                             <div class="text-center"
                             id="iconimage${this.index}">
                                 <i
