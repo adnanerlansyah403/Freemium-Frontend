@@ -1475,6 +1475,7 @@ document.addEventListener('alpine:init', () => {
                         @click="handleClick()"
                         class="-mt-[6px] h-6 w-6 transform transiton-transform duration-200 ease-in-out"
                         title="Open"
+                        style="transform: translateY(-3px)"
                         >
                             <ion-icon name="chevron-down-circle-outline" class="w-full h-full text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
                         </span>

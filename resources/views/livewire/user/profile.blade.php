@@ -144,7 +144,7 @@
                         <p x-text="data_user.email">user@gmail.com</p>
                         <div class="mt-8 flex flex-col items-center justify-center">
                             {{-- <span class="mb-4 font-semibold text-primary">AUTHOR</span> --}}
-                            <p class="flex items-center gap-2" x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-6' : ''">
+                            <p class="flex items-center gap-2" x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-0' : ''">
                                 <span class=" font-bold">Status : </span>
                                 <template x-if="data_user.role == 1">
                                     {{-- <span x-text="console.log(data_user.role)"></span> --}}
@@ -157,7 +157,7 @@
                             <template x-if="data_user.role == 2">
                                 <div>
 
-                                    <p class="flex items-center gap-2 mt-3 text-center justify-center" x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-6' : ''">
+                                    <p class="flex items-center gap-2 mt-3 text-center justify-center" x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-0' : ''">
                                         <template x-if="data_user.subscribe_status == 1">
                                             <div>
                                                 <h1>Member since : </h1>
@@ -177,18 +177,18 @@
                                     </p>
                                 </div>
                             </template>
-                            <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
-                                <a href="{{ route('transaction.create') }}" class="group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] mb-3 lg:mb-5 flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
-                                >
-                                    <i data-feather="check-circle" class="text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80"></i>
-                                    <h2 class="font-bold transition duration-200 text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80 ease-in-out"
-                                    >Get Unlimited Access</h2>
-                                    <script>
-                                        feather.replace()
-                                    </script>
-                                </a>
-                            </template>
                         </div>
+                        <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
+                            <a href="{{ route('transaction.create') }}" class="group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] mb-3 lg:mb-5 flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                            >
+                                <i data-feather="check-circle" class="text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80"></i>
+                                <h2 class="font-bold transition duration-200 text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80 ease-in-out"
+                                >Get Unlimited Access</h2>
+                                <script>
+                                    feather.replace()
+                                </script>
+                            </a>
+                        </template>
                     </div>
                     <!-- Feather Icons Scripts -->
                     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
