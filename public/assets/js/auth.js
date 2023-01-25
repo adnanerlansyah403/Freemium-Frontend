@@ -98,7 +98,7 @@ document.addEventListener('alpine:init', () => {
         .then(async response => {
           user = await response.json()
           if (!user.status) {
-            this.showFlash = true;
+            // this.showFlash = true;
             this.status_err = user.message;
           }
 
