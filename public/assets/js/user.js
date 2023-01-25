@@ -625,14 +625,14 @@ document.addEventListener('alpine:init', () => {
           data = await response.json();
 
           if (data.status) {
-            this.status_err[0] = data.message;
+            this.status_err[0] = null;
             this.showFlash = true;
             this.message = data.message;
           }
           else {
-            this.status_err[0] = null;
-            this.message = 'Update sub-article failed';
+            this.status_err[0] = data.message;
             this.showFlash = true;
+            this.message = 'Update article failed';
           }
 
           setTimeout(() => {
@@ -688,13 +688,13 @@ document.addEventListener('alpine:init', () => {
           if (sub.status) {
             editSub.id = sub.data.id;
             this.status_err[1] = null;
-            this.message = sub.message;
             this.showFlash = true;
+            this.message = sub.message;
           }
           else {
             this.status_err[1] = sub.message;
-            this.message = 'Update sub-article failed';
             this.showFlash = true;
+            this.message = 'Update sub-article failed';
           }
           setTimeout(() => {
             this.showFlash = false;
