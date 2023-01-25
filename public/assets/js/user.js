@@ -1344,16 +1344,16 @@ document.addEventListener('alpine:init', () => {
     filterArticle() {
       query = '';
 
-      if (this.filtersKey[0]) {
+      if (this.filtersKey[0] && this.filtersKey[0] != '') {
         query += 'search=' + this.filtersKey[0] + '&';
       }
-      if (this.filtersKey[1]) {
+      if (this.filtersKey[1] && this.filtersKey[1] != '') {
         query += 'type=' + this.filtersKey[1] + '&';
       }
-      if (this.filtersKey[2]) {
+      if (this.filtersKey[2] && this.filtersKey[2] != '') {
         query += 'category=' + this.filtersKey[2] + '&';
       }
-      if (this.filtersKey[3]) {
+      if (this.filtersKey[3] && this.filtersKey[3] != '') {
         query += 'author=' + this.filtersKey[3] + '&';
       }
 
@@ -1369,17 +1369,19 @@ document.addEventListener('alpine:init', () => {
             this.listArticle = data.data;
           }
           else {
+            this.listArticle = data.data;
             this.showFlash = true;
             this.message = data.message;
           }
-
+          
           setTimeout(() => {
             this.showFlash = false;
+            this.message = false;
           }, 4000);
 
           this.isLoadingArticle = false;
         }).catch(error => {
-          // console.log(error);
+          console.log(error);
           this.isLoadingArticle = false;
         })
 
