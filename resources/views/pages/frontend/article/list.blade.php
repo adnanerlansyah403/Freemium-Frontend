@@ -99,7 +99,7 @@
                             <option x-bind:value="item.id" x-text="item.name" ></option>
                         </template>
                     </select>
-                    <button type="button" @click="resetFilters()" class="w-full py-2 bg-primary dark:bg-slate-primary dark:border-white mt-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
+                    <button type="button" @click="resetFilters()" class="w-full py-2 bg-primary dark:bg-slate-primary dark:border dark:border-white mt-2 rounded-pill text-white hover:text-opacity-80 transition duration-200 ease-in-out">
                         Reset Filter
                     </button>
                 </div>
