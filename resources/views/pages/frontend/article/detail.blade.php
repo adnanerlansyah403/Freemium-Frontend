@@ -180,7 +180,7 @@
                             </div>
 
                             <div class="flex items-center w-full"
-                                x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between mt-12' : 'justify-end mt-6'">
+                                x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between mt-12' : 'justify-end'">
                                 <div class="flex content-center flex-wrap gap-3" x-bind:class="detailArticle?.tags.length > 0 ? '' : 'hidden'">
                                     <template x-for="(item, index) in detailArticle?.tags">
                                         <a class="px-3 py-2 bg-primary text-white dark:bg-slate-third pointer-events-none rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
@@ -224,81 +224,97 @@
                             </div>
                         </div>
 
+                        <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)] mt-6">
+                            <div class="flex items-start flex-wrap lg:flex-nowrap gap-4 md:gap-0 justify-between">
+                                <div class="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start text-center lg:text-left gap-3">
+                                    <figure>
+                                        <div>
+                                            <img x-bind:src="
+                                                detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
+                                                ? imgUrl + detailArticle?.author?.photo
+                                                : imgUrl + 'img/user1.png'"
+                                            src=""
+                                            class="w-[100px] h-[100px] bg-gray-secondary rounded-full border-none" alt="">
+                                        </div>
+                                    </figure>
+                                    <div class="">
+                                        <b class="text-base font-semibold" x-text="detailArticle?.author?.username">Nama Author</b>
+                                        <span class="block text-gray-primary dark:text-gray-third" x-text="detailArticle?.author?.email"></span>
+                                        <p class="mt-2 text-gray-secondary dark:text-white italic font-quickSand block max-w-[400px]">
+                                            Full-Stack Web Developer, Content Creator and CO-Founder SantriKoding.com
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center w-full lg:w-auto mt-4 lg:mt-0">
+                                    <ul class="flex items-center gap-4">
+            
+                                        <template
+                                            x-if="detailArticle?.author?.link_facebook != null && detailArticle?.author?.link_facebook != ''">
+                                            <li
+                                                class="mb-6 p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                                <a x-bind:href="detailArticle?.author?.link_facebook" class="text-md" target="_blank">
+                                                    <i data-feather="facebook"></i>
+                                                </a>
+                                                <script>
+                                                    feather.replace()
+                                                </script>
+                                            </li>
+                                        </template>
+            
+                                        <template
+                                            x-if="detailArticle?.author?.link_linkedin != null && detailArticle?.author?.link_linkedin != ''">
+                                            <li
+                                                class="mb-6 p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                                <a x-bind:href="detailArticle?.author?.link_linkedin" class="text-md" target="_blank">
+                                                    <i data-feather="linkedin"></i>
+                                                </a>
+                                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                                <script>
+                                                    feather.replace()
+                                                </script>
+                                            </li>
+                                        </template>
+            
+                                        <template
+                                            x-if="detailArticle?.author?.link_instagram != null && detailArticle?.author?.link_instagram != ''">
+                                            <li
+                                                class="mb-6 p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                                <a x-bind:href="detailArticle?.author?.link_instagram" class="text-md" target="_blank">
+                                                    <i data-feather="instagram"></i>
+                                                </a>
+                                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                                <script>
+                                                    feather.replace()
+                                                </script>
+                                            </li>
+                                        </template>
+            
+                                        <template
+                                            x-if="detailArticle?.author?.link_twitter != null && detailArticle?.author?.link_twitter != ''">
+                                            <li
+                                                class="mb-6 p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
+                                                <a x-bind:href="detailArticle?.author?.link_twitter" class="text-md" target="_blank">
+                                                    <i data-feather="twitter"></i>
+                                                </a>
+                                                <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+                                                <script>
+                                                    feather.replace()
+                                                </script>
+                                            </li>
+                                        </template>
+            
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <div class="col md:mx-0 col-12 lg:col-4 -order-1 lg:order-2">
 
                         <div
                             class="lg:sticky lg:top-24 px-5 py-6 bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.3)] rounded-lg" x-data="helpers">
-
-                            <ul class="relative left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 w-max p-2 rounded-lg"
-                            x-bind:class="
-                                 detailArticle?.author?.link_facebook == null || detailArticle?.author?.link_facebook == '' &&
-                                 detailArticle?.author?.link_instagram == null || detailArticle?.author?.link_instagram == '' &&
-                                 detailArticle?.author?.link_twitter == null || detailArticle?.author?.link_twitter == '' && 
-                                 detailArticle?.author?.link_linkedin == null || detailArticle?.author?.link_linkedin == '' ? 'hidden' : ''
-                            ">
-
-                                <template
-                                    x-if="detailArticle?.author?.link_facebook != null && detailArticle?.author?.link_facebook != ''">
-                                    <li
-                                        class="mb-6 p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                        <a x-bind:href="detailArticle?.author?.link_facebook" class="text-md" target="_blank">
-                                            <i data-feather="facebook"></i>
-                                        </a>
-                                        <!-- Feather Icons Scripts -->
-                                        <script>
-                                            feather.replace()
-                                        </script>
-                                    </li>
-                                </template>
-
-                                <template
-                                    x-if="detailArticle?.author?.link_linkedin != null && detailArticle?.author?.link_linkedin != ''">
-                                    <li
-                                        class="mb-6 p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                        <a x-bind:href="detailArticle?.author?.link_linkedin" class="text-md" target="_blank">
-                                            <i data-feather="linkedin"></i>
-                                        </a>
-                                        <!-- Feather Icons Scripts -->
-                                        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-                                        <script>
-                                            feather.replace()
-                                        </script>
-                                    </li>
-                                </template>
-
-                                <template
-                                    x-if="detailArticle?.author?.link_instagram != null && detailArticle?.author?.link_instagram != ''">
-                                    <li
-                                        class="mb-6 p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                        <a x-bind:href="detailArticle?.author?.link_instagram" class="text-md" target="_blank">
-                                            <i data-feather="instagram"></i>
-                                        </a>
-                                        <!-- Feather Icons Scripts -->
-                                        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-                                        <script>
-                                            feather.replace()
-                                        </script>
-                                    </li>
-                                </template>
-
-                                <template
-                                    x-if="detailArticle?.author?.link_twitter != null && detailArticle?.author?.link_twitter != ''">
-                                    <li
-                                        class="mb-6 p-2 rounded-full hover:bg-primary dark:hover:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                        <a x-bind:href="detailArticle?.author?.link_twitter" class="text-md" target="_blank">
-                                            <i data-feather="twitter"></i>
-                                        </a>
-                                        <!-- Feather Icons Scripts -->
-                                        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-                                        <script>
-                                            feather.replace()
-                                        </script>
-                                    </li>
-                                </template>
-
-                            </ul>
 
                             <h3 class="text-md font-semibold">Content</h3>
 
@@ -307,7 +323,7 @@
                             <template x-if="detailArticle?.subarticles.length > 0">
                                 <div x-data="{
                                     type: null,
-                                }">
+                                }" class="mt-4">
 
                                     <div class="flex items-center w-full gap-2 mb-3" x-bind:class="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1 ? 'mt-5' : ''">
                                         <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1">
