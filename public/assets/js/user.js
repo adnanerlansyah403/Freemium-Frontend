@@ -737,12 +737,12 @@ document.addEventListener('alpine:init', () => {
     },
 
     //pay subscription
-    plan: '',
-    plan_id: '',
+    plan: 0,
+    plan_id: 0,
     paySubscription() {
       const data = new FormData()
-      data.append('plan', this.plan)
-      let plan_id = this.plan
+      data.append('plan', this.plan_id)
+      let plan_id = this.plan_id
       fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
         method: "POST",
         headers: {
@@ -851,6 +851,9 @@ document.addEventListener('alpine:init', () => {
     },
 
     selectedPlan(item = null) {
+
+      this.plan_id = item.id;
+      console.log(this.plan_id);
 
       var elements = document.querySelectorAll(".cardplan");
       for (var i = 0; i < elements.length; i++) {
