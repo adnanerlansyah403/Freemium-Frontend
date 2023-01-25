@@ -28,7 +28,7 @@
                 
                 <div class="mb-5">
                     <label for="name" class="text-md">Name</label>
-                    <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4">
+                    <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.name ? 'border border-[#b91c1c]' : ''">
                         <i data-feather="user" class="w-6 h-6 text-gray-secondary"></i>
                         <input type="text" placeholder="Your name..."
                         x-bind:class="status_err.name ? 'input-danger' : ''" class="w-full" x-model="name">
@@ -43,7 +43,7 @@
 
                 <div class="mb-5">
                     <label for="username" class="text-md">Username</label>
-                    <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4">
+                    <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.username ? 'border border-[#b91c1c]' : ''">
                         <i data-feather="user" class="w-6 h-6 text-gray-secondary"></i>
                         <input type="text" placeholder="Your Username..."
                         x-bind:class="status_err.username ? 'input-danger' : ''" class="w-full" x-model="username">
@@ -58,7 +58,7 @@
 
                 <div class="mb-5">
                     <label for="email" class="text-md">Email</label>
-                    <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4">
+                    <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.email ? 'border border-[#b91c1c]' : ''">
                         <i data-feather="mail" class="w-6 h-6 text-gray-secondary"></i>
                         <input type="text" placeholder="Your email..."
                         x-bind:class="status_err.email ? 'input-danger' : ''" class="w-full" x-model="email">
@@ -73,7 +73,7 @@
 
                 <div class="mb-8" x-data="{passwordHidden: true}">
                     <label for="password" class="text-md">Password</label>
-                    <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out">
+                    <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out" x-bind:class="status_err.password ? 'border border-[#b91c1c]' : ''">
                         <button type="button" @click="
                         typePassword = passwordHidden == true ? 'text' : 'password';
                         $refs.password.setAttribute('type', typePassword)

@@ -43,7 +43,7 @@
         
             <div class="w-full" x-data="{passwordHidden: true}">
                 <label for="password" class="text-md">New Password</label>
-                <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary dark:text-white dark:shadow-none dark:border dark:border-white rounded-primary mt-4 transition duration-200 ease-in-out">
+                <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary dark:text-white dark:shadow-none dark:border dark:border-white rounded-primary mt-4 transition duration-200 ease-in-out" x-bind:class="status_err.password ? 'border border-[#b91c1c]' : ''">
                     <button type="button" @click="
                     typePassword = passwordHidden == true ? 'text' : 'password';
                     $refs.password.setAttribute('type', typePassword)
