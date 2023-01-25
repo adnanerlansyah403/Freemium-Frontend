@@ -121,8 +121,8 @@ document.addEventListener('alpine:init', () => {
             // localStorage.setItem('subscribe_status', subscribe_status)
             localStorage.setItem('showFlash', true)
             localStorage.setItem('message', user.message);
-            this.showFlash = true;
-            this.message = user.message;
+            // this.showFlash = true;
+            // this.message = user.message;
             this.data_user = user.data
             if (role == 2) {
               return window.location.replace(this.baseUrl + 'article')

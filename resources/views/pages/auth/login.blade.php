@@ -17,10 +17,10 @@
 <section class="pt-[140px] pb-[100px] dark:text-white" x-data="auth">
     <div x-init="checkAlreadyAuth()"></div>
     {{-- alert --}}
-    {{-- <div x-init="flash()"></div>
+    <div x-init="flash()"></div>
     <div x-show="showFlash">
         <x-alert />
-    </div> --}}
+    </div>
 
     <div x-show="isLoadingAuth" class="flex justify-center px-32 py-4">
         <x-loading-page />
@@ -32,10 +32,10 @@
                 <form x-on:submit.prevent="fetchLogin()">
                     <div class="mb-5">
                         <label for="email" class="text-md">Email</label>
-                        <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.password ? 'border border-[#b91c1c]' : ''">
+                        <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.email || status_err.email[0] ? 'border border-[#b91c1c]' : ''">
                             <i data-feather="mail" class="w-6 h-6 text-gray-secondary"></i>
                             <input type="text" placeholder="Your email..."
-                                x-bind:class="status_err.email ? 'input-danger' : ''" class="w-full" x-model="email">
+                                x-bind:class="status_err.email || status_err.email[0] ? 'input-danger' : ''" class="w-full" x-model="email">
                         </div>
                             <template x-if="status_err.email">
                                 <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -47,7 +47,7 @@
         
                     <div class="mb-8" x-data="{passwordHidden: true}">
                         <label for="password" class="text-md">Password</label>
-                        <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out" x-bind:class="status_err.password ? 'border border-[#b91c1c]' : ''">
+                        <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out" x-bind:class="status_err.password || status_err.password[0] ? 'border border-[#b91c1c]' : ''">
                             <span>
                                 <i data-feather="lock" class="w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
                                 <script>

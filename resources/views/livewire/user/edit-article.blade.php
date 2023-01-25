@@ -197,7 +197,11 @@
                                                     title="Edit Article">
                                                     <i data-feather="edit" class="text-sm"></i>
                                                 </button>
-                                                <button type="button" @click="confirm('Delete this sub-article?') ? deleteSub(s?.id) : ''; s = null" class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
+                                                <button type="button" @click="
+                                                    confirm('Delete this sub-article?') ? deleteSub(s?.id) : '';
+                                                    EditArticle.subarticles.splice(editSub, 1); 
+                                                    editSub--;" 
+                                                class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                                     title="Delete Sub Article">
                                                     <i data-feather="trash-2" class="text-sm"></i>
                                                 </button>
@@ -321,11 +325,11 @@
                         <span class="text-md">Choose Your Plan</span>
                         <div class="flex items-center gap-2 mt-2">
                             <label for="free" class="flex items-center gap-1">
-                                <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'free'" x-on:change="EditArticle.subarticles[editSub].type = $event.target.value">
+                                <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'free'" x-on:change="console.log(EditArticle.subarticles);EditArticle.subarticles[editSub].type = $event.target.value">
                                 <span class="text-base">Free</span>
                             </label>
                             <label for="paid" class="flex items-center gap-1">
-                                <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'paid'" x-on:change="EditArticle.subarticles[editSub].type = $event.target.value">
+                                <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'paid'" x-on:change="console.log(EditArticle.subarticles);EditArticle.subarticles[editSub].type = $event.target.value">
                                 <span class="text-base">Member-Only</span>
                             </label>
                         </div>

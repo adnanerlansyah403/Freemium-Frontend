@@ -516,8 +516,7 @@ document.addEventListener('alpine:init', () => {
       let url = window.location.href;
       let id = url.substring(url.lastIndexOf('/') + 1);
 
-      fetch(`${this.apiUrl
-        }article/${id}`, {
+      fetch(`${this.apiUrl}article/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -651,10 +650,13 @@ document.addEventListener('alpine:init', () => {
           }
           else {
             this.status_err[0] = null;
+            this.message = 'Update sub-article failed';
+            this.showFlash = true;
           }
 
           setTimeout(() => {
             this.showFlash = false;
+            this.message = '';
           }, 4000);
 
           this.isLoading = false;
@@ -710,10 +712,12 @@ document.addEventListener('alpine:init', () => {
           }
           else {
             this.status_err[1] = sub.message;
-
+            this.message = 'Update sub-article failed';
+            this.showFlash = true;
           }
           setTimeout(() => {
             this.showFlash = false;
+            this.message = '';
           }, 4000);
 
           this.isLoading = false;
@@ -731,11 +735,31 @@ document.addEventListener('alpine:init', () => {
           'Authorization': token
         }
       })
-        .then((response) => {
+        .then(async response => {
+          data = await response.json();
+
+          if (data.status) {
+            this.showFlash = true;
+            this.message = data.message;
+            console.log('test', data);
+            this.fetchListMyArticle();
+          }
+          else {
+            console.log('test1', data);
+            this.showFlash = true;
+            this.message = data.message;
+          }
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
+
           this.isLoading = false;
-          this.fetchListMyArticle();
-          // window.location.replace(this.baseUrl + 'myarticle')
-        });
+        }).catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        })
     },
 
     deleteSub(delSub) {
@@ -748,20 +772,38 @@ document.addEventListener('alpine:init', () => {
           'Authorization': token
         }
       })
-        .then((response) => {
+        .then(async response => {
+          data = await response.json();
+
+          if (data.status) {
+            this.showFlash = true;
+            this.message = data.message;
+            this.fetchListMyArticle();
+          }
+          else {
+            this.showFlash = true;
+            this.message = data.message;
+          }
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
+
           this.isLoading = false;
-          this.fetchListMyArticle();
-          // window.location.replace(this.baseUrl + 'myarticle')
-        });
+        }).catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        })
     },
 
     //pay subscription
-    plan: '',
-    plan_id: '',
+    plan: 0,
+    plan_id: 0,
     paySubscription() {
       const data = new FormData()
-      data.append('plan', this.plan)
-      let plan_id = this.plan
+      data.append('plan', this.plan_id)
+      let plan_id = this.plan_id
       fetch(this.apiUrl + 'payment?plan_id=' + plan_id, {
         method: "POST",
         headers: {
@@ -862,6 +904,17 @@ document.addEventListener('alpine:init', () => {
               const baseUrl = "http://127.0.0.1:8000/";
               window.location.replace(`${baseUrl}profile`);
             }, 3500)
+          } else {
+            message = data.message.attachment[0];
+            Swal.fire({
+              icon: 'error',
+              title: message,
+              titleColor: '#FFFF',
+              iconColor: '#FFFF',
+              color: '#FFFF',
+              background: '#7C030B',
+              position: 'center',
+            })
           }
         })
         .catch(error => {
@@ -869,7 +922,54 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    showOrder(val, id = 0) {
+      let modal = document.getElementById("modal");
+
+      let planOrder = document.getElementById("planOrder");
+      let priceOrder = document.getElementById("priceOrder");
+      let vaOrder = document.getElementById("vaOrder");
+      let paymentDateOrder = document.getElementById("paymentDateOrder");
+
+      if (id === 0) {
+        vaOrder.value = 0;
+        priceOrder = 0;
+        paymentDateOrder.value = '';
+      }
+
+      if (val) {
+        fadeIn(modal);
+      } else {
+        fadeOut(modal);
+        // return;
+      }
+
+      fetch(`${this.apiUrl}payment/getMyPayment`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+
+          data.data.filter(item => {
+            if (item.id == id) {
+              planOrder.innerText = item.plan.name;
+              priceOrder.innerText = '$' + item.total_price;
+              vaOrder.innerText = item.virtual_account_number;
+              paymentDateOrder.innerText = this.convertDate(item.payment_date);
+            }
+          })
+
+
+        })
+    },
+
     selectedPlan(item = null) {
+
+      this.plan_id = item.id;
+      console.log(this.plan_id);
 
       var elements = document.querySelectorAll(".cardplan");
       for (var i = 0; i < elements.length; i++) {
@@ -1056,7 +1156,26 @@ document.addEventListener('alpine:init', () => {
       let formData = new FormData();
       formData.append('title', title.value);
       formData.append('description', description);
-      formData.append('thumbnail', thumbnail);
+
+      thumb_err = document.getElementById("err_thumb");
+      thumb_err.innerHTML = '';
+
+      if (thumbnail) {
+        file_thumbnail = thumbnail;
+        getTypeThumbnail = file_thumbnail.type;
+        typeThumbnail = getTypeThumbnail.split('/')[0];
+        if (typeThumbnail === 'image') {
+          if (thumbnail.size > 1023546) {
+            thumb_err.innerHTML += this.styleMessage(`Thumbnail not be greater than 1024 kilobytes.`);
+          } else {
+            formData.append('thumbnail', thumbnail);
+          }
+        } else {
+          thumb_err.innerHTML += this.styleMessage(`Thumbnail must be image.`);
+        }
+      } else {
+        thumb_err.innerHTML += this.styleMessage(`Thumbnail required.`);
+      }
       for (var i = 0, length = type.length; i < length; i++) {
         if (type[i].checked) {
           formData.append('type_sub[]', type[i].value);
@@ -1386,6 +1505,7 @@ document.addEventListener('alpine:init', () => {
                         @click="handleClick()"
                         class="-mt-[6px] h-6 w-6 transform transiton-transform duration-200 ease-in-out"
                         title="Open"
+                        style="transform: translateY(-3px)"
                         >
                             <ion-icon name="chevron-down-circle-outline" class="w-full h-full text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
                         </span>

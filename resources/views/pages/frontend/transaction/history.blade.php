@@ -29,7 +29,7 @@
             
                 @include("layouts.partials.user.dashboard")
             
-                <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0">
+                <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0" x-data="helpers">
         
                     <div class="w-full col-12">
     
@@ -69,7 +69,6 @@
                                         <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                                             <thead>
                                               <tr>
-                                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Name</th>
                                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Plan</th>
                                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Virtual Number</th>
                                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Payment Date</th>
@@ -81,7 +80,6 @@
                                                 <template x-for="(item, index) in myTransactions">
                                                     <tr class="border border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
                                                         {{-- not defined --}}
-                                                        <td x-bind:class="item.user.name ? 'border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap font-semibold' : 'border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap font-semibold text-[#86A3B8] dark:text-[#787A91] italic' " x-text="item.user.name ? item.user.name : 'Undefined'"></td>
                                                         <td x-bind:class="item.plan.name ? 'border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap' : 'border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap text-[#86A3B8] dark:text-[#787A91] italic' " x-text="item.plan.name ? item.plan.name : 'Undefined'">
                                                         <i class="fas fa-circle text-orange-500 mr-2"></i>
                                                         </td>
@@ -91,10 +89,19 @@
                                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
                                                         <i class="fas fa-circle text-orange-500 mr-2" x-text="item.payment_date ? convertDate(item.payment_date) : 'No data'"></i>
                                                         </td>
-                                                        <td class="flex items-center w-full h-full border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2">
+                                                        <td class="flex items-center w-full h-full border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-3">
                                                             <button @click="showOrder(true, item.id)" class="group" title="Details">
                                                                 <i data-feather="eye" class="group-hover:text-primary dark:group-hover:text-white transition duration-200 ease-in-out w-5 h-5 lg:w-6 lg:h-6"></i>
                                                             </button>
+                                                            {{-- <span x-text="console.log(item)" style="display: none;"></span> --}}
+                                                            <template x-if="data_user.subscribe_status == false && item.status == 0">
+                                                                <a href="{{ route('transaction.show') }}" class="group" title="Pay Now">
+                                                                    <i data-feather="credit-card" class="group-hover:text-primary dark:group-hover:text-white transition duration-200 ease-in-out w-5 h-5 lg:w-6 lg:h-6"></i>
+                                                                    <script>
+                                                                        feather.replace()
+                                                                    </script>
+                                                                </a>
+                                                            </template>
                                                         </td>
                                                         <script>
                                                             feather.replace()
@@ -113,14 +120,14 @@
                                     </div>
                                 </div>
         
-                                <div class="mt-4 flex items-center justify-between">
-                                    {{-- <p class="dark:text-white">
+                                {{-- <div class="mt-4 flex items-center justify-between">
+                                    <p class="dark:text-white">
                                         Pages
                                         <b>
                                             <span x-text="listOrder.current_page"></span> /
                                             <span class="span dark:text-slate-third" x-text="listOrder.last_page"></span>
                                         </b>
-                                    </p> --}}
+                                    </p>
                                     <ul class="flex items-center justify-center gap-2">
                                         <template x-if="listOrder.current_page != 1">
                 
@@ -138,7 +145,6 @@
                                                     'bg-active' : listOrder.current_page == order.label,
                                                     '' : listOrder.current_page != order.label,
                                                 }" @click="paginateOrder(order.url); console.log(order.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
-                                                {{-- <span x-text="console.log(categoriesArticle)"></span> --}}
                                                     <button
                                                     x-text="order.label">
                                                     </button>
@@ -153,7 +159,7 @@
                                             </a>
                                         </template>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                         </template>
                         <template x-if="isLoading == true">
@@ -168,6 +174,47 @@
                 <script>
                     feather.replace()
                 </script>
+                
+
+    
+            <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
+                <div role="alert" class="relative top-[13%] lg:top-[17%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
+                    <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
+                        <div class="w-full flex justify-start text-primary dark:text-white mb-3">
+                            <i data-feather="credit-card" class="w-14 h-14"></i>
+                        </div>
+                        <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Details Order</h1>
+                        <p class="mt-3">
+                            <b class="span dark:text-slate-fourth">Plan Order : </b>
+                            <span class="dark:text-white" id="planOrder">Lifetime</span>
+                        </p>
+                        <p class="mt-3">
+                            <b class="span dark:text-slate-fourth">Virtual Number : </b>
+                            <span class="dark:text-white" id="vaOrder"></span>
+                        </p>
+                        <p class="mt-3">
+                            <b class="span dark:text-slate-fourth">Price : </b>
+                            <span class="dark:text-white" id="priceOrder">$100.00</span>
+                        </p>
+                        <p class="mt-3">
+                            <b class="span dark:text-slate-fourth">Payment Date : </b>
+                            <span class="dark:text-white" id="paymentDateOrder">27 Jan, 2023</span>
+                        </p>
+                        <p class="mt-3" id="imageOrderWrapper" style="display: none;">
+                            <b class="span dark:text-slate-fourth">Screenshoot : </b> <br>
+                            <img src="" id="imageOrder" class="mt-2 w-full h-[200px]" alt="">
+                        </p>
+                        <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="showOrder()" aria-label="close modal" role="button">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             </div>
         </template>
         <template x-if="isLoading">
@@ -177,5 +224,38 @@
         </template>
 
     </section>
+
+    <script>
+        // let modal = document.getElementById("modal");
+        // function modalHandler(val) {
+        //     if (val) {
+        //         fadeIn(modal);
+        //     } else {
+        //         fadeOut(modal);
+        //     }
+        // }
+        function fadeOut(el) {
+            el.style.opacity = 1;
+            (function fade() {
+                if ((el.style.opacity -= 0.1) < 0) {
+                    el.style.display = "none";
+                } else {
+                    requestAnimationFrame(fade);
+                }
+            })();
+        }
+        function fadeIn(el, display) {
+            el.style.opacity = 0;
+            el.style.display = display || "flex";
+            (function fade() {
+                let val = parseFloat(el.style.opacity);
+                if (!((val += 0.2) > 1)) {
+                    el.style.opacity = val;
+                    requestAnimationFrame(fade);
+                }
+            })();
+        }
+    </script>
+    
 
 @endsection

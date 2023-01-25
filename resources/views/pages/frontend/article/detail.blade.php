@@ -52,7 +52,13 @@
 
     </style>
 
-    <section class="pt-[140px] pb-[100px] dark:text-white" x-data="user" >
+    <section id="sectionDetail" class="pt-[140px] pb-[100px] dark:text-white" x-data="user" x-init="
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            document.getElementById('sectionDetail').style.display = 'block';
+        }, 1000)
+    })
+    ">
         <div x-init="checkSession()"></div>
         <div x-data="articles">
             <span x-init="getDetailArticle(window.location.href.split('/').pop())"></span>
@@ -130,7 +136,8 @@
                                     setTimeout(() => {
                                         let pre = document.querySelectorAll("pre");
                                         pre.forEach((element, index) => {
-                                            element.style.overflowX = "hidden";
+                                            element.style.overflow = "auto";
+                                            element.classList.add("has-scrollbar2");
                                             element.innerHTML += `
                                                 <div class="absolute flex items-start justify-end w-full h-full top-0 left-0 right-0 bottom-0">
                                                         <span id="copy${index}" title="Copy to clipboard" class="w-0 h-0">
