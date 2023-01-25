@@ -1379,6 +1379,8 @@ document.addEventListener('alpine:init', () => {
             this.message = false;
           }, 4000);
 
+          console.log(this.listArticle);
+
           this.isLoadingArticle = false;
         }).catch(error => {
           console.log(error);
