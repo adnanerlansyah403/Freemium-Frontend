@@ -168,6 +168,10 @@
 
             });
             
+            // console.error = function() {}
+            // console.warn = function() {}
+
+            
         </script>
 
 

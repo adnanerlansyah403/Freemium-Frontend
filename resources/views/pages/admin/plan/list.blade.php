@@ -158,7 +158,7 @@
                         <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter a Plan</h1>
                         <input type="hidden" id="plan_id" value="0">
                         <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
-                        <input id="name" x-bind:class="status_err.name ? 'bg-primary' : ''" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary dark:border-white rounded-primary" placeholder="Name..." style="border: 1px solid white"/>
+                        <input id="name" x-bind:class="status_err.name ? 'bg-primary' : ''" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary dark:border-white rounded-primary" placeholder="Name..."/>
                         <template x-if="status_err.name">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2 mb-5">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -166,7 +166,7 @@
                             </div>
                         </template>
                         <label for="price" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Price</label>
-                        <input id="price" x-bind:class="status_err.price ? 'bg-primary' : ''" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary dark:border-white rounded-primary" type="number" placeholder="price..." style="border: 1px solid white" />
+                        <input id="price" x-bind:class="status_err.price ? 'bg-primary' : ''" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary dark:border-white rounded-primary" type="number" placeholder="Price..." />
                         <template x-if="status_err.price">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2 mb-5">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -174,7 +174,7 @@
                             </div>
                         </template>
                         <label for="expired" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Expired</label>
-                        <input id="expired" x-bind:class="status_err.expired ? 'bg-primary' : ''" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary rounded-primary" type="number" placeholder="expired..." style="border: 1px solid white;" />
+                        <input id="expired" x-bind:class="status_err.expired ? 'bg-primary' : ''" class="mb-5 mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 text-sm border border-primary rounded-primary" type="number" placeholder="Expired Time..." />
                         <template x-if="status_err.expired">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2 mb-5">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>

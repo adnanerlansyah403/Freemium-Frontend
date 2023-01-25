@@ -115,9 +115,14 @@
                                                 <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
                                                     <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold" x-text="category.name">Laravel</td>
                                                     <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                                        <img x-bind:src="imgUrl+category.icon" src="" class="w-[100px]">
+                                                        <template x-if="category.icon">
+                                                            <img x-bind:src="imgUrl+category.icon" src="" class="w-[100px]">
+                                                        </template>
+                                                        <template x-if="!category?.icon">
+                                                            <span class="text-gray-secondary italic">No Icon</span>
+                                                        </template>
                                                     </td>
-                                                    <td class="flex items-center w-full h-full translate-y-1/3 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2">
+                                                    <td class="flex items-center w-full h-full border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2">
                                                         <button @click="modalHandlerCategory(true, category.id)" class="w-max hover:text-opacity-60 transition duration-200 ease-in-out" title="Edit">
                                                             <i data-feather="edit" class="w-5 h-5 lg:w-6 lg:h-6"></i>
                                                         </button>
@@ -215,7 +220,7 @@
                         <input type="hidden" id="category_id" value="0">
                         <div class="my-4">
                             <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name</label>
-                            <input id="name" x-bind:class="status_err.name ? 'bg-primary' : ''" class="mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary dark:border-white rounded-primary" placeholder="Name..." style="border: 1px solid white;" />
+                            <input id="name" x-bind:class="status_err.name ? 'bg-primary' : ''" class="mt-2 text-gray-600 font-normal w-full h-10 flex items-center pl-3 text-sm border border-primary dark:border-white rounded-primary" placeholder="Name..." />
                         </div>
                         <template x-if="status_err.name">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2 mb-5">
@@ -225,7 +230,7 @@
                         </template>
                         <div class="my-4">
                             <label for="icon" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Icon</label>
-                            <input id="icon" x-bind:class="status_err.name ? 'bg-primary' : ''" type="file" class="mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 py-2 text-sm border border-primary dark:border-white rounded-primary" placeholder="Icon..." style="border: 1px solid white" />
+                            <input id="icon" x-bind:class="status_err.name ? 'bg-primary' : ''" type="file" class="mt-2 text-gray-600 font-normal w-full h-10 flex items-center px-3 py-2 text-sm border border-primary dark:border-white rounded-primary" placeholder="Icon..." />
                             <template x-if="status_err.icon">
                                 <div class="mt-3 flex text-[#b91c1c] items-center gap-2 mb-5">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>

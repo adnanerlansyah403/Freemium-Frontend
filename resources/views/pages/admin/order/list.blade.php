@@ -28,7 +28,7 @@
             @include("layouts.partials.user.dashboard")
     
             <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9" x-data="admin">
-                <div x-init="fetchListOrder()"></div>
+                <div x-init="fetchListOrder()" style="display: none;"></div>
                 <div class="w-full lg:col-3">
                     @include("pages.admin.layouts.partials.sidebar")
                 </div>
@@ -67,7 +67,7 @@
                         <div class="w-full">
                             <div class="w-full rounded-primary bg-white shadow-lg">
                                 <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Orders</div>
-                                <div class="overflow-x-auto">
+                                <div class="overflow-x-auto has-scrollbar2">
                                     <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                                         <thead>
                                           <tr>
