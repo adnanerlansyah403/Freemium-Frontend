@@ -154,6 +154,29 @@
                                     <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm" x-text="data_user.subscribe_status == 1 ? 'Member - '+data_user.payments[0].plan.name : 'Not a Member'">Member - Lifetime</span>
                                 </template>
                             </p>
+                            <template x-if="data_user.role == 2">
+                                <div>
+
+                                    <p class="flex items-center gap-2 mt-3 text-center justify-center" x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-6' : ''">
+                                        <template x-if="data_user.subscribe_status == 1">
+                                            <div>
+                                                <h1>Member since : </h1>
+                                                <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm" x-text="data_user.payments[0].payment_date"></span>
+                                            </div>
+                                        </template>
+                                    </p>
+                                    <p class="flex items-center gap-2 mt-3 text-center justify-center" x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-6' : ''">
+                                        <template x-if="data_user.subscribe_status == 1">
+                                            <template x-if="data_user.payments[0].plan.expired != 0">
+                                                <div>
+                                                    <h1>Expired : </h1>
+                                                    <span class="bg-primary dark:bg-slate-third py-1 px-3 text-white text-sm" x-text="addMonths(new Date(data_user.payments[0].payment_date), data_user.payments[0].plan.expired)"></span>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </p>
+                                </div>
+                            </template>
                             <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
                                 <a href="{{ route('transaction.create') }}" class="group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] mb-3 lg:mb-5 flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
                                 >

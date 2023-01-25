@@ -56,6 +56,12 @@ document.addEventListener('alpine:init', () => {
     link_instagram: '',
     link_twitter: '',
 
+    addMonths(date, months) {
+      date.setMonth(date.getMonth() + months);
+
+      return date;
+    },
+
     fetchMe() {
       this.isLoading = true;
       fetch(this.apiUrl + 'me', {
