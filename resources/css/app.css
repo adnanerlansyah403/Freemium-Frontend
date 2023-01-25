@@ -127,6 +127,18 @@
         @apply bg-primary dark:bg-slate-third;
     }
 
+    .has-scrollbar3::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .has-scrollbar3::-webkit-scrollbar-track {
+	@apply border dark:border dark:border-white;
+    }
+
+    .has-scrollbar3::-webkit-scrollbar-thumb {
+        @apply bg-primary dark:bg-slate-third rounded-b-[6px];
+    }
+    
     /* COLS */
     .col {
         margin: 0 18px;
