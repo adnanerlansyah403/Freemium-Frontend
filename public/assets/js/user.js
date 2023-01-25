@@ -1205,7 +1205,22 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.listArticle = data.data;
+          
+          if (data.status) {
+            this.listArticle = data.data;
+          }
+          else {
+            this.showFlash = true;
+            this.message = data.message;
+          }
+
+          setTimeout(() => {
+            this.showFlash = false;
+          }, 4000);
+
+          this.isLoadingArticle = false;
+        }).catch(error => {
+          // console.log(error);
           this.isLoadingArticle = false;
         })
 
@@ -1272,7 +1287,7 @@ document.addEventListener('alpine:init', () => {
 
       this.isLoadingArticle = true;
 
-      fetch(`${this.apiUrl}article?category=${categoryId}&search=${this.keywordArticle}`, {
+      fetch(`${this.apiUrl}article?category=${categoryId}`, {
         method: "GET"
       })
         .then(async (response) => {
@@ -1306,6 +1321,7 @@ document.addEventListener('alpine:init', () => {
 
     index: 1,
     total: 1,
+    
     createSubArticle(refs) {
       refs.listsubarticle.insertAdjacentHTML('beforeend', `
             <li class="relative bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion` + this.index}" x-data="accordion(${this.index})">
