@@ -106,7 +106,9 @@
                             </p> --}}
                             <p class="font-merrieweather mt-4 dark:text-white">
                                 If you have a story to tell, knowledge to share, or a perspective to offer
-                                — welcome home, Sign up for free now and start sharing your story today —
+                                <span class="text-[14.5px] translate-y-2">
+                                  — welcome home, Sign up for free now and start sharing your story today —
+                                </span>
                             </p>
                             <a href="{{ route("article.create") }}" class="translate-y-10 py-2 px-4 flex items-center gap-2 w-max rounded-pill bg-primary dark:bg-slate-secondary text-white hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>
