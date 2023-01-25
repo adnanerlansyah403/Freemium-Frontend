@@ -55,6 +55,9 @@ document.addEventListener('alpine:init', () => {
     link_linkedin: '',
     link_instagram: '',
     link_twitter: '',
+    diffpayment:'',
+    paymentDateProfile:'',
+    diffPaymentByMonth: '',
 
     addMonths(date, months) {
       date.setMonth(date.getMonth() + months);
@@ -84,9 +87,25 @@ document.addEventListener('alpine:init', () => {
             this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
             this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
             this.isLoading = false;
+            this.diffpayment = user.data.payments[0].plan.expired
+            this.paymentDateProfile = user.data.payments[0].payment_date
+
+            const resultPaymentProfile = this.addMonths(new Date(this.paymentDateProfile), this.diffpayment)
+
+            const datenow = Date.now();
+            const diff = new Date(resultPaymentProfile - datenow)
+            this.diffPaymentByMonth = diff.getUTCMonth()
+
           }
         });
     },
+
+    addMonths(date, months) {
+        date.setMonth(date.getMonth() + months);
+
+        return date;
+    },
+
 
     checkSession() {
       const token = localStorage.getItem('token')
@@ -1352,7 +1371,7 @@ document.addEventListener('alpine:init', () => {
                         </p>
                     </li>
                 </ul>
-                
+
                 <h2
                 id="${`accordionTitle${this.index}`}"
                 class="flex flex-row justify-between items-center font-semibold px-3 py-2 cursor-pointer"
@@ -1372,7 +1391,7 @@ document.addEventListener('alpine:init', () => {
                         </span>
                     </div>
                 </h2>
-                
+
                 <div
                 x-ref="tab"
                 :style="handleToggle()"
