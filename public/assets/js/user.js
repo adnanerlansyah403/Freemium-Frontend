@@ -838,6 +838,12 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    getTime(date) {
+      var newDate = new Date(date);
+      var hour = newDate.getHours();
+      var minutes = newDate.getMinutes();
+      return `${hour}:${minutes}`;
+    },
 
     // MY TRANSACTONS
 
@@ -855,7 +861,6 @@ document.addEventListener('alpine:init', () => {
 
           let url = window.location.href;
           let lastPath = url.substring(url.lastIndexOf('/'));
-
 
           if (this.myTransactions[0] != null) {
             if (this.myTransactions[0].status == 1 && lastPath == '/details') {
@@ -955,7 +960,7 @@ document.addEventListener('alpine:init', () => {
               planOrder.innerText = item.plan.name;
               priceOrder.innerText = '$' + item.total_price;
               vaOrder.innerText = item.virtual_account_number;
-              paymentDateOrder.innerText = this.convertDate(item.payment_date);
+              paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
           })
 
