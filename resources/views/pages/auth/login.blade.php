@@ -17,10 +17,10 @@
 <section class="pt-[140px] pb-[100px] dark:text-white" x-data="auth">
     <div x-init="checkAlreadyAuth()"></div>
     {{-- alert --}}
-    {{-- <div x-init="flash()"></div>
+    <div x-init="flash()"></div>
     <div x-show="showFlash">
         <x-alert />
-    </div> --}}
+    </div>
 
     <div x-show="isLoadingAuth" class="flex justify-center px-32 py-4">
         <x-loading-page />
