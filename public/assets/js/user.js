@@ -892,6 +892,48 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    showOrder(val, id = 0) {
+      let modal = document.getElementById("modal");
+
+      let planOrder = document.getElementById("planOrder");
+      let priceOrder = document.getElementById("priceOrder");
+      let vaOrder = document.getElementById("vaOrder");
+      let paymentDateOrder = document.getElementById("paymentDateOrder");
+
+      if (id === 0) {
+        vaOrder.value = 0;
+        priceOrder = 0;
+        paymentDateOrder.value = '';
+      }
+
+      if (val) {
+        fadeIn(modal);
+      } else {
+        fadeOut(modal);
+      }
+      fetch(`${this.apiUrl}payment/getMyPayment`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+
+          data.data.filter(item => {
+            if (item.id == id) {
+              planOrder.innerText = item.plan.name;
+              priceOrder.innerText = '$' + item.total_price;
+              vaOrder.innerText = item.virtual_account_number;
+              paymentDateOrder.innerText = this.convertDate(item.payment_date);
+            }
+          })
+
+
+        })
+    },
+
     selectedPlan(item = null) {
 
       this.plan_id = item.id;
