@@ -173,7 +173,7 @@
 
         @livewireScripts
 
-        {{-- <script src="{{ asset("assets/libs/highlight/highlight.min.js") }}"></script> --}}
+        <script src="{{ asset("assets/js/prism.js") }}"></script>
 
     </body>
 </html>

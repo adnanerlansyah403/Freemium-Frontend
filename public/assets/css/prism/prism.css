@@ -116,7 +116,11 @@ pre[class*=language-] {
     cursor: help
 }
 
+/* PHP STYLE LANGUAGE */
 
+/* pre[class*="language-php"] {
+    color: rgb(243, 128, 243);
+} */
 
 /* code {
     font-family: Consolas, "Courier New", monospace;

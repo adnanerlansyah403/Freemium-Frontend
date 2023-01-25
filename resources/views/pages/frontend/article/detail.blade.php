@@ -125,6 +125,51 @@
                                 </figure>
                                 <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </div>
+                                <script>
+                            
+                                    setTimeout(() => {
+                                        let pre = document.querySelectorAll("pre");
+                                        pre.forEach((element, index) => {
+                                            element.style.overflowX = "hidden";
+                                            element.innerHTML += `
+                                                <div class="absolute flex items-start justify-end w-full h-full top-0 left-0 right-0 bottom-0">
+                                                        <span id="copy${index}" title="Copy to clipboard" class="w-0 h-0">
+                                                            <i id="iconCopy${index}" data-feather="clipboard" class="absolute top-[15px] right-4 cursor-pointer text-white hover:text-opacity-60 w-[24px] h-[24px] top-[10px] right-4 transition duration-200 ease-in-out"></i>
+                                                            
+                                                            <i id="checklistCopy${index}" data-feather="check-square" class="absolute top-[15px] right-4 cursor-pointer text-white hover:text-opacity-60 w-[24px] h-[24px] top-[10px] right-4 transition duration-200 ease-in-out" style="display: none;"></i>    
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            `;
+                                            function copyText() {
+                                                // mendapatkan elemen dengan id "code"
+                                                var code = pre[index].querySelector("code");
+                                                var copy = document.getElementById(`copy${index}`);
+                                                var iconCopy = document.getElementById(`iconCopy${index}`);
+                                                var checklistCopy = document.getElementById(`checklistCopy${index}`);
+
+                                                // menyalin teks yang dipilih
+                                                navigator.clipboard.writeText(code.textContent);
+                                                iconCopy.style.display = 'none';
+                                                checklistCopy.style.display = 'block';
+
+                                                setTimeout(() => {
+                                                    iconCopy.style.display = 'block';
+                                                    checklistCopy.style.display = 'none';
+                                                }, 1000);
+
+                                            }
+                                            document.getElementById(`copy${index}`).addEventListener("click", function() {
+                                                copyText();
+                                            });
+                                        });
+
+
+                                    feather.replace()
+                                    }, 600);
+                                    
+                            
+                                </script>
                             </div>
 
                             <div class="flex items-center w-full"
@@ -363,11 +408,5 @@
         </div>
 
     </section>
-
-    <script>
-
-        
-
-    </script>
 
 @endsection
