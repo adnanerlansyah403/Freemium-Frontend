@@ -1008,7 +1008,14 @@ document.addEventListener('alpine:init', () => {
         this.isLoading = false;
       })
     },
-
+    styleMessage(msg) {
+      return `
+        <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          <span class="span-danger">${msg}</span>
+        </div>
+      `
+    },
     async createArticle() {
       this.sub_article_err = '';
       this.isLoadingArticle = true;
@@ -1041,20 +1048,26 @@ document.addEventListener('alpine:init', () => {
       for (let i = 0; i < title_sub.length; i++) {
         let data_id = title_sub[i].getAttribute("data-id");
         let accordion = document.getElementById(`accordionTitle${i + 1}`);
-        let errorSubArticle = document.getElementById(`errorSubArticle${i + 1}`);
+
+        titleSub = document.getElementById(`err_title${data_id}`);
+        titleSub.innerHTML = '';
+
+        thumbnailSub = document.getElementById(`err_thumbnail${data_id}`);
+        thumbnailSub.innerHTML = '';
+
+        description_sub = document.getElementById(`err_description${data_id}`);
+        description_sub.innerHTML = '';
+
         if (title_sub[i].value != '') {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          formData.append('title_sub[]', title_sub[i].value);
+          if (title_sub[i].value.trim().length > 255) {
+            titleSub.innerHTML += this.styleMessage(`title sub article ${i + 1} not be greater than 255 character.`);
+          } else {
+            formData.append('title_sub[]', title_sub[i].value);
+          }
         } else {
-          titleSub = document.getElementById(`err_title${data_id}`);
-          titleSub.innerHTML = '';
-          titleSub.innerHTML += `
-            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                <span class="span-danger">title sub article ${i + 1} required</span>
-            </div>
-        `;
+          titleSub.innerHTML += this.styleMessage(`title sub article ${i + 1} required.`);
           this.status_sub_err = true;
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
@@ -1062,18 +1075,22 @@ document.addEventListener('alpine:init', () => {
         if (thumbnail_sub[i].files[0]) {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
+          console.log(thumbnail_sub[i].files[0]);
+          file = thumbnail_sub[i].files[0];
+          getType = file.type;
+          type = getType.split('/')[0];
+          console.log(file)
+          if (type === 'image') {
+            if (file.size > 1023546) {
+              thumbnailSub.innerHTML += this.styleMessage(`Thumbnail sub article ${i + 1} not be greater than 1024 kilobytes.`);
+            } else {
+              formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
+            }
+          } else {
+            thumbnailSub.innerHTML += this.styleMessage(`Thumbnail sub article ${i + 1} must be image.`);
+          }
         } else {
-
-          thumbnailSub = document.getElementById(`err_thumbnail${data_id}`);
-          thumbnailSub.innerHTML = '';
-          thumbnailSub.innerHTML += `
-            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                <span class="span-danger">Thumbnail sub article ${i + 1} required</span>
-            </div>
-        `;
-
+          thumbnailSub.innerHTML += this.styleMessage(`Thumbnail sub article ${i + 1} required.`);
           this.status_sub_err = true;
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
@@ -1081,16 +1098,13 @@ document.addEventListener('alpine:init', () => {
         if (tinymce.get(`editor${data_id}`).getContent() != '') {
           this.status_sub_err = false;
           accordion.style.border = 'none';
-          formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
+          if (tinymce.get(`editor${data_id}`).getContent().trim().length < 100) {
+            description_sub.innerHTML += this.styleMessage(`Description sub article ${i + 1} must be greater than 100 charcter.`);
+          } else {
+            formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
+          }
         } else {
-          description_sub = document.getElementById(`err_description${data_id}`);
-          description_sub.innerHTML = '';
-          description_sub.innerHTML += `
-            <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                <span class="span-danger">Description sub article ${i + 1} required</span>
-            </div>
-        `;
+          description_sub.innerHTML += this.styleMessage(`Description sub article ${i + 1} required`);
           this.status_sub_err = true;
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
@@ -1111,7 +1125,6 @@ document.addEventListener('alpine:init', () => {
         this.showFlash = true;
         this.status_err = data.message;
         this.isLoadingArticle = false;
-        // console.log(this.sub_article_err)
       }
 
       if (data.status) {
@@ -1185,19 +1198,19 @@ document.addEventListener('alpine:init', () => {
     filterArticle() {
       query = '';
 
-      if(this.filtersKey[0]){
+      if (this.filtersKey[0]) {
         query += 'search=' + this.filtersKey[0] + '&';
       }
-      if(this.filtersKey[1]){
+      if (this.filtersKey[1]) {
         query += 'type=' + this.filtersKey[1] + '&';
       }
-      if(this.filtersKey[2]){
+      if (this.filtersKey[2]) {
         query += 'category=' + this.filtersKey[2] + '&';
       }
-      if(this.filtersKey[3]){
+      if (this.filtersKey[3]) {
         query += 'author=' + this.filtersKey[3] + '&';
       }
-      
+
       this.isLoadingArticle = true;
 
       fetch(`${this.apiUrl}article?${query}`, {
@@ -1205,7 +1218,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          
+
           if (data.status) {
             this.listArticle = data.data;
           }
@@ -1308,7 +1321,7 @@ document.addEventListener('alpine:init', () => {
         })
 
     },
-    
+
     resetFilters() {
       document.getElementById('search').value = null;
       document.getElementById('category').value = '';
@@ -1321,7 +1334,7 @@ document.addEventListener('alpine:init', () => {
 
     index: 1,
     total: 1,
-    
+
     createSubArticle(refs) {
       refs.listsubarticle.insertAdjacentHTML('beforeend', `
             <li class="relative bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion` + this.index}" x-data="accordion(${this.index})">
