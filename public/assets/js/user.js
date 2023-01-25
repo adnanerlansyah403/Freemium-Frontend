@@ -58,6 +58,7 @@ document.addEventListener('alpine:init', () => {
     diffpayment: '',
     paymentDateProfile: '',
     diffPaymentByMonth: '',
+    diffPaymentByDay: '',
 
     addMonths(date, months) {
       date.setMonth(date.getMonth() + months);
@@ -95,6 +96,7 @@ document.addEventListener('alpine:init', () => {
             const datenow = Date.now();
             const diff = new Date(resultPaymentProfile - datenow)
             this.diffPaymentByMonth = diff.getUTCMonth()
+            this.diffPaymentByDay = diff.getUTCDay()
 
           }
         });

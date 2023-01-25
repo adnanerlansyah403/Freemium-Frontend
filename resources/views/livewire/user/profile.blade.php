@@ -170,7 +170,7 @@
                                             <template x-if="data_user.payments[0].plan.expired != 0">
                                                 <div x-init="">
                                                     <span class=" font-bold">Expired : </span >
-                                                    <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm" x-text="`${diffPaymentByMonth} Months from now`"></span>
+                                                    <span class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm" x-text="`${diffPaymentByMonth} Months ${diffPaymentByDay} Days  from now`"></span>
                                                 </div>
                                             </template>
                                         </template>
