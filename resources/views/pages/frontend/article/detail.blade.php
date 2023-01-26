@@ -206,7 +206,7 @@
                                                 class="p-2 rounded-full border border-primary hover:bg-primary hover:text-white text-black dark:text-white dark:hover:opacity-80 dark:border-none dark:bg-slate-third dark:hover:text-opacity-80 transition duration-200 ease-linear">
                                                 <i data-feather="arrow-left" class="w-4 h-4"></i>
                                             </button>
-                                            <button x-show="content && content?.id != detailArticle?.subarticles?.[detailArticle?.subarticles?.length - 1]?.id"
+                                            <button x-show="content?.id != detailArticle?.subarticles?.[detailArticle?.subarticles?.length - 1]?.id"
                                                 x-on:click="
                                                     id = content.id;
                                                     id = detailArticle?.subarticles?.findIndex(x => x.id == id);
