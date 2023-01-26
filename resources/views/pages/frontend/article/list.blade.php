@@ -221,9 +221,12 @@
                                         short desc short desc short desc short desc
                                     </p>
 
-                                    <template x-for="(c, index) in item.tags">
-                                        <span x-text="c.category.name" @click="fetchArticleByCategory(c.category.id)" class="mt-4 cursor-pointer py-1 px-3 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)] dark:shadow-[0px_0px_4px_#fff] text-sm text-[rgba(41,41,41,1)] font-medium dark:bg-slate-secondary dark:text-white w-max"></span>
-                                    </template>
+                                    <div class="flex gap-2">
+
+                                        <template x-for="(c, index) in item.tags">
+                                            <span x-text="c.category.name" @click="fetchArticleByCategory(c.category.id)" class="mt-4 cursor-pointer py-1 px-3 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)] dark:shadow-[0px_0px_4px_#fff] text-sm text-[rgba(41,41,41,1)] font-medium dark:bg-slate-secondary dark:text-white w-max"></span>
+                                        </template>
+                                    </div>
 
                                 </div>
                                 {{-- <span x-text="console.log(item.thumbnail)"></span> --}}
