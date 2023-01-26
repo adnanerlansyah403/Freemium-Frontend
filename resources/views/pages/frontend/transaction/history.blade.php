@@ -21,18 +21,18 @@
         <div x-show="showFlash">
             <x-alert />
         </div>
-        
-        
+
+
         <template x-if="!isLoading">
             <div>
                 <h1 class="font-iceberg text-lg text-center text-primary dark:text-white mb-16">ME</h1>
-            
+
                 @include("layouts.partials.user.dashboard")
-            
+
                 <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0" x-data="helpers">
-        
+
                     <div class="w-full col-12">
-    
+
                         <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
                             <i class="span font-bold dark:text-white" data-feather="credit-card"></i>
                             <p>
@@ -40,27 +40,27 @@
                             Transaction
                         </p>
                         </h2>
-        
+
                         {{-- <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4 col-12">
-        
+
                             <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" >
-        
+
                                 <div class="p-2 w-full flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
                                     <input type="text" placeholder="Search Here..." @change="searchOrder(keyword)" x-model="keyword" class="w-[93%] dark:text-white">
                                     <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                                 </div>
-        
+
                                 <button @click="sortOrder('payment_date')" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                                     <p>
                                         <span class="span dark:text-white">Sort By:</span>A/Z
                                     </p>
                                     <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:-rotate-90 dark:group-hover:text-white transition duration-200 ease-in-out"></i>
                                 </button>
-        
+
                             </div>
-        
+
                         </div> --}}
-        
+
                         <template x-if="!isLoading">
                             <div class="mt-6 w-full">
                                 <div class="w-full rounded-primary bg-white shadow-lg">
@@ -75,7 +75,7 @@
                                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                                               </tr>
                                             </thead>
-                
+
                                             <tbody>
                                                 <template x-for="(item, index) in myTransactions">
                                                     <tr class="border border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
@@ -111,7 +111,7 @@
                                                 <template x-if="myTransactions == 0">
                                                     <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
                                                         <td colspan="5">
-                                                            <span class="text-base dark:text-white">Empty Data</span>
+                                                            <span class="text-base dark:text-white">No Transaction Yet.</span>
                                                         </td>
                                                     </tr>
                                                 </template>
@@ -119,7 +119,7 @@
                                         </table>
                                     </div>
                                 </div>
-        
+
                                 {{-- <div class="mt-4 flex items-center justify-between">
                                     <p class="dark:text-white">
                                         Pages
@@ -130,13 +130,13 @@
                                     </p>
                                     <ul class="flex items-center justify-center gap-2">
                                         <template x-if="listOrder.current_page != 1">
-                
+
                                             <a @click="paginateOrder(listOrder.prev_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                
+
                                                 <
-                
+
                                             </a>
-                
+
                                         </template>
                                         <template x-for="(order, index) in listOrder.links">
                                             <template x-if="index != 0 && index != (listOrder.links.length - 1) && listOrder.last_page > 1">
@@ -153,9 +153,9 @@
                                         </template>
                                         <template x-if="listOrder.current_page < listOrder.last_page">
                                             <a @click="paginateOrder(listOrder.next_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                
+
                                                 >
-                
+
                                             </a>
                                         </template>
                                     </ul>
@@ -167,16 +167,16 @@
                                 <x-loading />
                             </div>
                         </template>
-        
+
                     </div>
-        
+
                 </div>
                 <script>
                     feather.replace()
                 </script>
-                
 
-    
+
+
             <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
                 <div role="alert" class="relative top-[13%] lg:top-[17%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
                     <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
@@ -256,6 +256,6 @@
             })();
         }
     </script>
-    
+
 
 @endsection
