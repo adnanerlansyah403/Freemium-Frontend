@@ -75,7 +75,7 @@
                             Profession
                         </span>
                         <select name="profession" id="profession" class="py-3 w-full lg:w-4/5 bg-none dark:text-white border-none hover:border-none focus-visible:border-none" style="border: none !important; background: transparent; outline: none;">
-                            <option value="" disabled>--- Select your profession ---</option>
+                            <option value="" :selected="!data_user.profession" disabled>--- Select your profession ---</option>
                             <template x-for="(item, index) in professions">
                                 <option :value="index" :selected="item == data_user.profession" x-text="' ' + item + ' '"> Select your profession </option>
                             </template>

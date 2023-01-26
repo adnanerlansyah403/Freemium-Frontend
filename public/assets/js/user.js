@@ -13,7 +13,7 @@ document.addEventListener('alpine:init', () => {
     linkInputTwitter: false,
     data_user: [],
     professions: [
-      'Freemium blog author',
+      'Freemium blogger',
       'Doctor',
       'Teacher',
       'Police officer',
