@@ -16,9 +16,7 @@
             document.title = 'Edit Article - Freemium App';
         </script>
     </template>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
-
+    
     <style>
 
         .mult-select-tag {
@@ -555,12 +553,6 @@
         }
         }));
     })
-    </script>
-    
-    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
-
-    <script>
-        new MultiSelectTag('category_id')  // id
     </script>
     
 </section>

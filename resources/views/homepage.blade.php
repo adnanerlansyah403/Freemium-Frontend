@@ -19,10 +19,6 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-        {{-- Quill Theme --}}
-
-        <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
-
         {{-- ChartJS --}}
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -120,10 +116,10 @@
         
         <script>
             AOS.init();
-            window.onload = function(){
-                localStorage.removeItem("showFlash");
-                localStorage.removeItem("message");
-            }
+            // window.onload = function(){
+            //     localStorage.removeItem("showFlash");
+            //     localStorage.removeItem("message");
+            // }
         </script>
 
         {{-- TinyMCE Scripts --}}
