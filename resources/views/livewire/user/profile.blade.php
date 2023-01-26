@@ -224,7 +224,7 @@
                                                 <span class=" font-bold">Expired : </span>
                                                 <span
                                                     class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm"
-                                                    x-text="`${diffPaymentByMonth} Months ${diffPaymentByDay} Days  from now`"></span>
+                                                    x-text="`${diffPaymentByDay} Days from now`"></span>
                                             </div>
                                         </template>
                                     </template>

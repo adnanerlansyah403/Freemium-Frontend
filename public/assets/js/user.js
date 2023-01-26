@@ -71,7 +71,6 @@ document.addEventListener('alpine:init', () => {
     link_twitter: '',
     diffpayment: '',
     paymentDateProfile: '',
-    diffPaymentByMonth: '',
     diffPaymentByDay: '',
 
     addMonths(date, months) {
@@ -107,11 +106,9 @@ document.addEventListener('alpine:init', () => {
             this.paymentDateProfile = user.data.payments[0].payment_date
 
             const resultPaymentProfile = this.addMonths(new Date(this.paymentDateProfile), this.diffpayment)
-
             const datenow = Date.now();
-            const diff = new Date(resultPaymentProfile - datenow)
-            this.diffPaymentByMonth = diff.getUTCMonth()
-            this.diffPaymentByDay = diff.getUTCDay()
+            const diff = Math.abs(resultPaymentProfile - datenow)
+            this.diffPaymentByDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
           }
         });
