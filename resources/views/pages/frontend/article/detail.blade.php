@@ -189,7 +189,7 @@
 
                                 </div>
                                 <template x-if="detailArticle?.subarticles.length > 0">
-                                    <div class="flex items-center gap-4">
+                                    <div class="flex items-center gap-4 mt-4">
                                         <div class="flex items-center gap-2">
                                             <span x-text="content ? detailArticle?.subarticles?.findIndex(x => x.id == content?.id) + 1 + ' of ' + detailArticle?.subarticles?.length + ' sub-article': ''"></span>
                                             <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id"
@@ -327,14 +327,14 @@
 
                                 <div class="flex items-center justify-center">
 
-                                    <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mb-3 rounded-primary border border-primary bg-primary bg-opacity-20 font-bold dark:border-white dark:bg-slate-primary">
+                                    <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mb-6 rounded-primary border border-primary bg-primary bg-opacity-20 font-bold dark:border-white dark:bg-slate-primary">
                                         You have to
                                         <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
                                         to Access this
                                     </p>
                                 </div>
 
-                                    <div class="flex items-center w-full gap-2 mb-3" x-bind:class="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1 ? 'mt-5' : ''">
+                                    <div class="flex items-center w-full gap-2 mb-3">
                                         <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
                                                 type = type == 'paid' ? '' : 'paid';
@@ -379,6 +379,7 @@
                                                     </template>
                                                     <template x-if="item.type == 'paid' && data_user?.subscribe_status != 1">
                                                         <div>
+                                                            {{-- <span x-text="console.log(detailArticle)"></span> --}}
                                                             <i data-feather="lock"
                                                                 class="hover:text-white min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]"></i>
                                                                 <script>

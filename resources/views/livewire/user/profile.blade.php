@@ -55,7 +55,16 @@
                             <span class="group-hover:translate-x-1 bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary transition duration-200 ease-in-out">
                                 Password
                             </span>
-                            <input type="password" class="py-3 w-full lg:w-4/5 dark:text-white" placeholder="Your password..." x-model="password">
+                            <input type="password" class="py-3 w-full lg:w-4/5 dark:text-white" placeholder="Your password..." x-model="password" style="background-color: transparent !important;">
+                        </div>
+
+                        <div class="group flex items-center gap-5 mb-7 pl-4 lg:pl-0 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
+                            <span class="group-hover:translate-x-1 bg-primary dark:bg-slate-secondary lg:w-[150px] text-white text-center hidden lg:block lg:px-6 py-3 rounded-primary transition duration-200 ease-in-out">
+                                Profession
+                            </span>
+                            <select name="" id="profession" x-model="profession" class="py-3 w-full lg:w-4/5 bg-none dark:text-white border-none hover:border-none focus-visible:border-none" style="border: none !important; background: transparent; outline: none;">
+                                <option value="1" selected> Select your profession </option>
+                            </select>
                         </div>
 
                         <div class="flex items-center gap-5 mb-7 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
@@ -179,7 +188,7 @@
                             </template>
                         </div>
                         <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
-                            <a href="{{ route('transaction.create') }}" class="-translate-y-2 group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
+                            <a href="{{ route('transaction.create') }}" class="-translate-y-2 group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] flex items-center justify-center gap-2 lg:mt-auto md:mt-auto"
                             >
                                 <i data-feather="check-circle" class="text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80"></i>
                                 <h2 class="font-bold transition duration-200 text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80 ease-in-out"

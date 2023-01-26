@@ -46,6 +46,7 @@ module.exports = {
       comic: ['Comic Neue', 'cursive'],
       quickSand: ['Quicksand', 'sans-serif'],
       merrieweather: ['Merriweather', 'serif'],
+      lato: ['Lato', 'sans-serif'],
     },
     extend: {
       animation: {

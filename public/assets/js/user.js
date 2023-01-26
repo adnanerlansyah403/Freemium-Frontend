@@ -50,6 +50,7 @@ document.addEventListener('alpine:init', () => {
     username: '',
     email: '',
     password: '',
+    profession: '',
     // photo: '',
     link_facebook: '',
     link_linkedin: '',
@@ -179,6 +180,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     updateMe() {
+      let profession = document.getElementById('profession').value;
       let photoProfile = document.getElementById('photo').files[0];
 
       if (photoProfile == undefined) {
@@ -570,7 +572,7 @@ document.addEventListener('alpine:init', () => {
     searchMyArticle(keyword) {
       const token = localStorage.getItem('token')
 
-      // this.isLoading = true,
+      this.isLoadingMyArticle = true;
       fetch(`${this.apiUrl}myArticle?search=${keyword}`, {
         method: "GET",
         headers: {
@@ -585,6 +587,7 @@ document.addEventListener('alpine:init', () => {
           }
           this.listMyArticle = data.data;
 
+          this.isLoadingMyArticle = false;
         })
 
     },

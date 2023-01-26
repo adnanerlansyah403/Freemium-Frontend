@@ -13,6 +13,14 @@
 
 @section("content")
 
+<style>
+
+    input {
+        border: none;
+    }
+
+</style>
+
 <section class="pt-[140px] pb-[100px] dark:text-white" x-data="auth" x-init="checkAlreadyAuth()"
 >
 

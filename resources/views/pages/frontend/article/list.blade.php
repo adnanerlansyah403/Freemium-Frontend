@@ -83,18 +83,18 @@
                     <div class="flex items-center gap-2 mt-2">
                         <div class="flex items-center gap-[5px]">
                             <input class="checked:bg-primary dark:checked:bg-slate-third" type="radio" id="free" name="type_article" value="free" @click="filtersKey[1] = $event.target.value; filterArticle()">
-                            <label class="mt-[2px] text-sm leading-[21px]" for="free">Free</label><br>
+                            <label class="mt-[2px] text-sm leading-[21px] font-semibold" for="free">Free</label><br>
                         </div>
                         <div class="flex items-center gap-[5px]">
                             <input class="checked:bg-primary dark:checked:bg-slate-third" type="radio" id="paid" name="type_article" value="paid" @click="filtersKey[1] = $event.target.value; filterArticle()">
-                            <label class="mt-[2px] text-sm leading-[21px]" for="paid">Paid</label><br>
+                            <label class="mt-[2px] text-sm leading-[21px] font-semibold" for="paid">Paid</label><br>
                         </div>
                     </div>
 
                 </div>
 
                 <div class="mt-[33px] flex flex-wrap gap-[11px]" x-init="getCategories()">
-                    <select name="category" x-on:change="filtersKey[2] = $event.target.value; filterArticle()" id="category" class="text-sm py-2 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white" x-ref="category">
+                    <select name="category" x-on:change="filtersKey[2] = $event.target.value; filterArticle()" id="category" class="text-sm py-2 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white font-medium" x-ref="category">
                         <option value="" @click="getCategories()">  Select a category... </option>
                         <template x-for="(item, index) in categoriesArticle">
                             <option x-bind:value="item.id" x-text="item.name" ></option>
@@ -174,7 +174,7 @@
                                 <div class="flex flex-col col-12 md:col-9">
                                     <div class="flex items-start justify-between">
                                         <div>
-                                            <h1 class="text-[18px] font-bold font-bebasNeue" x-text="item.author.username">Nama Author</h1>
+                                            <h1 class="text-[18px] font-quickSand font-semibold" x-text="item.author.username">Nama Author</h1>
                                             <div class="flex gap-3 flex-wrap mt-2">
                                                 <p class="text-[14px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
                                                 <p class="flex items-center gap-1 text-[14px]">
@@ -202,7 +202,7 @@
 
                                     <div class="flex flex-col lg:flex-row gap-y-2 lg:gap-5 justify-between items-start mt-0 md:mt-5">
                                         <a x-bind:href="baseUrl + `article/detail/${item.id}`"
-                                        class="font-bold text-[24px] font-neucha leading-9" x-text="item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title">JUDUL ARTIKEL</a>
+                                        class="font-bold text-[24px] font-lato leading-9" x-text="item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title">JUDUL ARTIKEL</a>
                                         <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"
                                         x-on:click="
                                             if(item.type == 'free') {
