@@ -1574,7 +1574,7 @@ document.addEventListener('alpine:init', () => {
                         <div class="mb-5 col-12 lg:col-12">
                             <label for="text" class="text-md">Title</label>
                             <input data-id="${this.index}" type="text" placeholder="Your text..."
-                                class="title_sub dark:text-white px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border-white rounded-primary bg-white dark:bg-slate-primary border border-white hover:bg-white mt-4">
+                                class="title_sub dark:text-white px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border-white rounded-primary bg-white border-none dark:bg-slate-primary border border-white hover:bg-white mt-4">
                                 <div id="err_title${this.index}"></div>
                         </div>
                     </div>
