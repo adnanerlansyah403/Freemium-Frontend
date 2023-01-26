@@ -114,7 +114,7 @@
                                         </template>
                                         <p>
                                             <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span>
-                                            <span x-text="content ? content?.total_views : detailArticle?.total_views_sum">
+                                            <span x-text="detailViews.total">
                                             </span>
                                             Views
                                         </p>

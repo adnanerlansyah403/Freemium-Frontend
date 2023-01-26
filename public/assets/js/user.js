@@ -1007,8 +1007,10 @@ document.addEventListener('alpine:init', () => {
     apiUrl: "http://127.0.0.1:8001/api/",
     imgUrl: "http://127.0.0.1:8001/",
     listArticle: [],
+    listView: [],
     categoriesArticle: [],
     detailArticle: null,
+    detailViews: null,
     isLoadingArticle: false,
     isLoadMore: false,
     isLoading: false,
@@ -1060,6 +1062,8 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           this.listArticle = data.data;
+          this.listView = data.views;
+          console.log(this.listView)
 
           // DOM
           // document.getElementById("all").classList.add('active');
@@ -1081,6 +1085,12 @@ document.addEventListener('alpine:init', () => {
       }, 600)
     },
 
+    checkExists(obj, id) {
+      return obj.some(function (gfg) {
+        return gfg.id === id;
+      });
+    },
+
     getDetailArticle(id) {
       this.isLoadingArticle = true;
       fetch(`${this.apiUrl}article/${id}`, {
@@ -1093,6 +1103,7 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           if (data.status) {
             this.detailArticle = data.data;
+            this.detailViews = data.views;
           }
           else {
             // console.log(data.message);
@@ -1123,6 +1134,7 @@ document.addEventListener('alpine:init', () => {
           }
           else {
             this.content = data.data;
+            this.detailViews = data.views;
             this.fetchStatus = true;
           }
           this.isLoading = false;

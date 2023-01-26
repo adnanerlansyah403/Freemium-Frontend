@@ -166,12 +166,24 @@
                                             <h1 class="text-[18px] font-quickSand font-semibold" x-text="item.author.username">Nama Author</h1>
                                             <div class="flex gap-3 flex-wrap mt-2">
                                                 <p class="text-[14px]" x-text="convertDate(item.created_at)">tanggal-bulan-tahun</p>
-                                                <p class="flex items-center gap-1 text-[14px]">
-                                                    <i data-feather="eye" class="w-4 h-4 -translate-y-[1px]"></i>
-                                                    <span x-text="item.total_views_sum > 0 ? item.total_views_sum : 'No Views'">
-                                                        1000
-                                                    </span>
-                                                </p>
+                                                <template x-for="list in listView">
+                                                    <template x-if="list.id === item.id">
+                                                        <p class="flex items-center gap-1 text-[14px]">
+                                                            <i data-feather="eye" class="w-4 h-4 -translate-y-[1px]"></i>
+                                                            <span x-text="list.total">
+                                                                1000
+                                                            </span>
+                                                        </p>
+                                                    </template>
+                                                </template>
+                                                <template x-if="!checkExists(listView, item.id)">
+                                                    <p class="flex items-center gap-1 text-[14px]">
+                                                        <i data-feather="eye" class="w-4 h-4 -translate-y-[1px]"></i>
+                                                        <span x-text="'No views'">
+                                                            1000
+                                                        </span>
+                                                    </p>
+                                                </template>
                                             </div>
                                         </div>
                                         <div class="-translate-x-[24px]">
