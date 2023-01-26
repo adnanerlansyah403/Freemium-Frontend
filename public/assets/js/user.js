@@ -1581,7 +1581,7 @@ document.addEventListener('alpine:init', () => {
 
                     <div class="mb-5">
                         <label for="text" class="text-md">Thumbnail</label>
-                        <input class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
+                        <input accept="image/*" class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
                             hidden
                             id="file${this.index}">
                         <span

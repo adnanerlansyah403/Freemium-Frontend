@@ -86,7 +86,7 @@
 
                 <div class="mb-6">
                     <label for="text" class="text-md">Thumbnail</label>
-                    <input id="thumbnail" type="file" name="thumbnail" placeholder="Your thumbnail..."
+                    <input accept="image/*" id="thumbnail" type="file" name="thumbnail" placeholder="Your thumbnail..."
                         hidden
                         x-ref="file"
                         @change="
