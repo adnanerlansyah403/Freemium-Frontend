@@ -1,5 +1,5 @@
 <header id="header" class="group fixed w-full z-[101] 
-{{ ($currentRoute == 'article.list') ?
+{{ ($currentRoute == 'article.list') ||($currentRoute == 'article.create') || ($currentRoute == 'article.index') || ($currentRoute == 'article.show') || ($currentRoute == 'transaction.history')  ?
     'shadow-lg bg-[rgba(255,255,255,.95)] text-slate-primary dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out' : '' 
 }} py-2 lg:py-1 transition duration-200 ease-in-out" data-aos="fade-down">
     <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
