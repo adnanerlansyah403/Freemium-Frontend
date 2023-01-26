@@ -268,7 +268,13 @@
                 },
                 idx: -1,
                 handleClick() {
-                this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
+                    let tab = document.getElementById(`tab${this.idx}`);
+                    if(tab.classList.contains('max-h-[1305px]')) {
+                        tab.classList.remove("max-h-[1305px]");
+                        tab.classList.add("max-h-0");
+                    }else{
+                        this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
+                    }
                 },
                 handleRotate() {
                 return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';

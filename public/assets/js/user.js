@@ -1211,7 +1211,10 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < title_sub.length; i++) {
         let data_id = title_sub[i].getAttribute("data-id");
-        let accordion = document.getElementById(`accordionTitle${i + 1}`);
+        let accordion = document.getElementById(`accordionTitle${data_id}`);
+        let tab = document.getElementById(`tab${data_id}`);
+
+        accordion.style.border = 'none';
 
         titleSub = document.getElementById(`err_title${data_id}`);
         titleSub.innerHTML = '';
@@ -1224,54 +1227,76 @@ document.addEventListener('alpine:init', () => {
 
         if (title_sub[i].value != '') {
           this.status_sub_err = false;
-          accordion.style.border = 'none';
           if (title_sub[i].value.trim().length > 255) {
+            this.status_sub_err = true;
+            tab.classList.remove("max-h-0");
+            tab.classList.add("max-h-[1305px]");
+            accordion.style.border = '1px solid #b91c1c';
+            accordion.style.borderRadius = '10px';
             titleSub.innerHTML += this.styleMessage(`title sub article ${i + 1} not be greater than 255 character.`);
           } else {
             formData.append('title_sub[]', title_sub[i].value);
           }
         } else {
-          titleSub.innerHTML += this.styleMessage(`title sub article ${i + 1} required.`);
           this.status_sub_err = true;
+          tab.classList.remove("max-h-0");
+          tab.classList.add("max-h-[1305px]");
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
+          titleSub.innerHTML += this.styleMessage(`title sub article ${i + 1} required.`);
         }
         if (thumbnail_sub[i].files[0]) {
           this.status_sub_err = false;
-          accordion.style.border = 'none';
-          console.log(thumbnail_sub[i].files[0]);
           file = thumbnail_sub[i].files[0];
           getType = file.type;
           type = getType.split('/')[0];
-          console.log(file)
           if (type === 'image') {
             if (file.size > 1023546) {
+              this.status_sub_err = true;
+              tab.classList.remove("max-h-0");
+              tab.classList.add("max-h-[1305px]");
+              accordion.style.border = '1px solid #b91c1c';
+              accordion.style.borderRadius = '10px';
               thumbnailSub.innerHTML += this.styleMessage(`Thumbnail sub article ${i + 1} not be greater than 1024 kilobytes.`);
             } else {
               formData.append('thumbnail_sub[]', thumbnail_sub[i].files[0]);
             }
           } else {
+            this.status_sub_err = true;
+            tab.classList.remove("max-h-0");
+            tab.classList.add("max-h-[1305px]");
+            accordion.style.border = '1px solid #b91c1c';
+            accordion.style.borderRadius = '10px';
             thumbnailSub.innerHTML += this.styleMessage(`Thumbnail sub article ${i + 1} must be image.`);
           }
         } else {
-          thumbnailSub.innerHTML += this.styleMessage(`Thumbnail sub article ${i + 1} required.`);
           this.status_sub_err = true;
+          tab.classList.remove("max-h-0");
+          tab.classList.add("max-h-[1305px]");
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
+          thumbnailSub.innerHTML += this.styleMessage(`Thumbnail sub article ${i + 1} required.`);
         }
         if (tinymce.get(`editor${data_id}`).getContent() != '') {
           this.status_sub_err = false;
           accordion.style.border = 'none';
           if (tinymce.get(`editor${data_id}`).getContent().trim().length < 100) {
+            this.status_sub_err = true;
+            tab.classList.remove("max-h-0");
+            tab.classList.add("max-h-[1305px]");
+            accordion.style.border = '1px solid #b91c1c';
+            accordion.style.borderRadius = '10px';
             description_sub.innerHTML += this.styleMessage(`Description sub article ${i + 1} must be greater than 100 charcter.`);
           } else {
             formData.append('description_sub[]', tinymce.get(`editor${data_id}`).getContent());
           }
         } else {
-          description_sub.innerHTML += this.styleMessage(`Description sub article ${i + 1} required`);
           this.status_sub_err = true;
+          tab.classList.remove("max-h-0");
+          tab.classList.add("max-h-[1305px]");
           accordion.style.border = '1px solid #b91c1c';
           accordion.style.borderRadius = '10px';
+          description_sub.innerHTML += this.styleMessage(`Description sub article ${i + 1} required`);
         }
 
         this.sub_article_err += `<br>`;
@@ -1503,6 +1528,12 @@ document.addEventListener('alpine:init', () => {
     index: 1,
     total: 1,
 
+    radioType(index, val) {
+      type = document.getElementById(`type${index}`);
+      type.innerHTML = '';
+      type.innerHTML = `(${val})`;
+    },
+
     createSubArticle(refs) {
       refs.listsubarticle.insertAdjacentHTML('beforeend', `
             <li class="relative bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion` + this.index}" x-data="accordion(${this.index})">
@@ -1519,7 +1550,7 @@ document.addEventListener('alpine:init', () => {
                 id="${`accordionTitle${this.index}`}"
                 class="flex flex-row justify-between items-center font-semibold px-3 py-2 cursor-pointer"
                 >
-                    <span>Sub Artikel ${this.index}</span>
+                    <span>Sub Artikel ${this.index} <span id="type${this.index}">(Free)</span></span>
                     <div class="translate-y-1 flex items-center">
                         <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60" @click="deleteSubArticle(${this.index})">
                             <ion-icon name="trash-outline" class="w-6 h-6 text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
@@ -1537,6 +1568,7 @@ document.addEventListener('alpine:init', () => {
                 </h2>
 
                 <div
+                id="tab${this.index}"
                 x-ref="tab"
                 :style="handleToggle()"
                 class="px-4 overflow-y-scroll has-scrollbar overflow-x-hidden max-h-0 duration-500 transition-all"
@@ -1593,11 +1625,11 @@ document.addEventListener('alpine:init', () => {
                         <span class="text-md">Choose Your Plan</span>
                         <div class="flex items-center gap-2 mt-2">
                             <label for="free" class="flex items-center gap-1">
-                                <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="free" id="free${this.index}" checked>
+                                <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="free" id="free${this.index}" x-on:change="radioType(${this.index}, $event.target.value)" checked>
                                 <span class="text-base">Free</span>
                             </label>
                             <label for="paid" class="flex items-center gap-1">
-                                <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="paid" id="paid${this.index}">
+                                <input class="type checked:bg-primary dark:checked:bg-slate-third" type="radio" name="status${this.index}" value="paid" id="paid${this.index}" x-on:change="radioType(${this.index}, $event.target.value)">
                                 <span class="text-base">Member-Only</span>
                             </label>
                         </div>
@@ -1656,10 +1688,13 @@ document.addEventListener('alpine:init', () => {
       });
 
       let title_sub = document.getElementsByClassName('title_sub');
-      if (this.total > 4) {
+      if (this.total > 3) {
         for (let i = 0; i < this.total; i++) {
           let data_id = title_sub[i].getAttribute("data-id");
           if (i <= 2) {
+            type = document.getElementById(`type${data_id}`);
+            type.innerHTML = '';
+            type.innerHTML = '(Free)';
             document.getElementById(`free${data_id}`).checked = true;
             document.getElementById(`paid${data_id}`).disabled = true;
           }
