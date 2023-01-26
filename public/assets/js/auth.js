@@ -75,11 +75,13 @@ document.addEventListener('alpine:init', () => {
           this.flash();
           return window.history.back();
         }
-        this.isLoadingAuth = false;
+        // this.isLoadingAuth = false;
         return window.location.href = this.baseUrl;
       } else {
         this.isLoadingAuth = false;
       }
+
+      this.isLoadingAuth = false;
 
     },
 
