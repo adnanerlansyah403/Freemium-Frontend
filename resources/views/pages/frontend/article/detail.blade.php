@@ -240,9 +240,8 @@
                                     <div class="">
                                         <b class="text-base font-semibold" x-text="detailArticle?.author?.username">Nama Author</b>
                                         <span class="block text-gray-primary dark:text-gray-third" x-text="detailArticle?.author?.email"></span>
-                                        <p class="mt-2 text-gray-secondary dark:text-white italic font-quickSand block max-w-[400px]" x-text="detailArticle?.author.profession">
-
-                                        </p>
+                                        <p class="mt-2 text-gray-secondary dark:text-white italic font-quickSand font-semibold block max-w-[400px]" x-text="detailArticle?.author.profession != null ? detailArticle?.author.profession + ' | Freemium.com' : 'I am blogger' + ' | Freemium.com'">
+                                        </p> 
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-center w-full lg:w-auto mt-4 lg:mt-0">
