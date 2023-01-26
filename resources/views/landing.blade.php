@@ -72,7 +72,7 @@
         <main>
             <article>
 
-                <section class="pt-[180px] pb-[90px] dark:text-slate-third">
+                <section class="pt-[180px] pb-[90px] dark:text-slate-third" id="home">
                     <div class="container px-3 mx-auto flex items-start flex-wrap lg:flex-nowrap gap-10">
 
                         <figure class="hidden col-12 lg:block lg:col-6 dark:bg-slate-secondary dark:rounded-lg" data-aos="fade-right">
