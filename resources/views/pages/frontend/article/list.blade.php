@@ -169,19 +169,25 @@
                                                 <template x-for="list in listView">
                                                     <template x-if="list.id === item.id">
                                                         <p class="flex items-center gap-1 text-[14px]">
-                                                            <i data-feather="eye" class="w-4 h-4 -translate-y-[1px]"></i>
+                                                            <i data-feather="eye" class="w-4 h-4"></i>
                                                             <span x-text="list.total">
                                                                 1000
                                                             </span>
+                                                            <script>
+                                                                feather.replace()
+                                                            </script>
                                                         </p>
                                                     </template>
                                                 </template>
                                                 <template x-if="!checkExists(listView, item.id)">
                                                     <p class="flex items-center gap-1 text-[14px]">
-                                                        <i data-feather="eye" class="w-4 h-4 -translate-y-[1px]"></i>
+                                                        <i data-feather="eye" class="w-4 h-4"></i>
                                                         <span x-text="'No views'">
                                                             1000
                                                         </span>
+                                                        <script>
+                                                            feather.replace()
+                                                        </script>
                                                     </p>
                                                 </template>
                                             </div>

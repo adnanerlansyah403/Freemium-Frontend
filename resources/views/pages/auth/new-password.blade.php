@@ -16,6 +16,7 @@
 <section class="pt-[140px] pb-[100px] dark:text-white" x-data="auth"
 >
 <div x-init="checkAlreadyAuth()"></div>
+
 <div x-init="flash()"></div>
 <div x-show="showFlash" x-init="setTimeout(() => {
   showFlash = false

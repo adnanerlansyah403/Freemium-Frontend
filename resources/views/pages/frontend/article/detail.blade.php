@@ -50,6 +50,66 @@
             font-weight: bold;
         }
 
+        blockquote{
+            display:block;
+            background: #fff;
+            padding: 15px 20px 15px 45px;
+            position: relative;
+            margin-block: 15px;            
+            /*Font*/
+            font-family: Georgia, serif;
+            font-size: 16px;
+            line-height: 1.2;
+            color: #666;
+            text-align: justify;
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+            /*Borders - (Optional)*/
+            border-left: 15px solid #7C000B;
+            /* border-right: 2px solid #7C000B; */
+            
+            /*Box Shadow - (Optional)*/
+            -moz-box-shadow: 2px 2px 15px #ccc;
+            -webkit-box-shadow: 2px 2px 15px #ccc;
+            box-shadow: 2px 2px 15px #ccc;
+        }
+
+        blockquote::before{
+            content: "\201C"; /*Unicode for Left Double Quote*/
+            
+            /*Font*/
+            font-family: Georgia, serif;
+            font-size: 60px;
+            font-weight: bold;
+            color: #999;
+            
+            /*Positioning*/
+            position: absolute;
+            left: 10px;
+            top:0;
+        }
+
+        blockquote::after{
+            /*Reset to make sure*/
+            content: "";
+        }
+
+        blockquote a{
+            text-decoration: none;
+            background: #eee;
+            cursor: pointer;
+            padding: 0 3px;
+            color: #7C000B;
+        }
+
+        blockquote a:hover{
+            color: #666;
+        }
+
+        blockquote em{
+            font-style: italic;
+        }
+
     </style>
 
     <section id="sectionDetail" class="pt-[140px] pb-[100px] dark:text-white" x-data="user" x-init="
@@ -127,7 +187,7 @@
                                 content?.thumbnail == '' ||
                                 detailArticle?.thumbnail == '' ? 'hidden' : ''">
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
-                                        class="w-full object-cover bg-gray-secondary max-h-[450px] rounded-primary" alt="">
+                                        class="w-full object-fill bg-gray-secondary max-h-[450px] rounded-primary" alt="">
                                 </figure>
                                 <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </div>
