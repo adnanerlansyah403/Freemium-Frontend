@@ -17,7 +17,36 @@
         </script>
     </template>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+
     <style>
+
+        .mult-select-tag {
+            margin-top: 14.5px;
+        }
+        
+        .mult-select-tag .body {
+            padding: 10px;
+            min-height: unset;
+        }
+
+        .mult-select-tag .btn-container {
+            border: none;
+        }
+
+        .mult-select-tag .item-container {
+            padding: 6px;
+            border: none;
+            background: #7C000B;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .mult-select-tag .item-container .item-label {
+            color: #fff;
+            font-weight: 600;
+            padding-inline: 6px;
+        }
 
         .filename.active {
             bottom: 0;
@@ -83,7 +112,9 @@
                     </div>
 
                     <div class="mb-5 col-12 lg:col lg:col-6">
-                        <label for="category_id" class="text-md">Category</label>
+                        <div class="flex justify-between">
+                            <label for="category_id" class="text-md">Category</label>
+                        </div>
                         <select x-bind:model="EditArticle && EditArticle.tags ? EditArticle.tags[0].category_id : ''" name="category_id" id="category_id"
                             class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary dark:border dark:border-white mt-4">
                             <option value=""> Choosen category... </option>
@@ -502,7 +533,6 @@
         </div>
     </template>
 
-
     <script>
         document.addEventListener('alpine:init', () => {
         Alpine.store('accordion', {
@@ -526,5 +556,12 @@
         }));
     })
     </script>
+    
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
+    <script>
+        new MultiSelectTag('category_id')  // id
+    </script>
+    
 </section>
 
