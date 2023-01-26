@@ -30,12 +30,12 @@
 
     input {
         outline: none;
-        background-color: none;
+        background: none;
     }
 
     input:is(:hover, :focus-visible) {
         outline: none;
-        background-color: none;
+        background: none;
     }
 
     input[type="file"]::-webkit-file-upload-button {

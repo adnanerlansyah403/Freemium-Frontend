@@ -7,7 +7,7 @@
         <figure>
             <a href="{{ route('homepage') }}" class="flex items-center">
                 <span class="span text-lg sm:text-xl dark:text-slate-third">F</span>
-                <p class="text-md font-iceberg">reemium</p>
+                <p class="text-md font-iceberg dark:text-white">reemium</p>
             </a>
         </figure>
 
@@ -49,8 +49,8 @@
                 }">
                     <template x-if="!isLogedIn">
                         <div>
-                            <a href="{{ route('login') }}" class=" {{ $currentRoute == 'login' ? 'bg-primary text-white dark:bg-slate-third' : '' }} text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
-                            <a href="{{ route('register') }}" class=" {{ $currentRoute == 'register' ? 'bg-primary dark:bg-slate-third text-white' : '' }} text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
+                            <a href="{{ route('login') }}" class=" {{ $currentRoute == 'login' ? 'bg-primary text-white dark:bg-slate-third' : '' }} text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary dark:text-white hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
+                            <a href="{{ route('register') }}" class=" {{ $currentRoute == 'register' ? 'bg-primary dark:bg-slate-third text-white' : '' }} text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white dark:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
                         </div>
                     </template>
 
