@@ -20,7 +20,7 @@
                 </li>
                 <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary dark:before:bg-slate-third before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
                     <a href="{{ route('article.list') }}">
-                        <span class="span dark:text-slate-third">A</span>rticle
+                        <span class="span dark:text-slate-third">A</span>rticles
                     </a>
                 </li>
                 <li class="relative text-base font-medium before:absolute before:w-full before:h-[1px] before:bottom-0 before:bg-primary dark:before:bg-slate-third before:-left-full hover:before:left-0 before:transiton before:duration-200 before:ease-in-out overflow-x-hidden">
@@ -232,9 +232,9 @@
                 </div>
             </template>
 
-            <div x-data="helpers" class="absolute right-5 top-[125%] xl:-right-1/3 xl:top-[23px] xl:group-hover:right-3 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
+            <div x-data="helpers" class="absolute right-5 top-[125%] md:top-[142%] lg:top-[170%] xl:-right-1/3 xl:top-[21px] xl:group-hover:right-3 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
 
-                <button id="buttonMode" @click="darkMode()" class="p-[6px] text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
+                <button id="buttonMode" @click="darkMode()" class="p-[8px] text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
                     <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
                 </button>
             </div>

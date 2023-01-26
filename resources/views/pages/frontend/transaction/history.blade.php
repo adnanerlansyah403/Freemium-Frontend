@@ -29,7 +29,7 @@
 
                 @include("layouts.partials.user.dashboard")
 
-                <div class="container mx-auto flex flex-wrap md:flex-nowrap gap-10 lg:gap-0" x-data="helpers">
+                <div class="container mx-auto px-4 lg:px-0 flex flex-wrap md:flex-nowrap gap-10 lg:gap-0" x-data="helpers">
 
                     <div class="w-full col-12">
 
@@ -41,31 +41,11 @@
                         </p>
                         </h2>
 
-                        {{-- <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4 col-12">
-
-                            <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" >
-
-                                <div class="p-2 w-full flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
-                                    <input type="text" placeholder="Search Here..." @change="searchOrder(keyword)" x-model="keyword" class="w-[93%] dark:text-white">
-                                    <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
-                                </div>
-
-                                <button @click="sortOrder('payment_date')" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
-                                    <p>
-                                        <span class="span dark:text-white">Sort By:</span>A/Z
-                                    </p>
-                                    <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary group-hover:-rotate-90 dark:group-hover:text-white transition duration-200 ease-in-out"></i>
-                                </button>
-
-                            </div>
-
-                        </div> --}}
-
                         <template x-if="!isLoading">
                             <div class="mt-6 w-full">
                                 <div class="w-full rounded-primary bg-white shadow-lg">
                                     <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Orders</div>
-                                    <div class="overflow-x-auto">
+                                    <div class="overflow-x-auto has-scrollbar2">
                                         <table class="w-full overflow-x-scroll items-center bg-transparent border-collapse">
                                             <thead>
                                               <tr>
@@ -177,43 +157,43 @@
 
 
 
-            <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
-                <div role="alert" class="relative top-[13%] lg:top-[17%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
-                    <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
-                        <div class="w-full flex justify-start text-primary dark:text-white mb-3">
-                            <i data-feather="credit-card" class="w-14 h-14"></i>
+                <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
+                    <div role="alert" class="relative top-[13%] lg:top-[17%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
+                        <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
+                            <div class="w-full flex justify-start text-primary dark:text-white mb-3">
+                                <i data-feather="credit-card" class="w-14 h-14"></i>
+                            </div>
+                            <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Details Order</h1>
+                            <p class="mt-3">
+                                <b class="span dark:text-slate-fourth">Plan Order : </b>
+                                <span class="dark:text-white" id="planOrder">Lifetime</span>
+                            </p>
+                            <p class="mt-3">
+                                <b class="span dark:text-slate-fourth">Virtual Number : </b>
+                                <span class="dark:text-white" id="vaOrder"></span>
+                            </p>
+                            <p class="mt-3">
+                                <b class="span dark:text-slate-fourth">Price : </b>
+                                <span class="dark:text-white" id="priceOrder">$100.00</span>
+                            </p>
+                            <p class="mt-3">
+                                <b class="span dark:text-slate-fourth">Payment Date : </b>
+                                <span class="dark:text-white" id="paymentDateOrder">27 Jan, 2023</span>
+                            </p>
+                            <p class="mt-3" id="imageOrderWrapper" style="display: none;">
+                                <b class="span dark:text-slate-fourth">Screenshoot : </b> <br>
+                                <img src="" id="imageOrder" class="mt-2 w-full h-[200px]" alt="">
+                            </p>
+                            <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="showOrder()" aria-label="close modal" role="button">
+                                <svg  xmlns="http://www.w3.org/2000/svg"  class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                            </button>
                         </div>
-                        <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Details Order</h1>
-                        <p class="mt-3">
-                            <b class="span dark:text-slate-fourth">Plan Order : </b>
-                            <span class="dark:text-white" id="planOrder">Lifetime</span>
-                        </p>
-                        <p class="mt-3">
-                            <b class="span dark:text-slate-fourth">Virtual Number : </b>
-                            <span class="dark:text-white" id="vaOrder"></span>
-                        </p>
-                        <p class="mt-3">
-                            <b class="span dark:text-slate-fourth">Price : </b>
-                            <span class="dark:text-white" id="priceOrder">$100.00</span>
-                        </p>
-                        <p class="mt-3">
-                            <b class="span dark:text-slate-fourth">Payment Date : </b>
-                            <span class="dark:text-white" id="paymentDateOrder">27 Jan, 2023</span>
-                        </p>
-                        <p class="mt-3" id="imageOrderWrapper" style="display: none;">
-                            <b class="span dark:text-slate-fourth">Screenshoot : </b> <br>
-                            <img src="" id="imageOrder" class="mt-2 w-full h-[200px]" alt="">
-                        </p>
-                        <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" @click="showOrder()" aria-label="close modal" role="button">
-                            <svg  xmlns="http://www.w3.org/2000/svg"  class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
-            </div>
 
             </div>
         </template>

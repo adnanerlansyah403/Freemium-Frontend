@@ -52,7 +52,7 @@
 
 </head>
 <body x-data="user" x-init="checkSession()"
-style="display: none;" class="dark:bg-slate-primary dark:text-white">
+style="display: none;" class="dark:bg-slate-primary dark:text-white has-scrollbar">
 
 {{-- Title Section --}}
 <template x-if="isLogedIn">
@@ -76,7 +76,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
         <div x-data="user" class="relative container mx-auto flex flex-col">
 
 
-            <div class="absolute top-0 -translate-y-8 right-0 -translate-x-8" x-data="helpers">
+            <div class="absolute top-0 -translate-y-8 right-0 -translate-x-8 lg:-translate-x-20" x-data="helpers">
                 <button id="buttonMode" @click="darkMode()" class="p-2 text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
                     {{-- <ion-icon id="iconMode" class="dark:text-white" name="moon-outline"></ion-icon> --}}
                     {{-- <i id="iconMode" data-feather="moon"></i> --}}
@@ -131,7 +131,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
                 </template>
             </div>
 
-            <div class="px-2 lg:px-0 lg:w-[630px] lg:mx-auto">
+            <div class="px-4 lg:px-0 lg:w-[630px] lg:mx-auto">
                 <span class="text-md font-semibold">Pay With : </span>
 
                 <div class="flex items-center gap-5 mt-7 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">

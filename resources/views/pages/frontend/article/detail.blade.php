@@ -127,7 +127,7 @@
                                 content?.thumbnail == '' ||
                                 detailArticle?.thumbnail == '' ? 'hidden' : ''">
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
-                                        class="w-full h-[500px] bg-gray-secondary rounded-primary" alt="">
+                                        class="w-full object-cover bg-gray-secondary max-h-[450px] rounded-primary" alt="">
                                 </figure>
                                 <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </div>
@@ -189,8 +189,8 @@
 
                                 </div>
                                 <template x-if="detailArticle?.subarticles.length > 0">
-                                    <div class="flex items-center gap-4 mt-4">
-                                        <div class="flex items-center gap-2">
+                                    <div class="flex items-center gap-4">
+                                        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
                                             <span x-text="content ? detailArticle?.subarticles?.findIndex(x => x.id == content?.id) + 1 + ' of ' + detailArticle?.subarticles?.length + ' sub-article': ''"></span>
                                             <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id"
                                                 x-on:click="
@@ -226,7 +226,7 @@
 
                         <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)] mt-6">
                             <div class="flex items-start flex-wrap lg:flex-nowrap gap-4 md:gap-0 justify-between">
-                                <div class="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start text-center lg:text-left gap-3">
+                                <div class="flex flex-wrap flex-col w-full lg:w-auto lg:flex-row lg:flex-nowrap items-center lg:items-start justify-center lg:justify-start text-center lg:text-left gap-3">
                                     <figure>
                                         <div>
                                             <img x-bind:src="

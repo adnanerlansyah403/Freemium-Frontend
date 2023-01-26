@@ -104,7 +104,7 @@
         </div>
 
         {{-- kanan --}}
-        <div class="lg:col-9 mt-5 lg:mt-0 lg:ml-[30px] md:mt-160" x-bind:class="isLoadingArticle ? 'grid place-items-center' : ''" data-aos="fade-left">
+        <div class="lg:col-9 mt-5 lg:mt-0 lg:ml-[30px] md:mt-160" x-bind:class="isLoadingArticle ? '' : ''" data-aos="fade-left">
 
             <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
                 <div id="alertSubscribe"
@@ -121,11 +121,13 @@
 
             <div class="flex flex-wrap items-center justify-center w-full" x-data="helpers">
 
-                <div class="flex flex-col flex-wrap items-center justify-center">
+                <div class="relative flex flex-col flex-wrap items-center justify-center">
 
-                    <template x-if="isLoadingArticle && isLoadMore == false && listArticle.length != 0">
-                        <x-loading />
-                    </template>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 translate-y-1/2">
+                        <template x-if="isLoadingArticle && isLoadMore == false && listArticle.length != 0">
+                            <x-loading />
+                        </template>
+                    </div>
 
                     <template x-if="listArticle.length == 0 && !isLoading && !isLoadingArticle">
                         <div x-ref="articleNotFound" class="text-md mt-10 dark:text-white"
@@ -157,7 +159,7 @@
                         <div class="content first-of-type:mt-0 mt-[22px]" >
 
                             {{-- <div class="border mt-5 first:border-none"></div> --}}
-                            <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary max-h-[250px] dark:text-white rounded-primary px-3 py-4">
+                            <div class="flex lg:justify-between flex-wrap lg:flex-nowrap md:flex-nowrap shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white dark:bg-slate-secondary lg:max-h-[250px] dark:text-white rounded-primary px-3 py-4">
                                 <div class="flex flex-col col-12 md:col-9">
                                     <div class="flex items-start justify-between">
                                         <div>
@@ -190,7 +192,7 @@
                                     <div class="flex flex-col lg:flex-row gap-y-2 lg:gap-5 justify-between items-start mt-0 md:mt-5">
                                         <a x-bind:href="baseUrl + `article/detail/${item.id}`"
                                         class="font-bold text-[24px] font-lato leading-9" x-text="item.title.length > 40 ? item.title.substring(0, 40) + '...' : item.title">JUDUL ARTIKEL</a>
-                                        <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"
+                                        <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary dark:border dark:border-white text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"
                                         x-on:click="
                                             if(item.type == 'free') {
                                                 getFreeArticle()
@@ -211,7 +213,7 @@
                                     <div class="flex gap-2">
 
                                         <template x-for="(c, index) in item.tags">
-                                            <span x-text="c.category.name" @click="fetchArticleByCategory(c.category.id)" class="mt-4 cursor-pointer py-1 px-3 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)] dark:shadow-[0px_0px_4px_#fff] text-sm text-[rgba(41,41,41,1)] font-medium dark:bg-slate-secondary dark:text-white w-max"></span>
+                                            <span x-text="c.category.name" @click="fetchArticleByCategory(c.category.id)" class="mt-4 cursor-pointer py-1 px-3 rounded-lg shadow-[0px_0px_4px_rgba(0,0,0,0.3)] dark:shadow-[0px_0px_4px_#fff] text-xs text-[rgba(41,41,41,1)] font-medium dark:bg-slate-secondary dark:text-white w-max"></span>
                                         </template>
                                     </div>
 

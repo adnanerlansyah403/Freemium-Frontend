@@ -107,7 +107,7 @@
     }
 
     .has-scrollbar::-webkit-scrollbar {
-        width: 5px;
+        width: 6px;
     }
 
     .has-scrollbar::-webkit-scrollbar-track {

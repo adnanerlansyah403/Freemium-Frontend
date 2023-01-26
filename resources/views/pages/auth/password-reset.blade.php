@@ -46,7 +46,7 @@
                         <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary dark:shadow-none dark:border dark:border-white rounded-primary mt-4" x-bind:class="status_err[0] ? 'shadow-none border border-[#b91c1c]' : ''">
                             <i data-feather="mail" class="w-6 h-6 text-gray-secondary dark:text-white"></i>
                             <input type="text" placeholder="Your email..."
-                                x-bind:class="status_err[0] ? 'input-danger' : ''" class="w-full" x-model="email">
+                                x-bind:class="status_err[0] ? 'input-danger' : ''" class="w-full border-none" x-model="email">
                         </div>
                         <template x-if="status_err[0]">
                             <div class="mt-3 flex text-[#b91c1c] dark:text-white items-center gap-2">
