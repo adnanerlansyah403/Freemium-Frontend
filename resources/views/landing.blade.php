@@ -19,9 +19,9 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-        {{-- Quill Theme --}}
-
-        <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+        {{-- AOS Animation CSS --}}
+        
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
         {{-- ChartJS --}}
 
@@ -75,15 +75,11 @@
                 <section class="pt-[180px] pb-[90px] dark:text-slate-third">
                     <div class="container px-3 mx-auto flex items-start flex-wrap lg:flex-nowrap gap-10">
 
-                        <figure class="hidden col-12 lg:block lg:col-6 dark:bg-slate-secondary dark:rounded-lg">
+                        <figure class="hidden col-12 lg:block lg:col-6 dark:bg-slate-secondary dark:rounded-lg" data-aos="fade-right">
                             <img src="{{ asset("assets/images/contentcreatefreemium.svg") }}" class="w-full h-full object-cover" alt="">
                         </figure>
 
-                        <div class="relative col-12 lg:col-6 h-full">
-                            {{-- <h1 class="text-[64px] font-bebasNeue -mt-5">
-                                <span class="span dark:text-white">INNOVATION</span>
-                                WITH YOURSELF
-                            </h1> --}}
+                        <div class="relative col-12 lg:col-6 h-full" data-aos="fade-left">
                             <h1 class="text-[64px] leading-[6rem] font-bebasNeue -mt-5">
                                 SHARE your
                                 <span class="span dark:text-white">ideas</span>,
@@ -92,18 +88,10 @@
                                   <span class="span dark:text-white">experiences</span>
                                 </div>
                             </h1>
-                            {{-- <p class="font-poppins -translate-y-3">
-                                <span class="font-semibold span dark:text-white">Make it real</span>
-                                About what's your think
-                            </p> --}}
                             <p class="font-poppins -translate-y-3 mt-8 dark:text-white">
                                 <span class="font-semibold span dark:text-white">Bring your ideas to life and </span>
                                 share your thoughts with the world.
                             </p>
-                            {{-- <p class="font-merrieweather mt-4">
-                                If you have a story to tell, knowledge to share, or a perspective to offer
-                                — welcome home. Sign up for free so your writing can thrive in a network supported by millions of readers —
-                            </p> --}}
                             <p class="font-merrieweather mt-4 dark:text-white">
                                 If you have a story to tell, knowledge to share, or a perspective to offer
                                 <span class="text-[14.5px] translate-y-2">
@@ -123,7 +111,7 @@
 
                 <section class="py-[90px] dark:text-slate-third" id="about">
 
-                    <div class="container mx-auto my-10">
+                    <div class="container mx-auto my-10" data-aos="fade-up">
                         <div class="col-12">
                             <p class="flex items-center justify-center gap-2 text-[32px] font-neucha">
                                 <ion-icon name="document-text-outline" class="text-lg span m-0 -translate-y-1 dark:text-slate-third"></ion-icon>
@@ -134,11 +122,11 @@
 
                     <div class="container px-3 mx-auto mt-16 flex items-start gap-10">
 
-                        <figure class="hidden lg:block col-12 lg:col-6 h-full dark:bg-slate-secondary dark:rounded-lg">
+                        <figure class="hidden lg:block col-12 lg:col-6 h-full dark:bg-slate-secondary dark:rounded-lg" data-aos="fade-right">
                             <img src="{{ asset("assets/images/aboutfreemium.svg") }}" class="w-full h-full object-cover" alt="">
                         </figure>
 
-                        <div class="relative col-12 lg:col-6 h-full">
+                        <div class="relative col-12 lg:col-6 h-full" data-aos="fade-left">
                             <h1 class="font-comic leading-[22px] dark:text-white text-[28px] text-center lg:text-left font-bold">
                                 <span class="span dark:text-slate-third">What's</span>
                                 We Build?
@@ -156,7 +144,7 @@
 
                 <section class="py-[90px]" id="faq">
 
-                    <div class="container px-3 mx-auto my-10">
+                    <div class="container px-3 mx-auto my-10" data-aos="fade-up">
                         <div class="col-12 flex flex-col items-center justify-center">
                             <p class="flex items-center justify-center gap-2 text-[32px] font-neucha">
                                 <ion-icon name="help-outline" class="text-lg span m-0 -translate-y-1 dark:text-slate-third"></ion-icon>
@@ -166,7 +154,7 @@
                         </div>
                     </div>
 
-                    <div class="container px-3 mx-auto mt-16 ">
+                    <div class="container px-3 mx-auto mt-16" data-aos="fade-down">
                         <ul class="flex flex-col">
                             <li class="bg-white rounded-lg dark:bg-slate-secondary my-2 shadow-lg" x-data="accordion(1)">
                               <h2
@@ -360,24 +348,18 @@
 
                 <section class="pt-[90px] pb-[120px]" id="contact">
 
-                    <div class="container px-3 mx-auto my-10">
+                    <div class="container px-3 mx-auto my-10" data-aos="fade-up">
                         <div class="col-12 flex flex-col items-center justify-center">
                             <p class="flex items-center justify-center gap-2 text-[32px] lg:-translate-x-3 font-neucha">
                                 <ion-icon name="call-outline" class="text-lg span m-0 -translate-y-1 dark:text-slate-third"></ion-icon>
                                 <b class="tracking-widest dark:text-white"><span class="span dark:text-slate-third">C</span>ontact Us</b>
                             </p>
                             <h2 class="text-gray-secondary mt-2 mb-4 text-base dark:text-slate-third">Let us know what's your problem by : </h2>
-                            <a href="mailto:freemium@example.com" class="my-6 flex items-center justify-center gap-2 px-6 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white hover:text-opacity-80 transition duration-200 ease-in-out">
+                            <a href="mailto:freemium@example.com" class="my-6 flex items-center justify-center gap-2 px-6 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white hover:text-opacity-80 transition duration-200 ease-in-out" data-aos="fade-down">
                                 <i data-feather="mail"></i>
                                 Email Us
                             </a>
                         </div>
-                    </div>
-
-                    <div class="container mx-auto">
-
-
-
                     </div>
                 </section>
 
@@ -422,6 +404,14 @@
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+        {{-- AOS Animation Scripts --}}
+        
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        
+        <script>
+            AOS.init();
+        </script>
 
         <script defer>
 

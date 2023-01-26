@@ -1,4 +1,7 @@
-<header id="header" class="group fixed w-full z-[101] shadow-lg py-2 lg:py-1 bg-white dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out">
+<header id="header" class="group fixed w-full z-[101] 
+{{ ($currentRoute == 'article.list') ?
+    'shadow-lg bg-[rgba(255,255,255,.95)] text-slate-primary dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out' : '' 
+}} py-2 lg:py-1 transition duration-200 ease-in-out" data-aos="fade-down">
     <div class="container mx-auto flex items-center justify-between px-2 sm:px-0">
 
         <figure>
@@ -240,4 +243,27 @@
         </div>
 
     </div>
-    </header>
+</header>
+
+<script type="text/javascript">
+    // Get the button
+    let header = document.getElementById('header');
+    
+    window.onload = function() {
+        scrollFunction();
+    }
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+        console.log('test');
+        scrollFunction();
+    };
+    
+    function scrollFunction() {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            header.classList.add('active');
+        } else {
+            header.classList.remove('active');
+        }
+    }
+</script>

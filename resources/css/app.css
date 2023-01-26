@@ -101,6 +101,10 @@
         @apply bg-primary dark:bg-slate-third;
         color: #fff;
     }
+    
+    #header.active {
+	@apply shadow-lg bg-[rgba(255,255,255,.95)] text-slate-primary dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out;
+    }
 
     .has-scrollbar::-webkit-scrollbar {
         width: 5px;

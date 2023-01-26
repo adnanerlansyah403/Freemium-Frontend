@@ -25,11 +25,10 @@
   outline: none !important;
 }
 
-/* nav */
-
 </style>
 
 <section class="lg:px-[12px] px-8 pt-[140px]" x-data="user">
+    <div x-init="fetchMe()"></div>
     {{-- alert --}}
     <div x-init="flash()"></div>
     <div x-show="showFlash" x-init="setTimeout(() => {
@@ -41,22 +40,16 @@
 
     <div class="flex container mx-auto justify-center mb-[226px] flex-col lg:flex-row" x-data="articles">
         <span x-init="resetFilters()"></span>
+        <div x-init="getArticle()"></div>
         <template>
             <span x-init="fetchArticleByCategory(1)"></span>
         </template>
 
         {{-- kiri --}}
-        <div class="lg:col-3">
-            <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
-                <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max" style="display: none;">
+        <div class="lg:col-3" data-aos="fade-right">
+            <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
+                <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max">
                     <a href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] mb-3 lg:mb-5 flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
-                    x-init="
-                        window.addEventListener('DOMContentLoaded', function() {
-                            setTimeout(() => {
-                                document.getElementById('buttonTransactionCreate').style.display = 'flex';
-                            }, 1000)
-                        });
-                    "
                     >
                         <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
                         <h2 class="font-bold text-white hover:text-opacity-80 transition duration-200 ease-in-out"
@@ -111,20 +104,12 @@
         </div>
 
         {{-- kanan --}}
-        <div class="lg:col-9 mt-5 lg:mt-0 lg:ml-[30px] md:mt-160" x-bind:class="isLoadingArticle ? 'grid place-items-center' : ''">
-            <div x-init="fetchMe()"></div>
-            <div x-init="getArticle()"></div>
+        <div class="lg:col-9 mt-5 lg:mt-0 lg:ml-[30px] md:mt-160" x-bind:class="isLoadingArticle ? 'grid place-items-center' : ''" data-aos="fade-left">
 
-            <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
-                <div id="alertSubscribe" style="display: none"
+            <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
+                <div id="alertSubscribe"
                 >
-                    <div x-init="
-                    window.addEventListener('DOMContentLoaded', function() {
-                        setTimeout(() => {
-                            document.getElementById('alertSubscribe').style.display = 'block';
-                        }, 1000)
-                    })
-                    " class="w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-4 bg-opacity-20 mt-5 lg:-translate-y-1 lg:mt-0 font-normal text-sm px-4 py-2">
+                    <div class="w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-4 bg-opacity-20 mt-5 lg:-translate-y-1 lg:mt-0 font-normal text-sm px-4 py-2">
                         You have to
                         <span class="font-bold text-primary dark:text-slate-third leading-[27px]">
                             Subscribe</span>  to Get Unlimited Access
@@ -142,25 +127,27 @@
                         <x-loading />
                     </template>
 
-                    <template x-if="listArticle.length == 0">
+                    <template x-if="listArticle.length == 0 && !isLoading && !isLoadingArticle">
                         <div x-ref="articleNotFound" class="text-md mt-10 dark:text-white"
-                            x-init="
-                                setTimeout(function() {
-                                    $refs.articleNotFound.style.display = 'block';
-                                }, 600)
-                            "
-                            style="display: none;"
+                        {{-- x-init="
+                            setTimeout(function() {
+                                $refs.articleNotFound.style.display = 'block';
+                            }, 1000)
+                        "
+                        style="display: none;" --}}
                         >
                             <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-6" alt="">
                             <p>
                                 <span class="span dark:text-slate-fourth" x-text="$refs.search.value != '' ? 'Oops' : 'Sorry'"></span>
                                 <span x-text="$refs.search.value != '' ? ', We can not find your article' : ', We still have not an article'"></span>
                             </p>
-                            <div class="flex items-center justify-center mt-6">
-                                <a href="{{ route("article.create") }}" class="py-2 px-4 border border-primary dark:border-white rounded-pill text-sm font-medium text-center hover:bg-primary hover:text-white dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                                    Create One
-                                </a>
-                            </div>
+                            <template x-if="$refs.search.value == '' && listArticle.length == 0">
+                                <div class="flex items-center justify-center mt-6">
+                                    <a href="{{ route("article.create") }}" class="py-2 px-4 border border-primary dark:border-white rounded-pill text-sm font-medium text-center hover:bg-primary hover:text-white dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                        Create One
+                                    </a>
+                                </div>
+                            </template>
                         </div>
                     </template>
                 </div>
