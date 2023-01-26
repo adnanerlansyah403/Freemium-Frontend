@@ -24,18 +24,18 @@
     </div>
     <template x-if="!isLoading">
         <div>
-    
-    
+
+
             @include("layouts.partials.user.dashboard")
-    
+
             <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9">
-    
+
                 <div class="w-full lg:col-3">
                     @include("pages.admin.layouts.partials.sidebar")
                 </div>
-    
+
                 <div class="w-full col-12 lg:col-9">
-    
+
                     <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
                         <i class="span dark:text-white font-bold" data-feather="package"></i>
                         <p>
@@ -43,32 +43,32 @@
                         Admin (Plan)
                     </p>
                     </h2>
-    
+
                     <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4" x-data="user">
-    
+
                         <button class="flex lg:col-2 items-center gap-1 dark:text-white" @click="modalHandler(true)">
                             <i class="span dark:text-slate-third" data-feather="plus-square"></i>
                             Add Plan
                         </button>
-    
+
                         {{-- <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
                             <span x-text="console.log(keywordPlan)"></span>
                             <div class="p-2 w-full lg:col-4 flex items-center justify-between bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_#7C000B] dark:shadow-none dark:border dark:border-white rounded-lg">
                                 <input type="text" placeholder="Search Here..." class="w-[93%] dark:text-white">
                                 <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                             </div>
-    
+
                             <button class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                                 <p>
                                     <span class="span dark:text-white">Sort By:</span>A/Z
                                 </p>
                                 <i data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary dark:group-hover:text-white group-hover:-rotate-90 transition duration-200 ease-in-out"></i>
                             </button>
-    
+
                         </div> --}}
-    
+
                     </div>
-    
+
                     <template x-if="isLoading">
                         <div class="w-full col-12 flex items-center justify-center mt-10">
                             <x-loading />
@@ -93,7 +93,7 @@
                                         <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                                       </tr>
                                     </thead>
-        
+
                                     <tbody>
                                       <template x-for="data in listPlan">
                                         <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
@@ -120,7 +120,7 @@
                                       <template x-if="listPlan.length == 0">
                                           <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
                                               <td colspan="4">
-                                                  <span class="text-base dark:text-white">Empty Data</span>
+                                                  <span class="text-base dark:text-white">No Plans Yet.</span>
                                               </td>
                                           </tr>
                                       </template>
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                     </template>
-    
+
                     {{-- <div class="mt-4">
                         <ul class="flex items-center justify-center gap-2">
                             <li class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
@@ -143,12 +143,12 @@
                             </li>
                         </ul>
                     </div> --}}
-    
+
                 </div>
-    
+
             </div>
-    
-    
+
+
             <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
                 <div role="alert" class="relative top-[13%] lg:top-[11%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
                     <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
@@ -195,9 +195,9 @@
                     </div>
                 </div>
             </div>
-    
-    
-    
+
+
+
         </div>
     </template>
     <template x-if="isLoading">

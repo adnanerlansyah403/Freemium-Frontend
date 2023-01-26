@@ -37,7 +37,7 @@
 
 <section class="pt-[140px] pb-[100px]" x-data="user" x-init="checkSession()">
     <div x-init="checkRole()"></div>
-    
+
     <div x-init="flash()"></div>
     <div x-show="showFlash" x-init="setTimeout(() => {
         showFlash = false
@@ -48,16 +48,16 @@
 
     <template x-if="!isLoading">
         <div>
-    
-    
+
+
             @include("layouts.partials.user.dashboard")
-    
+
             <div class="flex flex-wrap lg:flex-nowrap gap-8 container mx-auto px-3 lg:px-0 mt-9" x-data="articles">
-    
+
                 <div class="w-full lg:col-2">
                     @include("pages.admin.layouts.partials.sidebar")
                 </div>
-    
+
                 <div class="w-full col-12 lg:col-9">
                     <div x-init="fetchPaginationCategory()"></div>
                     <h2 class="w-full flex items-center justify-center gap-2 py-3 border border-primary dark:border-white dark:bg-slate-secondary rounded-primary text-[20px]">
@@ -67,14 +67,14 @@
                         Admin (Category)
                     </p>
                     </h2>
-    
+
                     <div class="relative mt-6 mb-10 flex items-center justify-between flex-wrap lg:flex-nowrap gap-y-4">
-    
+
                         <button class="flex lg:col-2 items-center gap-1 dark:text-white" @click="modalHandlerCategory(true)">
                             <i class="span dark:text-slate-third" data-feather="plus-square"></i>
                             Add Category
                         </button>
-    
+
                         <div class="w-full flex items-center flex-wrap lg:flex-nowrap gap-2 gap-y-3" style="justify-content: flex-end">
                             <div action="" class="w-full lg:col-4">
                                 <div class="p-2 w-full flex items-center justify-between bg-white dark:bg-slate-secondary dark:shadow-none dark:border dark:border-white shadow-[0px_0px_4px_#7C000B] rounded-lg">
@@ -82,22 +82,22 @@
                                     <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
                                 </div>
                             </div>
-    
+
                             <button @click="sort('name')" type="button" class="group w-full lg:col-2 flex items-center justify-center gap-2 p-2 rounded-primary border border-primary dark:bg-slate-secondary dark:border-white dark:text-slate-fourth transition duration-200 ease-in-out">
                                 <p>
                                     <span class="span dark:text-white group-hover:animate-bounce5">Sort By:</span>A/Z
                                 </p>
                                 <i id="repeatIcon" data-feather="repeat" class="rotate-90 w-4 h-4 text-gray-secondary transition duration-200 ease-in-out"></i>
                             </button>
-    
+
                         </div>
-    
+
                     </div>
-    
+
                     <template x-if="!isLoading">
-    
+
                         <div>
-    
+
                             <div class="w-full rounded-primary bg-white shadow-lg">
                                 <div class="w-full text-center bg-primary dark:bg-slate-secondary py-2 text-white">List Category</div>
                                 <div class="overflow-x-auto">
@@ -109,7 +109,7 @@
                                             <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                                         </tr>
                                         </thead>
-                                
+
                                         <tbody>
                                             <template x-for="category in categoriesArticle.data">
                                                 <tr class="border border-b-primary dark:border-b-slate-secondary dark:bg-slate-fourth dark:text-slate-secondary">
@@ -138,7 +138,7 @@
                                             <template x-if="categoriesArticle.data.length == 0">
                                                 <tr class="text-center border border-b-slate-secondary dark:bg-slate-fourth">
                                                     <td colspan="3">
-                                                        <span class="text-base dark:text-white">Empty Data</span>
+                                                        <span class="text-base dark:text-white">No Categories Yet. </span>
                                                     </td>
                                                 </tr>
                                             </template>
@@ -146,7 +146,7 @@
                                     </table>
                                 </div>
                             </div>
-        
+
                             <div class="mt-4 flex items-center justify-between">
                                 <p class="dark:text-white">
                                     Pages
@@ -156,19 +156,19 @@
                                     </b>
                                 </p>
                                 <ul class="flex items-center justify-center gap-2">
-            
+
                                     <template x-if="categoriesArticle.current_page != 1">
-            
+
                                         <a @click="paginate(categoriesArticle.prev_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-            
-                                            <                                
-                                            
+
+                                            <
+
                                         </a>
-            
+
                                     </template>
-            
+
                                     <template x-for="(category, index) in categoriesArticle.links">
-                                            
+
                                             <template x-if="index != 0 && index != (categoriesArticle.links.length - 1) && categoriesArticle.last_page > 1">
                                                 <li :class="
                                                 {
@@ -176,40 +176,40 @@
                                                     '' : categoriesArticle.current_page != category.label,
                                                 }" @click="paginate(category.url); console.log(category.url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white dark:hover:text-white transition duration-200 ease-in-out">
                                                 {{-- <span x-text="console.log(categoriesArticle)"></span> --}}
-                                                    <button  
+                                                    <button
                                                     x-text="category.label">
                                                     </button>
                                                 </li>
                                             </template>
-                                            
-                                                                        
+
+
                                     </template>
-            
+
                                     <template x-if="categoriesArticle.current_page < categoriesArticle.last_page">
                                         <a @click="paginate(categoriesArticle.next_page_url)" class="w-8 h-8 cursor-pointer leading-7 rounded-full text-center border border-primary dark:border-white hover:bg-primary dark:bg-slate-third hover:text-white transition duration-200 ease-in-out">
-                                    
+
                                             >
-                                            
+
                                         </a>
                                     </template>
                                 </ul>
                             </div>
-                            
+
                         </div>
-    
+
                     </template>
-    
+
                     <template x-if="isLoading">
                         <div class="w-full col-12 flex items-center justify-center mt-10">
                             <x-loading />
                         </div>
                     </template>
-    
+
                 </div>
-    
+
             </div>
-    
-            
+
+
             <div class="hidden py-12 bg-gray-700 transition duration-150 ease-in-out z-10 top-0 w-full h-full" id="modal" style="position: fixed; background: rgba(0, 0, 0, 50%)" x-data="user">
                 <div role="alert" class="relative top-[13%] lg:top-[11%] container mx-auto w-11/12 md:w-2/3 max-w-lg">
                     <div class="relative py-8 px-5 md:px-10 bg-white dark:text-white dark:bg-slate-secondary shadow-md rounded border border-gray-400">
@@ -252,9 +252,9 @@
                     </div>
                 </div>
             </div>
-            
-    
-    
+
+
+
         </div>
     </template>
 
