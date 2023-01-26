@@ -12,6 +12,19 @@ document.addEventListener('alpine:init', () => {
     linkInputInstagram: false,
     linkInputTwitter: false,
     data_user: [],
+    professions: [
+      'Freemium blog author',
+      'Doctor',
+      'Teacher',
+      'Police officer',
+      'Professor',
+      'Programmer',
+      'Engineer',
+      'Business owner',
+      'Journalist',
+      'Photographer',
+      'Artist'
+    ],
     showFlash: false,
     status_err: [],
     category_err: [],
@@ -84,6 +97,7 @@ document.addEventListener('alpine:init', () => {
             this.email = user.data.email == null ? '' : user.data.email
             this.password = user.data.password == null ? '' : user.data.password
             this.photo = user.data.photo == null ? '' : user.data.photo
+            this.profession = user.data.profession == null ? '' : user.data.profession
             this.link_facebook = user.data.link_facebook == null ? '' : user.data.link_facebook
             this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
             this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
@@ -195,6 +209,7 @@ document.addEventListener('alpine:init', () => {
         formData.append('password', this.password);
       }
       if (photoProfile) formData.append('photo', photoProfile);
+      formData.append('profession', profession ? profession : '');
       formData.append('link_facebook', this.link_facebook ? this.link_facebook : '');
       formData.append('link_linkedin', this.link_linkedin ? this.link_linkedin : '');
       formData.append('link_instagram', this.link_instagram ? this.link_instagram : '');
