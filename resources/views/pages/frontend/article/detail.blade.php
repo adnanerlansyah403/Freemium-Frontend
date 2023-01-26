@@ -240,8 +240,8 @@
                                     <div class="">
                                         <b class="text-base font-semibold" x-text="detailArticle?.author?.username">Nama Author</b>
                                         <span class="block text-gray-primary dark:text-gray-third" x-text="detailArticle?.author?.email"></span>
-                                        <p class="mt-2 text-gray-secondary dark:text-white italic font-quickSand block max-w-[400px]">
-                                            Full-Stack Web Developer, Content Creator and CO-Founder SantriKoding.com
+                                        <p class="mt-2 text-gray-secondary dark:text-white italic font-quickSand block max-w-[400px]" x-text="detailArticle?.author.profession">
+
                                         </p>
                                     </div>
                                 </div>
