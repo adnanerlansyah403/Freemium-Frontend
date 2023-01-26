@@ -202,7 +202,7 @@
 
                                     <div class="flex flex-col lg:flex-row gap-y-2 lg:gap-5 justify-between items-start mt-0 md:mt-5">
                                         <a x-bind:href="baseUrl + `article/detail/${item.id}`"
-                                        class="font-bold text-[24px] font-lato leading-9" x-text="item.title.length > 50 ? item.title.substring(0, 50) + '...' : item.title">JUDUL ARTIKEL</a>
+                                        class="font-bold text-[24px] font-lato leading-9" x-text="item.title.length > 40 ? item.title.substring(0, 40) + '...' : item.title">JUDUL ARTIKEL</a>
                                         <button class="w-[100px] h-[30px] bg-primary dark:bg-slate-primary text-white font-bold text-sm leading-[21px] rounded-[10px]" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"
                                         x-on:click="
                                             if(item.type == 'free') {
