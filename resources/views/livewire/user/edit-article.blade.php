@@ -19,6 +19,26 @@
 
     <style>
 
+        .filename.active {
+            bottom: 0;
+            transition: .2s ease-in-out;
+        }
+
+        .filenamesubarticle.active {
+            bottom: 0;
+            transition: .2s ease-in-out;
+        }
+
+        .filesize.active {
+            right: 12px;
+            transition: .2s ease-in-out;
+        }
+
+        .removefile.active {
+            right: 12px;
+            transition: .2s ease-in-out;
+        }
+
         .tox .tox-editor-header {
             z-index: 0;
         }
@@ -97,8 +117,19 @@
                                 var reader = new FileReader();
                                 reader.readAsDataURL($refs.file.files[0]);
                                 reader.onload = function (e) {
-                                    EditArticle.thumbnail_1 = e.target.result;
-                                    EditArticle.thumbnail_1_alt = $refs.file.files[0].name;
+                                    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                                    if(!allowedExtensions.exec($refs.file.files[0].name)) {
+                                        $refs.iconimageerror.style.display = 'block';
+                                        $refs.image.src = '';
+                                        $refs.image.alt = '';
+                                        $refs.filename.innerText = '';
+                                        $refs.filename.classList.remove('active');
+                                    } else {
+                                        EditArticle.thumbnail_1 = e.target.result;
+                                        EditArticle.thumbnail_1_alt = $refs.file.files[0].name;
+                                        $refs.filename.classList.add('active');
+                                        $refs.filename.innerText = $refs.file.files[0].name;
+                                    }
                                 }
                             }
                         ">
@@ -107,7 +138,7 @@
                         @click="
                             $refs.file.click();
                         ">
-                        <img x-bind:src="!EditArticle?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full rounded-lg object-cover" x-bind:alt="EditArticle?.thumbnail_1_alt"  onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                        <img x-ref="image" x-bind:src="!EditArticle?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full rounded-lg object-cover" x-bind:alt="EditArticle?.thumbnail_1_alt"  onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                         <div class="text-center"
                         x-ref="iconimage">
                             <i
@@ -116,10 +147,22 @@
                             >
                             </i>
                             <span class="block mt-4">
-                                <b class="span dark:text-white">Click here</b> to input an image
+                                <b class="span dark:text-white">Click to Upload</b> <br> <p class="text-sm font-semibold">(SVG, PNG, JPG, JPEG)</p>
                             </span>
                         </div>
-                        <p x-show="EditArticle?.thumbnail_1_alt" x-text="EditArticle?.thumbnail_1_alt" class="filename absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
+                        <div class="text-center"
+                        x-ref="iconimageerror" style="display: none;">
+                            <i
+                            data-feather="alert-circle"
+                            class="w-[100px] h-[100px] lg:h-[100px] mx-auto text-primary dark:text-white"
+                            >
+                            </i>
+                            <span class="block mt-4">
+                                <b class="span dark:text-white">Oops!</b> You cannot input anything other than images. <br>
+                                <b>Please Click Again</b>
+                            </span>
+                        </div>
+                        <p x-show="EditArticle?.thumbnail_1_alt" x-text="EditArticle?.thumbnail_1_alt" x-ref="filename" class="filename absolute w-full -bottom-1/2 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
                     </span>
 
                     <template x-if="status_err?.[0]?.thumbnail">
@@ -285,8 +328,20 @@
                                     var reader = new FileReader();
                                     reader.readAsDataURL($refs.filesubarticle.files[0]);
                                     reader.onload = function (e) {
-                                        EditArticle.subarticles[editSub].thumbnail_1 = e.target.result;
-                                        EditArticle.subarticles[editSub].thumbnail_1_alt = $refs.filesubarticle.files[0].name;
+                                        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                                        if(!allowedExtensions.exec($refs.filesubarticle.files[0].name)) {
+                                            $refs.iconimagesubarticleerror.style.display = 'block';
+                                            $refs.imagesubarticle.src = '';
+                                            $refs.imagesubarticle.alt = '';
+                                            $refs.filenamesubarticle.innerText = '';
+                                            $refs.filenamesubarticle.classList.remove('active');
+                                        } else {
+                                            console.log('berhasil')
+                                            EditArticle.subarticles[editSub].thumbnail_1 = e.target.result;
+                                            EditArticle.subarticles[editSub].thumbnail_1_alt = $refs.filesubarticle.files[0].name;
+                                            $refs.filenamesubarticle.classList.add('active');
+                                            $refs.filenamesubarticle.innerText = $refs.file.files[0].name;
+                                        }
                                     }
                                 }
                             ">
@@ -295,7 +350,7 @@
                             @click="
                                 $refs.filesubarticle.click();
                             ">
-                            <img x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg object-cover" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1" accept="image/*">
+                            <img x-ref="imagesubarticle" x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg object-cover" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1" accept="image/*">
                             <div class="text-center"
                             x-ref="iconimagesubarticle">
                                 <i
@@ -304,10 +359,22 @@
                                 >
                                 </i>
                                 <span class="block mt-4">
-                                    <b class="span dark:text-white">Click here</b> to input an image
+                                    <b class="span dark:text-white">Click to Upload</b> <br> <p class="text-sm font-semibold">(SVG, PNG, JPG, JPEG)</p>
                                 </span>
                             </div>
-                            <p x-show="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-text="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" class="filenamesubarticle absolute w-full bottom-0 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
+                            <div class="text-center"
+                            x-ref="iconimagesubarticleerror" style="display: none;">
+                                <i
+                                data-feather="alert-circle"
+                                class="w-[100px] h-[100px] lg:h-[100px] mx-auto text-primary dark:text-white"
+                                >
+                                </i>
+                                <span class="block mt-4">
+                                    <b class="span dark:text-white">Oops!</b> You cannot input anything other than images. <br>
+                                    <b>Please Click Again</b>
+                                </span>
+                            </div>
+                            <p x-show="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-text="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" x-ref="filenamesubarticle" class="filenamesubarticle absolute w-full -bottom-1/2 py-2 bg-primary text-white text-center font-semibold rounded-lg transition duration-200 ease-in-out active"></p>
                         </span>
 
                         <template x-if="status_err?.[1]?.thumbnail">

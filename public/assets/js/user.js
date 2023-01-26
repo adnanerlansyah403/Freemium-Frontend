@@ -1601,8 +1601,20 @@ document.addEventListener('alpine:init', () => {
                                 >
                                 </i>
                                 <span class="block mt-4">
-                                    <b class="span dark:text-white">Click here</b> to input an image
+                                    <b class="span dark:text-white">Click to Upload</b> <br> <p class="text-sm font-semibold">(SVG, PNG, JPG, JPEG)</p>
                                 </span>
+                            </div>
+                            <div class="text-center"
+                            id="iconimageerror${this.index}" style="display: none">
+                              <i
+                              data-feather="alert-circle"
+                              class="w-[100px] h-[100px] lg:h-[100px] mx-auto text-primary dark:text-white"
+                              >
+                              </i>
+                              <span class="block mt-4">
+                                  <b class="span dark:text-white">Oops!</b> You cannot input anything other than images. <br>
+                                  <b>Please Click Again</b>
+                              </span>
                             </div>
                             <p
                                 class="filename absolute w-full -bottom-full py-2 bg-primary text-white text-center font-semibold rounded-b-lg transition duration-200 ease-in-out"
@@ -1646,6 +1658,7 @@ document.addEventListener('alpine:init', () => {
       let filename = document.getElementById(`filename${this.index}`);
       let image = document.getElementById(`image${this.index}`);
       let iconimage = document.getElementById(`iconimage${this.index}`);
+      let iconimageerror = document.getElementById(`iconimageerror${this.index}`);
       let buttonClickImage = document.getElementById(`buttonClickImage${this.index}`);
 
       buttonClickImage.addEventListener("click", function () {
@@ -1659,10 +1672,20 @@ document.addEventListener('alpine:init', () => {
           var reader = new FileReader();
           reader.readAsDataURL(file.files[0]);
           reader.addEventListener("load", (e) => {
-            image.setAttribute("src", e.target.result);
-            image.setAttribute("alt", e.target.result);
-            filename.classList.add('active');
-            filename.innerText = file.files[0].name;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+            if (!allowedExtensions.exec(file.files[0].name)) {
+              iconimageerror.style.display = 'block';
+              image.src = '';
+              image.alt = '';
+              filename.classList.remove('active');
+              filename.innerText = '';
+              removefile.classList.remove('active')
+            } else {
+              image.setAttribute("src", e.target.result);
+              image.setAttribute("alt", e.target.result);
+              filename.classList.add('active');
+              filename.innerText = file.files[0].name;
+            }
           })
 
           // $refs.iconimage${this.index}.style.display = 'none';

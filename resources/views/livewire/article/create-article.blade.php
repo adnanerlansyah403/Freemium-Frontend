@@ -95,11 +95,21 @@
                                 var reader = new FileReader();
                                 reader.readAsDataURL($refs.file.files[0]);
                                 reader.onload = function (e) {
-                                    $refs.image.src = e.target.result;
-                                    $refs.image.alt = $refs.file.name;
-                                    $refs.filename.classList.add('active');
-                                    $refs.filename.innerText = $refs.file.files[0].name;
-                                    $refs.removefile.classList.add('active')
+                                    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                                    if(!allowedExtensions.exec($refs.file.files[0].name)){
+                                        $refs.iconimageerror.style.display = 'block';
+                                        $refs.image.src = '';
+                                        $refs.image.alt = '';
+                                        $refs.filename.classList.remove('active');
+                                        $refs.filename.innerText = '';
+                                        $refs.removefile.classList.remove('active')
+                                    }else{
+                                        $refs.image.src = e.target.result;
+                                        $refs.image.alt = $refs.file.name;
+                                        $refs.filename.classList.add('active');
+                                        $refs.filename.innerText = $refs.file.files[0].name;
+                                        $refs.removefile.classList.add('active')
+                                    }
                                 }
                             }
                         ">
@@ -119,7 +129,19 @@
                             >
                             </i>
                             <span class="block mt-4">
-                                <b class="span dark:text-white">Click here</b> to input an image
+                                <b class="span dark:text-white">Click to Upload</b> <br> <p class="text-sm font-semibold">(SVG, PNG, JPG, JPEG)</p>
+                            </span>
+                        </div>
+                        <div class="text-center"
+                        x-ref="iconimageerror" style="display: none;">
+                            <i
+                            data-feather="alert-circle"
+                            class="w-[100px] h-[100px] lg:h-[100px] mx-auto text-primary dark:text-white"
+                            >
+                            </i>
+                            <span class="block mt-4">
+                                <b class="span dark:text-white">Oops!</b> You cannot input anything other than images. <br>
+                                <b>Please Click Again</b>
                             </span>
                         </div>
                         <p
