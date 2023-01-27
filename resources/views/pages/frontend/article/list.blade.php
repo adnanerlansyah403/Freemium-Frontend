@@ -198,7 +198,7 @@
                                                 <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
                                             </template>
                                             <template x-if="item.author.photo == null">
-                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+'img/user1.png'" alt="">
+                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="baseUrl+'images/user1.png'" alt="">
                                             </template>
                                         </div>
                                     </div>

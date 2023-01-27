@@ -59,7 +59,7 @@
             /*Font*/
             font-family: Georgia, serif;
             font-size: 16px;
-            line-height: 1.2;
+            /* line-height: 1.2; */
             color: #666;
             text-align: justify;
             font-family: 'Lato', sans-serif;
@@ -86,7 +86,7 @@
             /*Positioning*/
             position: absolute;
             left: 10px;
-            top:0;
+            top: -10px;
         }
 
         blockquote::after{
@@ -147,7 +147,7 @@
                                             <img x-bind:src="
                                                 detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
                                                 ? imgUrl + detailArticle?.author?.photo
-                                                : imgUrl + 'img/user1.png'"
+                                                : imgUrl + 'images/user1.png'"
                                             src=""
                                             class="w-[50px] h-[50px] bg-gray-secondary rounded-full border-none" alt="">
                                         </div>
@@ -292,7 +292,7 @@
                                             <img x-bind:src="
                                                 detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
                                                 ? imgUrl + detailArticle?.author?.photo
-                                                : imgUrl + 'img/user1.png'"
+                                                : imgUrl + 'images/user1.png'"
                                             src=""
                                             class="w-[100px] h-[100px] bg-gray-secondary rounded-full border-none" alt="">
                                         </div>

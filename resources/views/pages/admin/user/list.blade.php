@@ -104,7 +104,7 @@
                                                     <img x-bind:src="imgUrl+data.photo" src="" class="w-[100px]">
                                                 </template>
                                                 <template x-if="data?.photo == null">
-                                                    <img x-bind:src="imgUrl+'img/user1.png'" src="" class="w-[100px]">
+                                                    <img x-bind:src="baseUrl+'images/user1.png'" src="" class="w-[100px]">
                                                 </template>
                                             </td>
                                             <td class="flex items-center justify-center w-full h-full translate-y-[15%] border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2">
