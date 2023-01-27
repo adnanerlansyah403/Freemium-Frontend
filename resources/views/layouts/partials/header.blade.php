@@ -47,10 +47,19 @@
                 <div class="relative flex items-center gap-2 order-1 lg:-order-1" x-data="{
                     menuBar: false
                 }">
+                
                     <template x-if="!isLogedIn">
                         <div>
                             <a href="{{ route('login') }}" class=" {{ $currentRoute == 'login' ? 'bg-primary text-white dark:bg-slate-third' : '' }} text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary dark:text-white hover:text-white rounded-pill transition duration-200 ease-in-out">Sign In</a>
                             <a href="{{ route('register') }}" class=" {{ $currentRoute == 'register' ? 'bg-primary dark:bg-slate-third text-white' : '' }} text-[16px] sm:text-base px-4 py-2 hover:bg-primary dark:hover:bg-slate-secondary hover:text-white dark:text-white rounded-pill transition duration-200 ease-in-out">Sign Up</a>
+                        </div>
+                    </template>
+
+                    <template x-if="!isLogedIn">
+                        <div x-data="helpers">
+                            <button id="buttonMode" @click="darkMode()">
+                                <img src="{{ asset("assets/images/icons/moon.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out" style="widows: 28px; height: 28px;">
+                            </button>
                         </div>
                     </template>
 
@@ -107,7 +116,8 @@
                                 </script>
                             </li>
                         </ul>
-                        @endif
+                    @endif
+
                 </div>
 
 
@@ -223,6 +233,11 @@
                             </li>
                         </ul>
                     </div>
+                    <div x-data="helpers" class="mt-2">
+                        <button id="buttonMode" @click="darkMode()">
+                            <img src="{{ asset("assets/images/icons/moon.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out" style="widows: 28px; height: 28px;">
+                        </button>
+                    </div>
                     <!-- Feather Icons Scripts -->
                     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
                     <script>
@@ -230,14 +245,6 @@
                     </script>
                 </div>
             </template>
-
-            <div x-data="helpers" class="absolute right-5 top-[125%] md:top-[142%] lg:top-[170%] xl:-right-1/3 xl:top-[21px] xl:group-hover:right-3 transition duration-200 ease-in-out" style="transition: .6s ease-in-out;">
-
-                <button id="buttonMode" @click="darkMode()" class="p-[8px] text-sm rounded-full bg-slate-primary dark:bg-white text-white dark:text-slate-secondary flex items-center gap-2 overflow-hidden transition duration-200 ease-in-out" title="Light Mode">
-                    <img src="{{ asset("assets/images/icons/sun.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out">
-                </button>
-            </div>
-
 
         </div>
 

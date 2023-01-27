@@ -2123,14 +2123,14 @@ document.addEventListener('alpine:init', () => {
         document.documentElement.classList.add('light')
         document.documentElement.classList.remove('dark')
         localStorage.theme = 'light'
-        document.getElementById("buttonMode").setAttribute("title", "Light Mode")
-        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
+        document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
       } else {
         document.documentElement.classList.add('dark')
         document.documentElement.classList.remove('light')
         localStorage.theme = 'dark'
-        document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
-        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
+        document.getElementById("buttonMode").setAttribute("title", "Light Mode")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
       }
     },
 
