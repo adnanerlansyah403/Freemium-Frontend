@@ -37,10 +37,17 @@ document.addEventListener('alpine:init', () => {
     },
     EditArticle: [],
     listMyArticle: [],
+    listMyView: [],
     itemMyArticle: 3,
     myTransactions: [],
     message: '',
     categories: [],
+
+    checkExists(obj, id) {
+      return obj.some(function (gfg) {
+        return gfg.id === id;
+      });
+    },
 
     flash() {
       if (localStorage.getItem('showFlash')) {
@@ -575,6 +582,7 @@ document.addEventListener('alpine:init', () => {
               window.location.replace(this.baseUrl + 'login')
             }
             this.listMyArticle = data.data;
+            this.listMyView = data.views;
             this.isLoading = false;
 
           })

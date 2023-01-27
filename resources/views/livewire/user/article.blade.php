@@ -77,12 +77,36 @@
                                                         <i data-feather="calendar" class="w-4 h-4"></i>
                                                     </span>
                                                 </p>
-                                                <div class="flex items-center gap-2">
+                                                {{-- <div class="flex items-center gap-2">
                                                     <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
                                                     <span class="flex items-center gap-1 -ml-1" x-text="item.total_views_sum ? item.total_views_sum : '0'">
                                                         1000
                                                     </span>
-                                                </div>
+                                                </div> --}}
+                                                <template x-for="list in listMyView">
+                                                    <template x-if="list.id === item.id">
+                                                        <p class="flex items-center gap-1 text-[14px]">
+                                                            <i data-feather="eye" class="w-4 h-4"></i>
+                                                            <span x-text="list.total">
+                                                                1000
+                                                            </span>
+                                                            <script>
+                                                                feather.replace()
+                                                            </script>
+                                                        </p>
+                                                    </template>
+                                                </template>
+                                                <template x-if="!checkExists(listMyView, item.id)">
+                                                    <p class="flex items-center gap-1 text-[14px]">
+                                                        <i data-feather="eye" class="w-4 h-4"></i>
+                                                        <span x-text="'No views'">
+                                                            1000
+                                                        </span>
+                                                        <script>
+                                                            feather.replace()
+                                                        </script>
+                                                    </p>
+                                                </template>
                                             </div>
                                             <div class="pb-4 pt-12 lg:py-0 lg:translate-y-5">
                                                 <div class="flex flex-wrap lg:flex-nowrap items-start gap-4 mb-4">
