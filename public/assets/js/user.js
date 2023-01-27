@@ -2135,5 +2135,9 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    firstName(string) {
+      return string.match(/^\w+/);
+    },
+
   }))
 })
