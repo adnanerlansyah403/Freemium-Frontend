@@ -36,7 +36,7 @@
                             {{-- x-on:mouseleave="resetShow = false"
                             x-on:mouseover="resetShow = true" --}}
                         >
-                            <div class="h-[44px] col col-10 lg:mx-0 w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white">
+                            <div class="group relative h-[44px] col col-10 lg:mx-0 w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white overflow-hidden">
                                 <div class="flex justify-between">
                                     <input
                                         x-model="keywordMyArticle"
@@ -46,9 +46,9 @@
                                         {{-- x-on:keyup="resetShow = true"
                                         x-on:mouseover="resetShow = true"
                                         x-on:keydown="resetShow = false" --}}
-                                        class="w-[85%] md:w-[95%] lg:w-[85%] text-[#8B8585] font-normal text-sm"
+                                        class="w-[85%] md:w-[95%] lg:w-[85%] block translate-x-8 text-[#8B8585] font-normal text-sm transition duration-200 ease-in-out"
                                         placeholder="Search Here..." />
-                                    <img class="w-[24px] h-[24px]" src="{{ asset('./assets/images/search.png') }}" alt="">
+                                    <img class="group-hover:translate-x-0 w-[24px] h-[24px] absolute left-2 top-2 transition duration-200 ease-in-out" src="{{ asset('./assets/images/search.png') }}" alt="">
                                 </div>
                             </div>
                             <div class="col" style="margin-left: 0;">
@@ -64,28 +64,44 @@
                             </div>
                         </template>
 
+                        
                         <template x-if="!isLoadingMyArticle">
-                            <template x-for="(item, index) in listMyArticle.length > 1 ? listMyArticle.slice(0, itemMyArticle) : listMyArticle">
-                                
-                                <div class="group flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between mb-10 gap-6">
-                                    <div class="relative z-10 flex lg:items-start flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white lg:mx-0 px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] h-full lg:max-h-[200px] lg:h-[200px] dark:bg-slate-secondary rounded-lg overflow-hidden">
-                                        <div class="col lg:col-9 col:12" style="margin: 0 !important;">
-                                            <div class="flex items-center gap-3">
+                            <div>
+                                <template x-for="(item, index) in listMyArticle.length > 1 ? listMyArticle.slice(0, itemMyArticle) : listMyArticle">
+                                    
+                                    
+                                    <article class="hover:-translate-y-3 bg-white shadow-lg dark:hover:shadow-[0_0_2px_2px_#fff] dark:bg-[#111] w-[370px] rounded-lg max-w-max transition duration-400 ease-in-out">
+                                        <div class="bg-no-repeat h-[220px] rounded-t-lg overflow-hidden relative">
+                                            <img x-bind:src="imgUrl+item.thumbnail" alt="" class="h-full w-full object-cover">
+                                            <template x-if="item.type == 'paid'">
+                                                <span class="absolute w-6 h-6 left-3 top-3" title="PAID">
+                                                    <i data-feather="lock"></i>
+                                                    <script>
+                                                        feather.replace()
+                                                    </script>
+                                                </span>
+                                            </template>
+                                            <template x-if="item.type == 'free'">
+                                                <span class="absolute w-6 h-6 left-3 top-3" title="FREE">
+                                                    <i data-feather="unlock"></i>
+                                                    <script>
+                                                        feather.replace()
+                                                    </script>
+                                                </span>
+                                            </template>
+                                        </div>
+                                        <div class="dark:bg-[#111] flex-1 rounded-b-lg overflow-hidden px-3 pt-4 pb-6">
+                                            <div class="flex items-center gap-2">
                                                 <p class="text-sm">
                                                     <span class="flex items-center gap-1" 
                                                     x-text="convertDate(item.created_at)">
                                                         <i data-feather="calendar" class="w-4 h-4"></i>
                                                     </span>
                                                 </p>
-                                                {{-- <div class="flex items-center gap-2">
-                                                    <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
-                                                    <span class="flex items-center gap-1 -ml-1" x-text="item.total_views_sum ? item.total_views_sum : '0'">
-                                                        1000
-                                                    </span>
-                                                </div> --}}
                                                 <template x-for="list in listMyView">
                                                     <template x-if="list.id === item.id">
-                                                        <p class="flex items-center gap-1 text-[14px]">
+                                                        <p class="flex items-center gap-1 text-[14px] text-white">
+                                                            <span x-text="console.log(list.total)"></span>
                                                             <i data-feather="eye" class="w-4 h-4"></i>
                                                             <span x-text="list.total">
                                                                 1000
@@ -96,63 +112,108 @@
                                                         </p>
                                                     </template>
                                                 </template>
-                                                <template x-if="!checkExists(listMyView, item.id)">
-                                                    <p class="flex items-center gap-1 text-[14px]">
-                                                        <i data-feather="eye" class="w-4 h-4"></i>
-                                                        <span x-text="'No views'">
-                                                            1000
-                                                        </span>
-                                                        <script>
-                                                            feather.replace()
-                                                        </script>
-                                                    </p>
-                                                </template>
                                             </div>
-                                            <div class="pb-4 pt-12 lg:py-0 lg:translate-y-5">
-                                                <div class="flex flex-wrap lg:flex-nowrap items-start gap-4 mb-4">
-                                                    <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="text-[22px] md:text-md font-lato font-bold" x-text="substring(item.title, 70)"></a>
-                                                    <i class="bg-primary dark:bg-slate-third px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
-                                                </div>
-                                                <p class="text-sm text-gray-secondary mt-8 w-full" x-html="parseToOriginalString(item.substring, 150)+'...'">
-                
-                                                </p>
+                                            <div class="flex items-start mt-2">
+                                                <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="text-[22px] font-lato font-bold" x-text="substring(item.title, 70)"></a>
+                                            </div>
+                                            <div class="flex items-center gap-3 mt-6">
+                                                <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
+                                                    <i data-feather="edit"></i>
+                                                    <script>
+                                                        feather.replace()
+                                                    </script>
+                                                </a>
+                                                <button href="#" x-on:click="deleteArticle(item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
+                                                    <i data-feather="trash-2"></i>
+                                                    <script>
+                                                        feather.replace()
+                                                    </script>
+                                                </button>
                                             </div>
                                         </div>
-                                        <template x-if="item.thumbnail != ''">
-                                            <figure class="col col-2 h-full hidden lg:flex items-center justify-end" style="margin: 0 !important;">
-                                                <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full bg-gray-primary rounded-lg" alt="">
-                                            </figure>
-                                        </template>
-                                        <template x-if="item.thumbnail == ''">
-                                            <figure class="bg-slate-secondary dark:bg-white rounded-lg col col-2 h-full hidden lg:flex items-center justify-end" style="margin: 0 !important;">
-                                            </figure>
-                                        </template>
-                                        <div class="absolute right-4 md:hidden flex flex-row md:flex-col items-center lg:items-start gap-2">
-                                            <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
+                                    </article>
+    
+                                    {{-- <div class="group flex items-center flex-wrap lg:flex-nowrap justify-center lg:justify-between mb-10 gap-6">
+                                        <div class="relative z-10 flex lg:items-start flex-wrap lg:flex-nowrap lg:justify-between col lg:col-10 bg-white lg:mx-0 px-4 py-3 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] h-full lg:max-h-[200px] lg:h-[200px] dark:bg-slate-secondary rounded-lg overflow-hidden">
+                                            <div class="col lg:col-9 col:12" style="margin: 0 !important;">
+                                                <div class="flex items-center gap-3">
+                                                    <p class="text-sm">
+                                                        <span class="flex items-center gap-1" 
+                                                        x-text="convertDate(item.created_at)">
+                                                            <i data-feather="calendar" class="w-4 h-4"></i>
+                                                        </span>
+                                                    </p>
+                                                    <template x-for="list in listMyView">
+                                                        <template x-if="list.id === item.id">
+                                                            <p class="flex items-center gap-1 text-[14px]">
+                                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                                                <span x-text="list.total">
+                                                                    1000
+                                                                </span>
+                                                                <script>
+                                                                    feather.replace()
+                                                                </script>
+                                                            </p>
+                                                        </template>
+                                                    </template>
+                                                    <template x-if="!checkExists(listMyView, item.id)">
+                                                        <p class="flex items-center gap-1 text-[14px]">
+                                                            <i data-feather="eye" class="w-4 h-4"></i>
+                                                            <span x-text="'No views'">
+                                                                1000
+                                                            </span>
+                                                            <script>
+                                                                feather.replace()
+                                                            </script>
+                                                        </p>
+                                                    </template>
+                                                </div>
+                                                <div class="pb-4 pt-12 lg:py-0 lg:translate-y-5">
+                                                    <div class="flex flex-wrap lg:flex-nowrap items-start gap-4 mb-4">
+                                                        <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="text-[22px] md:text-md font-lato font-bold" x-text="substring(item.title, 70)"></a>
+                                                        <i class="bg-primary dark:bg-slate-third px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
+                                                    </div>
+                                                    <p class="text-sm text-gray-secondary mt-8 w-full" x-html="parseToOriginalString(item.substring, 150)+'...'">
+                    
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <template x-if="item.thumbnail != ''">
+                                                <figure class="col col-2 h-full hidden lg:flex items-center justify-end" style="margin: 0 !important;">
+                                                    <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full bg-gray-primary rounded-lg" alt="">
+                                                </figure>
+                                            </template>
+                                            <template x-if="item.thumbnail == ''">
+                                                <figure class="bg-slate-secondary dark:bg-white rounded-lg col col-2 h-full hidden lg:flex items-center justify-end" style="margin: 0 !important;">
+                                                </figure>
+                                            </template>
+                                            <div class="absolute right-4 md:hidden flex flex-row md:flex-col items-center lg:items-start gap-2">
+                                                <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
+                                                    <i data-feather="edit"></i>
+                                                </a>
+                                                <button href="#" x-on:click="deleteArticle(item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
+                                                    <i data-feather="trash-2"></i>
+                                                </button>
+                                            </div>
+                
+                                            <script>
+                                                feather.replace()
+                                            </script>
+                                        </div>
+                
+                                        <div class="relative hidden z-[1] col col-2 lg:col-1 lg:flex flex-row md:flex-col items-center lg:items-start gap-4">
+                                            <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-[-25%] transition delay-100 duration-200 ease-in-out">
                                                 <i data-feather="edit"></i>
                                             </a>
-                                            <button href="#" x-on:click="deleteArticle(item.id)" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
+                                            <button href="#" x-on:click="confirm('Do you want to delete this article?') ? deleteArticle(item.id) : ''" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-[-25%] transition delay-200 duration-200 ease-in-out">
                                                 <i data-feather="trash-2"></i>
                                             </button>
                                         </div>
-            
-                                        <script>
-                                            feather.replace()
-                                        </script>
-                                    </div>
-            
-                                    <div class="relative hidden z-[1] col col-2 lg:col-1 lg:flex flex-row md:flex-col items-center lg:items-start gap-4">
-                                        <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-[-25%] transition delay-100 duration-200 ease-in-out">
-                                            <i data-feather="edit"></i>
-                                        </a>
-                                        <button href="#" x-on:click="confirm('Do you want to delete this article?') ? deleteArticle(item.id) : ''" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none -translate-x-[300%] group-hover:translate-x-[-25%] transition delay-200 duration-200 ease-in-out">
-                                            <i data-feather="trash-2"></i>
-                                        </button>
-                                    </div>
-            
-                                </div>
-            
-                            </template>
+                
+                                    </div> --}}
+                
+                                </template>
+                            </div>
                         </template>
                         
                     </div>
