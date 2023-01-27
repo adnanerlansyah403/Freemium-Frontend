@@ -1104,6 +1104,7 @@ document.addEventListener('alpine:init', () => {
           if (data.status) {
             this.detailArticle = data.data;
             this.detailViews = data.views;
+            console.log(this.detailViews)
           }
           else {
             // console.log(data.message);

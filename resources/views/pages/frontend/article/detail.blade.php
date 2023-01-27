@@ -164,20 +164,27 @@
                                         </p>
                                     </span>
                                     <span class="flex items-center gap-1 translate-y-[1px]">
-                                        <template x-if="detailArticle.total_views_sum > 0">
-                                            <span>
-                                                <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
-                                                <script>
-                                                    feather.replace()
-                                                </script>
-                                            </span>
-                                        </template>
+                                        <span>
+                                            <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
+                                            <script>
+                                                feather.replace()
+                                            </script>
+                                        </span>
                                         <p>
-                                            <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span>
-                                            <span x-text="detailViews.total">
-                                            </span>
-                                            Views
+                                            {{-- <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span> --}}
+                                            <template x-if="!detailViews">
+                                                    <span x-text="'No views'">
+                                                        1000
+                                                    </span>
+                                            </template>
+                                            <template x-if="detailViews">
+                                                <div>
+                                                    <span x-text="detailViews.total"></span>
+                                                    Views
+                                                </div>
+                                            </template>
                                         </p>
+
                                     </span>
                                 </div>
                             </div>
