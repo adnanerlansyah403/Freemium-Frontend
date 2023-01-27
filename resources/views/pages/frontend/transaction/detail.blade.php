@@ -136,7 +136,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white has-scrollba
                         Confirm Payment
                     </button>
 
-                    <a href="{{ route('homepage') }}" class="bg-primary dark:bg-slate-secondary px-4 py-2 rounded-pill text-white hover:text-opacity-60 transition duration-200 ease-in-out">
+                    <a href="{{ route('homepage') }}" class="bg-primary text-center dark:bg-slate-secondary px-4 py-2 rounded-pill text-white hover:text-opacity-60 transition duration-200 ease-in-out">
                         Go Back to Home
                     </a>
                 </div>
