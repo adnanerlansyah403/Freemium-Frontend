@@ -147,7 +147,7 @@
                                             <img x-bind:src="
                                                 detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
                                                 ? imgUrl + detailArticle?.author?.photo
-                                                : imgUrl + 'images/user1.png'"
+                                                : baseUrl + 'assets/images/user1.png'"
                                             src=""
                                             class="w-[50px] h-[50px] bg-gray-secondary rounded-full border-none" alt="">
                                         </div>
@@ -292,7 +292,7 @@
                                             <img x-bind:src="
                                                 detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
                                                 ? imgUrl + detailArticle?.author?.photo
-                                                : imgUrl + 'images/user1.png'"
+                                                : baseUrl + 'assets/images/user1.png'"
                                             src=""
                                             class="w-[100px] h-[100px] bg-gray-secondary rounded-full border-none" alt="">
                                         </div>

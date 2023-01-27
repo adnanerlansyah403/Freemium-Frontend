@@ -205,7 +205,7 @@
                                                 <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px] max-w-[50px] max-h-[50px] object-cover" x-bind:src="imgUrl+item.author.photo" alt="">
                                             </template>
                                             <template x-if="item.author.photo == null">
-                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px] max-w-[50px] max-h-[50px] object-cover" x-bind:src="baseUrl+'images/user1.png'" alt="">
+                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px] max-w-[50px] max-h-[50px] object-cover" x-bind:src="baseUrl+'assets/images/user1.png'" alt="">
                                             </template>
                                         </div>
                                     </div>

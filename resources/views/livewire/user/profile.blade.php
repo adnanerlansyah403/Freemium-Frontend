@@ -178,7 +178,7 @@
                                 class="w-[100px] h-[100px] object-cover bg-gray-secondary rounded-full" alt="">
                         </template>
                         <template x-if="data_user.photo == null || data_user.photo.length == 0">
-                            <img x-bind:src="baseUrl+'images/user1.png'"
+                            <img x-bind:src="baseUrl+'assets/images/user1.png'"
                                 class="w-[100px] h-[100px] object-cover bg-gray-secondary rounded-full" alt="">
                         </template>
                     </figure>
