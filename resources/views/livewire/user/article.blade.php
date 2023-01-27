@@ -85,7 +85,7 @@
                                                 </div>
                                             </div>
                                             <div class="pb-4 pt-12 lg:py-0 lg:translate-y-5">
-                                                <div class="flex items-center justify-between mb-4">
+                                                <div class="flex flex-wrap lg:flex-nowrap items-start gap-4 mb-4">
                                                     <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="text-[22px] md:text-md font-lato font-bold" x-text="substring(item.title, 70)"></a>
                                                     <i class="bg-primary dark:bg-slate-third px-4 py-2 rounded-primary text-white font-bold" x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)"></i>
                                                 </div>

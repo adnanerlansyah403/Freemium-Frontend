@@ -142,12 +142,12 @@
                         >
                             <template x-if="data_user?.photo != null">
                                 <figure>
-                                    <img x-bind:src="imgUrl + data_user?.photo" src="" class="w-6 h-6 mr-2 bg-gray-third rounded-full" alt="">
+                                    <img x-bind:src="imgUrl + data_user?.photo" src="" class="w-7 h-7 object-cover mr-2 bg-gray-third rounded-full" alt="">
                                 </figure>
                             </template>
                             <template x-if="data_user.photo == null || data_user.photo.length == 0">
                                 <img x-bind:src="baseUrl+'images/user1.png'"
-                                    class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
+                                    class="w-7 h-7 object-cover bg-gray-secondary rounded-full" alt="">
                             </template>
                             <span class="font-inter" x-text="data_user?.name == null ? 'User' : substring(data_user?.name)"></span>
                         </button>

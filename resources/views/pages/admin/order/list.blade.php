@@ -118,10 +118,8 @@
                             <div class="mt-4 flex items-center justify-between">
                                 <p class="dark:text-white">
                                     Pages
-                                    <b>
-                                        <span x-text="listOrder.current_page"></span> /
-                                        <span class="span dark:text-slate-third" x-text="listOrder.last_page"></span>
-                                    </b>
+                                    <span x-text="listOrder.current_page" class="font-semibold"></span> /
+                                    <span class="span dark:text-slate-third font-semibold" x-text="listOrder.last_page"></span>
                                 </p>
                                 <ul class="flex items-center justify-center gap-2">
                                     <template x-if="listOrder.current_page != 1">

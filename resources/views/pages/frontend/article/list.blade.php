@@ -48,14 +48,17 @@
         {{-- kiri --}}
         <div class="lg:col-3" data-aos="fade-right">
             <template  x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
-                <div id="buttonTransactionCreate" class="w-full lg:w-[270px] mx-auto h-max">
-                    <a href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] mb-3 lg:mb-5 flex items-center justify-center gap-2 mt-10 lg:mt-auto md:mt-auto"
-                    >
-                        <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
-                        <h2 class="font-bold text-white hover:text-opacity-80 transition duration-200 ease-in-out"
-                        >Get Unlimited Access</h2>
-                    </a>
-                </div>
+                <a id="getUnlimitedAccess" href="{{ route('transaction.create') }}" class="w-full bg-primary dark:bg-slate-secondary px-4 py-2 text-sm rounded-[10px] mb-3 lg:mb-5 flex items-center justify-center gap-2"
+                style="display: none;"
+                    x-init="
+                        setTimeout(function() {
+                            document.getElementById('getUnlimitedAccess').style.display = 'flex';
+                        }, 600)
+                ">
+                    <img class="w-6 h-6" src="{{ asset('./assets/images/check-circle.png') }}" alt="">
+                    <h2 class="font-bold text-white hover:text-opacity-80 transition duration-200 ease-in-out"
+                    >Get Unlimited Access</h2>
+                </a>
             </template>
             <div class="w-full lg:w-[270px] mx-auto h-max px-4 py-8 bg-white dark:bg-slate-secondary dark:text-white rounded-[19px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                 <div class="h-[44px] w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white">
@@ -108,7 +111,12 @@
 
             <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
                 <div id="alertSubscribe"
-                >
+                style="display: none;"
+                    x-init="
+                        setTimeout(function() {
+                            document.getElementById('alertSubscribe').style.display = 'block';
+                        }, 600)
+                ">
                     <div class="w-full bg-primary dark:bg-slate-secondary rounded-[10px] dark:text-white mb-4 bg-opacity-20 mt-5 lg:-translate-y-1 lg:mt-0 font-normal text-sm px-4 py-2">
                         You have to
                         <span class="font-bold text-primary dark:text-slate-third leading-[27px]">
@@ -193,12 +201,11 @@
                                             </div>
                                         </div>
                                         <div class="-translate-x-[24px]">
-                                            {{-- <span x-text="console.log(data_user.photo != undefined)"></span> --}}
                                             <template x-if="item.author.photo != null">
-                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="imgUrl+item.author.photo" alt="">
+                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px] max-w-[50px] max-h-[50px] object-cover" x-bind:src="imgUrl+item.author.photo" alt="">
                                             </template>
                                             <template x-if="item.author.photo == null">
-                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px]" x-bind:src="baseUrl+'images/user1.png'" alt="">
+                                                <img class="bg-[#D9D9D9] rounded-full w-[50px] h-[50px] max-w-[50px] max-h-[50px] object-cover" x-bind:src="baseUrl+'images/user1.png'" alt="">
                                             </template>
                                         </div>
                                     </div>

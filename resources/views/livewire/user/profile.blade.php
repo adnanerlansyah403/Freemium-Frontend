@@ -175,11 +175,11 @@
                     <figure class="mb-5">
                         <template x-if="data_user.photo != null || data_user.photo.length != 0">
                             <img x-bind:src="imgUrl+data_user.photo"
-                                class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
+                                class="w-[100px] h-[100px] object-cover bg-gray-secondary rounded-full" alt="">
                         </template>
                         <template x-if="data_user.photo == null || data_user.photo.length == 0">
                             <img x-bind:src="baseUrl+'images/user1.png'"
-                                class="w-[100px] h-[100px] bg-gray-secondary rounded-full" alt="">
+                                class="w-[100px] h-[100px] object-cover bg-gray-secondary rounded-full" alt="">
                         </template>
                     </figure>
                     <span class="text-md font-semibold" x-text="data_user.name">User</span>
