@@ -52,7 +52,7 @@
 
                 <div class="col-12">
 
-                    <h1 class="font-poppins text-base lg:text-md font-semibold mb-4 dark:text-white">Article Search Results</h1>
+                    <h1 class="px-3 font-poppins text-base lg:text-md font-semibold mb-4 dark:text-white">Article Search Results</h1>
 
                     <div class="px-3 md:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
                         <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
@@ -86,11 +86,16 @@
                                 "
                                 class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
-                            <template x-if="limitcategory <= categoriesArticle.length">
-                                <button x-on:click="getCategories(true)" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                                    <span>More ...</span>
+                            <div x-on:click="getCategories(true)">
+                                <button class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                    More
                                 </button>
-                            </template>
+                                <div class="fixed grid place-items-center">
+                                    <ul class="bg-white shadow-[0px_0px_4px_rgba(255,255,255,.25)">
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex items-center gap-2">
                             <button x-ref="paidFilter" 
@@ -111,7 +116,12 @@
                     </div>
 
                     <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
-                        <div class="mt-8 text-center py-6 container mx-auto max-w-max rounded-lg">
+                        <div id="getUnlimitedAccess" class="mt-8 text-center py-6 container mx-auto max-w-max rounded-lg" style="display: none;"
+                        x-init="
+                            setTimeout(function() {
+                                document.getElementById('getUnlimitedAccess').style.display = 'block';
+                            }, 600)
+                        ">
                             <p class="text-[20px] lg:text-md text-black font-medium font-poppins mb-6 dark:text-white">Get Unlimited Access Now for All Content</p>
                             <a href="{{ route('transaction.create') }}" class="px-4 py-2 rounded-pill bg-primary dark:bg-black text-white text-sm lg:text-base dark:border dark:border-white hover:text-opacity-80 transition-none duration-200 ease-in-out">Join Now</a>
                         </div>
@@ -121,7 +131,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6" x-data="helpers" style="margin-top: 32px;">
                             <template x-for="(item, index) in listArticle.data">
                                 <div class="dark:border dark:border-white dark:rounded-lg hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
-                                    <figure class="bg-no-repeat w-full h-[270px] rounded-t-[6px] overflow-hidden relative bg-primary"> 
+                                    <figure class="bg-no-repeat w-full h-[270px] rounded-t-[6px] overflow-hidden relative bg-primary">
                                         <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-cover dark:text-white" onerror="this.style.opacity = 0" onload="this.style.opacity = 1" x-bind:alt="`${item.title}.png is not found`">
                                     </figure>
                                     <div class="relative h-[230px] pt-12 dark:bg-[#111] shadow-lg dark:shadow-none flex-1 rounded-b-[6px] overflow-hidden px-3 pb-6">
@@ -191,15 +201,15 @@
                 <x-loading />
             </template>
 
-            <template x-if="listArticle.length == 0 && !isLoading && !isLoadingArticle">
+            <template x-if="listArticle.data.length == 0">
                 <div x-ref="articleNotFound" class="flex flex-col items-center justify-center text-md mt-10 dark:text-white"
                 >
                     <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-6" alt="">
                     <p>
-                        <span class="span dark:text-slate-fourth" x-text="$refs.search.value != '' ? 'Oops' : 'Sorry'"></span>
-                        <span x-text="$refs.search.value != '' ? ', We can not find your article' : ', We still have not an article'"></span>
+                        <span class="span dark:text-slate-fourth" x-text="filtersKey[0] != '' ? 'Oops' : 'Sorry'"></span>
+                        <span x-text="filtersKey[0] != '' ? ', We can not find your article' : ', We still have not an article'"></span>
                     </p>
-                    <template x-if="$refs.search.value == '' && listArticle.length == 0">
+                    <template x-if="filtersKey[0] == '' && listArticle.data.length == 0">
                         <div class="flex items-center justify-center mt-6">
                             <a href="{{ route("article.create") }}" class="py-2 px-4 border border-primary dark:border-white rounded-pill text-sm font-medium text-center hover:bg-primary hover:text-white dark:bg-slate-secondary dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 Create One
@@ -209,17 +219,19 @@
                 </div>
             </template>
 
-            <div class="flex items-center justify-center gap-4 translate-y-14 dark:text-white">
-                <b class="font-semibold">
-                    Halaman <span x-text="listArticle.current_page">1</span> dari <span class="span dark:text-slate-fourth" x-text="listArticle.last_page">200</span>
-                </b>
-                <template x-if="listArticle.current_page < listArticle.last_page">
-                    <a @click="paginateArticle(listArticle.next_page_url)" class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </template>
-
-            </div>
+            <template x-if="listArticle.data.length != 0">
+                <div class="flex items-center justify-center gap-4 translate-y-14 dark:text-white">
+                    <b class="font-semibold">
+                        Halaman <span x-text="listArticle.current_page">1</span> dari <span class="span dark:text-slate-fourth" x-text="listArticle.last_page">200</span>
+                    </b>
+                    <template x-if="listArticle.current_page < listArticle.last_page">
+                        <a @click="paginateArticle(listArticle.next_page_url)" class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </template>
+    
+                </div>
+            </template>
 
 
             </template>

@@ -263,12 +263,8 @@ document.addEventListener('alpine:init', () => {
           Swal.fire({
             position: 'center',
             icon: 'success',
-<<<<<<< HEAD
             title: 'Success!',
             text: user.message,
-=======
-            title: user.message,
->>>>>>> 19544fd
             background: '#fff',
             titleColor: '#000',
             color: '#000',
