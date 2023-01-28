@@ -11,6 +11,8 @@ document.addEventListener('alpine:init', () => {
     linkInputLinkedin: false,
     linkInputInstagram: false,
     linkInputTwitter: false,
+    limitcategory : 4,
+
     data_user: [],
     professions: [
       'Freemium blogger',
@@ -1457,7 +1459,11 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Get all categories
-    getCategories() {
+    getCategories(addMore=false) {
+
+      if(addMore == true){
+        this.limitcategory+=4
+      }
 
       fetch(`${this.apiUrl
         }allCategory`, {
@@ -1468,8 +1474,9 @@ document.addEventListener('alpine:init', () => {
           let limitcategoriesArticle = data.data
         //   this.categoriesArticle = data.data;
           this.categoriesArticle = [];
+
           limitcategoriesArticle.map((data, index)=>{
-            if(index<8) {
+            if(index<this.limitcategory) {
                 this.categoriesArticle.push(data)
             }
 
