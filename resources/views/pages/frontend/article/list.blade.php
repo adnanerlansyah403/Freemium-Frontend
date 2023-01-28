@@ -42,11 +42,11 @@
         <div class="container mx-auto" x-data="articles">
             <span x-init="resetFilters()"></span>
             <div x-init="getArticle()"></div>
-    
+
             <template x-if="!isLoadingArticle">
 
                 <div class="col-12">
-                
+
                     <div class="flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
                         <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
                         x-on:change="filtersKey[0] = $event.target.value; filterArticle()" placeholder="Search for a article....">
@@ -55,7 +55,7 @@
                             <span>Search</span>
                         </button>
                     </div>
-        
+
                     <div class="mt-4 w-full flex items-start justify-between gap-4">
                         {{-- <div class="w-full flex flex-wrap gap-[11px]" x-init="getCategories()">
                             <select name="category" x-on:change="filtersKey[2] = $event.target.value; filterArticle()" id="category" class="text-sm py-2 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white font-medium" x-ref="category">
@@ -81,24 +81,24 @@
                             </button>
                         </div>
                     </div>
-        
+
                     <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
                         <div class="mt-8 text-center py-6 container mx-auto max-w-max rounded-lg">
                             <p class="text-md text-black font-medium font-poppins mb-6 dark:text-white">Get Unlimited Access Now for All Content</p>
                             <a href="{{ route('transaction.create') }}" class="px-4 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white dark:border dark:border-white hover:text-opacity-80 transition-none duration-200 ease-in-out">Join Now</a>
                         </div>
                     </template>
-        
+
                     <template x-if="!isLoading">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6" x-data="helpers" style="margin-top: 32px;">
                             <template x-for="(item, index) in listArticle">
                                 <div class="hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
                                     <figure class="bg-no-repeat w-full h-[270px] rounded-t-[6px] overflow-hidden relative">
-                                        <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-fill" alt="">
+                                        <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-cover" x-bind:alt="`${item.title}.png is not found`">
                                     </figure>
                                     <div class="relative h-[230px] pt-12 dark:bg-[#111] shadow-lg dark:shadow-none flex-1 rounded-b-[6px] overflow-hidden px-3 pb-6">
                                         <div class="flex items-center justify-between w-full absolute top-4 left-0 px-3">
-                                            <button class="flex items-center gap-1 text-black font-bold text-sm leading-[21px] rounded-[10px]" 
+                                            <button class="flex items-center gap-1 text-black font-bold text-sm leading-[21px] rounded-[10px]"
                                             x-on:click="
                                                 if(item.type == 'free') {
                                                     getFreeArticle()
@@ -142,7 +142,7 @@
                                         <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="font-bold text-[20px] font-lato leading-9 dark:text-white" x-text="item.title.length > 30 ? item.title.substring(0, 30) + '...' : item.title"></a>
                                         <p class="font-normal text-sm dark:text-gray-primary"
                                         x-text="item.description.length > 120 ? parseToOriginalString(item.description, 120) : item.description">
-            
+
                                         </p>
                                         <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="group flex items-center gap-1 absolute bottom-0 -translate-y-4 px-4 py-1 border border-primary text-primary dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-slate-primary font-poppins font-medium transition duration-200 ease-in-out">
                                             Read More
@@ -154,11 +154,11 @@
                                 </div>
                         </div>
                     </template>
-            
+
                 </div>
-                        
+
             </template>
-            
+
             <template x-if="isLoading">
                 <x-loading />
             </template>
@@ -180,7 +180,7 @@
                     </template>
                 </div>
             </template>
-            
+
             <div class="flex items-center justify-center gap-2 translate-y-14 dark:text-white">
                 <b class="font-semibold">
                     Halaman <span>1</span> dari <span class="span dark:text-slate-fourth">200</span>
