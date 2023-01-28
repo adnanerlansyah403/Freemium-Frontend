@@ -32,12 +32,12 @@
                 <form x-on:submit.prevent="fetchLogin()">
                     <div class="mb-5">
                         <label for="email" class="text-md">Email</label>
-                        <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.email || status_err.email[0] ? 'border border-[#b91c1c]' : ''">
+                        <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err?.email || status_err?.email?.[0] ? 'border border-[#b91c1c]' : ''">
                             <i data-feather="mail" class="w-6 h-6 text-gray-secondary"></i>
                             <input type="text" placeholder="Your email..."
-                                x-bind:class="status_err.email || status_err.email[0] ? 'input-danger' : ''" class="w-full" x-model="email">
+                                x-bind:class="status_err?.email || status_err?.email?.[0] ? 'input-danger' : ''" class="w-full" x-model="email">
                         </div>
-                        <template x-if="status_err.email">
+                        <template x-if="status_err?.email">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                                 <span class="span-danger" x-text="status_err.email[0]">Validasi Error</span>
@@ -47,7 +47,7 @@
         
                     <div class="mb-8" x-data="{passwordHidden: true}">
                         <label for="password" class="text-md">Password</label>
-                        <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out" x-bind:class="status_err.password || status_err.password[0] ? 'border border-[#b91c1c]' : ''">
+                        <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4 transition duration-200 ease-in-out" x-bind:class="status_err?.password || status_err?.password?.[0] ? 'border border-[#b91c1c]' : ''">
                             <span>
                                 <i data-feather="lock" class="w-6 h-6 text-gray-secondary transition duration-200 ease-in-out"></i>
                                 <script>
@@ -55,7 +55,7 @@
                                 </script>
                             </span>
                             <input type="password" placeholder="Your password..."
-                            x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full" x-model="password" x-ref="password">
+                            x-bind:class="status_err?.password ? 'input-danger' : ''" class="w-full" x-model="password" x-ref="password">
                             <button type="button" title="show password" @click="
                             typePassword = passwordHidden == true ? 'text' : 'password';
                             $refs.password.setAttribute('type', typePassword)
@@ -77,7 +77,7 @@
                                 </span>
                             </button>
                         </div>
-                        <template x-if="status_err.password">
+                        <template x-if="status_err?.password">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                                 <span class="span-danger" x-text="status_err.password[0]">Validasi Error</span>
