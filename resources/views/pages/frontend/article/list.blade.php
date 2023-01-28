@@ -52,7 +52,7 @@
 
                 <div class="col-12">
 
-                    <h1 class="font-poppins text-base lg:text-md font-semibold mb-4">Article Search Results</h1>
+                    <h1 class="font-poppins text-base lg:text-md font-semibold mb-4 dark:text-white">Article Search Results</h1>
 
                     <div class="px-3 md:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
                         <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
@@ -79,21 +79,21 @@
                         </div> --}}
                         <div class="relative flex items-center flex-wrap gap-[6px]" x-init="getCategories()">
                             <template x-for="(item, index) in categoriesArticle ">
-                                <span class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
+                                <span class="cursor-pointer px-2 py-1 text-xs font-medium dark:border dark:border-white  rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
                             <template x-if="limitcategory <= categoriesArticle.length">
-                                <button x-on:click="getCategories(true)" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                <button x-on:click="getCategories(true)" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                     <span>More ...</span>
                                 </button>
                             </template>
                         </div>
                         <div class="flex items-center gap-2">
                             <button x-ref="paidFilter" x-on:click="
-                            getPaidArticle()" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                            getPaidArticle()" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>PAID</span>
                             </button>
                             <button x-ref="freeFilter" x-on:click="
-                            getFreeArticle()" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                            getFreeArticle()" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>FREE</span>
                             </button>
                         </div>
@@ -102,14 +102,14 @@
                     <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
                         <div class="mt-8 text-center py-6 container mx-auto max-w-max rounded-lg">
                             <p class="text-[20px] lg:text-md text-black font-medium font-poppins mb-6 dark:text-white">Get Unlimited Access Now for All Content</p>
-                            <a href="{{ route('transaction.create') }}" class="px-4 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white text-sm lg:text-base dark:border dark:border-white hover:text-opacity-80 transition-none duration-200 ease-in-out">Join Now</a>
+                            <a href="{{ route('transaction.create') }}" class="px-4 py-2 rounded-pill bg-primary dark:bg-black text-white text-sm lg:text-base dark:border dark:border-white hover:text-opacity-80 transition-none duration-200 ease-in-out">Join Now</a>
                         </div>
                     </template>
 
                     <template x-if="!isLoading">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6" x-data="helpers" style="margin-top: 32px;">
                             <template x-for="(item, index) in listArticle.data">
-                                <div class="hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
+                                <div class="dark:border dark:border-white dark:rounded-2xl hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
                                     <figure class="bg-no-repeat w-full h-[270px] rounded-t-[6px] overflow-hidden relative">
                                         <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-cover dark:text-white" x-bind:alt="`${item.title}.png is not found`">
                                     </figure>
