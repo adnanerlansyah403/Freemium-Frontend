@@ -77,7 +77,9 @@
                                     
                                     <article class="bg-white shadow-lg dark:hover:shadow-[0_0_4px_2px_#fff] dark:bg-[#111] w-[370px] rounded-lg max-w-max transition duration-400 ease-in-out">
                                         <div class="bg-no-repeat h-[220px] rounded-t-lg overflow-hidden relative">
-                                            <img x-bind:src="imgUrl+item.thumbnail" alt="" class="h-full w-full object-cover">
+                                            <figure class="bg-primary w-full h-full">
+                                                <img x-bind:src="imgUrl+item.thumbnail" alt="" onerror="this.style.opacity = 0" onload="this.style.opacity = 1" class="h-full w-full object-cover">
+                                            </figure>
                                             <template x-if="item.type == 'paid'">
                                                 <span class="absolute left-3 top-3 bg-primary text-white dark:bg-slate-secondary p-2" title="PAID">
                                                     <i data-feather="lock" class="text-sm rounded-lg"></i>

@@ -127,7 +127,8 @@ document.addEventListener('alpine:init', () => {
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: user.message,
+              title: 'Success!',
+              text: user.message,
               background: '#fff',
               titleColor: '#000',
               color: '#000',
@@ -184,7 +185,8 @@ document.addEventListener('alpine:init', () => {
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: user.message,
+              title: 'Success!',
+              text: user.message,
               background: '#fff',
               titleColor: '#000',
               color: '#000',
@@ -220,7 +222,7 @@ document.addEventListener('alpine:init', () => {
             // localStorage.setItem('message', user.message);
             // this.flash();
             Swal.fire(
-              'Login Success!',
+              'Success!',
               user.message,
               'success',
             )
@@ -256,7 +258,8 @@ document.addEventListener('alpine:init', () => {
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: user.message,
+              title: 'Registration Success',
+              text: user.message,
               background: '#fff',
               titleColor: '#000',
               color: '#000',

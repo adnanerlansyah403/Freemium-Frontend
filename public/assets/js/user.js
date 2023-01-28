@@ -251,7 +251,8 @@ document.addEventListener('alpine:init', () => {
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: user.message,
+            title: 'Success!',
+            text: user.message,
             background: '#fff',
             titleColor: '#000',
             color: '#000',
@@ -1511,16 +1512,16 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          let limitcategoriesArticle = data.data
-          //   this.categoriesArticle = data.data;
-          this.categoriesArticle = [];
+          this.categoriesArticle = data.data;
+          // let limitcategoriesArticle = data.data
+          // this.categoriesArticle = [];
 
-          limitcategoriesArticle.map((data, index) => {
-            if (index < this.limitcategory) {
-              this.categoriesArticle.push(data)
-            }
+          // limitcategoriesArticle.map((data, index) => {
+          //   if (index < this.limitcategory) {
+          //     this.categoriesArticle.push(data)
+          //   }
 
-          })
+          // })
 
         })
 
