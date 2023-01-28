@@ -882,7 +882,7 @@ document.addEventListener('alpine:init', () => {
 
         .then(async response => {
           let data = await response.json();
-          console.log(data);
+          
           if (data.status) {
             window.open(data.data, '_blank');
           } else {
@@ -1121,7 +1121,6 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           this.listArticle = data.data;
           this.listView = data.views;
-          console.log(this.listView)
 
           // DOM
           // document.getElementById("all").classList.add('active');
@@ -1164,10 +1163,6 @@ document.addEventListener('alpine:init', () => {
           if (data.status) {
             this.detailArticle = data.data;
             this.detailViews = data.views;
-            console.log(this.detailViews)
-          }
-          else {
-            // console.log(data.message);
           }
           this.isLoadingArticle = false;
           this.isLoading = false;
@@ -1510,8 +1505,6 @@ document.addEventListener('alpine:init', () => {
             this.showFlash = false;
             this.message = false;
           }, 4000);
-
-          console.log(this.listArticle);
 
           this.isLoadingArticle = false;
         }).catch(error => {
