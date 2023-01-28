@@ -1,3 +1,9 @@
+<style>
+
+    #buttonMode {
+	    margin-top: 6px;
+    }
+</style>
 <header id="header" class="group fixed w-full z-[101]
 {{ ($currentRoute == 'article.list') ||($currentRoute == 'article.create') || ($currentRoute == 'article.index') || ($currentRoute == 'article.show') || ($currentRoute == 'transaction.history')  ?
     'shadow-lg bg-[rgba(255,255,255,.95)] text-slate-primary dark:bg-slate-primary dark:text-white transition duration-200 ease-in-out' : ''
@@ -233,8 +239,8 @@
                             </li>
                         </ul>
                     </div>
-                    <div x-data="helpers" class="mt-2">
-                        <button id="buttonMode" @click="darkMode()">
+                    <div x-data="helpers">
+                        <button id="buttonMode" @click="darkMode()" style="margin-top: 8px;">
                             <img src="{{ asset("assets/images/icons/moon.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out" style="widows: 28px; height: 28px;">
                         </button>
                     </div>

@@ -101,10 +101,10 @@
                                             </td>
                                             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                                 <template x-if="data?.photo != null">
-                                                    <img x-bind:src="imgUrl+data.photo" src="" class="max-w-[100px] max-h-[100px] object-cover">
+                                                    <img x-bind:src="imgUrl+data.photo" src="" class="w-full h-full object-cover">
                                                 </template>
                                                 <template x-if="data?.photo == null">
-                                                    <img x-bind:src="baseUrl+'assets/images/user1.png'" src="" class="w-[100px] h-[100px] object-cover">
+                                                    <img x-bind:src="baseUrl+'assets/images/user1.png'" src="" class="w-full h-full object-cover">
                                                 </template>
                                             </td>
                                             <td class="flex items-center justify-center w-full h-full translate-y-[15%] border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 gap-2">

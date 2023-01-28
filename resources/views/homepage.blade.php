@@ -10,14 +10,14 @@
 
         <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
 
-        <!-- Vite Link CSS -->
-
-        @vite('resources/css/app.css')
-
         <!-- Ionicons -->
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+        {{-- Bootstrap Icons --}}
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
         {{-- ChartJS --}}
 
@@ -57,15 +57,12 @@
             .tox-tinymce {
                 /* height: 500px !important; */
             }
-            
-            /* pre {
-            margin: 0;
-            padding: 16px;
-            background-color: #2e2f30;
-            border-radius: 3px;
-            } */
 
         </style>
+
+        <!-- Vite Link CSS -->
+
+        @vite('resources/css/app.css')
 
         @livewireStyles
 

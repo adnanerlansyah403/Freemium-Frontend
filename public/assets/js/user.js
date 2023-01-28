@@ -108,7 +108,6 @@ document.addEventListener('alpine:init', () => {
             this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
             this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
             this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
-            this.isLoading = false;
             this.diffpayment = user.data.payments[0].plan.expired
             this.paymentDateProfile = user.data.payments[0].payment_date
 
@@ -117,7 +116,9 @@ document.addEventListener('alpine:init', () => {
             const diff = Math.abs(resultPaymentProfile - datenow)
             this.diffPaymentByDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
+            this.isLoading = false;
           }
+          this.isLoading = false;
         });
     },
 
