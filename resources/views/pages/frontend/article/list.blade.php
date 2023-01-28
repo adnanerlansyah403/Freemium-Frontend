@@ -54,12 +54,13 @@
 
                     <div class="px-3 md:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
                         <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
-                        x-on:change="filtersKey[0] = $event.target.value; filterArticle()" placeholder="Search for a article....">
+                        x-bind:value="filtersKey[0] ? filtersKey[0] : ''"
+                        x-on:change="filtersKey[0] = $event.target.value; filterArticle()" 
+                        placeholder="Search article title....">
                         <button @click="
                             if(filtersKey[0] != '') {
                                 filterArticle()
                             }
-                            resetFilters()
                         " class="text-sm lg:text-base translate-x-1 flex items-center px-4 py-2 gap-2 bg-primary dark:bg-slate-secondary rounded-r-pill text-white dark:text-white">
                             <i data-feather="search" class="text-white dark:text-gray-secondary"></i>
                             <span>Search</span>
@@ -76,8 +77,12 @@
                             </select>
                         </div> --}}
                         <div class="relative flex items-center flex-wrap gap-[6px]" x-init="getCategories()">
-                            <template x-for="(item, index) in categoriesArticle ">
-                                <span class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
+                            <template x-for="(item, index) in categoriesArticle">
+                                <span 
+                                x-on:click="
+                                    filterArticle(item.id);
+                                "
+                                class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
                             <template x-if="limitcategory <= categoriesArticle.length">
                                 <button x-on:click="getCategories(true)" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
@@ -86,12 +91,18 @@
                             </template>
                         </div>
                         <div class="flex items-center gap-2">
-                            <button x-ref="paidFilter" x-on:click="
-                            getPaidArticle()" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                            <button x-ref="paidFilter" 
+                            x-on:click="
+                                filtersKey[1] = filtersKey[1] != 'paid' ? 'paid' : '';
+                                filterArticle();
+                            "class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>PAID</span>
                             </button>
-                            <button x-ref="freeFilter" x-on:click="
-                            getFreeArticle()" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                            <button x-ref="freeFilter" 
+                            x-on:click="
+                                filtersKey[1] = filtersKey[1] != 'free' ? 'free' : '';
+                                filterArticle()
+                            " class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>FREE</span>
                             </button>
                         </div>
