@@ -128,7 +128,7 @@
 
 
             <template x-if="isLogedIn">
-                <div class="flex items-center gap-3 lg:gap-4 -order-1 lg:order-1" x-data="user">
+                <div class="flex items-center gap-3 -order-1 lg:order-1" x-data="user">
                     <div x-init="fetchMe()"></div>
                     <div x-init="fetchMyTransactions()"></div>
                     {{-- <span x-text="console.log(data_user)"></span> --}}

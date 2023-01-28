@@ -79,9 +79,11 @@
                             <template x-for="(item, index) in categoriesArticle ">
                                 <span class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
-                            <button class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                                <span>More ...</span>
-                            </button>
+                            <template x-if="limitcategory <= categoriesArticle.length">
+                                <button x-on:click="getCategories(true)" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                    <span>More ...</span>
+                                </button>
+                            </template>
                         </div>
                         <div class="flex items-center gap-2">
                             <button x-ref="paidFilter" x-on:click="
@@ -97,8 +99,8 @@
 
                     <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
                         <div class="mt-8 text-center py-6 container mx-auto max-w-max rounded-lg">
-                            <p class="text-md text-black font-medium font-poppins mb-6 dark:text-white">Get Unlimited Access Now for All Content</p>
-                            <a href="{{ route('transaction.create') }}" class="px-4 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white dark:border dark:border-white hover:text-opacity-80 transition-none duration-200 ease-in-out">Join Now</a>
+                            <p class="text-[20px] lg:text-md text-black font-medium font-poppins mb-6 dark:text-white">Get Unlimited Access Now for All Content</p>
+                            <a href="{{ route('transaction.create') }}" class="px-4 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white text-sm lg:text-base dark:border dark:border-white hover:text-opacity-80 transition-none duration-200 ease-in-out">Join Now</a>
                         </div>
                     </template>
 
