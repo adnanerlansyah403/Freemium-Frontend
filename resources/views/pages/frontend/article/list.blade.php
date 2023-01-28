@@ -109,7 +109,7 @@
                     <template x-if="!isLoading">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6" x-data="helpers" style="margin-top: 32px;">
                             <template x-for="(item, index) in listArticle.data">
-                                <div class="dark:border dark:border-white dark:rounded-2xl hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
+                                <div class="dark:border dark:border-white dark:rounded-lg hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
                                     <figure class="bg-no-repeat w-full h-[270px] rounded-t-[6px] overflow-hidden relative">
                                         <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-cover dark:text-white" x-bind:alt="`${item.title}.png is not found`">
                                     </figure>
