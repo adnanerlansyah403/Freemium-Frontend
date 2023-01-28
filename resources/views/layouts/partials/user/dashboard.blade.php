@@ -19,8 +19,8 @@
             <template x-if="data_user.role == 2">
                 <li class="pb-2 {{ $currentRoute == 'transaction.history' ? 'border-b border-primary dark:border-white' : '' }} cursor-pointer">
                     <a href="{{ route("transaction.history") }}" class="text-base font-iceberg">
-                        <span class="span dark:text-slate-third">History</span>
-                        Transaction
+                        <span class="span dark:text-slate-third">Transaction</span>
+                        History
                     </a>
                 </li>
             </template>

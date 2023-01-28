@@ -247,8 +247,8 @@
                             </div>
 
                             <div class="flex items-center w-full"
-                                x-bind:class="detailArticle?.tags.length > 0 ? 'justify-between mt-12' : 'justify-end'">
-                                <div class="flex content-center flex-wrap gap-3" x-bind:class="detailArticle?.tags.length > 0 ? '' : 'hidden'">
+                                x-bind:class="detailArticle?.tags?.length > 0 ? 'justify-between mt-12' : 'justify-end'">
+                                <div class="flex content-center flex-wrap gap-3" x-bind:class="detailArticle?.tags?.length > 0 ? '' : 'hidden'">
                                     <template x-for="(item, index) in detailArticle?.tags">
                                         <a class="px-3 py-2 bg-primary text-white dark:bg-slate-third pointer-events-none rounded-primary text-sm font-bold font-iceberg drop-shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                             x-text="item.category.name"></a>

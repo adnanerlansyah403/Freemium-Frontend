@@ -115,8 +115,8 @@ document.addEventListener('alpine:init', () => {
             this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
             this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
             this.isLoading = false;
-            this.diffpayment = user.data.payments[0].plan.expired
-            this.paymentDateProfile = user.data.payments[0].payment_date
+            this.diffpayment = user?.data?.payments?.[0]?.plan.expired
+            this.paymentDateProfile = user?.data?.payments?.[0]?.payment_date
 
             const resultPaymentProfile = this.addMonths(new Date(this.paymentDateProfile), this.diffpayment)
             const datenow = Date.now();
