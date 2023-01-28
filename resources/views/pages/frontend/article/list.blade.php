@@ -52,7 +52,7 @@
 
                 <div class="col-12">
 
-                    <div class="px-3 lg:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
+                    <div class="px-3 md:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
                         <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
                         x-on:change="filtersKey[0] = $event.target.value; filterArticle()" placeholder="Search for a article....">
                         <button @click="
@@ -79,23 +79,9 @@
                             <template x-for="(item, index) in categoriesArticle ">
                                 <span class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
-                            <div class="relative">
-                                <button class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">More ...</button>
-                                {{-- <ul class="absolute top-full rounded-lg mt-2 p-2 bg-white border border-primary">
-                                    <li class="cursor-pointer m-0 p-0">
-                                        <span>Cooking</span>
-                                    </li>
-                                    <li class="cursor-pointer m-0 p-0">
-                                        <span>Cooking</span>
-                                    </li>
-                                    <li class="cursor-pointer m-0 p-0">
-                                        <span>Cooking</span>
-                                    </li>
-                                    <li class="cursor-pointer m-0 p-0">
-                                        <span>Cooking</span>
-                                    </li>
-                                </ul> --}}
-                            </div>
+                            <button class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                <span>More ...</span>
+                            </button>
                         </div>
                         <div class="flex items-center gap-2">
                             <button x-ref="paidFilter" x-on:click="
