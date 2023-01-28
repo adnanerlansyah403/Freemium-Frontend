@@ -42,7 +42,7 @@
                 <p class="mt-2 mb-4 text-[14px] text-gray-primary dark:text-white">Please enter your new password, and the password will be changed </p>
             </div>
         
-            <div class="w-full" x-data="{passwordHidden: true}">
+            <form class="w-full" x-data="{passwordHidden: true}">
                 <label for="password" class="text-md">New Password</label>
                 <div class="group flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary dark:text-white dark:shadow-none dark:border dark:border-white rounded-primary mt-4 transition duration-200 ease-in-out" x-bind:class="status_err.password ? 'border border-[#b91c1c]' : ''">
                     <button type="button" @click="
@@ -69,7 +69,7 @@
                         </template>
                     </button>
                     <input type="password" placeholder="Your password..."
-                    x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full border-none" x-model="password" x-ref="password">
+                    x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full border-none" required x-model="password" x-ref="password">
                 </div>
                 <template x-if="status_err.password">
                     <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -83,7 +83,7 @@
                         Confirm
                     </button>
                 </div>
-            </div>
+            </form>
 
 
         </div>

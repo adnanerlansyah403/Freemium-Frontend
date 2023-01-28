@@ -31,7 +31,7 @@
     <template x-if="!isLoadingAuth">
         <div class="container mx-auto flex items-start justify-center">
     
-            <div class="col col-12 md:col-6 lg:col-6 py-6 px-4 border border-gray-third bg-white dark:bg-slate-secondary rounded-primary lg:flex flex-col items-center">
+            <form class="col col-12 md:col-6 lg:col-6 py-6 px-4 border border-gray-third bg-white dark:bg-slate-secondary rounded-primary lg:flex flex-col items-center">
 
                     <div class="mb-8 text-center">
                         <h1 class="text-[32px]">
@@ -46,7 +46,7 @@
                         <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary dark:shadow-none dark:border dark:border-white rounded-primary mt-4" x-bind:class="status_err[0] ? 'shadow-none border border-[#b91c1c]' : ''">
                             <i data-feather="mail" class="w-6 h-6 text-gray-secondary dark:text-white"></i>
                             <input type="text" placeholder="Your email..."
-                                x-bind:class="status_err[0] ? 'input-danger' : ''" class="w-full border-none" x-model="email">
+                                x-bind:class="status_err[0] ? 'input-danger' : ''" required="true" class="w-full border-none" x-model="email">
                         </div>
                         <template x-if="status_err[0]">
                             <div class="mt-3 flex text-[#b91c1c] dark:text-white items-center gap-2">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
     
-            </div>
+            </form>
             <script>
                 feather.replace()
             </script>

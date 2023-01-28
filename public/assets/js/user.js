@@ -11,7 +11,7 @@ document.addEventListener('alpine:init', () => {
     linkInputLinkedin: false,
     linkInputInstagram: false,
     linkInputTwitter: false,
-    limitcategory : 4,
+    limitcategory: 4,
 
     data_user: [],
     professions: [
@@ -100,35 +100,35 @@ document.addEventListener('alpine:init', () => {
           'Authorization': localStorage.getItem('token')
         },
       })
-      .then(async response => {
-        user = await response.json();
-        if (user.status) {
-          this.data_user = user.data
-          this.name = user.data.name == null ? '' : user.data.name
-          this.username = user.data.username == null ? '' : user.data.username
-          this.email = user.data.email == null ? '' : user.data.email
-          this.password = user.data.password == null ? '' : user.data.password
-          this.photo = user.data.photo == null ? '' : user.data.photo
-          this.profession = user.data.profession == null ? '' : user.data.profession
-          this.link_facebook = user.data.link_facebook == null ? '' : user.data.link_facebook
-          this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
-          this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
-          this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
+        .then(async response => {
+          user = await response.json();
+          if (user.status) {
+            this.data_user = user.data
+            this.name = user.data.name == null ? '' : user.data.name
+            this.username = user.data.username == null ? '' : user.data.username
+            this.email = user.data.email == null ? '' : user.data.email
+            this.password = user.data.password == null ? '' : user.data.password
+            this.photo = user.data.photo == null ? '' : user.data.photo
+            this.profession = user.data.profession == null ? '' : user.data.profession
+            this.link_facebook = user.data.link_facebook == null ? '' : user.data.link_facebook
+            this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
+            this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
+            this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
+            this.isLoading = false;
+            this.diffpayment = user.data.payments[0].plan.expired
+            this.paymentDateProfile = user.data.payments[0].payment_date
+
+            const resultPaymentProfile = this.addMonths(new Date(this.paymentDateProfile), this.diffpayment)
+            const datenow = Date.now();
+            const diff = Math.abs(resultPaymentProfile - datenow)
+            this.diffPaymentByDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+          }
+        })
+        .catch(error => {
+          console.log(error);
           this.isLoading = false;
-          this.diffpayment = user.data.payments[0].plan.expired
-          this.paymentDateProfile = user.data.payments[0].payment_date
-
-          const resultPaymentProfile = this.addMonths(new Date(this.paymentDateProfile), this.diffpayment)
-          const datenow = Date.now();
-          const diff = Math.abs(resultPaymentProfile - datenow)
-          this.diffPaymentByDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
-
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        this.isLoading = false;
-      });
+        });
     },
 
     // Check if user logged in and set islogedIn session to true
@@ -257,10 +257,24 @@ document.addEventListener('alpine:init', () => {
           this.link_instagram = user.data.link_instagram != null ? user.data.link_instagram : ''
           this.link_twitter = user.data.link_twitter != null ? user.data.link_twitter : ''
 
-          localStorage.setItem('showFlash', true)
-          localStorage.setItem('message', user.message);
+          // localStorage.setItem('showFlash', true)
+          // localStorage.setItem('message', user.message);
           // this.typeStatus = true;
-          window.location.replace(this.baseUrl + 'profile');
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: user.message,
+            background: '#fff',
+            titleColor: '#000',
+            color: '#000',
+            showConfirmButton: false,
+            timer: 3000
+          })
+
+          setTimeout(function () {
+            let baseUrl = "http://127.0.0.1:8000/";
+            window.location.replace(baseUrl + 'profile');
+          }, 3300)
         })
         .catch(error => {
           console.log(error);
@@ -830,39 +844,59 @@ document.addEventListener('alpine:init', () => {
 
     // Delete user article
     deleteArticle(id) {
-      this.isLoading = true;
 
-      const token = localStorage.getItem('token')
-      fetch(this.apiUrl + 'article/' + id + '/delete', {
-        method: "POST",
-        headers: {
-          'Authorization': token
+      const token = localStorage.getItem('token');
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          this.isLoading = true;
+          fetch(this.apiUrl + 'article/' + id + '/delete', {
+            method: "POST",
+            headers: {
+              'Authorization': token
+            }
+          })
+            .then(async response => {
+              data = await response.json();
+
+              if (data.status) {
+                // this.showFlash = true;
+                // this.message = data.message;
+                Swal.fire(
+                  'Deleted!',
+                  data.message,
+                  'success'
+                )
+                this.fetchListMyArticle();
+              }
+              else {
+                this.showFlash = true;
+                this.message = data.message;
+              }
+
+              setTimeout(() => {
+                this.showFlash = false;
+                this.message = '';
+              }, 4000);
+
+              this.isLoading = false;
+            }).catch(error => {
+              console.log(error);
+              this.isLoading = false;
+            })
+
         }
       })
-        .then(async response => {
-          data = await response.json();
 
-          if (data.status) {
-            this.showFlash = true;
-            this.message = data.message;
-            this.fetchListMyArticle();
-          }
-          else {
-            this.showFlash = true;
-            this.message = data.message;
-          }
-
-          setTimeout(() => {
-            this.showFlash = false;
-            this.message = '';
-          }, 4000);
-
-          this.isLoading = false;
-        })
-        .catch(error => {
-          console.log(error);
-          this.isLoading = false;
-        })
     },
 
     // Delete user sub-article
@@ -917,7 +951,7 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async response => {
           let data = await response.json();
-          
+
           if (data.status) {
             window.open(data.data, '_blank');
           } else {
@@ -1179,8 +1213,8 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.remove('active');
           // document.getElementById("paid").classList.remove('active');
 
+        }).finally(() => {
           this.isLoadingArticle = false;
-
         })
         .catch(error => {
           console.log(error);
@@ -1276,10 +1310,10 @@ document.addEventListener('alpine:init', () => {
         this.categoriesArticle = data.data;
         this.isLoading = false;
       })
-      .catch(error => {
-        console.log(error);
-        this.isLoading = false;
-      });
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        });
     },
 
     // Sweet alert ?
@@ -1519,10 +1553,10 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Get all categories
-    getCategories(addMore=false) {
+    getCategories(addMore = false) {
 
-      if(addMore == true){
-        this.limitcategory+=4
+      if (addMore == true) {
+        this.limitcategory += 4
       }
 
       fetch(`${this.apiUrl
@@ -1535,9 +1569,9 @@ document.addEventListener('alpine:init', () => {
           //   this.categoriesArticle = data.data;
           this.categoriesArticle = [];
 
-          limitcategoriesArticle.map((data, index)=>{
-            if(index<this.limitcategory) {
-                this.categoriesArticle.push(data)
+          limitcategoriesArticle.map((data, index) => {
+            if (index < this.limitcategory) {
+              this.categoriesArticle.push(data)
             }
 
           })
@@ -1554,12 +1588,12 @@ document.addEventListener('alpine:init', () => {
 
     filterArticle(categories = '') {
       query = '';
-      
+
       // Get or remove selected category
       if (categories != '' && !this.categoryFilter.includes(categories)) {
         this.categoryFilter.push(categories)
       }
-      else if(this.categoryFilter.includes(categories)){
+      else if (this.categoryFilter.includes(categories)) {
         let index = this.categoryFilter.indexOf(categories);
         if (index > -1) {
           this.categoryFilter.splice(index, 1);
@@ -1572,7 +1606,7 @@ document.addEventListener('alpine:init', () => {
       if (this.filtersKey[1] && this.filtersKey[1] != '') {
         query += 'type=' + this.filtersKey[1] + '&';
       }
-      for(let i = 0; i < this.categoryFilter.length; i++){
+      for (let i = 0; i < this.categoryFilter.length; i++) {
         query += 'category[]=' + this.categoryFilter[i] + '&';
       }
       if (this.filtersKey[3] && this.filtersKey[3] != '') {

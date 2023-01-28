@@ -8,7 +8,7 @@
 
         {{-- Custome CSS Link --}}
 
-        <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+        {{-- <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}"> --}}
 
         <!-- Ionicons -->
 
@@ -46,6 +46,9 @@
         {{-- Bootstrap Icons --}}
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+        {{-- SweetAlert --}}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- Custom Style --}}
 

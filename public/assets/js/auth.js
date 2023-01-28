@@ -7,7 +7,7 @@ document.addEventListener('alpine:init', () => {
     name: '',
     username: '',
     email: '',
-    password: '',
+    password: null,
     message: '',
     isLoadingAuth: false,
     subscribe_status: false,
@@ -121,16 +121,33 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('name', fullName)
             // localStorage.setItem('role', role)
             // localStorage.setItem('subscribe_status', subscribe_status)
-            localStorage.setItem('showFlash', true)
-            localStorage.setItem('message', user.message);
+            this.data_user = user.data
             // this.showFlash = true;
             // this.message = user.message;
-            this.data_user = user.data
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Success!',
+              text: user.message,
+              background: '#fff',
+              titleColor: '#000',
+              color: '#000',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            // localStorage.setItem('showFlash', true)
+            // localStorage.setItem('message', user.message);
             if (role == 2) {
-              return window.location.replace(this.baseUrl + 'article')
+              setTimeout(function () {
+                let baseUrl = "http://127.0.0.1:8000/";
+                return window.location.replace(baseUrl + 'article')
+              }, 3300)
             }
             if (role == 1) {
-              return window.location.replace(this.baseUrl + 'admin/dashboard')
+              setTimeout(function () {
+                let baseUrl = "http://127.0.0.1:8000/";
+                return window.location.replace(this.baseUrl + 'admin/dashboard')
+              }, 3300)
             }
           }
         });
@@ -161,10 +178,21 @@ document.addEventListener('alpine:init', () => {
             // this.flash();
           } else {
             this.isLoadingAuth = false;
-            localStorage.setItem('showFlash', true)
-            localStorage.setItem('message', user.message);
-            this.flash();
-            window.location.replace(this.baseUrl + 'passwordReset');
+            this.status_err = [];
+            // localStorage.setItem('showFlash', true)
+            // localStorage.setItem('message', user.message);
+            // this.flash();
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Success!',
+              text: user.message,
+              background: '#fff',
+              titleColor: '#000',
+              color: '#000',
+              showConfirmButton: false,
+              timer: 3000
+            })
           }
         });
     },
@@ -190,10 +218,19 @@ document.addEventListener('alpine:init', () => {
             this.flash();
           } else {
             this.isLoadingAuth = false;
-            localStorage.setItem('showFlash', true)
-            localStorage.setItem('message', user.message);
-            this.flash();
-            window.location.replace(this.baseUrl + 'login')
+            // localStorage.setItem('showFlash', true)
+            // localStorage.setItem('message', user.message);
+            // this.flash();
+            Swal.fire(
+              'Success!',
+              user.message,
+              'success',
+            )
+
+            setTimeout(function () {
+              let baseUrl = "http://127.0.0.1:8000/";
+              window.location.replace(baseUrl + 'login')
+            }, 3300)
           }
         });
     },
@@ -216,9 +253,23 @@ document.addEventListener('alpine:init', () => {
           if (!user.status) {
             this.status_err = user.message;
           } else {
-            localStorage.setItem('showFlash', true)
-            localStorage.setItem('message', user.message);
-            window.location.replace(this.baseUrl + 'login')
+            // localStorage.setItem('showFlash', true)
+            // localStorage.setItem('message', user.message);
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Registration Success',
+              text: user.message,
+              background: '#fff',
+              titleColor: '#000',
+              color: '#000',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            setTimeout(function () {
+              let baseUrl = "http://127.0.0.1:8000/";
+              window.location.replace(baseUrl + 'login')
+            }, 3500)
           }
         });
     },
