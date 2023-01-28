@@ -56,7 +56,7 @@
                     </template>
 
                     <template x-if="!isLogedIn">
-                        <div x-data="helpers">
+                        <div x-data="helpers" class="mt-2">
                             <button id="buttonMode" @click="darkMode()">
                                 <img src="{{ asset("assets/images/icons/moon.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out" style="widows: 28px; height: 28px;">
                             </button>
@@ -159,7 +159,7 @@
                                 <img x-bind:src="baseUrl+'assets/images/user1.png'"
                                     class="w-7 h-7 object-cover bg-gray-secondary rounded-full" alt="">
                             </template>
-                            <span class="font-inter" x-text="data_user?.name == null ? 'User' : substring(data_user?.name)"></span>
+                            <span class="font-inter" x-text="data_user?.name == null ? 'User' : firstName(data_user?.name)"></span>
                         </button>
                         <ul
                             class="absolute top-[170%] right-0 rounded-primary w-[200px] bg-primary dark:bg-slate-secondary text-white shadow-[0px_0px_8px_2px_rgba(0,0,0,0.25)] overflow-hidden"

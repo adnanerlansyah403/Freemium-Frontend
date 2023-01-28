@@ -665,10 +665,10 @@ document.addEventListener('alpine:init', () => {
 
 
           })
-        .catch(error => {
-          console.log(error);
-          this.isLoading = false;
-        })
+          .catch(error => {
+            console.log(error);
+            this.isLoading = false;
+          })
 
     },
 
@@ -682,15 +682,15 @@ document.addEventListener('alpine:init', () => {
       }
 
       let selected = document.getElementById('category_id');
-      
+
       let formData = new FormData();
 
       for (let i = 0; i < selected.options.length; i++) {
-          if (selected.options[i].selected) {
-              formData.append('category_id[]', selected.options[i].value);
-          }
+        if (selected.options[i].selected) {
+          formData.append('category_id[]', selected.options[i].value);
+        }
       }
-      
+
       formData.append('title', editA.title);
       formData.append('description', editA.description);
       formData.append('thumbnail', editA.thumbnail);
@@ -1048,10 +1048,10 @@ document.addEventListener('alpine:init', () => {
               vaOrder.innerText = item.virtual_account_number;
               paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
-        })
-        .catch(error => {
-          console.log(error);
-        })
+          })
+            .catch(error => {
+              console.log(error);
+            })
 
         })
     },
@@ -1249,9 +1249,9 @@ document.addEventListener('alpine:init', () => {
       let title_sub = document.getElementsByClassName('title_sub');
       let thumbnail_sub = document.getElementsByClassName('thumbnail_sub');
       // let description_sub = document.getElementsByClassName('ck-content');
-      
+
       let formData = new FormData();
-      
+
       formData.append('title', title.value);
       formData.append('description', description);
 
@@ -1290,7 +1290,7 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < category.length; i++) {
         if (category.options[i].selected) {
-            formData.append('category_id[]', category.options[i].value);
+          formData.append('category_id[]', category.options[i].value);
         }
       }
       for (let i = 0; i < title_sub.length; i++) {
@@ -1385,7 +1385,7 @@ document.addEventListener('alpine:init', () => {
 
         this.sub_article_err += `<br>`;
       }
-      
+
       article = await fetch(`${this.apiUrl}article`, {
         method: "POST",
         headers: {
@@ -1489,7 +1489,7 @@ document.addEventListener('alpine:init', () => {
         query += 'author=' + this.filtersKey[3] + '&';
       }
 
-      this.isLoadingArticle = true;
+      this.isLoading = true;
 
       fetch(`${this.apiUrl}article?${query}`, {
         method: 'GET',
@@ -1513,10 +1513,10 @@ document.addEventListener('alpine:init', () => {
 
           console.log(this.listArticle);
 
-          this.isLoadingArticle = false;
+          this.isLoading = false;
         }).catch(error => {
           console.log(error);
-          this.isLoadingArticle = false;
+          this.isLoading = false;
         })
 
     },
@@ -1540,7 +1540,7 @@ document.addEventListener('alpine:init', () => {
     // Get free article
     getFreeArticle() {
 
-      this.isLoadingArticle = true;
+      this.isLoading = true;
 
       fetch(`${this.apiUrl}article?type=free`, {
         method: "GET"
@@ -1554,7 +1554,7 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.add('active');
           // document.getElementById("paid").classList.remove('active');
 
-          this.isLoadingArticle = false;
+          this.isLoading = false;
 
         })
     },
@@ -1562,7 +1562,7 @@ document.addEventListener('alpine:init', () => {
     // Get paid article
     getPaidArticle() {
 
-      this.isLoadingArticle = true;
+      this.isLoading = true;
 
       fetch(`${this.apiUrl}article?type=paid`, {
         method: "GET"
@@ -1576,7 +1576,7 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.remove('active');
           // document.getElementById("paid").classList.add('active');
 
-          this.isLoadingArticle = false;
+          this.isLoading = false;
 
         })
     },
@@ -2248,6 +2248,10 @@ document.addEventListener('alpine:init', () => {
         document.getElementById("buttonMode").setAttribute("title", "Light Mode")
         document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
       }
+    },
+
+    firstName(string) {
+      return string.match(/^\w+/);
     },
 
   }))
