@@ -55,7 +55,7 @@
             background: #fff;
             padding: 15px 20px 15px 45px;
             position: relative;
-            margin-block: 15px;            
+            margin-block: 15px;
             /*Font*/
             font-family: Georgia, serif;
             font-size: 16px;
@@ -67,7 +67,7 @@
             /*Borders - (Optional)*/
             border-left: 15px solid #7C000B;
             /* border-right: 2px solid #7C000B; */
-            
+
             /*Box Shadow - (Optional)*/
             -moz-box-shadow: 2px 2px 15px #ccc;
             -webkit-box-shadow: 2px 2px 15px #ccc;
@@ -76,13 +76,13 @@
 
         blockquote::before{
             content: "\201C"; /*Unicode for Left Double Quote*/
-            
+
             /*Font*/
             font-family: Georgia, serif;
             font-size: 60px;
             font-weight: bold;
             color: #999;
-            
+
             /*Positioning*/
             position: absolute;
             left: 10px;
@@ -308,7 +308,7 @@
                                         <b class="text-base font-semibold" x-text="detailArticle?.author?.username">Nama Author</b>
                                         <span class="block text-gray-primary dark:text-gray-third" x-text="detailArticle?.author?.email"></span>
                                         <p class="mt-2 text-gray-secondary dark:text-white italic font-quickSand font-semibold block max-w-[400px]" x-text="detailArticle?.author.profession != null ? detailArticle?.author.profession + ' | Freemium.com' : 'I am blogger' + ' | Freemium.com'">
-                                        </p> 
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-center w-full lg:w-auto mt-4 lg:mt-0">

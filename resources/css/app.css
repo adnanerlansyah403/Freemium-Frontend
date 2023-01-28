@@ -142,6 +142,48 @@
         @apply bg-primary dark:bg-slate-third rounded-b-[6px];
     }
     
+    /* Mozilla Firefox */
+    
+    
+    .has-scrollbar::-moz-scrollbar {
+        width: 6px;
+    }
+
+    .has-scrollbar::-moz-scrollbar-track {
+	@apply border dark:border dark:border-white;
+    }
+
+    .has-scrollbar::-moz-scrollbar-thumb {
+        @apply bg-primary dark:bg-white rounded-pill;
+    }
+
+    .has-scrollbar2::-moz-scrollbar {
+        width: 5px;
+    }
+
+    .has-scrollbar2::-moz-scrollbar-track {
+	@apply border dark:border dark:border-white;
+    }
+
+    .has-scrollbar2::-moz-scrollbar-thumb {
+        @apply bg-primary dark:bg-slate-third;
+    }
+    
+
+    .has-scrollbar3::-moz-scrollbar {
+        width: 5px;
+    }
+
+    .has-scrollbar3::-moz-scrollbar-track {
+	@apply border dark:border dark:border-white;
+    }
+
+    .has-scrollbar3::-moz-scrollbar-thumb {
+        @apply bg-primary dark:bg-slate-third rounded-b-[6px];
+    }
+    
+    
+    
     /* COLS */
     .col {
         margin: 0 18px;

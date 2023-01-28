@@ -10,14 +10,14 @@
 
         <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
 
-        <!-- Vite Link CSS -->
-
-        @vite('resources/css/app.css')
-
         <!-- Ionicons -->
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+        {{-- Bootstrap Icons --}}
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
         {{-- ChartJS --}}
 
@@ -43,6 +43,10 @@
         
         <link rel="stylesheet" href="{{ asset("assets/css/prism/prism.css") }}">
 
+        {{-- Bootstrap Icons --}}
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
         {{-- Custom Style --}}
 
         <style>
@@ -57,15 +61,12 @@
             .tox-tinymce {
                 /* height: 500px !important; */
             }
-            
-            /* pre {
-            margin: 0;
-            padding: 16px;
-            background-color: #2e2f30;
-            border-radius: 3px;
-            } */
 
         </style>
+
+        <!-- Vite Link CSS -->
+
+        @vite('resources/css/app.css')
 
         @livewireStyles
 
@@ -164,14 +165,14 @@
                     document.documentElement.classList.add('light')
                     document.documentElement.classList.remove('dark')
                     localStorage.theme = 'light'
-                    document.getElementById("buttonMode").setAttribute("title", "Light Mode")
-                    document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/sun.svg")
+                    document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
+                    document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/moon.svg")
                 } else if(localStorage.theme === 'dark') {
                     document.documentElement.classList.add('dark')
                     document.documentElement.classList.remove('light')
                     localStorage.theme = 'dark'
-                    document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
-                    document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/moon.svg")
+                    document.getElementById("buttonMode").setAttribute("title", "Light Mode")
+                    document.getElementById("iconMode").setAttribute("src", "http://localhost:8000/" + "assets/images/icons/sun.svg")
                 }
 
             });

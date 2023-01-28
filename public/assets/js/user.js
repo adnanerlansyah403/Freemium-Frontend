@@ -11,6 +11,8 @@ document.addEventListener('alpine:init', () => {
     linkInputLinkedin: false,
     linkInputInstagram: false,
     linkInputTwitter: false,
+    limitcategory : 4,
+
     data_user: [],
     professions: [
       'Freemium blogger',
@@ -665,14 +667,14 @@ document.addEventListener('alpine:init', () => {
 
 
           })
-        .catch(error => {
-          console.log(error);
-          this.isLoading = false;
-        })
+          .catch(error => {
+            console.log(error);
+            this.isLoading = false;
+          })
 
     },
 
-    // Update editted article 
+    // Update editted article
     updateArticle() {
       let editA = this.EditArticle;
       editA.description = tinymce.get('content').getContent();
@@ -682,15 +684,15 @@ document.addEventListener('alpine:init', () => {
       }
 
       let selected = document.getElementById('category_id');
-      
+
       let formData = new FormData();
 
       for (let i = 0; i < selected.options.length; i++) {
-          if (selected.options[i].selected) {
-              formData.append('category_id[]', selected.options[i].value);
-          }
+        if (selected.options[i].selected) {
+          formData.append('category_id[]', selected.options[i].value);
+        }
       }
-      
+
       formData.append('title', editA.title);
       formData.append('description', editA.description);
       formData.append('thumbnail', editA.thumbnail);
@@ -1048,10 +1050,10 @@ document.addEventListener('alpine:init', () => {
               vaOrder.innerText = item.virtual_account_number;
               paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
-        })
-        .catch(error => {
-          console.log(error);
-        })
+          })
+            .catch(error => {
+              console.log(error);
+            })
 
         })
     },
@@ -1107,6 +1109,16 @@ document.addEventListener('alpine:init', () => {
           localStorage.removeItem("message")
         }, 3000);
       }
+    },
+
+    paginateArticle(url) {
+      fetch(`${url}`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+        })
     },
 
     // Get list all article
@@ -1244,9 +1256,9 @@ document.addEventListener('alpine:init', () => {
       let title_sub = document.getElementsByClassName('title_sub');
       let thumbnail_sub = document.getElementsByClassName('thumbnail_sub');
       // let description_sub = document.getElementsByClassName('ck-content');
-      
+
       let formData = new FormData();
-      
+
       formData.append('title', title.value);
       formData.append('description', description);
 
@@ -1285,7 +1297,7 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < category.length; i++) {
         if (category.options[i].selected) {
-            formData.append('category_id[]', category.options[i].value);
+          formData.append('category_id[]', category.options[i].value);
         }
       }
       for (let i = 0; i < title_sub.length; i++) {
@@ -1380,7 +1392,7 @@ document.addEventListener('alpine:init', () => {
 
         this.sub_article_err += `<br>`;
       }
-      
+
       article = await fetch(`${this.apiUrl}article`, {
         method: "POST",
         headers: {
@@ -1452,7 +1464,11 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Get all categories
-    getCategories() {
+    getCategories(addMore=false) {
+
+      if(addMore == true){
+        this.limitcategory+=4
+      }
 
       fetch(`${this.apiUrl
         }allCategory`, {
@@ -1460,7 +1476,17 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.categoriesArticle = data.data;
+          let limitcategoriesArticle = data.data
+          //   this.categoriesArticle = data.data;
+          this.categoriesArticle = [];
+
+          limitcategoriesArticle.map((data, index)=>{
+            if(index<this.limitcategory) {
+                this.categoriesArticle.push(data)
+            }
+
+          })
+
         })
 
     },
@@ -1603,10 +1629,10 @@ document.addEventListener('alpine:init', () => {
 
     // Reset filters
     resetFilters() {
-      document.getElementById('search').value = null;
-      document.getElementById('category').value = '';
-      document.getElementById('free').checked = false;
-      document.getElementById('paid').checked = false;
+      // document.getElementById('search').value = null;
+      // document.getElementById('category').value = '';
+      // document.getElementById('free').checked = false;
+      // document.getElementById('paid').checked = false;
 
       this.filtersKey = [];
       this.getArticle();
@@ -2233,15 +2259,21 @@ document.addEventListener('alpine:init', () => {
         document.documentElement.classList.remove('dark')
         localStorage.theme = 'light'
         document.getElementById("buttonMode").setAttribute("title", "Light Mode")
-        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
       } else {
         document.documentElement.classList.add('dark')
         document.documentElement.classList.remove('light')
         localStorage.theme = 'dark'
         document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
-        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
       }
     },
+
+    firstName(string) {
+      let firstName = string.match(/^\w+/)[0];
+
+      return firstName;
+    }
 
   }))
 })
