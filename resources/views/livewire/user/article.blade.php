@@ -36,26 +36,31 @@
                             {{-- x-on:mouseleave="resetShow = false"
                             x-on:mouseover="resetShow = true" --}}
                         >
-                            <div class="group relative h-[44px] col col-10 lg:mx-0 w-full py-2.5 px-3 rounded-[10px] border-solid border border-primary dark:border-white overflow-hidden">
+                            <div class="group relative h-[44px] col col-12 lg:mx-0 w-full rounded-[10px] border-solid border border-primary dark:border-white overflow-hidden">
                                 <div class="flex justify-between">
-                                    <input
-                                        x-model="keywordMyArticle"
-                                        x-on:change="
-                                        searchMyArticle(keywordMyArticle);
-                                        "
-                                        {{-- x-on:keyup="resetShow = true"
-                                        x-on:mouseover="resetShow = true"
-                                        x-on:keydown="resetShow = false" --}}
-                                        class="w-[85%] md:w-[95%] lg:w-[85%] block translate-x-8 text-[#8B8585] font-normal text-sm transition duration-200 ease-in-out"
-                                        placeholder="Search Here..." />
-                                    <img class="group-hover:translate-x-0 w-[24px] h-[24px] absolute left-2 top-2 transition duration-200 ease-in-out" src="{{ asset('./assets/images/search.png') }}" alt="">
+                                    <div class="w-full">
+                                        <input
+                                            x-model="keywordMyArticle"
+                                            x-on:change="
+                                            searchMyArticle(keywordMyArticle);
+                                            "
+                                            {{-- x-on:keyup="resetShow = true"
+                                            x-on:mouseover="resetShow = true"
+                                            x-on:keydown="resetShow = false" --}}
+                                            class="w-[85%] md:w-[95%] lg:w-full block translate-x-8 text-[#8B8585] py-2.5 px-3 font-normal text-sm transition duration-200 ease-in-out"
+                                            placeholder="Search Here..." />
+                                        <img class="group-hover:translate-x-0 w-[24px] h-[24px] absolute left-2 top-2 transition duration-200 ease-in-out" src="{{ asset('./assets/images/search.png') }}" alt="">
+                                    </div>
+                                    {{-- <button type="button" @click="" class="cursor-pointer p-2 h-full hover:text-opacity-80 dark:hover:text-opacity-80 rounded-r-lg transition duration-200 ease-in-out">
+                                        Search
+                                    </button> --}}
                                 </div>
                             </div>
-                            <div class="col" style="margin-left: 0;">
+                            {{-- <div class="col" style="margin-left: 0;">
                                 <button @click="keywordMyArticle = ''; fetchListMyArticle();  itemMyArticle = 3;" class="px-6 py-2 border border-primary dark:border-white hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-secondary rounded-pill transition duration-200 ease-in-out">
                                     Reset
                                 </button>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <template x-if="isLoadingMyArticle">
@@ -70,20 +75,20 @@
                                 <template x-for="(item, index) in listMyArticle.length > 1 ? listMyArticle.slice(0, itemMyArticle) : listMyArticle">
                                     
                                     
-                                    <article class="hover:-translate-y-3 bg-white shadow-lg dark:hover:shadow-[0_0_2px_2px_#fff] dark:bg-[#111] w-[370px] rounded-lg max-w-max transition duration-400 ease-in-out">
+                                    <article class="hover:-translate-y-2 bg-white shadow-lg dark:hover:shadow-[0_0_4px_2px_#fff] dark:bg-[#111] w-[370px] rounded-lg max-w-max transition duration-400 ease-in-out">
                                         <div class="bg-no-repeat h-[220px] rounded-t-lg overflow-hidden relative">
                                             <img x-bind:src="imgUrl+item.thumbnail" alt="" class="h-full w-full object-cover">
                                             <template x-if="item.type == 'paid'">
-                                                <span class="absolute w-6 h-6 left-3 top-3" title="PAID">
-                                                    <i data-feather="lock"></i>
+                                                <span class="absolute left-3 top-3 bg-primary text-white dark:bg-slate-secondary p-2" title="PAID">
+                                                    <i data-feather="lock" class="text-sm rounded-lg"></i>
                                                     <script>
                                                         feather.replace()
                                                     </script>
                                                 </span>
                                             </template>
                                             <template x-if="item.type == 'free'">
-                                                <span class="absolute w-6 h-6 left-3 top-3" title="FREE">
-                                                    <i data-feather="unlock"></i>
+                                                <span class="absolute left-3 top-3 bg-primary text-white dark:bg-slate-secondary p-2 "title="FREE">
+                                                    <i data-feather="unlock" class="text-sm rounded-lg"></i>
                                                     <script>
                                                         feather.replace()
                                                     </script>
@@ -247,6 +252,19 @@
                     <div>
                         <img src="{{ asset("assets/images/nodata.svg") }}" class="h-[200px] w-[200px] mx-auto mb-4" alt="">
                         <h1 class="text-center text-md"><span class="span dark:text-slate-third">Oops</span>, You don't have an article</h1>
+                    </div>
+                </template>
+
+
+                <template x-if="listMyArticle.length != 0">
+                    <div class="flex items-center justify-center gap-4 translate-y-14 dark:text-white">
+                        <b class="font-semibold">
+                            Halaman <span>1</span> dari <span class="span dark:text-slate-fourth">200</span>
+                        </b>
+                        <a class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+    
                     </div>
                 </template>
     

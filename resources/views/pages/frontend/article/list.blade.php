@@ -196,7 +196,7 @@
                 </div>
             </template>
 
-            <div class="flex items-center justify-center gap-2 translate-y-14 dark:text-white">
+            <div class="flex items-center justify-center gap-4 translate-y-14 dark:text-white">
                 <b class="font-semibold">
                     Halaman <span x-text="listArticle.current_page">1</span> dari <span class="span dark:text-slate-fourth" x-text="listArticle.last_page">200</span>
                 </b>
