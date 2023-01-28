@@ -11,7 +11,7 @@ document.addEventListener('alpine:init', () => {
     linkInputLinkedin: false,
     linkInputInstagram: false,
     linkInputTwitter: false,
-    limitcategory : 4,
+    limitcategory: 4,
 
     data_user: [],
     professions: [
@@ -245,10 +245,24 @@ document.addEventListener('alpine:init', () => {
           this.link_instagram = user.data.link_instagram != null ? user.data.link_instagram : ''
           this.link_twitter = user.data.link_twitter != null ? user.data.link_twitter : ''
 
-          localStorage.setItem('showFlash', true)
-          localStorage.setItem('message', user.message);
+          // localStorage.setItem('showFlash', true)
+          // localStorage.setItem('message', user.message);
           // this.typeStatus = true;
-          window.location.replace(this.baseUrl + 'profile');
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: user.message,
+            background: '#fff',
+            titleColor: '#000',
+            color: '#000',
+            showConfirmButton: false,
+            timer: 3000
+          })
+
+          setTimeout(function () {
+            let baseUrl = "http://127.0.0.1:8000/";
+            window.location.replace(baseUrl + 'profile');
+          }, 3300)
         })
     },
 
@@ -798,38 +812,59 @@ document.addEventListener('alpine:init', () => {
 
     // Delete user article
     deleteArticle(id) {
-      this.isLoading = true;
 
-      const token = localStorage.getItem('token')
-      fetch(this.apiUrl + 'article/' + id + '/delete', {
-        method: "POST",
-        headers: {
-          'Authorization': token
+      const token = localStorage.getItem('token');
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          this.isLoading = true;
+          fetch(this.apiUrl + 'article/' + id + '/delete', {
+            method: "POST",
+            headers: {
+              'Authorization': token
+            }
+          })
+            .then(async response => {
+              data = await response.json();
+
+              if (data.status) {
+                // this.showFlash = true;
+                // this.message = data.message;
+                Swal.fire(
+                  'Deleted!',
+                  data.message,
+                  'success'
+                )
+                this.fetchListMyArticle();
+              }
+              else {
+                this.showFlash = true;
+                this.message = data.message;
+              }
+
+              setTimeout(() => {
+                this.showFlash = false;
+                this.message = '';
+              }, 4000);
+
+              this.isLoading = false;
+            }).catch(error => {
+              console.log(error);
+              this.isLoading = false;
+            })
+
         }
       })
-        .then(async response => {
-          data = await response.json();
 
-          if (data.status) {
-            this.showFlash = true;
-            this.message = data.message;
-            this.fetchListMyArticle();
-          }
-          else {
-            this.showFlash = true;
-            this.message = data.message;
-          }
-
-          setTimeout(() => {
-            this.showFlash = false;
-            this.message = '';
-          }, 4000);
-
-          this.isLoading = false;
-        }).catch(error => {
-          console.log(error);
-          this.isLoading = false;
-        })
     },
 
     // Delete user sub-article
@@ -884,7 +919,7 @@ document.addEventListener('alpine:init', () => {
 
         .then(async response => {
           let data = await response.json();
-          
+
           if (data.status) {
             window.open(data.data, '_blank');
           } else {
@@ -1139,8 +1174,8 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.remove('active');
           // document.getElementById("paid").classList.remove('active');
 
+        }).finally(() => {
           this.isLoadingArticle = false;
-
         })
     },
 
@@ -1464,10 +1499,10 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Get all categories
-    getCategories(addMore=false) {
+    getCategories(addMore = false) {
 
-      if(addMore == true){
-        this.limitcategory+=4
+      if (addMore == true) {
+        this.limitcategory += 4
       }
 
       fetch(`${this.apiUrl
@@ -1480,9 +1515,9 @@ document.addEventListener('alpine:init', () => {
           //   this.categoriesArticle = data.data;
           this.categoriesArticle = [];
 
-          limitcategoriesArticle.map((data, index)=>{
-            if(index<this.limitcategory) {
-                this.categoriesArticle.push(data)
+          limitcategoriesArticle.map((data, index) => {
+            if (index < this.limitcategory) {
+              this.categoriesArticle.push(data)
             }
 
           })

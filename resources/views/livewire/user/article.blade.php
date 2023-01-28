@@ -72,10 +72,10 @@
                         
                         <template x-if="!isLoadingMyArticle">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4">
-                                <template x-for="(item, index) in listMyArticle.length > 1 ? listMyArticle.slice(0, itemMyArticle) : listMyArticle">
+                                <template x-for="(item, index) in listMyArticle">
                                     
                                     
-                                    <article class="hover:-translate-y-2 bg-white shadow-lg dark:hover:shadow-[0_0_4px_2px_#fff] dark:bg-[#111] w-[370px] rounded-lg max-w-max transition duration-400 ease-in-out">
+                                    <article class="bg-white shadow-lg dark:hover:shadow-[0_0_4px_2px_#fff] dark:bg-[#111] w-[370px] rounded-lg max-w-max transition duration-400 ease-in-out">
                                         <div class="bg-no-repeat h-[220px] rounded-t-lg overflow-hidden relative">
                                             <img x-bind:src="imgUrl+item.thumbnail" alt="" class="h-full w-full object-cover">
                                             <template x-if="item.type == 'paid'">
