@@ -52,16 +52,21 @@
 
                 <div class="col-12">
 
-                    <div class="flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
+                    <div class="px-3 lg:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
                         <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
                         x-on:change="filtersKey[0] = $event.target.value; filterArticle()" placeholder="Search for a article....">
-                        <button class="translate-x-1 flex items-center px-4 py-2 gap-2 bg-primary dark:bg-slate-secondary rounded-r-pill text-white dark:text-white">
+                        <button @click="
+                            if(filtersKey[0] != '') {
+                                filterArticle()
+                            }
+                            resetFilters()
+                        " class="text-sm lg:text-base translate-x-1 flex items-center px-4 py-2 gap-2 bg-primary dark:bg-slate-secondary rounded-r-pill text-white dark:text-white">
                             <i data-feather="search" class="text-white dark:text-gray-secondary"></i>
                             <span>Search</span>
                         </button>
                     </div>
 
-                    <div class="mt-4 w-full flex items-start justify-between gap-4">
+                    <div class="px-3 md:px-0 mt-4 w-full flex items-start justify-between gap-4">
                         {{-- <div class="w-full flex flex-wrap gap-[11px]" x-init="getCategories()">
                             <select name="category" x-on:change="filtersKey[2] = $event.target.value; filterArticle()" id="category" class="text-sm py-2 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white font-medium" x-ref="category">
                                 <option value="" @click="getCategories()">  Select a category... </option>
@@ -70,21 +75,23 @@
                                 </template>
                             </select>
                         </div> --}}
-                        <div class="flex items-center flex-wrap gap-[6px]" x-init="getCategories()">
+                        <div class="relative flex items-center flex-wrap gap-[6px]" x-init="getCategories()">
                             <template x-for="(item, index) in categoriesArticle ">
                                 <span class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
-                            <button x-on:click="getCategories(true)" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                                <span>More ...</span>
-                            </button>
+                            <template x-if="limitcategory <= categoriesArticle.length">
+                                <button x-on:click="getCategories(true)" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                    <span>More ...</span>
+                                </button>
+                            </template>
                         </div>
                         <div class="flex items-center gap-2">
                             <button x-ref="paidFilter" x-on:click="
-                            getPaidArticle()" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                            getPaidArticle()" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>PAID</span>
                             </button>
                             <button x-ref="freeFilter" x-on:click="
-                            getFreeArticle()" class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                            getFreeArticle()" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>FREE</span>
                             </button>
                         </div>
@@ -92,8 +99,8 @@
 
                     <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status && isLoading == false">
                         <div class="mt-8 text-center py-6 container mx-auto max-w-max rounded-lg">
-                            <p class="text-md text-black font-medium font-poppins mb-6 dark:text-white">Get Unlimited Access Now for All Content</p>
-                            <a href="{{ route('transaction.create') }}" class="px-4 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white dark:border dark:border-white hover:text-opacity-80 transition-none duration-200 ease-in-out">Join Now</a>
+                            <p class="text-[20px] lg:text-md text-black font-medium font-poppins mb-6 dark:text-white">Get Unlimited Access Now for All Content</p>
+                            <a href="{{ route('transaction.create') }}" class="px-4 py-2 rounded-pill bg-primary dark:bg-slate-secondary text-white text-sm lg:text-base dark:border dark:border-white hover:text-opacity-80 transition-none duration-200 ease-in-out">Join Now</a>
                         </div>
                     </template>
 
@@ -194,7 +201,7 @@
                     Halaman <span x-text="listArticle.current_page">1</span> dari <span class="span dark:text-slate-fourth" x-text="listArticle.last_page">200</span>
                 </b>
                 <template x-if="listArticle.current_page < listArticle.last_page">
-                    <a @click="paginateArticle(listArticle.next_page_url)" class="text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                    <a @click="paginateArticle(listArticle.next_page_url)" class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                         <i class="bi bi-arrow-right"></i>
                     </a>
                 </template>

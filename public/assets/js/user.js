@@ -1636,10 +1636,10 @@ document.addEventListener('alpine:init', () => {
 
     // Reset filters
     resetFilters() {
-      document.getElementById('search').value = null;
-      document.getElementById('category').value = '';
-      document.getElementById('free').checked = false;
-      document.getElementById('paid').checked = false;
+      // document.getElementById('search').value = null;
+      // document.getElementById('category').value = '';
+      // document.getElementById('free').checked = false;
+      // document.getElementById('paid').checked = false;
 
       this.filtersKey = [];
       this.getArticle();
