@@ -30,7 +30,7 @@
 
 </head>
 <body x-data="user" x-init="checkSession()"
-style="display: none;" class="dark:bg-slate-primary dark:text-white">
+style="display: none;" class="dark:bg-slate-primary dark:text-white has-scrollbar">
 
 {{-- Title Section --}}
 <template x-if="isLogedIn">
@@ -71,7 +71,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
             <span x-text="console.log(myTransactions[0])"></span>
 
             <div class="mb-8 text-center">
-                <span class="text-base md:text-md text-gray-secondary">Payment Code ( Transaction No. )</span>
+                <span class="text-base md:text-md text-gray-secondary dark:text-gray-third">Payment Code ( Transaction No. )</span>
                 <p class="font-bold text-[20px] mt-2" x-text="myTransactions[0].virtual_account_number">
 
                 </p>
@@ -136,7 +136,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white">
                         Confirm Payment
                     </button>
 
-                    <a href="{{ route('homepage') }}" class="bg-primary dark:bg-slate-secondary px-4 py-2 rounded-pill text-white hover:text-opacity-60 transition duration-200 ease-in-out">
+                    <a href="{{ route('homepage') }}" class="bg-primary text-center dark:bg-slate-secondary px-4 py-2 rounded-pill text-white hover:text-opacity-60 transition duration-200 ease-in-out">
                         Go Back to Home
                     </a>
                 </div>

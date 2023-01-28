@@ -69,10 +69,10 @@ document.addEventListener('alpine:init', () => {
 
       if (this.isLogedIn) {
         if (lastPath == '/passwordReset') {
-          this.isLoadingAuth = false;
           localStorage.setItem('showFlash', true)
           localStorage.setItem('message', 'Oops, you must have to logged out first');
           this.flash();
+          // this.isLoadingAuth = false;
           return window.history.back();
         }
         // this.isLoadingAuth = false;

@@ -14,7 +14,7 @@
 </style>
 
 <button id="topButton" type="button"
-    class="fixed right-14 p-3 dark:bg-slate-secondary bg-primary text-white hover:text-white dark:hover:text-opacity-80 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)]"
+    class="fixed right-14 p-3 dark:bg-slate-secondary bg-primary text-white hover:text-white dark:hover:text-opacity-80 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] z-[102]"
     title="Instructions">
     <i data-feather="arrow-up" class="animate-bounce bottom-[3px]"></i>
 </button>

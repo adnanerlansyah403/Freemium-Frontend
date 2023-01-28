@@ -16,6 +16,7 @@
 <section class="pt-[140px] pb-[100px] dark:text-white" x-data="auth"
 >
 <div x-init="checkAlreadyAuth()"></div>
+
 <div x-init="flash()"></div>
 <div x-show="showFlash" x-init="setTimeout(() => {
   showFlash = false
@@ -68,7 +69,7 @@
                         </template>
                     </button>
                     <input type="password" placeholder="Your password..."
-                    x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full" x-model="password" x-ref="password">
+                    x-bind:class="status_err.password ? 'input-danger' : ''" class="w-full border-none" x-model="password" x-ref="password">
                 </div>
                 <template x-if="status_err.password">
                     <div class="mt-3 flex text-[#b91c1c] items-center gap-2">

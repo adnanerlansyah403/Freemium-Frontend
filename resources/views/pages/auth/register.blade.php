@@ -39,7 +39,7 @@
                     <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.name || status_err.name[0] ? 'border border-[#b91c1c]' : ''">
                         <i data-feather="user" class="w-6 h-6 text-gray-secondary"></i>
                         <input type="text" placeholder="Your name..."
-                        x-bind:class="status_err.name || status_err.name[0] ? 'input-danger' : ''" class="w-full" x-model="name">
+                        x-bind:class="status_err.name || status_err.name[0] ? 'input-danger' : ''" class="w-full border-none" x-model="name">
                     </div>
                         <template x-if="status_err.name">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -54,7 +54,7 @@
                     <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.username || status_error.username[0] ? 'border border-[#b91c1c]' : ''">
                         <i data-feather="user" class="w-6 h-6 text-gray-secondary"></i>
                         <input type="text" placeholder="Your Username..."
-                        x-bind:class="status_err.username || status_error.username[0] ? 'input-danger' : ''" class="w-full" x-model="username">
+                        x-bind:class="status_err.username || status_error.username[0] ? 'input-danger' : ''" class="w-full border-none" x-model="username">
                     </div>
                         <template x-if="status_err.username">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -69,7 +69,7 @@
                     <div class="flex items-center gap-4 pl-4 pr-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] bg-white hover:bg-white dark:bg-slate-secondary rounded-primary mt-4" x-bind:class="status_err.email || status_err.email[0] ? 'border border-[#b91c1c]' : ''">
                         <i data-feather="mail" class="w-6 h-6 text-gray-secondary"></i>
                         <input type="text" placeholder="Your email..."
-                        x-bind:class="status_err.email || status_err.email[0] ? 'input-danger' : ''" class="w-full" x-model="email">
+                        x-bind:class="status_err.email || status_err.email[0] ? 'input-danger' : ''" class="w-full border-none" x-model="email">
                     </div>
                         <template x-if="status_err.email">
                             <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -89,7 +89,7 @@
                             </script>
                         </span>
                         <input type="password" placeholder="Your password..."
-                        x-bind:class="status_err.password || status_err.password[0] ? 'input-danger' : ''" class="w-full" x-model="password" x-ref="password">
+                        x-bind:class="status_err.password || status_err.password[0] ? 'input-danger' : ''" class="w-full border-none" x-model="password" x-ref="password">
 
                         <button type="button" title="show password" @click="
                         typePassword = passwordHidden == true ? 'text' : 'password';

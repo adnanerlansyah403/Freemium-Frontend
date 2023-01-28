@@ -150,10 +150,8 @@
                             <div class="mt-4 flex items-center justify-between">
                                 <p class="dark:text-white">
                                     Pages
-                                    <b>
-                                        <span x-text="categoriesArticle.current_page"></span> /
-                                        <span class="span dark:text-slate-third" x-text="categoriesArticle.last_page"></span>
-                                    </b>
+                                    <span x-text="categoriesArticle.current_page" class="font-semibold"></span> /
+                                    <span class="span dark:text-slate-third font-semibold" x-text="categoriesArticle.last_page"></span>
                                 </p>
                                 <ul class="flex items-center justify-center gap-2">
 

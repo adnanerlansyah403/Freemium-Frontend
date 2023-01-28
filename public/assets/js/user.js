@@ -873,20 +873,11 @@ document.addEventListener('alpine:init', () => {
         }
       })
 
-        .then((response) => {
-          if (response.ok) {
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Transaction Process',
-              background: '#7C030B',
-              showConfirmButton: false,
-              timer: 3000
-            })
-            setTimeout(function () {
-              const baseUrl = "http://127.0.0.1:8000/";
-              window.location.replace(baseUrl + 'transaction/details')
-            }, 3500)
+        .then(async response => {
+          let data = await response.json();
+          console.log(data);
+          if (data.status) {
+            window.open(data.data, '_blank');
           } else {
             Swal.fire({
               icon: 'error',

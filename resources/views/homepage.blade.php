@@ -116,10 +116,10 @@
         
         <script>
             AOS.init();
-            // window.onload = function(){
-            //     localStorage.removeItem("showFlash");
-            //     localStorage.removeItem("message");
-            // }
+            window.onload = function(){
+                localStorage.removeItem("showFlash");
+                localStorage.removeItem("message");
+            }
         </script>
 
         {{-- TinyMCE Scripts --}}

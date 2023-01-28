@@ -50,6 +50,66 @@
             font-weight: bold;
         }
 
+        blockquote{
+            display:block;
+            background: #fff;
+            padding: 15px 20px 15px 45px;
+            position: relative;
+            margin-block: 15px;            
+            /*Font*/
+            font-family: Georgia, serif;
+            font-size: 16px;
+            /* line-height: 1.2; */
+            color: #666;
+            text-align: justify;
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+            /*Borders - (Optional)*/
+            border-left: 15px solid #7C000B;
+            /* border-right: 2px solid #7C000B; */
+            
+            /*Box Shadow - (Optional)*/
+            -moz-box-shadow: 2px 2px 15px #ccc;
+            -webkit-box-shadow: 2px 2px 15px #ccc;
+            box-shadow: 2px 2px 15px #ccc;
+        }
+
+        blockquote::before{
+            content: "\201C"; /*Unicode for Left Double Quote*/
+            
+            /*Font*/
+            font-family: Georgia, serif;
+            font-size: 60px;
+            font-weight: bold;
+            color: #999;
+            
+            /*Positioning*/
+            position: absolute;
+            left: 10px;
+            top: -10px;
+        }
+
+        blockquote::after{
+            /*Reset to make sure*/
+            content: "";
+        }
+
+        blockquote a{
+            text-decoration: none;
+            background: #eee;
+            cursor: pointer;
+            padding: 0 3px;
+            color: #7C000B;
+        }
+
+        blockquote a:hover{
+            color: #666;
+        }
+
+        blockquote em{
+            font-style: italic;
+        }
+
     </style>
 
     <section id="sectionDetail" class="pt-[140px] pb-[100px] dark:text-white" x-data="user" x-init="
@@ -87,7 +147,7 @@
                                             <img x-bind:src="
                                                 detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
                                                 ? imgUrl + detailArticle?.author?.photo
-                                                : imgUrl + 'img/user1.png'"
+                                                : baseUrl + 'assets/images/user1.png'"
                                             src=""
                                             class="w-[50px] h-[50px] bg-gray-secondary rounded-full border-none" alt="">
                                         </div>
@@ -104,20 +164,27 @@
                                         </p>
                                     </span>
                                     <span class="flex items-center gap-1 translate-y-[1px]">
-                                        <template x-if="detailArticle.total_views_sum > 0">
-                                            <span>
-                                                <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
-                                                <script>
-                                                    feather.replace()
-                                                </script>
-                                            </span>
-                                        </template>
+                                        <span>
+                                            <i data-feather="eye" class="-mt-[2px] w-4 h-4"></i>
+                                            <script>
+                                                feather.replace()
+                                            </script>
+                                        </span>
                                         <p>
-                                            <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span>
-                                            <span x-text="content ? content?.total_views : detailArticle?.total_views_sum">
-                                            </span>
-                                            Views
+                                            {{-- <span x-show="detailArticle?.total_views_sum == null ? detailArticle.total_views_sum = 0 : ''"></span> --}}
+                                            <template x-if="!detailViews">
+                                                    <span x-text="'No views'">
+                                                        1000
+                                                    </span>
+                                            </template>
+                                            <template x-if="detailViews">
+                                                <div>
+                                                    <span x-text="detailViews.total"></span>
+                                                    Views
+                                                </div>
+                                            </template>
                                         </p>
+
                                     </span>
                                 </div>
                             </div>
@@ -127,7 +194,7 @@
                                 content?.thumbnail == '' ||
                                 detailArticle?.thumbnail == '' ? 'hidden' : ''">
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
-                                        class="w-full h-[500px] bg-gray-secondary rounded-primary" alt="">
+                                        class="w-full object-fill bg-gray-secondary max-h-[450px] rounded-primary" alt="">
                                 </figure>
                                 <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </div>
@@ -189,8 +256,8 @@
 
                                 </div>
                                 <template x-if="detailArticle?.subarticles.length > 0">
-                                    <div class="flex items-center gap-4 mt-4">
-                                        <div class="flex items-center gap-2">
+                                    <div class="flex items-center gap-4">
+                                        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
                                             <span x-text="content ? detailArticle?.subarticles?.findIndex(x => x.id == content?.id) + 1 + ' of ' + detailArticle?.subarticles?.length + ' sub-article': ''"></span>
                                             <button x-show="content && content?.id != detailArticle?.subarticles?.[0]?.id"
                                                 x-on:click="
@@ -226,13 +293,13 @@
 
                         <div class="px-4 py-5 rounded-primary bg-white dark:bg-slate-secondary shadow-[0px_0px_4px_rgba(0,0,0,0.25)] mt-6">
                             <div class="flex items-start flex-wrap lg:flex-nowrap gap-4 md:gap-0 justify-between">
-                                <div class="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start text-center lg:text-left gap-3">
+                                <div class="flex flex-wrap flex-col w-full lg:w-auto lg:flex-row lg:flex-nowrap items-center lg:items-start justify-center lg:justify-start text-center lg:text-left gap-3">
                                     <figure>
                                         <div>
                                             <img x-bind:src="
                                                 detailArticle?.author?.photo != null && detailArticle?.author?.photo != ''
                                                 ? imgUrl + detailArticle?.author?.photo
-                                                : imgUrl + 'img/user1.png'"
+                                                : baseUrl + 'assets/images/user1.png'"
                                             src=""
                                             class="w-[100px] h-[100px] bg-gray-secondary rounded-full border-none" alt="">
                                         </div>
