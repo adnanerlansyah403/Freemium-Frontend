@@ -667,10 +667,10 @@ document.addEventListener('alpine:init', () => {
 
 
           })
-        .catch(error => {
-          console.log(error);
-          this.isLoading = false;
-        })
+          .catch(error => {
+            console.log(error);
+            this.isLoading = false;
+          })
 
     },
 
@@ -688,9 +688,9 @@ document.addEventListener('alpine:init', () => {
       let formData = new FormData();
 
       for (let i = 0; i < selected.options.length; i++) {
-          if (selected.options[i].selected) {
-              formData.append('category_id[]', selected.options[i].value);
-          }
+        if (selected.options[i].selected) {
+          formData.append('category_id[]', selected.options[i].value);
+        }
       }
 
       formData.append('title', editA.title);
@@ -1050,10 +1050,10 @@ document.addEventListener('alpine:init', () => {
               vaOrder.innerText = item.virtual_account_number;
               paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
-        })
-        .catch(error => {
-          console.log(error);
-        })
+          })
+            .catch(error => {
+              console.log(error);
+            })
 
         })
     },
@@ -1109,6 +1109,16 @@ document.addEventListener('alpine:init', () => {
           localStorage.removeItem("message")
         }, 3000);
       }
+    },
+
+    paginateArticle(url) {
+      fetch(`${url}`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+        })
     },
 
     // Get list all article
@@ -1292,7 +1302,7 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < category.length; i++) {
         if (category.options[i].selected) {
-            formData.append('category_id[]', category.options[i].value);
+          formData.append('category_id[]', category.options[i].value);
         }
       }
       for (let i = 0; i < title_sub.length; i++) {
@@ -1472,7 +1482,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           let limitcategoriesArticle = data.data
-        //   this.categoriesArticle = data.data;
+          //   this.categoriesArticle = data.data;
           this.categoriesArticle = [];
 
           limitcategoriesArticle.map((data, index)=>{
@@ -2256,15 +2266,21 @@ document.addEventListener('alpine:init', () => {
         document.documentElement.classList.remove('dark')
         localStorage.theme = 'light'
         document.getElementById("buttonMode").setAttribute("title", "Light Mode")
-        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
       } else {
         document.documentElement.classList.add('dark')
         document.documentElement.classList.remove('light')
         localStorage.theme = 'dark'
         document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
-        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
       }
     },
+
+    firstName(string) {
+      let firstName = string.match(/^\w+/)[0];
+
+      return firstName;
+    }
 
   }))
 })

@@ -62,7 +62,7 @@
                     </template>
 
                     <template x-if="!isLogedIn">
-                        <div x-data="helpers" class="mt-1">
+                        <div x-data="helpers" class="">
                             <button id="buttonMode" @click="darkMode()">
                                 <img src="{{ asset("assets/images/icons/moon.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out" style="widows: 28px; height: 28px;">
                             </button>
@@ -151,7 +151,7 @@
                     >
                         <button
                             type="button"
-                            class="flex items-center gap-1 px-3 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
+                            class="flex items-center gap-[6px] px-3 py-2 bg-primary dark:bg-slate-secondary text-white hover:text-opacity-90 rounded-primary"
                             @click="dropdownmenu = !dropdownmenu"
                             x-on:mouseover="dropdownmenu = true;"
                             x-data="helpers"
@@ -239,7 +239,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div x-data="helpers" class="mt-1">
+                    <div x-data="helpers" class="">
                         <button id="buttonMode" @click="darkMode()">
                             <img src="{{ asset("assets/images/icons/moon.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out" style="widows: 28px; height: 28px;">
                         </button>
