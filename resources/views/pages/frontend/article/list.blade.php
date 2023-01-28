@@ -66,9 +66,12 @@
                             </select>
                         </div> --}}
                         <div class="flex items-center flex-wrap gap-[6px]" x-init="getCategories()">
-                            <template x-for="(item, index) in categoriesArticle">
+                            <template x-for="(item, index) in categoriesArticle ">
                                 <span class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
+                            <button class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                <span>More ...</span>
+                            </button>
                         </div>
                         <div class="flex items-center gap-2">
                             <button x-ref="paidFilter" x-on:click="

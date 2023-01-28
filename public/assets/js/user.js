@@ -112,6 +112,7 @@ document.addEventListener('alpine:init', () => {
             this.link_linkedin = user.data.link_linkedin == null ? '' : user.data.link_linkedin
             this.link_instagram = user.data.link_instagram == null ? '' : user.data.link_instagram
             this.link_twitter = user.data.link_twitter == null ? '' : user.data.link_twitter
+            this.isLoading = false;
             this.diffpayment = user.data.payments[0].plan.expired
             this.paymentDateProfile = user.data.payments[0].payment_date
 
@@ -120,9 +121,7 @@ document.addEventListener('alpine:init', () => {
             const diff = Math.abs(resultPaymentProfile - datenow)
             this.diffPaymentByDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
-            this.isLoading = false;
           }
-          this.isLoading = false;
         });
     },
 
@@ -666,14 +665,14 @@ document.addEventListener('alpine:init', () => {
 
 
           })
-          .catch(error => {
-            console.log(error);
-            this.isLoading = false;
-          })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        })
 
     },
 
-    // Update editted article 
+    // Update editted article
     updateArticle() {
       let editA = this.EditArticle;
       editA.description = tinymce.get('content').getContent();
@@ -687,9 +686,9 @@ document.addEventListener('alpine:init', () => {
       let formData = new FormData();
 
       for (let i = 0; i < selected.options.length; i++) {
-        if (selected.options[i].selected) {
-          formData.append('category_id[]', selected.options[i].value);
-        }
+          if (selected.options[i].selected) {
+              formData.append('category_id[]', selected.options[i].value);
+          }
       }
 
       formData.append('title', editA.title);
@@ -1049,10 +1048,10 @@ document.addEventListener('alpine:init', () => {
               vaOrder.innerText = item.virtual_account_number;
               paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
-          })
-            .catch(error => {
-              console.log(error);
-            })
+        })
+        .catch(error => {
+          console.log(error);
+        })
 
         })
     },
@@ -1291,7 +1290,7 @@ document.addEventListener('alpine:init', () => {
       }
       for (let i = 0; i < category.length; i++) {
         if (category.options[i].selected) {
-          formData.append('category_id[]', category.options[i].value);
+            formData.append('category_id[]', category.options[i].value);
         }
       }
       for (let i = 0; i < title_sub.length; i++) {
@@ -1466,7 +1465,16 @@ document.addEventListener('alpine:init', () => {
       })
         .then(async (response) => {
           const data = await response.json();
-          this.categoriesArticle = data.data;
+          let limitcategoriesArticle = data.data
+        //   this.categoriesArticle = data.data;
+          this.categoriesArticle = [];
+          limitcategoriesArticle.map((data, index)=>{
+            if(index<8) {
+                this.categoriesArticle.push(data)
+            }
+
+          })
+
         })
 
     },
@@ -1490,7 +1498,7 @@ document.addEventListener('alpine:init', () => {
         query += 'author=' + this.filtersKey[3] + '&';
       }
 
-      this.isLoading = true;
+      this.isLoadingArticle = true;
 
       fetch(`${this.apiUrl}article?${query}`, {
         method: 'GET',
@@ -1514,10 +1522,10 @@ document.addEventListener('alpine:init', () => {
 
           console.log(this.listArticle);
 
-          this.isLoading = false;
+          this.isLoadingArticle = false;
         }).catch(error => {
           console.log(error);
-          this.isLoading = false;
+          this.isLoadingArticle = false;
         })
 
     },
@@ -1541,7 +1549,7 @@ document.addEventListener('alpine:init', () => {
     // Get free article
     getFreeArticle() {
 
-      this.isLoading = true;
+      this.isLoadingArticle = true;
 
       fetch(`${this.apiUrl}article?type=free`, {
         method: "GET"
@@ -1555,7 +1563,7 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.add('active');
           // document.getElementById("paid").classList.remove('active');
 
-          this.isLoading = false;
+          this.isLoadingArticle = false;
 
         })
     },
@@ -1563,7 +1571,7 @@ document.addEventListener('alpine:init', () => {
     // Get paid article
     getPaidArticle() {
 
-      this.isLoading = true;
+      this.isLoadingArticle = true;
 
       fetch(`${this.apiUrl}article?type=paid`, {
         method: "GET"
@@ -1577,7 +1585,7 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.remove('active');
           // document.getElementById("paid").classList.add('active');
 
-          this.isLoading = false;
+          this.isLoadingArticle = false;
 
         })
     },
@@ -2240,19 +2248,15 @@ document.addEventListener('alpine:init', () => {
         document.documentElement.classList.add('light')
         document.documentElement.classList.remove('dark')
         localStorage.theme = 'light'
-        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
-        document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
+        document.getElementById("buttonMode").setAttribute("title", "Light Mode")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
       } else {
         document.documentElement.classList.add('dark')
         document.documentElement.classList.remove('light')
         localStorage.theme = 'dark'
-        document.getElementById("buttonMode").setAttribute("title", "Light Mode")
-        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/sun.svg")
+        document.getElementById("buttonMode").setAttribute("title", "Dark Mode")
+        document.getElementById("iconMode").setAttribute("src", this.baseUrl + "assets/images/icons/moon.svg")
       }
-    },
-
-    firstName(string) {
-      return string.match(/^\w+/);
     },
 
   }))
