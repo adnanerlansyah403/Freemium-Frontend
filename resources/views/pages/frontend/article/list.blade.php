@@ -111,7 +111,7 @@
                             <template x-for="(item, index) in listArticle.data">
                                 <div class="hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
                                     <figure class="bg-no-repeat w-full h-[270px] rounded-t-[6px] overflow-hidden relative">
-                                        <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-cover" x-bind:alt="`${item.title}.png is not found`">
+                                        <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-cover dark:text-white" x-bind:alt="`${item.title}.png is not found`">
                                     </figure>
                                     <div class="relative h-[230px] pt-12 dark:bg-[#111] shadow-lg dark:shadow-none flex-1 rounded-b-[6px] overflow-hidden px-3 pb-6">
                                         <div class="flex items-center justify-between w-full absolute top-4 left-0 px-3">
