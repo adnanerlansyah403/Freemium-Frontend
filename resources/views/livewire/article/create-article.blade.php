@@ -68,7 +68,7 @@
                         <div class="mb-5 col-12 lg:col lg:col-6" x-data="articles">
                             <div x-init="getCategories()"></div>
                             <label for="text" class="text-md">Category</label>
-                            <select name="category_id" id="" class="categories px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white  dark:bg-slate-secondary mt-4" >
+                            <select multiple name="category_id[]" id="category_id" class="categories px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border dark:border-white rounded-primary bg-white  dark:bg-slate-secondary mt-4" >
                                 <option value=""> Choosen category... </option>
                                 <template x-for="category in categoriesArticle">
                                     <option x-bind:value="category.id" x-text="category.name">HTML</option>

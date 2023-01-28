@@ -681,9 +681,16 @@ document.addEventListener('alpine:init', () => {
         editA.thumbnail = editA.thumbnail[0];
       }
 
+      let selected = document.getElementById('category_id');
+      
       let formData = new FormData();
 
-      formData.append('category_id[]', document.getElementById('category_id').value);
+      for (let i = 0; i < selected.options.length; i++) {
+          if (selected.options[i].selected) {
+              formData.append('category_id[]', selected.options[i].value);
+          }
+      }
+      
       formData.append('title', editA.title);
       formData.append('description', editA.description);
       formData.append('thumbnail', editA.thumbnail);
@@ -1237,13 +1244,14 @@ document.addEventListener('alpine:init', () => {
       let title = document.getElementById('title');
       let description = tinymce.get('content').getContent();
       let thumbnail = document.getElementById('thumbnail').files[0];
-      let category = document.getElementsByClassName('categories');
+      let category = document.getElementById('category_id');
       let type = document.getElementsByClassName('type');
       let title_sub = document.getElementsByClassName('title_sub');
       let thumbnail_sub = document.getElementsByClassName('thumbnail_sub');
       // let description_sub = document.getElementsByClassName('ck-content');
-
+      
       let formData = new FormData();
+      
       formData.append('title', title.value);
       formData.append('description', description);
 
@@ -1266,18 +1274,24 @@ document.addEventListener('alpine:init', () => {
       } else {
         thumb_err.innerHTML += this.styleMessage(`Thumbnail required.`);
       }
+
+      // Type validation
       for (var i = 0, length = type.length; i < length; i++) {
         if (type[i].checked) {
           formData.append('type_sub[]', type[i].value);
         }
       }
+
+      // Category validation
+      if (category.selectedOptions.length > 0) {
+        this.category_err = null;
+      } else {
+        this.category_err = { category: ['category cannot be empty!'] }
+      }
       for (let i = 0; i < category.length; i++) {
-        if (category[i].value == '') {
-          this.category_err = { category: ['category cannot be empty!'] }
-        } else {
-          this.category_err = null;
+        if (category.options[i].selected) {
+            formData.append('category_id[]', category.options[i].value);
         }
-        formData.append('category_id[]', category[i].value);
       }
       for (let i = 0; i < title_sub.length; i++) {
         let data_id = title_sub[i].getAttribute("data-id");
@@ -1371,6 +1385,7 @@ document.addEventListener('alpine:init', () => {
 
         this.sub_article_err += `<br>`;
       }
+      
       article = await fetch(`${this.apiUrl}article`, {
         method: "POST",
         headers: {
@@ -1656,7 +1671,7 @@ document.addEventListener('alpine:init', () => {
                     <div class="mt-4 flex flex-wrap lg:flex-nowrap">
                         <div class="mb-5 col-12 lg:col-12">
                             <label for="text" class="text-md">Title</label>
-                            <input data-id="${this.index}" type="text" placeholder="Your text..."
+                            <input required data-id="${this.index}" type="text" placeholder="Your text..."
                                 class="title_sub dark:text-white px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border-white rounded-primary bg-white border-none dark:bg-slate-primary border border-white hover:bg-white mt-4">
                                 <div id="err_title${this.index}"></div>
                         </div>
@@ -1664,7 +1679,7 @@ document.addEventListener('alpine:init', () => {
 
                     <div class="mb-5">
                         <label for="text" class="text-md">Thumbnail</label>
-                        <input accept="image/*" class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
+                        <input required accept="image/*" class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
                             hidden
                             id="file${this.index}">
                         <span
