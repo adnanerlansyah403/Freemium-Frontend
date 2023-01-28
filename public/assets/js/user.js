@@ -1252,7 +1252,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           if (data.status) {
-            this.detailArticle = data.data;
+            this.detailArticle = data.data[0];
             this.detailViews = data.views;
           }
           this.isLoadingArticle = false;
@@ -1338,31 +1338,65 @@ document.addEventListener('alpine:init', () => {
       let type = document.getElementsByClassName('type');
       let title_sub = document.getElementsByClassName('title_sub');
       let thumbnail_sub = document.getElementsByClassName('thumbnail_sub');
-      // let description_sub = document.getElementsByClassName('ck-content');
 
       let formData = new FormData();
 
-      formData.append('title', title.value);
-      formData.append('description', description);
+      title_err = document.getElementById("err_title");
+      title_err.innerHTML = '';
 
       thumb_err = document.getElementById("err_thumb");
       thumb_err.innerHTML = '';
 
+      description_err = document.getElementById("err_description");
+      description_err.innerHTML = '';
+
+      if (title.value != '') {
+        this.status_sub_err = true;
+        if (title.value.trim().length > 100) {
+          this.status_sub_err = true;
+          title_err.innerHTML += this.styleMessage(`title not be greater than 100 character.`);
+        } else if (title.value.trim().length < 10) {
+          this.status_sub_err = true;
+          title_err.innerHTML += this.styleMessage(`title not be less than 10 character.`);
+        } else {
+          formData.append('title', title.value);
+        }
+      } else {
+        this.status_sub_err = true;
+        title_err.innerHTML += this.styleMessage(`Title required.`);
+      }
+
       if (thumbnail) {
+        this.status_sub_err = false;
         file_thumbnail = thumbnail;
         getTypeThumbnail = file_thumbnail.type;
         typeThumbnail = getTypeThumbnail.split('/')[0];
         if (typeThumbnail === 'image') {
           if (thumbnail.size > 1023546) {
+            this.status_sub_err = true;
             thumb_err.innerHTML += this.styleMessage(`Thumbnail not be greater than 1024 kilobytes.`);
           } else {
             formData.append('thumbnail', thumbnail);
           }
         } else {
+          this.status_sub_err = true;
           thumb_err.innerHTML += this.styleMessage(`Thumbnail must be image.`);
         }
       } else {
         thumb_err.innerHTML += this.styleMessage(`Thumbnail required.`);
+      }
+
+      if (description != '') {
+        this.status_sub_err = false;
+        if (description.trim().length < 100) {
+          this.status_sub_err = true;
+          description_err.innerHTML += this.styleMessage(`Description article must be greater than 100 charcter.`);
+        } else {
+          formData.append('description', description);
+        }
+      } else {
+        this.status_sub_err = true;
+        description_err.innerHTML += this.styleMessage(`Description article required`);
       }
 
       // Type validation
@@ -1472,32 +1506,28 @@ document.addEventListener('alpine:init', () => {
           accordion.style.borderRadius = '10px';
           description_sub.innerHTML += this.styleMessage(`Description sub article ${i + 1} required`);
         }
-
-        this.sub_article_err += `<br>`;
       }
 
-      article = await fetch(`${this.apiUrl}article`, {
-        method: "POST",
-        headers: {
-          'Authorization': localStorage.getItem('token')
-        },
-        body: formData
-      })
+      this.isLoadingArticle = false;
+      if (!this.category_err && !this.status_sub_err) {
+        this.isLoadingArticle = true;
+        article = await fetch(`${this.apiUrl}article`, {
+          method: "POST",
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          },
+          body: formData
+        })
 
-      data = await article.json();
-      if (!data.status) {
-        this.showFlash = true;
-        this.status_err = data.message;
-        this.isLoadingArticle = false;
-      }
+        data = await article.json();
 
-      if (data.status) {
-        this.isLoadingArticle = false;
-        localStorage.setItem('message', 'article successfully created!');
-        localStorage.setItem('showFlash', true);
-        if (!this.category_err && !this.status_sub_err) {
+        if (data.status) {
+          localStorage.setItem('message', 'article successfully created!');
+          localStorage.setItem('showFlash', true);
+
           this.isLoadingArticle = false;
           return window.location.replace(`${this.baseUrl}myarticle`)
+
         }
       }
     },

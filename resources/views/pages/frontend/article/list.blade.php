@@ -54,19 +54,21 @@
 
                     <h1 class="px-3 font-poppins text-base lg:text-md font-semibold mb-4 dark:text-white">Article Search Results</h1>
 
-                    <div class="px-3 md:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
-                        <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
-                        x-bind:value="filtersKey[0] ? filtersKey[0] : ''"
-                        x-on:change="filtersKey[0] = $event.target.value; filterArticle()" 
-                        placeholder="Search article title....">
-                        <button @click="
-                            if(filtersKey[0] != '') {
-                                filterArticle()
-                            }
-                        " class="text-sm lg:text-base translate-x-1 flex items-center px-4 py-2 gap-2 bg-primary dark:bg-slate-secondary rounded-r-pill text-white dark:text-white">
-                            <i data-feather="search" class="text-white dark:text-gray-secondary"></i>
-                            <span>Search</span>
-                        </button>
+                    <div class="px-3">
+                        <div class=" md:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
+                            <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
+                            x-bind:value="filtersKey[0] ? filtersKey[0] : ''"
+                            x-on:change="filtersKey[0] = $event.target.value; filterArticle()" 
+                            placeholder="Search article title....">
+                            <button @click="
+                                if(filtersKey[0] != '') {
+                                    filterArticle()
+                                }
+                            " class="text-sm lg:text-base translate-x-[2px] flex items-center px-4 py-2 gap-2 bg-primary dark:bg-slate-secondary rounded-r-pill text-white dark:text-white">
+                                <i data-feather="search" class="text-white dark:text-gray-secondary"></i>
+                                <span>Search</span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="px-3 md:px-0 mt-4 w-full flex items-start justify-between gap-4">
@@ -78,8 +80,9 @@
                                 </template>
                             </select>
                         </div> --}}
-                        <div class="relative flex items-center flex-wrap gap-[6px]" x-init="getCategories()">
-                            <template x-for="(item, index) in categoriesArticle">
+                        <div class="relative flex items-center flex-wrap gap-[6px]" x-init="getCategories()"
+                        x-data="{categoryShow: false}">
+                            <template x-for="(item, index) in categoriesArticle.slice(0, 8)">
                                 <span 
                                 x-on:click="
                                     filterArticle(item.id);
@@ -87,13 +90,28 @@
                                 class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
                             <div x-on:click="getCategories(true)">
-                                <button class="px-4 py-1 border border-primary rounded-pill text-slate-primary dark:text-white font-medium dark:border dark:border-white dark:bg-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                <button class="px-4 py-1 border border-primary rounded-pill text-slate-primary font-medium dark:border dark:border-white dark:bg-white dark:text-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" @click="categoryShow = !categoryShow">
                                     More
                                 </button>
-                                <div class="fixed grid place-items-center">
-                                    <ul class="bg-white shadow-[0px_0px_4px_rgba(255,255,255,.25)">
-                                        <li></li>
-                                    </ul>
+                                <div class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 grid place-items-center z-[100]">
+                                    <div class="bg-white p-2 rounded-primary w-[350px] lg:w-[400px] shadow-[0px_0px_8px_rgba(0,0,0,0.25)] pr-4 transition duration-200 ease-in-out" x-show="categoryShow" x-transition>
+                                        <div class="flex items-center justify-between w-full">
+                                            <h3 class="font-medium font-poppins text-base"><span class="span dark:text-slate-third">Category</span> List </h3>
+                                            <span @click="categoryShow = false" class="text-black text-base hover:text-opacity-80 font-medium cursor-pointer">
+                                                <i data-feather="x"></i>
+                                            </span>
+                                        </div>
+                                        <ul class="max-h-[200px] overflow-y-auto has-scrollbar2 flex items-center flex-wrap gap-2 mt-2">
+                                            {{-- <li class="mb-6">
+                                                <span class="span">Category</span> List
+                                            </li> --}}
+                                            <template x-for="(item, index) in categoriesArticle.slice(8)">
+                                                <li class="cursor-pointer px-2 py-1 text-xs font-medium rounded-primary text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                                    <span x-text="item.name"></span>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -130,11 +148,11 @@
                     <template x-if="!isLoading">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6" x-data="helpers" style="margin-top: 32px;">
                             <template x-for="(item, index) in listArticle.data">
-                                <div class="dark:border dark:border-white dark:rounded-lg hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
-                                    <figure class="bg-no-repeat w-full h-[270px] rounded-t-[6px] overflow-hidden relative bg-primary">
+                                <div class="dark:border dark:border-white md:dark:rounded-lg hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
+                                    <figure class="bg-no-repeat w-full h-[270px] rounded-none md:rounded-t-[6px] overflow-hidden relative bg-primary dark:bg-slate-secondary">
                                         <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-cover dark:text-white" onerror="this.style.opacity = 0" onload="this.style.opacity = 1" x-bind:alt="`${item.title}.png is not found`">
                                     </figure>
-                                    <div class="relative h-[230px] pt-12 dark:bg-[#111] shadow-lg dark:shadow-none flex-1 rounded-b-[6px] overflow-hidden px-3 pb-6">
+                                    <div class="relative h-[230px] pt-12 dark:bg-[#111] shadow-lg dark:shadow-none flex-1 rounded-none md:rounded-b-[6px] overflow-hidden px-3 pb-6">
                                         <div class="flex items-center justify-between w-full absolute top-4 left-0 px-3">
                                             <button class="flex items-center gap-1 text-black font-bold text-sm leading-[21px] rounded-[10px]"
                                             x-on:click="
@@ -221,6 +239,14 @@
 
             <template x-if="listArticle.data.length != 0">
                 <div class="flex items-center justify-center gap-4 translate-y-14 dark:text-white">
+                    <template x-if="listArticle.current_page != 1">
+                            <
+                            <a @click="paginateArticle(listArticle.prev_page_url)" class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                <i class="bi bi-arrow-left"></i>
+                            </a>
+                        </a>
+
+                    </template>
                     <b class="font-semibold">
                         Halaman <span x-text="listArticle.current_page">1</span> dari <span class="span dark:text-slate-fourth" x-text="listArticle.last_page">200</span>
                     </b>
