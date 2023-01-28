@@ -1109,6 +1109,16 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    paginateArticle(url) {
+      fetch(`${url}`, {
+        method: "GET"
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listArticle = data.data;
+        })
+    },
+
     // Get list all article
     getArticle() {
 

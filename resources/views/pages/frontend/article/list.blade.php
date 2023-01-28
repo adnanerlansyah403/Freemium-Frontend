@@ -18,6 +18,11 @@
   /* display: none; */
 }
 
+.bg-active {
+        background : #7C000D;
+        color: white;
+    }
+
 .noContent {
   color: #000 !important;
   background-color: transparent !important;
@@ -94,7 +99,7 @@
 
                     <template x-if="!isLoading">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6" x-data="helpers" style="margin-top: 32px;">
-                            <template x-for="(item, index) in listArticle">
+                            <template x-for="(item, index) in listArticle.data">
                                 <div class="hover:-translate-y-2 dark:hover:shadow-[0px_2px_8px_rgba(255,255,255,.30)] transition duration-200 ease-linear">
                                     <figure class="bg-no-repeat w-full h-[270px] rounded-t-[6px] overflow-hidden relative">
                                         <img x-bind:src="imgUrl+item.thumbnail" class="w-full h-full object-cover" x-bind:alt="`${item.title}.png is not found`">
@@ -186,11 +191,14 @@
 
             <div class="flex items-center justify-center gap-2 translate-y-14 dark:text-white">
                 <b class="font-semibold">
-                    Halaman <span>1</span> dari <span class="span dark:text-slate-fourth">200</span>
+                    Halaman <span x-text="listArticle.current_page">1</span> dari <span class="span dark:text-slate-fourth" x-text="listArticle.last_page">200</span>
                 </b>
-                <a href="" class="text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                    <i class="bi bi-arrow-right"></i>
-                </a>
+                <template x-if="listArticle.current_page < listArticle.last_page">
+                    <a @click="paginateArticle(listArticle.next_page_url)" class="text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </template>
+
             </div>
 
 
