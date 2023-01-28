@@ -124,6 +124,10 @@ document.addEventListener('alpine:init', () => {
             this.diffPaymentByDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
           }
+        })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
         });
     },
 
@@ -172,6 +176,10 @@ document.addEventListener('alpine:init', () => {
           if (this.data_user.role == 1) {
             this.isLoading = false;
           }
+        })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
         });
     },
 
@@ -194,6 +202,10 @@ document.addEventListener('alpine:init', () => {
           if (this.data_user.role == 2) {
             this.isLoading = false;
           }
+        })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
         });
     },
 
@@ -251,8 +263,12 @@ document.addEventListener('alpine:init', () => {
           Swal.fire({
             position: 'center',
             icon: 'success',
+<<<<<<< HEAD
             title: 'Success!',
             text: user.message,
+=======
+            title: user.message,
+>>>>>>> 19544fd
             background: '#fff',
             titleColor: '#000',
             color: '#000',
@@ -265,6 +281,9 @@ document.addEventListener('alpine:init', () => {
             window.location.replace(baseUrl + 'profile');
           }, 3300)
         })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
     // Logout
@@ -292,6 +311,10 @@ document.addEventListener('alpine:init', () => {
           this.listPlan = data.data;
           this.isLoading = false;
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        });
 
     },
 
@@ -328,8 +351,10 @@ document.addEventListener('alpine:init', () => {
           price.value = data.data.price;
           expired.value = data.data.expired;
           plan_id.value = data.data.id;
-
         })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
     // searchPlan(keyword) {
@@ -371,6 +396,9 @@ document.addEventListener('alpine:init', () => {
           name.value = data.data.name;
           category_id.value = data.data.id;
         })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
     async actionCategory() {
@@ -503,6 +531,9 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           this.listUser = data.data;
         })
+        .catch(error => {
+          console.log(error);
+        });
     },
     sort(col = 'name') {
       if (this.sortCol === col) this.sortAsc = !this.sortAsc;
@@ -528,6 +559,9 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           this.listUser = data.data;
         })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
     // Fetch all user data ) (admin)
@@ -545,6 +579,10 @@ document.addEventListener('alpine:init', () => {
           this.listUser = data.data;
           this.isLoading = false;
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        });
     },
 
     // Delete user data (admin)
@@ -679,8 +717,6 @@ document.addEventListener('alpine:init', () => {
               this.categories = data.category;
             }
             this.isLoading = false;
-
-
           })
           .catch(error => {
             console.log(error);
@@ -898,7 +934,8 @@ document.addEventListener('alpine:init', () => {
           }, 4000);
 
           this.isLoading = false;
-        }).catch(error => {
+        })
+        .catch(error => {
           console.log(error);
           this.isLoading = false;
         })
@@ -917,7 +954,6 @@ document.addEventListener('alpine:init', () => {
           'Authorization': localStorage.getItem('token'),
         }
       })
-
         .then(async response => {
           let data = await response.json();
 
@@ -1092,6 +1128,9 @@ document.addEventListener('alpine:init', () => {
             })
 
         })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
   }))
@@ -1117,6 +1156,7 @@ document.addEventListener('alpine:init', () => {
 
     // INPUTS ARTICLE
     filtersKey: [],
+    categoryFilter: [],
 
     // CATEGORIES ARTICLE
     sortCol: null,
@@ -1155,6 +1195,9 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           this.listArticle = data.data;
         })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
     // Get list all article
@@ -1178,6 +1221,10 @@ document.addEventListener('alpine:init', () => {
         }).finally(() => {
           this.isLoadingArticle = false;
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoadingArticle = false;
+        });
     },
 
     // load more feature
@@ -1268,6 +1315,10 @@ document.addEventListener('alpine:init', () => {
         this.categoriesArticle = data.data;
         this.isLoading = false;
       })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        });
     },
 
     // Sweet alert ?
@@ -1483,6 +1534,9 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           this.categoriesArticle = data.data;
         })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
     // Search Category
@@ -1497,6 +1551,10 @@ document.addEventListener('alpine:init', () => {
           this.categoriesArticle = data.data;
           this.isLoading = false
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        });
     },
 
     // Get all categories
@@ -1524,14 +1582,28 @@ document.addEventListener('alpine:init', () => {
           // })
 
         })
+        .catch(error => {
+          console.log(error);
+        });
 
     },
 
 
     // FILTERS
 
-    filterArticle() {
+    filterArticle(categories = '') {
       query = '';
+
+      // Get or remove selected category
+      if (categories != '' && !this.categoryFilter.includes(categories)) {
+        this.categoryFilter.push(categories)
+      }
+      else if (this.categoryFilter.includes(categories)) {
+        let index = this.categoryFilter.indexOf(categories);
+        if (index > -1) {
+          this.categoryFilter.splice(index, 1);
+        }
+      }
 
       if (this.filtersKey[0] && this.filtersKey[0] != '') {
         query += 'search=' + this.filtersKey[0] + '&';
@@ -1539,8 +1611,8 @@ document.addEventListener('alpine:init', () => {
       if (this.filtersKey[1] && this.filtersKey[1] != '') {
         query += 'type=' + this.filtersKey[1] + '&';
       }
-      if (this.filtersKey[2] && this.filtersKey[2] != '') {
-        query += 'category=' + this.filtersKey[2] + '&';
+      for (let i = 0; i < this.categoryFilter.length; i++) {
+        query += 'category[]=' + this.categoryFilter[i] + '&';
       }
       if (this.filtersKey[3] && this.filtersKey[3] != '') {
         query += 'author=' + this.filtersKey[3] + '&';
@@ -1569,7 +1641,8 @@ document.addEventListener('alpine:init', () => {
           }, 4000);
 
           this.isLoadingArticle = false;
-        }).catch(error => {
+        })
+        .catch(error => {
           console.log(error);
           this.isLoadingArticle = false;
         })
@@ -1589,6 +1662,10 @@ document.addEventListener('alpine:init', () => {
           this.listArticle = data.data;
           this.isLoadingArticle = false;
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoadingArticle = false;
+        });
 
     },
 
@@ -1610,8 +1687,11 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("paid").classList.remove('active');
 
           this.isLoadingArticle = false;
-
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoadingArticle = false;
+        });
     },
 
     // Get paid article
@@ -1632,8 +1712,11 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("paid").classList.add('active');
 
           this.isLoadingArticle = false;
-
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoadingArticle = false;
+        });
     },
 
     // filter article by category
@@ -1658,9 +1741,11 @@ document.addEventListener('alpine:init', () => {
           //     document.getElementById(`category${ this.categoriesArticle[index].id }`).classList.remove('active');
           //   }
           // }
-
         })
-
+        .catch(error => {
+          console.log(error);
+          this.isLoadingArticle = false;
+        });
     },
 
     // Reset filters
@@ -1953,6 +2038,9 @@ document.addEventListener('alpine:init', () => {
           if (this.data_user.role != 1) {
             return window.history.back()
           }
+        })
+        .catch(error => {
+          console.log(error);
         });
     },
 
@@ -1971,6 +2059,9 @@ document.addEventListener('alpine:init', () => {
           if (this.data_user.role == 1) {
             return window.history.back()
           }
+        })
+        .catch(error => {
+          console.log(error);
         });
     },
 
@@ -2001,7 +2092,10 @@ document.addEventListener('alpine:init', () => {
           }
           this.isLoading = false;
         })
-        .catch()
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        });
     },
 
     // Make chart based on admin data
