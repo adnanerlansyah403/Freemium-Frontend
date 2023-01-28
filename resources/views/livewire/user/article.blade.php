@@ -66,7 +66,7 @@
 
                         
                         <template x-if="!isLoadingMyArticle">
-                            <div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4">
                                 <template x-for="(item, index) in listMyArticle.length > 1 ? listMyArticle.slice(0, itemMyArticle) : listMyArticle">
                                     
                                     
@@ -90,7 +90,7 @@
                                                 </span>
                                             </template>
                                         </div>
-                                        <div class="dark:bg-[#111] flex-1 rounded-b-lg overflow-hidden px-3 pt-4 pb-6">
+                                        <div class="relative h-[230px] dark:bg-[#111] flex-1 rounded-b-lg overflow-hidden px-3 pt-4 pb-6">
                                             <div class="flex items-center gap-2">
                                                 <p class="text-sm">
                                                     <span class="flex items-center gap-1" 
@@ -114,9 +114,13 @@
                                                 </template>
                                             </div>
                                             <div class="flex items-start mt-2">
-                                                <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="text-[22px] font-lato font-bold" x-text="substring(item.title, 70)"></a>
+                                                <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="text-[22px] font-lato font-bold" x-text="substring(item.title, 30)"></a>
                                             </div>
-                                            <div class="flex items-center gap-3 mt-6">
+                                            <p class="font-normal text-sm dark:text-gray-primary"
+                                            x-text="item.description.length > 80 ? parseToOriginalString(item.description, 80) : item.description">
+                
+                                            </p>
+                                            <div class="absolute -bottom-2 -translate-y-5 flex items-center gap-3 mt-6">
                                                 <a x-bind:href="baseUrl+`article/edit/${item.id}`" @click="Article['id'] = item.id" class="w-max p-2 rounded-full outline outline-1 outline-primary dark:outline-slate-third hover:bg-primary dark:hover:bg-white hover:text-white dark:hover:text-slate-primary hover:outline-none transition duration-200 ease-in-out">
                                                     <i data-feather="edit"></i>
                                                     <script>
@@ -221,7 +225,7 @@
     
                 <template x-if="listMyArticle.length > 1 && listMyArticle.length > itemMyArticle">
                     
-                    <div>
+                    {{-- <div>
                         <template x-if="isLoadMore">
                             <div class="flex items-center justify-center">
                                 <span class="span dark:text-slate-third">Loading...</span>
@@ -235,7 +239,7 @@
                                 " id="loadMore" class="px-4 py-2 outline outline-1 outline-primary dark:outline-white rounded-pill text-primary dark:text-white hover:bg-primary dark:bg-slate-secondary hover:outline-none hover:text-white transition duration-200 ease-in-out">Load More</button>
                             </div>
                         </template>
-                    </div>
+                    </div> --}}
                 
                 </template>
                 

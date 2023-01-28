@@ -113,11 +113,11 @@
                         <div class="flex justify-between">
                             <label for="category_id" class="text-md">Category</label>
                         </div>
-                        <select x-bind:model="EditArticle && EditArticle.tags ? EditArticle.tags[0].category_id : ''" name="category_id" id="category_id"
+                        <select multiple name="category_id[]" id="category_id"
                             class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary dark:border dark:border-white mt-4">
                             <option value=""> Choosen category... </option>
                             <template x-for="(c, index) in categories">
-                                <option :value="c.id" :selected="c.id == EditArticle?.tags?.[0]?.category_id" x-text="c.name">test</option>
+                                <option :value="c.id" :selected="EditArticle?.tags?.some(element => element.category_id == c.id)" x-text="c.name">test</option>
                             </template>
                         </select>
 

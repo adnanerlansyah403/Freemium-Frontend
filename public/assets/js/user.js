@@ -43,12 +43,28 @@ document.addEventListener('alpine:init', () => {
     message: '',
     categories: [],
 
+    // User data
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+    profession: '',
+    // photo: '',
+    link_facebook: '',
+    link_linkedin: '',
+    link_instagram: '',
+    link_twitter: '',
+    diffpayment: '',
+    paymentDateProfile: '',
+    diffPaymentByDay: '',
+
     checkExists(obj, id) {
       return obj.some(function (gfg) {
         return gfg.id === id;
       });
     },
 
+    // Flash user
     flash() {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
@@ -66,26 +82,14 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
-    name: '',
-    username: '',
-    email: '',
-    password: '',
-    profession: '',
-    // photo: '',
-    link_facebook: '',
-    link_linkedin: '',
-    link_instagram: '',
-    link_twitter: '',
-    diffpayment: '',
-    paymentDateProfile: '',
-    diffPaymentByDay: '',
-
+    // Adding months to inputted date
     addMonths(date, months) {
       date.setMonth(date.getMonth() + months);
 
       return date;
     },
 
+    // Fetch logged in user data
     fetchMe() {
       this.isLoading = true;
       fetch(this.apiUrl + 'me', {
@@ -122,13 +126,7 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
-    addMonths(date, months) {
-      date.setMonth(date.getMonth() + months);
-
-      return date;
-    },
-
-
+    // Check if user logged in and set islogedIn session to true
     checkSession() {
       const token = localStorage.getItem('token')
       this.isLogedIn = token ? true : false
@@ -148,11 +146,13 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    // Check token
     checkAuth() {
       const token = localStorage.getItem('token')
       this.isLogedIn = token ? true : false
     },
 
+    // Check if user is not admin
     checkRole() {
       this.isLoading = true;
       fetch(this.apiUrl + 'me', {
@@ -173,6 +173,8 @@ document.addEventListener('alpine:init', () => {
           }
         });
     },
+
+    // Isn't this is same with checkRole() ?
     checkRoleUser() {
       this.isLoading = true;
       fetch(this.apiUrl + 'me', {
@@ -194,10 +196,12 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
+    // Set tinyMce content with inputted text
     setTiny(id, text) {
       tinymce.get(id).setContent(text);
     },
 
+    // Update user profile
     updateMe() {
       let profession = document.getElementById('profession').value;
       let photoProfile = document.getElementById('photo').files[0];
@@ -247,6 +251,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    // Logout
     logout() {
       localStorage.clear()
       window.location.replace(this.baseUrl + 'login')
@@ -273,6 +278,8 @@ document.addEventListener('alpine:init', () => {
         })
 
     },
+
+
     modalHandler(val, id = 0) {
       let modal = document.getElementById("modal");
       let plan_id = document.getElementById("plan_id");
@@ -309,17 +316,17 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
-    searchPlan(keyword) {
-      // fetch(`${this.apiUrl}category`, {
-      //   method: 'GET',
-      //   headers: {
-      //     Authorization: localStorage.getItem('token'),
-      //   }
-      // })
-      //   .then(async (response) => {
-      //     const data = await response.json();
-      //   })
-    },
+    // searchPlan(keyword) {
+    //   fetch(`${this.apiUrl}category`, {
+    //     method: 'GET',
+    //     headers: {
+    //       Authorization: localStorage.getItem('token'),
+    //     }
+    //   })
+    //     .then(async (response) => {
+    //       const data = await response.json();
+    //     })
+    // },
 
     modalHandlerCategory(val, id = 0) {
       let modal = document.getElementById("modal");
@@ -431,6 +438,7 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    // Delete plan
     async deletePlan(id) {
       plan = await fetch(`${this.apiUrl}plan/${id}/delete`, {
         method: "POST",
@@ -448,6 +456,7 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    // Delete category
     async deleteCategory(id) {
       category = await fetch(`${this.apiUrl}category/${id}/delete`, {
         method: "POST",
@@ -488,6 +497,8 @@ document.addEventListener('alpine:init', () => {
         return 0;
       });
     },
+
+    // Search user from list (admin)
     searchUser() {
       fetch(`${this.apiUrl
         }user/all?search=${this.search}`, {
@@ -502,6 +513,8 @@ document.addEventListener('alpine:init', () => {
           this.listUser = data.data;
         })
     },
+
+    // Fetch all user data ) (admin)
     fetchListUser() {
       this.isLoading = true;
       fetch(`${this.apiUrl}user/all`, {
@@ -518,6 +531,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    // Delete user data (admin)
     async deleteUser(id) {
       user = await fetch(`${this.apiUrl}user/${id}/delete`, {
         method: "POST",
@@ -535,6 +549,7 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    // Fetch logged in user article
     fetchMyArticle() {
       let url = window.location.href;
       let id = url.substring(url.lastIndexOf('/') + 1);
@@ -554,6 +569,7 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    // Load more article
     loadMoreMyArticle() {
       this.isLoadingMyArticle = true;
       this.isLoadMore = true;
@@ -565,6 +581,7 @@ document.addEventListener('alpine:init', () => {
       }, 600)
     },
 
+    // Fetch logged in user article
     keywordMyArticle: '',
     fetchListMyArticle() {
       const token = localStorage.getItem('token')
@@ -587,9 +604,14 @@ document.addEventListener('alpine:init', () => {
             this.isLoading = false;
 
           })
+          .catch(error => {
+            console.log(error);
+            this.isLoading = false;
+          })
 
     },
 
+    // My article search filter
     searchMyArticle(keyword) {
       const token = localStorage.getItem('token')
 
@@ -610,9 +632,14 @@ document.addEventListener('alpine:init', () => {
 
           this.isLoadingMyArticle = false;
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoadingMyArticle = false;
+        })
 
     },
 
+    // Fetch article user want to edit
     fetchEditArticle(id) {
       const token = localStorage.getItem('token')
 
@@ -639,9 +666,14 @@ document.addEventListener('alpine:init', () => {
 
 
           })
+          .catch(error => {
+            console.log(error);
+            this.isLoading = false;
+          })
 
     },
 
+    // Update editted article 
     updateArticle() {
       let editA = this.EditArticle;
       editA.description = tinymce.get('content').getContent();
@@ -650,9 +682,16 @@ document.addEventListener('alpine:init', () => {
         editA.thumbnail = editA.thumbnail[0];
       }
 
+      let selected = document.getElementById('category_id');
+
       let formData = new FormData();
 
-      formData.append('category_id[]', document.getElementById('category_id').value);
+      for (let i = 0; i < selected.options.length; i++) {
+        if (selected.options[i].selected) {
+          formData.append('category_id[]', selected.options[i].value);
+        }
+      }
+
       formData.append('title', editA.title);
       formData.append('description', editA.description);
       formData.append('thumbnail', editA.thumbnail);
@@ -692,6 +731,7 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    // add subarticle (edit)
     addSub() {
       let id = 0;
       let article_id = this.EditArticle.id;
@@ -702,6 +742,7 @@ document.addEventListener('alpine:init', () => {
       return { id, article_id, title, type, description, thumbnail };
     },
 
+    // Updated editted sub-article
     updateSub(number) {
       let editSub = this.EditArticle.subarticles[number];
       editSub.description = tinymce.get('sub_content').getContent();
@@ -747,9 +788,14 @@ document.addEventListener('alpine:init', () => {
 
           this.isLoading = false;
         })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = true;
+        })
 
     },
 
+    // Delete user article
     deleteArticle(id) {
       this.isLoading = true;
 
@@ -785,6 +831,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    // Delete user sub-article
     deleteSub(delSub) {
       this.isLoading = true;
 
@@ -851,8 +898,27 @@ document.addEventListener('alpine:init', () => {
             })
 
           }
-        });
+        })
+        .catch(error => {
+          console.log(error);
+        })
 
+    },
+
+    // Select plan for subscribe
+    selectedPlan(item = null) {
+
+      this.plan_id = item.id;
+
+      var elements = document.querySelectorAll(".cardplan");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove("active");
+        document.querySelectorAll(".selectplan")[i].innerText = "Select"
+      }
+
+      document.getElementById(`plan${item.id}`).click();
+      document.getElementById(`cardplan${item.id}`).classList.add('active');
+      document.getElementById(`selectedplan${item.id}`).innerText = 'Selected';
     },
 
     getTime(date) {
@@ -890,6 +956,9 @@ document.addEventListener('alpine:init', () => {
           }
           return;
         })
+        .catch(error => {
+          console.log(error);
+        })
     },
 
     updateMyTransaction() {
@@ -920,7 +989,7 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('showFlash', true, 5000)
             localStorage.setItem('message', data.message);
             setTimeout(function () {
-              const baseUrl = "http://127.0.0.1:8000/";
+              // const baseUrl = "http://127.0.0.1:8000/";
               window.location.replace(`${baseUrl}profile`);
             }, 3500)
           } else {
@@ -937,10 +1006,11 @@ document.addEventListener('alpine:init', () => {
           }
         })
         .catch(error => {
-          console.log(error.message);
+          console.log(error);
         })
     },
 
+    // Show user order detail on modal
     showOrder(val, id = 0) {
       let modal = document.getElementById("modal");
 
@@ -980,25 +1050,12 @@ document.addEventListener('alpine:init', () => {
               paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
           })
-
+            .catch(error => {
+              console.log(error);
+            })
 
         })
     },
-
-    selectedPlan(item = null) {
-
-      this.plan_id = item.id;
-
-      var elements = document.querySelectorAll(".cardplan");
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].classList.remove("active");
-        document.querySelectorAll(".selectplan")[i].innerText = "Select"
-      }
-
-      document.getElementById(`plan${item.id}`).click();
-      document.getElementById(`cardplan${item.id}`).classList.add('active');
-      document.getElementById(`selectedplan${item.id}`).innerText = 'Selected';
-    }
 
   }))
 
@@ -1034,6 +1091,7 @@ document.addEventListener('alpine:init', () => {
     status_sub_err: false,
 
 
+    // Flash admin
     flash() {
       if (localStorage.getItem('showFlash')) {
         this.showFlash = true;
@@ -1052,6 +1110,7 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    // Get list all article
     getArticle() {
 
       this.isLoadingArticle = true;
@@ -1075,6 +1134,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    // load more feature
     loadMoreArticle() {
       this.isLoadingArticle = true;
       this.isLoadMore = true;
@@ -1091,6 +1151,7 @@ document.addEventListener('alpine:init', () => {
       });
     },
 
+    // Get detail article
     getDetailArticle(id) {
       this.isLoadingArticle = true;
       fetch(`${this.apiUrl}article/${id}`, {
@@ -1118,6 +1179,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    // Get detail sub-article
     getSubArticle(id = 1) {
       this.isLoading = true;
       fetch(`${this.apiUrl}sub-article/${id}`, {
@@ -1146,11 +1208,13 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    // Get all categories
     async fetchCategory() {
       category = await fetch(`${this.apiUrl}category`);
       this.categoriesArticle = await category.json();
     },
 
+    // Pagination category
     async fetchPaginationCategory() {
       this.isLoading = true;
       // category = await fetch(`${this.apiUrl}category`);
@@ -1163,6 +1227,8 @@ document.addEventListener('alpine:init', () => {
         this.isLoading = false;
       })
     },
+
+    // Sweet alert ?
     styleMessage(msg) {
       return `
         <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -1171,19 +1237,22 @@ document.addEventListener('alpine:init', () => {
         </div>
       `
     },
+
+    // Create article (user)
     async createArticle() {
       this.sub_article_err = '';
       this.isLoadingArticle = true;
       let title = document.getElementById('title');
       let description = tinymce.get('content').getContent();
       let thumbnail = document.getElementById('thumbnail').files[0];
-      let category = document.getElementsByClassName('categories');
+      let category = document.getElementById('category_id');
       let type = document.getElementsByClassName('type');
       let title_sub = document.getElementsByClassName('title_sub');
       let thumbnail_sub = document.getElementsByClassName('thumbnail_sub');
       // let description_sub = document.getElementsByClassName('ck-content');
 
       let formData = new FormData();
+
       formData.append('title', title.value);
       formData.append('description', description);
 
@@ -1206,18 +1275,24 @@ document.addEventListener('alpine:init', () => {
       } else {
         thumb_err.innerHTML += this.styleMessage(`Thumbnail required.`);
       }
+
+      // Type validation
       for (var i = 0, length = type.length; i < length; i++) {
         if (type[i].checked) {
           formData.append('type_sub[]', type[i].value);
         }
       }
+
+      // Category validation
+      if (category.selectedOptions.length > 0) {
+        this.category_err = null;
+      } else {
+        this.category_err = { category: ['category cannot be empty!'] }
+      }
       for (let i = 0; i < category.length; i++) {
-        if (category[i].value == '') {
-          this.category_err = { category: ['category cannot be empty!'] }
-        } else {
-          this.category_err = null;
+        if (category.options[i].selected) {
+          formData.append('category_id[]', category.options[i].value);
         }
-        formData.append('category_id[]', category[i].value);
       }
       for (let i = 0; i < title_sub.length; i++) {
         let data_id = title_sub[i].getAttribute("data-id");
@@ -1311,6 +1386,7 @@ document.addEventListener('alpine:init', () => {
 
         this.sub_article_err += `<br>`;
       }
+
       article = await fetch(`${this.apiUrl}article`, {
         method: "POST",
         headers: {
@@ -1337,6 +1413,7 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    // Sort article by abjad
     sort(col) {
       if (this.sortCol === col) this.sortAsc = !this.sortAsc;
       this.sortCol = col;
@@ -1355,6 +1432,7 @@ document.addEventListener('alpine:init', () => {
       });
     },
 
+    // Paginate category ?
     paginate(url) {
       fetch(`${url}`, {
         method: "GET"
@@ -1365,6 +1443,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    // Search Category
     searchCategory() {
       this.isLoading = true;
       fetch(`${this.apiUrl
@@ -1378,6 +1457,7 @@ document.addEventListener('alpine:init', () => {
         })
     },
 
+    // Get all categories
     getCategories() {
 
       fetch(`${this.apiUrl
@@ -1410,7 +1490,7 @@ document.addEventListener('alpine:init', () => {
         query += 'author=' + this.filtersKey[3] + '&';
       }
 
-      this.isLoadingArticle = true;
+      this.isLoading = true;
 
       fetch(`${this.apiUrl}article?${query}`, {
         method: 'GET',
@@ -1434,14 +1514,15 @@ document.addEventListener('alpine:init', () => {
 
           console.log(this.listArticle);
 
-          this.isLoadingArticle = false;
+          this.isLoading = false;
         }).catch(error => {
           console.log(error);
-          this.isLoadingArticle = false;
+          this.isLoading = false;
         })
 
     },
 
+    // Search article by keyword
     searchArticle(keyword) {
 
       this.isLoadingArticle = true;
@@ -1457,9 +1538,10 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    // Get free article
     getFreeArticle() {
 
-      this.isLoadingArticle = true;
+      this.isLoading = true;
 
       fetch(`${this.apiUrl}article?type=free`, {
         method: "GET"
@@ -1473,14 +1555,15 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.add('active');
           // document.getElementById("paid").classList.remove('active');
 
-          this.isLoadingArticle = false;
+          this.isLoading = false;
 
         })
     },
 
+    // Get paid article
     getPaidArticle() {
 
-      this.isLoadingArticle = true;
+      this.isLoading = true;
 
       fetch(`${this.apiUrl}article?type=paid`, {
         method: "GET"
@@ -1494,11 +1577,12 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.remove('active');
           // document.getElementById("paid").classList.add('active');
 
-          this.isLoadingArticle = false;
+          this.isLoading = false;
 
         })
     },
 
+    // filter article by category
     fetchArticleByCategory(categoryId) {
 
       this.isLoadingArticle = true;
@@ -1525,6 +1609,7 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    // Reset filters
     resetFilters() {
       document.getElementById('search').value = null;
       document.getElementById('category').value = '';
@@ -1544,6 +1629,7 @@ document.addEventListener('alpine:init', () => {
       type.innerHTML = `(${val})`;
     },
 
+    // Create sub-article (user)
     createSubArticle(refs) {
       refs.listsubarticle.insertAdjacentHTML('beforeend', `
             <li class="relative bg-white dark:bg-slate-secondary rounded-lg my-2 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] accordion" id="${`accordion` + this.index}" x-data="accordion(${this.index})">
@@ -1560,7 +1646,7 @@ document.addEventListener('alpine:init', () => {
                 id="${`accordionTitle${this.index}`}"
                 class="flex flex-row justify-between items-center font-semibold px-3 py-2 cursor-pointer"
                 >
-                    <span>Sub Artikel ${this.index} <span id="type${this.index}">(Free)</span></span>
+                    <span>Sub Article ${this.index} <span id="type${this.index}">(Free)</span></span>
                     <div class="translate-y-1 flex items-center">
                         <span class="p-1 rounded-full text-gray-secondary hover:text-opacity-60" @click="deleteSubArticle(${this.index})">
                             <ion-icon name="trash-outline" class="w-6 h-6 text-primary dark:text-white dark:hover:text-opacity:75"></ion-icon>
@@ -1586,7 +1672,7 @@ document.addEventListener('alpine:init', () => {
                     <div class="mt-4 flex flex-wrap lg:flex-nowrap">
                         <div class="mb-5 col-12 lg:col-12">
                             <label for="text" class="text-md">Title</label>
-                            <input data-id="${this.index}" type="text" placeholder="Your text..."
+                            <input required data-id="${this.index}" type="text" placeholder="Your text..."
                                 class="title_sub dark:text-white px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] dark:shadow-none dark:border-white rounded-primary bg-white border-none dark:bg-slate-primary border border-white hover:bg-white mt-4">
                                 <div id="err_title${this.index}"></div>
                         </div>
@@ -1594,7 +1680,7 @@ document.addEventListener('alpine:init', () => {
 
                     <div class="mb-5">
                         <label for="text" class="text-md">Thumbnail</label>
-                        <input accept="image/*" class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
+                        <input required accept="image/*" class="thumbnail_sub" type="file" name="thumbnail" placeholder="Your thumbnail..."
                             hidden
                             id="file${this.index}">
                         <span
@@ -1738,6 +1824,7 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    // Delete sub-article (user)
     deleteSubArticle(id) {
       let parentElement = document.getElementById('listsubarticle');
       parentElement.querySelector(`#accordion${id}`).remove();
@@ -1770,6 +1857,7 @@ document.addEventListener('alpine:init', () => {
     message: '',
     keyword: '',
 
+    // Flash admin
     flash() {
       this.showFlash = false;
       if (localStorage.getItem('showFlash')) {
@@ -1784,6 +1872,7 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    //  Check if token exist and set isLogedIn session to true
     checkSession() {
       const token = localStorage.getItem('token')
       this.isLogedIn = token ? true : false
@@ -1795,6 +1884,7 @@ document.addEventListener('alpine:init', () => {
       }
     },
 
+    // Check if logged in user role is admin
     checkRole() {
       fetch(this.apiUrl + 'me', {
         method: "GET",
@@ -1812,6 +1902,7 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
+    // Its same as checkRole()
     checkIsAdmin() {
       fetch(this.apiUrl + 'me', {
         method: "GET",
@@ -1829,6 +1920,7 @@ document.addEventListener('alpine:init', () => {
         });
     },
 
+    // Fetch admin data
     fetchAdminData() {
       this.isLoading = true;
       fetch(`${this.apiUrl}admin`, {
@@ -1845,18 +1937,20 @@ document.addEventListener('alpine:init', () => {
             this.fetchChart();
             // this.showFlash = true;
             // this.typeStatus = true;
-            // localStorage.setItem("typeStatus", true)
+            localStorage.setItem("typeStatus", true)
           }
-          // else {
-          //   localStorage.setItem('message', data.message);
-          //   localStorage.setItem('showFlash', true);
-          //   this.typeStatus = false;
-          //   localStorage.setItem("typeStatus", false)
-          // }
+          else {
+            localStorage.setItem('message', data.message);
+            localStorage.setItem('showFlash', true);
+            this.typeStatus = false;
+            localStorage.setItem("typeStatus", false)
+          }
           this.isLoading = false;
         })
+        .catch()
     },
 
+    // Make chart based on admin data
     fetchChart() {
       const barChart = document.getElementById('barChart');
       const lineChart = document.getElementById('lineChart');
@@ -1974,6 +2068,7 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    // Fetch all user order
     fetchListOrder() {
       this.isLoading = true;
       fetch(`${this.apiUrl}payment`, {
@@ -1986,10 +2081,15 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           this.listOrder = data.data;
           this.isLoading = false;
-        });
+        })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        })
 
     },
 
+    // Show detail order on modal
     showOrder(val, id = 0) {
       let modal = document.getElementById("modal");
 
@@ -2031,10 +2131,15 @@ document.addEventListener('alpine:init', () => {
           paymentDateOrder.innerText = this.convertDate(data.data.payment_date);
 
         })
+        .catch(error => {
+          console.log(error);
+        })
     },
+
 
     // FILTERING ORDERS
 
+    // Sort order list
     sortOrder(col = 'payment_date') {
       if (this.sortCol === col) this.sortAsc = !this.sortAsc;
       this.sortCol = col;
@@ -2045,6 +2150,7 @@ document.addEventListener('alpine:init', () => {
       });
     },
 
+    // Order list search feature
     searchOrder(keyword) {
       fetch(`${this.apiUrl}payment?search=${keyword}`, {
         method: 'GET',
@@ -2056,6 +2162,9 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           this.listOrder = data.data
         })
+        .catch(error => {
+          console.log(error);
+        })
 
     },
 
@@ -2066,6 +2175,7 @@ document.addEventListener('alpine:init', () => {
     apiUrl: "http://127.0.0.1:8001/api/",
     imgUrl: "http://127.0.0.1:8001/",
 
+    // Convert expired month from number of month to string years / month
     convertExpiredPlan(time = 1) {
       if (time >= 12) {
         if (time == 12) {
@@ -2079,6 +2189,7 @@ document.addEventListener('alpine:init', () => {
       return 'Unlimited';
     },
 
+    // Convert laravel timestamp to readable string date
     convertDate(date) {
 
       const months = ["Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
@@ -2091,11 +2202,13 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    // I dont know what is this
     convertCurrencyUsd(money) {
       let currency = '$' + money.toFixed(2);
       return currency;
     },
 
+    // Cut some long text as long as inputted length
     substring(string, max = 10) {
       const text = string.textContent
       if (string.length > max) {
@@ -2104,12 +2217,14 @@ document.addEventListener('alpine:init', () => {
       return string;
     },
 
+    // Check if text is string (not html text)
     checkString(string) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(string, 'text/html');
       const hasHTMLTag = doc.body.childNodes.length > 0;
     },
 
+    // Convert tinyMce content with html tag to original string
     parseToOriginalString(string, max = 10) {
       const stringWithoutHTML = string.replace(/<[^>]+>/g, '');
       if (stringWithoutHTML.length > max) {
@@ -2118,6 +2233,7 @@ document.addEventListener('alpine:init', () => {
       return stringWithoutHTML
     },
 
+    // Dark mode
     darkMode() {
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (localStorage.theme == 'dark') {

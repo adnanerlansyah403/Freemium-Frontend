@@ -62,7 +62,7 @@
                     </template>
 
                     <template x-if="!isLogedIn">
-                        <div x-data="helpers">
+                        <div x-data="helpers" class="mt-1">
                             <button id="buttonMode" @click="darkMode()">
                                 <img src="{{ asset("assets/images/icons/moon.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out" style="widows: 28px; height: 28px;">
                             </button>
@@ -239,8 +239,8 @@
                             </li>
                         </ul>
                     </div>
-                    <div x-data="helpers">
-                        <button id="buttonMode" @click="darkMode()" style="margin-top: 8px;">
+                    <div x-data="helpers" class="mt-1">
+                        <button id="buttonMode" @click="darkMode()">
                             <img src="{{ asset("assets/images/icons/moon.svg") }}" id="iconMode" alt="" class="transition duration-200 ease-in-out" style="widows: 28px; height: 28px;">
                         </button>
                     </div>
