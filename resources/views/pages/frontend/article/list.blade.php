@@ -52,6 +52,8 @@
 
                 <div class="col-12">
 
+                    <h1 class="font-poppins text-base lg:text-md font-semibold mb-4">Article Search Results</h1>
+
                     <div class="px-3 md:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
                         <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
                         x-on:change="filtersKey[0] = $event.target.value; filterArticle()" placeholder="Search for a article....">
