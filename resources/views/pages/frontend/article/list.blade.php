@@ -221,6 +221,14 @@
 
             <template x-if="listArticle.data.length != 0">
                 <div class="flex items-center justify-center gap-4 translate-y-14 dark:text-white">
+                    <template x-if="listArticle.current_page != 1">
+                            <
+                            <a @click="paginateArticle(listArticle.prev_page_url)" class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                <i class="bi bi-arrow-left"></i>
+                            </a>
+                        </a>
+
+                    </template>
                     <b class="font-semibold">
                         Halaman <span x-text="listArticle.current_page">1</span> dari <span class="span dark:text-slate-fourth" x-text="listArticle.last_page">200</span>
                     </b>
