@@ -400,7 +400,7 @@
                                     </p>
                                 </div>
 
-                                    <div class="flex items-center w-full gap-2 mb-3">
+                                    <div class="flex items-center w-full gap-2" x-bind:class="data_user.subscribe_status != 1 ? 'mt-3' : ''">
                                         <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
                                                 type = type == 'paid' ? '' : 'paid';
