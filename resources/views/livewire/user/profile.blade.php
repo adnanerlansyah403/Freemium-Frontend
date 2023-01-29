@@ -171,70 +171,73 @@
                 </div>
 
                 <div
-                    class="col col-12 lg:col-4 md:order-2 h-max py-5 px-4 rounded-primary bg-white dark:bg-slate-secondary dark:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
-                    <figure class="mb-5">
-                        <template x-if="data_user.photo != null || data_user.photo.length != 0">
-                            <img x-bind:src="imgUrl+data_user.photo"
-                                class="w-[100px] h-[100px] object-cover bg-gray-secondary rounded-full" alt="">
-                        </template>
-                        <template x-if="data_user.photo == null || data_user.photo.length == 0">
-                            <img x-bind:src="baseUrl+'assets/images/user1.png'"
-                                class="w-[100px] h-[100px] object-cover bg-gray-secondary rounded-full" alt="">
-                        </template>
-                    </figure>
-                    <span class="text-md font-semibold" x-text="data_user.name">User</span>
-                    <p x-text="data_user.email">user@gmail.com</p>
-                    <div class="mt-8 h-max flex flex-col items-center justify-center">
-                        {{-- <span class="mb-4 font-semibold text-primary">AUTHOR</span> --}}
-                        <p class="flex items-center gap-2"
-                            x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-0' : ''">
-                            <span class=" font-bold">Status : </span>
-                            <template x-if="data_user.role == 1">
-                                {{-- <span x-text="console.log(data_user.role)"></span> --}}
-                                <span
-                                    class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm"
-                                    x-text="data_user.role == 1 ? 'Admin Member' : ''">Admin Member</span>
+                    class="col col-12 lg:col-4 md:order-2">
+                    <div class="h-max pt-3 px-4 rounded-primary bg-white dark:bg-slate-secondary dark:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
+                        <figure class="mb-5">
+                            <template x-if="data_user.photo != null || data_user.photo.length != 0">
+                                <img x-bind:src="imgUrl+data_user.photo"
+                                    class="w-[100px] h-[100px] object-cover bg-gray-secondary rounded-full" alt="">
                             </template>
+                            <template x-if="data_user.photo == null || data_user.photo.length == 0">
+                                <img x-bind:src="baseUrl+'assets/images/user1.png'"
+                                    class="w-[100px] h-[100px] object-cover bg-gray-secondary rounded-full" alt="">
+                            </template>
+                        </figure>
+                        <span class="text-md font-semibold" x-text="data_user.name">User</span>
+                        <p x-text="data_user.email">user@gmail.com</p>
+                        <div class="mt-8 h-max flex flex-col items-center justify-center">
+                            {{-- <span class="mb-4 font-semibold text-primary">AUTHOR</span> --}}
+                            <p class="flex items-center gap-2"
+                                x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-0' : ''">
+                                <span class=" font-bold">Status : </span>
+                                <template x-if="data_user.role == 1">
+                                    {{-- <span x-text="console.log(data_user.role)"></span> --}}
+                                    <span
+                                        class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm"
+                                        x-text="data_user.role == 1 ? 'Admin Member' : ''">Admin Member</span>
+                                </template>
+                                <template x-if="data_user.role == 2">
+                                    <span
+                                        class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm"
+                                        x-text="data_user.subscribe_status == 1 ? 'Member - '+data_user.payments[0].plan.name : 'Not a Member'">Member
+                                        - Lifetime</span>
+                                </template>
+                            </p>
                             <template x-if="data_user.role == 2">
-                                <span
-                                    class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm"
-                                    x-text="data_user.subscribe_status == 1 ? 'Member - '+data_user.payments[0].plan.name : 'Not a Member'">Member
-                                    - Lifetime</span>
-                            </template>
-                        </p>
-                        <template x-if="data_user.role == 2">
-                            <div x-init="resultPaymentProfile()">
-
-                                <p class="flex items-center gap-2 mt-3 text-center justify-center"
-                                    x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-0' : ''">
-                                    <template x-if="data_user.subscribe_status == 1">
-                                        <div>
-                                            <span class=" font-bold">Member since : </span>
-                                            <span
-                                                class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm"
-                                                x-text="data_user.payments[0].payment_date"></span>
-                                        </div>
-                                    </template>
-                                </p>
-                                <p class="flex items-center gap-2 mt-3 text-center justify-center"
-                                    x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-6' : ''">
-                                    <template x-if="data_user.subscribe_status == 1">
-                                        <template x-if="data_user.payments[0].plan.expired != 0">
-                                            <div x-init="">
-                                                <span class=" font-bold">Expired : </span>
+                                <div x-init="resultPaymentProfile()">
+    
+                                    <p class="flex items-center gap-2 mt-3 text-center justify-center"
+                                        x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-0' : ''">
+                                        <template x-if="data_user.subscribe_status == 1">
+                                            <div>
+                                                <span class=" font-bold">Member since : </span>
                                                 <span
                                                     class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm"
-                                                    x-text="`${diffPaymentByDay} Days from now`"></span>
+                                                    x-text="data_user.payments[0].payment_date"></span>
                                             </div>
                                         </template>
-                                    </template>
-                                </p>
-                            </div>
-                        </template>
+                                    </p>
+                                    <p class="flex items-center gap-2 mt-3 text-center justify-center"
+                                        x-bind:class="localStorage.getItem('token') && !data_user?.subscribe_status ? 'mb-6' : ''">
+                                        <template x-if="data_user.subscribe_status == 1">
+                                            <template x-if="data_user.payments[0].plan.expired != 0">
+                                                <div x-init="">
+                                                    <span class=" font-bold">Expired : </span>
+                                                    <span
+                                                        class="bg-primary dark:bg-slate-third rounded-primary py-1 px-3 text-white text-sm"
+                                                        x-text="`${diffPaymentByDay} Days from now`"></span>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </p>
+                                </div>
+                            </template>
+                        </div>
                     </div>
                     <template x-if="localStorage.getItem('token') && !data_user?.subscribe_status">
                         <a href="{{ route('transaction.create') }}"
-                            class="-translate-y-2 group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] flex items-center justify-center gap-2 lg:mt-auto md:mt-auto">
+                            style="margin-top: 15px !important;"
+                            class="group w-full bg-primary dark:bg-slate-secondary dark:border dark:border-white text-white px-4 py-2 lg:w-[270px text-center] text-sm rounded-[10px] flex items-center justify-center gap-2 lg:mt-auto md:mt-auto">
                             <i data-feather="check-circle"
                                 class="text-white group-hover:text-opacity-70 dark:group-hover:text-opacity-80"></i>
                             <h2
