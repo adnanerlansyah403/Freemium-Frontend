@@ -632,6 +632,22 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Fetch logged in user article
+    paginateMyArticle(url) {
+      fetch(`${url}`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listMyArticle = data.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     keywordMyArticle: '',
     fetchListMyArticle() {
       const token = localStorage.getItem('token')
@@ -650,6 +666,7 @@ document.addEventListener('alpine:init', () => {
               window.location.replace(this.baseUrl + 'login')
             }
             this.listMyArticle = data.data;
+            console.log(this.listMyArticle)
             this.listMyView = data.views;
             this.isLoading = false;
 

@@ -72,8 +72,8 @@
                         
                         <template x-if="!isLoadingMyArticle">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4">
-                                <template x-if="listMyArticle.length > 0">
-                                    <template x-for="(item, index) in listMyArticle">
+                                <template x-if="listMyArticle.data.length > 0">
+                                    <template x-for="(item, index) in listMyArticle.data">
                                         
                                         
                                         <article class="bg-white shadow-lg dark:hover:shadow-[0_0_4px_2px_#fff] dark:bg-[#111] w-[370px] rounded-lg max-w-max transition duration-400 ease-in-out">
@@ -240,18 +240,28 @@
                         
                     </div>
                 </template>
-
-                <template x-if="listMyArticle.length != 0">
+                <template x-if="listMyArticle.data.length != 0">
                     <div class="flex items-center justify-center gap-4 translate-y-14 dark:text-white">
-                        <b class="font-semibold">
-                            Halaman <span>1</span> dari <span class="span dark:text-slate-fourth">200</span>
-                        </b>
-                        <a class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
+                        <template x-if="listMyArticle.current_page != 1">
+                                <
+                                <a @click="paginateMyArticle(listMyArticle.prev_page_url)" class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                    <i class="bi bi-arrow-left"></i>
+                                </a>
+                            </a>
     
+                        </template>
+                        <b class="font-semibold">
+                            Halaman <span x-text="listMyArticle.current_page">1</span> dari <span class="span dark:text-slate-fourth" x-text="listMyArticle.last_page">200</span>
+                        </b>
+                        <template x-if="listMyArticle.current_page < listMyArticle.last_page">
+                            <a @click="paginateMyArticle(listMyArticle.next_page_url)" class="cursor-pointer text-base font-semibold hover:text-primary dark:text-white dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </template>
+        
                     </div>
                 </template>
+
     
                 {{-- <template x-if="itemMyArticle > listMyArticle.length">
                     <div class="flex items-center justify-center">
