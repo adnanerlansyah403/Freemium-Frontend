@@ -112,11 +112,11 @@
                                 "
                                 class="category cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
-                            <div x-on:click="getCategories(true)">
+                            <div x-on:click="getCategories(true)" class="relative">
                                 <button class="px-4 py-1 border border-primary rounded-pill text-slate-primary font-medium dark:border dark:border-white dark:bg-white dark:text-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" @click="categoryShow = !categoryShow">
                                     More
                                 </button>
-                                <div class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 grid place-items-center z-[100]">
+                                <div class="absolute left-[-175%] md:left-0 z-[100]" style="top: 100%; transform: translateY(10px)">
                                     <div class="bg-white p-2 rounded-primary w-[350px] lg:w-[400px] shadow-[0px_0px_8px_rgba(0,0,0,0.25)] pr-4 transition duration-200 ease-in-out" x-show="categoryShow" x-transition>
                                         <div class="flex items-center justify-between w-full">
                                             <h3 class="font-medium font-poppins text-base"><span class="span dark:text-slate-third">Category</span> List </h3>
@@ -129,17 +129,19 @@
                                                 <span class="span">Category</span> List
                                             </li> --}}
                                             <template x-for="(item, index) in categoriesArticle.slice(8)">
-                                                <li class="cursor-pointer px-2 py-1 text-xs font-medium rounded-primary text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                                                    <span x-text="item.name" x-bind:id="'categoryModal'+item.id"
-                                                        x-on:click="
-                                                            filterArticle(item.id);
-                                                            let category = document.getElementById(`categoryModal${item.id}`);
-                                                            if(category.classList.contains('active')) {
-                                                                category.classList.remove('active');
-                                                            } else {
-                                                                category.classList.add('active');
-                                                            }
-                                                    "></span>
+                                                <li class="category cursor-pointer px-2 py-1 text-xs font-medium rounded-primary text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out"
+                                                x-bind:id="'category'+item.id"
+                                                x-on:click="
+                                                    filterArticle(item.id);
+                                                    let category = document.getElementById(`category${item.id}`);
+                                                    if(category.classList.contains('active')) {
+                                                        category.classList.remove('active');
+                                                    } else {
+                                                        category.classList.add('active');
+                                                    }
+                                                "
+                                                >
+                                                    <span x-text="item.name"></span>
                                                 </li>
                                             </template>
                                         </ul>
