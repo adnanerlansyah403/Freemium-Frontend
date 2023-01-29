@@ -698,15 +698,15 @@ document.addEventListener('alpine:init', () => {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': token
           }
         })
           .then(async (response) => {
             data = await response.json();
 
             if (data.status == false) {
-              localStorage.setItem('showFlash', true);
-              localStorage.setItem('message', data.message);
+              this.showFlash = true;
+              this.message = data.message;
               window.history.back();
             } else {
               this.EditArticle = data.data;
@@ -717,6 +717,13 @@ document.addEventListener('alpine:init', () => {
           .catch(error => {
             console.log(error);
             this.isLoading = false;
+            this.showFlash = true;
+            this.message = 'Sorry, an unexpected error has occurred';
+            
+            setTimeout(() => {
+              this.showFlash = false;
+              this.message = '';
+            }, 4000);
           })
 
     },

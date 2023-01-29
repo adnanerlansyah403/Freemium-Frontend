@@ -130,7 +130,16 @@
                                             </li> --}}
                                             <template x-for="(item, index) in categoriesArticle.slice(8)">
                                                 <li class="cursor-pointer px-2 py-1 text-xs font-medium rounded-primary text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
-                                                    <span x-text="item.name"></span>
+                                                    <span x-text="item.name" x-bind:id="'categoryModal'+item.id"
+                                                        x-on:click="
+                                                            filterArticle(item.id);
+                                                            let category = document.getElementById(`categoryModal${item.id}`);
+                                                            if(category.classList.contains('active')) {
+                                                                category.classList.remove('active');
+                                                            } else {
+                                                                category.classList.add('active');
+                                                            }
+                                                    "></span>
                                                 </li>
                                             </template>
                                         </ul>

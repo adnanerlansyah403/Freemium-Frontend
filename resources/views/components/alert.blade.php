@@ -18,9 +18,9 @@
 
 <div id="alert" class="fixed flex gap-4 left-1/2 -translate-x-1/2 p-4 rounded-lg max-w-[400px] dark:alert-dark w-full z-[101]" x-data="{ showFlash: true }" :class="{
     'active' : localStorage.getItem('showFlash') || showFlash, 
-    '' : localStorage.getItem('showFlash') || !showFlash,
+    '' : !localStorage.getItem('showFlash') || !showFlash,
     'alert-success' : localStorage.getItem('typeStatus'),
-    'alert-danger' : localStorage.getItem('typeStatus')
+    'alert-danger' : !localStorage.getItem('typeStatus')
     }" 
     x-init="setTimeout(() => {
                 localStorage.removeItem('showFlash');

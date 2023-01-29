@@ -98,7 +98,7 @@
                         <div class="flex justify-between">
                             <label for="title" class="text-md">Title</label>
                         </div>
-                        <input x-model="EditArticle.title" type="text" placeholder="Your text..." name="title" id="title"
+                        <input x-model="EditArticle.title" onchange="isDirty()" type="text" placeholder="Your text..." name="title" id="title"
                             class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary dark:border dark:border-white mt-4">
 
                         <template x-if="status_err?.[0]?.title">
@@ -222,7 +222,7 @@
                 </div>
 
                 <div class="flex items-center justify-center mt-6 mb-10">
-                    <button @click.prevent="updateArticle()"
+                    <button @click.prevent="updateArticle()" onsubmit="formSubmitting = true; alert(formSubmitting)"
                         class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
                     </button>
@@ -531,26 +531,44 @@
 
     <script>
         document.addEventListener('alpine:init', () => {
-        Alpine.store('accordion', {
-        tab: 0
-        });
+            Alpine.store('accordion', {
+            tab: 0
+            });
 
-        Alpine.data('accordion', (idx) => ({
-        init() {
-            this.idx = idx;
-        },
-        idx: -1,
-        handleClick() {
-            this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
-        },
-        handleRotate() {
-            return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';
-        },
-        handleToggle() {
-            return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
-        }
-        }));
-    })
+            Alpine.data('accordion', (idx) => ({
+            init() {
+                this.idx = idx;
+            },
+            idx: -1,
+            handleClick() {
+                this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
+            },
+            handleRotate() {
+                return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';
+            },
+            handleToggle() {
+                return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
+            }
+            }));
+
+            var formSubmitting = false;
+            var isDirty = function() { return false; }
+
+            window.onload = function() {
+                window.addEventListener("beforeunload", function (e) {
+                    if (formSubmitting || !isDirty()) {
+                        return undefined;
+                    }
+                    
+                    var confirmationMessage = 'It looks like you have been editing something. '
+                                            + 'If you leave before saving, your changes will be lost.';
+
+                    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+                    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+                });
+                formSubmitting = false;
+            };
+        })
     </script>
     
 </section>
