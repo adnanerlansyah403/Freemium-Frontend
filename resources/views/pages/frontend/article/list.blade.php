@@ -116,7 +116,7 @@
                                 <button class="px-4 py-1 border border-primary rounded-pill text-slate-primary font-medium dark:border dark:border-white dark:bg-white dark:text-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" @click="categoryShow = !categoryShow">
                                     More
                                 </button>
-                                <div class="absolute z-[100]" style="top: 100%; transform: translateY(10px)">
+                                <div class="absolute left-[-175%] md:left-0 z-[100]" style="top: 100%; transform: translateY(10px)">
                                     <div class="bg-white p-2 rounded-primary w-[350px] lg:w-[400px] shadow-[0px_0px_8px_rgba(0,0,0,0.25)] pr-4 transition duration-200 ease-in-out" x-show="categoryShow" x-transition>
                                         <div class="flex items-center justify-between w-full">
                                             <h3 class="font-medium font-poppins text-base"><span class="span dark:text-slate-third">Category</span> List </h3>
