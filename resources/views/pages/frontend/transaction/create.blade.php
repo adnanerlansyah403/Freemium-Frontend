@@ -101,7 +101,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white has-scrollba
             </h1>
 
             <div class="mt-14 mb-10 flex flex-col items-center text-center">
-                <h3 class="text-[20px] md:text-md text-gray-secondary">Plans at less 100$/Year</h3>
+                <h3 class="text-[20px] md:text-md text-gray-secondary">Whats you get?</h3>
                 <ul class="mt-4">
                     <li class="flex items-center gap-2 text-sm">
                         <i data-feather="check-circle" class="text-primary dark:text-slate-third"></i>
@@ -137,7 +137,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white has-scrollba
                 </template>
             </div>
 
-            <div class="px-4 lg:px-0 lg:w-[630px] lg:mx-auto">
+            {{-- <div class="px-4 lg:px-0 lg:w-[630px] lg:mx-auto">
                 <span class="text-md font-semibold">Pay With : </span>
 
                 <div class="flex items-center gap-5 mt-7 pr-2 bg-white dark:bg-slate-primary rounded-primary shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
@@ -146,7 +146,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white has-scrollba
                     </span>
                     <span class="py-3 font-semibold">Virtual Account</span>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="flex items-center justify-center mt-10">
                 <button @click.prevent="paySubscription()" type="submit" class="px-4 py-2 rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 transition duration-200 ease-in-out">
