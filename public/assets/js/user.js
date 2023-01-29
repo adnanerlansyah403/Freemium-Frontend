@@ -949,6 +949,20 @@ document.addEventListener('alpine:init', () => {
     deleteSub(delSub) {
       this.isLoading = true;
 
+      // if subarticle not saved yet, the id is 0
+      if(delSub == 0){
+        this.showFlash = true;
+        this.message = 'Sub Article data deleted successfully';
+
+        setTimeout(() => {
+          this.showFlash = false;
+          this.message = '';
+        }, 4000);
+
+        this.isLoading = false;
+        return 0; 
+      }
+
       const token = localStorage.getItem('token')
       fetch(this.apiUrl + 'sub-article/' + delSub + '/delete', {
         method: "POST",
@@ -1856,6 +1870,7 @@ document.addEventListener('alpine:init', () => {
       // document.getElementById('paid').checked = false;
 
       this.filtersKey = [];
+      this.categoryFilter = [];
       this.getArticle();
     },
 

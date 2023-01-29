@@ -149,31 +149,31 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <button x-ref="paidFilter" 
-                            x-on:click="
-                                filtersKey[1] = filtersKey[1] != 'paid' ? 'paid' : '';
-                                filterArticle();
-                                $refs.freeFilter.classList.remove('active');
-                                if($refs.paidFilter.classList.contains('active')) {
-                                    $refs.paidFilter.classList.remove('active');
-                                } else {
-                                    $refs.paidFilter.classList.add('active');
-                                }
-                            "
+                                x-on:click="
+                                    filtersKey[1] = filtersKey[1] != 'paid' ? 'paid' : '';
+                                    filterArticle();
+                                    $refs.freeFilter.classList.remove('active');
+                                    if($refs.paidFilter.classList.contains('active')) {
+                                        $refs.paidFilter.classList.remove('active');
+                                    } else {
+                                        $refs.paidFilter.classList.add('active');
+                                    }
+                                "
                             id="paidFilter" 
                             class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>PAID</span>
                             </button>
                             <button x-ref="freeFilter" 
-                            x-on:click="
-                                filtersKey[1] = filtersKey[1] != 'free' ? 'free' : '';
-                                filterArticle();
-                                $refs.paidFilter.classList.remove('active');
-                                if($refs.freeFilter.classList.contains('active')) {
-                                    $refs.freeFilter.classList.remove('active');
-                                } else {
-                                    $refs.freeFilter.classList.add('active');
-                                }
-                            "
+                                x-on:click="
+                                    filtersKey[1] = filtersKey[1] != 'free' ? 'free' : '';
+                                    filterArticle();
+                                    $refs.paidFilter.classList.remove('active');
+                                    if($refs.freeFilter.classList.contains('active')) {
+                                        $refs.freeFilter.classList.remove('active');
+                                    } else {
+                                        $refs.freeFilter.classList.add('active');
+                                    }
+                                "
                             id="freeFilter" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>FREE</span>
                             </button>

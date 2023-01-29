@@ -4,12 +4,14 @@
     <div x-init="checkSession()"></div>
     <div x-init="checkRoleUser()"></div>
     <div x-init="fetchMe()"></div>
+
     <div x-init="flash()"></div>
     <div x-show="showFlash">
         <x-alert />
     </div>
-    <div x-init="
-    fetchEditArticle(window.location.href.split('/').pop())"></div>
+
+    <div x-init="fetchEditArticle(window.location.href.split('/').pop())"></div>
+    <span x-init="localStorage.removeItem('changed_sub')"></span>
 
     <template x-if="isLogedIn && data_user.role == 2 && data_user.id == EditArticle?.user_id">
         <script>
@@ -83,7 +85,7 @@
 
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 
-            <form action="" class="col lg:mx-0 col-12">
+            <form onsubmit="return false" class="col lg:mx-0 col-12">
                 <p class="flex items-center gap-2 mb-4" x-show="!isLoading">
                     <b>Created At : </b>
                     <span x-text="convertDate(EditArticle?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
@@ -113,7 +115,7 @@
                         <div class="flex justify-between">
                             <label for="category_id" class="text-md">Category</label>
                         </div>
-                        <select multiple name="category_id[]" id="category_id"
+                        <select multiple onchange="isDirty()" name="category_id[]" id="category_id"
                             class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary dark:border dark:border-white has-scrollbar2 mt-4">
                             <option value=""> Choosen category... </option>
                             <template x-for="(c, index) in categories">
@@ -139,7 +141,7 @@
 
                 <div class="mb-5">
                     <label for="thumbnail" class="text-md">Thumbnail</label>
-                    <input x-on:change="EditArticle.thumbnail = Object.values($event.target.files)" type="file" accept="image/*" name="thumbnail" id="thumbnail" placeholder="Your thumbnail..." hidden
+                    <input x-on:change="EditArticle.thumbnail = Object.values($event.target.files)" onchange="isDirty()" type="file" accept="image/*" name="thumbnail" id="thumbnail" placeholder="Your thumbnail..." hidden
                         x-ref="file" @change="
                             if ($refs.file) {
                                 $refs.iconimage.style.display = 'none';
@@ -222,7 +224,7 @@
                 </div>
 
                 <div class="flex items-center justify-center mt-6 mb-10">
-                    <button @click.prevent="updateArticle()" onsubmit="formSubmitting = true; alert(formSubmitting)"
+                    <button @submit.prevent="updateArticle()" onclick="formSubmitting = true; save()"
                         class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
                     </button>
@@ -232,7 +234,10 @@
 
         </div>
 
-        <div class="relative container mx-auto mt-4" x-data="{editSub: 0,}">
+        <div class="relative container mx-auto mt-4" x-data="{
+            editSub: 0,
+            changed_sub: new Map()
+        }">
 
 
             <div class="w-full my-1 px-5 lg:px-0 dark:text-white">
@@ -263,6 +268,9 @@
                                 <div class="flex flex-wrap gap-4 max-h-[500px] pb-4 overflow-y-auto">
                                     <template x-for="(s, index) in EditArticle?.subarticles">
                                         <span type="button" x-show="s"
+                                            x-bind:class="[
+                                                changed_sub.get(index) ? 'bg-primary' : ''
+                                            ]"
                                             class="group h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
                                             <div class="flex items-center gap-1">
                                                 <b x-text="Number(index + 1) + '. '" class="text-primary dark:text-white group-hover:text-white"></b>
@@ -277,9 +285,11 @@
                                                     <i data-feather="edit" class="text-sm"></i>
                                                 </button>
                                                 <button type="button" @click="
-                                                    confirm('Delete this sub-article?') ? deleteSub(s?.id) : '';
-                                                    EditArticle.subarticles.splice(editSub, 1);
-                                                    editSub--;"
+                                                    if(confirm('Delete this sub-article?')){
+                                                        deleteSub(s?.id);
+                                                        EditArticle.subarticles.splice(editSub, 1);
+                                                        editSub--;
+                                                    }"
                                                 class="flex items-center justify-center p-1 rounded-full shadow-[0px_0px_4px_rgba(0,0,0,0.3)]"
                                                     title="Delete Sub Article">
                                                     <i data-feather="trash-2" class="text-sm"></i>
@@ -335,7 +345,14 @@
                                 </template>
 
                             </div>
-                            <input x-bind:value="EditArticle?.subarticles?.[editSub]?.title" x-on:change="EditArticle.subarticles[editSub].title = $event.target.value" type="text" placeholder="Your text..." name="sub_title" id="sub_title"
+                            <input 
+                                x-bind:value="EditArticle?.subarticles?.[editSub]?.title" 
+                                x-on:change="
+                                    EditArticle.subarticles[editSub].title = $event.target.value; 
+                                    changed_sub.set(editSub, true);
+                                    localStorage.setItem('changed_sub', changed_sub.size);
+                                "
+                                type="text" placeholder="Your text..." name="sub_title" id="sub_title"
                                 class="px-3 py-4 w-full shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-primary bg-white dark:bg-slate-secondary mt-4">
                             <template x-if="status_err?.[1]?.title">
                                 <div class="mt-3 flex text-[#b91c1c] items-center gap-2">
@@ -349,7 +366,11 @@
 
                     <div class="mb-5">
                         <label for="sub_thumbnail" class="text-md">Thumbnail</label>
-                        <input x-on:change="EditArticle.subarticles[editSub].thumbnail = Object.values($event.target.files)" type="file" accept="image/*" name="thumbnail_subarticle" placeholder="Your thumbnail..." hidden name="sub_thumbnail" id="sub_thumbnail"
+                        <input x-on:change="
+                            EditArticle.subarticles[editSub].thumbnail = Object.values($event.target.files)
+                            changed_sub.set(editSub, true);
+                            localStorage.setItem('changed_sub', changed_sub.size);
+                        " type="file" accept="image/*" name="thumbnail_subarticle" placeholder="Your thumbnail..." hidden name="sub_thumbnail" id="sub_thumbnail"
                             x-ref="filesubarticle" @change="
                                 if ($refs.filesubarticle) {
                                     $refs.iconimagesubarticle.style.display = 'none';
@@ -435,11 +456,25 @@
                         <span class="text-md">Choose Your Plan</span>
                         <div class="flex items-center gap-2 mt-2">
                             <label for="free" class="flex items-center gap-1">
-                                <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'free'" x-on:change="console.log(EditArticle.subarticles);EditArticle.subarticles[editSub].type = $event.target.value">
+                                <input type="radio" name="status" id="free" value="free" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" 
+                                x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'free'" 
+                                x-on:change="
+                                    console.log(EditArticle.subarticles);
+                                    EditArticle.subarticles[editSub].type = $event.target.value
+                                    changed_sub.set(editSub, true);
+                                    localStorage.setItem('changed_sub', changed_sub.size);
+                                ">
                                 <span class="text-base">Free</span>
                             </label>
                             <label for="paid" class="flex items-center gap-1">
-                                <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'paid'" x-on:change="console.log(EditArticle.subarticles);EditArticle.subarticles[editSub].type = $event.target.value">
+                                <input type="radio" name="status" id="paid" value="paid" class="bg-gray-third checked:accent-primary dark:checked:accent-slate-third" 
+                                x-bind:checked="EditArticle?.subarticles?.[editSub]?.type == 'paid'" 
+                                x-on:change="
+                                    console.log(EditArticle.subarticles);
+                                    EditArticle.subarticles[editSub].type = $event.target.value
+                                    changed_sub.set(editSub, true);
+                                    localStorage.setItem('changed_sub', changed_sub.size);
+                                ">
                                 <span class="text-base">Member-Only</span>
                             </label>
                         </div>
@@ -460,7 +495,12 @@
                     </div>
 
                     <div class="flex items-center justify-center my-10">
-                        <button @click.prevent="updateSub(editSub)"
+                        <button @submit.prevent="
+                            updateSub(editSub)
+                            changed_sub.delete(editSub);
+                            localStorage.setItem('changed_sub', changed_sub.size);
+                        " 
+                            onclick="formSubmitting_sub = true; save()"
                             class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                             Save
                         </button>
@@ -550,25 +590,45 @@
                 return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
             }
             }));
-
-            var formSubmitting = false;
-            var isDirty = function() { return false; }
-
-            window.onload = function() {
-                window.addEventListener("beforeunload", function (e) {
-                    if (formSubmitting || !isDirty()) {
-                        return undefined;
-                    }
-                    
-                    var confirmationMessage = 'It looks like you have been editing something. '
-                                            + 'If you leave before saving, your changes will be lost.';
-
-                    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-                    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-                });
-                formSubmitting = false;
-            };
         })
+        
+        var formSubmitting = false;
+        var formSubmitting_sub = false;
+        var changed = false;
+
+        // Mean that the article is edited but not updated yet
+        function isDirty() { 
+            changed = true;
+        }
+
+        function save(){
+            // if article is updating
+            if (formSubmitting) { // your condition here
+                changed = false;
+                formSubmitting = false;
+            }
+            if(formSubmitting_sub){
+                formSubmitting_sub = false;
+            }
+            
+            return undefined;
+        }
+
+        window.addEventListener("beforeunload", function (e) {
+            // if article is not changed and count of changed sub is 0
+            if(!changed && parseInt(localStorage.getItem('changed_sub')) == 0){
+                // result on not alerting user
+                return undefined;
+            }
+            // variable for alert message
+            var confirmationMessage = "You have unsaved changes. Are you sure you want to leave?";
+
+            // e.preventDefault();
+            (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+                    
+            // returning alert for user
+            return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+        });
     </script>
     
 </section>
