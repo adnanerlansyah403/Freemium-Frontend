@@ -190,11 +190,11 @@
                             </div>
 
                             <div class="mt-4">
-                                <figure class="mt-4" x-bind:class="
+                                <figure class="mt-4 h-[450px]" x-bind:class="
                                 content?.thumbnail == '' ||
                                 detailArticle?.thumbnail == '' ? 'hidden' : ''">
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
-                                        class="w-full object-fill bg-gray-secondary max-h-[450px] rounded-primary" alt="">
+                                        class="w-full h-full object-fill bg-gray-secondary rounded-primary" alt="">
                                 </figure>
                                 <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </div>
@@ -429,7 +429,7 @@
                                                     back = true;
                                                     if(showFlash){flash();}"
                                                     :class="{
-                                                        'border-primary text-black': item.type == 'paid',
+                                                        'text-black': item.type == 'paid',
                                                         'bg-white border-slate-primary text-slate-primary': content?.id == item.id
                                                     }"
                                                     class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none dark:text-slate-fourth hover:text-white dark:hover:text-white hover:translate-x-2 transition duration-200 ease-in-out flex justify-between items-center">
