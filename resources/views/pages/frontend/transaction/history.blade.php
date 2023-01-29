@@ -169,7 +169,7 @@
                                 <span class="dark:text-white" id="planOrder">Lifetime</span>
                             </p>
                             <p class="mt-3">
-                                <b class="span dark:text-slate-fourth">Virtual Number : </b>
+                                <b class="span dark:text-slate-fourth">Order Number : </b>
                                 <span class="dark:text-white" id="orderNumber"></span>
                             </p>
                             <p class="mt-3">
