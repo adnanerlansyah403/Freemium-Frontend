@@ -632,6 +632,22 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Fetch logged in user article
+    paginateMyArticle(url) {
+      fetch(`${url}`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          this.listMyArticle = data.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     keywordMyArticle: '',
     fetchListMyArticle() {
       const token = localStorage.getItem('token')
@@ -650,6 +666,7 @@ document.addEventListener('alpine:init', () => {
               window.location.replace(this.baseUrl + 'login')
             }
             this.listMyArticle = data.data;
+            console.log(this.listMyArticle)
             this.listMyView = data.views;
             this.isLoading = false;
 
@@ -1055,6 +1072,8 @@ document.addEventListener('alpine:init', () => {
           const data = await response.json();
           this.myTransactions = data.data;
 
+          // console.log(this.myTransactions);
+
           let url = window.location.href;
           let lastPath = url.substring(url.lastIndexOf('/'));
 
@@ -1136,11 +1155,11 @@ document.addEventListener('alpine:init', () => {
 
       let planOrder = document.getElementById("planOrder");
       let priceOrder = document.getElementById("priceOrder");
-      let vaOrder = document.getElementById("vaOrder");
+      let orderNumber = document.getElementById("orderNumber");
       let paymentDateOrder = document.getElementById("paymentDateOrder");
 
       if (id === 0) {
-        vaOrder.value = 0;
+        orderNumber.value = 0;
         priceOrder = 0;
         paymentDateOrder.value = '';
       }
@@ -1166,7 +1185,7 @@ document.addEventListener('alpine:init', () => {
             if (item.id == id) {
               planOrder.innerText = item.plan.name;
               priceOrder.innerText = '$' + item.total_price;
-              vaOrder.innerText = item.virtual_account_number;
+              orderNumber.innerText = item.order_id;
               paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
           })

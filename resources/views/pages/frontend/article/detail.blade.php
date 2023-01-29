@@ -190,11 +190,11 @@
                             </div>
 
                             <div class="mt-4">
-                                <figure class="mt-4" x-bind:class="
+                                <figure class="mt-4 h-[450px]" x-bind:class="
                                 content?.thumbnail == '' ||
                                 detailArticle?.thumbnail == '' ? 'hidden' : ''">
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
-                                        class="w-full object-fill bg-gray-secondary max-h-[450px] rounded-primary" alt="">
+                                        class="w-full h-full object-fill bg-gray-secondary rounded-primary" alt="">
                                 </figure>
                                 <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </div>
@@ -400,7 +400,7 @@
                                     </p>
                                 </div>
 
-                                    <div class="flex items-center w-full gap-2 mb-3">
+                                    <div class="flex items-center w-full gap-2" x-bind:class="data_user.subscribe_status != 1 ? 'mt-3' : ''">
                                         <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
                                                 type = type == 'paid' ? '' : 'paid';
@@ -429,7 +429,7 @@
                                                     back = true;
                                                     if(showFlash){flash();}"
                                                     :class="{
-                                                        'border-primary text-black': item.type == 'paid',
+                                                        'text-black': item.type == 'paid',
                                                         'bg-white border-slate-primary text-slate-primary': content?.id == item.id
                                                     }"
                                                     class="p-3 rounded-primary cursor-pointer border hover:bg-primary dark:hover:bg-slate-third dark:border dark:border-white dark:hover::border-none dark:shadow-none dark:text-slate-fourth hover:text-white dark:hover:text-white hover:translate-x-2 transition duration-200 ease-in-out flex justify-between items-center">

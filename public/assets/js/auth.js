@@ -125,6 +125,7 @@ document.addEventListener('alpine:init', () => {
             this.data_user = user.data
             // this.showFlash = true;
             // this.message = user.message;
+            this.status_err = [];
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -269,6 +270,7 @@ document.addEventListener('alpine:init', () => {
           } else {
             // localStorage.setItem('showFlash', true)
             // localStorage.setItem('message', user.message);
+            this.status_err = [];
             Swal.fire({
               position: 'center',
               icon: 'success',
