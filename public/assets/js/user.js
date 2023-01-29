@@ -969,6 +969,7 @@ document.addEventListener('alpine:init', () => {
     plan: 0,
     plan_id: 0,
     paySubscription() {
+      this.isLoading = true;
       const data = new FormData()
       data.append('plan', this.plan_id)
       let plan_id = this.plan_id
@@ -982,6 +983,8 @@ document.addEventListener('alpine:init', () => {
           let data = await response.json();
 
           if (data.status) {
+            this.isLoading = false;
+            window.location.replace(this.baseUrl + "article");
             window.open(data.data, '_blank');
           } else {
             Swal.fire({

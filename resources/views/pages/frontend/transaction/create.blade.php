@@ -61,6 +61,12 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white has-scrollba
     </script>
 </template>
 
+<template x-if="isLoading">
+    <div class="flex justify-center px-32 py-4">
+        <x-loading-page />
+    </div>
+</template>
+
 
 <div x-init="fetchMyTransactions()"></div>
     <section class="pt-[140px] pb-[100px]"
@@ -112,7 +118,7 @@ style="display: none;" class="dark:bg-slate-primary dark:text-white has-scrollba
                         <span class="text-md" x-text="item.name"></span>
 
                         <p class="mt-12 mb-8 text-base text-slate-secondary dark:text-slate-fourth">
-                            <span x-text=" '$' + parseFloat(item.price).toFixed(2)"></span> /
+                            <span x-text=" 'IDR' + parseFloat(item.price).toFixed(2)"></span> /
                             <b x-text="convertExpiredPlan(item.expired)"></b>
                         </p>
 
