@@ -775,6 +775,13 @@ document.addEventListener('alpine:init', () => {
         }).catch(error => {
           console.log(error);
           this.isLoading = false;
+          this.showFlash = true;
+          this.message = 'Sorry, an unexpected error has occurred';
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
         })
 
     },
@@ -839,6 +846,13 @@ document.addEventListener('alpine:init', () => {
         .catch(error => {
           console.log(error);
           this.isLoading = true;
+          this.showFlash = true;
+          this.message = 'Sorry, an unexpected error has occurred';
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
         })
 
     },
@@ -893,6 +907,13 @@ document.addEventListener('alpine:init', () => {
             }).catch(error => {
               console.log(error);
               this.isLoading = false;
+              this.showFlash = true;
+              this.message = 'Sorry, an unexpected error has occurred';
+
+              setTimeout(() => {
+                this.showFlash = false;
+                this.message = '';
+              }, 4000);
             })
 
         }
@@ -934,6 +955,13 @@ document.addEventListener('alpine:init', () => {
         .catch(error => {
           console.log(error);
           this.isLoading = false;
+          this.showFlash = true;
+          this.message = 'Sorry, an unexpected error has occurred';
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
         })
     },
 
@@ -969,7 +997,13 @@ document.addEventListener('alpine:init', () => {
           }
         })
         .catch(error => {
-          console.log(error);
+          this.showFlash = true;
+          this.message = 'Sorry, an unexpected error has occurred';
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
         })
 
     },
@@ -1076,6 +1110,13 @@ document.addEventListener('alpine:init', () => {
         })
         .catch(error => {
           console.log(error);
+          localStorage.setItem('showFlash', true, 5000)
+          localStorage.setItem('message', 'Sorry, an unexpected error has occurred');
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
         })
     },
 
@@ -1119,10 +1160,6 @@ document.addEventListener('alpine:init', () => {
               paymentDateOrder.innerText = `${this.convertDate(item.payment_date)} ${this.getTime(item.payment_date)}`;
             }
           })
-            .catch(error => {
-              console.log(error);
-            })
-
         })
         .catch(error => {
           console.log(error);
@@ -1214,7 +1251,6 @@ document.addEventListener('alpine:init', () => {
           // document.getElementById("free").classList.remove('active');
           // document.getElementById("paid").classList.remove('active');
 
-        }).finally(() => {
           this.isLoadingArticle = false;
         })
         .catch(error => {
@@ -1260,6 +1296,7 @@ document.addEventListener('alpine:init', () => {
         })
         .catch(error => {
           console.log(error);
+          this.isLoading = false;
           this.isLoadingArticle = false;
         })
     },
@@ -1306,15 +1343,16 @@ document.addEventListener('alpine:init', () => {
       // data = await category.json();
       fetch(`${this.apiUrl}category`, {
         method: 'GET',
-      }).then(async (response) => {
+      })
+      .then(async (response) => {
         const data = await response.json();
         this.categoriesArticle = data.data;
         this.isLoading = false;
       })
-        .catch(error => {
-          console.log(error);
-          this.isLoading = false;
-        });
+      .catch(error => {
+        console.log(error);
+        this.isLoading = false;
+      });
     },
 
     // Sweet alert ?
@@ -1671,6 +1709,13 @@ document.addEventListener('alpine:init', () => {
         .catch(error => {
           console.log(error);
           this.isLoadingArticle = false;
+          this.showFlash = true;
+          this.message = 'Sorry, an unexpected error has occurred';
+
+          setTimeout(() => {
+            this.showFlash = false;
+            this.message = '';
+          }, 4000);
         })
 
     },
@@ -2121,6 +2166,10 @@ document.addEventListener('alpine:init', () => {
         .catch(error => {
           console.log(error);
           this.isLoading = false;
+          localStorage.setItem('message', 'Sorry, an unexpected error has occurred');
+          localStorage.setItem('showFlash', true);
+          this.typeStatus = false;
+          localStorage.setItem("typeStatus", false)
         });
     },
 

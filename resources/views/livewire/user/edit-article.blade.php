@@ -261,7 +261,6 @@
                             class="px-4 overflow-hidden max-h-0 duration-500 transition-all">
                             <div class="px-1 h-[500px]">
                                 <div class="flex flex-wrap gap-4 max-h-[500px] pb-4 overflow-y-auto">
-                                    {{-- <span x-text="console.log(EditArticle.subarticles)"></span> --}}
                                     <template x-for="(s, index) in EditArticle?.subarticles">
                                         <span type="button" x-show="s"
                                             class="group h-max flex items-center justify-between col-12 lg:col-6 py-2 px-4 bg-white dark:bg-slate-third hover:bg-primary hover:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.3)] font-iceberg text-base text-left rounded-lg transition duration-200 ease-in-out">
@@ -365,7 +364,6 @@
                                             $refs.filenamesubarticle.innerText = '';
                                             $refs.filenamesubarticle.classList.remove('active');
                                         } else {
-                                            console.log('berhasil')
                                             EditArticle.subarticles[editSub].thumbnail_1 = e.target.result;
                                             EditArticle.subarticles[editSub].thumbnail_1_alt = $refs.filesubarticle.files[0].name;
                                             $refs.filenamesubarticle.classList.add('active');

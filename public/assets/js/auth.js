@@ -85,6 +85,7 @@ document.addEventListener('alpine:init', () => {
 
     },
 
+    // Fetch login
     fetchLogin() {
       let params = {
         email: this.email,
@@ -150,7 +151,11 @@ document.addEventListener('alpine:init', () => {
               }, 3300)
             }
           }
-        });
+        })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        })
     },
 
     passwordReset() {
@@ -194,7 +199,10 @@ document.addEventListener('alpine:init', () => {
               timer: 3000
             })
           }
-        });
+        })
+        .catch(error => {
+          console.log(error);
+        })
     },
 
     newPassword(token) {
@@ -232,7 +240,13 @@ document.addEventListener('alpine:init', () => {
               window.location.replace(baseUrl + 'login')
             }, 3300)
           }
-        });
+        })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+          localStorage.setItem('showFlash', true)
+          localStorage.setItem('message', 'Sorry, an unexpected error has occurred');
+        })
     },
     register() {
       let params = {
@@ -271,7 +285,10 @@ document.addEventListener('alpine:init', () => {
               window.location.replace(baseUrl + 'login')
             }, 3500)
           }
-        });
+        })
+        .catch(error => {
+          console.log(error);
+        })
     },
 
     logout() {
