@@ -1291,7 +1291,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           if (data.status) {
-            this.detailArticle = data.data;
+            this.detailArticle = data.data[0];
             this.detailViews = data.views;
           }
           this.isLoadingArticle = false;
