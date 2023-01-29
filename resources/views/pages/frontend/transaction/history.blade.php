@@ -50,7 +50,7 @@
                                             <thead>
                                               <tr>
                                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Plan</th>
-                                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Virtual Number</th>
+                                                <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Order Number</th>
                                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Payment Date</th>
                                                 <th class="px-6 align-middle dark:bg-slate-third dark:text-white border border-primary dark:border-none py-3 text-xs uppercase whitespace-nowrap font-semibold text-left bg-pink-800">Actions</th>
                                               </tr>
@@ -64,7 +64,7 @@
                                                         <i class="fas fa-circle text-orange-500 mr-2"></i>
                                                         </td>
                                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
-                                                        <i class="fas fa-circle text-orange-500 mr-2" x-text="item.virtual_account_number ? item.virtual_account_number : 'No data'"></i>
+                                                        <i class="fas fa-circle text-orange-500 mr-2" x-text="item.order_id ? item.order_id : 'No data'"></i>
                                                         </td>
                                                         <td class="border-t-0 px-5 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
                                                         <i class="fas fa-circle text-orange-500 mr-2" x-text="item.payment_date ? convertDate(item.payment_date) : 'No data'"></i>
@@ -170,7 +170,7 @@
                             </p>
                             <p class="mt-3">
                                 <b class="span dark:text-slate-fourth">Virtual Number : </b>
-                                <span class="dark:text-white" id="vaOrder"></span>
+                                <span class="dark:text-white" id="orderNumber"></span>
                             </p>
                             <p class="mt-3">
                                 <b class="span dark:text-slate-fourth">Price : </b>
