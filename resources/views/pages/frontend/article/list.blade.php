@@ -8,9 +8,19 @@
 
 
 .category.active {
-    background-color: #7C000B;
-    color: white;
+    background-color: #fff;
+    color: #7C000B;
     border: none;
+}
+
+#freeFilter.active {
+    background-color: #7C000B;
+    color: #fff
+}
+
+#paidFilter.active {
+    background-color: #7C000B;
+    color: #fff
 }
 
 .content {
@@ -52,9 +62,15 @@
 
                 <div class="col-12">
 
-                    <h1 class="px-3 font-poppins text-base lg:text-md font-semibold mb-4 dark:text-white">Article Search Results</h1>
+                    <div class="px-3 lg:px-0 flex items-center justify-between">
+                        <h1 class=" font-poppins text-base lg:text-md font-semibold mb-4 dark:text-white">Article Search Results</h1>
+                        <button x-on:click="resetFilters()" class="text-base font-medium flex items-center gap-1 hover:text-gray-secondary dark:hover:text-opacity-80 dark:text-white transition duration-200 ease-in-out">
+                            <i data-feather="filter"></i>
+                            Reset Filters
+                        </button>
+                    </div>
 
-                    <div class="px-3">
+                    <div class="px-3 lg:px-0">
                         <div class=" md:px-0 flex items-center justify-between bg-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-pill w-full">
                             <input type="text" class="py-2 px-4 text-sm w-full" x-ref="search"
                             x-bind:value="filtersKey[0] ? filtersKey[0] : ''"
@@ -71,7 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="px-3 md:px-0 mt-4 w-full flex items-start justify-between gap-4">
+                    <div class="px-3 lg:px-0 md:px-0 mt-4 w-full flex items-start justify-between gap-4">
                         {{-- <div class="w-full flex flex-wrap gap-[11px]" x-init="getCategories()">
                             <select name="category" x-on:change="filtersKey[2] = $event.target.value; filterArticle()" id="category" class="text-sm py-2 px-3 rounded-[10px] border-solid border border-primary dark:border-white w-full bg-white dark:bg-slate-primary dark:text-white font-medium" x-ref="category">
                                 <option value="" @click="getCategories()">  Select a category... </option>
@@ -81,13 +97,20 @@
                             </select>
                         </div> --}}
                         <div class="relative flex items-center flex-wrap gap-[6px]" x-init="getCategories()"
-                        x-data="{categoryShow: false}">
+                        x-data="{categoryShow: false, categoryActive: false}">
                             <template x-for="(item, index) in categoriesArticle.slice(0, 8)">
                                 <span 
+                                x-bind:id="'category'+item.id"
                                 x-on:click="
                                     filterArticle(item.id);
+                                    let category = document.getElementById(`category${item.id}`);
+                                    if(category.classList.contains('active')) {
+                                        category.classList.remove('active');
+                                    } else {
+                                        category.classList.add('active');
+                                    }
                                 "
-                                class="cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
+                                class="category cursor-pointer px-2 py-1 text-xs font-medium rounded-pill text-white bg-primary dark:bg-slate-secondary hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" x-text="item.name">Javascript</span>
                             </template>
                             <div x-on:click="getCategories(true)">
                                 <button class="px-4 py-1 border border-primary rounded-pill text-slate-primary font-medium dark:border dark:border-white dark:bg-white dark:text-black text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out" @click="categoryShow = !categoryShow">
@@ -120,14 +143,29 @@
                             x-on:click="
                                 filtersKey[1] = filtersKey[1] != 'paid' ? 'paid' : '';
                                 filterArticle();
-                            "class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                $refs.freeFilter.classList.remove('active');
+                                if($refs.paidFilter.classList.contains('active')) {
+                                    $refs.paidFilter.classList.remove('active');
+                                } else {
+                                    $refs.paidFilter.classList.add('active');
+                                }
+                            "
+                            id="paidFilter" 
+                            class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>PAID</span>
                             </button>
                             <button x-ref="freeFilter" 
                             x-on:click="
                                 filtersKey[1] = filtersKey[1] != 'free' ? 'free' : '';
-                                filterArticle()
-                            " class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
+                                filterArticle();
+                                $refs.paidFilter.classList.remove('active');
+                                if($refs.freeFilter.classList.contains('active')) {
+                                    $refs.freeFilter.classList.remove('active');
+                                } else {
+                                    $refs.freeFilter.classList.add('active');
+                                }
+                            "
+                            id="freeFilter" class="px-4 py-1 border border-primary rounded-pill text-black dark:text-white font-medium dark:border dark:border-white dark:bg-slate-secondary text-sm hover:text-opacity-80 dark:hover:text-opacity-80 transition duration-200 ease-in-out">
                                 <span>FREE</span>
                             </button>
                         </div>

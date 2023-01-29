@@ -1288,7 +1288,7 @@ document.addEventListener('alpine:init', () => {
         .then(async (response) => {
           const data = await response.json();
           if (data.status) {
-            this.detailArticle = data.data[0];
+            this.detailArticle = data.data;
             this.detailViews = data.views;
           }
           this.isLoadingArticle = false;
@@ -1344,15 +1344,15 @@ document.addEventListener('alpine:init', () => {
       fetch(`${this.apiUrl}category`, {
         method: 'GET',
       })
-      .then(async (response) => {
-        const data = await response.json();
-        this.categoriesArticle = data.data;
-        this.isLoading = false;
-      })
-      .catch(error => {
-        console.log(error);
-        this.isLoading = false;
-      });
+        .then(async (response) => {
+          const data = await response.json();
+          this.categoriesArticle = data.data;
+          this.isLoading = false;
+        })
+        .catch(error => {
+          console.log(error);
+          this.isLoading = false;
+        });
     },
 
     // Sweet alert ?
@@ -1682,7 +1682,7 @@ document.addEventListener('alpine:init', () => {
         query += 'author=' + this.filtersKey[3] + '&';
       }
 
-      this.isLoadingArticle = true;
+      // this.isLoadingArticle = true;
 
       fetch(`${this.apiUrl}article?${query}`, {
         method: 'GET',
