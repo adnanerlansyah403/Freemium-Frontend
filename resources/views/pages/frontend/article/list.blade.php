@@ -194,6 +194,7 @@
                         </div>
                     </template>
 
+                    {{-- restricted list article --}}
                     <template x-if="!isLoading">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6" x-data="helpers" style="margin-top: 32px;">
                             <template x-for="(item, index) in listArticle.data">
@@ -227,6 +228,7 @@
                                                         </script>
                                                     </span>
                                                 </template>
+                                                {{-- render text type is free or paid --}}
                                                 <span x-text="item.type.charAt(0).toUpperCase() + item.type.slice(1)" class="text-primary dark:text-white"></span>
                                             </button>
                                             <div class="flex items-center gap-2 dark:text-white">
@@ -244,6 +246,7 @@
                                                 </template>
                                             </div>
                                         </div>
+                                        {{-- restricted title and redirect to detail to check the user is loged or not --}}
                                         <a x-bind:href="baseUrl + `article/detail/${item.id}`" class="font-bold text-[20px] font-lato leading-9 dark:text-white" x-text="item.title.length > 30 ? item.title.substring(0, 30) + '...' : item.title"></a>
                                         <p class="font-normal text-sm dark:text-gray-primary"
                                         x-text="item.description.length > 120 ? parseToOriginalString(item.description, 120) : item.description">

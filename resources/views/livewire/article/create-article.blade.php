@@ -162,6 +162,7 @@
                     <div id="err_description"></div>
                 </div>
 
+                {{-- when it be clicked it will add some element accordion in wrap sub article --}}
                 <div class="flex items-center justify-between mt-16 mb-10">
                     <button type="button" class="group flex items-center gap-2" @click="createSubArticle($refs), $refs.hiddensave.remove(), buttonshow = true " >
                         <i data-feather="plus-circle" class="w-10 h-10 text-primary dark:text-slate-third group-hover:rotate-90 transition duration-200 ease-in-out"></i>
@@ -193,6 +194,8 @@
                         *If you make three paid sub contents, then you must have to create 3 free content first.
                     </p>
 
+                    {{-- wrap for accordion sub article --}} 
+                    {{-- it will render sub article form --}}
                     <ul class="flex flex-col" id="listsubarticle" x-ref="listsubarticle">
 
 
