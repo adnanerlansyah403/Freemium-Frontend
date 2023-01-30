@@ -2074,6 +2074,7 @@ document.addEventListener('alpine:init', () => {
         cleanup: true,
       });
 
+      // free automate content tipe
       let title_sub = document.getElementsByClassName('title_sub');
       if (this.total > 3) {
         for (let i = 0; i < this.total; i++) {

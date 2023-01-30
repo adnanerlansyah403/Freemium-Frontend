@@ -239,7 +239,6 @@
             changed_sub: new Map()
         }">
 
-
             <div class="w-full my-1 px-5 lg:px-0 dark:text-white">
 
                 <p class="font-semibold text-sm lg:text-base mb-2 bg-primary dark:bg-white dark:text-slate-secondary bg-opacity-20 p-3 rounded-lg">
@@ -262,6 +261,7 @@
                                 </span>
                             </div>
                         </h2>
+                        {{-- edit subarticle accordion --}}
                         <div x-ref="tab" :style="handleToggle()"
                             class="px-4 overflow-hidden max-h-0 duration-500 transition-all">
                             <div class="px-1 h-[500px]">

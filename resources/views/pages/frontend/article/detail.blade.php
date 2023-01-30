@@ -124,6 +124,7 @@
         }, 1000)
     })
     ">
+        {{-- restricted detail article --}}
         <div x-init="checkSession()"></div>
         <div x-data="articles">
             <span x-init="getDetailArticle(window.location.href.split('/').pop())"></span>
@@ -260,6 +261,7 @@
                                     </template>
 
                                 </div>
+                                
                                 <template x-if="detailArticle?.subarticles.length > 0">
                                     <div class="flex items-center gap-4">
                                         <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
@@ -406,6 +408,7 @@
                                 </div>
 
                                     <div class="flex items-center w-full gap-2" x-bind:class="data_user.subscribe_status != 1 ? 'mt-3' : ''">
+                                        {{-- restricted filter free --}}
                                         <template x-if="detailArticle?.type == 'free' || detailArticle?.subarticles?.length >= 3 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'free').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'paid').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
                                                 type = type == 'paid' ? '' : 'paid';
@@ -415,6 +418,7 @@
                                                     <span>Free</span>
                                             </button>
                                         </template>
+                                        {{-- restricted filter paid --}}
                                         <template x-if="detailArticle?.type == 'paid' && detailArticle?.subarticles?.length != 0 && data_user.subscribe_status != 1">
                                             <button type="button" x-bind:class="detailArticle?.subarticles.filter(item => item.type == 'paid').length > 0 && detailArticle?.subarticles.filter(item => item.type == 'free').length == 0 ? 'active' : ''" class="p-2 flex-1 rounded-pill font-semibold font-iceberg border border-primary hover:bg-primary hover:text-white dark:text-white dark:border-white dark:hover:bg-slate-third dark:hover:opacity-80 transition duration-200 ease-in-out" @click="
                                             type = type == 'free' ? '' : 'free';
@@ -426,12 +430,15 @@
                                         </template>
                                     </div>
 
+                                    {{-- display sub content and restricted by tipe user is member or not --}}
                                     <div id="wrapperSub" class="block max-h-[408px] overflow-y-auto has-scrollbar">
                                         <ul class="flex flex-col gap-4 pr-4" x-transition x-bind:class="detailArticle?.subarticles.length > 0 ? 'mt-2' : ''">
+                                            {{-- display detail after check restricted --}}
                                             <template x-for="(item, index) in detailArticle?.subarticles">
                                                 <li x-show="item.type != type" @click="
                                                     getSubArticle(item.id);
                                                     back = true;
+                                                    {{-- if tipe paid and user not yet subscribe it will display flah --}}
                                                     if(showFlash){flash();}"
                                                     :class="{
                                                         'text-black': item.type == 'paid',
@@ -448,6 +455,7 @@
                                                             <b>Active</b>
                                                         </p>
                                                     </template>
+                                                    {{-- if tipe paid and user not yet subscribe it will display --}}
                                                     <template x-if="item.type == 'paid' && data_user?.subscribe_status != 1">
                                                         <div>
                                                             {{-- <span x-text="console.log(detailArticle)"></span> --}}
