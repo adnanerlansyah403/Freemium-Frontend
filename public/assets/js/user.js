@@ -1358,6 +1358,7 @@ document.addEventListener('alpine:init', () => {
 
     // Get detail sub-article
     getSubArticle(id = 1) {
+      this.isLoadingArticle = true;
       this.isLoading = true;
       fetch(`${this.apiUrl}sub-article/${id}`, {
         method: "GET",
@@ -1377,10 +1378,12 @@ document.addEventListener('alpine:init', () => {
             this.detailViews = data.views;
             this.fetchStatus = true;
           }
+          this.isLoadingArticle = false;
           this.isLoading = false;
         })
         .catch(error => {
           console.log(error);
+          this.isLoadingArticle = false;
           this.isLoading = false;
         })
     },
