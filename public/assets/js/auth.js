@@ -3,7 +3,7 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('auth', () => ({
     isLogedIn: false,
     baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcapital.fly.dev/api/",
+    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
     name: '',
     username: '',
     email: '',
@@ -148,7 +148,7 @@ document.addEventListener('alpine:init', () => {
             if (role == 1) {
               setTimeout(function () {
                 let baseUrl = "https://freemium-farcapital.fly.dev/";
-                return window.location.replace(this.baseUrl + 'admin/dashboard')
+                return window.location.replace(baseUrl + 'admin/dashboard')
               }, 3300)
             }
           }

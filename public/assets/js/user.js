@@ -4,8 +4,8 @@ document.addEventListener('alpine:init', () => {
     buttonshow: false,
     isLogedIn: false,
     baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcapital.fly.dev/api/",
-    imgUrl: "https://api-freemium-farcapital.fly.dev/",
+    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
+    imgUrl: "https://api-freemium-farcap.fly.dev/",
     subscribe_status: false,
     linkInputFacebook: true,
     linkInputLinkedin: false,
@@ -740,7 +740,7 @@ document.addEventListener('alpine:init', () => {
             this.isLoading = false;
             this.showFlash = true;
             this.message = 'Sorry, an unexpected error has occurred';
-            
+
             setTimeout(() => {
               this.showFlash = false;
               this.message = '';
@@ -954,7 +954,7 @@ document.addEventListener('alpine:init', () => {
       this.isLoading = true;
 
       // if subarticle not saved yet, the id is 0
-      if(delSub == 0){
+      if (delSub == 0) {
         this.showFlash = true;
         this.message = 'Sub Article data deleted successfully';
 
@@ -964,7 +964,7 @@ document.addEventListener('alpine:init', () => {
         }, 4000);
 
         this.isLoading = false;
-        return 0; 
+        return 0;
       }
 
       const token = localStorage.getItem('token')
@@ -1026,7 +1026,7 @@ document.addEventListener('alpine:init', () => {
 
           if (data.status) {
             this.isLoading = false;
-            window.location.replace(this.baseUrl + "article");
+            // window.location.replace(this.baseUrl + "article");
             window.open(data.data, '_blank');
           } else {
             Swal.fire({
@@ -1217,8 +1217,8 @@ document.addEventListener('alpine:init', () => {
 
   Alpine.data('articles', () => ({
     baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcapital.fly.dev/api/",
-    imgUrl: "https://api-freemium-farcapital.fly.dev/",
+    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
+    imgUrl: "https://api-freemium-farcap.fly.dev/",
     listArticle: [],
     listView: [],
     categoriesArticle: [],
@@ -1426,7 +1426,6 @@ document.addEventListener('alpine:init', () => {
     // Create article (user)
     async createArticle() {
       this.sub_article_err = '';
-      this.isLoadingArticle = true;
       let title = document.getElementById('title');
       let description = tinymce.get('content').getContent();
       let thumbnail = document.getElementById('thumbnail').files[0];
@@ -2112,8 +2111,8 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('admin', () => ({
     isLogedIn: false,
     baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcapital.fly.dev/api/",
-    imgUrl: "https://api-freemium-farcapital.fly.dev/",
+    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
+    imgUrl: "https://api-freemium-farcap.fly.dev/",
     data_user: [],
     data_admin: [],
     years: [],
@@ -2454,8 +2453,8 @@ document.addEventListener('alpine:init', () => {
 
   Alpine.data('helpers', () => ({
     baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcapital.fly.dev/api/",
-    imgUrl: "https://api-freemium-farcapital.fly.dev/",
+    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
+    imgUrl: "https://api-freemium-farcap.fly.dev/",
 
     // Convert expired month from number of month to string years / month
     convertExpiredPlan(time = 1) {
