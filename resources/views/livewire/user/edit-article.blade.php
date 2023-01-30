@@ -85,7 +85,7 @@
 
         <div x-data="helpers" class="container mx-auto flex items-center dark:text-white">
 
-            <form onsubmit="return false" class="col lg:mx-0 col-12">
+            <form class="col lg:mx-0 col-12">
                 <p class="flex items-center gap-2 mb-4" x-show="!isLoading">
                     <b>Created At : </b>
                     <span x-text="convertDate(EditArticle?.created_at)" class="px-2 py-1 rounded-lg bg-primary text-white dark:bg-slate-third" style="display: none;" x-init="
@@ -224,7 +224,7 @@
                 </div>
 
                 <div class="flex items-center justify-center mt-6 mb-10">
-                    <button @submit.prevent="updateArticle()" onclick="formSubmitting = true; save()"
+                    <button @click.prevent="updateArticle()" onclick="formSubmitting = true; save()"
                         class="px-4 py-2 bg-primary dark:bg-slate-secondary rounded-lg text-white hover:text-opacity-80 transition duration ease-in-out shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         Save
                     </button>
@@ -495,7 +495,7 @@
                     </div>
 
                     <div class="flex items-center justify-center my-10">
-                        <button @submit.prevent="
+                        <button @click.prevent="
                             updateSub(editSub)
                             changed_sub.delete(editSub);
                             localStorage.setItem('changed_sub', changed_sub.size);
@@ -616,7 +616,8 @@
 
         window.addEventListener("beforeunload", function (e) {
             // if article is not changed and count of changed sub is 0
-            if(!changed && parseInt(localStorage.getItem('changed_sub')) == 0){
+            let test = localStorage.getItem('changed_sub') ? localStorage.getItem('changed_sub') : 0;
+            if(!changed && parseInt(test) == 0){
                 // result on not alerting user
                 return undefined;
             }
