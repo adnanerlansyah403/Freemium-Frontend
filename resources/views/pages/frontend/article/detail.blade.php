@@ -200,7 +200,7 @@
                                 content?.thumbnail == '' ||
                                 detailArticle?.thumbnail == '' ? 'hidden' : ''">
                                     <img x-bind:src="content ? imgUrl + content?.thumbnail : imgUrl + detailArticle?.thumbnail" src=""
-                                        class="w-full h-full object-fill bg-gray-secondary rounded-primary" alt="">
+                                        class="w-full h-full object-cover bg-gray-secondary rounded-primary" alt="">
                                 </figure>
                                 <div id="description" x-show="!isLoading" class="mt-6 font-quickSand text-[#3A3440] dark:text-white font-semibold" x-html="content ? content?.description : detailArticle?.description">
                                 </div>
