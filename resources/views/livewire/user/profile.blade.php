@@ -172,7 +172,7 @@
 
                 <div
                     class="col col-12 lg:col-4 md:order-2">
-                    <div class="h-max pt-3 px-4 rounded-primary bg-white dark:bg-slate-secondary dark:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
+                    <div class="h-max py-3 px-4 rounded-primary bg-white dark:bg-slate-secondary dark:text-white shadow-[0px_0px_4px_rgba(0,0,0,0.25)] flex flex-col items-center">
                         <figure class="mb-5">
                             <template x-if="data_user.photo != null || data_user.photo.length != 0">
                                 <img x-bind:src="imgUrl+data_user.photo"
