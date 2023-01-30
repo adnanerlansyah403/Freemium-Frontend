@@ -2,8 +2,8 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('auth', () => ({
     isLogedIn: false,
-    baseUrl: "http://127.0.0.1:8000/",
-    apiUrl: "http://127.0.0.1:8001/api/",
+    baseUrl: "https://freemium-farcapital.fly.dev/",
+    apiUrl: "https://api-freemium-farcapital.fly.dev/api/",
     name: '',
     username: '',
     email: '',
@@ -141,13 +141,13 @@ document.addEventListener('alpine:init', () => {
             // localStorage.setItem('message', user.message);
             if (role == 2) {
               setTimeout(function () {
-                let baseUrl = "http://127.0.0.1:8000/";
+                let baseUrl = "https://freemium-farcapital.fly.dev/";
                 return window.location.replace(baseUrl + 'article')
               }, 3300)
             }
             if (role == 1) {
               setTimeout(function () {
-                let baseUrl = "http://127.0.0.1:8000/";
+                let baseUrl = "https://freemium-farcapital.fly.dev/";
                 return window.location.replace(this.baseUrl + 'admin/dashboard')
               }, 3300)
             }
@@ -237,7 +237,7 @@ document.addEventListener('alpine:init', () => {
             )
 
             setTimeout(function () {
-              let baseUrl = "http://127.0.0.1:8000/";
+              let baseUrl = "https://freemium-farcapital.fly.dev/";
               window.location.replace(baseUrl + 'login')
             }, 3300)
           }
@@ -283,7 +283,7 @@ document.addEventListener('alpine:init', () => {
               timer: 3000
             })
             setTimeout(function () {
-              let baseUrl = "http://127.0.0.1:8000/";
+              let baseUrl = "https://freemium-farcapital.fly.dev/";
               window.location.replace(baseUrl + 'login')
             }, 3500)
           }
