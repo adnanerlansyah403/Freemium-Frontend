@@ -1268,10 +1268,12 @@ document.addEventListener('alpine:init', () => {
     },
 
     paginateArticle(url) {
+      this.isLoadingArticle = true;
       fetch(`${url}`, {
         method: "GET"
       })
         .then(async (response) => {
+          this.isLoadingArticle = false;
           const data = await response.json();
           this.listArticle = data.data;
         })
