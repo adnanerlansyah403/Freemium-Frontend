@@ -9,7 +9,7 @@
             document.title = 'Details Article - Freemium App';
         </script>
     </template>
-    
+
     <div x-init="flash()"></div>
     <div x-show="showFlash">
         <x-alert />
@@ -261,7 +261,7 @@
                                     </template>
 
                                 </div>
-                                
+
                                 <template x-if="detailArticle?.subarticles.length > 0">
                                     <div class="flex items-center gap-4">
                                         <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
@@ -400,7 +400,7 @@
 
                                 <div class="flex items-center justify-center">
 
-                                    <p x-ref="statusUser" x-show="!fetchStatus" id="alert" class="w-full p-3 mb-6 rounded-primary border border-primary bg-primary bg-opacity-20 font-bold dark:border-white dark:bg-slate-primary">
+                                    <p x-ref="statusUser" x-show="!fetchStatus" class="w-full p-3 mb-6 rounded-primary border border-primary bg-primary bg-opacity-20 font-bold dark:border-white dark:bg-slate-primary">
                                         You have to
                                         <a href="{{ route("transaction.create") }}" class="span hover:text-opacity-80 dark:hover:text-opacity-80 dark:text-white font-bold transition duration-200 ease-in-out">Subscribe</a>
                                         to Access this
