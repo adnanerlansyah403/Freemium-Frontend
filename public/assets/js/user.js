@@ -3,7 +3,7 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('user', () => ({
     buttonshow: false,
     isLogedIn: false,
-    baseUrl: "https://freemium-farcapital.fly.dev/",
+    baseUrl: "https://freemium-farcap.fly.dev/",
     apiUrl: "https://api-freemium-farcap.fly.dev/api/",
     imgUrl: "https://api-freemium-farcap.fly.dev/",
     subscribe_status: false,
@@ -273,7 +273,7 @@ document.addEventListener('alpine:init', () => {
           })
 
           setTimeout(function () {
-            let baseUrl = "https://freemium-farcapital.fly.dev/";
+            let baseUrl = "https://freemium-farcap.fly.dev/";
             window.location.replace(baseUrl + 'profile');
           }, 3300)
         })
@@ -1139,7 +1139,7 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('showFlash', true, 5000)
             localStorage.setItem('message', data.message);
             setTimeout(function () {
-              // const baseUrl = "https://freemium-farcapital.fly.dev/";
+              // const baseUrl = "https://freemium-farcap.fly.dev/";
               window.location.replace(`${baseUrl}profile`);
             }, 3500)
           } else {
@@ -1216,7 +1216,7 @@ document.addEventListener('alpine:init', () => {
   }))
 
   Alpine.data('articles', () => ({
-    baseUrl: "https://freemium-farcapital.fly.dev/",
+    baseUrl: "https://freemium-farcap.fly.dev/",
     apiUrl: "https://api-freemium-farcap.fly.dev/api/",
     imgUrl: "https://api-freemium-farcap.fly.dev/",
     listArticle: [],
@@ -1338,7 +1338,7 @@ document.addEventListener('alpine:init', () => {
             this.detailArticle = data.data;
             this.detailViews = data.views;
           }
-          else{
+          else {
             localStorage.setItem('showFlash', true);
             localStorage.setItem('message', data.message);
             return window.history.back()
@@ -2111,7 +2111,7 @@ document.addEventListener('alpine:init', () => {
 
   Alpine.data('admin', () => ({
     isLogedIn: false,
-    baseUrl: "https://freemium-farcapital.fly.dev/",
+    baseUrl: "https://freemium-farcap.fly.dev/",
     apiUrl: "https://api-freemium-farcap.fly.dev/api/",
     imgUrl: "https://api-freemium-farcap.fly.dev/",
     data_user: [],
@@ -2453,7 +2453,7 @@ document.addEventListener('alpine:init', () => {
   }))
 
   Alpine.data('helpers', () => ({
-    baseUrl: "https://freemium-farcapital.fly.dev/",
+    baseUrl: "https://freemium-farcap.fly.dev/",
     apiUrl: "https://api-freemium-farcap.fly.dev/api/",
     imgUrl: "https://api-freemium-farcap.fly.dev/",
 

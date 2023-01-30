@@ -2,7 +2,7 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('auth', () => ({
     isLogedIn: false,
-    baseUrl: "https://freemium-farcapital.fly.dev/",
+    baseUrl: "https://freemium-farcap.fly.dev/",
     apiUrl: "https://api-freemium-farcap.fly.dev/api/",
     name: '',
     username: '',
@@ -141,13 +141,13 @@ document.addEventListener('alpine:init', () => {
             // localStorage.setItem('message', user.message);
             if (role == 2) {
               setTimeout(function () {
-                let baseUrl = "https://freemium-farcapital.fly.dev/";
+                let baseUrl = "https://freemium-farcap.fly.dev/";
                 return window.location.replace(baseUrl + 'article')
               }, 3300)
             }
             if (role == 1) {
               setTimeout(function () {
-                let baseUrl = "https://freemium-farcapital.fly.dev/";
+                let baseUrl = "https://freemium-farcap.fly.dev/";
                 return window.location.replace(baseUrl + 'admin/dashboard')
               }, 3300)
             }
@@ -237,7 +237,7 @@ document.addEventListener('alpine:init', () => {
             )
 
             setTimeout(function () {
-              let baseUrl = "https://freemium-farcapital.fly.dev/";
+              let baseUrl = "https://freemium-farcap.fly.dev/";
               window.location.replace(baseUrl + 'login')
             }, 3300)
           }
@@ -283,7 +283,7 @@ document.addEventListener('alpine:init', () => {
               timer: 3000
             })
             setTimeout(function () {
-              let baseUrl = "https://freemium-farcapital.fly.dev/";
+              let baseUrl = "https://freemium-farcap.fly.dev/";
               window.location.replace(baseUrl + 'login')
             }, 3500)
           }

@@ -1,6 +1,6 @@
-# fly.toml file generated for freemium-farcapital on 2023-01-29T20:04:37+07:00
+# fly.toml file generated for freemium-farcap on 2023-01-30T18:55:58+07:00
 
-app = "freemium-farcapital"
+app = "freemium-farcap"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
