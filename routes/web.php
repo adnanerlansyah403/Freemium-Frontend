@@ -133,7 +133,7 @@ Route::prefix('transaction')
     ->group(function () {
         Route::get('/', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-        Route::get('/details', 'show')->name('show');
+        // Route::get('/details', 'show')->name('show');
         Route::get('/history', function() {
             return view("pages.frontend.transaction.history");
         })->name('history');
