@@ -3,9 +3,9 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('user', () => ({
     buttonshow: false,
     isLogedIn: false,
-    baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
-    imgUrl: "https://api-freemium-farcap.fly.dev/",
+    baseUrl: "http://127.0.0.1:8000/",
+    apiUrl: "http://127.0.0.1:8001/api/",
+    imgUrl: "http://127.0.0.1:8001/",
     subscribe_status: false,
     linkInputFacebook: true,
     linkInputLinkedin: false,
@@ -273,7 +273,7 @@ document.addEventListener('alpine:init', () => {
           })
 
           setTimeout(function () {
-            let baseUrl = "https://freemium-farcapital.fly.dev/";
+            let baseUrl = "http://127.0.0.1:8000/";
             window.location.replace(baseUrl + 'profile');
           }, 3300)
         })
@@ -1139,7 +1139,7 @@ document.addEventListener('alpine:init', () => {
             localStorage.setItem('showFlash', true, 5000)
             localStorage.setItem('message', data.message);
             setTimeout(function () {
-              // const baseUrl = "https://freemium-farcapital.fly.dev/";
+              // const baseUrl = "http://127.0.0.1:8000/";
               window.location.replace(`${baseUrl}profile`);
             }, 3500)
           } else {
@@ -1216,9 +1216,9 @@ document.addEventListener('alpine:init', () => {
   }))
 
   Alpine.data('articles', () => ({
-    baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
-    imgUrl: "https://api-freemium-farcap.fly.dev/",
+    baseUrl: "http://127.0.0.1:8000/",
+    apiUrl: "http://127.0.0.1:8001/api/",
+    imgUrl: "http://127.0.0.1:8001/",
     listArticle: [],
     listView: [],
     categoriesArticle: [],
@@ -1338,7 +1338,7 @@ document.addEventListener('alpine:init', () => {
             this.detailArticle = data.data;
             this.detailViews = data.views;
           }
-          else{
+          else {
             localStorage.setItem('showFlash', true);
             localStorage.setItem('message', data.message);
             return window.history.back()
@@ -2111,9 +2111,9 @@ document.addEventListener('alpine:init', () => {
 
   Alpine.data('admin', () => ({
     isLogedIn: false,
-    baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
-    imgUrl: "https://api-freemium-farcap.fly.dev/",
+    baseUrl: "http://127.0.0.1:8000/",
+    apiUrl: "http://127.0.0.1:8001/api/",
+    imgUrl: "http://127.0.0.1:8001/",
     data_user: [],
     data_admin: [],
     years: [],
@@ -2453,9 +2453,9 @@ document.addEventListener('alpine:init', () => {
   }))
 
   Alpine.data('helpers', () => ({
-    baseUrl: "https://freemium-farcapital.fly.dev/",
-    apiUrl: "https://api-freemium-farcap.fly.dev/api/",
-    imgUrl: "https://api-freemium-farcap.fly.dev/",
+    baseUrl: "http://127.0.0.1:8000/",
+    apiUrl: "http://127.0.0.1:8001/api/",
+    imgUrl: "http://127.0.0.1:8001/",
 
     // Convert expired month from number of month to string years / month
     convertExpiredPlan(time = 1) {
