@@ -9,6 +9,11 @@
             document.title = 'Details Article - Freemium App';
         </script>
     </template>
+    
+    <div x-init="flash()"></div>
+    <div x-show="showFlash">
+        <x-alert />
+    </div>
 </div>
 
 @section('content')

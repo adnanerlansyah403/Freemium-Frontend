@@ -721,7 +721,7 @@ document.addEventListener('alpine:init', () => {
           .then(async (response) => {
             data = await response.json();
 
-            if (data.status == false) {
+            if (!data.status) {
               this.showFlash = true;
               this.message = data.message;
               window.history.back();
@@ -730,6 +730,10 @@ document.addEventListener('alpine:init', () => {
               this.categories = data.category;
             }
             this.isLoading = false;
+            setTimeout(() => {
+              this.showFlash = false;
+              this.message = '';
+            }, 4000);
           })
           .catch(error => {
             console.log(error);
@@ -1334,6 +1338,11 @@ document.addEventListener('alpine:init', () => {
             this.detailArticle = data.data;
             this.detailViews = data.views;
           }
+          else{
+            localStorage.setItem('showFlash', true);
+            localStorage.setItem('message', data.message);
+            return window.history.back()
+          }
           this.isLoadingArticle = false;
           this.isLoading = false;
         })
@@ -1341,6 +1350,9 @@ document.addEventListener('alpine:init', () => {
           console.log(error);
           this.isLoading = false;
           this.isLoadingArticle = false;
+          localStorage.setItem('showFlash', true);
+          localStorage.setItem('message', 'Sorry, an unexpected error has occurred');
+          return window.history.back()
         })
     },
 
