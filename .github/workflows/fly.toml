@@ -1,4 +1,4 @@
-name: freemium
+name: Freemium
 on:
   push:
     branches:
@@ -7,9 +7,9 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 jobs:
   deploy:
-    name: Freemium App
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy
+      name: Freemium
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - uses: superfly/flyctl-actions/setup-flyctl@master
+        - run: flyctl deploy --remote-only
