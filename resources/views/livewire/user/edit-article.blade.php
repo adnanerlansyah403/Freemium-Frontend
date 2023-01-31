@@ -169,7 +169,7 @@
                         @click="
                             $refs.file.click();
                         ">
-                        <img x-ref="image" x-bind:src="!EditArticle?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full rounded-lg object-fill" x-bind:alt="EditArticle?.thumbnail_1_alt"  onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
+                        <img x-ref="image" x-bind:src="!EditArticle?.thumbnail_1 ? imgUrl + EditArticle?.thumbnail : EditArticle?.thumbnail_1" class="absolute w-full h-full rounded-lg object-fill" x-bind:alt="EditArticle?.thumbnail_1_alt"  onerror="this.style.opacity = 0" onload="this.style.opacity = 1">
                         <div class="text-center"
                         x-ref="iconimage">
                             <i
@@ -398,7 +398,7 @@
                             @click="
                                 $refs.filesubarticle.click();
                             ">
-                            <img x-ref="imagesubarticle" x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? 'http://localhost:8001/' + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg  object-fill" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1" accept="image/*">
+                            <img x-ref="imagesubarticle" x-bind:src="!EditArticle?.subarticles?.[editSub]?.thumbnail_1 ? imgUrl + EditArticle?.subarticles?.[editSub]?.thumbnail : EditArticle?.subarticles?.[editSub]?.thumbnail_1" class="absolute w-full h-full rounded-lg  object-fill" x-bind:alt="EditArticle?.subarticles?.[editSub]?.thumbnail_1_alt" onerror="this.style.opacity = 0" onload="this.style.opacity = 1" accept="image/*">
                             <div class="text-center"
                             x-ref="iconimagesubarticle">
                                 <i
